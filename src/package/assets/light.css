@@ -1,0 +1,156 @@
+  html[toyar-theme='light']{
+  --toyar-red-1:#FFECE8;
+  --toyar-red-2:#FDCDC5;
+  --toyar-red-3:#FBACA3;
+  --toyar-red-4:#F98981;
+  --toyar-red-5:#F76560;
+  --toyar-red-6:#F53F3F;
+  --toyar-red-7:#CB272D;
+  --toyar-red-8:#A1151E;
+  --toyar-red-9:#770813;
+  --toyar-red-10:#4D000A;
+
+  --toyar-orangered-1:#FFF3E8;
+  --toyar-orangered-2:#FDDDC3;
+  --toyar-orangered-3:#FCC59F;
+  --toyar-orangered-4:#FAAC7B;
+  --toyar-orangered-5:#F99057;
+  --toyar-orangered-6:#F77234;
+  --toyar-orangered-7:#CC5120;
+  --toyar-orangered-8:#A23511;
+  --toyar-orangered-9:#771F06;
+  --toyar-orangered-10:#4D0E00;
+
+  --toyar-orange-1:#FFF7E8;
+  --toyar-orange-2:#FFE4BA;
+  --toyar-orange-3:#FFCF8B;
+  --toyar-orange-4:#FFB65D;
+  --toyar-orange-5:#FF9A2E;
+  --toyar-orange-6:#FF7D00;
+  --toyar-orange-7:#D25F00;
+  --toyar-orange-8:#A64500;
+  --toyar-orange-9:#792E00;
+  --toyar-orange-10:#4D1B00;
+
+  --toyar-gold-1:#FFFCE8;
+  --toyar-gold-2:#FDF4BF;
+  --toyar-gold-3:#FCE996;
+  --toyar-gold-4:#FADC6D;
+  --toyar-gold-5:#F9CC45;
+  --toyar-gold-6:#F7BA1E;
+  --toyar-gold-7:#CC9213;
+  --toyar-gold-8:#A26D0A;
+  --toyar-gold-9:#774B04;
+  --toyar-gold-10:#4D2D00;
+
+  --toyar-yellow-1:#FEFFE8;
+  --toyar-yellow-2:#FEFEBE;
+  --toyar-yellow-3:#FDFA94;
+  --toyar-yellow-4:#FCF26B;
+  --toyar-yellow-5:#FBE842;
+  --toyar-yellow-6:#FADC19;
+  --toyar-yellow-7:#CFAF0F;
+  --toyar-yellow-8:#A38408;
+  --toyar-yellow-9:#785D03;
+  --toyar-yellow-10:#4D3800;
+
+  --toyar-lime-1:#FCFFE8;
+  --toyar-lime-2:#EDF8BB;
+  --toyar-lime-3:#DCF190;
+  --toyar-lime-4:#C9E968;
+  --toyar-lime-5:#B5E241;
+  --toyar-lime-6:#9FDB1D;
+  --toyar-lime-7:#7EB712;
+  --toyar-lime-8:#5F940A;
+  --toyar-lime-9:#437004;
+  --toyar-lime-10:#2A4D00;
+
+  --toyar-green-1:#E8FFEA;
+  --toyar-green-2:#AFF0B5;
+  --toyar-green-3:#7BE188;
+  --toyar-green-4:#4CD263;
+  --toyar-green-5:#23C343;
+  --toyar-green-6:#00B42A;
+  --toyar-green-7:#009A29;
+  --toyar-green-8:#008026;
+  --toyar-green-9:#006622;
+  --toyar-green-10:#004D1C;
+
+  --toyar-cyan-1:#E8FFFB;
+  --toyar-cyan-2:#B7F4EC;
+  --toyar-cyan-3:#89E9E0;
+  --toyar-cyan-4:#5EDFD6;
+  --toyar-cyan-5:#37D4CF;
+  --toyar-cyan-6:#14C9C9;
+  --toyar-cyan-7:#0DA5AA;
+  --toyar-cyan-8:#07828B;
+  --toyar-cyan-9:#03616C;
+  --toyar-cyan-10:#00424D;
+
+  --toyar-blue-1:#E8F7FF;
+  --toyar-blue-2:#C3E7FE;
+  --toyar-blue-3:#9FD4FD;
+  --toyar-blue-4:#7BC0FC;
+  --toyar-blue-5:#57A9FB;
+  --toyar-blue-6:#3491FA;
+  --toyar-blue-7:#206CCF;
+  --toyar-blue-8:#114BA3;
+  --toyar-blue-9:#063078;
+  --toyar-blue-10:#001A4D;
+
+  --toyar-xblue-1:#E8F3FF;
+  --toyar-xblue-2:#BEDAFF;
+  --toyar-xblue-3:#94BFFF;
+  --toyar-xblue-4:#6AA1FF;
+  --toyar-xblue-5:#4080FF;
+  --toyar-xblue-6:#165DFF;
+  --toyar-xblue-7:#0E42D2;
+  --toyar-xblue-8:#072CA6;
+  --toyar-xblue-9:#031A79;
+  --toyar-xblue-10:#000D4D;
+
+  --toyar-purple-1:#F5E8FF;
+  --toyar-purple-2:#DDBEF6;
+  --toyar-purple-3:#C396ED;
+  --toyar-purple-4:#A871E3;
+  --toyar-purple-5:#8D4EDA;
+  --toyar-purple-6:#722ED1;
+  --toyar-purple-7:#551DB0;
+  --toyar-purple-8:#3C108F;
+  --toyar-purple-9:#27066E;
+  --toyar-purple-10:#16004D;
+
+  --toyar-pinkpurple-1:#FFE8FB;
+  --toyar-pinkpurple-2:#F7BAEF;
+  --toyar-pinkpurple-3:#F08EE6;
+  --toyar-pinkpurple-4:#E865DF;
+  --toyar-pinkpurple-5:#E13EDB;
+  --toyar-pinkpurple-6:#D91AD9;
+  --toyar-pinkpurple-7:#B010B6;
+  --toyar-pinkpurple-8:#8A0993;
+  --toyar-pinkpurple-9:#650370;
+  --toyar-pinkpurple-10:#42004D;
+
+  --toyar-magenta-1:#FFE8F1;
+  --toyar-magenta-2:#FDC2DB;
+  --toyar-magenta-3:#FB9DC7;
+  --toyar-magenta-4:#F979B7;
+  --toyar-magenta-5:#F754A8;
+  --toyar-magenta-6:#F5319D;
+  --toyar-magenta-7:#CB1E83;
+  --toyar-magenta-8:#A11069;
+  --toyar-magenta-9:#77064F;
+  --toyar-magenta-10:#4D0034;
+
+  --toyar-gray-1:#F7F8FA;
+  --toyar-gray-2:#F2F3F5;
+  --toyar-gray-3:#E5E6EB;
+  --toyar-gray-4:#C9CDD4;
+  --toyar-gray-5:#A9AEB8;
+  --toyar-gray-6:#86909C;
+  --toyar-gray-7:#6B7785;
+  --toyar-gray-8:#4E5969;
+  --toyar-gray-9:#272E3B;
+  --toyar-gray-10:#1D2129;
+
+  }
