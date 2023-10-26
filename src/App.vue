@@ -87,6 +87,10 @@
   <ty-button shape="circle" size="large"> 
    <ty-icon icon="ri-add-fill" color="#fff"/>
   </ty-button>
+  <hr>
+  <ty-button-group>
+    <ty-button @click="fn"  v-for="item in ['primary','danger','success','warning']" :state="item">btn</ty-button>
+  </ty-button-group>
 </template>
 <script setup lang="ts">
   let boolean =true

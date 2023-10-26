@@ -6,7 +6,6 @@
         `ty-button-${state}`,
         `ty-button-${type}`,
         `ty-button-${size}`,
-        `ty-button-${size}`,
         `ty-button-${shape}`,
         {
           'is-disabled': disabled,
@@ -22,7 +21,7 @@
   </button>
 </template>
 
-<script setup name='TyButton'>
+<script setup >
 const props = defineProps({
   state: {
     type: String,
@@ -68,6 +67,7 @@ const props = defineProps({
   },
   shape:{
     type: String,
+    default: "square",
     validator: (value) => {
       return ["square", "round", "circle"].includes(
         value

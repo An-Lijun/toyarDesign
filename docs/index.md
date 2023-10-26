@@ -9,12 +9,12 @@ hero:
   actions:
     - theme: brand
       text: 开始使用
-      link: /etc/doc/index.html
+      link: /page/button
     - theme: alt
       text: 在 GitHub 上查看
       link: https://github.com/An-Lijun/Robinson
   image:
-    src: /card.png
+    src: ./assets/logo.svg
     alt: 网页的logo图标
 
 features:
