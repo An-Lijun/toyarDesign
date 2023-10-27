@@ -1,7 +1,7 @@
 export default {
     "page/guid": [
       {
-        text: "基础",
+        text: "开发指南",
         items: [
           {
             text: "风格",
@@ -11,20 +11,25 @@ export default {
             text: "安装",
             link: "page/guid/install",
           },
-          {
-            text: "快速开始",
-            link: "page/guid/quickstart",
-          },
         ],
       },
+    
+    ],
+    "page/button": [
       {
-        text: "进阶",
+        text: "组件",
         items: [
           {
-            text: "xx",
-            link: "/xx",
+            text: "按钮/Button",
+            link: "page/button",
           },
+          {
+            text: "图标/Icon",
+            link: "page/Icon",
+          },
+        
         ],
       },
+      
     ],
   }

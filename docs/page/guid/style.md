@@ -1,7 +1,7 @@
 ---
-prev:
-  text: 'Markdown'
-  link: '/guide/markdown'
+next:
+  text: '安装'
+  link: 'page/guid/install'
 ---
 
 <img src='../../assets//card.png' style="height:300px;margin:0 auto">

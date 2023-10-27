@@ -93,10 +93,10 @@
   /* padding尺寸 */
   --padding-1:11px;
   --padding-2:12px;
-  --padding-2:13px;
-  --padding-2:14px;
-  --padding-3:15px;
-  --padding-4:19px;
+  --padding-3:13px;
+  --padding-4:14px;
+  --padding-5:15px;
+  --padding-9:19px;
 
   /* 组件尺寸 */
   --size-mini: 24px;

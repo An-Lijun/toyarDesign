@@ -36,7 +36,7 @@ const props = defineProps({
     type: String,
     default: "normal",
     validator: (value) => {
-      return ["normal", "secondary",  "dashed",'text'].includes(
+      return ["normal", "secondary",  "dashed",'text','link'].includes(
         value
       );
     }
