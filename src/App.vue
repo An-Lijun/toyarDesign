@@ -4,6 +4,13 @@
   <header>
     <button @click="change">切换</button>
   </header>
+  <TyIcon  icon="ri-ancient-gate-fill"  :size="100" />
+
+  <ty-divider>111</ty-divider>
+  <div style="height: 50px;">
+  <ty-divider direction="column"></ty-divider>
+
+  </div>
   <div style="font-size: 120px;">
     <TyIcon  icon="ri-ancient-gate-fill"  :size="100" style="color: var(--text-4);"/>
   </div>

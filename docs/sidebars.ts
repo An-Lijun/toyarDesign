@@ -15,21 +15,24 @@ export default {
       },
     
     ],
-    "page/button": [
+    "page/component": [
       {
         text: "组件",
         items: [
           {
             text: "按钮/Button",
-            link: "page/button",
+            link: "page/component/button",
           },
           {
             text: "图标/Icon",
-            link: "page/Icon",
+            link: "page/component/icon",
           },
-        
+          {
+            text: "分隔线/Divider",
+            link: "page/component/divider",
+          },
         ],
       },
-      
     ],
+    
   }

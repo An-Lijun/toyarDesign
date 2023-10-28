@@ -39,7 +39,7 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com" }],
     nav: [
       { text: "指南", link: "/page/guid/style" },
-      { text: "组件", link: "/page/button" },
+      { text: "组件", link: "/page/component/button" },
     ],
     sidebar: sidebars,
     search: {

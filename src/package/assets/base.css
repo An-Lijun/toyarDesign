@@ -134,4 +134,10 @@
   --time-8:0.8s;
   --time-9:0.9s;
 
+  --color-bg-1:var(--bg-1);
+  --color-bg-2:var(--bg-2);
+  --color-bg-3:var(--bg-3);
+  --color-bg-4:var(--bg-4);
+  --color-bg-5:var(--bg-5);
+
 }

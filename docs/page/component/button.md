@@ -1,7 +1,7 @@
 # Button 按钮
 ## 基础用法(state)
 
-:::demo  基础用法(state)
+:::demo  state修改按钮类状态
 ```html
   <ty-button class="mw-10">默认按钮</ty-button>
   <ty-button state="danger" class="mw-10">危险按钮</ty-button>
@@ -13,7 +13,7 @@
 
 ## 按钮类型(type)
 
-:::demo  基础用法(state)
+:::demo  type修改按钮类型
 ```html
   <ty-button class="mw-10">默认按钮</ty-button>
   <ty-button state="danger" class="mw-10">危险按钮</ty-button>
@@ -51,7 +51,7 @@
 
 
 ## 按钮禁用(disabled)
-:::demo  按钮禁用(disabled)
+:::demo  disabled按钮禁用
 ```html
   <ty-button disabled class="mw-10">默认按钮</ty-button>
   <ty-button disabled type="secondary" state="danger" class="mw-10">危险按钮</ty-button>
@@ -62,7 +62,7 @@
 :::
 ## 按钮大小(size)
 
-:::demo  按钮大小(size)
+:::demo  size控制按钮大小
 ```html
   <ty-button size="mini" class="mw-10">默认按钮</ty-button>
   <ty-button  state="danger" class="mw-10">危险按钮</ty-button>
@@ -73,7 +73,7 @@
 
 ## 按钮形状(shape)
 
-:::demo  按钮形状(shape)
+:::demo  shape按钮圆角形状
 ```html
   <ty-button   class="mw-10">   
   默认按钮
@@ -90,7 +90,7 @@
 
 ## 块级形状(block)
 
-:::demo  块级形状(block)
+:::demo  block控制按钮是否充满一行
 ```html
   <ty-button  block>默认按钮</ty-button>
   <ty-button  class="mt-10" shape="round"   block>默认按钮</ty-button>
@@ -110,6 +110,10 @@
 | block     | 是否是块级按钮  | boolean   | false/true | false   |
 | htmlType  | html原生type | string | button / submit / reset | button |
 
+## 插槽(slot)
+| 名称      | 描述    |
+|----- |----- |
+| default | 默认插槽 |
 
 ## 变量(cssVariables)
 
