@@ -5,7 +5,7 @@
       <slot name="demo"></slot>
     </div>
 
-    <div class="meta" ref="meta" :style="{maxHeight:`${isShow?'1000px':'0px'}`}">
+    <div class="meta" ref="meta" :style="{maxHeight:`${isShow?'1500px':'0px'}`}">
       <div class="description">
         <!-- 插入描述信息 -->
         <slot name="description"></slot>

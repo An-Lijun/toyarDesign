@@ -31,6 +31,14 @@ export default {
             text: "分隔线/Divider",
             link: "page/component/divider",
           },
+          {
+            text: "栅格行/Row",
+            link: "page/component/row",
+          },
+          {
+            text: "栅格列/Col",
+            link: "page/component/col",
+          },
         ],
       },
     ],

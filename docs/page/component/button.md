@@ -125,7 +125,7 @@
 | --font-weight-5 | 500 | font-weight |
 | --border-1 | 1px | border |
 | --font-body-3 | 1px | font-size |
-| --border-radius-2 | 2px | border-radius |
+| --border-radius-4 | 4px | border-radius |
 | --text-0 | -- | normal类型时button字体颜色
 | --`state`-6 | -- | state类型时button 常规 背景色边框色
 | --`state`-5 | -- | state类型时button hover/focus 背景色边框色

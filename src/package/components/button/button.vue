@@ -7,11 +7,13 @@
         `ty-button-${type}`,
         `ty-button-${size}`,
         `ty-button-${shape}`,
-        {
+        { 
           'is-disabled': disabled,
           'is-block':block
         } 
     ]"
+    :disabled="disabled"
+    @click="handleClick"
     >
     <span v-if="type === 'link'">
       <slot></slot>
@@ -51,7 +53,7 @@ const props = defineProps({
   },
   size:{
     type: String,
-    default: "samll",
+    default: "small",
     validator: (value) => {
       return ["mini", "small",  "medium",'large'].includes(
         value
@@ -93,7 +95,7 @@ const props = defineProps({
   user-select: none;
   border: var(--border-1) solid;
   font-size: var(--font-body-3);
-  border-radius: var(--border-radius-2);
+  border-radius: var(--border-radius-4);
   position: relative;
 
 }
@@ -240,7 +242,7 @@ const props = defineProps({
 }
 // ------------------------  按钮圆角样式  ------------------------
 $btnShape:(
-  square:(2),
+  square:(4),
   round:(16),
   circle:(circle)
 );
@@ -257,7 +259,7 @@ $btnShape:(
 // ------------------------  按钮尺寸样式  ------------------------
 $btnSize:(
   mini:(1),
-  samll:(3),
+  small:(3),
   medium:(3),
   large:(4)
 );
