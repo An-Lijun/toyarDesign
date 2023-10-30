@@ -4,25 +4,36 @@ import TyButtonGroup from './components/buttonGroup';
 import TyDivider from './components/divider';
 import TyRow from './components/row';
 import TyCol from './components/col';
+import TyForm from './components/form';
+import TyFormItem from './components/form-item';
+import TyInput from './components/input';
+
 
 
 
 import 'remixicon/fonts/remixicon.css'//字体图标
 import './assets/index.scss';
-document.getElementsByTagName('html')[0].setAttribute('toyar-theme','light');
+document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light');
 
 const install = app => {
   app.use(TyIcon),
-  app.use(TyButton),
-  app.use(TyButtonGroup),
-  app.use(TyDivider),
-  app.use(TyRow),
-  app.use(TyCol)
+    app.use(TyButton),
+    app.use(TyButtonGroup),
+    app.use(TyDivider),
+    app.use(TyRow),
+    app.use(TyCol),
+    app.use(TyForm),
+    app.use(TyFormItem),
+    app.use(TyInput)
 
 }
 const toyarUI = {
-    version:'1.0.0',
-    install
+  version: '1.0.0',
+  install
 }
-export { TyIcon, TyButton,TyButtonGroup,TyDivider,TyRow,TyCol}; //按需引入
+export {
+  TyIcon, TyButton, TyButtonGroup,
+  TyDivider, TyRow, TyCol, TyForm,
+  TyFormItem,TyInput
+}; //按需引入
 export default toyarUI //全量引入

@@ -266,6 +266,7 @@ $btnSize:(
 @mixin addBtnSize($name,$value){
   .ty-button-#{$name} {
     height: var(--size-#{$name});
+    line-height: var(--size-#{$name});
     padding: 0  var(--padding-#{$value});
   }
   .ty-button-#{$name}.ty-button-circle{
