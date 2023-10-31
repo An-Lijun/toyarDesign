@@ -30,6 +30,14 @@
       >
         <slot  name="innerAft" ></slot>
       </span>
+      <span 
+        class="ty-input-clear"
+        :style="{
+          transform: `translateX(-${outAftWidth}px)`
+        }"
+      >
+         
+      </span>
       <div class="ty-input-outAft" 
         ref="outAft"
       >
@@ -62,6 +70,8 @@ import {ref ,onMounted} from 'vue'
   height: var(--size-small);
   width: 100%;
   position: relative;
+  color: var(--text-3);
+  font-size: var(--font-body-3);
   .ty-input-outPre{
     border: var(--border-1) solid;
     border-color: var(--toyar-gray-8);
@@ -76,6 +86,47 @@ import {ref ,onMounted} from 'vue'
       border-bottom-right-radius: 0;
       margin-left: -1px;
     }
+  }
+
+  .ty-input-innerPre{
+    height: 100%;
+    display: flex;
+    left: 5px;
+    position: absolute;
+    align-items: center;
+  }
+  input{
+    width: 0;
+    flex-grow: 1;
+    padding: unset;
+    border: var(--border-1) solid;
+    border-color: var(--toyar-gray-8);
+    box-sizing: border-box;
+    border-radius: var(--border-radius-4);
+    outline:unset;
+    color: var(--text-3);
+
+    &:focus{
+        border-color: var(--primary-6);
+    }
+    &.is-outPre{
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &.is-outAft{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    // &:placeholder-shown {
+    //   background-color: red;
+    // }
+  }
+  .ty-input-innerAft{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 5px;
   }
   .ty-input-outAft{
       border: var(--border-1) solid;
@@ -92,40 +143,6 @@ import {ref ,onMounted} from 'vue'
         margin-left: -1px;
 
       }
-    }
-  .ty-input-innerPre{
-    height: 100%;
-    display: flex;
-    left: 5px;
-    position: absolute;
-    align-items: center;
-  }
-  input{
-    flex:1;
-    padding: unset;
-    border: var(--border-1) solid;
-    border-color: var(--toyar-gray-8);
-    box-sizing: border-box;
-    border-radius: var(--border-radius-4);
-    outline:unset;
-    &:focus{
-        border-color: var(--primary-6);
-    }
-    &.is-outPre{
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    &.is-outAft{
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  }
-  .ty-input-innerAft{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 5px;
   }
 }
 </style>

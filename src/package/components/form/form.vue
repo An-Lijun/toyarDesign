@@ -7,11 +7,16 @@
   </form>
 </template>
 <script lang='ts' setup>
-import { provide,toRefs,defineProps} from "vue";
+import { provide,defineProps} from "vue";
 const props =defineProps({
   formData:Object,
   rules: Object,
   labelWidth:String,
+  labelPosition: String,
+  size:String,
+  disabled:Boolean,
+  readonly:Boolean,
+
 });
 
 provide('tyForm',{
