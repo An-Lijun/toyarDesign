@@ -1,6 +1,6 @@
 <template>
    <i :class="[
-    'ty-icon',
+    'toyar',
      icon
     ]"
     :style="{

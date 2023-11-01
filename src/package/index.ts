@@ -8,10 +8,7 @@ import TyForm from './components/form';
 import TyFormItem from './components/form-item';
 import TyInput from './components/input';
 
-
-
-
-import 'remixicon/fonts/remixicon.css'//字体图标
+import './icon/toyaricon.css'
 import './assets/index.scss';
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light');
 
