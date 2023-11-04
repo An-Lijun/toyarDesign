@@ -8,11 +8,11 @@
         `ty-button-${size}`,
         `ty-button-${shape}`,
         { 
-          'is-disabled': disabled,
+          'is-disabled': mergeDisabled,
           'is-block':block
         } 
     ]"
-    :disabled="disabled"
+    :disabled="mergeDisabled"
     @click="handleClick"
     >
     <span v-if="type === 'link'">
@@ -24,6 +24,9 @@
 </template>
 
 <script setup >
+import {  inject,computed  } from 'vue'
+import {configProviderDisabled} from '@/package/hooks/symbolNm'
+
 const props = defineProps({
   state: {
     type: String,
@@ -77,6 +80,11 @@ const props = defineProps({
     }
   }
 })
+const inputInject = inject(configProviderDisabled)
+const mergeDisabled = computed(()=>{
+  return inputInject?.disabled || props.disabled
+}
+)
 </script>
 <style lang="scss" scoped>
 

@@ -7,20 +7,37 @@
   </form>
 </template>
 <script lang='ts' setup>
+import {formContent} from '@/package/hooks/symbolNm'
 import { provide,defineProps} from "vue";
+
 const props =defineProps({
   formData:Object,
-  rules: Object,
+  rules: {
+    type:Object,
+    default:()=>({})
+  },
   labelWidth:String,
   labelPosition: String,
   size:String,
   disabled:Boolean,
   readonly:Boolean,
-
 });
-
-provide('tyForm',{
-  props
+const fieldList=[];
+function addField(formItemObj){
+  fieldList.push(formItemObj)
+}
+function validataAll(){
+  
+  fieldList.forEach(item=>{
+    item.fns.forEach(ite=>{
+      ite(item.prop)
+    })
+  })
+}
+provide(formContent,{
+  ...props,
+  addField,
+  validataAll
 })
 
 </script>

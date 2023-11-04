@@ -3,27 +3,50 @@
 <template>
   <header>
     <button @click="change">切换</button>
+    <button @click="change2">状态切换</button>
   </header>
   <button @click="fnnn">111</button>
   <TyButton @dblclick="fnn">提交1</TyButton>
 
   <!-- <TyForm   :formData="{}">
-    <TyRow :gutter="num">
-      <TyCol :span="6">
-        <TyFormItem>
-            <template #label>
-                金额
-            </template>
-          
-        </TyFormItem> 
-        </TyCol>
-    </TyRow>
+
   </TyForm> -->
-  <TyInput v-model="dd" @input="inp" @blur="a" style="width:500px">
+  <TyForm :formData="formData" :rules="{
+    'dd':[{required:true, message:`dd 是必填字段`}
+  ]}">
+    <TyRow :gutter="num" >
+      <TyCol :span="12">
+        <TyFormItem prop="dd">
+          <template #label>
+            金额
+          </template>
+
+          <TyInput v-model="formData.dd"  @input="inp" @blur="a">
+            <template #outPre>
+              <ty-button @click="fn" disabled>btn</ty-button>
+            </template>
+            <template #innerPre>
+              <ty-icon icon="ty-money-cny-circle-line">
+              </ty-icon>
+            </template>
+            <template #outAft>
+              <TyButton>提交</TyButton>
+            </template>
+          </TyInput>
+        </TyFormItem>
+      </TyCol>
+    </TyRow>
+
+  </TyForm>
+  <TyInput :disabled="boolean" v-model="dd" @input="inp" @blur="a" style="width:500px">
     <template #outPre>
-      <ty-button @click="fn" :disabled="boolean">btn</ty-button>
+      <ty-button @click="fn">btn</ty-button>
     </template>
     <template #innerPre>
+      <ty-icon icon="ty-money-cny-circle-line">
+      </ty-icon>
+    </template>
+    <template #innerAft>
       <ty-icon icon="ty-money-cny-circle-line">
       </ty-icon>
     </template>
@@ -31,21 +54,28 @@
       <TyButton>提交</TyButton>
     </template>
   </TyInput>
-  {{ dd }}
+  {{ formData.dd }}
   <div>
     <ty-button @click="fn" :disabled="boolean">btn</ty-button>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-
+const formData= ref({
+  dd:''
+})
 let boolean = ref(true)
+let boolean1 = ref(true)
+
 let dd = ref('111')
 let num = ref(10)
 const change = () => {
-  boolean.value = !boolean.value
+  boolean1.value = !boolean1.value
   let html = document.getElementsByTagName('html');
-  html[0].setAttribute('toyar-theme', boolean.value ? 'light' : 'dark')
+  html[0].setAttribute('toyar-theme', boolean1.value ? 'light' : 'dark')
+}
+const change2 = () => {
+  boolean.value = !boolean.value
 }
 const data1 = { labelWidth: 50 }
 const fn = () => {

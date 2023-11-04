@@ -5,7 +5,7 @@
     ]"
     :style="{
       'fontSize':props.size >0?size+'px':'unset',
-      'color': color?color:'var(--toyar-gray-10)'
+      'color': color ?'var(--toyar-gray-10)':''
     }"
    >
    </i>
