@@ -17,6 +17,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "markdown-it-container": "^3.0.0",
+    "sass": "^1.69.5",
     "typescript": "^5.0.2",
     "unplugin-auto-import": "^0.12.0",
     "vite": "^4.4.11",

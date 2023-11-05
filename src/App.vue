@@ -11,7 +11,7 @@
   <!-- <TyForm   :formData="{}">
 
   </TyForm> -->
-  <TyForm :formData="formData" :rules="{
+  <TyForm ref="form1" :formData="formData" :rules="{
     'dd':[
       {required:true, message:`dd 是必填字段`},
       {min:2,max:5}
@@ -73,10 +73,12 @@
   <div>
     <ty-button @click="fn" :disabled="boolean">btn</ty-button>
   </div>
+  <ty-button @click="submit">submit</ty-button>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import { TyCol } from './package';
+import { ref,onMounted } from 'vue';
+
+const form1 =ref()
 const formData= ref({
   dd:''
 })
@@ -113,5 +115,12 @@ function a() {
 function fnnn() {
   dd.value = "777"
 }
+function submit(){
+    console.log(form1.value.validateAll);
+}
+onMounted(() => {
+  console.log(form1.value.validateAll);
+})
+
 </script>
 <style scoped></style>

@@ -48,7 +48,11 @@ provide(formContent,{
   addValidate,
   validataAll
 })
-
+defineExpose({
+  validata,
+  validataAll,
+  a:123
+});
 </script>
 
 <style lang="scss" scoped>
