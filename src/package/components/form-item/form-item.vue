@@ -13,54 +13,93 @@
     </label>
     <div class="ty-form-item-content">
       <slot></slot>
-      <div v-show="isShowErrorMsg" class="ty-form-item-tip">
-        {{errorMsg  }}
+      <div v-show="formItemError.isShowErrorMsg" class="ty-form-item-tip">
+        {{ formItemError.errorMsg }}
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { formContent } from '@/package/hooks/symbolNm'
-import { inject, onMounted, toRefs } from "vue";
+import { formContent ,formItemContent} from '@/package/hooks/symbolNm'
+import { inject, onMounted, toRefs,provide } from "vue";
 const tyForm = inject(formContent);
-let isShowErrorMsg = ref(false);
-let errorMsg = ref('')
+const formItemError = ref({
+  isShowErrorMsg: false,
+  errorMsg: ''
+})
 const props = defineProps({
   prop: String,
 })
 
 const { prop } = toRefs(props)
-
-const generatorValidata = (arr) => {
+provide(formItemContent,{
+  ...props
+})
+const generatorValidate = (rules) => {
   const fnArr = [];
-  arr.forEach(element => {
-    let keys = Object.keys(element);
-    if (keys.includes('required')){
-    fnArr.push(
-      (data) => {
-        return new Promise((resolve, reject) => {
-          console.log(tyForm.formData);
-          if (!tyForm.formData[data.value]) {
-            isShowErrorMsg.value = true
-            errorMsg.value = element.message || `${data} is required`
-            return reject(new Error('123'))
+  rules.forEach(rule => {
+    let keys = Object.keys(rule);
+    if (keys.includes('required')) {
+      fnArr.push(
+        (data) => {
+          return new Promise((resolve, reject) => {
+            if (!tyForm.formData[data]) {
+              formItemError.value.isShowErrorMsg = true
+              formItemError.value.errorMsg = rule.message || `${data} is required`
+              return reject(new Error(formItemError.value.errorMsg))
+            }
+            formItemError.value.isShowErrorMsg = false
+            resolve()
+          })
+        }
+      )
+    }
+    if (keys.includes('min') || keys.includes('max')) {
+      fnArr.push(
+        (data) => {
+          let errMsg = '';
+          if (keys.includes('min')) {
+            errMsg += rule.message || `${data} length must > ${rule.min}`
           }
-          isShowErrorMsg.value = false
-          resolve()
-        })
-      }
-    )
-  }
-});
-return fnArr
+          if (keys.includes('max')) {
+            if (keys.includes('min')) {
+              errMsg += ' and '
+            }
+            errMsg += rule.message || `${data} length must < ${rule.max}`
+          }
+          return new Promise((resolve, reject) => {
+            if (keys.includes('min')) {
+              if (`${tyForm.formData[data.value]}`.length <= rule.min) {
+                formItemError.value.isShowErrorMsg = true
+                formItemError.value.errorMsg = errMsg
+                return reject(new Error(errMsg))
+              }
+            }
+            if (keys.includes('max')) {
+              if (`${tyForm.formData[data.value]}`.length >= rule.max) {
+                formItemError.value.isShowErrorMsg = true
+                formItemError.value.errorMsg = errMsg
+                return reject(new Error(errMsg))
+              }
+            }
+            formItemError.value.isShowErrorMsg = false
+            resolve()
+          })
+        }
+      )
+    }
+
+
+  });
+  return fnArr
 }
 
 onMounted(() => {
   if (prop && Object.keys(tyForm.rules).includes(prop.value)) {
-    tyForm.addField({
-      prop,
-      fns:generatorValidata(tyForm.rules[prop.value])
-    })
+    tyForm.addValidate(
+       prop.value,
+       generatorValidate(tyForm.rules[prop.value])
+    )
   }
 })
 </script>

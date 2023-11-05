@@ -12,8 +12,14 @@
 
   </TyForm> -->
   <TyForm :formData="formData" :rules="{
-    'dd':[{required:true, message:`dd 是必填字段`}
-  ]}">
+    'dd':[
+      {required:true, message:`dd 是必填字段`},
+      {min:2,max:5}
+    ],
+    'cc':[
+      {required:true, message:`cc 是必填字段`},
+    ]
+  }">
     <TyRow :gutter="num" >
       <TyCol :span="12">
         <TyFormItem prop="dd">
@@ -33,6 +39,15 @@
               <TyButton>提交</TyButton>
             </template>
           </TyInput>
+        </TyFormItem>
+      </TyCol>
+      <TyCol :span="12">
+    
+        <TyFormItem prop="cc">
+          <template #label>
+          el
+        </template>
+          <TyInput v-model="formData.cc"/>
         </TyFormItem>
       </TyCol>
     </TyRow>
@@ -61,6 +76,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+import { TyCol } from './package';
 const formData= ref({
   dd:''
 })

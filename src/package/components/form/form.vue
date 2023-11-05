@@ -22,21 +22,30 @@ const props =defineProps({
   disabled:Boolean,
   readonly:Boolean,
 });
-const fieldList=[];
-function addField(formItemObj){
-  fieldList.push(formItemObj)
+const fieldList={};
+function addValidate(prop,fns){
+  fieldList[prop]=fns;
 }
 function validataAll(){
-  
-  fieldList.forEach(item=>{
-    item.fns.forEach(ite=>{
-      ite(item.prop)
-    })
+  let keys = Object.keys(fieldList);
+  keys.forEach(async key=>{
+    const item  = fieldList[key];
+    
+    for (let index = 0; index < item.fns.length; index++) {
+       await item.fns[index](item.prop)
+    }
   })
+}
+async function validata(prop){
+  const fns= fieldList[prop]
+  for (let index = 0; index < fns.length; index++) {
+       await fns[index](prop)
+  }
 }
 provide(formContent,{
   ...props,
-  addField,
+  validata,
+  addValidate,
   validataAll
 })
 
