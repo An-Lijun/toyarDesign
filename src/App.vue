@@ -11,15 +11,7 @@
   <!-- <TyForm   :formData="{}">
 
   </TyForm> -->
-  <TyForm ref="form1" :formData="formData" :rules="{
-    'dd':[
-      {required:true, message:`dd 是必填字段`},
-      {min:2,max:5}
-    ],
-    'cc':[
-      {required:true, message:`cc 是必填字段`},
-    ]
-  }">
+  <TyForm ref="form1" :formData="formData" :rules="rules">
     <TyRow :gutter="num" >
       <TyCol :span="12">
         <TyFormItem prop="dd">
@@ -74,6 +66,8 @@
     <ty-button @click="fn" :disabled="boolean">btn</ty-button>
   </div>
   <ty-button @click="submit">submit</ty-button>
+  <ty-button @click="reset">reset</ty-button>
+
 </template>
 <script setup lang="ts">
 import { ref,onMounted } from 'vue';
@@ -100,6 +94,28 @@ const fn = () => {
   num.value++
   data1.labelWidth++
 }
+const rules ={
+    'dd':[
+      {required:true, message:`dd 是必填字段`},
+      {min:2,max:5}
+    ],
+    'cc':[
+      {required:true, message:`cc 是必填字段`},{
+        validate:val, message:`cc11`
+      }
+    ]
+  }
+function val(data,cb){
+  console.log("12345");
+  console.log(data,cb);
+  if(data.length<2){
+    return cb('length must >2')
+  }
+  cb()
+  
+  
+    // cb("123")
+}
 function fnn() {
   console.log("666");
 
@@ -116,7 +132,13 @@ function fnnn() {
   dd.value = "777"
 }
 function submit(){
-    console.log(form1.value.validateAll);
+    form1.value.validateAll()
+}
+function reset(){
+  form1.value.clearValidateAll()
+  // form1.value.clearValidate('dd')
+
+  
 }
 onMounted(() => {
   console.log(form1.value.validateAll);

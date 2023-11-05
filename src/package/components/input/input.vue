@@ -58,7 +58,7 @@
 import {configProviderDisabled} from '../../hooks/symbolNm'
 import { formContent,formItemContent} from '@/package/hooks/symbolNm'
 
-import { ref, onMounted, toRefs,reactive ,provide, useSlots, useAttrs, watch } from 'vue'
+import { ref, onMounted, toRefs,reactive , useSlots, useAttrs, watch } from 'vue'
 const attrs = useAttrs()
 const props = defineProps({
   size: {
@@ -119,7 +119,7 @@ function handleInput(event) {
 }
 function handleBlur(event) {
   if(tyForm){
-    tyForm.validata(tyFormItem.prop);
+    tyForm.validate(tyFormItem.prop);
   }
   focus.value = false
   emit('blur', event)

@@ -8,7 +8,7 @@
 </template>
 <script lang='ts' setup>
 import {formContent} from '@/package/hooks/symbolNm'
-import { provide,defineProps} from "vue";
+// import { provide,defineProps} from "vue";
 
 const props =defineProps({
   formData:Object,
@@ -23,35 +23,57 @@ const props =defineProps({
   readonly:Boolean,
 });
 const fieldList={};
-function addValidate(prop,fns){
-  fieldList[prop]=fns;
+function addValidate(prop,fns,clearValidate){
+  fieldList[prop]={
+    fns,
+    clearValidate
+  };
 }
-function validataAll(){
+function removeValidate(prop){
+  delete fieldList[prop]
+}
+function validateAll(){
   let keys = Object.keys(fieldList);
   keys.forEach(async key=>{
-    const item  = fieldList[key];
-    
-    for (let index = 0; index < item.fns.length; index++) {
-       await item.fns[index](item.prop)
+    const item  = fieldList[key].fns;
+    for (let index = 0; index < item.length; index++) {
+       await item[index](key)
     }
   })
 }
-async function validata(prop){
-  const fns= fieldList[prop]
-  for (let index = 0; index < fns.length; index++) {
-       await fns[index](prop)
-  }
+function validate(prop){
+  const fns= fieldList[prop].fns
+  const list =fns.map(item=> item(prop))
+  console.log(list);
+  
+  return Promise.all(list).then((res)=>{
+    console.log(res,"123456789");
+  }).catch(err=>{
+    console.log(err,"123eerr");
+    
+  })
+}
+function clearValidateAll(){
+  let keys = Object.keys(fieldList);
+  keys.forEach( key=>{
+    fieldList[key].clearValidate();
+  })
+}
+function clearValidate(prop){
+  fieldList[prop].clearValidate();
 }
 provide(formContent,{
   ...props,
-  validata,
+  validate,
   addValidate,
-  validataAll
+  validateAll,
+  removeValidate
 })
 defineExpose({
-  validata,
-  validataAll,
-  a:123
+  validate,
+  validateAll,
+  clearValidate,
+  clearValidateAll
 });
 </script>
 

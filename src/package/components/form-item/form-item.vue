@@ -20,8 +20,8 @@
   </div>
 </template>
 <script setup>
-import { formContent ,formItemContent} from '@/package/hooks/symbolNm'
-import { inject, onMounted, toRefs,provide } from "vue";
+import { formContent, formItemContent } from '@/package/hooks/symbolNm'
+// import { inject, onMounted, toRefs,provide } from "vue";
 const tyForm = inject(formContent);
 const formItemError = ref({
   isShowErrorMsg: false,
@@ -32,7 +32,7 @@ const props = defineProps({
 })
 
 const { prop } = toRefs(props)
-provide(formItemContent,{
+provide(formItemContent, {
   ...props
 })
 const generatorValidate = (rules) => {
@@ -69,14 +69,14 @@ const generatorValidate = (rules) => {
           }
           return new Promise((resolve, reject) => {
             if (keys.includes('min')) {
-              if (`${tyForm.formData[data.value]}`.length <= rule.min) {
+              if (`${tyForm.formData[data]}`.length <= rule.min) {
                 formItemError.value.isShowErrorMsg = true
                 formItemError.value.errorMsg = errMsg
                 return reject(new Error(errMsg))
               }
             }
             if (keys.includes('max')) {
-              if (`${tyForm.formData[data.value]}`.length >= rule.max) {
+              if (`${tyForm.formData[data]}`.length >= rule.max) {
                 formItemError.value.isShowErrorMsg = true
                 formItemError.value.errorMsg = errMsg
                 return reject(new Error(errMsg))
@@ -88,20 +88,43 @@ const generatorValidate = (rules) => {
         }
       )
     }
-
-
+    if (keys.includes('validate')) {
+      return new Promise((resolve, reject) => {
+        const cb = (data) => {
+          if (!data) {
+            formItemError.value.isShowErrorMsg = false
+            formItemError.value.errorMsg = ''
+            return resolve()
+          }
+          formItemError.value.isShowErrorMsg = true
+          formItemError.value.errorMsg = data
+          reject(new Error(data))
+        }
+        fnArr.push((data) => {
+          rule.validate(tyForm.formData[data], cb)
+        })
+      })
+    }
   });
   return fnArr
 }
-
+const clearValidate = () => {
+  formItemError.value.isShowErrorMsg = false;
+  formItemError.value.errorMsg = '';
+}
 onMounted(() => {
   if (prop && Object.keys(tyForm.rules).includes(prop.value)) {
     tyForm.addValidate(
-       prop.value,
-       generatorValidate(tyForm.rules[prop.value])
+      prop.value,
+      generatorValidate(tyForm.rules[prop.value]),
+      clearValidate
     )
   }
 })
+onBeforeUnmount(()=>{
+  tyForm.removeValidate(prop.value)
+})
+
 </script>
 <style lang="scss" scoped>
 .ty-form-item {
