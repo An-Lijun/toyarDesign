@@ -123,6 +123,8 @@
   --box-shadow-2: 0 -2px 5px rgba(0, 0, 0, 0.1);
   --box-shadow-3: 0 0 10px rgba(0, 0, 0, 0.1);
   --box-shadow-4: 0 0 20px rgba(0, 0, 0, 0.1);
+  --box-shadow-5: 0 4px 10px rgba(0,0,0,.1);
+
   /* 时间 */
   --time-1:0.1s;
   --time-2:0.2s;

@@ -1,7 +1,7 @@
 <template>
   <div ref="root" :class="[
-    'ty-input',
-    `ty-input-${size}`,
+    'ty-select',
+    `ty-select-${size}`,
     {
       'is-focus': focus,
       'is-disabled': disabled,
@@ -9,58 +9,27 @@
       'is-error':tyFormItem && tyFormItem.formItemError.isShowErrorMsg
     }
   ]">
-    <!-- 前置元素 -->
-    <div class="ty-input-outPre" ref="outPre" v-if="useSlots().outPre">
-      <slot name="outPre"></slot>
-    </div>
-    <!-- 前置内容 -->
-    <span class="ty-input-innerPre" v-if="useSlots().innerPre" 
-       ref="innerPre" 
-       :style="{
-         color: disabled?'var(--text-4)':'var(--text-1)',
-         transform: `translateX(${outPreWidth}px)`
-    }">
-      <slot name="innerPre"></slot>
-    </span>
-    <!-- 输入框 -->
-    <input type="text" ref="nativeInp" :disabled="disabled" :class="[
-      {
-        'is-outPre': outPreWidth > 0,
-        'is-outAft': outAftWidth > 0
-      }
-    ]" :style="[
-  {
-    paddingLeft: `${innerPreWidth + 20}px`,
-    paddingRight: `${innerAftWidth + 20}px`
-  }
-]" @input="handleInput" @blur="handleBlur" @focus="handleFocus" />
-    <!-- 后置内容 -->
-    <span ref="innerAft" class="ty-input-innerAft" v-if="useSlots().innerAft&& !isShowClearBtn" :style="{
-      transform: `translateX(-${outAftWidth}px)`,
-    }">
-      <slot name="innerAft"></slot>
-    </span>
 
-    <span v-if="isShowClearBtn" class="ty-input-clear" :style="{
+    <!-- 输入框 -->
+    <input type="text" ref="nativeInp" @click="isShowOption=true" :disabled="disabled" 
+     @input="handleInput" 
+     @blur="handleBlur" 
+     @focus="handleFocus" />
+    <span v-if="isShowClearBtn" class="ty-select-clear" :style="{
       position: 'absolute',
       right: '10px',
-      transform: `translateX(-${outAftWidth}px)`
     }" @click="clear">
     </span>
-    <!-- 后置元素 -->
-    <div class="ty-input-outAft" ref="outAft" v-if="useSlots().outAft ">
-      <slot name="outAft">
-
-      </slot>
-    </div>
+    <ul class="ty-select-group" v-show="isShowOption">
+       <slot> </slot>
+    </ul>
   </div>
 </template>
 <script setup>
-import {configProviderDisabled} from '../../hooks/symbolNm'
+import {selectContent} from '../../hooks/symbolNm'
 import { formContent,formItemContent} from '@/package/hooks/symbolNm'
 
-import { ref, onMounted, toRefs,reactive , useSlots, useAttrs, watch } from 'vue'
-const attrs = useAttrs()
+import { ref, onMounted, toRefs,reactive , useAttrs, watch } from 'vue'
 const props = defineProps({
   size: {
     type: String,
@@ -93,26 +62,17 @@ const{disabled,readonly,modelValue,size} =toRefs(props)
 const root = ref();
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])
 const nativeInp = ref()
-const outPre = ref()
-const innerPre = ref()
-const outAft = ref()
-const innerAft = ref()
 const focus = ref(false)
-let outPreWidth = ref(0)
-let innerPreWidth = ref(0)
 let outAftWidth = ref(0)
-let innerAftWidth = ref(0)
-const provideInp=reactive ({disabled})
-provide(configProviderDisabled,provideInp)
+// const provideInp=reactive ({disabled})
+
 onMounted(() => {
-  outPreWidth.value = outPre?.value?.clientWidth
-  innerPreWidth.value = innerPre?.value?.clientWidth
-  outAftWidth.value = outAft?.value?.clientWidth
-  innerAftWidth.value = innerAft?.value?.clientWidth
   setNativeInp(props.modelValue)
 })
+const isShowOption =ref(false)
 function setNativeInp(value) {
   nativeInp.value.value = value
+  emit('update:modelValue',value)
 }
 function handleInput(event) {
   emit('update:modelValue', event.target.value)
@@ -139,10 +99,12 @@ watch(
     setNativeInp(newVal)
   }
 )
+provide(selectContent,{setNativeInp,isShowOption})
+
 </script>
 
 <style lang="scss" scoped>
-.ty-input {
+.ty-select {
   display: flex;
   width: 100%;
   position: relative;
@@ -153,46 +115,6 @@ watch(
   box-sizing: border-box;
   transition: all var(--time-5);
 
-  .ty-input-outPre {
-    border: var(--border-1) solid transparent;
-    border-radius: var(--border-radius-4) 0 0 var(--border-radius-4);
-    display: flex;
-    align-items: center;
-
-    ::v-deep() .ty-button {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      margin-left: -1px;
-    }
-  }
-
-  .ty-input-innerPre {
-    height: 100%;
-    display: flex;
-    left: 10px;
-    position: absolute;
-    align-items: center;
-  }
-
-  .ty-input-innerAft {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 10px;
-  }
-
-  .ty-input-outAft {
-    border-radius: 0 var(--border-radius-4) var(--border-radius-4) 0;
-    display: flex;
-    align-items: center;
-    margin-right: -1px;
-
-    ::v-deep() .ty-button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-  }
 
   input {
     width: 0;
@@ -204,10 +126,10 @@ watch(
     outline: unset;
     color: var(--text-1);
     background-color: var(--fill-2);
+    padding:0 30px 0 10px;
     &.is-outPre {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-
     }
 
     &.is-outAft {
@@ -217,8 +139,7 @@ watch(
 
   }
 
-
-  .ty-input-clear{
+  .ty-select-clear{
     display: none;
     &:before {
     font-family: 'toyaricon' !important;
@@ -228,8 +149,7 @@ watch(
   }
   }
 
-
-  .ty-input-clear:hover {
+  .ty-select-clear:hover {
     &::before {
       font-family: 'toyaricon' !important;
       font-style: normal;
@@ -245,7 +165,7 @@ watch(
     input {
       background-color: var(--fill-3);
     }
-    .ty-input-clear{
+    .ty-select-clear{
       display: block; 
     }
   }
@@ -278,7 +198,6 @@ watch(
     }
   }
 
-
 }
 
 // ------------------------  input尺寸样式  ------------------------
@@ -290,7 +209,7 @@ $inputSize: (
 );
 
 @mixin addInputSize($name) {
-  .ty-input-#{$name} {
+  .ty-select-#{$name} {
     height: var(--size-#{$name});
     line-height: var(--size-#{$name});
   }
@@ -298,5 +217,19 @@ $inputSize: (
 
 @each $name in $inputSize {
   @include addInputSize($name);
+}
+.ty-select-group{
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  box-sizing: border-box;
+  list-style: none;
+  padding: unset;
+  border:1px solid var(--fill-3);
+  background-color: var(--color-bg-1);
+  box-shadow: var(--box-shadow-5);
+  width: 100%;
+  border-radius: var(--border-radius-4);
+  padding: 5px 0;
 }
 </style>

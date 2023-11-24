@@ -33,7 +33,8 @@ const props = defineProps({
 
 const { prop } = toRefs(props)
 provide(formItemContent, {
-  ...props
+  ...props,
+  formItemError:formItemError.value
 })
 const generatorValidate = (rules) => {
   const fnArr = [];
@@ -42,15 +43,15 @@ const generatorValidate = (rules) => {
     if (keys.includes('required')) {
       fnArr.push(
         (data) => {
-          return new Promise((resolve, reject) => {
+          // return new Promise((resolve, reject) => {
             if (!tyForm.formData[data]) {
               formItemError.value.isShowErrorMsg = true
               formItemError.value.errorMsg = rule.message || `${data} is required`
-              return reject(new Error(formItemError.value.errorMsg))
+              return prop.value
             }
             formItemError.value.isShowErrorMsg = false
-            resolve()
-          })
+            // resolve()
+          // })
         }
       )
     }
@@ -67,43 +68,46 @@ const generatorValidate = (rules) => {
             }
             errMsg += rule.message || `${data} length must < ${rule.max}`
           }
-          return new Promise((resolve, reject) => {
+          // return new Promise((resolve, reject) => {
             if (keys.includes('min')) {
               if (`${tyForm.formData[data]}`.length <= rule.min) {
                 formItemError.value.isShowErrorMsg = true
                 formItemError.value.errorMsg = errMsg
-                return reject(new Error(errMsg))
+                // return reject(prop.value)
+                return prop.value
               }
             }
             if (keys.includes('max')) {
               if (`${tyForm.formData[data]}`.length >= rule.max) {
                 formItemError.value.isShowErrorMsg = true
                 formItemError.value.errorMsg = errMsg
-                return reject(new Error(errMsg))
+                return reject(prop.value)
               }
             }
             formItemError.value.isShowErrorMsg = false
-            resolve()
-          })
+            // resolve()
+          // })
         }
       )
     }
     if (keys.includes('validate')) {
-      return new Promise((resolve, reject) => {
+      // return new Promise((resolve, reject) => {
         const cb = (data) => {
           if (!data) {
             formItemError.value.isShowErrorMsg = false
             formItemError.value.errorMsg = ''
-            return resolve()
+            // return resolve()
+            return
           }
           formItemError.value.isShowErrorMsg = true
           formItemError.value.errorMsg = data
-          reject(new Error(data))
+          // reject(prop.value)
+          return prop.value
         }
         fnArr.push((data) => {
-          rule.validate(tyForm.formData[data], cb)
+          rule.validate(tyForm.formData[data]||'', cb)
         })
-      })
+      // })
     }
   });
   return fnArr
