@@ -22,7 +22,9 @@
   <TyChcekBox v-model="isT" :value="2">456</TyChcekBox>
   <TyChcekBox v-model="isT" :value="3">456</TyChcekBox>
   <TyChcekBox v-model="isT" :value="4">456</TyChcekBox>
-
+  {{ isC }}
+  <TyRadio  v-model="isC" :value="2">123</TyRadio>
+  <TyRadio  v-model="isC" :value="3">456</TyRadio>
 
   <TyForm ref="form1" :formData="formData" :rules="rules">
     <TyRow :gutter="num">
@@ -75,6 +77,10 @@
     </template>
   </TyInput>
   {{ formData.dd }}
+  <hr>
+  {{ cd }}
+  <input type="radio"  v-model="cd"  value="2" id="">
+  <input type="radio"  v-model="cd" value="3" id="">
   <div>
     <ty-button @click="fn" :disabled="boolean">btn</ty-button>
   </div>
@@ -89,12 +95,13 @@ const formData = ref({
   dd: ''
 })
 const isT =ref([1])
-
+let cd= ref('2')
 let boolean = ref(true)
 let boolean1 = ref(true)
 let ee= ref(1);
 let dd = ref('111')
 let num = ref(10)
+let isC =ref('3')
 const change = () => {
   boolean1.value = !boolean1.value
   let html = document.getElementsByTagName('html');
@@ -135,6 +142,7 @@ function submit() {
 function fnn() {
    isT.value =[1,2]
   console.log("666");
+  isC.value='2'
 
 }
 function inp() {

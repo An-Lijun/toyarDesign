@@ -9,7 +9,7 @@ import TyFormItem from './components/form-item';
 import TyInput from './components/input';
 import TySelect from './components/select';
 import TyChcekBox from './components/check-box';
-
+import TyRadio from './components/radio'
 
 import './icon/toyaricon.css'
 import './assets/index.scss';
@@ -25,16 +25,19 @@ const install = app => {
     app.use(TyForm),
     app.use(TyFormItem),
     app.use(TyInput),
-    app.use(TySelect)
-    app.use(TyChcekBox)
+    app.use(TySelect),
+    app.use(TyChcekBox),
+    app.use(TyRadio)
 }
 const toyarUI = {
   version: '1.0.0',
   install
 }
+
+export default toyarUI //全量引入
+
 export {
   TyIcon, TyButton, TyButtonGroup,
   TyDivider, TyRow, TyCol, TyForm,
-  TyFormItem,TyInput,TyChcekBox
+  TyFormItem,TyInput,TyChcekBox,TyRadio
 }; //按需引入
-export default toyarUI //全量引入

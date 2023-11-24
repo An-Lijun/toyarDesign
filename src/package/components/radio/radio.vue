@@ -1,15 +1,15 @@
 <template>
-  <label class="ty-check-box">
-    <input type="checkbox"  
+  <label class="ty-radio">
+    <!-- v-model="model" -->
+    <input type="radio"  
       v-model="model"
       :value="value"
       :class="[
-        `ty-check-box-${size}`
+        `ty-radio-${size}`
       ]"
     >
     <slot/>
   </label>
-
 </template>
 <script setup>
 const emit = defineEmits(['update:modelValue'])
@@ -39,35 +39,41 @@ const model =computed({
     emit('update:modelValue',val)
   }
 })
-
 </script>
 <style lang="scss" scoped>
-.ty-check-box{
+.ty-radio{
   display:inline-flex;
   align-items:center;
   user-select:none;
+  box-sizing: border-box;
   input{
     appearance:none;
-    border-radius: var(--border-radius-4);
-    background-color: var(--fill-2);
-    text-align:center;
-    margin:unset;
-    box-sizing: border-box;
+    border-radius: var(--border-radius-circle);
+    border: var(--border-2) solid var(--primary-6);
     position: relative;
+    margin:unset;
     margin-right:10px;
   }
-  input:hover{
-    cursor: pointer;
+  input[type=radio]:checked::after {
+    content:'';
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: var(--border-radius-circle);
+    background-color:var(--primary-6);
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
-  // ------------------------  checkBox尺寸样式  ------------------------
   $inputSize: (
     mini,
     small,
     medium,
     large
   );
-  @mixin addCheckBoxSize($name) {
-    .ty-check-box-#{$name} {
+  @mixin addRadioSize($name) {
+    .ty-radio-#{$name} {
       height: var(--size-#{$name});
       width: var(--size-#{$name});
       line-height:var(--size-#{$name});
@@ -75,23 +81,7 @@ const model =computed({
   }
 
   @each $name in $inputSize {
-    @include addCheckBoxSize($name);
-  }
-  input[type="checkbox"]:checked{
-    background-color:var(--primary-6);
-  }
-  input[type=checkbox]:checked::after {
-    box-sizing: border-box;
-    content: '✔';
-    color: white;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    left: 50%;
-    top: 50%;
-    line-height: 20px;
-    transform: translate(-50%, -50%);
+    @include addRadioSize($name);
   }
 }
-
 </style>
