@@ -7,6 +7,13 @@
   </header>
   <button @click="fnnn">111</button>
   <TyButton @dblclick="fnn">提交1</TyButton>
+  <hr>
+  <div style="width:400px">
+    {{ date1 }}
+  <TyCalendar v-model="date1"/>
+
+  </div>
+  <hr>
   <div>
     {{ ee }}
   </div>
@@ -89,7 +96,8 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-
+import { TyCalendar } from './package';
+const date1=ref('')
 const form1 = ref()
 const formData = ref({
   dd: ''

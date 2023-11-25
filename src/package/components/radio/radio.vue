@@ -53,6 +53,7 @@ const model =computed({
     position: relative;
     margin:unset;
     margin-right:10px;
+    background-color: var(--fill-2);
   }
   input[type=radio]:checked::after {
     content:'';

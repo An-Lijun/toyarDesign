@@ -117,7 +117,7 @@ provide(selectContent,{setNativeInp,isShowOption})
 
 
   input {
-    width: 0;
+    width: 100%;
     flex-grow: 1;
     padding: unset;
     border: unset;
