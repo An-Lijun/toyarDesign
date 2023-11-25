@@ -41,10 +41,10 @@
   --danger-1: var(--toyar-red-1);
 
   /* 边框颜色 */
-  --border-4:var(--toyar-gray-6);/*重色 按钮描边*/
-  --border-3:var(--toyar-gray-4);/*深色 悬浮*/
-  --border-2:var(--toyar-gray-3);/* 一般*/
-  --border-1:var(--toyar-gray-2);/*浅色*/
+  --border-color-4:var(--toyar-gray-6);/*重色 按钮描边*/
+  --border-color-3:var(--toyar-gray-4);/*深色 悬浮*/
+  --border-color-2:var(--toyar-gray-3);/* 一般*/
+  --border-color-1:var(--toyar-gray-2);/*浅色*/
   /* 填充颜色 */
   --fill-4:var(--toyar-gray-4);/*重/特殊场景*/
   --fill-3:var(--toyar-gray-3);/*深/灰底悬浮*/
@@ -141,5 +141,14 @@
   --color-bg-3:var(--bg-3);
   --color-bg-4:var(--bg-4);
   --color-bg-5:var(--bg-5);
+
+  --zindex-1: 1;
+  --zindex-3: 3;
+  --zindex-5: 5;
+  --zindex-7: 7;
+  --zindex-9: 9;
+  --zindex-50: 50;
+  --zindex-import: 99;
+
 
 }

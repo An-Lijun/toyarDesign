@@ -135,7 +135,7 @@ onBeforeUnmount(()=>{
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-
+  position: relative;
   .ty-form-label {
     width: 100px;
     text-align: right;

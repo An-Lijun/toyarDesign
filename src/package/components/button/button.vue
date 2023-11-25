@@ -148,7 +148,7 @@ const mergeDisabled = computed(()=>{
   
   // 虚线按钮
   .ty-button-#{$state}.ty-button-dashed{
-    border:1px dashed;
+    border:var(--border-1) dashed;
     background-color: unset;
     color: var(--#{$state}-6);
     &:hover,
@@ -184,20 +184,20 @@ const mergeDisabled = computed(()=>{
     border: unset;
     background: unset;
     span{
-       border-bottom: 1px solid var(--#{$state}-6);
+       border-bottom: var(--border-1) solid var(--#{$state}-6);
     }
     &:hover,
     &:focus {
       background: unset;
       color:  var(--#{$state}-5);
       span{
-        border-bottom: 1px solid var(--#{$state}-5);
+        border-bottom: var(--border-1)  solid var(--#{$state}-5);
       }
     }
     &:active {
       color:  var(--#{$state}-7);
       span{
-        border-bottom: 1px solid var(--#{$state}-7);
+        border-bottom: var(--border-1)  solid var(--#{$state}-7);
       }
     }
   }
@@ -239,7 +239,7 @@ const mergeDisabled = computed(()=>{
       cursor: no-drop;
       border-color: var(--#{$state}-3);
       span{
-        border-bottom: 1px solid var(--#{$state}-3);
+        border-bottom: var(--border-1)  solid var(--#{$state}-3);
       }
     }
   }

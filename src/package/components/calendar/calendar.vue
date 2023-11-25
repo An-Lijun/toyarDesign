@@ -12,12 +12,15 @@
     <!-- 输入框 -->
     <input type="text" ref="nativeInp" @click="isShowCalendar = true" :disabled="disabled" @input="handleInput"
       @blur="handleBlur" @focus="handleFocus" />
-    <span v-if="isShowClearBtn" class="ty-calendar-clear" :style="{
+      <span ref="innerAft" class="ty-input-innerAft" >
+        <TyIcon icon="ty-calendar-line"></TyIcon>
+    </span>
+   <span v-if="isShowClearBtn" class="ty-calendar-clear" :style="{
       position: 'absolute',
       right: '10px',
     }" @click="clear">
     </span>
-    <div class="ty-calendar-box" v-show="isShowCalendar">
+    <div class="ty-calendar-box" v-show="isShowCalendar" :style="`top: var(--size-${size});`">
       <header>
         <div class="ty-calendar-com">
           <div class="lastYear" @click="lastYear">
@@ -91,6 +94,10 @@ let befMonth = ref([])
 let nowMonth = ref(0)
 let aftMonth = ref(0)
 
+let isShowClearBtn  = computed(()=>{
+ return props.modelValue!=='' && props.clearable && !props.disabled
+})
+
 const render = (dateArr) => {
   // 1.获取当前年月日
   let date = new Date(dateArr[0], dateArr[1])
@@ -149,13 +156,20 @@ const selectDay=(day)=>{
   nativeInp.value.value = `${countDate[0]}-${countDate[1]+1}-${day}`
   emit('update:modelValue',`${countDate[0]}-${countDate[1]+1}-${day}`)
 }
+const clear =()=>{
+  nativeInp.value.value = ``
+  emit('update:modelValue',``)
+}
 </script>
 <style lang="scss" scoped>
 .ty-calendar {
+  color: var(--text-1);
+  display: flex;
   position:relative;
-
+  user-select: none;
   input {
     width: 100%;
+    height: 100%;
     flex-grow: 1;
     padding: unset;
     border: unset;
@@ -177,10 +191,17 @@ const selectDay=(day)=>{
     }
 
   }
-
+  .ty-input-innerAft {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
   .ty-calendar-clear {
     display: none;
-
+    height: 100%;
     &:before {
       font-family: 'toyaricon' !important;
       font-style: normal;
@@ -201,12 +222,16 @@ const selectDay=(day)=>{
 
   &:hover {
     background-color: var(--fill-3);
+    border-radius: var(--border-radius-4);
 
     input {
       background-color: var(--fill-3);
+      border-radius: var(--border-radius-4);
+
     }
 
     .ty-calendar-clear {
+      background-color:var(--fill-3);
       display: block;
     }
   }
@@ -332,10 +357,8 @@ $inputSize: (
 
 @mixin addInputSize($name) {
   .ty-calendar-#{$name} {
-    input {
       height: var(--size-#{$name});
       line-height: var(--size-#{$name});
-    }
   }
 }
 
