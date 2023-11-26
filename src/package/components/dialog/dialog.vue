@@ -91,7 +91,7 @@ function handleClose() {
   .ty-dialog {
     position: relative;
     margin: 15vh auto 50px;
-    background: var(--color-bg-1);
+    background: var(--color-bg-2);
     border-radius: var(--border-radius-2);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;

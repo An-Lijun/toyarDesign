@@ -13,6 +13,9 @@ import TyRadio from './components/radio';
 import TyCalendar from './components/calendar';
 import TyDialog from './components/dialog';
 import TyBackTop from './components/backTop';
+import TyCard from './components/card';
+import TyTable from './components/table';
+
 
 import './icon/toyaricon.css'
 import './assets/index.scss';
@@ -33,7 +36,9 @@ const install = app => {
     app.use(TyRadio),
     app.use(TyCalendar),
     app.use(TyDialog),
-    app.use(TyBackTop)
+    app.use(TyBackTop),
+    app.use(TyCard),
+    app.use(TyTable)
 }
 const toyarUI = {
   version: '1.0.0',
@@ -45,5 +50,6 @@ export default toyarUI //全量引入
 export {
   TyIcon, TyButton, TyButtonGroup,
   TyDivider, TyRow, TyCol, TyForm,
-  TyFormItem,TyInput,TyChcekBox,TyRadio,TyCalendar,TyDialog,TyBackTop
+  TyFormItem,TyInput,TyChcekBox,TyRadio,TyCalendar,TyDialog,TyBackTop,
+  TyCard,TyTable
 }; //按需引入

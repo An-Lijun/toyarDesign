@@ -9,8 +9,55 @@
   <button @click="fnnn">111</button>
   <TyButton @dblclick="fnn">提交1</TyButton>
   <TyButton @click="visible = true">onpen</TyButton>
+  <TyTable :columns="[
+    {title:'姓名',key:'name'},
+    {title:'年龄',key:'age'},
+    {title:'地址',key:'address'},
+]"
+  :data="[
+    {
+      name:'张三',
+      age:'18',
+      address:'南京'
+    },  
+    {
+      name:'李四',
+      age:'18',
+      address:'上海'
+    },
+    {
+      name:'张二麻子',
+      age:'18',
+      address:'长春'
+    },
+  ]"
+>
+    <template #operation="scroped">
+      <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
+    </template>
+</TyTable>
+  <br>
+<br>
+<br>
 
-
+  <TyCard>
+      123456
+    </TyCard>
+  <br>
+  <TyCard>
+    <template #header>
+      <div>
+        12345
+      </div>
+    </template>
+    <TyCalendar v-model="date1" />
+    <br>
+    <TySelect v-model="ee" style="margin-bottom: 20px;">
+    <TyOption v-for="(item, index) in [1, 2, 3]" :key="index" :label="item + '66'" :value="item">
+    </TyOption>
+  </TySelect>
+    </TyCard>
+  <br>
   <TyDialog v-model:visible="visible" width="500px">
     <div style="width:400px">
       {{ date1 }}
@@ -159,6 +206,10 @@ const data1 = { labelWidth: 50 }
 const fn = () => {
   num.value++
   data1.labelWidth++
+}
+const fnner=(row)=>{
+  console.log(row);
+  
 }
 const rules = {
   'dd': [
