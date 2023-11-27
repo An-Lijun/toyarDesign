@@ -12,6 +12,7 @@
 
 </template>
 <script setup>
+import {useCompMvalue} from '@/package/hooks/useCompMvalue'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   size: {
@@ -31,14 +32,7 @@ const props = defineProps({
     required:true
   }
 })
-const model =computed({
-  get() {
-    return props.modelValue 
-  },
-  set (val){
-    emit('update:modelValue',val)
-  }
-})
+const {model} =useCompMvalue(props,emit)
 
 </script>
 <style lang="scss" scoped>
