@@ -12,7 +12,7 @@
 
 </template>
 <script setup>
-import {useCompMvalue} from '@/package/hooks/useCompMvalue'
+import {useCompMvalue} from '../..//hooks/useCompMvalue'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   size: {

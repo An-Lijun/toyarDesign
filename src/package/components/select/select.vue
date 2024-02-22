@@ -27,7 +27,7 @@
 </template>
 <script setup>
 import {selectContent} from '../../hooks/symbolNm'
-import { formContent,formItemContent} from '@/package/hooks/symbolNm'
+import { formContent,formItemContent} from '../../hooks/symbolNm'
 
 import { ref, onMounted, toRefs,reactive , useAttrs, watch } from 'vue'
 const props = defineProps({

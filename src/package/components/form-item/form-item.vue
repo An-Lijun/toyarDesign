@@ -20,7 +20,7 @@
   </div>
 </template>
 <script setup>
-import { formContent, formItemContent } from '@/package/hooks/symbolNm'
+import { formContent, formItemContent } from '../../hooks/symbolNm'
 // import { inject, onMounted, toRefs,provide } from "vue";
 const tyForm = inject(formContent);
 const formItemError = ref({
@@ -81,7 +81,8 @@ const generatorValidate = (rules) => {
               if (`${tyForm.formData[data]}`.length >= rule.max) {
                 formItemError.value.isShowErrorMsg = true
                 formItemError.value.errorMsg = errMsg
-                return reject(prop.value)
+                // return reject(prop.value)
+                return prop.value
               }
             }
             formItemError.value.isShowErrorMsg = false

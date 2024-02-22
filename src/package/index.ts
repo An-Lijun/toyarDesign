@@ -15,6 +15,7 @@ import TyDialog from './components/dialog';
 import TyBackTop from './components/backTop';
 import TyCard from './components/card';
 import TyTable from './components/table';
+import TyInputNumber from './components/input-number'
 
 
 import './icon/toyaricon.css'
@@ -38,7 +39,8 @@ const install = app => {
     app.use(TyDialog),
     app.use(TyBackTop),
     app.use(TyCard),
-    app.use(TyTable)
+    app.use(TyTable),
+    app.use(TyInputNumber)
 }
 const toyarUI = {
   version: '1.0.0',
@@ -51,5 +53,5 @@ export {
   TyIcon, TyButton, TyButtonGroup,
   TyDivider, TyRow, TyCol, TyForm,
   TyFormItem,TyInput,TyChcekBox,TyRadio,TyCalendar,TyDialog,TyBackTop,
-  TyCard,TyTable
+  TyCard,TyTable,TyInputNumber
 }; //按需引入

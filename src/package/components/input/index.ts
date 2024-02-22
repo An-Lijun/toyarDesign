@@ -1,4 +1,4 @@
-import TyInput from './input.vue'
+import TyInput from './src/input.vue'
 TyInput.install = app=>{
     app.component('TyInput',TyInput)
 }

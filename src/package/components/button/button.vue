@@ -25,7 +25,7 @@
 
 <script setup >
 import {  inject,computed  } from 'vue'
-import {configProviderDisabled} from '@/package/hooks/symbolNm'
+import {configProviderDisabled} from '../../hooks/symbolNm'
 
 const props = defineProps({
   state: {

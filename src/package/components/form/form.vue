@@ -4,7 +4,7 @@
   </form>
 </template>
 <script lang='ts' setup>
-import { formContent } from '@/package/hooks/symbolNm'
+import { formContent } from '../../hooks/symbolNm'
 
 const props = defineProps({
   formData: Object,
