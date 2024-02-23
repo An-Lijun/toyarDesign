@@ -10,8 +10,7 @@
   </div>
 </template>
 <script lang='ts' setup name='TyBackTop'>
-import { ref } from "@vue/reactivity";
-import { onMounted,onBeforeUnmount} from "@vue/runtime-core";
+import { onMounted,onBeforeUnmount} from "vue";
 
 const props = defineProps({
   vHeight: {

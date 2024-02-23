@@ -12,8 +12,8 @@
       </div>
       <div class="code-content">
         <!-- 插入代码块 -->
-        <slot name="source"></slot>
-      </div>
+          <slot name="source"></slot>
+        </div>
     </div>
     <div v-show="!isShow" class="showBox">
         <span class="icon"></span> <span class="etc" @click="isShow=!isShow">展开代码</span>

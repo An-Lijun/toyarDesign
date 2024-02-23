@@ -4,7 +4,6 @@
 export const inputProps = {
   size: {
     type: String,
-    default: 'small',
     validator: value => {
       return ['mini', 'small', 'medium', 'large'].includes(value)
     }

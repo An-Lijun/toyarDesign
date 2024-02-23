@@ -437,7 +437,9 @@ const rules = {
     { min: 2, max: 5 }
   ],
   'cc': [
-    { required: true, message: `cc 是必填字段`, trigger: ['blur'] }, {
+
+    { required: true, message: `cc 是必填字段`, trigger: ['blur'] }, 
+    {
       validate: val
     }
   ]

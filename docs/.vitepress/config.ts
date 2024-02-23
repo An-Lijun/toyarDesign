@@ -39,7 +39,7 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com" }],
     nav: [
       { text: "指南", link: "/page/guid/style" },
-      { text: "组件", link: "/page/component/button" },
+      { text: "组件", link: "/page/component/base/button" },
     ],
     sidebar: sidebars,
     search: {
@@ -57,4 +57,8 @@ export default defineConfig({
     },
     config: (md)=>useMd(md),
   },
+  plugins: [
+    'vuepress-plugin-demoblock-plus' 
+  ]
+
 });

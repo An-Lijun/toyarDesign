@@ -39,7 +39,6 @@
     <input 
       :maxlength="attrs.maxlength"
        v-show="isShowFormat"
-      
       :class="[{
           'is-outPre': outPreWidth > 0,
           'is-outAft': outAftWidth > 0
@@ -48,14 +47,16 @@
         paddingLeft: `${innerPreWidth + 20}px`,
         paddingRight: `${(innerAftWidth>0?innerAftWidth:16) + (limitBlockWidth>0?limitBlockWidth-10:0) + 20}px`
       }]"
-        :disabled="disabled" 
+        :disabled="disabled"
+        :readonly="readonly" 
         :value="formatValue"
         @click="handleToFocus"
       />
     <input
      :type="attrs.type||'text'"
      :maxlength="attrs.maxlength"
-      ref="nativeInp" v-show="!isShowFormat" v-model="model" :disabled="disabled" 
+      ref="nativeInp" v-show="!isShowFormat"
+       v-model="model" 
      :class="[{
         'is-outPre': outPreWidth > 0,
         'is-outAft': outAftWidth > 0
@@ -65,6 +66,8 @@
         paddingLeft: `${innerPreWidth + 20}px`,
         paddingRight: `${(innerAftWidth>0?innerAftWidth:16) + (limitBlockWidth>0?limitBlockWidth-10:0) + 20}px`
       }]"
+      :disabled="disabled" 
+      :readonly="readonly" 
       @input="handleInput" @blur="handleBlur" @focus="handleFocus" 
       @keydown.enter="handleEnter"
       />
@@ -79,7 +82,7 @@
     <!-- clearAble -->
     <span v-if="isShowClearBtn"
     :class="[
-      'ty-input-clear',
+      'ty-input-clear'
     ]"
     :style="{
       position: 'absolute',
@@ -116,14 +119,14 @@
 import {inputProps} from './props'
 import { formContent, formItemContent ,configProviderDisabled} from '../../../hooks/symbolNm'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
-import { ref, onMounted, toRefs, reactive, useSlots, useAttrs, watch } from 'vue'
+import { ref, onMounted,computed ,
+   toRefs, reactive, useSlots, useAttrs, watch ,inject,provide } from 'vue'
 
 // 属性
 const attrs = useAttrs()
 const props = defineProps(inputProps)
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])
-const { disabled, readonly, modelValue, size } = toRefs(props)
-
+const {  modelValue } = toRefs(props)
 //inject
 const tyForm = inject(formContent);
 const tyFormItem = inject(formItemContent);
@@ -145,6 +148,17 @@ let innerPreWidth = ref(0)
 let outAftWidth = ref(0)
 let innerAftWidth = ref(0)
 const isShowFormat =ref(true);
+
+// computed 继承属性
+const disabled = computed(() => {
+  return props.disabled || tyFormItem?.disabled ||  tyForm?.disabled
+})
+const readonly = computed(() => {
+  return props.readonly || tyFormItem?.readonly ||  tyForm?.readonly
+})
+const size = computed(() => {
+  return props.size || tyFormItem?.size ||  tyForm?.size ||'small'
+})
 
 const provideInp = reactive({ disabled })
 const { model } = useCompMvalue(props, emit)
@@ -194,8 +208,9 @@ function handleFocus() {
 }
 
 let isShowClearBtn = computed(() => {
-  return props.modelValue !== '' && props.clearable && !props.disabled
+  return props.modelValue !== '' && props.clearable && !disabled && !readonly
 })
+
 
 watch(model, (newVal, oldVal) => {
   if(newVal){
@@ -381,16 +396,16 @@ watch(model, (newVal, oldVal) => {
       cursor: no-drop;
     }
   }
-  // &.is-readonly {
-  //   background-color: var(--fill-2);
-  //   color: var(--text-4);
+  &.is-readonly {
+    background-color: var(--fill-2);
+    color: var(--text-4);
 
-  //   input {
-  //     color: var(--toyar-gray-4);
-  //     background-color: var(--fill-1);
-  //     // cursor: no-drop;
-  //   }
-  // }
+    input {
+      color: var(--toyar-gray-4);
+      background-color: var(--fill-1);
+      // cursor: no-drop;
+    }
+  }
 
 }
 

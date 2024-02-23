@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 开始使用
-      link: /page/button
+      link: /page/guid/style
     - theme: alt
       text: 在 GitHub 上查看
       link: https://github.com/An-Lijun/Robinson

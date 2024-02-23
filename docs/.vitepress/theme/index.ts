@@ -7,5 +7,6 @@ export default {
   enhanceApp({ app }) {
     app.use(toyar),
     app.component('demo-block',demoBlock)
+
   }
 }

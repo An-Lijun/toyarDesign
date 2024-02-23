@@ -1,10 +1,11 @@
 <template>
   <div class="ty-form-item">
-    <label class="ty-form-label" :style="{
+    <label class="ty-form-label" 
+    :style="{
       display: 'block',
       wordBreak: 'break-all',
       width: `${tyForm.labelWidth}px`,
-
+      minWidth:`${tyForm.labelWidth}px`,
     }">
       <template v-if="tyForm.label">
         {{ tyForm.label }}
@@ -13,7 +14,12 @@
     </label>
     <div class="ty-form-item-content">
       <slot></slot>
-      <div v-show="formItemError.isShowErrorMsg" class="ty-form-item-tip">
+      <div v-show="formItemError.isShowErrorMsg" 
+        class="ty-form-item-tip"
+        :style="{
+          maxWidth: `calc(100% - ${tyForm.labelWidth}px)`
+        }"
+      >
         {{ formItemError.errorMsg }}
       </div>
     </div>
@@ -21,7 +27,7 @@
 </template>
 <script setup>
 import { formContent, formItemContent } from '../../hooks/symbolNm'
-// import { inject, onMounted, toRefs,provide } from "vue";
+import { inject, onMounted, toRefs,provide,ref,onBeforeUnmount } from "vue";
 const tyForm = inject(formContent);
 const formItemError = ref({
   isShowErrorMsg: false,
@@ -68,12 +74,10 @@ const generatorValidate = (rules) => {
             }
             errMsg += rule.message || `${data} length must < ${rule.max}`
           }
-          // return new Promise((resolve, reject) => {
             if (keys.includes('min')) {
               if (`${tyForm.formData[data]}`.length <= rule.min) {
                 formItemError.value.isShowErrorMsg = true
                 formItemError.value.errorMsg = errMsg
-                // return reject(prop.value)
                 return prop.value
               }
             }
@@ -81,34 +85,27 @@ const generatorValidate = (rules) => {
               if (`${tyForm.formData[data]}`.length >= rule.max) {
                 formItemError.value.isShowErrorMsg = true
                 formItemError.value.errorMsg = errMsg
-                // return reject(prop.value)
                 return prop.value
               }
             }
             formItemError.value.isShowErrorMsg = false
-            // resolve()
-          // })
         }
       )
     }
     if (keys.includes('validate')) {
-      // return new Promise((resolve, reject) => {
         const cb = (data) => {
           if (!data) {
             formItemError.value.isShowErrorMsg = false
             formItemError.value.errorMsg = ''
-            // return resolve()
             return
           }
           formItemError.value.isShowErrorMsg = true
           formItemError.value.errorMsg = data
-          // reject(prop.value)
           return prop.value
         }
         fnArr.push((data) => {
           rule.validate(tyForm.formData[data]||'', cb)
         })
-      // })
     }
   });
   return fnArr
@@ -158,9 +155,13 @@ onBeforeUnmount(()=>{
     flex: 1;
 
     .ty-form-item-tip {
+      position: absolute;
       color: var(--toyar-red-6);
       font-size: 12px;
-      position: absolute;
+      overflow: hidden;
+      word-break: break-all;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }
