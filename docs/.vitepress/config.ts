@@ -34,6 +34,7 @@ function useMd(md){
 export default defineConfig({
 
   title:'Toyar',
+  head:  [['link', { rel: 'icon', href: '../assets/logo.svg' }]],
   description: 'A config Vue component',
   themeConfig: {
     socialLinks: [{ icon: "github", link: "https://github.com" }],
@@ -56,9 +57,6 @@ export default defineConfig({
         dark: 'github-dark',
     },
     config: (md)=>useMd(md),
-  },
-  plugins: [
-    'vuepress-plugin-demoblock-plus' 
-  ]
+  }
 
 });

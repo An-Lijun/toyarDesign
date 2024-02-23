@@ -4,7 +4,7 @@ next:
   link: 'page/guid/install'
 ---
 
-<img src='../../assets//card.png' style="height:300px;margin:0 auto">
+<img src='../../assets/card.png' style="height:300px;margin:0 auto">
 
 ## 一致性 Consistency
 - 与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；

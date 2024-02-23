@@ -96,7 +96,7 @@
       v-if="showLimit"
       ref="limitBlock"
       :style="{
-        transform: `translateX(-${outAftWidth}px)`
+        transform: `translateX(-${outAftWidth|| 18}px)`
       }"
     >
       {{ model.length  }}/{{ attrs.maxlength }}
@@ -208,7 +208,7 @@ function handleFocus() {
 }
 
 let isShowClearBtn = computed(() => {
-  return props.modelValue !== '' && props.clearable && !disabled && !readonly
+  return props.modelValue !== '' && props.clearable && !disabled.value && !readonly.value
 })
 
 

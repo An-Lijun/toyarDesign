@@ -48,6 +48,18 @@ export default {
           text: "表单/Form",
           link: "page/component/form/form",
         },
+        {
+          text: "表单/FormItem",
+          link: "page/component/form/formItem",
+        },
+        {
+          text: "表单/Input",
+          link: "page/component/form/input",
+        },
+        {
+          text: "表单/InputNumber",
+          link: "page/component/form/inputNumber",
+        }
       ]
     }
   ],

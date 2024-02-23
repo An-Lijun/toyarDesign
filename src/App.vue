@@ -23,7 +23,7 @@
         </template>
   </TyInputNumber>
   <TyInputNumber v-model="adc" :isDouble="true" >
-    <template #outPre>
+     <template #outPre>
           <ty-button @click="fn">btn</ty-button>
         </template>
         <template #innerPre>
