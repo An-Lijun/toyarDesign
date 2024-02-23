@@ -183,6 +183,29 @@ function reset1() {
 ```js
 ```
 :::
+## 属性(Attributes)
+| 属性      | 描述    | 类型      | 默认       | 
+|----- |----- |----- |----- |
+| disabled     | 整个form组件的disabled状态  | boolean  | false |
+| readonly     | 整个form组件的readonly状态  | boolean  | false |
+| size     | 整个组件的尺寸状态  | string  | mini |
+| labelWidth     | 整个form组件的labelWidth | string  | 100 |
+| rules     | 整个form组件的校验规则 | array  | [] |
+
+## 插槽(slot)
+| 名称      | 描述    |
+|----- |----- |
+| default | 默认插槽 |
+
+## 方法(methods)
+| 名称      | 描述    | 参数|
+|----- |----- |----- |
+| validate | 校验某一个prop(Promise) | 参数prop名称|
+| validateAll | 校验全部prop(Promise) | |
+| clearValidate | 清除某个prop校验信息 |参数prop名称 |
+| clearValidateAll | 清除全部校验信息 | |
+
+
 
 <script setup>
     import {ref} from 'vue'
