@@ -5,8 +5,15 @@ import '../../assets/index.scss'
 export default {
   extends:DefaultTheme,
   enhanceApp({ app }) {
-    app.use(toyar),
-    app.component('demo-block',demoBlock)
+    app.component('demo-block',demoBlock),
+    app.mixin({
+      mounted() {
+        import('../../../src/package/index').then((res)=>{
+          app.use(res.default)
+        })
+      },
+    })
 
   }
 }
+// app.use(toyar),

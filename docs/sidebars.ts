@@ -17,26 +17,35 @@ export default {
   ],
   "page/component": [
     {
+      text: "布局组件",
+      items: [
+        {
+          text: "布局/container",
+          link: "page/component/layout/container",
+        },
+      ],
+    },
+    {
       text: "基础组件",
       items: [
         {
-          text: "按钮/Button",
+          text: "基础/按钮/Button",
           link: "page/component/base/button",
         },
         {
-          text: "图标/Icon",
+          text: "基础/图标/Icon",
           link: "page/component/base/icon",
         },
         {
-          text: "分隔线/Divider",
+          text: "基础/分隔线/Divider",
           link: "page/component/base/divider",
         },
         {
-          text: "栅格行/Row",
+          text: "基础/栅格行/Row",
           link: "page/component/base/row",
         },
         {
-          text: "栅格列/Col",
+          text: "基础/栅格列/Col",
           link: "page/component/base/col",
         },
       ],

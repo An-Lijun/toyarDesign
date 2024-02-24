@@ -1,0 +1,327 @@
+<!-- 
+  @input="aainput"
+  @blur ="aablur"
+  @click ='aaClick'
+  @clear	点击清除按钮的回调	() => void	-	-
+  @parseEnter
+ -->
+
+<template>
+  <div
+    :class="[
+      'ty-input',
+      `ty-input-${size}`,
+      {
+        'is-focus': focus,
+        'is-disabled': disabled,
+        'is-readonly': readonly,
+        'is-error': tyFormItem && tyFormItem.formItemError.isShowErrorMsg
+      }
+    ]"
+  >
+    <!-- 输入框 -->
+
+    <input
+      :type="isPassworld ? 'password' : 'text'"
+      :maxlength="attrs.maxlength"
+      ref="nativeInp"
+      v-model="model"
+      :style="[
+        {
+          paddingLeft: `${innerPreWidth + 20}px`,
+          paddingRight: `${(innerAftWidth > 0 ? innerAftWidth : 16) + 20}px`
+        }
+      ]"
+      :disabled="disabled"
+      :readonly="readonly"
+      @input="handleInput"
+      @blur="handleBlur"
+      @focus="handleFocus"
+      @keydown.enter="handleEnter"
+    />
+
+    <!-- 后置内容 -->
+    <span
+      ref="innerAft"
+      class="ty-input-innerAft"
+      @click="isPassworld = !isPassworld"
+    >
+      <TyIcon
+        :icon="`${isPassworld ? 'ty-eye-off-line' : 'ty-eye-line'}`"
+      ></TyIcon>
+    </span>
+    <span
+      v-if="isShowClearBtn"
+      :class="['ty-input-clear']"
+      :style="{
+        position: 'absolute',
+        right: '30px',
+        top: '0'
+      }"
+      @click="handleClear"
+    >
+    </span>
+  </div>
+</template>
+<script setup>
+import { inputProps } from './props'
+import {
+  formContent,
+  formItemContent,
+  configProviderDisabled
+} from '../../../hooks/symbolNm'
+import { useCompMvalue } from '../../../hooks/useCompMvalue'
+import {
+  ref,
+  onMounted,
+  computed,
+  toRefs,
+  reactive,
+  useSlots,
+  useAttrs,
+  watch,
+  inject,
+  provide
+} from 'vue'
+
+// 属性
+const attrs = useAttrs()
+const props = defineProps(inputProps)
+const emit = defineEmits(['blur', 'input', 'update:modelValue'])
+const { modelValue } = toRefs(props)
+//inject
+const tyForm = inject(formContent)
+const tyFormItem = inject(formItemContent)
+
+// ref
+const limitBlock = ref()
+const nativeInp = ref()
+const outAft = ref()
+const innerAft = ref()
+
+const focus = ref(false)
+const formatValue = ref('')
+let limitBlockWidth = ref(0)
+let innerPreWidth = ref(0)
+let innerAftWidth = ref(0)
+
+// computed 继承属性
+const disabled = computed(() => {
+  return props.disabled || tyFormItem?.disabled || tyForm?.disabled
+})
+const readonly = computed(() => {
+  return props.readonly || tyFormItem?.readonly || tyForm?.readonly
+})
+const size = computed(() => {
+  return props.size || tyFormItem?.size || tyForm?.size || 'small'
+})
+
+const provideInp = reactive({ disabled })
+const { model } = useCompMvalue(props, emit)
+provide(configProviderDisabled, provideInp)
+
+onMounted(() => {
+  innerAftWidth.value = innerAft?.value?.offsetWidth
+})
+
+function handleInput (event) {
+  // emit('update:modelValue', event.target.value)
+  emit('input', event.target.value)
+}
+
+function handleToFocus () {
+  setTimeout(() => {
+    nativeInp.value.focus()
+  })
+}
+
+function handleBlur (event) {
+  if (tyForm && tyFormItem && tyFormItem.prop) {
+    tyForm.validate(tyFormItem.prop, 'blur')
+  }
+  focus.value = false
+  emit('blur', event)
+}
+
+function handleClear () {
+  emit('update:modelValue', '')
+  emit('clear')
+}
+
+function handleEnter () {
+  emit('enter', model.value)
+}
+
+function handleFocus () {
+  focus.value = true
+}
+const isPassworld = ref(true)
+
+let isShowClearBtn = computed(() => {
+  return (
+    props.modelValue !== '' &&
+    props.clearable &&
+    !disabled.value &&
+    !readonly.value
+  )
+})
+
+watch(
+  model,
+  (newVal, oldVal) => {
+    if (newVal) {
+      if (props?.format) {
+        formatValue.value = props.format(newVal)
+      } else {
+        formatValue.value = ''
+      }
+    } else {
+      formatValue.value = ''
+    }
+  },
+  { immediate: true }
+)
+</script>
+
+<style lang="scss" scoped>
+.ty-input {
+  display: flex;
+  width: 100%;
+  position: relative;
+  color: var(--text-1);
+  background-color: var(--fill-2);
+  border-radius: var(--border-radius-4);
+  border: unset;
+  box-sizing: border-box;
+  // transition: all var(--time-5);
+  overflow: hidden;
+
+  .ty-input-innerAft {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input {
+    width: 0;
+    flex-grow: 1;
+    padding: unset;
+    border: unset;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-4);
+    outline: unset;
+    color: var(--text-1);
+    background-color: var(--fill-2);
+  }
+
+  input[type='password']::-ms-reveal {
+    display: none;
+  }
+
+  .ty-input-clear {
+    height: 100%;
+    top: 0;
+    display: none;
+
+    &:before {
+      font-family: 'toyaricon' !important;
+      font-style: normal;
+      display: inline-block;
+      content: '\eb99';
+    }
+  }
+
+  .ty-input-clear:hover {
+    display: flex;
+    align-items: center;
+
+    &::before {
+      font-family: 'toyaricon' !important;
+      font-style: normal;
+      display: inline-block;
+      content: '\eb97';
+      cursor: pointer;
+    }
+  }
+
+  &:hover:not(.is-disabled) {
+    background-color: var(--fill-3);
+
+    input {
+      background-color: var(--fill-3);
+    }
+
+    .ty-input-clear {
+      display: flex;
+      align-items: center;
+    }
+
+    .ty-input-innerAft {
+      // display: none;
+    }
+  }
+
+  &.is-focus {
+    background-color: var(--color-bg-2);
+    // box-shadow: 0px 0px var(--primary-6),
+    //   0px 0px var(--primary-6),
+    //   0px 0x var(--primary-6),
+    //   0px 0px var(--primary-6);
+    border: 1px solid var(--primary-6);
+
+    input {
+      background-color: var(--color-bg-2);
+    }
+  }
+
+  &.is-error {
+    // box-shadow: 1px 1px var(--danger-6),
+    //   -1px 1px var(--danger-6),
+    //   1px -1px var(--danger-6),
+    //   -1px -1px var(--danger-6);
+    border: 1px solid var(--danger-6);
+  }
+
+  &.is-disabled {
+    background-color: var(--fill-2);
+    color: var(--text-4);
+
+    input {
+      color: var(--toyar-gray-4);
+      background-color: var(--fill-1);
+      cursor: no-drop;
+    }
+  }
+
+  &.is-readonly {
+    background-color: var(--fill-2);
+    color: var(--text-4);
+
+    input {
+      color: var(--toyar-gray-4);
+      background-color: var(--fill-1);
+      // cursor: no-drop;
+    }
+  }
+}
+
+// ------------------------  input尺寸样式  ------------------------
+$inputSize: (mini, small, medium, large);
+
+@mixin addInputSize($name) {
+  .ty-input-#{$name} {
+    height: var(--size-#{$name});
+    line-height: var(--size-#{$name});
+  }
+}
+
+@each $name in $inputSize {
+  @include addInputSize($name);
+}
+</style>
