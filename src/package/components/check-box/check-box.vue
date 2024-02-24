@@ -65,6 +65,7 @@ const {model} =useCompMvalue(props,emit)
       height: var(--size-#{$name});
       width: var(--size-#{$name});
       line-height:var(--size-#{$name});
+      font-size: calc(var(--size-#{$name})/2);
     }
   }
 
@@ -79,12 +80,11 @@ const {model} =useCompMvalue(props,emit)
     content: '✔';
     color: white;
     position: absolute;
-    width: 20px;
-    height: 20px;
-    left: 50%;
-    top: 50%;
-    line-height: 20px;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

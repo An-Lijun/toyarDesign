@@ -17,7 +17,14 @@ import TyCard from './components/card'
 import TyTable from './components/table'
 import TyInputNumber from './components/input-number'
 import TyInputPassword from './components/input-password'
-import { TyContainer, TyMain, TyAside,TyHeader,TyFooter} from './components/container'
+import {
+  TyContainer,
+  TyMain,
+  TyAside,
+  TyHeader,
+  TyFooter
+} from './components/container'
+import { TyMenu, TySubMenu, TyMenuGroup, TyMenuItem } from './components/menu'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -43,7 +50,8 @@ const install = app => {
     app.use(TyTable),
     app.use(TyInputNumber),
     app.use(TyInputPassword),
-    app.use(TyContainer)
+    app.use(TyContainer),
+    app.use(TyMenu)
 }
 const toyarUI = {
   version: '1.0.0',
@@ -71,5 +79,13 @@ export {
   TyTable,
   TyInputNumber,
   TyInputPassword,
-  TyContainer, TyMain, TyAside ,TyHeader,TyFooter
+  TyContainer,
+  TyMain,
+  TyAside,
+  TyHeader,
+  TyFooter,
+  TyMenu,
+  TySubMenu,
+  TyMenuGroup,
+  TyMenuItem
 } //按需引入

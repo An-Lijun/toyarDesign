@@ -2,12 +2,12 @@
   <TyInput type="number" v-model="model" v-bind="attrs">
     <template #outPre>
       <TyButton @click="handleMinus">
-        <TyIcon icon="ty-subtract-line"></TyIcon>
+        <TyIcon color="var(--toyar-gray-10)" icon="ty-subtract-line"></TyIcon>
       </TyButton>
     </template>
     <template #outAft>
       <TyButton @click="handleAdd">
-        <TyIcon icon="ty-add-fill"></TyIcon>
+        <TyIcon color="var(--toyar-gray-10)" icon="ty-add-fill"></TyIcon>
       </TyButton>
     </template>
   </TyInput>

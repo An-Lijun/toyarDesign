@@ -23,6 +23,14 @@ export default {
           text: "布局/container",
           link: "page/component/layout/container",
         },
+        {
+          text: "布局/栅格行/Row",
+          link: "page/component/layout/row",
+        },
+        {
+          text: "布局/栅格列/Col",
+          link: "page/component/layout/col",
+        },
       ],
     },
     {
@@ -40,14 +48,7 @@ export default {
           text: "基础/分隔线/Divider",
           link: "page/component/base/divider",
         },
-        {
-          text: "基础/栅格行/Row",
-          link: "page/component/base/row",
-        },
-        {
-          text: "基础/栅格列/Col",
-          link: "page/component/base/col",
-        },
+
       ],
     },
     {
@@ -68,6 +69,14 @@ export default {
         {
           text: "表单/InputNumber",
           link: "page/component/form/inputNumber",
+        },
+        {
+          text: "表单/InputPassword",
+          link: "page/component/form/inputPassword",
+        },
+        {
+          text: "表单/radio",
+          link: "page/component/form/radio",
         }
       ]
     }
