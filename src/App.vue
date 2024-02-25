@@ -4,7 +4,19 @@
     <button @click="change2">状态切换</button>
   </header>
   {{ adc }}
-
+  {{ selectValue }}
+  <button @click="()=>{
+    selectValue='jz'
+  }"> change</button>
+  <TySelect v-model="selectValue" style="margin-bottom: 20px">
+      <TyOption
+        v-for="(item, index) in [{label:'香蕉',value:'xj'},{label:'橘子',value:'jz'}]"
+        :key="index"
+        :label="item.label"
+        :value="item.value"
+      >
+      </TyOption>
+    </TySelect>
   <TyMenu>
     <template #header>
       <div
@@ -335,10 +347,10 @@
     <br />
     <TySelect v-model="ee" style="margin-bottom: 20px">
       <TyOption
-        v-for="(item, index) in [1, 2, 3]"
+        v-for="(item, index) in [{label:'香蕉',value:'xj'},{label:'橘子',value:'jz'}]"
         :key="index"
-        :label="item + '66'"
-        :value="item"
+        :label="item.label"
+        :value="item.value"
       >
       </TyOption>
     </TySelect>
@@ -454,7 +466,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { TyCalendar, TyInput } from './package'
-
+let selectValue= ref('')
 function aainput(value) {
   console.log(value, 123456)
 }

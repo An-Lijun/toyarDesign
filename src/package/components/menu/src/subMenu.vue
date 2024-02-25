@@ -1,11 +1,11 @@
 <template>
-  <div class="ty-sub-menu"  >
+  <div class="ty-sub-menu">
     <div class="ty-sub-menu-inner" @click="openChildMenu">
-      <span class="ty-sub-menu-index" v-for="item in compLevel">
-      </span>
-      <div class="ty-sub-menu_icon" 
+      <span class="ty-sub-menu-index" v-for="item in compLevel"> </span>
+      <div
+        class="ty-sub-menu_icon"
         :style="{
-          '--toyar-gray-10': flag? 'var(--toyar-xblue-6)':''
+          '--toyar-gray-10': flag ? 'var(--toyar-xblue-6)' : ''
         }"
       >
         <slot name="icon"></slot>
@@ -13,27 +13,32 @@
       <div div class="ty-sub-menu_text">
         <slot name="title"></slot>
       </div>
-      <div class="ty-sub-menu_flag" :class="{
+      <div
+        class="ty-sub-menu_flag"
+        :class="{
           opened: flag
-        }
-        ">
+        }"
+      >
         <TyIcon icon="ty-arrow-down-s-line"></TyIcon>
       </div>
     </div>
-    <ul class="ty-sub-menu-content"  
-      v-show="flag"
-    > 
-    <!-- -->
-      <slot></slot>
-    </ul>
+    <div class="ty-sub-menu-content"
+    :class="{
+      opend:flag
+    }"
+    >
+      <!-- v-show="flag" -->
+      <ul>
+        <slot></slot>
+      </ul>
+    </div>
   </div>
 </template>
 <script setup>
-import {injectLevel} from "./hooks/level.ts";
+import { injectLevel } from './hooks/level.ts'
 
 let flag = ref(false)
-const compLevel =injectLevel(true)
-console.log(compLevel);
+const compLevel = injectLevel(true)
 const openChildMenu = () => {
   flag.value = !flag.value
 }
@@ -50,22 +55,22 @@ const openChildMenu = () => {
     padding: 0 10px;
     border-radius: 5px;
     user-select: none;
-    .ty-sub-menu-index{
+    .ty-sub-menu-index {
       width: 10px;
       display: inline-block;
       height: 100%;
     }
-    .ty-sub-menu_icon{
+    .ty-sub-menu_icon {
       width: 50px;
       min-width: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .ty-sub-menu_text{
+    .ty-sub-menu_text {
       flex: 1;
     }
-    .ty-sub-menu_flag{
+    .ty-sub-menu_flag {
       width: 40px;
       min-width: 40px;
       display: flex;
@@ -80,12 +85,22 @@ const openChildMenu = () => {
       transform: rotate(180deg);
     }
   }
-  .ty-sub-menu-content{
-    margin: unset;
-    padding: unset;
-    // padding-left: 10px;
-    transition: all 2s;
+  .ty-sub-menu-content {
+    display: grid;
+      grid-template-rows: 0fr;
+      transition: .3s;
+      overflow: hidden;
+    &>ul{
+      min-height: 0;
+      margin: unset;
+      padding: unset;
+    }
+    &.opend{
 
+    // // padding-left: 10px;
+    // transition: all 2s;
+    grid-template-rows: 1fr;
+    }
   }
 }
 </style>

@@ -4,7 +4,10 @@
   </li>
 </template>
 <script setup>
-import {selectContent} from '../../hooks/symbolNm'
+import {TySelectOptions} from './symbol'
+import {selectContent} from '../../../hooks/symbolNm'
+import { inject ,onMounted} from 'vue'
+
 const props = defineProps({
   label: {
     type: String,
@@ -17,11 +20,14 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue']);
 const _selectContent =inject(selectContent);
+const setOption = inject(TySelectOptions)
 function selectOption(){
-  _selectContent.setNativeInp(props.value)
+  _selectContent.setNativeInp(props.value,props.label)
   _selectContent.isShowOption.value=false
 }
-
+onMounted(()=>{
+  setOption(props.label,props.value)
+})
 </script>
 <style lang="scss" scoped>
   li{

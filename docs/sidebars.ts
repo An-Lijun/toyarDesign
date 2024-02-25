@@ -31,6 +31,10 @@ export default {
           text: "布局/栅格列/Col",
           link: "page/component/layout/col",
         },
+        {
+          text: "布局/Card",
+          link: "page/component/layout/card",
+        },
       ],
     },
     {

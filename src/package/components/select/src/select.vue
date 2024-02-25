@@ -26,10 +26,10 @@
   </div>
 </template>
 <script setup>
-import {selectContent} from '../../hooks/symbolNm'
-import { formContent,formItemContent} from '../../hooks/symbolNm'
-
-import { ref, onMounted, toRefs,reactive , useAttrs, watch } from 'vue'
+import {selectContent} from '../../../hooks/symbolNm'
+import { formContent,formItemContent} from '../../../hooks/symbolNm'
+import {TySelectOptions} from './symbol'
+import { ref, onMounted, toRefs,reactive , useAttrs, watch , provide} from 'vue'
 const props = defineProps({
   size: {
     type: String,
@@ -56,6 +56,7 @@ const props = defineProps({
     default: ''
   }
 })
+const options = {}
 const tyForm = inject(formContent);
 const tyFormItem =inject(formItemContent);
 const{disabled,readonly,modelValue,size} =toRefs(props)
@@ -64,14 +65,18 @@ const emit = defineEmits(['blur', 'input', 'update:modelValue'])
 const nativeInp = ref()
 const focus = ref(false)
 let outAftWidth = ref(0)
+
+provide(TySelectOptions,(label,value)=>{
+  options[value] = label
+})
 // const provideInp=reactive ({disabled})
 
 onMounted(() => {
-  setNativeInp(props.modelValue)
+  setNativeInp(props.modelValue,'')
 })
 const isShowOption =ref(false)
-function setNativeInp(value) {
-  nativeInp.value.value = value
+function setNativeInp(value,label) {
+  nativeInp.value.value = label
   emit('update:modelValue',value)
 }
 function handleInput(event) {
@@ -96,7 +101,10 @@ let isShowClearBtn  = computed(()=>{
 watch(
   () => props.modelValue,
   (newVal, oldVal) => {
-    setNativeInp(newVal)
+    if(props.modelValue === oldVal ){
+      return
+    }
+    setNativeInp(newVal,options[newVal])
   }
 )
 provide(selectContent,{setNativeInp,isShowOption})

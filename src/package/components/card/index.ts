@@ -1,4 +1,4 @@
-import TyCard from './card.vue'
+import TyCard from './src/card.vue'
 TyCard.install = app=>{
     app.component('TyCard',TyCard)
 }
