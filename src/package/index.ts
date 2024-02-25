@@ -25,6 +25,7 @@ import {
   TyFooter
 } from './components/container'
 import { TyMenu, TySubMenu, TyMenuGroup, TyMenuItem } from './components/menu'
+import TyMessage from './components/message'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -87,5 +88,6 @@ export {
   TyMenu,
   TySubMenu,
   TyMenuGroup,
-  TyMenuItem
+  TyMenuItem,
+  TyMessage
 } //按需引入

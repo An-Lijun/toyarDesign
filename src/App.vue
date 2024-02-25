@@ -5,6 +5,11 @@
   </header>
   {{ adc }}
   {{ selectValue }}
+  <button @click="ffnn">123</button>
+  <transition name="ty-message-fade" >
+      <h2 v-show="flagee">123456</h2>
+  </transition>
+  <button @click="()=> flagee= ! flagee">flagee</button>
   <button @click="()=>{
     selectValue='jz'
   }"> change</button>
@@ -466,6 +471,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { TyCalendar, TyInput } from './package'
+import {TyMessage} from './package/index'
+const ffnn=()=>{
+  TyMessage('123',{
+    time:3000,
+    type:'warning'
+  })
+}
 let selectValue= ref('')
 function aainput(value) {
   console.log(value, 123456)
@@ -615,9 +627,21 @@ function fnnn() {
 function reset() {
   form1.value.clearValidateAll()
 }
+let flagee=ref(false)
 onMounted(() => {})
 </script>
 <style>
+
+.ty-message-fade-enter-active,
+.ty-message-fade-leave-active {
+  transition: all 0.5s ;
+}
+
+.ty-message-fade-leave-to {
+  opacity: 0;
+  transform: translate(0, -100%);
+
+}
 body {
   height: 100%;
   overflow: hidden;
