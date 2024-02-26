@@ -1,9 +1,10 @@
 <template>
   <transition name="ty-message-fade" >
   <div
+    ref="messageRef"
     v-show="visible"
     :style="{
-      top: `${top}px`
+      top: `${topValue}px`
     }"
     :class="['ty-message', `ty-message-${type}`]"
   >
@@ -26,6 +27,11 @@
 </template>
 <script setup>
 import TyIcon from '../../icon'
+
+defineOptions({
+  name: 'TyMessage'
+})
+const emit = defineEmits(['close'])
 const props = defineProps({
   msg: {
     type: String,
@@ -39,9 +45,9 @@ const props = defineProps({
     default: '0'
   }
 })
-const a = inject('aa')
-console.log(a);
+
 const visible= ref(false)
+let topValue =ref(props.top)
 const msgIconObj = {
   info: 'ty-information-fill',
   success: 'ty-checkbox-circle-fill',
@@ -51,7 +57,6 @@ const msgIconObj = {
 const type = msgIconObj.hasOwnProperty(props.options.type)
   ? props.options.type
   : 'info'
-
 onMounted(()=>{
   visible.value= true  
 })
@@ -60,12 +65,17 @@ onBeforeMount(() => {
 })
 setTimeout(() => {
   visible.value = false  
+  emit('close')
 }, 2500);
-
+const floatMsg =()=>{
+  topValue.value = topValue.value -54
+}
+defineExpose({
+  floatMsg,
+  visible
+});
 </script>
 <style lang="scss" scoped>
-
-
 .ty-message-fade-enter-active,
 .ty-message-fade-leave-active {
   transition: all 1s ease;
@@ -86,7 +96,7 @@ setTimeout(() => {
   align-items: center;
   border-radius: 5px;
   transform: translateX(-50%);
-
+  transition: all 1s ease;
   .ty-message-icon,
   .ty-message-close {
     width: 40px;
