@@ -17,6 +17,15 @@ export default {
   ],
   "page/component": [
     {
+      text: "展示组件",
+      items: [
+        {
+          text: "展示/avatar",
+          link: "page/component/show/avatar",
+        },
+      ],
+    },
+    {
       text: "布局组件",
       items: [
         {
@@ -82,6 +91,19 @@ export default {
           text: "表单/radio",
           link: "page/component/form/radio",
         }
+      ]
+    },
+    {
+      text: "反馈组件",
+      items: [
+        {
+          text: "反馈/Result",
+          link: "page/component/feedback/result",
+        },
+        {
+          text: "反馈/Message",
+          link: "page/component/feedback/message",
+        },
       ]
     }
   ],
