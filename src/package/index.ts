@@ -26,6 +26,10 @@ import {
 } from './components/container'
 import { TyMenu, TySubMenu, TyMenuGroup, TyMenuItem } from './components/menu'
 import TyMessage from './components/message'
+import TyAlert from './components/alert'
+import TyResult from './components/result'
+import TyAvatar from './components/avatar'
+
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -52,10 +56,12 @@ const install = app => {
     app.use(TyInputNumber),
     app.use(TyInputPassword),
     app.use(TyContainer),
-    app.use(TyMenu)
+    app.use(TyMenu),
+    app.use(TyResult),
+    app.use(TyAvatar)
 }
 const toyarUI = {
-  version: '1.0.0',
+  version: '0.0.1',
   install
 }
 
@@ -89,5 +95,8 @@ export {
   TySubMenu,
   TyMenuGroup,
   TyMenuItem,
-  TyMessage
+  TyMessage,
+  TyAlert,
+  TyResult,
+  TyAvatar
 } //按需引入

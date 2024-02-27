@@ -158,4 +158,17 @@
   --bg-3:#fff;
   --bg-4:#fff;
   --bg-5:#fff;
+
+  --shadow-1:0 0 1px rgba(0, 0, 0, 0.3);
+  --shadow-2:0 -2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-3:0 0 10px rgba(0, 0, 0, 0.1);
+  --shadow-4: 0 0 20px rgba(0, 0, 0, 0.1);
+  --shadow-5:0 4px 10px rgba(0,0,0,.1);
+
+  --opcity-color-1:rgba(0, 0, 0, 0.1);
+  --opcity-color-2:rgba(0, 0, 0, 0.2);
+  --opcity-color-3:rgba(0, 0, 0, 0.3);
+  --opcity-color-4:rgba(0, 0, 0, 0.4);
+  --opcity-color-5:rgba(0, 0, 0, 0.5);
+
   }

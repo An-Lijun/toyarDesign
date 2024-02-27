@@ -1,36 +1,48 @@
 import { createVNode, render } from "vue"
 import message from './src/message.vue'
 let messageArr = []
-export default function MessageJs(msg, options = {
-  type: 'info',
-  time: 3000
-}) {
 
-  const div = document.createElement('div')
-  const top =messageArr.reduce((item,current)=>{
-    return  item + current.component.exposed.height.value+10
-  },100)
-  
+const getTop = ()=>messageArr.reduce((item,current)=>{
+  return  item + current.component.exposed.height.value+10
+},100)
+
+const createMsg = (msg, options,div)=>{
+  const top =getTop()
   const instance = createVNode(message, {
     msg,
     options,
     top,
     onClose:()=>{
-      document.body.removeChild(div)
+  if(window&&window.document){
+      
+      document?.body.removeChild(div)
       messageArr= messageArr.filter(item => item.id !== instance.id)
       allMove(instance)
+  }
     }
   })
-  messageArr.push(instance)
-
-  function allMove(id){
+  function allMove(instance){
     messageArr.forEach(({component})=>{
       component.exposed.floatMsg(instance.component.exposed.height.value)
     })
   }
   instance.id =Date.now().toString(16)
+  messageArr.push(instance)
+  return instance
+}
+
+export default function MessageJs(msg, options = {
+  type: 'info',
+  time: 3000
+}) {
+  if(window&&window.document){
+
+  const div = document?.createElement('div')
+
+  const instance = createMsg(msg, options,div)
   render(instance, div)
-  document.body.appendChild(div)
+  document?.body.appendChild(div)
+  }
 }
 MessageJs.error =function (msg){
   this(msg,{

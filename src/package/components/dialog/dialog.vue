@@ -17,7 +17,9 @@
         <div class="ty-dialog_body">
           <!-- 内容可能是除span以外的其他内容，比如列表等，所以在这里使用插槽，并且不规定插槽内具体的标签 -->
           <!-- 并且在这里使用匿名插槽，使用匿名插槽的好处就是不用指定名称，这样在不使用<template v-slot>指定插槽内容的时候，也可以自定义内容 -->
-          <slot></slot>
+          <slot>
+            {{ info }}
+          </slot>
         </div>
         <div class="ty-dialog_footer" v-if="useSlots().footer">
           <!-- 如果footer不传递内容，则不显示footer -->
@@ -28,6 +30,7 @@
   </div>
 </template>
 <script lang='ts' setup name='TyDialog'>
+import TyIcon from "../icon";
 import { onMounted, useSlots } from "vue";
 const props = defineProps({
   title: {
@@ -46,6 +49,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  info:{
+    type:String,
+  }
+  
 });
 const emits = defineEmits(["update:visible"]);
 const tyDialogHeader = ref(null);
@@ -64,10 +71,17 @@ onMounted(() => {
   tyDialogHeader.value.addEventListener("mousedown", (e) => {
     x = e.pageX - tyDialog.value.offsetLeft;
     y = e.pageY - tyDialog.value.offsetTop;
-    document.addEventListener("mousemove", moveDialog);
+  if(window&&window.document){
+
+    document?.addEventListener("mousemove", moveDialog)
+  }
   });
   tyDialogHeader.value.addEventListener("mouseup", () => {
-    document.removeEventListener("mousemove", moveDialog);
+  if(window&&window.document){
+
+    document?.removeEventListener("mousemove", moveDialog);
+  }
+
   });
 });
 
@@ -85,7 +99,7 @@ function handleClose() {
   overflow: auto;
   margin: 0;
   z-index: var(--zindex-9);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--opcity-5);
   color: var(--text-1);
 
   .ty-dialog {

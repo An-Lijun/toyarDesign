@@ -23,5 +23,6 @@ provideLevel(0)
   background:var(--color-bg-2);
   padding: 0 5px;
   overflow: auto;
+  transition: background-color 1s;
 }
 </style>

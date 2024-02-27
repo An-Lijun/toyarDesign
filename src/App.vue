@@ -5,8 +5,27 @@
   </header>
   {{ adc }}
   {{ selectValue }}
+  <button @click="alert1">alert</button>
   <button @click="ffnn">123</button>
   <button @click="ffnn1">1111</button>
+  <TyAvatar src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  
+  <TyAvatar shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+ 
+  <!-- 'none', 'fill', 'contain', 'cover', 'scale-down' -->
+  <TyAvatar size="70" fit="fill" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyAvatar fit="contain" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyAvatar size="70" fit="cover" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyAvatar fit="scale-down" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  
+  <div
+  height="300px">
+  <TyResult type="info"></TyResult>
+</div>
+<div
+  height="300px">
+  <TyResult type="info" title="title" subTitle="subTitle"></TyResult>
+</div>
 
   <transition name="ty-message-fade" >
       <h2 v-show="flagee">123456</h2>
@@ -467,13 +486,16 @@
   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
   <TyBackTop />
   <TyBackTop type="square" :right="100" />
-
   <!-- </div> -->
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { TyCalendar, TyInput } from './package'
-import {TyMessage} from './package/index'
+import {TyMessage,TyAlert} from './package/index'
+
+const alert1 =()=>{
+  TyAlert('11')
+}
 let time =2000
 const ffnn=()=>{
 
@@ -483,7 +505,7 @@ const ffnn=()=>{
   })
 }
 const ffnn1=()=>{
-  TyMessage.info('你好')
+  TyMessage.success('你好')
 }
 let selectValue= ref('')
 function aainput(value) {

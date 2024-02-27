@@ -1,8 +1,13 @@
 <template>
   <transition name="ty-message-fade">
-    <div ref="messageRef" v-show="visible" :style="{
-      top: `${topValue}px`
-    }" :class="['ty-message', `ty-message-${type}`]">
+    <div
+      ref="messageRef"
+      v-show="visible"
+      :style="{
+        top: `${topValue}px`
+      }"
+      :class="['ty-message', `ty-message-${type}`]"
+    >
       <div class="ty-message-icon">
         <slot name="icon">
           <TyIcon :icon="msgIconObj[type]"></TyIcon>
@@ -21,6 +26,7 @@
 </template>
 <script setup>
 import TyIcon from '../../icon'
+import {ref,onMounted,nextTick  } from 'vue';
 defineOptions({
   name: 'TyMessage'
 })
@@ -72,13 +78,13 @@ const getCompHeight = () => {
 }
 
 onMounted(() => {
-  visible.value = true,
-  nextTick(()=>{
-    getCompHeight()
-  })
+  (visible.value = true),
+    nextTick(() => {
+      getCompHeight()
+    })
 })
 
-const floatMsg = (value) => {
+const floatMsg = value => {
   topValue.value = topValue.value - value
 }
 defineExpose({
@@ -126,7 +132,7 @@ defineExpose({
   .ty-message-msg {
     flex: 1;
     text-align: left;
-    word-wrap:break-word;
+    word-wrap: break-word;
     max-width: 420px;
   }
 
@@ -145,12 +151,14 @@ defineExpose({
   }
 
   @each $state,
-  $value in ('info': 'primary',
-    'success': 'success',
-    'warning': 'warning',
-    'error': 'danger'
-
-  ) {
+    $value
+      in (
+        'info': 'primary',
+        'success': 'success',
+        'warning': 'warning',
+        'error': 'danger'
+      )
+  {
     @include addMessageState($state, $value);
   }
 }

@@ -119,11 +119,11 @@
   --border-radius-circle: 50%;
 
   /* 阴影 */
-  --box-shadow-1: 0 0 1px rgba(0, 0, 0, 0.3);
-  --box-shadow-2: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  --box-shadow-3: 0 0 10px rgba(0, 0, 0, 0.1);
-  --box-shadow-4: 0 0 20px rgba(0, 0, 0, 0.1);
-  --box-shadow-5: 0 4px 10px rgba(0,0,0,.1);
+  --box-shadow-1: var(--shadow-1);
+  --box-shadow-2: var(--shadow-2);
+  --box-shadow-3: var(--shadow-3);
+  --box-shadow-4: var(--shadow-4);
+  --box-shadow-5: var(--shadow-5);
 
   /* 时间 */
   --time-1:0.1s;
@@ -150,5 +150,10 @@
   --zindex-50: 50;
   --zindex-import: 99;
 
+  --opcity-1: var(--opcity-color-1);
+  --opcity-2: var(--opcity-color-2);
+  --opcity-3: var(--opcity-color-3);
+  --opcity-4: var(--opcity-color-4);
+  --opcity-5: var(--opcity-color-5);
 
 }
