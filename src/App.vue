@@ -472,10 +472,12 @@
 import { ref, onMounted } from 'vue'
 import { TyCalendar, TyInput } from './package'
 import {TyMessage} from './package/index'
+let time =2000
 const ffnn=()=>{
+
   TyMessage('123',{
     time:3000,
-    type:'warning'
+    type:'error'
   })
 }
 let selectValue= ref('')

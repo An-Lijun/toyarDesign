@@ -1,37 +1,34 @@
 <template>
-  <transition name="ty-message-fade" >
-  <div
-    ref="messageRef"
-    v-show="visible"
-    :style="{
-      top: `${topValue}px`
-    }"
-    :class="['ty-message', `ty-message-${type}`]"
-  >
-    <div class="ty-message-icon">
-      <slot name="icon">
-        <TyIcon :icon="msgIconObj[type]"></TyIcon>
-      </slot>
+  <transition name="ty-message-fade">
+    <div
+      ref="messageRef"
+      v-show="visible"
+      :style="{
+        top: `${topValue}px`
+      }"
+      :class="['ty-message', `ty-message-${type}`]"
+    >
+      <div class="ty-message-icon">
+        <slot name="icon">
+          <TyIcon :icon="msgIconObj[type]"></TyIcon>
+        </slot>
+      </div>
+      <div class="ty-message-msg">
+        {{ msg }}
+      </div>
+      <div class="ty-message-close">
+        <slot name="close">
+          <TyIcon icon="ty-close-fill"></TyIcon>
+        </slot>
+      </div>
     </div>
-    <div class="ty-message-msg">
-      {{ msg }}
-    </div>
-    <div class="ty-message-close">
-      <slot name="close">
-        <TyIcon icon="ty-close-fill"></TyIcon>
-      </slot>
-    </div>
-  </div>
-</transition>
-
+  </transition>
 </template>
 <script setup>
 import TyIcon from '../../icon'
-
 defineOptions({
   name: 'TyMessage'
 })
-const emit = defineEmits(['close'])
 const props = defineProps({
   msg: {
     type: String,
@@ -45,9 +42,12 @@ const props = defineProps({
     default: '0'
   }
 })
+const emit = defineEmits(['close'])
 
-const visible= ref(false)
-let topValue =ref(props.top)
+
+const visible = ref(false)
+let topValue = ref(props.top)
+
 const msgIconObj = {
   info: 'ty-information-fill',
   success: 'ty-checkbox-circle-fill',
@@ -57,28 +57,37 @@ const msgIconObj = {
 const type = msgIconObj.hasOwnProperty(props.options.type)
   ? props.options.type
   : 'info'
-onMounted(()=>{
-  visible.value= true  
+
+const timmer = setTimeout(() => {
+  close()
+},props.options.time)
+
+const close = () => {
+  if(timmer){
+    clearTimeout(timmer)
+  }
+  visible.value = false
+  const smTimmer = setTimeout(()=>{
+    emit('close')
+    clearTimeout(smTimmer)
+  },500)
+}
+onMounted(() => {
+  visible.value = true
 })
-onBeforeMount(() => {
-  visible.value = false  
-})
-setTimeout(() => {
-  visible.value = false  
-  emit('close')
-}, 2500);
-const floatMsg =()=>{
-  topValue.value = topValue.value -54
+
+const floatMsg = () => {
+  topValue.value = topValue.value - 54
 }
 defineExpose({
   floatMsg,
-  visible
-});
+  close
+})
 </script>
 <style lang="scss" scoped>
 .ty-message-fade-enter-active,
 .ty-message-fade-leave-active {
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 .ty-message-fade-enter-from,
 .ty-message-fade-leave-to {
