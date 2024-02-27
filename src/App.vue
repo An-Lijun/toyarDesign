@@ -6,6 +6,8 @@
   {{ adc }}
   {{ selectValue }}
   <button @click="ffnn">123</button>
+  <button @click="ffnn1">1111</button>
+
   <transition name="ty-message-fade" >
       <h2 v-show="flagee">123456</h2>
   </transition>
@@ -475,10 +477,13 @@ import {TyMessage} from './package/index'
 let time =2000
 const ffnn=()=>{
 
-  TyMessage('123',{
-    time:3000,
+  TyMessage('你好?',{
+    time:3500,
     type:'error'
   })
+}
+const ffnn1=()=>{
+  TyMessage.info('你好')
 }
 let selectValue= ref('')
 function aainput(value) {

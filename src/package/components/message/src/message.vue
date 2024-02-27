@@ -1,13 +1,8 @@
 <template>
   <transition name="ty-message-fade">
-    <div
-      ref="messageRef"
-      v-show="visible"
-      :style="{
-        top: `${topValue}px`
-      }"
-      :class="['ty-message', `ty-message-${type}`]"
-    >
+    <div ref="messageRef" v-show="visible" :style="{
+      top: `${topValue}px`
+    }" :class="['ty-message', `ty-message-${type}`]">
       <div class="ty-message-icon">
         <slot name="icon">
           <TyIcon :icon="msgIconObj[type]"></TyIcon>
@@ -43,8 +38,7 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['close'])
-
-
+const messageRef = ref()
 const visible = ref(false)
 let topValue = ref(props.top)
 
@@ -60,28 +54,37 @@ const type = msgIconObj.hasOwnProperty(props.options.type)
 
 const timmer = setTimeout(() => {
   close()
-},props.options.time)
+}, props.options.time)
 
 const close = () => {
-  if(timmer){
+  if (timmer) {
     clearTimeout(timmer)
   }
   visible.value = false
-  const smTimmer = setTimeout(()=>{
+  const smTimmer = setTimeout(() => {
     emit('close')
     clearTimeout(smTimmer)
-  },500)
+  }, 500)
 }
+let height = ref(0)
+const getCompHeight = () => {
+  height.value = messageRef.value.getBoundingClientRect().height
+}
+
 onMounted(() => {
-  visible.value = true
+  visible.value = true,
+  nextTick(()=>{
+    getCompHeight()
+  })
 })
 
-const floatMsg = () => {
-  topValue.value = topValue.value - 54
+const floatMsg = (value) => {
+  topValue.value = topValue.value - value
 }
 defineExpose({
   floatMsg,
-  close
+  close,
+  height
 })
 </script>
 <style lang="scss" scoped>
@@ -89,16 +92,19 @@ defineExpose({
 .ty-message-fade-leave-active {
   transition: all 0.5s ease;
 }
+
 .ty-message-fade-enter-from,
 .ty-message-fade-leave-to {
   transform: translate(-50%, -100%) !important;
   opacity: 0;
 }
+
 .ty-message {
   position: fixed;
   left: 50%;
-  width: 500px;
-  height: 50px;
+  max-width: 500px;
+  min-width: 300px;
+  padding: 10px 0;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -106,6 +112,8 @@ defineExpose({
   border-radius: 5px;
   transform: translateX(-50%);
   transition: all 1s ease;
+  box-sizing: border-box;
+
   .ty-message-icon,
   .ty-message-close {
     width: 40px;
@@ -118,6 +126,8 @@ defineExpose({
   .ty-message-msg {
     flex: 1;
     text-align: left;
+    word-wrap:break-word;
+    max-width: 420px;
   }
 
   // ---------------Message状态样式
@@ -135,14 +145,12 @@ defineExpose({
   }
 
   @each $state,
-    $value
-      in (
-        'info': 'primary',
-        'success': 'success',
-        'warning': 'warning',
-        'error': 'danger'
-      )
-  {
+  $value in ('info': 'primary',
+    'success': 'success',
+    'warning': 'warning',
+    'error': 'danger'
+
+  ) {
     @include addMessageState($state, $value);
   }
 }
