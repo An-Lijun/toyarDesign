@@ -4,7 +4,9 @@
 
 :::demo
 ```html
+<ClientOnly>
   <TyButton @click="message">message</TyButton>
+</ClientOnly>
 ```
 ```js
 const message =()=>{
@@ -21,7 +23,9 @@ const message =()=>{
 
 :::demo
 ```html
+<ClientOnly>
   <TyButton @click="message1">message1</TyButton>
+</ClientOnly>
 ```
 ```js
 const message1 =()=>{
@@ -31,8 +35,13 @@ const message1 =()=>{
 ```
 :::
 <script setup>
-import {TyMessage} from '../../../../src/package/index.ts'
-
+// import {TyMessage} from '../../../../src/package/index.ts'
+let TyMessage =()=>{}
+if(document){
+   import('../../../../src/package/index.ts').then(res=>{
+     TyMessage =res.TyMessage
+   })
+}
 const message =()=>{
     TyMessage('你好?',{
     time:3500,

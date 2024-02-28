@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ty-avatar', `ty-avatar-${shape}`]">
+  <div :class="['ty-image', `ty-image-${shape}`]">
     <img :src="src" :alt="alt" :style="{
       width: `${size}px`, 
       height: `${size}px`, 
@@ -37,17 +37,17 @@ const props = defineProps({
 })
 </script>
 <style lang="scss" scoped>
-.ty-avatar {
+.ty-image {
   display: inline-flex;
 
-  &.ty-avatar-square {
+  &.ty-image-square {
     border-radius: 4px;
     &>img{
       border-radius: 4px;
     }
   }
 
-  &.ty-avatar-circle {
+  &.ty-image-circle {
     border-radius: 50%;
     &>img{
       border-radius: 50%;

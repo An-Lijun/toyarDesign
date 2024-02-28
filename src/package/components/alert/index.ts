@@ -1,6 +1,8 @@
 import { createVNode, ref, render } from "vue"
 import dialog from "../dialog/dialog.vue"
 let visible =ref(false)
+let doc = document||{}
+
 const createAlert= (info, options,div)=>{
   const instance = createVNode(dialog, {
     info,
@@ -8,9 +10,9 @@ const createAlert= (info, options,div)=>{
     visible,
     "onUpdate:visible":()=>{
       visible.value=false
-      if(window&&window.document){
+      if(doc){
 
-        document?.body.removeChild(div)
+        doc?.body.removeChild(div)
       }
     }
   })
@@ -21,13 +23,13 @@ const createAlert= (info, options,div)=>{
 export default function AlertJs(info, options = {
   title: '提示'
 }) {
-  if(window&&window.document){
+  if(doc){
 
-  const div = document?.createElement('div')
+  const div = doc?.createElement('div')
 
   const instance = createAlert(info, options,div)
   render(instance, div)
-  document?.body.appendChild(div)
+  doc?.body.appendChild(div)
   nextTick(()=>{
     visible.value=true
   })

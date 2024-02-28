@@ -4,7 +4,21 @@ body{
 .mt-5 {
   margin-top: 5px;
 }
+.ml-5 {
+  margin-left: 5px;
+}
 
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
 .mt-10 {
   margin-top: 10px;
 }
@@ -88,4 +102,8 @@ table{
 .flex-between{
   display: flex;
   justify-content: space-between;
+}
+
+.bd{
+  border: 1px solid #000;
 }

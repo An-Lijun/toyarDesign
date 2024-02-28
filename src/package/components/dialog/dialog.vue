@@ -71,13 +71,13 @@ onMounted(() => {
   tyDialogHeader.value.addEventListener("mousedown", (e) => {
     x = e.pageX - tyDialog.value.offsetLeft;
     y = e.pageY - tyDialog.value.offsetTop;
-  if(window&&window.document){
+  if(document){
 
     document?.addEventListener("mousemove", moveDialog)
   }
   });
   tyDialogHeader.value.addEventListener("mouseup", () => {
-  if(window&&window.document){
+  if(document){
 
     document?.removeEventListener("mousemove", moveDialog);
   }

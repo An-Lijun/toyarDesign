@@ -5,18 +5,25 @@
   </header>
   {{ adc }}
   {{ selectValue }}
+  <!-- <TyNotification type="success" title="成功" style="top:50px" message="这是一条成功的提示消息"/>
+  <TyNotification type="warning" style="top:150px" title="警告" message="这是一条警告的提示消息"/>
+  <TyNotification type="error" style="top:250px" title="错误" message="这是一条错误的提示消息"/>
+  <TyNotification type="info" style="top:350px" title="普通" message="这是一条普通的提示消息"/> -->
+    <button @click="notify">notify</button>
+
+
   <button @click="alert1">alert</button>
   <button @click="ffnn">123</button>
   <button @click="ffnn1">1111</button>
-  <TyAvatar src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyImage src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
   
-  <TyAvatar shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyImage shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
  
   <!-- 'none', 'fill', 'contain', 'cover', 'scale-down' -->
-  <TyAvatar size="70" fit="fill" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  <TyAvatar fit="contain" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  <TyAvatar size="70" fit="cover" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  <TyAvatar fit="scale-down" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyImage size="70" fit="fill" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyImage fit="contain" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyImage size="70" fit="cover" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
+  <TyImage fit="scale-down" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
   
   <div
   height="300px">
@@ -491,8 +498,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { TyCalendar, TyInput } from './package'
-import {TyMessage,TyAlert} from './package/index'
-
+import {TyMessage,TyAlert,TyNotification} from './package/index'
+const notify =()=>{
+  TyNotification()
+}
 const alert1 =()=>{
   TyAlert('11')
 }
