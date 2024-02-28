@@ -14,7 +14,13 @@
 
 
 ## 插槽(slot)
+
+<div class="listTb">
+
+
 | 名称      | 描述    |
 |----- |----- |
 | default | 默认插槽 |
 | header | 头部插槽可选 |
+
+</div>

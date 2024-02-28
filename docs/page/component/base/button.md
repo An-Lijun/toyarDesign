@@ -100,6 +100,8 @@
 
 ## 属性(Attributes)
 
+<div class="listTb">
+
 | 属性      | 描述    | 类型      | 值       | 默认   |
 |----- |----- |----- |----- |-----  |
 | state     | 按钮的状态  | string  | primary / success / warning / danger    | primary |
@@ -110,10 +112,16 @@
 | block     | 是否是块级按钮  | boolean   | false/true | false   |
 | htmlType  | html原生type | string | button / submit / reset | button |
 
+</div>
+
 ## 插槽(slot)
+
+<div class="listTb">
+
 | 名称      | 描述    |
 |----- |----- |
 | default | 默认插槽 |
+</div>
 
 ## 变量(cssVariables)
 
@@ -142,9 +150,6 @@
 | --padding-3 | 13px | 组件高度 size为samll
 | --padding-3 | 13px | 组件高度 size为medium
 | --padding-4 | 14px | 组件高度 size为large
-
-
-
 
 </div>
 

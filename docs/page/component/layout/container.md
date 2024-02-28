@@ -71,6 +71,7 @@
 
 ## 属性(Attributes)
 
+<div class="listTb">
 
 | 组件 | 属性       | 描述                           | 类型     | 值                        | 默认          | 
 | ----------| ---------- | ------------------------------ | -------- | ------------------------- | ------------- |
@@ -79,7 +80,12 @@
 | aside | width       | aside组件的宽度             | string   | -- | 100 |
 | footer | height       | footer组件的高度             | string   | -- | 100 |
 
+</div>
+
 ## 插槽(slot)
+
+<div class="listTb">
+
 | 组件 | 名称      | 描述    |
 | ----- |----- |----- |
 | container | default | 默认插槽 |
@@ -87,6 +93,9 @@
 | aside | default | 默认插槽 |
 | footer | default | 默认插槽 |
 | main | default | 默认插槽 |
+
+</div>
+
 
 
 

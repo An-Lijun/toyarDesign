@@ -1,9 +1,11 @@
-body{
+body {
   line-height: unset;
 }
+
 .mt-5 {
   margin-top: 5px;
 }
+
 .ml-5 {
   margin-left: 5px;
 }
@@ -19,6 +21,7 @@ body{
 .mr-10 {
   margin-right: 10px;
 }
+
 .mt-10 {
   margin-top: 10px;
 }
@@ -38,72 +41,111 @@ body{
 .mw-15 {
   margin: 0 15px;
 }
-.colBox{
+
+.colBox {
   background: var(--toyar-xblue-6);
   height: 20px;
   border-radius: 4px;
 }
-.vp-doc {
-  table {
-    tr {
-      th {
-        font-weight: bold ;
-        font-size: 15px ;
-      }
-      border: unset ;
-    }
 
-    tr {
-      th,
-      td {
+.vp-doc {
+   .listTb >table {
+      tr {
+        th {
+          font-weight: bold;
+          font-size: 15px;
+        }
+
         border: unset;
       }
-      td:first-child{
-        color:#6AA1FF;
+
+      tr {
+
+        th,
+        td {
+          border: unset;
+        }
+
+        td:first-child {
+          color: #6AA1FF;
+        }
+
+        td:nth-child(4) {
+          color: #165DFF;
+        }
       }
-      td:nth-child(4){
-        color:#165DFF;
-      }
-    }
-    tr:nth-child(2n) {
-      // background-color: #e9e9e9 !important;
-    }
-  }
-}
-table{
-  thead,tbody{
-    display: block;
-    width: 100%;
-    tr{
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      td,th{
-        flex: 1;
+
+      tr:nth-child(2n) {
+        // background-color: #e9e9e9 !important;
       }
     }
-  }
+      th,td{
+        border: unset;
+      }
 }
 
-.cssVar{
-  table{
-    thead,tbody{
+
+ .listTb>table {
+    thead,
+    tbody {
       display: block;
       width: 100%;
-      tr{
-        th:nth-child(3),td:nth-child(3){
-          flex: 2;
 
+      tr {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        td,
+        th {
+          flex: 1;
+        }
+        
+      }
+    }
+}
+
+
+.cssVar {
+  &>table {
+    thead,
+    tbody {
+      display: block;
+      width: 100%;
+
+      tr {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        border: unset;
+        td,
+        th {
+          flex: 1;
+          border: unset;
+        }
+      }
+    }
+  }
+  &>table {
+    thead,
+    tbody {
+      display: block;
+      width: 100%;
+      tr {
+        th:nth-child(3),
+        td:nth-child(3) {
+          flex: 2;
         }
       }
     }
   }
 }
-.flex-between{
+
+.flex-between {
   display: flex;
   justify-content: space-between;
 }
 
-.bd{
+.bd {
   border: 1px solid #000;
 }

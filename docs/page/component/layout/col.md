@@ -131,13 +131,22 @@
 :::
 ## 属性(Attributes)
 
+<div class="listTb">
+
+
 | 属性      | 描述    | 类型      | 值       | 默认   |
 |----- |----- |----- |----- |-----  |
 | span     | 栅格列占一行的分数一行为24份  | Number  | 0 
 | offset     | 栅格列向右偏移多少份  | Number  | 0 
 
+</div>
 
 ## 插槽(slot)
+
+<div class="listTb">
+
 | 名称      | 描述    |
 |----- |----- |
 | default | 默认插槽 |
+
+</div>

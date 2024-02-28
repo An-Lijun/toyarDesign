@@ -1,29 +1,31 @@
+const root ='/page/component/form/'
+
 export default     {
   text: "表单组件",
   items: [
     {
       text: "表单/Form",
-      link: "./form",
+      link: `${root}form`,
     },
     {
       text: "表单/FormItem",
-      link: "./formItem",
+      link: `${root}formItem`,
     },
     {
       text: "表单/Input",
-      link: "./input",
+      link: `${root}input`,
     },
     {
       text: "表单/InputNumber",
-      link: "./inputNumber",
+      link: `${root}inputNumber`,
     },
     {
       text: "表单/InputPassword",
-      link: "./inputPassword",
+      link: `${root}inputPassword`,
     },
     {
       text: "表单/radio",
-      link: "./radio",
+      link: `${root}radio`,
     }
   ]
 }

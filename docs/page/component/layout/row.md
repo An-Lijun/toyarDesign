@@ -105,12 +105,21 @@
 
 ## 属性(Attributes)
 
+<div class="listTb">
+
 | 属性      | 描述    | 类型      | 值       | 默认   |
 |----- |----- |----- |----- |-----  |
 | gutter     | 栅格列之间的间距  | Number  | 0 
 
+</div>
+
 ## 插槽(slot)
+
+<div class="listTb">
+
 | 名称      | 描述    |
 |----- |----- |
 | default | 默认插槽 |
+
+</div>
 

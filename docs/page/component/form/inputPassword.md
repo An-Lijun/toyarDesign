@@ -45,6 +45,7 @@ const inp = ref('')
 
 ## 属性(Attributes)
 
+<div class="listTb">
 
 | 属性       | 描述                           | 类型     | 值                        | 默认          | 
 | ---------- | ------------------------------ | -------- | ------------------------- | ------------- |
@@ -54,6 +55,7 @@ const inp = ref('')
 | readonly   | 是否只读                       | boolean  | --                        | false         | 
 | modelValue | v-model 绑定值(required)       | string   | number                    | ''            |
 
+</div>
 
 
 

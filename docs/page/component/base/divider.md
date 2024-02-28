@@ -56,16 +56,25 @@
 :::
 
 ## 属性(Attributes)
+<div class="listTb">
 
 | 属性      | 描述    | 类型      | 值       | 默认   |
 |----- |----- |----- |----- |-----  |
 | direction | 分割线的方向  | string  | row / column  | row
 | position | 分割线的方向  | string  | center / left / right /bottom / top  | center
 
+</div>
+
+
 ## 插槽(slot)
+<div class="listTb">
+
 | 名称      | 描述    |
 |----- |----- |
 | default | 默认插槽 |
+
+</div>
+
 
 ## 变量(cssVariables)
 
@@ -81,11 +90,5 @@
 | --toyar-gray-2 | -- | 分隔线内容的颜色 |
 | --border-1 | -- | 分隔线内容的粗细 |
 | --padding-2 | -- | 分隔线外侧的margin  |
-
-
-
-
-
-
 
 </div>

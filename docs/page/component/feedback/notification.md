@@ -1,16 +1,16 @@
-# message
+# notification
 
 ## 使用方式一
 
 :::demo
 ```html
 <ClientOnly>
-  <TyButton @click="message">message</TyButton>
+  <TyButton @click="notification">notification</TyButton>
 </ClientOnly>
 ```
 ```js
-const message =()=>{
-    TyMessage('你好?',{
+const notification =()=>{
+    TyNotification('你好?',{
     time:3500,
     type:'success'
   })
@@ -56,10 +56,9 @@ const message1 =()=>{
 </script>
 ## 属性(Attributes)
 
-<div class="listTb">
 
 | 属性       | 描述                           | 类型     | 值                        | 默认          | 
 | ---------- | ------------------------------ | -------- | ------------------------- | ------------- |
 | type       | message的类型                       | string   | -- |  info/success/error/warning  |
 | 类方法       | warning/info/error/success           | string   | -- | -- |
-</div>
+

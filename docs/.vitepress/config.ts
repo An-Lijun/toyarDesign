@@ -34,7 +34,7 @@ function useMd(md){
 export default defineConfig({
 
   title:'Toyar',
-  head:  [['link', { rel: 'icon', href: '../assets/logo.svg' }]],
+  head:  [['link', { rel: 'icon', href: '/logo.svg' }]],
   description: 'A config Vue component',
   themeConfig: {
     socialLinks: [{ icon: "github", link: "https://github.com" }],

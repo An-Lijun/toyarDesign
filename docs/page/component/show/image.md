@@ -45,6 +45,9 @@
 :::
 
 ## 属性(Attributes)
+
+<div class="listTb">
+
 | 属性      | 描述    | 类型      | 默认       | 
 |----- |----- |----- |----- |
 | src     | image的图片地址(required)  | string  | '' |
@@ -52,3 +55,5 @@
 | shape     | 组件的展示形状  |  'square'/'circle' | 'square' |
 | fit     | 填充形式 | string  | 'none'/'fill'/'contain'/'cover'/'scale-down' |
 | alt     | 图片失效后的文字展示形式 | string  | '' |
+
+</div>

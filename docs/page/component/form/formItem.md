@@ -50,14 +50,24 @@ function reset() {
 
 :::
 ## 属性(Attributes)
+
+<div class="listTb">
+
 | 属性      | 描述    | 类型      | 默认       | 
 |----- |----- |----- |----- |
 | prop     | 配合form rules进行校验  | string  | -- |
 
+</div>
+
 ## 插槽(slot)
+
+<div class="listTb">
+
 | 名称      | 描述    |
 |----- |----- |
 | default | 默认插槽 |
+
+</div>
 
 
 <script setup>

@@ -38,16 +38,23 @@ const isC = ref('')
 ## 属性(Attributes)
 
 
+<div class="listTb">
+
 | 属性       | 描述                           | 类型     | 值                        | 默认          | 
 | ---------- | ------------------------------ | -------- | ------------------------- | ------------- |
 | size       | 组件大小                       | string   | mini/ small/ medium/ mini | mini |
 | value       | 选中后的值                       | string   | mini/ small/ medium/ mini | mini |
-
+</div>
 
 
 
 ## 插槽(slot)
 
+<div class="listTb">
+
 | 名称     | 描述         |
 | -------- | ------------ |
 | default   | radio的描述     |
+
+</div>
+

@@ -40,7 +40,7 @@ const props = defineProps({
 .ty-table{
   margin-top: 50px;
   overflow:hidden;
-
+  display: table;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
