@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang='ts' setup name='TyBackTop'>
-import { onMounted,onBeforeUnmount} from "vue";
+import { onMounted,onBeforeUnmount,ref} from "vue";
 
 const props = defineProps({
   vHeight: {
@@ -38,9 +38,11 @@ let scrollFn=()=>{
 }
 onMounted(() => {
   parentNode =backTop.value.parentNode
-  backTop.value.style.right = props.right + "px";
-  backTop.value.style.bottom = props.bottom + "px";
-  parentNode.addEventListener('scroll',scrollFn)
+  if(parentNode){
+    backTop.value.style.right = props.right + "px";
+    backTop.value.style.bottom = props.bottom + "px";
+    parentNode.addEventListener('scroll',scrollFn)
+  }
 });
 
 function back() {

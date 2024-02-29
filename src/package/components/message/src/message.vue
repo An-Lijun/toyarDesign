@@ -54,13 +54,13 @@ const msgIconObj = {
   warning: 'ty-information-fill',
   error: 'ty-close-circle-fill'
 }
-const type = msgIconObj.hasOwnProperty(props.options.type)
-  ? props.options.type
+const type = msgIconObj.hasOwnProperty(props.options?.type)
+  ? props.options?.type
   : 'info'
 
 const timmer = setTimeout(() => {
   close()
-}, props.options.time)
+}, props.options?.time)
 
 const close = () => {
   if (timmer) {

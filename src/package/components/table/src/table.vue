@@ -2,7 +2,7 @@
   <table class="ty-table">
       <thead>
         <tr>
-          <th v-for="(item, index) in columns" :key="item.title">
+          <th v-for="(item, index) in columns" :key="index">
             {{ item.title }}
           </th>
           <th v-if="useSlots().operation">

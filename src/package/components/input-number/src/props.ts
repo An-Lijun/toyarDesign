@@ -46,14 +46,14 @@ export const inputProps={
 /**
  * 计算props的值进行v-model绑定
  */
-export const useCompMvalue= (props,emit)=>{
+export const useCompMvalue= (props,emitFn)=>{
   const model = computed({
     get() {
       return props.modelValue
     },
     set(val) {
      let value =  Number.isNaN(val)?'':!val?'':val
-      emit('update:modelValue',value)
+     emitFn('update:modelValue',value)
     },
   })
   return {model}

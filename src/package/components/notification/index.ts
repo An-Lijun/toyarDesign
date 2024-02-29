@@ -17,9 +17,9 @@ const createNoti = (msg, options = {
   const top = getTop()
   const instance = createVNode(TyNotification, {
     message: msg,
-    title: options.title ||'提示',
-    type: options.type,
-    time: options.time,
+    title: options?.title ||'提示',
+    type: options?.type,
+    time: options?.time,
     top,
     onClose: () => {
       if (doc) {

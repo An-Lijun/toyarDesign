@@ -34,7 +34,7 @@ import TyWaterMark from './components/waterMark'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
-document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
+// document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 const install = app => {
   app.use(TyIcon),

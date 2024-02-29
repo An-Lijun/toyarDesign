@@ -1,17 +1,17 @@
 import { createVNode, ref, render } from "vue"
 import dialog from "../dialog/dialog.vue"
-let visible =ref(false)
-let doc = document||{}
 
-const createAlert= (info, options,div)=>{
+let visible = ref(false)
+let doc = document || {}
+
+const createAlert = (info, options, div) => {
   const instance = createVNode(dialog, {
     info,
-    title:options.title,
+    title: options.title,
     visible,
-    "onUpdate:visible":()=>{
-      visible.value=false
-      if(doc){
-
+    "onUpdate:visible": () => {
+      visible.value = false
+      if (doc) {
         doc?.body.removeChild(div)
       }
     }
@@ -23,16 +23,17 @@ const createAlert= (info, options,div)=>{
 export default function AlertJs(info, options = {
   title: '提示'
 }) {
-  if(doc){
+  if (doc) {
 
-  const div = doc?.createElement('div')
+    const div = doc?.createElement('div')
+    if (div) {
+      const instance = createAlert(info, options, div)
+      render(instance, div)
+      doc?.body.appendChild(div)
+      nextTick(() => {
+        visible.value = true
+      })
+    }
+  }
 
-  const instance = createAlert(info, options,div)
-  render(instance, div)
-  doc?.body.appendChild(div)
-  nextTick(()=>{
-    visible.value=true
-  })
-}
-  
 }
