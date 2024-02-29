@@ -4,13 +4,11 @@
 
 :::demo
 ```html
-<ClientOnly>
   <TyButton @click="notification">notification</TyButton>
-</ClientOnly>
 ```
 ```js
 const notification =()=>{
-    TyNotification('你好?',{
+    TyNotification('你好Ty-Design',{
     time:3500,
     type:'success'
   })
@@ -23,33 +21,37 @@ const notification =()=>{
 
 :::demo
 ```html
-<ClientOnly>
-  <TyButton @click="message1">message1</TyButton>
-</ClientOnly>
+  <TyButton @click="notification1">notification1</TyButton>
 ```
 ```js
-const message1 =()=>{
-  TyMessage.warning('你好??')
+const notification1 =()=>{
+   TyNotification('你好Ty-Design',{
+    time:3500,
+    type:'error'
+  })
 }
 
 ```
 :::
 <script setup>
 // import {TyMessage} from '../../../../src/package/index.ts'
-let TyMessage =()=>{}
+let TyNotification =()=>{}
 if(document){
    import('../../../../src/package/index.ts').then(res=>{
-     TyMessage =res.TyMessage
+     TyNotification =res.TyNotification
    })
 }
-const message =()=>{
-    TyMessage('你好?',{
+const notification =()=>{
+    TyNotification('你好Ty-Design',{
     time:3500,
     type:'success'
   })
 }
-const message1 =()=>{
-  TyMessage.warning('你好??')
+const notification1 =()=>{
+   TyNotification('你好Ty-Design',{
+    time:3500,
+    type:'error'
+  })
 }
 
 

@@ -14,5 +14,9 @@ export default {
       text: "基础/分隔线/Divider",
       link: `${root}divider`,
     },
+    {
+      text: "基础/水印/WaterMark",
+      link: `${root}waterMark`,
+    },
   ]
 }

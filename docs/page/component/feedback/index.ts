@@ -11,5 +11,9 @@ export default    {
       text: "反馈/Message",
       link: `${root}message`,
     },
+    {
+      text: "反馈/Notification",
+      link: `${root}notification`,
+    },
   ]
 }

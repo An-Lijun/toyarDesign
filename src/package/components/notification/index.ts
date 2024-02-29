@@ -9,16 +9,18 @@ const getTop = () =>
     return item + current.component.exposed.height.value + 10
   }, 30)
 
-const createNoti = (msg, options, div) => {
+const createNoti = (msg, options = {
+  title: '提示',
+  type: 'info',
+  time: 3000
+}, div) => {
   const top = getTop()
-  console.log(top);
-  
   const instance = createVNode(TyNotification, {
-    title:'提示',
-    message:"哈哈哈哈",
-    type:'info',
+    message: msg,
+    title: options.title ||'提示',
+    type: options.type,
+    time: options.time,
     top,
-    time:3000,
     onClose: () => {
       if (doc) {
         doc?.body.removeChild(div)
@@ -27,7 +29,7 @@ const createNoti = (msg, options, div) => {
       }
     }
   })
-  function allMove (instance) {
+  function allMove(instance) {
     notiArr.forEach(({ component }) => {
       component.exposed.floatNoti(instance.component.exposed.height.value)
     })
@@ -37,11 +39,8 @@ const createNoti = (msg, options, div) => {
   return instance
 }
 
-// TyNotification.install = app => {
-//   app.component('TyNotification', TyNotification)
-// }
-// export default TyNotification
-export default function NotifyJs (msg, options) {
+
+export default function NotifyJs(msg, options) {
   if (doc) {
     const div = doc?.createElement('div')
     const instance = createNoti(msg, options, div)

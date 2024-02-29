@@ -30,7 +30,7 @@ import TyAlert from './components/alert'
 import TyResult from './components/result'
 import TyImage from './components/image'
 import TyNotification from './components/notification'
-
+import TyWaterMark from './components/waterMark'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -59,7 +59,8 @@ const install = app => {
     app.use(TyContainer),
     app.use(TyMenu),
     app.use(TyResult),
-    app.use(TyImage)  
+    app.use(TyImage),
+    app.use(TyWaterMark)
 }
 const toyarUI = {
   version: '0.0.1',
@@ -100,5 +101,6 @@ export {
   TyNotification,
   TyAlert,
   TyResult,
-  TyImage
+  TyImage,
+  TyWaterMark
 } //按需引入

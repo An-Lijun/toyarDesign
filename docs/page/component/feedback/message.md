@@ -4,9 +4,7 @@
 
 :::demo
 ```html
-<ClientOnly>
   <TyButton @click="message">message</TyButton>
-</ClientOnly>
 ```
 ```js
 const message =()=>{
@@ -23,9 +21,7 @@ const message =()=>{
 
 :::demo
 ```html
-<ClientOnly>
   <TyButton @click="message1">message1</TyButton>
-</ClientOnly>
 ```
 ```js
 const message1 =()=>{

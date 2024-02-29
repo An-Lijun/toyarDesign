@@ -5,6 +5,14 @@
   </header>
   {{ adc }}
   {{ selectValue }}
+  <TyWaterMark style="width:500px;height:500px"
+    markInfo="123456"
+    :options="{
+      fontColor:'red'
+    }"
+  >
+    123456
+  </TyWaterMark>
   <!-- <TyNotification type="success" title="成功" style="top:50px" message="这是一条成功的提示消息"/>
   <TyNotification type="warning" style="top:150px" title="警告" message="这是一条警告的提示消息"/>
   <TyNotification type="error" style="top:250px" title="错误" message="这是一条错误的提示消息"/>

@@ -30,6 +30,7 @@
 </template>
 
 <script setup>
+import {ref,onMounted,nextTick} from 'vue'
 import TyIcon from '../../icon'
 const props = defineProps({
   type: {
