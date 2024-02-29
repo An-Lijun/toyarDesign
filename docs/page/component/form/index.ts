@@ -26,6 +26,10 @@ export default     {
     {
       text: "表单/radio",
       link: `${root}radio`,
+    },
+    {
+      text: "表单/checkBox",
+      link: `${root}checkBox`,
     }
   ]
 }

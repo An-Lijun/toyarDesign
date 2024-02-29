@@ -426,10 +426,10 @@
     </TyOption>
   </TySelect>
   {{ isT }}
-  <TyChcekBox v-model="isT" :value="1" size="mini">123</TyChcekBox>
-  <TyChcekBox v-model="isT" :value="2" size="small">456</TyChcekBox>
-  <TyChcekBox v-model="isT" :value="3" size="medium">456</TyChcekBox>
-  <TyChcekBox v-model="isT" :value="4" size="large">456</TyChcekBox>
+  <TyCheckBox v-model="isT" :value="1" size="mini">123</TyCheckBox>
+  <TyCheckBox v-model="isT" :value="2" size="small">456</TyCheckBox>
+  <TyCheckBox v-model="isT" :value="3" size="medium">456</TyCheckBox>
+  <TyCheckBox v-model="isT" :value="4" size="large">456</TyCheckBox>
   {{ isC }}
   <TyRadio v-model="isC" :value="2" size="mini">123</TyRadio>
   <TyRadio v-model="isC" :value="3" size="small">456</TyRadio>
