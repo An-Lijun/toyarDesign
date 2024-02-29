@@ -11,9 +11,9 @@
     "dev": "vite",
     "build": "vite build -f es",
     "preview": "vite preview",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "docs:dev": "vitepress dev docsBase",
+    "docs:build": "vitepress build docsBase",
+    "docs:serve": "vitepress serve docsBase"
   },
   "dependencies": {
     "@vuepress/plugin-register-components": "^2.0.0-rc.15",
