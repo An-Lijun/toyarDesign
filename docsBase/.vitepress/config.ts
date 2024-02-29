@@ -35,6 +35,7 @@ export default defineConfig({
 
   title:'Toyar',
   outDir: "../docs",
+  base:'/toyarDesign/',
   head:  [['link', { rel: 'icon', href: '/logo.svg' }]],
   description: 'A config Vue component',
   themeConfig: {
