@@ -34,10 +34,10 @@ import TyWaterMark from './components/waterMark'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
-// document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
+document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 const install = app => {
-  app.use(TyIcon),
+    app.use(TyIcon),
     app.use(TyButton),
     app.use(TyButtonGroup),
     app.use(TyDivider),
@@ -62,12 +62,11 @@ const install = app => {
     app.use(TyImage),
     app.use(TyWaterMark)
 }
-const toyarUI = {
+
+export default {
   version: '0.0.1',
   install
-}
-
-export default toyarUI //全量引入
+} //全量引入
 
 export {
   TyIcon,
