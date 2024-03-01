@@ -4,19 +4,19 @@ export default    {
   text: "布局组件",
   items: [
     {
-      text: "布局/container",
+      text: "container",
       link: `${root}container`,
     },
     {
-      text: "布局/栅格行/Row",
+      text: "栅格行/Row",
       link: `${root}row`,
     },
     {
-      text: "布局/栅格列/Col",
+      text: "栅格列/Col",
       link: `${root}col`,
     },
     {
-      text: "布局/Card",
+      text: "Card",
       link: `${root}card`,
     },
   ],

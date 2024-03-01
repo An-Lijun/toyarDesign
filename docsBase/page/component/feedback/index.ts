@@ -4,15 +4,15 @@ export default    {
   text: "反馈组件",
   items: [
     {
-      text: "反馈/Result",
+      text: "Result",
       link: `${root}result`,
     },
     {
-      text: "反馈/Message",
+      text: "Message",
       link: `${root}message`,
     },
     {
-      text: "反馈/Notification",
+      text: "Notification",
       link: `${root}notification`,
     },
   ]

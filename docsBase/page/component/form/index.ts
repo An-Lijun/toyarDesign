@@ -4,31 +4,31 @@ export default     {
   text: "表单组件",
   items: [
     {
-      text: "表单/Form",
+      text: "Form",
       link: `${root}form`,
     },
     {
-      text: "表单/FormItem",
+      text: "FormItem",
       link: `${root}formItem`,
     },
     {
-      text: "表单/Input",
+      text: "Input",
       link: `${root}input`,
     },
     {
-      text: "表单/InputNumber",
+      text: "InputNumber",
       link: `${root}inputNumber`,
     },
     {
-      text: "表单/InputPassword",
+      text: "InputPassword",
       link: `${root}inputPassword`,
     },
     {
-      text: "表单/radio",
+      text: "radio",
       link: `${root}radio`,
     },
     {
-      text: "表单/checkBox",
+      text: "checkBox",
       link: `${root}checkBox`,
     }
   ]

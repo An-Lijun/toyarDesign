@@ -4,11 +4,11 @@ export default {
   text: "展示组件",
   items: [
     {
-      text: "展示/image",
+      text: "image",
       link: `${root}image`,
     },
     {
-      text: "展示/table",
+      text: "table",
       link: `${root}table`,
     }
   ],

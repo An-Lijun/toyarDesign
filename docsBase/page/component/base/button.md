@@ -82,7 +82,10 @@
   默认按钮
   </ty-button>
   <ty-button shape="circle"  class="mw-10">   
-    <ty-icon icon="ri-add-fill" color="#fff" />
+    <ty-icon icon="ty-add-fill" color="#fff" />
+  </ty-button>
+    <ty-button   class="mw-10">   
+    <ty-icon icon="ty-add-fill" color="#fff" />
   </ty-button>
 ```
 :::
