@@ -28,7 +28,7 @@
 <script setup>
 import { formContent, formItemContent } from '../../hooks/symbolNm'
 import { inject, onMounted, toRefs,provide,ref,onBeforeUnmount } from "vue";
-const tyForm = inject(formContent);
+const tyForm = inject(formContent,null);
 const formItemError = ref({
   isShowErrorMsg: false,
   errorMsg: ''

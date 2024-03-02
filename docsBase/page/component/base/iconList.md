@@ -24,9 +24,9 @@
 
 <iconList :iconArr="Development"/>
 
-## Device166
+## Device
 
-<iconList :iconArr="Device166"/>
+<iconList :iconArr="Device"/>
 
 ## Document
 
@@ -8816,7 +8816,7 @@
       alias: ['fill', null, 'fill']
     }
   ]
-  const Device166=[
+  const Device=[
     {
       icon: 'ty-tv-line',
       belong: 'Device166',

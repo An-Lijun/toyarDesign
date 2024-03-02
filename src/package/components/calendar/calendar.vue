@@ -58,6 +58,8 @@
   </div>
 </template>
 <script setup>
+import { formItemContent} from '../..//hooks/symbolNm'
+
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])
 const props = defineProps({
   size: {
@@ -85,6 +87,8 @@ const props = defineProps({
     default: ''
   }
 })
+const tyFormItem =inject(formItemContent,null);
+const focus =ref(false)
 const nativeInp = ref()
 const isShowCalendar = ref(false)
 const weekArr = ['日', '一', '二', '三', '四', '五', '六'];
@@ -97,7 +101,9 @@ let aftMonth = ref(0)
 let isShowClearBtn  = computed(()=>{
  return props.modelValue!=='' && props.clearable && !props.disabled
 })
+const handleFocus=()=>{
 
+}
 const render = (dateArr) => {
   // 1.获取当前年月日
   let date = new Date(dateArr[0], dateArr[1])

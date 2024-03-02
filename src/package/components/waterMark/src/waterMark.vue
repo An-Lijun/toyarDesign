@@ -1,7 +1,8 @@
 <template>
-  <div class="ty-waterMark">
+  <div class="ty-waterMark" ref="maskContainer">
     <div
       class="ty-waterMark-mark"
+      ref="mark"
       :style="{
         backgroundImage: `${bgUrl}`
       }"
@@ -10,7 +11,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref,onMounted } from 'vue'
 const props = defineProps({
   markInfo: {
     type: String || Array,
@@ -29,11 +30,13 @@ const defaultOptions = {
   height: 200,
   rotate: (-30 * Math.PI) / 180,
   offsetX: 0,
-  offsetY: 0
+  offsetY: 0,
+  antiTamper:false
 }
 const options = Object.assign(defaultOptions, props.options)
 const bgUrl = ref('')
-
+const mark = ref()
+const maskContainer = ref()
 const isImageByReg = (str, type = 'http') => {
   //尾缀是图片
   const PICTURE_EXPRESSION = /\.(png|jpe?g|gif|svg)(\?.*)?$/
@@ -107,7 +110,28 @@ const createMark = () => {
       })
   }
 }
-createMark()
+let mutOb = new MutationObserver(records => {
+  records.forEach(el => {
+    if (el.target === mark.value) {
+      mark.value.style.display = 'block'
+      mark.value.style.opacity = '1'
+    }
+    if (el.removedNodes[0] === mark.value) {
+      createMark()
+    }
+  })
+})
+onMounted(() => {
+  if(options.antiTamper){
+    mutOb.observe(maskContainer.value, {
+    childList: true,
+    attributes: true,
+    subtree: true
+  })
+  }
+
+}),
+  createMark()
 </script>
 <style lang="scss" scoped>
 .ty-waterMark {

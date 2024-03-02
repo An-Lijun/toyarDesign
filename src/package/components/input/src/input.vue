@@ -127,9 +127,8 @@ const attrs = useAttrs()
 const props = defineProps(inputProps)
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])
 const {  modelValue } = toRefs(props)
-//inject
-const tyForm = inject(formContent);
-const tyFormItem = inject(formItemContent);
+const tyForm = inject(formContent,null);
+const tyFormItem = inject(formItemContent,null);
 
 // ref
 const limitBlock =ref();

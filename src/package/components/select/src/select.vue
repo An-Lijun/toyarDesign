@@ -57,8 +57,8 @@ const props = defineProps({
   }
 })
 const options = {}
-const tyForm = inject(formContent);
-const tyFormItem =inject(formItemContent);
+const tyForm = inject(formContent,null);
+const tyFormItem =inject(formItemContent,null);
 const{disabled,readonly,modelValue,size} =toRefs(props)
 const root = ref();
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])

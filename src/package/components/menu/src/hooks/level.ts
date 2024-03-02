@@ -8,7 +8,10 @@ export function provideLevel(level) {
   );
 }
 export  function injectLevel(provideNext) {
-  const levelContext = inject(MenuLevelProvide);
+  const levelContext = inject(MenuLevelProvide,null);
+  if(levelContext){
+    
+  }
   const compLevel = computed(() => levelContext?.value || 0);
   if (provideNext) {
     const nextLevel = computed(() => compLevel.value + 1);

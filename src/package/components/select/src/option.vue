@@ -19,8 +19,8 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['update:modelValue']);
-const _selectContent =inject(selectContent);
-const setOption = inject(TySelectOptions)
+const _selectContent =inject(selectContent,null);
+const setOption = inject(TySelectOptions,null)
 function selectOption(){
   _selectContent.setNativeInp(props.value,props.label)
   _selectContent.isShowOption.value=false

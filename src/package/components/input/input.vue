@@ -57,7 +57,7 @@
 </template>
 <script setup>
 import {configProviderDisabled} from '../../hooks/symbolNm'
-import { formContent,formItemContent} from '@/package/hooks/symbolNm'
+import { formContent,formItemContent} from '../../hooks/symbolNm'
 
 import { ref, onMounted, toRefs,reactive , useSlots, useAttrs, watch } from 'vue'
 const attrs = useAttrs()
@@ -87,8 +87,8 @@ const props = defineProps({
     default: ''
   }
 })
-const tyForm = inject(formContent);
-const tyFormItem =inject(formItemContent);
+const tyForm = inject(formContent,null);
+const tyFormItem =inject(formItemContent,null);
 const{disabled,readonly,modelValue,size} =toRefs(props)
 const root = ref();
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])

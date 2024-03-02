@@ -11,12 +11,13 @@
 ```
 
 :::
+
 ## 多行文本
 
 :::demo
 
 ```html
-<TyWaterMark :markInfo="['TyDesign',time]" :options={width:300,height:300}>
+<TyWaterMark :markInfo="['TyDesign',time]" :options="{width:300,height:300}">
   <TyTable :columns="columns" :data="tableData"> </TyTable>
 </TyWaterMark>
 ```
@@ -28,12 +29,13 @@
 :::demo
 
 ```html
-<TyWaterMark markInfo="/toyar.png" :options={width:400,height:100,rotate:0}>
+<TyWaterMark markInfo="/toyar.png" :options="{width:400,height:100,rotate:0}">
   <TyTable :columns="columns" :data="tableData"> </TyTable>
 </TyWaterMark>
 ```
 
 :::
+
 ## 修改配置
 
 :::demo
@@ -61,18 +63,19 @@
 
 <div class="listTb">
 
-| 属性               | 描述              | 类型             | 值    | 默认                   |
-| ------------------ | ----------------- | ---------------- | ----- | ---------------------- |
-| markInfo           | 水印的填充内容    | string(required)或Array[a,b] | --    | --                     |
-| options.fontColor  | 水印的文字颜色    | string           | --    | rgba(210,210,230,0.7)  |
-| options.fontSize   | 水印的文字大小    | string           | --    | 30                     |
-| options.fontFamily | 水印的文字字体    | string           | --    | Arial                  |
-| options.zIndex     | 水印的层级        | string/ number   | --    | '999'                  |
-| options.width      | 一块水印的 width  | string           | --    | 200                    |
-| options.width      | 一块水印的 height | string/number    | 0-180 | (-30 \* Math.PI) / 180 |
-| options.rotate     | 水印的角度        | string           | --    | none                   |
-| options.offsetX    | 水印的偏移量 x    | string/number    | --    | 0                      |
-| options.offsetY    | 水印的偏移量 y    | string/number    | --    | 0                      |
+| 属性               | 描述              | 类型                          | 值    | 默认                   |
+| ------------------ | ----------------- | ----------------------------- | ----- | ---------------------- |
+| markInfo           | 水印的填充内容    | string(required)或 Array[a,b] | --    | --                     |
+| options.fontColor  | 水印的文字颜色    | string                        | --    | rgba(210,210,230,0.7)  |
+| options.fontSize   | 水印的文字大小    | string                        | --    | 30                     |
+| options.fontFamily | 水印的文字字体    | string                        | --    | Arial                  |
+| options.zIndex     | 水印的层级        | string/ number                | --    | '999'                  |
+| options.width      | 一块水印的 width  | string                        | --    | 200                    |
+| options.width      | 一块水印的 height | string/number                 | 0-180 | (-30 \* Math.PI) / 180 |
+| options.rotate     | 水印的角度        | string                        | --    | none                   |
+| options.offsetX    | 水印的偏移量 x    | string/number                 | --    | 0                      |
+| options.offsetY    | 水印的偏移量 y    | string/number                 | --    | 0                      |
+| options.antiTamper | 防止水印被篡改    | boolean                       | --    | false                  |
 
 </div>
 

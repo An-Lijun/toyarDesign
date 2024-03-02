@@ -12,7 +12,7 @@
 </template>
 <script lang='ts' setup >
 import { inject } from "vue";
-const gutter = inject("gutter");
+const gutter = inject("gutter",null);
 const props = defineProps({
   span: {
     type: Number,

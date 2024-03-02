@@ -1,4 +1,4 @@
-import TyCol from './col.vue'
+import TyCol from './src/col.vue'
 TyCol.install = app=>{
     app.component('TyCol',TyCol)
 }

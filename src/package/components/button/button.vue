@@ -80,7 +80,7 @@ const props = defineProps({
     }
   }
 })
-const inputInject = inject(configProviderDisabled)
+const inputInject = inject(configProviderDisabled,null)
 const mergeDisabled = computed(()=>{
   return inputInject?.disabled || props.disabled
 }
