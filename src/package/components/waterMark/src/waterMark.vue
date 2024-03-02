@@ -10,10 +10,10 @@
   </div>
 </template>
 <script setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
 const props = defineProps({
   markInfo: {
-    type: String,
+    type: String || Array,
     required: true
   },
   options: {
@@ -33,20 +33,79 @@ const defaultOptions = {
 }
 const options = Object.assign(defaultOptions, props.options)
 const bgUrl = ref('')
+
+const isImageByReg = (str, type = 'http') => {
+  //尾缀是图片
+  const PICTURE_EXPRESSION = /\.(png|jpe?g|gif|svg)(\?.*)?$/
+  //http
+  const URL_REGULAR_EXPRESSION =
+    /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
+  if (type === 'http') {
+    return PICTURE_EXPRESSION.test(str)
+  } else {
+    return URL_REGULAR_EXPRESSION.test(str)
+  }
+}
+const isImageByDom = str => {
+  let img = document.createElement('img')
+  img.src = str
+  return new Promise(function (resolve, reject) {
+    img.onerror = () => {
+      reject(undefined)
+    }
+    img.onload = () => {
+      resolve(img)
+    }
+  })
+}
+//--------------
+const setUrl = img => {
+  bgUrl.value = `url(${img})`
+}
 const createMark = () => {
   const canvas = document.createElement('canvas')
-  canvas.width = defaultOptions.width
-  canvas.height = defaultOptions.height
+  canvas.width = options.width
+  canvas.height = options.height
   const ctx = canvas.getContext('2d')
-  ctx.fillStyle = defaultOptions.fontColor
-  ctx.font = `${defaultOptions.fontSize}px ${defaultOptions.fontFamily}`
+  ctx.fillStyle = options.fontColor
+  ctx.font = `${options.fontSize}px ${options.fontFamily}`
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
-  ctx.translate(defaultOptions.width/2,defaultOptions.height/2)
-  ctx.rotate(defaultOptions.rotate)
-  ctx.fillText(props.markInfo, defaultOptions.offsetX, defaultOptions.offsetY)
-  const img = canvas.toDataURL('image/png')
-  bgUrl.value = `url(${img})`
+  ctx.translate(options.width / 2, options.height / 2)
+  ctx.rotate(options.rotate)
+  if (Array.isArray(props.markInfo)) {
+    ctx.fillText(
+      props.markInfo[0],
+      options.offsetX,
+      options.offsetY - options.fontSize / 2
+    )
+    ctx.fillText(
+      props.markInfo[1],
+      options.offsetX,
+      options.offsetY + options.fontSize / 2
+    )
+    setUrl(canvas.toDataURL('image/png'))
+  } else {
+    isImageByDom(props.markInfo)
+      .then(img => {
+        ctx.drawImage(
+          img,
+          -options.width / 2,
+          -options.height / 2,
+          options.width,
+          options.height
+        )
+        setUrl(canvas.toDataURL('image/png'))
+      })
+      .catch(() => {
+        ctx.fillText(
+          props.markInfo,
+          defaultOptions.offsetX,
+          defaultOptions.offsetY
+        )
+        setUrl(canvas.toDataURL('image/png'))
+      })
+  }
 }
 createMark()
 </script>

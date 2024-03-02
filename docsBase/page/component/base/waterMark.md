@@ -11,7 +11,29 @@
 ```
 
 :::
+## 多行文本
 
+:::demo
+
+```html
+<TyWaterMark :markInfo="['TyDesign',time]" :options={width:300,height:300}>
+  <TyTable :columns="columns" :data="tableData"> </TyTable>
+</TyWaterMark>
+```
+
+:::
+
+## 图片水印
+
+:::demo
+
+```html
+<TyWaterMark markInfo="/toyar.png" :options={width:400,height:100,rotate:0}>
+  <TyTable :columns="columns" :data="tableData"> </TyTable>
+</TyWaterMark>
+```
+
+:::
 ## 修改配置
 
 :::demo
@@ -41,7 +63,7 @@
 
 | 属性               | 描述              | 类型             | 值    | 默认                   |
 | ------------------ | ----------------- | ---------------- | ----- | ---------------------- |
-| markInfo           | 水印的填充内容    | string(required) | --    | --                     |
+| markInfo           | 水印的填充内容    | string(required)或Array[a,b] | --    | --                     |
 | options.fontColor  | 水印的文字颜色    | string           | --    | rgba(210,210,230,0.7)  |
 | options.fontSize   | 水印的文字大小    | string           | --    | 30                     |
 | options.fontFamily | 水印的文字字体    | string           | --    | Arial                  |
@@ -55,6 +77,8 @@
 </div>
 
 <script setup>
+  const day =new Date()
+  const time =`${day.getFullYear()}-${day.getMonth()+1}-${day.getDate()}`
   const columns = [
   { title: '姓名', key: 'name' },
   { title: '年龄', key: 'age' },

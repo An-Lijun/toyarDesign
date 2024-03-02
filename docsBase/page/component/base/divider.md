@@ -8,13 +8,27 @@
   </div>
 <div class="mt-10">
 <ty-divider>
-  <ty-icon icon="ri-arrow-up-circle-fill" class="mw-10"></ty-icon>
+  <ty-icon icon="ty-arrow-up-circle-fill" class="mw-10"></ty-icon>
 </ty-divider>
 </div>
 
 
 ```
 :::
+
+
+## 常用
+
+:::demo  常用
+```html
+<div style="height:25px;display:flex;justify-content:center">
+  
+  <TyButton>新增</TyButton>   <ty-divider style="--border-1:2px" direction="column"></ty-divider>  <TyButton type="secondary">修改</TyButton>
+  <ty-divider style="--border-1:2px" direction="column"></ty-divider>  <TyButton state="danger">删除</TyButton>
+</div>
+```
+:::
+
 
 ## 分隔线方向(direction)
 
