@@ -5,16 +5,14 @@ import iconList from '../iconList.vue'
 export default {
   extends:DefaultTheme,
   enhanceApp({ app }) {
-    app.component('demo-block',demoBlock),
     app.mixin({
       mounted() {
-        console.log("1");
-        
-        if(!app.$message){
+        if(!app.ook){
+          app.component('demo-block',demoBlock),
           import('../../../src/package/index').then((res)=>{
-            app.$message=res.TyMessage
-            app.use(res.default),
-            app.component('iconList',iconList)
+          app.ook=true
+          app.use(res.default),
+          app.component('iconList',iconList)
           })
         }
       },
