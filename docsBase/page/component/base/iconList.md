@@ -68,7 +68,7 @@
 <iconList :iconArr="Others"/>
 
 <script setup>
-
+import iconList from '../../../.vitepress/iconList.vue'
 
   const Others= [
     {

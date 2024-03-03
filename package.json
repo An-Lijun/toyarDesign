@@ -14,6 +14,7 @@
     "preview": "vite preview",
     "docs:dev": "vitepress dev docsBase",
     "docs:build": "vitepress build docsBase",
+    "docs:build1": "node --max_old_space_size=8192 node_modules/vitepress/bin/vitepress.js build docsBase",
     "docs:serve": "vitepress serve docsBase",
     "publish": "npm version patch && npm run build && npm publish"
   },
