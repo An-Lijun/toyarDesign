@@ -1,12 +1,11 @@
 # 字体图标列表
 
 ## arrow
-
-<iconList :iconArr="arrow"/>
+  <iconList :iconArr="arrow"/> 
 
 ## Buildings
 
-<iconList :iconArr="Buildings"/>
+  <iconList :iconArr="Buildings"/>
 
 ## Business
 
@@ -69,6 +68,8 @@
 <iconList :iconArr="Others"/>
 
 <script setup>
+
+
   const Others= [
     {
       icon: 'ty-basketball-line',

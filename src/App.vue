@@ -5,10 +5,14 @@
   </header>
   {{ adc }}
   {{ selectValue }}
-  <TyWaterMark style="width:500px;height:500px"
+  <TyCollapse v-model="modelV1">
+    <TyCollapseItem title="title" name="aa">111111 </TyCollapseItem>
+  </TyCollapse>
+  <TyWaterMark
+    style="width: 500px; height: 500px"
     markInfo="123456"
     :options="{
-      fontColor:'red'
+      fontColor: 'red'
     }"
   >
     123456
@@ -17,47 +21,76 @@
   <TyNotification type="warning" style="top:150px" title="警告" message="这是一条警告的提示消息"/>
   <TyNotification type="error" style="top:250px" title="错误" message="这是一条错误的提示消息"/>
   <TyNotification type="info" style="top:350px" title="普通" message="这是一条普通的提示消息"/> -->
-    <button @click="notify">notify</button>
-
+  <button @click="notify">notify</button>
 
   <button @click="alert1">alert</button>
   <button @click="ffnn">123</button>
   <button @click="ffnn1">1111</button>
-  <TyImage src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  
-  <TyImage shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
- 
-  <!-- 'none', 'fill', 'contain', 'cover', 'scale-down' -->
-  <TyImage size="70" fit="fill" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  <TyImage fit="contain" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  <TyImage size="70" fit="cover" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  <TyImage fit="scale-down" shape="circle" src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg" />
-  
-  <div
-  height="300px">
-  <TyResult type="info"></TyResult>
-</div>
-<div
-  height="300px">
-  <TyResult type="info" title="title" subTitle="subTitle"></TyResult>
-</div>
+  <TyImage
+    src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg"
+  />
 
-  <transition name="ty-message-fade" >
-      <h2 v-show="flagee">123456</h2>
+  <TyImage
+    shape="circle"
+    src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg"
+  />
+
+  <!-- 'none', 'fill', 'contain', 'cover', 'scale-down' -->
+  <TyImage
+    size="70"
+    fit="fill"
+    shape="circle"
+    src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg"
+  />
+  <TyImage
+    fit="contain"
+    shape="circle"
+    src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg"
+  />
+  <TyImage
+    size="70"
+    fit="cover"
+    shape="circle"
+    src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg"
+  />
+  <TyImage
+    fit="scale-down"
+    shape="circle"
+    src="https://jslib.dev/wp-content/uploads/2021/05/css-object-fit-property-1024x569.jpeg"
+  />
+
+  <div height="300px">
+    <TyResult type="info"></TyResult>
+  </div>
+  <div height="300px">
+    <TyResult type="info" title="title" subTitle="subTitle"></TyResult>
+  </div>
+
+  <transition name="ty-message-fade">
+    <h2 v-show="flagee">123456</h2>
   </transition>
-  <button @click="()=> flagee= ! flagee">flagee</button>
-  <button @click="()=>{
-    selectValue='jz'
-  }"> change</button>
+  <button @click="() => (flagee = !flagee)">flagee</button>
+  <button
+    @click="
+      () => {
+        selectValue = 'jz'
+      }
+    "
+  >
+    change
+  </button>
   <TySelect v-model="selectValue" style="margin-bottom: 20px">
-      <TyOption
-        v-for="(item, index) in [{label:'香蕉',value:'xj'},{label:'橘子',value:'jz'}]"
-        :key="index"
-        :label="item.label"
-        :value="item.value"
-      >
-      </TyOption>
-    </TySelect>
+    <TyOption
+      v-for="(item, index) in [
+        { label: '香蕉', value: 'xj' },
+        { label: '橘子', value: 'jz' }
+      ]"
+      :key="index"
+      :label="item.label"
+      :value="item.value"
+    >
+    </TyOption>
+  </TySelect>
   <TyMenu>
     <template #header>
       <div
@@ -388,7 +421,10 @@
     <br />
     <TySelect v-model="ee" style="margin-bottom: 20px">
       <TyOption
-        v-for="(item, index) in [{label:'香蕉',value:'xj'},{label:'橘子',value:'jz'}]"
+        v-for="(item, index) in [
+          { label: '香蕉', value: 'xj' },
+          { label: '橘子', value: 'jz' }
+        ]"
         :key="index"
         :label="item.label"
         :value="item.value"
@@ -506,25 +542,25 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { TyCalendar, TyInput } from './package'
-import {TyMessage,TyAlert,TyNotification} from './package/index'
-const notify =()=>{
+import { TyMessage, TyAlert, TyNotification } from './package/index'
+const modelV1 =ref(['aa'])
+const notify = () => {
   TyNotification()
 }
-const alert1 =()=>{
+const alert1 = () => {
   TyAlert('11')
 }
-let time =2000
-const ffnn=()=>{
-
-  TyMessage('你好?',{
-    time:3500,
-    type:'error'
+let time = 2000
+const ffnn = () => {
+  TyMessage('你好?', {
+    time: 3500,
+    type: 'error'
   })
 }
-const ffnn1=()=>{
+const ffnn1 = () => {
   TyMessage.success('你好')
 }
-let selectValue= ref('')
+let selectValue = ref('')
 function aainput(value) {
   console.log(value, 123456)
 }
@@ -673,20 +709,18 @@ function fnnn() {
 function reset() {
   form1.value.clearValidateAll()
 }
-let flagee=ref(false)
+let flagee = ref(false)
 onMounted(() => {})
 </script>
 <style>
-
 .ty-message-fade-enter-active,
 .ty-message-fade-leave-active {
-  transition: all 0.5s ;
+  transition: all 0.5s;
 }
 
 .ty-message-fade-leave-to {
   opacity: 0;
   transform: translate(0, -100%);
-
 }
 body {
   height: 100%;

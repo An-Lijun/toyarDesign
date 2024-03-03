@@ -1,5 +1,6 @@
 import startMenu from './page/component/start'
 import baseMenu from './page/component/base'
+import containerMenu from './page/component/container'
 import feedBackMenu from './page/component/feedback'
 import layoutMenu from './page/component/layout'
 import showMenu from './page/component/show'
@@ -24,6 +25,7 @@ export default {
     startMenu,
     baseMenu,
     layoutMenu,
+    containerMenu,
     formMenu,
     showMenu,
     feedBackMenu

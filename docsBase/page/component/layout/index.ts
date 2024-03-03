@@ -15,9 +15,6 @@ export default    {
       text: "栅格列/Col",
       link: `${root}col`,
     },
-    {
-      text: "Card",
-      link: `${root}card`,
-    },
+
   ],
 }

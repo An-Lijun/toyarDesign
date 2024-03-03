@@ -97,9 +97,7 @@ const openChildMenu = () => {
     }
     &.opend{
 
-    // // padding-left: 10px;
-    // transition: all 2s;
-    grid-template-rows: 1fr;
+       grid-template-rows: 1fr;
     }
   }
 }
