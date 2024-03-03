@@ -23,7 +23,7 @@ const props = defineProps({
   },
   justify: {
     type: String,
-    default: 'start'
+    default: 'top'
   },
   align: {
     type: String,
@@ -63,30 +63,38 @@ const compAlign = computed(() => {
 .ty-row {
   &.justify-center {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
   }
   &.justify-end {
     display: flex;
-    justify-content: justify-end;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
   &.justify-around {
     display: flex;
+    flex-wrap: wrap;
+
     justify-content: space-around;
   }
   &.justify-between {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
   &.align-end {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
   }
   &.align-center {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
   }
   &.align-top {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
   }
 }

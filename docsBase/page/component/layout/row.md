@@ -240,7 +240,7 @@
 | ------- | ---------------- | ------ | ------------------------------- | ----- |
 | gutter  | 栅格列之间的间距 | Number | --                              | 0     |
 | justify | col 的左右对齐方式   | String | center/start/end/around/between | start |
-| align | col 的上下对齐方式   | String | center/top/bottom | center |
+| align | col 的上下对齐方式   | String | center/top/bottom | top |
 
 
 </div>
