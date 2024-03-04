@@ -69,9 +69,9 @@
 
 <script setup>
   import {ref} from 'vue'
-  const modelV1 =ref(['aa'])
-  const modelV2 =ref(['aa'])
-  const modelV3 =ref(['aa'])
+  const modelV1 =ref([])
+  const modelV2 =ref([])
+  const modelV3 =ref([])
   const modelV4 =ref([])
   const modelV5 =ref([])
 
