@@ -32,6 +32,8 @@ import TyImage from './components/image'
 import TyNotification from './components/notification'
 import TyWaterMark from './components/waterMark'
 import {TyCollapse,TyCollapseItem} from './components/collapse'
+import {TyTabs,TyTabItem} from './components/tabs'
+
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -62,7 +64,8 @@ const install = app => {
     app.use(TyResult),
     app.use(TyImage),
     app.use(TyWaterMark),
-    app.use(TyCollapse)
+    app.use(TyCollapse),
+    app.use(TyTabs)
 }
 
 export default {
@@ -104,5 +107,6 @@ export {
   TyResult,
   TyImage,
   TyWaterMark,
-  TyCollapse,TyCollapseItem
+  TyCollapse,TyCollapseItem,
+  TyTabs,TyTabItem
 } //按需引入

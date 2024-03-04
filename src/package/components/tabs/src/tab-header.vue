@@ -1,11 +1,6 @@
 <template>
-  <div class="ty-tab">
-    <header>
-
-    </header>
-    <main>
-      
-    </main>
+  <div class="divRoot">
+    <h2>测试标题</h2>
   </div>
 </template>
 <script setup>

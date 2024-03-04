@@ -3,6 +3,26 @@
     <button @click="change">切换</button>
     <button @click="change2">状态切换</button>
   </header>
+  <!-- <TyTabItem title="b" name="b"></TyTabItem> -->
+
+  <TyTabs v-model="tya" trigger="hover">
+    <TyTabItem title="a" name="a"></TyTabItem>
+    <TyTabItem title="b" name="b"></TyTabItem>
+    <TyTabItem title="c" name="c"></TyTabItem>
+    <TyTabItem title="d" name="d"></TyTabItem>
+  </TyTabs>
+  <TyTabs v-model="tya" type="card" position="left">
+    <TyTabItem title="a" name="a"></TyTabItem>
+    <TyTabItem title="b" name="b"></TyTabItem>
+    <TyTabItem title="c" name="c"></TyTabItem>
+    <TyTabItem title="d" name="d"></TyTabItem>
+  </TyTabs>
+  <TyTabs v-model="tya" position="right">
+    <TyTabItem title="a" name="a"></TyTabItem>
+    <TyTabItem title="b" name="b"></TyTabItem>
+    <TyTabItem title="c" name="c"></TyTabItem>
+    <TyTabItem title="d" name="d"></TyTabItem>
+  </TyTabs>
   {{ adc }}
   {{ selectValue }}
   <TyCollapse v-model="modelV1">
@@ -543,7 +563,8 @@
 import { ref, onMounted } from 'vue'
 import { TyCalendar, TyInput } from './package'
 import { TyMessage, TyAlert, TyNotification } from './package/index'
-const modelV1 =ref(['aa'])
+const modelV1 =ref([])
+const tya =ref('b')
 const notify = () => {
   TyNotification()
 }

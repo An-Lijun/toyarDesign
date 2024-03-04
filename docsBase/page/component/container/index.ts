@@ -11,5 +11,9 @@ export default    {
       text: "collapse",
       link: `${root}collapse`,
     },
+    {
+      text: "tabs",
+      link: `${root}tabs`,
+    },
   ],
 }
