@@ -4,6 +4,74 @@
     <button @click="change2">状态切换</button>
   </header>
   <!-- <TyTabItem title="b" name="b"></TyTabItem> -->
+  <div style="margin-top:20px">
+    <TyBadge text="HOT" max="15" type="dot" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge text="HOT" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge text="50" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge text="66" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  <TyBadge text="666" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  </div>
+  <div style="margin-top:20px">
+    <TyBadge status="success" text="HOT" max="15" type="dot" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="success" text="HOT" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="success" text="50" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="success" text="66" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  <TyBadge status="success" text="666" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  </div>
+  <div style="margin-top:20px">
+    <TyBadge status="warning" text="HOT" max="15" type="dot" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="warning" text="HOT" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="warning" text="50" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="warning" text="66" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  <TyBadge status="warning" text="666" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  </div>
+  <div style="margin-top:20px">
+    <TyBadge status="primary" text="HOT" max="15" type="dot" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="primary" text="HOT" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="primary" text="50" max="15" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+   <TyBadge status="primary" text="66" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  <TyBadge status="primary" text="666" style="margin-right:30px">
+    <TyButton>提交</TyButton>
+  </TyBadge>
+  </div>
 
   <TyTabs v-model="tya" trigger="hover">
     <TyTabItem title="a" name="a"></TyTabItem>
@@ -561,7 +629,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { TyCalendar, TyInput } from './package'
+import { TyBadge, TyCalendar, TyInput } from './package'
 import { TyMessage, TyAlert, TyNotification } from './package/index'
 const modelV1 =ref([])
 const tya =ref('b')

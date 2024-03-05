@@ -1,21 +1,26 @@
 <template>
-  <div :class="{
-    'ty-collapse-item':true,
-    'ty-collapse-item-disabled':disabled,
-    'ty-collapse-item-position':position==='left'
-
-  }">
+  <div
+    :class="{
+      'ty-collapse-item': true,
+      'ty-collapse-item-disabled': disabled,
+      'ty-collapse-item-position': position === 'left'
+    }"
+  >
     <header @dblclick="changeFlg()">
       <span>{{ title }}</span>
-      <div v-if="!hide" class="ty-collapse-button"  @click="changeFlg()" :class="{ rotate: isOpen }">
-        <TyIcon 
-          :color="disabled?'var(--text-4)':''"
-          icon="ty-arrow-right-s-line" ></TyIcon>
+      <div
+        v-if="!hide"
+        class="ty-collapse-button"
+        @click="changeFlg()"
+        :class="{ rotate: isOpen }"
+      >
+        <TyIcon
+          :color="disabled ? 'var(--text-4)' : ''"
+          icon="ty-arrow-right-s-line"
+        ></TyIcon>
       </div>
     </header>
-    <div :class="['content', { opend: isOpen }]"
-      v-if="destroy && isOpen"
-    >
+    <div :class="['content', { opend: isOpen }]" v-if="isDestroy">
       <div>
         <slot></slot>
       </div>
@@ -32,15 +37,16 @@ const props = defineProps({
   name: {
     type: String,
     required: true
-  },
+  }
 })
-const { model, itemChange,disabled,accordion,hide,position,destroy } = inject('collapseValue',null)
+const { model, itemChange, disabled, accordion, hide, position, destroy } =
+  inject('collapseValue', null)
 const changeFlg = () => {
-  if(disabled){
+  if (disabled) {
     return
   }
-  if(accordion){
-    if(model.value.includes(props.name)){
+  if (accordion) {
+    if (model.value.includes(props.name)) {
       return itemChange([])
     }
     return itemChange([props.name])
@@ -51,10 +57,20 @@ const changeFlg = () => {
   itemChange(arr)
 }
 const isOpen = computed(() => {
-  if(disabled){
+  if (disabled) {
     return
   }
   return model.value.includes(props.name)
+})
+const isDestroy = computed(() => {
+  if (destroy) {
+    if (disabled) {
+      return
+    }
+    return model.value.includes(props.name)
+  } else {
+    return true
+  }
 })
 </script>
 <style lang="scss" scoped>
@@ -70,7 +86,7 @@ const isOpen = computed(() => {
     padding: 5px 10px;
     border-bottom: 1px solid var(--border-color-2);
     box-sizing: border-box;
-    span{
+    span {
       flex: 1;
     }
     .ty-collapse-button {
@@ -94,19 +110,19 @@ const isOpen = computed(() => {
     }
   }
 }
-.ty-collapse-item-disabled{
-  header{
+.ty-collapse-item-disabled {
+  header {
     color: var(--text-4);
-    &:hover{
+    &:hover {
       cursor: not-allowed;
     }
   }
 }
-.ty-collapse-item-position{
-  header{
+.ty-collapse-item-position {
+  header {
     flex-direction: row-reverse;
     text-align: left;
-    span{
+    span {
       margin-left: 10px;
     }
   }

@@ -10,6 +10,10 @@ export default {
     {
       text: "table",
       link: `${root}table`,
+    },
+    {
+      text: "badge",
+      link: `${root}badge`,
     }
   ],
 }
