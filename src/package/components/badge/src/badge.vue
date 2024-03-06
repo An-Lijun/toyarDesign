@@ -44,7 +44,7 @@ const text = computed(()=>{
 <style lang="scss" scoped>
 .ty-badge{
   position: relative;
-  display: inline;
+  display: inline-block;
   .ty-badge-text{
     position: absolute;
     top: 2px;

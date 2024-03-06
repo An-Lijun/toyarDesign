@@ -34,6 +34,7 @@ import TyWaterMark from './components/waterMark'
 import {TyCollapse,TyCollapseItem} from './components/collapse'
 import {TyTabs,TyTabItem} from './components/tabs'
 import TyBadge from './components/badge'
+import TyPageHeader from './components/page-header'
 
 
 import './icon/toyaricon.css'
@@ -67,7 +68,8 @@ const install = app => {
     app.use(TyWaterMark),
     app.use(TyCollapse),
     app.use(TyTabs),
-    app.use(TyBadge)
+    app.use(TyBadge),
+    app.use(TyPageHeader)
 }
 
 export default {
@@ -111,5 +113,6 @@ export {
   TyWaterMark,
   TyCollapse,TyCollapseItem,
   TyTabs,TyTabItem,
-  TyBadge
+  TyBadge,
+  TyPageHeader
 } //按需引入
