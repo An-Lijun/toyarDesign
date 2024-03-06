@@ -3,6 +3,19 @@
     <button @click="change">切换</button>
     <button @click="change2">状态切换</button>
   </header>
+  <br>
+  {{ isSwitch }}
+  <TySwitch v-model="isSwitch" size="mini"/>
+  <hr>
+  {{ isSwitch1 }}
+  <TySwitch v-model="isSwitch1" openValue="1" closeValue="2" size="small"/>
+  <hr>
+
+  <TySwitch v-model="isSwitch" type="tube" size="medium"/>
+  <hr>
+
+  <TySwitch  v-model="isSwitch1" openValue="1" closeValue="2" type="inline" size="large"/>
+
   <!-- <TyTabItem title="b" name="b"></TyTabItem> -->
   <div style="margin-top:20px">
     <TyBadge text="HOT" max="15" type="dot" style="margin-right:30px">
@@ -633,6 +646,8 @@ import { ref, onMounted } from 'vue'
 import { TyBadge, TyCalendar, TyInput } from './package'
 import { TyMessage, TyAlert, TyNotification } from './package/index'
 const modelV1 =ref([])
+const isSwitch1 =ref('1')
+const isSwitch =ref(false)
 const tya =ref('b')
 const notify = () => {
   TyNotification()

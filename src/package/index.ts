@@ -35,6 +35,8 @@ import {TyCollapse,TyCollapseItem} from './components/collapse'
 import {TyTabs,TyTabItem} from './components/tabs'
 import TyBadge from './components/badge'
 import TyPageHeader from './components/page-header'
+import TySwitch from './components/switch'
+
 
 
 import './icon/toyaricon.css'
@@ -69,7 +71,8 @@ const install = app => {
     app.use(TyCollapse),
     app.use(TyTabs),
     app.use(TyBadge),
-    app.use(TyPageHeader)
+    app.use(TyPageHeader),
+    app.use(TySwitch)
 }
 
 export default {
@@ -114,5 +117,6 @@ export {
   TyCollapse,TyCollapseItem,
   TyTabs,TyTabItem,
   TyBadge,
-  TyPageHeader
+  TyPageHeader,
+  TySwitch
 } //按需引入
