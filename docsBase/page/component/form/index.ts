@@ -30,6 +30,10 @@ export default     {
     {
       text: "checkBox",
       link: `${root}checkBox`,
+    },
+    {
+      text: "switch",
+      link: `${root}switch`,
     }
   ]
 }

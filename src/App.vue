@@ -7,7 +7,7 @@
 
   </header>
   <div  v-Loading="refLoading" style="width:500px;height:500px; border: 1px solid red">
-
+    <TyEmpty></TyEmpty>
   </div>
   <br>
   <TyPagination total="6"/>

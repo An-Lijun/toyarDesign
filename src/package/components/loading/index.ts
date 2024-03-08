@@ -5,7 +5,9 @@ const doc = document || {}
 
 
 const createLoading = (div) => {
-  const instance = createVNode(TyLoading)
+  const instance = createVNode(TyLoading,{
+    isFixed:true
+  })
   function close() {
     doc?.body.removeChild(div)
   }

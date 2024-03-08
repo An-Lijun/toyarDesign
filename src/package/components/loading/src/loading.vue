@@ -1,5 +1,9 @@
 <template>
-  <div class="ty-loading">
+  <div class="ty-loading"
+    :style="{
+      position: props.isFixed?'fixed':'absolute'
+    }"
+  >
     <div class="loading" style="position:absolute;left: 50%; top: 50%; transform: translate(-50%,-50%);"> 
       <TyIcon class="load" color="var(--primary-6)" icon="ty-loader-2-line" ></TyIcon>
     </div>
@@ -7,7 +11,12 @@
 </template>
 <script setup>
 import TyIcon from '../../icon';
-
+const props = defineProps({
+  isFixed: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 <style lang="scss" scoped>
 @keyframes load{
@@ -19,7 +28,6 @@ import TyIcon from '../../icon';
   }
 }
 .ty-loading{
-  position: absolute;
   z-index: 99;
   left: 0;
   right: 0;

@@ -88,6 +88,7 @@ const change = () => {
   font-size: var(--font-body-3);
   user-select: none;
   justify-content: end;
+  box-sizing: content-box;
 
   &:hover {
     cursor: pointer;

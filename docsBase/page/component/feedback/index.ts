@@ -15,5 +15,9 @@ export default    {
       text: "Notification",
       link: `${root}notification`,
     },
+    {
+      text: "loading",
+      link: `${root}loading`,
+    },
   ]
 }

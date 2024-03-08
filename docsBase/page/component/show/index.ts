@@ -4,6 +4,10 @@ export default {
   text: "展示组件",
   items: [
     {
+      text: "pageHeader",
+      link: `${root}pageHeader`,
+    },
+    {
       text: "image",
       link: `${root}image`,
     },
@@ -14,6 +18,10 @@ export default {
     {
       text: "badge",
       link: `${root}badge`,
+    },
+    {
+      text: "empty",
+      link: `${root}empty`,
     }
   ],
 }

@@ -39,6 +39,8 @@ import TySwitch from './components/switch'
 import TyPagination from './components/pagination'
 import {LoadingJs as TyLoading} from './components/loading'
 import TyLoadingDirc from './components/loading'
+import TyEmpty from './components/empty'
+
 
 
 import './icon/toyaricon.css'
@@ -76,7 +78,8 @@ const install = app => {
     app.use(TyPageHeader),
     app.use(TySwitch),
     app.use(TyPagination),
-    app.use(TyLoadingDirc)
+    app.use(TyLoadingDirc),
+    app.use(TyEmpty)
 }
 
 export default {
@@ -124,5 +127,6 @@ export {
   TyPageHeader,
   TySwitch,
   TyPagination,
-  TyLoading
+  TyLoading,
+  TyEmpty
 } //按需引入

@@ -9,6 +9,7 @@
         </slot>
       </div>
       <TyDivider
+      v-if="props.showBack"
         style="--toyar-gray-2: var(--toyar-gray-10)"
         direction="column"
       ></TyDivider>
