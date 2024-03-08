@@ -36,7 +36,9 @@ import {TyTabs,TyTabItem} from './components/tabs'
 import TyBadge from './components/badge'
 import TyPageHeader from './components/page-header'
 import TySwitch from './components/switch'
-
+import TyPagination from './components/pagination'
+import {LoadingJs as TyLoading} from './components/loading'
+import TyLoadingDirc from './components/loading'
 
 
 import './icon/toyaricon.css'
@@ -72,7 +74,9 @@ const install = app => {
     app.use(TyTabs),
     app.use(TyBadge),
     app.use(TyPageHeader),
-    app.use(TySwitch)
+    app.use(TySwitch),
+    app.use(TyPagination),
+    app.use(TyLoadingDirc)
 }
 
 export default {
@@ -118,5 +122,7 @@ export {
   TyTabs,TyTabItem,
   TyBadge,
   TyPageHeader,
-  TySwitch
+  TySwitch,
+  TyPagination,
+  TyLoading
 } //按需引入

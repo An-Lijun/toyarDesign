@@ -2,16 +2,22 @@
   <header>
     <button @click="change">切换</button>
     <button @click="change2">状态切换</button>
+    <button @click="btn1Click">loading1</button>
+    <button @click="btn1Click1">loading2</button>
+
   </header>
+  <div  v-Loading="refLoading" style="width:500px;height:500px; border: 1px solid red">
+
+  </div>
   <br>
+  <TyPagination total="6"/>
   {{ isSwitch }}
   <TySwitch v-model="isSwitch" size="mini"/>
   <hr>
   {{ isSwitch1 }}
   <TySwitch v-model="isSwitch1" openValue="1" closeValue="2" size="small"/>
-  <hr>
 
-  <TySwitch v-model="isSwitch" type="tube" size="medium"/>
+  <TySwitch v-model="isSwitch" type="tube" size="medium"/>TyLoading
   <hr>
 
   <TySwitch  v-model="isSwitch1" openValue="1" closeValue="2" type="inline" size="large"/>
@@ -643,8 +649,18 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { TyBadge, TyCalendar, TyInput } from './package'
-import { TyMessage, TyAlert, TyNotification } from './package/index'
+import { TyMessage, TyAlert, TyNotification,TyLoading } from './package/index'
+const btn1Click =()=>{
+  const close= TyLoading()
+  console.log(close);
+  setTimeout(()=>{
+    close()
+  },2000)
+}
+let refLoading =ref(false)
+const btn1Click1 =()=>{
+  refLoading.value =! refLoading.value
+}
 const modelV1 =ref([])
 const isSwitch1 =ref('1')
 const isSwitch =ref(false)

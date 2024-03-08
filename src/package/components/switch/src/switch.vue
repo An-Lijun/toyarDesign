@@ -78,7 +78,7 @@ const change = () => {
   background-color: var(--fill-4);
   width: 30px;
   height: 20px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   border-radius: 30px;
   padding: 1px 5px;
