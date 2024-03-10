@@ -6,6 +6,23 @@
     <button @click="btn1Click1">loading2</button>
 
   </header>
+  {{ isProgress }}
+  <TySlider style="width:300px;margin-left: 50px;"  v-model="isProgress"/>
+  <TyProgress v-model="isProgress" type="circle"/>
+
+  <button @click="addProgress">addProgress</button>
+  <div style="width:500px">
+    <TyProgress v-model="isProgress"/>
+  <hr>
+  <TyProgress strokeWidth="10" v-model="isProgress" size="small"/>
+  <hr>
+
+  <TyProgress strokeWidth="20" v-model="isProgress" size="medium"/>
+  <hr>
+
+  <TyProgress strokeWidth="30" v-model="isProgress" size="large"/>
+  </div>
+
   <div  v-Loading="refLoading" style="width:500px;height:500px; border: 1px solid red">
     <TyEmpty></TyEmpty>
   </div>
@@ -649,7 +666,13 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+
 import { TyMessage, TyAlert, TyNotification,TyLoading } from './package/index'
+let isProgress =ref(5)
+
+const addProgress=()=>{
+  isProgress.value = isProgress.value +5
+}
 const btn1Click =()=>{
   const close= TyLoading()
   console.log(close);

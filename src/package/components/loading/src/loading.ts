@@ -26,7 +26,9 @@ export default {
       const {close} = createLoading(el)
       el.close = close
     }else{
-      el.close()
+      if(el.close){
+        el.close()
+      }
     }
   },
 }
