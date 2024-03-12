@@ -156,4 +156,8 @@ html[toyar-theme='dark'] {
   --opcity-color-3:rgba(255, 255, 255, 0.3);
   --opcity-color-4:rgba(255, 255, 255, 0.4);
   --opcity-color-5:rgba(255, 255, 255, 0.5);
+
+
+  --fill-white:#f6f6f6;
+  --text-white:#4E5969;
 }

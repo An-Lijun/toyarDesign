@@ -170,5 +170,8 @@
   --opcity-color-3:rgba(0, 0, 0, 0.3);
   --opcity-color-4:rgba(0, 0, 0, 0.4);
   --opcity-color-5:rgba(0, 0, 0, 0.5);
+  
 
-  }
+  --fill-white:#fff;
+  --text-white:#fff;
+}

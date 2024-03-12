@@ -45,6 +45,7 @@ import TySlider from './components/slider'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
+import './assets/i.scss'
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 const install = app => {
