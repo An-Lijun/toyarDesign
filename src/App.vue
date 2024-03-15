@@ -6,7 +6,43 @@
     <button @click="btn1Click1">loading2</button>
 
   </header>
+
+  <div style="height:150px;width: 300px;">
+    <TyCarousel>
+    <TyCarouselItem>
+        <div  class="a"></div>
+    </TyCarouselItem>
+    <TyCarouselItem>
+      <div class="a1"></div>
+
+    </TyCarouselItem>
+    <TyCarouselItem>
+      <div class="a2"></div>
+
+    </TyCarouselItem>
+  </TyCarousel>
+  </div>
+  <div style="height:500px">
+    <TySkeleton/>
+  </div>
+
   {{ isProgress }}
+  <hr>
+  <div style="text-align: center;">
+    <TyTooltip  trigger='click' content="6666611116">
+      6666611116
+  </TyTooltip>
+  </div>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+
+  <div style="text-align: center;">
+    <TyTooltip  content="哈哈哈哈哈哈哈哈">
+      哈哈哈哈哈哈哈哈
+  </TyTooltip>
+  </div>
   <TySlider style="width:300px;margin-left: 50px;"  v-model="isProgress"/>
   <TyProgress v-model="isProgress" type="circle"/>
 
@@ -857,6 +893,24 @@ let flagee = ref(false)
 onMounted(() => {})
 </script>
 <style>
+.a{
+  background-image: url('./assets/banner_01.jpeg');
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+}
+.a1{
+  background-image: url('./assets/banner_02.jpeg');
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+}
+.a2{
+  background-image: url('./assets/banner_03.jpeg');
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+}
 .ty-message-fade-enter-active,
 .ty-message-fade-leave-active {
   transition: all 0.5s;

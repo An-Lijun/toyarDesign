@@ -52,6 +52,8 @@ let x = 0;
 let maxWidth =0
 
 const move=(e)=>{
+  e.preventDefault();
+  
     let moveX = e.pageX - x;
     moveX= moveX>=maxWidth?maxWidth:moveX
     moveX= moveX<=0?0 : moveX 

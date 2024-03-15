@@ -42,6 +42,9 @@ import TyLoadingDirc from './components/loading'
 import TyEmpty from './components/empty'
 import TyProgress from './components/progress'
 import TySlider from './components/slider'
+import TySkeleton from './components/skeleton'
+import TyCarousel from './components/carousel'
+import TyTooltip from './components/tooltip'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -82,7 +85,10 @@ const install = app => {
     app.use(TyLoadingDirc),
     app.use(TyEmpty),
     app.use(TyProgress),
-    app.use(TySlider)
+    app.use(TySlider),
+    app.use(TySkeleton),
+    app.use(TyCarousel),
+    app.use(TyTooltip)
 }
 
 export default {
@@ -133,5 +139,8 @@ export {
   TyLoading,
   TyEmpty,
   TyProgress,
-  TySlider
+  TySlider,
+  TySkeleton,
+  TyCarousel,
+  TyTooltip
 } //按需引入
