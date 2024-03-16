@@ -6,7 +6,11 @@
     <button @click="btn1Click1">loading2</button>
 
   </header>
+<TyList header="header" size="large">
+  <TyListItem>1</TyListItem>
 
+  <TyListItem>2</TyListItem>
+</TyList>
   <div style="height:150px;width: 300px;">
     <TyCarousel>
     <TyCarouselItem>
