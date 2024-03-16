@@ -6,33 +6,15 @@
     <button @click="btn1Click1">loading2</button>
 
   </header>
+  <button @click="()=>reate1=2">2</button>
+  {{ reate1 }}
+  <TyRate v-model="reate1"></TyRate>
 <TyList header="header" size="large">
   <TyListItem>1</TyListItem>
 
   <TyListItem>2</TyListItem>
 </TyList>
-  <div style="height:150px;width: 300px;">
-    <TyCarousel>
-    <TyCarouselItem>
-        <div  class="a"></div>
-    </TyCarouselItem>
-    <TyCarouselItem>
-      <div class="a1"></div>
-
-    </TyCarouselItem>
-    <TyCarouselItem>
-      <div class="a2"></div>
-
-    </TyCarouselItem>
-  </TyCarousel>
-  </div>
-  <div style="height:500px">
-    <TySkeleton/>
-  </div>
-
-  {{ isProgress }}
-  <hr>
-  <div style="text-align: center;">
+<div style="text-align: center;">
     <TyTooltip  trigger='click' content="6666611116">
       6666611116
   </TyTooltip>
@@ -54,6 +36,28 @@
       6666611116
   </TyPopconfirm>
   </div>
+  <div style="height:150px;width: 300px;">
+    <TyCarousel>
+    <TyCarouselItem>
+        <div  class="a"></div>
+    </TyCarouselItem>
+    <TyCarouselItem>
+      <div class="a1"></div>
+
+    </TyCarouselItem>
+    <TyCarouselItem>
+      <div class="a2"></div>
+
+    </TyCarouselItem>
+  </TyCarousel>
+  </div>
+  <div style="height:500px">
+    <TySkeleton/>
+  </div>
+
+  {{ isProgress }}
+  <hr>
+
   <TySlider style="width:300px;margin-left: 50px;"  v-model="isProgress"/>
   <TyProgress v-model="isProgress" type="circle"/>
 
@@ -717,6 +721,7 @@ import { ref, onMounted } from 'vue'
 import { TyMessage, TyAlert, TyNotification,TyLoading } from './package/index'
 let isProgress =ref(5)
 
+const reate1 =ref(5)
 const addProgress=()=>{
   isProgress.value = isProgress.value +5
 }
