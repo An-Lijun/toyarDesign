@@ -43,6 +43,13 @@
       哈哈哈哈哈哈哈哈
   </TyTooltip>
   </div>
+  <hr>
+
+  <div style="text-align: center;">
+    <TyPopconfirm content="6666611116">
+      6666611116
+  </TyPopconfirm>
+  </div>
   <TySlider style="width:300px;margin-left: 50px;"  v-model="isProgress"/>
   <TyProgress v-model="isProgress" type="circle"/>
 

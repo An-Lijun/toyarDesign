@@ -45,6 +45,7 @@ import TySlider from './components/slider'
 import TySkeleton from './components/skeleton'
 import TyCarousel from './components/carousel'
 import TyTooltip from './components/tooltip'
+import TyPopconfirm from './components/popconfirm'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -88,7 +89,8 @@ const install = app => {
     app.use(TySlider),
     app.use(TySkeleton),
     app.use(TyCarousel),
-    app.use(TyTooltip)
+    app.use(TyTooltip),
+    app.use(TyPopconfirm)
 }
 
 export default {
@@ -142,5 +144,6 @@ export {
   TySlider,
   TySkeleton,
   TyCarousel,
-  TyTooltip
+  TyTooltip,
+  TyPopconfirm
 } //按需引入
