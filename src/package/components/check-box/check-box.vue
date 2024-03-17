@@ -1,6 +1,13 @@
 <template>
-  <label class="ty-check-box">
-    <input type="checkbox"  
+  <label class="ty-check-box"
+    :class="{
+      'ty-check-box-harf':props.canHarf,
+      'ty-check-box-disabled':props.disabled
+    }"
+  >
+    <input type="checkbox"
+      @click="handleChange"
+      :disabled="props.disabled"
       v-model="model"
       :value="value"
       :class="[
@@ -12,8 +19,7 @@
 
 </template>
 <script setup>
-import {useCompMvalue} from '../..//hooks/useCompMvalue'
-const emit = defineEmits(['update:modelValue'])
+import {useCompMvalue} from '../../hooks/useCompMvalue'
 const props = defineProps({
   size: {
     type: String,
@@ -30,9 +36,26 @@ const props = defineProps({
   value:{
     type:String,
     required:true
+  },
+  canHarf:{
+    type:Boolean,
+    default:false
+  },
+  disabled:{
+    type:Boolean,
+    default:true
   }
 })
-const {model} =useCompMvalue(props,emit)
+const emit = defineEmits(['update:modelValue','change'])
+const handleChange=(val)=>{
+  setTimeout(()=>{
+    emit('change',val)
+  })
+  return val
+}
+const {model} =useCompMvalue(props,emit,{
+  setFn:handleChange
+})
 
 </script>
 <style lang="scss" scoped>
@@ -40,6 +63,7 @@ const {model} =useCompMvalue(props,emit)
   display:inline-flex;
   align-items:center;
   user-select:none;
+  color: var(--text-1);
   input{
     appearance:none;
     border-radius: var(--border-radius-4);
@@ -87,5 +111,26 @@ const {model} =useCompMvalue(props,emit)
     justify-content: center;
   }
 }
-
+.ty-check-box-harf{
+  input[type=checkbox]:checked::after {
+    box-sizing: border-box;
+    content: '一';
+    color: white;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.ty-check-box-disabled{
+  color: var(--text-4);
+  input{
+    background-color: var(--fill-3);
+  }
+  input[type="checkbox"]:checked{
+    background-color:var(--primary-3);
+  }
+}
 </style>

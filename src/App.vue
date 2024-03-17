@@ -6,6 +6,8 @@
     <button @click="btn1Click1">loading2</button>
 
   </header>
+  <TyTransfer :data="transferData" v-model="arr100"/>
+  <hr/>
   <button @click="()=>reate1=2">2</button>
   {{ reate1 }}
   <TyRate v-model="reate1"></TyRate>
@@ -720,7 +722,16 @@ import { ref, onMounted } from 'vue'
 
 import { TyMessage, TyAlert, TyNotification,TyLoading } from './package/index'
 let isProgress =ref(5)
-
+const transferData =ref([{
+  label:'haha',
+  value:1
+},
+  {
+  label:'haha1',
+  value:2
+}
+])
+const arr100= ref([])
 const reate1 =ref(5)
 const addProgress=()=>{
   isProgress.value = isProgress.value +5

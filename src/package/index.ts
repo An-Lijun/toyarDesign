@@ -48,6 +48,8 @@ import TyTooltip from './components/tooltip'
 import TyPopconfirm from './components/popconfirm'
 import { TyList,TyListItem } from './components/list'
 import TyRate from './components/rate'
+import TyTransfer from './components/transfer'
+
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -94,7 +96,8 @@ const install = app => {
     app.use(TyTooltip),
     app.use(TyPopconfirm),
     app.use(TyList),
-    app.use(TyRate)
+    app.use(TyRate),
+    app.use(TyTransfer)
 }
 
 export default {
@@ -151,5 +154,6 @@ export {
   TyTooltip,
   TyPopconfirm,
   TyList,TyListItem ,
-  TyRate
+  TyRate,
+  TyTransfer
 } //按需引入
