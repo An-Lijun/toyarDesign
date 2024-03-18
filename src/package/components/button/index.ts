@@ -1,5 +1,6 @@
-import TyButton from './button.vue'
-TyButton.install = app=>{
-    app.component('TyButton',TyButton)
-}
-export default TyButton 
+import {installComp} from '../../utils/install'
+import TyButton from './src/button.vue'
+
+export type { TyButtonInstance } from './src/type.ts'
+
+export default installComp(TyButton) 
