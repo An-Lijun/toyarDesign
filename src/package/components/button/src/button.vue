@@ -24,11 +24,13 @@
 import { computed } from 'vue'
 import { buttonProps, inputInject } from './context.ts'
 import useNmSpace from '../../../hooks/useBem'
+
 defineOptions({
   name: 'TyButton'
 })
 const props = defineProps(buttonProps)
 const nm = useNmSpace('button')
+
 const mergeDisabled = computed(() => {
   return inputInject?.disabled || props?.disabled
 })

@@ -1,6 +1,8 @@
 <template>
   <div>
     <router-link to="button">button</router-link>
+    <router-link to="backTop">backTop</router-link>
+
     <router-view></router-view>
     {{ ref1 }}
     <TySwitch v-model="ref1">1</TySwitch>

@@ -1,5 +1,4 @@
-import TyBackTop from './backTop.vue'
-TyBackTop.install = app=>{
-    app.component('TyBackTop',TyBackTop)
-}
-export default TyBackTop 
+import {installComp} from '../../utils'
+import TyBackTop from './src/backTop.vue'
+
+export default installComp(TyBackTop) 
