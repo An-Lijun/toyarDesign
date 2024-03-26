@@ -2,15 +2,13 @@
   <button
     :type="htmlType"
     :class="[
-      'ty-button',
-      `ty-button-${state}`,
-      `ty-button-${type}`,
-      `ty-button-${size}`,
-      `ty-button-${shape}`,
-      {
-        'is-disabled': mergeDisabled,
-        'is-block': block
-      }
+      nm.b(),
+      nm.m(state),
+      nm.m(type),
+      nm.m(size),
+      nm.m(shape),
+      nm.is('disabled',mergeDisabled),
+      nm.is('block',block),
     ]"
     :disabled="mergeDisabled"
     @click="handleClick"
@@ -25,11 +23,12 @@
 <script setup>
 import { computed } from 'vue'
 import { buttonProps, inputInject } from './context.ts'
+import useNmSpace from '../../../hooks/useBem'
 defineOptions({
   name: 'TyButton'
 })
 const props = defineProps(buttonProps)
-
+const nm = useNmSpace('button')
 const mergeDisabled = computed(() => {
   return inputInject?.disabled || props?.disabled
 })
@@ -55,7 +54,7 @@ const mergeDisabled = computed(() => {
   // ------------------------  按钮状态样式  ------------------------
   @mixin addBtnState($state) {
     //基础按钮
-    &-normal.ty-button-#{$state} {
+    &--normal.ty-button--#{$state} {
       color: var(--text-0);
       background-color: var(--#{$state}-6);
       border-color: var(--#{$state}-6);
@@ -71,7 +70,7 @@ const mergeDisabled = computed(() => {
       }
     }
     //基础按钮的禁用样式
-    &-normal.ty-button-#{$state}.is-disabled {
+    &--normal.ty-button--#{$state}.is-disabled {
       &,
       &:hover,
       &:focus,
@@ -83,7 +82,7 @@ const mergeDisabled = computed(() => {
       }
     }
     //次级按钮
-    &-secondary.ty-button-#{$state} {
+    &--secondary.ty-button--#{$state} {
       background-color: unset;
       color: var(--#{$state}-6);
       border-color: var(--#{$state}-6);
@@ -101,7 +100,7 @@ const mergeDisabled = computed(() => {
       }
     }
     // 虚线按钮
-    &-dashed.ty-button-#{$state} {
+    &--dashed.ty-button--#{$state} {
       border: var(--border-1) dashed;
       background-color: unset;
       color: var(--#{$state}-6);
@@ -116,7 +115,7 @@ const mergeDisabled = computed(() => {
       }
     }
     // 文字按钮
-    &-text.ty-button-#{$state} {
+    &--text.ty-button--#{$state} {
       color: var(--#{$state}-6);
       border: unset;
       background: unset;
@@ -130,9 +129,9 @@ const mergeDisabled = computed(() => {
       }
     }
     //次级按钮 虚线按钮 文字按钮 的禁用状态
-    &-secondary.ty-button-#{$state}.is-disabled,
-    &-dashed.ty-button-#{$state}.is-disabled,
-    &-text.ty-button-#{$state}.is-disabled {
+    &--secondary.ty-button--#{$state}.is-disabled,
+    &--dashed.ty-button--#{$state}.is-disabled,
+    &--text.ty-button--#{$state}.is-disabled {
       &,
       &:hover,
       &:focus,
@@ -143,7 +142,7 @@ const mergeDisabled = computed(() => {
       }
     }
     // 链接按钮
-    &-link.ty-button-#{$state} {
+    &--link.ty-button--#{$state} {
       color: var(--#{$state}-6);
       border: unset;
       background: unset;
@@ -166,7 +165,7 @@ const mergeDisabled = computed(() => {
       }
     }
     // 链接按钮 的禁用状态
-    &-link.ty-button-#{$state}.is-disabled {
+    &--link.ty-button--#{$state}.is-disabled {
       &,
       &:hover,
       &:focus,
@@ -187,10 +186,10 @@ const mergeDisabled = computed(() => {
   // ------------------------  按钮圆角样式  ------------------------
   $btnShape: (
     square: (
-      4
+      2
     ),
     round: (
-      16
+      8
     ),
     circle: (
       circle
@@ -198,7 +197,7 @@ const mergeDisabled = computed(() => {
   );
 
   @mixin addBtnShape($name, $value) {
-    &-#{$name} {
+    &--#{$name} {
       border-radius: var(--border-radius-#{$value});
     }
   }
@@ -223,12 +222,12 @@ const mergeDisabled = computed(() => {
     )
   );
   @mixin addBtnSize($name, $value) {
-    &-#{$name} {
+    &--#{$name} {
       height: var(--size-#{$name});
       line-height: var(--size-#{$name});
       padding: 0 var(--padding-#{$value});
     }
-    &-#{$name}.ty-button-circle {
+    &--#{$name}.ty-button-circle {
       height: var(--size-#{$name});
       width: var(--size-#{$name});
       padding: unset;
@@ -240,7 +239,7 @@ const mergeDisabled = computed(() => {
 
   // ------------------------  按钮block  ------------------------
 
-  &-is-block {
+  &.is-block {
     width: 100%;
   }
 }
