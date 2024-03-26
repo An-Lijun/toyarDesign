@@ -47,7 +47,7 @@
 :::demo
 
 ```html
-<TyBadge text="HOT" max="15" type="dot" style="margin-right:30px">
+<TyBadge text="HOT" max="15" :dot="true" style="margin-right:30px">
   <TyButton>提交</TyButton>
 </TyBadge>
 ```
@@ -60,7 +60,7 @@
 
 ```html
 <div style="margin-top:20px">
-  <TyBadge text="HOT" max="15" type="dot" style="margin-right:30px">
+  <TyBadge text="HOT" max="15" :dot="true" style="margin-right:30px">
     <TyButton>提交</TyButton>
   </TyBadge>
   <TyBadge text="HOT" max="15" style="margin-right:30px">
@@ -81,7 +81,7 @@
     status="success"
     text="HOT"
     max="15"
-    type="dot"
+    :dot="true"
     style="margin-right:30px"
   >
     <TyButton>提交</TyButton>
@@ -104,7 +104,7 @@
     status="warning"
     text="HOT"
     max="15"
-    type="dot"
+    :dot="true"
     style="margin-right:30px"
   >
     <TyButton>提交</TyButton>
@@ -127,7 +127,7 @@
     status="primary"
     text="HOT"
     max="15"
-    type="dot"
+    :dot="true"
     style="margin-right:30px"
   >
     <TyButton>提交</TyButton>
@@ -153,12 +153,12 @@
 
 <div class="listTb">
 
-| 属性   | 描述                   | 类型         | 默认                                   |          |
-| ------ | ---------------------- | ------------ | -------------------------------------- | -------- |
-| text   | 组件的内容             | string       | Number                                 | ''       |
-| max    | 如果是 number 的最大值 | string       | number                                 | '10099'  |
-| type   | 是否为点状             | 'text'/'dot' | 'text'                                 |          |
-| status | 状态                   | string       | 'primary','success','warning','danger' | 'danger' |
+| 属性   | 描述                   | 类型    | 默认                                   |          |
+| ------ | ---------------------- | ------- | -------------------------------------- | -------- |
+| text   | 组件的内容             | string  | Number                                 | ''       |
+| max    | 如果是 number 的最大值 | string  | number                                 | '10099'  |
+| dot    | 是否为点状             | boolean | false                                  |          |
+| status | 状态                   | string  | 'primary','success','warning','danger' | 'danger' |
 
 </div>
 

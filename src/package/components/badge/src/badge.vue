@@ -1,57 +1,45 @@
 <template>
-  <div class="ty-badge"
-
-    :class="[{dot: props.type === 'dot'},[`ty-badge-${props.status}`]]"
-  >
-      <slot></slot> 
-      <span class="ty-badge-text">
-        {{ text }}
-      </span>
+  <div :class="[nm.b(), nm.m(props.status), nm.is('dot', dot)]">
+    <slot></slot>
+    <span :class="nm.e('text')">
+      {{ text }}
+    </span>
   </div>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
+import useNmSpace from '../../../hooks/useBem'
+import { badgeProp } from './context'
 
-const props = defineProps({
-  text: {
-    type: String,
-    default: ""
-  },
-  max:{
-    type:String||Number,
-    default:99
-  },
-  type:{
-    type:String,
-    default:'text'
-    // text dot
-  },
-  status:{
-    type:String,
-    default:'danger'
-  }
+defineOptions({
+  name: 'TyBadge'
 })
-const text = computed(()=>{
-  if(props.type !== 'text'){
+const props = defineProps(badgeProp)
+const nm = useNmSpace('badge')
+
+const text = computed(() => {
+  if (props.dot) {
     return ''
   }
-  if(!isNaN(props.text)){
-    return props.text > props.max ?props.max+'⁺':props.text
+  if (!isNaN(props.text)) {
+    // '⁺'
+    return props.text > props.max ? props.max + '+' : props.text
   }
   return props.text
 })
 </script>
 <style lang="scss" scoped>
-.ty-badge{
+.ty-badge {
   position: relative;
   display: inline-block;
-  .ty-badge-text{
+
+   &__text {
     position: absolute;
     top: 2px;
     right: 2px;
-    transform: translate(50%,-50%);
+    transform: translate(50%, -50%);
     border-radius: 20px;
-    padding:0 6px;
+    padding: 0 6px;
     min-width: 20px;
     font-size: 12px;
     box-shadow: 0 0 0 2px #fff;
@@ -60,10 +48,11 @@ const text = computed(()=>{
     line-height: 20px;
     text-align: center;
     user-select: none;
-    
+    overflow: hidden;
   }
-  &.dot{
-    .ty-badge-text{
+
+  &.is-dot {
+    .ty-badge__text {
       top: 2px;
       right: 2px;
       width: 10px;
@@ -74,14 +63,15 @@ const text = computed(()=>{
       padding: unset;
     }
   }
-}
-@mixin addState($state) {
-  //基础按钮
-  .ty-badge-#{$state} > .ty-badge-text {
-    background-color: var(--#{$state}-6);
+  @mixin addState($state) {
+    //基础按钮
+    &--#{$state} > .ty-badge__text {
+      background-color: var(--#{$state}-6);
+    }
   }
-}
-@each $state in 'primary','success','warning','danger' {
-  @include addState($state);
+
+  @each $state in 'primary', 'success', 'warning', 'danger' {
+    @include addState($state);
+  }
 }
 </style>

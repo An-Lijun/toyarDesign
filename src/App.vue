@@ -2,6 +2,8 @@
   <div>
     <router-link to="button">button</router-link>
     <router-link to="backTop">backTop</router-link>
+    <router-link to="badge">badge</router-link>
+
 
     <router-view></router-view>
     {{ ref1 }}
