@@ -1,45 +1,22 @@
 <template>
   <div 
-    class="ty-collapse"
+    :class="nm.b()"
   >
-    <slot :disabled="props.disabled" :accordion="props.accordion"></slot>
+    <slot ></slot>
   </div>
 </template>
 <script setup>
 import {provide} from 'vue'
 import {useCompMvalue} from '../../../hooks/useCompMvalue'
-const props = defineProps({
-  modelValue: {
-    type: Array
-  },
-  disabled: {
-    type: Boolean,
-    default:false
-  },
-  accordion: {
-    type: Boolean,
-    default:false
-  },
-  hide: {
-    type: Boolean,
-    default:false
-  },
-  hide: {
-    type: Boolean,
-    default:false
-  },
-  position:{
-    type:String,
-    default:'right'
-  },
-  destroy:{
-    type: Boolean,
-    default:false
-  }
-})
-const emit = defineEmits(['update:modelValue'])
-const {model} =useCompMvalue(props,emit)
+import {colProps,colEmt,nm} from './context'
 
+defineOptions({
+  name: 'TyCollapse'
+})
+const props = defineProps(colProps)
+const emit = defineEmits(colEmt)
+
+const {model} =useCompMvalue(props,emit)
 const itemChange=(value)=>{
   emit('update:modelValue',value)
 } 
@@ -49,7 +26,7 @@ provide('collapseValue',{
   disabled:props.disabled,
   accordion:props.accordion,
   hide:props.hide,
-  position:props.position,
+  position:props.positionLeft,
   destroy:props.destroy
 })
 

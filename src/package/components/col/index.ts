@@ -1,5 +1,4 @@
+import {installComp} from '../../utils'
 import TyCol from './src/col.vue'
-TyCol.install = app=>{
-    app.component('TyCol',TyCol)
-}
-export default TyCol 
+
+export default installComp(TyCol) 

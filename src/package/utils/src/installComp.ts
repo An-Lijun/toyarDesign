@@ -15,3 +15,5 @@ export default (component:Component|Array<Component>) => {
   }
   return component
 }
+
+

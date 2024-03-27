@@ -1,18 +1,11 @@
 <template>
-  <div
-    :class="{
-      'ty-collapse-item': true,
-      'ty-collapse-item-disabled': disabled,
-      'ty-collapse-item-position': position === 'left'
-    }"
-  >
+  <div :class="[nm.bem('item'), nm.is('disabled', disabled), nm.is('left', position)]">
     <header @dblclick="changeFlg()">
       <span>{{ title }}</span>
       <div
         v-if="!hide"
-        class="ty-collapse-button"
         @click="changeFlg()"
-        :class="{ rotate: isOpen }"
+        :class="[nm.e('button'), { rotate: isOpen }]"
       >
         <TyIcon
           :color="disabled ? 'var(--text-4)' : ''"
@@ -20,7 +13,7 @@
         ></TyIcon>
       </div>
     </header>
-    <div :class="['content', { opend: isOpen }]" v-if="isDestroy">
+    <div :class="[nm.bem('item','content'), nm.is('open',isOpen) ]" v-if="isDestroy">
       <div>
         <slot></slot>
       </div>
@@ -29,18 +22,16 @@
 </template>
 <script setup>
 import { computed, inject } from 'vue'
+import { nm, itemProp } from './context'
 
-const props = defineProps({
-  title: {
-    type: String
-  },
-  name: {
-    type: String,
-    required: true
-  }
+defineOptions({
+  name: 'TyCollapseItem'
 })
+
+const props = defineProps(itemProp)
 const { model, itemChange, disabled, accordion, hide, position, destroy } =
   inject('collapseValue', null)
+
 const changeFlg = () => {
   if (disabled) {
     return
@@ -78,6 +69,7 @@ const isDestroy = computed(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
+
   header {
     display: flex;
     justify-content: space-between;
@@ -86,44 +78,51 @@ const isDestroy = computed(() => {
     padding: 5px 10px;
     border-bottom: 1px solid var(--border-color-2);
     box-sizing: border-box;
+
     span {
       flex: 1;
     }
-    .ty-collapse-button {
+
+    .ty-collapse__button {
       transition: transform 0.2s;
     }
+
     .rotate {
       transform: rotate(90deg);
     }
   }
-  .content {
+
+  &__content {
     display: grid;
     grid-template-rows: 0fr;
     transition: 0.3s;
     overflow: hidden;
+
     div {
       min-height: 0;
     }
-    &.opend {
+
+    &.is-open {
       grid-template-rows: 1fr;
       padding: 10px;
     }
   }
-}
-.ty-collapse-item-disabled {
-  header {
-    color: var(--text-4);
-    &:hover {
-      cursor: not-allowed;
+  &.is-disabled {
+    header {
+      color: var(--text-4);
+      &:hover {
+        cursor: not-allowed;
+      }
     }
   }
-}
-.ty-collapse-item-position {
-  header {
-    flex-direction: row-reverse;
-    text-align: left;
-    span {
-      margin-left: 10px;
+  &.is-left {
+    header {
+      flex-direction: row-reverse;
+      text-align: left;
+
+      span {
+        margin-left: 10px;
+      }
     }
   }
 }

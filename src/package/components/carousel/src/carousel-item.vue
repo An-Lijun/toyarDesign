@@ -6,11 +6,10 @@
 <script setup>
 import {inject,onMounted} from 'vue'
 import {carouselContent} from '../../../hooks/symbolNm'
-import useNmSpace from '@/package/hooks/useBem';
+import { nm } from './context';
 defineOptions({
   name: 'TyCarouselItem'
 })
-const nm =useNmSpace('carousel')
 const {setItem} =inject(carouselContent,{})
 onMounted(() => {
   setItem()
