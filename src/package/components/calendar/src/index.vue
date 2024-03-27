@@ -165,13 +165,20 @@ const clear = () => {
   nativeInp.value.value = ``
   emit('update:modelValue', ``)
 }
+
+watch(
+  () => props.modelValue,
+  () => {
+    nativeInp.value.value = `${props.modelValue}`
+  }
+)
 </script>
 
 <style lang="scss" scoped>
 .ty-calendar {
   border-radius: var(--border-radius-4);
 
-  color: var(--text-1); 
+  color: var(--text-1);
   display: flex;
   position: relative;
   user-select: none;
@@ -262,8 +269,14 @@ const clear = () => {
 
     input {
       color: var(--toyar-gray-4);
-      background-color: var(--fill-1);
+      background-color: var(--fill-2);
       cursor: no-drop;
+    }
+    .ty-calendar__innerAft {
+      --toyar-gray-10: var(--toyar-gray-4);
+      :hover {
+        cursor: no-drop;
+      }
     }
   }
 
@@ -273,7 +286,8 @@ const clear = () => {
     z-index: 5;
     padding: 10px;
     border: var(--border-1) solid var(--fill-3);
-    background-color: var(--color-bg-1);
+    background-color: var(--color-bg-5);
+    // --bg-5
     box-shadow: var(--box-shadow-5);
     border-radius: var(--border-radius-4);
     user-calendar: none;
@@ -360,6 +374,4 @@ const clear = () => {
     @include addInputSize($name);
   }
 }
-
-
 </style>

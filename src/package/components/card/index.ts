@@ -1,5 +1,4 @@
-import TyCard from './src/card.vue'
-TyCard.install = app=>{
-    app.component('TyCard',TyCard)
-}
-export default TyCard 
+import {installComp} from '../../utils'
+import TyCard from './src/index.vue'
+
+export default installComp(TyCard) 

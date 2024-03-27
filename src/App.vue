@@ -5,13 +5,12 @@
      uncheckedText="亮" checkedText="暗"></TySwitch>
   </h6>
   <div>
-  <span v-for="item in routes" style="margin:0 10px">
+  <span v-for="item in routes" style="margin:0 5px">
     <router-link :to="item.name">{{item.name}}</router-link>
   </span>
   <br>
   <hr>
     <router-view></router-view>
-
   </div>
 
 
@@ -33,6 +32,13 @@ watch(
   }
 )
 </script>
-<style>
-
+<style >
+html{
+  background-color: var(--color-bg-1);
+}
+.router-link-exact-active{
+  background-color: blue;
+  padding: 0 5px;
+  color: #fff;
+}
 </style>
