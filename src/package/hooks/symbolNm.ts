@@ -1,10 +1,6 @@
- const formContent=Symbol('ToyarFormContent');
- const formItemContent =Symbol('ToyarFormItemContent');
- const configProviderDisabled =Symbol('ToyarConfigProviderDisabled');
- const selectContent =Symbol('selectContent')
-export {
-  formContent,
-  formItemContent,
-  configProviderDisabled,
-  selectContent
-}
+export const t = 'Toyar'
+export const formContent=Symbol(`${t}FormContent`);
+export const formItemContent =Symbol(`${t}FormItemContent`);
+export const configProviderDisabled =Symbol(`${t}ConfigProviderDisabled`);
+export const selectContent =Symbol(`${t}SelectContent`)
+export const carouselContent =Symbol(`${t}SelectContent`)

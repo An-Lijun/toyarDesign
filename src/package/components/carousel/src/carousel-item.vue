@@ -1,13 +1,18 @@
 <template>
-  <div class="ty-carousel-item">
+  <div :class="nm.bem('item')">
     <slot></slot>
   </div>
 </template>
 <script setup>
 import {inject,onMounted} from 'vue'
-const {setItem} =inject('carousel',{})
+import {carouselContent} from '../../../hooks/symbolNm'
+import useNmSpace from '@/package/hooks/useBem';
+defineOptions({
+  name: 'TyCarouselItem'
+})
+const nm =useNmSpace('carousel')
+const {setItem} =inject(carouselContent,{})
 onMounted(() => {
-  console.log('----------');
   setItem()
 })
 </script>

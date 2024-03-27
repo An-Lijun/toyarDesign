@@ -1,8 +1,5 @@
 import TyCarousel from './src/carousel.vue'
 import TyCarouselItem from './src/carousel-item.vue'
+import {installComp} from '../../utils'
 
-TyCarousel.install = app=>{
-    app.component('TyCarousel',TyCarousel),
-    app.component('TyCarouselItem',TyCarouselItem)
-}
-export default TyCarousel 
+export default installComp([TyCarousel,TyCarouselItem]) 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="ty-carousel"
+    :class="nm.b()"
     ref="carousel"
     @mouseenter.prevent="carouselEnter"
     @mouseleave.prevent="carouselLeave"
@@ -12,9 +12,10 @@
     >
       <slot> </slot>
     </ul>
-    <div class="indicator-left" @click="toLeft" v-if="showIndicator"></div>
-    <div class="indicator-right" @click="toRight" v-if="showIndicator"></div>
-    <div class="indicator">
+
+    <div :class="nm.e('leftIndicator')" @click="toLeft" v-if="showIndicator"></div>
+    <div :class="nm.e('rightIndicator')" @click="toRight" v-if="showIndicator"></div>
+    <div :class="nm.e('indicators')">
       <slot name="indicator">
         <li
           v-for="(item, index) in list"
@@ -28,16 +29,16 @@
 </template>
 <script setup>
 import { onMounted, ref, provide, watch } from 'vue'
-const props = defineProps({
-  showIndicator:{
-    type:Boolean,
-    default:true
-  },
-  interval:{
-    type:Number,
-    default:3000
-  }
+import {carouselContent} from '../../../hooks/symbolNm'
+import {carProps} from './context'
+import useNmSpace from '@/package/hooks/useBem';
+const nm = useNmSpace('carousel')
+
+defineOptions({
+  name: 'TyCarousel'
 })
+const props = defineProps(carProps)
+
 const carousel = ref()
 let baseWidth = 0
 let width = ref(0)
@@ -53,26 +54,10 @@ const start = () => {
     }
   }, props.interval)
 }
-const carouselEnter = () => {
-  clearInterval(timmer)
-}
-const carouselLeave = () => {
-  timmer = start()
-}
-const toLeft = () => {
-  if (now.value === 0) {
-    now.value = list.value.length - 1
-  } else {
-    now.value--
-  }
-}
-const toRight = () => {
-  if (now.value === list.value.length - 1) {
-    now.value = 0
-  } else {
-    now.value++
-  }
-}
+const carouselEnter = () => clearInterval(timmer)
+const carouselLeave = () => timmer = start()
+const toLeft = () => now.value === 0?now.value = list.value.length - 1: now.value-1
+const toRight = () => now.value = now.value=== list.value.length - 1? 0: now.value+1
 
 watch(now, () => {
   width.value = -(now.value * baseWidth)
@@ -85,7 +70,7 @@ onMounted(() => {
 const setItem = () => {
   list.value.push(String(list.value.length))
 }
-provide('carousel', {
+provide(carouselContent, {
   setItem
 })
 </script>
@@ -106,7 +91,7 @@ provide('carousel', {
     padding: unset;
     transition: all 0.5s;
   }
-  .indicator-left {
+  &__leftIndicator {
     width: 30px;
     height: 40px;
     z-index: 2;
@@ -121,7 +106,7 @@ provide('carousel', {
       cursor: pointer;
     }
   }
-  .indicator-right {
+  &__rightIndicator {
     width: 30px;
     height: 40px;
     z-index: 2;
@@ -136,7 +121,7 @@ provide('carousel', {
       cursor: pointer;
     }
   }
-  .indicator {
+  &__indicators {
     position: absolute;
     bottom: 10px;
     display: flex;

@@ -1,4 +1,4 @@
 import {installComp} from '../../utils'
-import TyCard from './src/index.vue'
+import TyCard from './src/card.vue'
 
 export default installComp(TyCard) 

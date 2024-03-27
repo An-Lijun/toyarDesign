@@ -1,5 +1,5 @@
 import {installComp} from '../../utils'
-import TyButton from './src/index.vue'
+import TyButton from './src/button.vue'
 
 export type { TyButtonInstance } from './src/type.ts'
 
