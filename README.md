@@ -96,8 +96,8 @@ https://an-lijun.github.io/toyarDesign/index.html
 │       ├── utils (utils只负责结构功能, 而hook负责实际页面的功能提取)
 │       └── index.ts 主入口(暴露全局引入 局部引入等)
 └── README.md
-
 ```
+
 ### 组件
 
 组件通常结构
@@ -158,6 +158,11 @@ css命名使用BEMI命名并抽取useBEMhooks
 .ElementNm--state //表示块中的一种样式
 
 对于布尔开启状态使用 is-xxx 来表示状态
+
+### 文件命名
+
+如果是多单词采用-分割而不是驼峰
+如 : buttonGroup 应写为 button-group
 
 
 

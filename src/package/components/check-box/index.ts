@@ -1,5 +1,6 @@
-import TyCheckBox from './check-box.vue'
-TyCheckBox.install = app=>{
-    app.component('TyCheckBox',TyCheckBox)
-}
-export default TyCheckBox 
+
+
+import {installComp} from '../../utils'
+import TyCheckBox from './src/check-box.vue'
+
+export default installComp(TyCheckBox) 

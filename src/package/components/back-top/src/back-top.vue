@@ -30,8 +30,6 @@ let scrollFn=()=>{
 onMounted(() => {
   parentNode =backTop.value.parentNode
   if(parentNode){
-    console.log(parentNode);
-    
     backTop.value.style.right = props.right + "px";
     backTop.value.style.bottom = props.bottom + "px";
     parentNode.addEventListener('scroll',scrollFn)
