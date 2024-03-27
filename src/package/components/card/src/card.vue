@@ -17,13 +17,11 @@
 </template>
 <script setup>
 import { useSlots, computed } from 'vue'
-import { cardProp } from './context'
-import useNmSpace from '@/package/hooks/useBem'
+import { cardProp,nm } from './context'
 defineOptions({
   name: 'TyCard'
 })
 const props = defineProps(cardProp)
-const nm = useNmSpace('card')
 
 </script>
 <style lang="scss" scoped>

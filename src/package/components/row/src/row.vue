@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['ty-row', compJustify, compAlign]"
+    :class="[nm.b(), compJustify, compAlign]"
     :style="{
       marginLeft: gutter / 2 + 'px',
       marginRight: gutter / 2 + 'px'
@@ -11,7 +11,8 @@
 </template>
 <script lang="ts" setup name="TyRow">
 import { provide, computed } from 'vue'
-
+import {rowContent} from '../../../hooks/symbolNm'
+import useNmSpace from '@/package/hooks/useBem';
 const props = defineProps({
   type: {
     type: String,
@@ -30,69 +31,70 @@ const props = defineProps({
     default: 'center'
   }
 })
-provide('gutter', {
+provide(rowContent, {
   value: props.gutter
 })
 
+const nm =useNmSpace('row')
 const compJustify = computed(() => {
   switch (props.justify) {
     case 'start':
       return ''
     case 'center':
-      return 'justify-center'
+      return nm.is('justify-center') 
     case 'end':
-      return 'justify-end'
+      return nm.is('justify-end') 
     case 'around':
-      return 'justify-around'
+      return nm.is('justify-around') 
     case 'between':
-      return 'justify-between'
+      return nm.is('justify-between') 
   }
 })
 const compAlign = computed(() => {
   switch (props.align) {
     case 'center':
-      return 'align-center'
+      return nm.is('align-center') 
     case 'end':
-      return 'align-bottom'
+      return nm.is('align-bottom') 
     case 'top':
-      return 'align-top'
+      return nm.is('align-top') 
   }
 })
 </script>
 <style lang="scss">
 .ty-row {
-  &.justify-center {
+  &.is-justify-center {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-  &.justify-end {
+  &.is-justify-end {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
   }
-  &.justify-around {
+  &.is-justify-around {
     display: flex;
     flex-wrap: wrap;
 
     justify-content: space-around;
   }
-  &.justify-between {
+  &.is-justify-between {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  &.align-end {
+  &.is-align-end {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
   }
-  &.align-center {
+  &.is-align-center {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
   }
-  &.align-top {
+  &.is-align-top {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;

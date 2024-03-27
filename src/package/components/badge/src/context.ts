@@ -1,3 +1,5 @@
+import useNmSpace from '../../../hooks/useBem'
+
 export const badgeProp={
   text: {
     type: String,
@@ -16,3 +18,5 @@ export const badgeProp={
     default:'danger'
   }
 }
+
+export  const nm = useNmSpace('badge')

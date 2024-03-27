@@ -30,9 +30,7 @@
 <script setup>
 import { onMounted, ref, provide, watch } from 'vue'
 import {carouselContent} from '../../../hooks/symbolNm'
-import {carProps} from './context'
-import useNmSpace from '@/package/hooks/useBem';
-const nm = useNmSpace('carousel')
+import {carProps,nm} from './context'
 
 defineOptions({
   name: 'TyCarousel'

@@ -1,3 +1,5 @@
+import useNmSpace from '../../../hooks/useBem'
+
 export const backTopProps = {
   vHeight: {
     type: Number,
@@ -17,3 +19,5 @@ export const backTopProps = {
   }
 }
 // "circle" //square
+
+export  const nm = useNmSpace('backTop')

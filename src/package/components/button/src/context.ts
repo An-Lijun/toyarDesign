@@ -1,5 +1,5 @@
-import {  inject  } from 'vue'
-import {configProviderDisabled} from '../../../hooks/symbolNm'
+import useNmSpace from '../../../hooks/useBem'
+
 import { TY_STATE,TY_SIZE} from '@/package/constant';
 
 export const buttonProps = {
@@ -55,4 +55,4 @@ export const buttonProps = {
     }
   }
 }
-export const inputInject = inject(configProviderDisabled,null)
+export const nm = useNmSpace('button')

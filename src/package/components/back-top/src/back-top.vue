@@ -13,14 +13,11 @@
 </template>
 <script lang='ts' setup name='TyBackTop'>
 import { onMounted,onBeforeUnmount,ref} from "vue";
-import {backTopProps} from './context'
-import useNmSpace from '../../../hooks/useBem'
-
+import {backTopProps,nm} from './context'
 defineOptions({
   name: 'TyBackTop'
 })
 const props = defineProps(backTopProps)
-const nm = useNmSpace('backTop')
 const backTop = ref();
 let scollHeight = ref(0);
 let parentNode:Element;

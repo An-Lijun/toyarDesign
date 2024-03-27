@@ -1,5 +1,5 @@
-import { inject } from 'vue'
-import { formItemContent} from '../../../hooks/symbolNm'
+import useNmSpace from '../../../hooks/useBem'
+
 export const calendarProp={
   size: {
     type: String,
@@ -27,5 +27,6 @@ export const calendarProp={
   }
 }
 export const calendarEmit =['blur', 'input', 'update:modelValue']
-export const tyFormItem =inject(formItemContent,null);
+
+export const nm = useNmSpace('calendar')
  

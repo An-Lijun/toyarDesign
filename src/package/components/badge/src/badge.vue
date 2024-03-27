@@ -8,14 +8,12 @@
 </template>
 <script setup>
 import { computed } from 'vue'
-import useNmSpace from '../../../hooks/useBem'
-import { badgeProp } from './context'
+import { badgeProp,nm } from './context'
 
 defineOptions({
   name: 'TyBadge'
 })
 const props = defineProps(badgeProp)
-const nm = useNmSpace('badge')
 
 const text = computed(() => {
   if (props.dot) {

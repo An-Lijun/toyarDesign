@@ -1,37 +1,33 @@
 <template>
   <div
-    class="ty-col"
-    :class="[compCol]"
+    :class="[nm.b(),compStyle]"
     :style="{
       marginLeft: (100 / 24) * offset + '%',
-      padding: 0 + ' ' + gutter.value + 'px'
+      padding: 0 + ' ' + gutter?.value + 'px'
     }"
   >
     <slot></slot>
   </div>
 </template>
 <script lang="ts" setup>
-import { inject, computed } from 'vue'
-const gutter = inject('gutter', null)
-const props = defineProps({
-  span: {
-    type: Number || Object,
-    default: 24
-  },
-  offset: {
-    type: Number,
-    default: 0
-  }
+import { computed ,inject} from 'vue'
+import  {colProps,nm} from './context'
+import {rowContent} from '../../../hooks/symbolNm'
+defineOptions({
+  name: 'TyCol'
 })
-const compCol = computed(() => {
+const props = defineProps(colProps)
+const gutter = inject(rowContent, null)
+
+const compStyle = computed(() => {
   if (props.span instanceof Object) {
     let style = ''
-    for (const key in props.span) {
-      style += `ty-col-${key}-${props.span[key]} `
+    for (const key in (props.span as Object)) {
+      style += nm.bem(`${key}-${props.span[key]}`)+' '
     }
     return style
   }
-  return `ty-col-${props.span}`
+  return  nm.bem(props.span)
 })
 </script>
 <style lang="scss" scoped>

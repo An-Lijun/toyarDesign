@@ -1,4 +1,5 @@
 
+import useNmSpace from '@/package/hooks/useBem'
 
 export const cardProp={
   border: {
@@ -10,3 +11,4 @@ export const cardProp={
     default: 'none'
   }
 }
+export const nm = useNmSpace('card')

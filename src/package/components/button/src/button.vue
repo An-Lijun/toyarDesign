@@ -22,14 +22,14 @@
 
 <script setup>
 import { computed } from 'vue'
-import { buttonProps, inputInject } from './context.ts'
-import useNmSpace from '../../../hooks/useBem'
-
+import { buttonProps ,nm} from './context.ts'
+import {  inject  } from 'vue'
+import {configProviderDisabled} from '../../../hooks/symbolNm'
 defineOptions({
   name: 'TyButton'
 })
 const props = defineProps(buttonProps)
-const nm = useNmSpace('button')
+const inputInject = inject(configProviderDisabled,null)
 
 const mergeDisabled = computed(() => {
   return inputInject?.disabled || props?.disabled

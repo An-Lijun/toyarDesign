@@ -81,15 +81,15 @@
   </div>
 </template>
 <script setup>
-import { calendarProp, calendarEmit, tyFormItem } from './context'
-import useNmSpace from '../../../hooks/useBem'
+import { calendarProp, calendarEmit,nm } from './context'
+import { formItemContent} from '../../../hooks/symbolNm'
 
 defineOptions({
   name: 'TyCalendar'
 })
 const props = defineProps(calendarProp)
 const emit = defineEmits(calendarEmit)
-const nm = useNmSpace('calendar')
+const tyFormItem =inject(formItemContent,null);
 
 const focus = ref(false)
 const nativeInp = ref()
