@@ -1,5 +1,4 @@
-import TyCalendar from './calendar.vue'
-TyCalendar.install = app=>{
-    app.component('TyCalendar',TyCalendar)
-}
-export default TyCalendar 
+import {installComp} from '../../utils'
+import TyCalendar from './src/index.vue'
+
+export default installComp(TyCalendar) 

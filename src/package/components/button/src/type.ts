@@ -1,2 +1,2 @@
-import TyButton from './src/button.vue'
+import TyButton from './src/index.vue'
 export type TyButtonInstance =InstanceType<typeof TyButton>

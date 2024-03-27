@@ -1,22 +1,37 @@
 <template>
+  <h6>
+    <TySwitch v-model="theme"
+     :openValue="true" :closeValue="false" 
+     uncheckedText="亮" checkedText="暗"></TySwitch>
+  </h6>
   <div>
-    <router-link to="button">button</router-link>
-    <router-link to="backTop">backTop</router-link>
-    <router-link to="badge">badge</router-link>
-
-
+  <span v-for="item in routes" style="margin:0 10px">
+    <router-link :to="item.name">{{item.name}}</router-link>
+  </span>
+  <br>
+  <hr>
     <router-view></router-view>
-    {{ ref1 }}
-    <TySwitch v-model="ref1">1</TySwitch>
+
   </div>
 
 
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import {routes} from './router'
+
+
+import { ref, watch} from 'vue'
 import { TyMessage, TyAlert, TyNotification,TyLoading } from './package/index'
 
-let ref1 =ref([])
+let theme =ref(false)
+
+watch(
+ theme,
+  (newVal, oldVal) => {
+    console.log(newVal,theme);
+    document.getElementsByTagName('html')[0].setAttribute('toyar-theme', newVal?'dark':'light')
+  }
+)
 </script>
 <style>
 

@@ -1,28 +1,47 @@
 <template>
-  <div class="ty-calendar" :class="[
-    'ty-calendar',
-    `ty-calendar-${size}`,
-    {
-      'is-focus': focus,
-      'is-disabled': disabled,
-      'is-readonly': readonly,
-      'is-error': tyFormItem && tyFormItem.formItemError.isShowErrorMsg
-    }
-  ]">
+  <div
+    :class="[
+      nm.b(),
+      nm.m(size),
+      nm.is('focus', focus),
+      nm.is('disabled', disabled),
+      nm.is('readonly', readonly),
+      nm.is(
+        'error',
+        (tyFormItem && tyFormItem.formItemError.isShowErrorMsg) || false
+      )
+    ]"
+  >
     <!-- 输入框 -->
-    <input type="text" ref="nativeInp" @click="isShowCalendar = true" :disabled="disabled" @input="handleInput"
-      @blur="handleBlur" @focus="handleFocus" />
-      <span ref="innerAft" class="ty-input-innerAft" >
-        <TyIcon icon="ty-calendar-line"></TyIcon>
+    <input
+      type="text"
+      ref="nativeInp"
+      @click="isShowCalendar = true"
+      :disabled="disabled"
+      @input="handleInput"
+      @blur="handleBlur"
+      @focus="handleFocus"
+    />
+    <span ref="innerAft" :class="[nm.e('innerAft')]">
+      <TyIcon icon="ty-calendar-line"></TyIcon>
     </span>
-   <span v-if="isShowClearBtn" class="ty-calendar-clear" :style="{
-      position: 'absolute',
-      right: '10px',
-    }" @click="clear">
+    <span
+      v-if="isShowClearBtn"
+      :class="[nm.e('clear')]"
+      :style="{
+        position: 'absolute',
+        right: '10px'
+      }"
+      @click="clear"
+    >
     </span>
-    <div class="ty-calendar-box" v-show="isShowCalendar" :style="`top: var(--size-${size});`">
+    <div
+      :class="[nm.e('box')]"
+      v-show="isShowCalendar"
+      :style="`top: var(--size-${size});`"
+    >
       <header>
-        <div class="ty-calendar-com">
+        <div :class="[nm.e('com')]">
           <div class="lastYear" @click="lastYear">
             <TyIcon icon="ty-arrow-left-double-line" />
           </div>
@@ -37,7 +56,7 @@
             <TyIcon icon="ty-arrow-right-double-line" />
           </div>
         </div>
-        <div class="ty-calendar-week">
+        <div :class="[nm.e('week')]">
           <div v-for="(item, index) in weekArr" :key="index" class="weekItem">
             {{ item }}
           </div>
@@ -47,7 +66,11 @@
         <div v-for="(item, index) in befMonth" class="dis day">
           <span>{{ item }}</span>
         </div>
-        <div v-for="(item, index) in nowMonth" class="day" @click="selectDay(item)">
+        <div
+          v-for="(item, index) in nowMonth"
+          class="day"
+          @click="selectDay(item)"
+        >
           <span>{{ item }}</span>
         </div>
         <div v-for="(item, index) in aftMonth" class="dis day">
@@ -58,53 +81,31 @@
   </div>
 </template>
 <script setup>
-import { formItemContent} from '../..//hooks/symbolNm'
+import { calendarProp, calendarEmit, tyFormItem } from './context'
+import useNmSpace from '../../../hooks/useBem'
 
-const emit = defineEmits(['blur', 'input', 'update:modelValue'])
-const props = defineProps({
-  size: {
-    type: String,
-    default: 'small',
-    validator: value => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
-  },
-  clearable: {
-    type: Boolean,
-    default: true
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  modelValue: {
-    type: String,
-    required: true,
-    default: ''
-  }
+defineOptions({
+  name: 'TyCalendar'
 })
-const tyFormItem =inject(formItemContent,null);
-const focus =ref(false)
+const props = defineProps(calendarProp)
+const emit = defineEmits(calendarEmit)
+const nm = useNmSpace('calendar')
+
+const focus = ref(false)
 const nativeInp = ref()
 const isShowCalendar = ref(false)
-const weekArr = ['日', '一', '二', '三', '四', '五', '六'];
-const countDate = [new Date().getFullYear(), new Date().getMonth()];
+const weekArr = ['日', '一', '二', '三', '四', '五', '六']
+const countDate = [new Date().getFullYear(), new Date().getMonth()]
 let nowDate = ref('')
 let befMonth = ref([])
 let nowMonth = ref(0)
 let aftMonth = ref(0)
 
-let isShowClearBtn  = computed(()=>{
- return props.modelValue!=='' && props.clearable && !props.disabled
+let isShowClearBtn = computed(() => {
+  return props.modelValue !== '' && props.clearable && !props.disabled
 })
-const handleFocus=()=>{
-
-}
-const render = (dateArr) => {
+const handleFocus = () => {}
+const render = dateArr => {
   // 1.获取当前年月日
   let date = new Date(dateArr[0], dateArr[1])
   let year = date.getFullYear()
@@ -115,7 +116,7 @@ const render = (dateArr) => {
   // 3.计算上个月展示几天
   befMonth.value = []
   let flag = true
-  let index = 0;
+  let index = 0
   while (flag) {
     let lastDay = new Date(year, month, index)
     befMonth.value.unshift(lastDay.getDate())
@@ -141,7 +142,6 @@ const lastMonth = () => {
     countDate[1] = countDate[1] - 1
   }
   render(countDate)
-
 }
 const nextMonth = () => {
   if (countDate[1] === 11) {
@@ -151,28 +151,29 @@ const nextMonth = () => {
     countDate[1] = countDate[1] + 1
   }
   render(countDate)
-
 }
 const nextYear = () => {
   countDate[0] = countDate[0] + 1
   render(countDate)
 }
-const selectDay=(day)=>{
-  isShowCalendar.value=false
-  nativeInp.value.value = `${countDate[0]}-${countDate[1]+1}-${day}`
-  emit('update:modelValue',`${countDate[0]}-${countDate[1]+1}-${day}`)
+const selectDay = day => {
+  isShowCalendar.value = false
+  nativeInp.value.value = `${countDate[0]}-${countDate[1] + 1}-${day}`
+  emit('update:modelValue', `${countDate[0]}-${countDate[1] + 1}-${day}`)
 }
-const clear =()=>{
+const clear = () => {
   nativeInp.value.value = ``
-  emit('update:modelValue',``)
+  emit('update:modelValue', ``)
 }
 </script>
 
 <style lang="scss" scoped>
 .ty-calendar {
-  color: var(--text-1);
+  border-radius: var(--border-radius-4);
+
+  color: var(--text-1); 
   display: flex;
-  position:relative;
+  position: relative;
   user-select: none;
   input {
     width: 100%;
@@ -196,9 +197,8 @@ const clear =()=>{
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-
   }
-  .ty-input-innerAft {
+  &__innerAft {
     height: 100%;
     display: flex;
     align-items: center;
@@ -206,7 +206,7 @@ const clear =()=>{
     right: 10px;
     top: 0;
   }
-  .ty-calendar-clear {
+  &__clear {
     display: none;
     height: 100%;
     &:before {
@@ -215,15 +215,14 @@ const clear =()=>{
       display: inline-block;
       content: '\eb99';
     }
-  }
-
-  .ty-calendar-clear:hover {
-    &::before {
-      font-family: 'toyaricon' !important;
-      font-style: normal;
-      display: inline-block;
-      content: '\eb97';
-      cursor: pointer;
+    &:hover {
+      &::before {
+        font-family: 'toyaricon' !important;
+        font-style: normal;
+        display: inline-block;
+        content: '\eb97';
+        cursor: pointer;
+      }
     }
   }
 
@@ -234,21 +233,18 @@ const clear =()=>{
     input {
       background-color: var(--fill-3);
       border-radius: var(--border-radius-4);
-
     }
 
-    .ty-calendar-clear {
-      background-color:var(--fill-3);
+    .ty-calendar__clear {
+      background-color: var(--fill-3);
       display: block;
     }
   }
 
   &.is-focus {
     background-color: var(--color-bg-2);
-    box-shadow: 1px 1px var(--primary-6),
-      -1px 1px var(--primary-6),
-      1px -1px var(--primary-6),
-      -1px -1px var(--primary-6);
+    box-shadow: 1px 1px var(--primary-6), -1px 1px var(--primary-6),
+      1px -1px var(--primary-6), -1px -1px var(--primary-6);
 
     input {
       background-color: var(--color-bg-2);
@@ -256,10 +252,8 @@ const clear =()=>{
   }
 
   &.is-error {
-    box-shadow: 1px 1px var(--danger-6),
-      -1px 1px var(--danger-6),
-      1px -1px var(--danger-6),
-      -1px -1px var(--danger-6);
+    box-shadow: 1px 1px var(--danger-6), -1px 1px var(--danger-6),
+      1px -1px var(--danger-6), -1px -1px var(--danger-6);
   }
 
   &.is-disabled {
@@ -273,10 +267,10 @@ const clear =()=>{
     }
   }
 
-  .ty-calendar-box {
-    position:absolute;
-    width:100%;
-    z-index:5;
+  &__box {
+    position: absolute;
+    width: 100%;
+    z-index: 5;
     padding: 10px;
     border: var(--border-1) solid var(--fill-3);
     background-color: var(--color-bg-1);
@@ -284,9 +278,9 @@ const clear =()=>{
     border-radius: var(--border-radius-4);
     user-calendar: none;
     color: var(--text-1);
-    box-sizing:border-box;
+    box-sizing: border-box;
     header {
-      .ty-calendar-com {
+      .ty-calendar__com {
         display: flex;
         width: 100%;
         justify-content: space-between;
@@ -297,13 +291,13 @@ const clear =()=>{
         }
       }
 
-      .ty-calendar-week {
+      .ty-calendar__week {
         font-size: var(--font-body-1);
         margin-top: 20px;
 
         div {
           display: inline-block;
-          width: calc(100%/7);
+          width: calc(100% / 7);
           text-align: center;
         }
       }
@@ -314,7 +308,7 @@ const clear =()=>{
 
       .day {
         display: inline-block;
-        width: calc(100%/7);
+        width: calc(100% / 7);
         height: 40px;
         line-height: 40px;
         text-align: center;
@@ -327,7 +321,6 @@ const clear =()=>{
           text-align: center;
           line-height: 35px;
           border-radius: var(--border-radius-circle);
-
         }
 
         &:hover {
@@ -346,30 +339,27 @@ const clear =()=>{
           cursor: not-allowed;
           color: var(--text-4);
           span {
-            background-color: unset
+            background-color: unset;
           }
         }
       }
     }
   }
-}
 
-// ------------------------  input尺寸样式  ------------------------
-$inputSize: (
-  mini,
-  small,
-  medium,
-  large
-);
+  // ------------------------  input尺寸样式  ------------------------
+  $inputSize: (mini, small, medium, large);
 
-@mixin addInputSize($name) {
-  .ty-calendar-#{$name} {
+  @mixin addInputSize($name) {
+    &--#{$name} {
       height: var(--size-#{$name});
       line-height: var(--size-#{$name});
+    }
+  }
+
+  @each $name in $inputSize {
+    @include addInputSize($name);
   }
 }
 
-@each $name in $inputSize {
-  @include addInputSize($name);
-}
+
 </style>
