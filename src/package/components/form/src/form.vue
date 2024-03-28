@@ -1,46 +1,41 @@
 <template>
-  <form class="ty-form" :class="{}">
+  <form :class="nm.b()" >
     <slot></slot>
   </form>
 </template>
-<script lang='ts' setup>
-import { formContent } from '../../hooks/symbolNm'
+<script lang='ts' setup name="TyForm">
+import { formContent } from '../../../hooks/symbolNm'
 import { provide } from "vue";
+import {formProps,nm} from './context'
 
-const props = defineProps({
-  formData: Object,
-  rules: {
-    type: Object,
-    default: () => ({})
-  },
-  labelWidth:{
-    type: String,
-    default:'100'
-  },
-  labelPosition: String,
-  size: String,
-  disabled: Boolean,
-  readonly: Boolean,
-});
-const fieldList = {};
-function addValidate(prop, fns, clearValidate) {
+interface IfieldList{
+  [index: string]: {
+    fns:Array<Function>,
+    clearValidate:Function
+  }
+}
+type TerrList =Array<{[index: string]:string}>
+
+const props = defineProps(formProps);
+const fieldList:IfieldList={};
+
+function addValidate(prop:string, fns:Array<Function>, clearValidate:Function) {
   fieldList[prop] = {
-    fns,
+    fns:fns,
     clearValidate
   };
 }
-function removeValidate(prop) {
+function removeValidate(prop:string) {
   delete fieldList[prop]
 }
 function validateAll() {
   return new Promise((resolve, reject) => {
     let keys = Object.keys(fieldList);
-    const errList = []
+    const errList:TerrList = []
     keys.forEach((key, index) => {
-      const item = fieldList[key].fns;
-      
-      for (let index = 0; index < item.length; index++) {
-        const data = item[index](key)
+      const fns = fieldList[key].fns;
+      for (let index = 0; index < fns.length; index++) {
+        const data = fns[index](key)
         if (data) {
           return errList.push(data)
         }
@@ -49,11 +44,11 @@ function validateAll() {
     if (errList.length > 0) {
       return reject(errList)
     }
-    resolve(123);
+    resolve('sucess');
   })
 
 }
-function validate(prop) {
+function validate(prop:string) {
   return new Promise((resolve,reject)=>{
     const fns = fieldList[prop].fns
     const errList = []
@@ -76,9 +71,10 @@ function clearValidateAll() {
     fieldList[key].clearValidate();
   })
 }
-function clearValidate(prop) {
+function clearValidate(prop:string) {
   fieldList[prop].clearValidate();
 }
+
 provide(formContent, {
   ...props,
   validate,
@@ -86,6 +82,7 @@ provide(formContent, {
   validateAll,
   removeValidate
 })
+
 defineExpose({
   validate,
   validateAll,

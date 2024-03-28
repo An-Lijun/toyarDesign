@@ -2,13 +2,13 @@
   <div class="divRoot">
     <TyButton @click="isShow1=!isShow1">123</TyButton>
     
-    <TyDialog v-model:visible="isShow1">
+    <TyDialog v-model="isShow1">
       12345679
     </TyDialog>
     <hr>
     <TyButton @click="isShow2=!isShow2">123</TyButton>
     
-    <TyDialog v-model:visible="isShow2">
+    <TyDialog v-model="isShow2">
       <TyTable :columns="columns" :data="tableData"> 
           <template #operation="scroped">
             <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>

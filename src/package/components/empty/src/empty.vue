@@ -1,6 +1,6 @@
 <template>
-  <div class="ty-empty">
-    <div class="inner">
+  <div :class="nm.b()">
+    <div :class="nm.e('inner')">
       <TyIcon icon="ty-inbox-2-line"></TyIcon>
       <span>
         {{ title }}
@@ -8,14 +8,10 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts" name="TyEmpty">
 import TyIcon from "../../icon";
-const props = defineProps({
-  title: {
-    type: String,
-    default: "暂无数据"
-  }
-});
+import {emptyProps,nm} from './context'
+const props = defineProps(emptyProps);
 </script>
 <style lang="scss" scoped>
 .ty-empty{
@@ -24,7 +20,7 @@ const props = defineProps({
   justify-content: center;
   align-items: center;
   font-size: 40px;
-  .inner{
+  &__inner{
     display: flex;
     flex-direction: column;
     align-items: center;

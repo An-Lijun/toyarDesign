@@ -1,4 +1,4 @@
-import useNmSpace from "@/package/hooks/useBem"
+import useNmSpace from "../../../hooks/useBem"
 
 export const dialogProp={
   title: {
@@ -13,8 +13,9 @@ export const dialogProp={
     type: String,
     default: "15vh",
   },
-  visible: {
+  modelValue: {
     type: Boolean,
+    required: true,
     default: false,
   },
   info:{
@@ -22,6 +23,6 @@ export const dialogProp={
   }
   
 }
-export const dialogEmit=["update:visible"]
+export const dialogEmit=["update:modelValue"]
 
 export const  nm = useNmSpace('dialog')

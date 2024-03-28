@@ -12,7 +12,7 @@
 <script lang="ts" setup name="TyRow">
 import { provide, computed } from 'vue'
 import {rowContent} from '../../../hooks/symbolNm'
-import useNmSpace from '@/package/hooks/useBem';
+import useNmSpace from '../../../hooks/useBem';
 const props = defineProps({
   type: {
     type: String,

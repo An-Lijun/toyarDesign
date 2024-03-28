@@ -6,7 +6,7 @@
     </section>
 </template>
 <script setup lang="ts" name="TyContainer">
-import useNmSpace from '@/package/hooks/useBem';
+import useNmSpace from '../../../hooks/useBem';
 
 const props = defineProps({
   column: {

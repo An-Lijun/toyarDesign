@@ -1,12 +1,12 @@
 <template>
   <!-- @click.self避免冒泡，只有点击自己时才能触发   -->
-  <div :class="nm.e('wrapper')" @click.self="handleClose" v-show="visible">
+  <div :class="nm.e('wrapper')" @click.self="handleClose" v-show="modelValue">
     <transition name="dialog-fade">
       <div
         :class="nm.b()"
         :style="{ width, top }"
         ref="tyDialog"
-        v-show="visible"
+        v-show="modelValue"
       >
         <div :class="nm.e('header')" ref="tyDialogHeader">
           <slot name="title">
@@ -72,7 +72,7 @@ onMounted(() => {
 function handleClose () {
   console.log("11111111");
   
-  emits('update:visible', false)
+  emits('update:modelValue', false)
 }
 </script>
 <style lang="scss" scoped>

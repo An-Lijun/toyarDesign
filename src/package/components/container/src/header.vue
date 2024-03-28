@@ -11,7 +11,7 @@
   </header>
 </template>
 <script setup  lang="ts" name="TyHeader">
-import useNmSpace from '@/package/hooks/useBem'
+import useNmSpace from '../../../hooks/useBem'
 
 const props = defineProps({
   height: {

@@ -27,7 +27,7 @@
   </div>
 </template>
 <script setup>
-import { TY_SIZE,TY_STATE } from '@/package/constant';
+import { TY_SIZE,TY_STATE } from '../../../constant';
   let states=ref(TY_STATE)
   let sizes= ref(TY_SIZE )
   let type=ref(['normal','secondary','dashed','text','link'])

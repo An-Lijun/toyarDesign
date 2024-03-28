@@ -1,6 +1,6 @@
 import useNmSpace from '../../../hooks/useBem'
 
-import { TY_STATE,TY_SIZE} from '@/package/constant';
+import { TY_STATE,TY_SIZE} from '../../../constant';
 
 export const buttonProps = {
   state: {

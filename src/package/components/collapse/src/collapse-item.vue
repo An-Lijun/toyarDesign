@@ -94,7 +94,7 @@ const isDestroy = computed(() => {
     grid-template-rows: 0fr;
     transition: 0.3s;
     overflow: hidden;
-
+    color: var(--text-3);
     div {
       min-height: 0;
     }

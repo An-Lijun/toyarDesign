@@ -1,5 +1,4 @@
-import TyDivider from './divider.vue'
-TyDivider.install = app=>{
-    app.component('TyDivider',TyDivider)
-}
-export default TyDivider 
+import { installComp } from '../../utils'
+import TyDivider from './src/divider.vue'
+
+export default  installComp(TyDivider)

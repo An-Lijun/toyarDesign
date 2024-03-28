@@ -1,5 +1,5 @@
-import useNmSpace from '@/package/hooks/useBem'
-import { TY_SIZE } from '@/package/constant'
+import useNmSpace from '../../../hooks/useBem'
+import { TY_SIZE } from '../../../constant'
 export const nm = useNmSpace('check-box')
 export const checkProps ={
   size: {

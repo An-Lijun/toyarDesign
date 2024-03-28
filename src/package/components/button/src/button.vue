@@ -55,14 +55,14 @@ const mergeDisabled = computed(() => {
   @mixin addBtnState($state) {
     //基础按钮
     &--normal.ty-button--#{$state} {
-      color: var(--text-0);
+      color: #fff;
       background-color: var(--#{$state}-6);
       border-color: var(--#{$state}-6);
       &:hover,
       &:focus {
         background: var(--#{$state}-5);
         border-color: var(--#{$state}-5);
-        color: var(--text-0);
+        color: #fff;
       }
       &:active {
         border-color: var(--#{$state}-7);
@@ -75,7 +75,7 @@ const mergeDisabled = computed(() => {
       &:hover,
       &:focus,
       &:active {
-        color: var(--text-0);
+        color: #fff;
         cursor: no-drop;
         background-color: var(--#{$state}-3);
         border-color: var(--#{$state}-3);

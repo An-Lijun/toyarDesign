@@ -1,5 +1,5 @@
 
-import useNmSpace from '@/package/hooks/useBem'
+import useNmSpace from '../../../hooks/useBem'
 
 export const cardProp={
   border: {

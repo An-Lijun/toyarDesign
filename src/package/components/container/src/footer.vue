@@ -11,7 +11,7 @@
   </footer>
 </template>
 <script setup lang="ts" name="TyFooter">
-import useNmSpace from '@/package/hooks/useBem';
+import useNmSpace from '../../../hooks/useBem';
 
 const props = defineProps({
   height: {

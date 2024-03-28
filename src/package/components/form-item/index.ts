@@ -1,4 +1,4 @@
-import TyFormItem from './form-item.vue'
+import TyFormItem from './src/form-item.vue'
 TyFormItem.install = app=>{
     app.component('TyFormItem',TyFormItem)
 }

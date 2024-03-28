@@ -33,5 +33,6 @@ provide('collapseValue',{
   width: 100%;
   border: 1px solid var(--border-color-2);
   box-sizing: border-box;
+  color: var(--text-1);
 }
 </style>

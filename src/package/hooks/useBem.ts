@@ -44,7 +44,7 @@ export  default function useNmSpace(blockNm:string){
   const b =()=>blockNm && blockNm ? genBem(blockNm) : ''
   const e =(elNm:string)=> elNm&& elNm? genBem( blockNm, '', elNm):'' 
   const m =(modifierNm:string)=>modifierNm&& modifierNm? genBem(blockNm,'','',modifierNm):''
-  const bem = (blockSuffix:string,elNm:string,modifierNm:string)=>genBem(blockNm,blockSuffix,elNm,modifierNm)
+  const bem = (blockSuffix:string,elNm?:string,modifierNm?:string)=>genBem(blockNm,blockSuffix,elNm,modifierNm)
 
   return {
     is,

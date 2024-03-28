@@ -8,7 +8,7 @@
   </aside>
 </template>
 <script setup lang="ts" name="TyAside">
-import useNmSpace from '@/package/hooks/useBem';
+import useNmSpace from '../../../hooks/useBem';
 
 const props = defineProps({
   width: {
