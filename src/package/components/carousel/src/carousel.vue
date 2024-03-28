@@ -27,14 +27,11 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang='ts' name="TyCarousel">
 import { onMounted, ref, provide, watch } from 'vue'
 import {carouselContent} from '../../../hooks/symbolNm'
 import {carProps,nm} from './context'
 
-defineOptions({
-  name: 'TyCarousel'
-})
 const props = defineProps(carProps)
 
 const carousel = ref()

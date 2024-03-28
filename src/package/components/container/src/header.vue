@@ -1,22 +1,28 @@
 <template>
-  <header class="ty-header"
-    :style="{
-      height: `${height}px`
-    }"
-  > 
+  <header
+    :style="[
+      nm.b(),
+      {
+        height: `${height}px`
+      }
+    ]"
+  >
     <slot></slot>
   </header>
 </template>
-<script setup>
+<script setup  lang="ts" name="TyHeader">
+import useNmSpace from '@/package/hooks/useBem'
+
 const props = defineProps({
   height: {
     type: String,
-    default: "100",
-  },
-});
+    default: '100'
+  }
+})
+const nm = useNmSpace('header')
 </script>
 <style lang="scss" scoped>
-  .ty-header{
-    width: 100%;
-  }
+.ty-header {
+  width: 100%;
+}
 </style>

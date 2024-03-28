@@ -38,7 +38,6 @@ const props = defineProps({
 <style lang="scss" scoped>
 
 .ty-table{
-  margin-top: 50px;
   overflow:hidden;
   display: table;
   width: 100%;

@@ -1,5 +1,5 @@
 <template>
-  <aside class="ty-aside" 
+  <aside :class="nm.b()" 
     :style="{
       width:`${width}px`
     }"
@@ -7,13 +7,17 @@
     <slot></slot>
   </aside>
 </template>
-<script setup>
+<script setup lang="ts" name="TyAside">
+import useNmSpace from '@/package/hooks/useBem';
+
 const props = defineProps({
   width: {
     type: String,
     default: "100",
   },
 });
+const nm =useNmSpace('aside')
+
 </script>
 <style lang="scss" scoped>
   .ty-aside{

@@ -1,9 +1,13 @@
 <template>
-  <main class="ty-main">
+  <main :class="nm.b()">
     <slot></slot>
   </main>
 </template>
-<script setup>
+<script setup  lang="ts" name="TyMain">
+import useNmSpace from '@/package/hooks/useBem'
+
+const nm = useNmSpace('main')
+
 </script>
 <style lang="scss" scoped>
 .ty-main{

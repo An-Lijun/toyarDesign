@@ -20,13 +20,10 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts" name="TyCollapseItem">
 import { computed, inject } from 'vue'
 import { nm, itemProp } from './context'
 
-defineOptions({
-  name: 'TyCollapseItem'
-})
 
 const props = defineProps(itemProp)
 const { model, itemChange, disabled, accordion, hide, position, destroy } =

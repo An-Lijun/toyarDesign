@@ -80,13 +80,10 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang='ts' name="TyCalendar">
 import { calendarProp, calendarEmit,nm } from './context'
 import { formItemContent} from '../../../hooks/symbolNm'
 
-defineOptions({
-  name: 'TyCalendar'
-})
 const props = defineProps(calendarProp)
 const emit = defineEmits(calendarEmit)
 const tyFormItem =inject(formItemContent,null);

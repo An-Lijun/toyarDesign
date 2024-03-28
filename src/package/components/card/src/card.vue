@@ -15,12 +15,10 @@
     </main>
   </div>
 </template>
-<script setup>
+<script setup lang='ts' name="TyCard">
 import { useSlots, computed } from 'vue'
 import { cardProp,nm } from './context'
-defineOptions({
-  name: 'TyCard'
-})
+
 const props = defineProps(cardProp)
 
 </script>

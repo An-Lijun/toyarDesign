@@ -20,14 +20,12 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang='ts' name="TyButton">
 import { computed } from 'vue'
 import { buttonProps ,nm} from './context.ts'
 import {  inject  } from 'vue'
 import {configProviderDisabled} from '../../../hooks/symbolNm'
-defineOptions({
-  name: 'TyButton'
-})
+
 const props = defineProps(buttonProps)
 const inputInject = inject(configProviderDisabled,null)
 

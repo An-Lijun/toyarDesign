@@ -4,15 +4,9 @@ import TyAside from './src/aside.vue'
 import TyHeader from './src/header.vue'
 import TyFooter from './src/footer.vue'
 
+import {installComp} from '../../utils'
 
-TyContainer.install = app=>{
-    app.component('TyContainer',TyContainer),
-    app.component('TyMain',TyMain),
-    app.component('TyAside',TyAside),
-    app.component('TyHeader',TyHeader),
-    app.component('TyFooter',TyFooter)
-
-}
+installComp([TyContainer,TyMain,TyAside,TyHeader,TyFooter])
 
 export  {
     TyContainer,

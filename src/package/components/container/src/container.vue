@@ -1,19 +1,21 @@
 <template>
-    <section class="ty-container"
-    :class="{
-      'flex-column':column
-    }"
+    <section 
+    :class="[nm.b(),nm.is('flexColumn',column)]"
     >
       <slot></slot>
     </section>
 </template>
-<script setup>
+<script setup lang="ts" name="TyContainer">
+import useNmSpace from '@/package/hooks/useBem';
+
 const props = defineProps({
   column: {
     type: Boolean,
     default: false,
   },
 });
+const nm =useNmSpace('container')
+
 </script>
 <style lang="scss" scoped>
   .ty-container{
@@ -21,7 +23,7 @@ const props = defineProps({
     flex: 1;
     width: 100%;
     height: 100%;
-    &.flex-column{
+    &.is-flexColumn{
       flex-direction: column;
     }
   }

@@ -1,5 +1,5 @@
 import { createVNode, ref, render } from "vue"
-import dialog from "../dialog/dialog.vue"
+import dialog from "../dialog/src/dialog.vue"
 
 let visible = ref(false)
 let doc = document || {}

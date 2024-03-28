@@ -6,13 +6,10 @@
     </span>
   </div>
 </template>
-<script setup>
+<script setup lang='ts' name="TyBadge">
 import { computed } from 'vue'
 import { badgeProp,nm } from './context'
 
-defineOptions({
-  name: 'TyBadge'
-})
 const props = defineProps(badgeProp)
 
 const text = computed(() => {

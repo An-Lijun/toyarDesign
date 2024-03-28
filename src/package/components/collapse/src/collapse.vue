@@ -5,14 +5,11 @@
     <slot ></slot>
   </div>
 </template>
-<script setup>
+<script setup lang="ts" name="TyCollapse">
 import {provide} from 'vue'
 import {useCompMvalue} from '../../../hooks/useCompMvalue'
 import {colProps,colEmt,nm} from './context'
 
-defineOptions({
-  name: 'TyCollapse'
-})
 const props = defineProps(colProps)
 const emit = defineEmits(colEmt)
 
