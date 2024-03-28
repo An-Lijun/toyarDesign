@@ -39,7 +39,10 @@
 import TyIcon from '../../icon'
 import { onMounted, useSlots, ref } from 'vue'
 import { dialogProp, dialogEmit, nm } from './context'
-const props = defineProps(dialogProp)
+defineOptions({
+  name:'TyDialog'
+})
+ defineProps(dialogProp)
 const emits = defineEmits(dialogEmit)
 
 const tyDialogHeader = ref()

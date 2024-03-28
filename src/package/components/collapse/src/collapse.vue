@@ -9,12 +9,14 @@
 import {provide} from 'vue'
 import {useCompMvalue} from '../../../hooks/useCompMvalue'
 import {colProps,colEmt,nm} from './context'
-
+defineOptions({
+  name:'TyCollapse'
+})
 const props = defineProps(colProps)
 const emit = defineEmits(colEmt)
 
 const {model} =useCompMvalue(props,emit)
-const itemChange=(value)=>{
+const itemChange=(value:boolean)=>{
   emit('update:modelValue',value)
 } 
 provide('collapseValue',{

@@ -7,7 +7,9 @@
 import {inject,onMounted} from 'vue'
 import {carouselContent} from '../../../hooks/symbolNm'
 import { nm } from './context';
-
+defineOptions({
+  name:'TyCarouselItem'
+})
 const {setItem} =inject(carouselContent,{})
 onMounted(() => {
   setItem()

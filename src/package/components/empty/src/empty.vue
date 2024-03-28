@@ -11,7 +11,10 @@
 <script setup lang="ts" name="TyEmpty">
 import TyIcon from "../../icon";
 import {emptyProps,nm} from './context'
-const props = defineProps(emptyProps);
+defineOptions({
+  name:'TyEmpty'
+})
+defineProps(emptyProps);
 </script>
 <style lang="scss" scoped>
 .ty-empty{

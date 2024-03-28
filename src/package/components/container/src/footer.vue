@@ -12,8 +12,10 @@
 </template>
 <script setup lang="ts" name="TyFooter">
 import useNmSpace from '../../../hooks/useBem';
-
-const props = defineProps({
+defineOptions({
+  name:'TyFooter'
+})
+ defineProps({
   height: {
     type: String,
     default: "100",

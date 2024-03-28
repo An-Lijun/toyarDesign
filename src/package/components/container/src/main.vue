@@ -5,7 +5,9 @@
 </template>
 <script setup  lang="ts" name="TyMain">
 import useNmSpace from '../../../hooks/useBem'
-
+defineOptions({
+  name:'TyMain'
+})
 const nm = useNmSpace('main')
 
 </script>

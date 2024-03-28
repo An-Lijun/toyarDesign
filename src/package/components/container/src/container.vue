@@ -7,8 +7,10 @@
 </template>
 <script setup lang="ts" name="TyContainer">
 import useNmSpace from '../../../hooks/useBem';
-
-const props = defineProps({
+defineOptions({
+  name:'TyContainer'
+})
+ defineProps({
   column: {
     type: Boolean,
     default: false,

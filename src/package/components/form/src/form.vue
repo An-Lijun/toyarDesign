@@ -7,6 +7,9 @@
 import { formContent } from '../../../hooks/symbolNm'
 import { provide } from "vue";
 import {formProps,nm} from './context'
+defineOptions({
+  name:'TyForm'
+})
 
 interface IfieldList{
   [index: string]: {

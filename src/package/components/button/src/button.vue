@@ -11,8 +11,8 @@
       nm.is('block',block),
     ]"
     :disabled="mergeDisabled"
-    @click="handleClick"
-  >
+    >
+    <!-- @click="handleClick" -->
     <span v-if="type === 'link'">
       <slot></slot>
     </span>
@@ -25,7 +25,9 @@ import { computed } from 'vue'
 import { buttonProps ,nm} from './context.ts'
 import {  inject  } from 'vue'
 import {configProviderDisabled} from '../../../hooks/symbolNm'
-
+defineOptions({
+  name:'TyButton'
+})
 const props = defineProps(buttonProps)
 const inputInject = inject(configProviderDisabled,null)
 

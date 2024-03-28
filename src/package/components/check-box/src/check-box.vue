@@ -15,7 +15,9 @@
 <script setup lang='ts' name="TyCheckBox">
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { nm, checkProps, checkEmits } from './context'
-
+defineOptions({
+  name:'TyCheckBox'
+})
 const props = defineProps(checkProps)
 const emit = defineEmits(checkEmits)
 

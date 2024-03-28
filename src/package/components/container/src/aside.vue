@@ -9,8 +9,10 @@
 </template>
 <script setup lang="ts" name="TyAside">
 import useNmSpace from '../../../hooks/useBem';
-
-const props = defineProps({
+defineOptions({
+  name:'TyAside'
+})
+ defineProps({
   width: {
     type: String,
     default: "100",
