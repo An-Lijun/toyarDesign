@@ -1,10 +1,12 @@
 
 // inputProp
 
+import useNmSpace from "../../../../package/hooks/useBem"
+
 export const inputProps = {
   size: {
     type: String,
-    validator: value => {
+    validator: (value:string) => {
       return ['mini', 'small', 'medium', 'large'].includes(value)
     }
   },
@@ -31,7 +33,7 @@ export const inputProps = {
   },
   format:{
     type:Function,
-    default:value=> value
+    default:(value:String|Number)=> value
   },
   outPreText:{
     type:String
@@ -40,3 +42,6 @@ export const inputProps = {
     type:String
   }
 }
+export const inputEmits =['blur', 'input', 'update:modelValue']
+
+export const nm = useNmSpace('input')
