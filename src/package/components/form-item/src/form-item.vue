@@ -32,7 +32,9 @@
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { inject, onMounted, toRefs, provide, ref, onBeforeUnmount } from 'vue'
 import { nm, itemProps } from './context'
-
+defineOptions({
+  name:'TyFormItem'
+})
 const tyForm = inject(formContent, null)
 const formItemError = ref({
   isShowErrorMsg: false,
@@ -132,7 +134,7 @@ onBeforeUnmount(() => {
   align-items: center;
   margin-bottom: 20px;
   position: relative;
-  .ty-form-item__label {
+  &__label {
     width: 100px;
     text-align: right;
     height: 100%;
@@ -149,7 +151,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  .ty-form-item__content {
+  &__content {
     flex: 1;
 
     .ty-form-item__tip {
