@@ -39,6 +39,22 @@
     </ty-button>
   </template>
 </TyInput>
+<hr />
+<TyInput v-model="inp" size="medium" >
+  <template #outAft>
+    <ty-button  style="height: 100%;">
+      <ty-icon color="#FFF" icon="ty-search-line" />
+    </ty-button>
+  </template>
+</TyInput>
+<hr />
+<TyInput v-model="inp"  size="large" >
+  <template #outAft>
+    <ty-button style="height: 100%;">
+      <ty-icon color="#FFF" icon="ty-search-line" />
+    </ty-button>
+  </template>
+</TyInput>
   </div>
 </template>
 <script setup>

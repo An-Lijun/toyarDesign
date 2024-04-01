@@ -1,37 +1,13 @@
 import { computed } from 'vue'
-
 export const inputProps={
-  size: {
-    type: String,
-    default: 'small',
-    validator: value => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
-  },
-  clearable: {
-    type: Boolean,
-    default: true
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
   modelValue: {
     type: [ Number,String],
     required: true,
     default: ''
   },
-  showLimit:{
-    type:Boolean,
-    default:false
-  },
   format:{
     type:Function,
-    default:value=> value
+    default:(value:string)=> value
   },
   isDouble:{
     type:Boolean,
@@ -42,7 +18,7 @@ export const inputProps={
     default:1
   }
 }
-
+export const inputEmits =['blur', 'input', 'update:modelValue']
 /**
  * 计算props的值进行v-model绑定
  */
