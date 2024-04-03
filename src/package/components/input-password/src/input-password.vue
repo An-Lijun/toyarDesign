@@ -81,7 +81,9 @@ import {
   inject,
   provide
 } from 'vue'
-
+defineOptions({
+  name:'TyInputPassword'
+})
 // 属性
 const attrs = useAttrs()
 const props = defineProps(inputProps)

@@ -1,5 +1,5 @@
 import TyInputPassword from './src/input-password.vue'
-TyInputPassword.install = app=>{
-    app.component('TyInputPassword',TyInputPassword)
-}
-export default TyInputPassword 
+
+import { installComp } from '../../utils'
+
+export default  installComp(TyInputPassword)

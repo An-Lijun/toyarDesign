@@ -1,5 +1,4 @@
 import useNmSpace from "../../../../package/hooks/useBem"
-import { computed } from 'vue'
 
 export const inputProps={
   size: {

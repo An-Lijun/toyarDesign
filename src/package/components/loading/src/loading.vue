@@ -1,22 +1,16 @@
 <template>
-  <div class="ty-loading"
-    :style="{
-      position: props.isFixed?'fixed':'absolute'
-    }"
+  <div :class="[nm.b(),nm.is('fixed',isFixed)]"
   >
-    <div class="loading" style="position:absolute;left: 50%; top: 50%; transform: translate(-50%,-50%);"> 
+    <div :class="nm.e('box')" style="position:absolute;left: 50%; top: 50%; transform: translate(-50%,-50%);"> 
       <TyIcon class="load" color="var(--primary-6)" icon="ty-loader-2-line" ></TyIcon>
     </div>
   </div>
 </template>
 <script setup>
 import TyIcon from '../../icon';
-const props = defineProps({
-  isFixed: {
-    type: Boolean,
-    default: false
-  }
-})
+import {lodProps,nm} from './context'
+const props = defineProps(lodProps)
+
 </script>
 <style lang="scss" scoped>
 @keyframes load{
@@ -34,11 +28,15 @@ const props = defineProps({
   top: 0;
   bottom: 0;
   background-color: var(--opcity-5);
-  .loading{
+  position: absolute;
+  &__box{
     display: flex;
     align-items: center;
     justify-content: center;
     animation: load 2s linear infinite ;
+  }
+  &.is-fixed{
+    position: fixed;
   }
 }
 </style>

@@ -1,11 +1,15 @@
 <template>
-  <div class="ty-list-item" :class="`ty-list-item-${size}`">
+  <div :class="[listNm.b(item),listNm.bem(item,'',size)]">
     <slot></slot>
   </div>
 </template>
 <script setup>
 import { inject } from 'vue'
+import {listNm } from './context'
 
+defineOptions({
+  name:'TyListItem'
+})
 const { size } = inject('listValue')
 </script>
 <style lang="scss" scoped>
@@ -24,7 +28,7 @@ $btnSize: (
   )
 );
 @mixin addSize($name, $value) {
-  .ty-list-item-#{$name} {
+  .ty-list-item--#{$name} {
     height: var(--size-#{$name});
     line-height: var(--size-#{$name});
     padding: 0 var(--padding-#{$value});

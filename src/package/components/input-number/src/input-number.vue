@@ -18,7 +18,9 @@
 import { formContent, formItemContent, configProviderDisabled } from '../../../hooks/symbolNm'
 import { ref, onMounted, toRefs, reactive, useSlots, watch ,useAttrs } from 'vue'
 import { inputProps, useCompMvalue,inputEmits} from './context'
-
+defineOptions({
+  name:'TyInputNumber'
+})
 const attrs = useAttrs()
 
 const props = defineProps(inputProps)
