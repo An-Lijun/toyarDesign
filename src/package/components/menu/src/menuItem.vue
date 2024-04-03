@@ -1,14 +1,18 @@
 <template>
-  <li class="ty-menu-item">
-    <span class="ty-menu-item-index" v-for="item in compLevel">
+  <li :class="nm.bem('item')">
+    <span :class="nm.bem('item','index')" 
+     v-for="item in compLevel">
     </span>
     <slot></slot>
   </li>
 </template>
 <script setup>
+import {nm} from './context'
 import {injectLevel} from "./hooks/level.ts";
+defineOptions({
+  name:'TyMenuItem'
+})
 const compLevel  =injectLevel()
-console.log(compLevel,'child');
 </script>
 <style lang="scss" scoped>
 .ty-menu-item {
@@ -21,7 +25,7 @@ console.log(compLevel,'child');
   &:hover {
     background-color: var(--toyar-gray-2);
   }
-  .ty-menu-item-index{
+  &__index{
     width: 20px;
     display: inline-block;
     height: 100%;

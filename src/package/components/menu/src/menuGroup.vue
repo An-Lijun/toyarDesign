@@ -4,6 +4,9 @@
   </div>
 </template>
 <script setup>
+defineOptions({
+  name:'TyMenuGroup'
+})
 </script>
 <style lang="scss" scoped>
 </style>

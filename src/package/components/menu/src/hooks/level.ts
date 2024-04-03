@@ -1,6 +1,6 @@
 import { isRef, computed, ref,provide,inject } from "vue";
 import { MenuLevelProvide } from '../symbol'
-export function provideLevel(level) {
+export function provideLevel(level:string) {
   const compLevel = computed(() => (isRef(level) ? level.value : level));
   provide(
     MenuLevelProvide,

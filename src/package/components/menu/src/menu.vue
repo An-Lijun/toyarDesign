@@ -1,26 +1,30 @@
 <template>
-  <section class="ty-menu"
+  <section
+    :class="nm.b()"
     :style="{
-      width:'250px'
+      width: '250px'
     }"
   >
-  <header>
+    <header>
       <slot name="header"></slot>
-  </header>
-    <div class="ty-menu-inner">
+    </header>
+    <div :class="nm.e('inner')">
       <slot></slot>
     </div>
   </section>
 </template>
 <script setup>
-import {provideLevel} from "./hooks/level.ts";
+import { provideLevel } from './hooks/level.ts'
+import { nm } from './context'
+defineOptions({
+  name:'TyMenu'
+})
 provideLevel(0)
-
 </script>
 <style lang="scss" scoped>
-.ty-menu{
-  height:100%;
-  background:var(--color-bg-2);
+.ty-menu {
+  height: 100%;
+  background: var(--color-bg-2);
   padding: 0 5px;
   overflow: auto;
   transition: background-color 1s;
