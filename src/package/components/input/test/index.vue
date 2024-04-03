@@ -30,7 +30,14 @@
 </TyInput>
 <hr />
 <TyInput v-model="inp"  outAftText=".com" size="large" />
-
+<hr />
+<TyInput v-model="inp" size="mini">
+  <template #outAft>
+    <ty-button>
+      <ty-icon color="#FFF" icon="ty-search-line" />
+    </ty-button>
+  </template>
+</TyInput>
 <hr />
 <TyInput v-model="inp" >
   <template #outAft>

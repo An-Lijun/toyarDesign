@@ -9,14 +9,12 @@
 <template>
   <div
     :class="[
-      'ty-input',
-      `ty-input-${size}`,
-      {
-        'is-focus': focus,
-        'is-disabled': disabled,
-        'is-readonly': readonly,
-        'is-error': tyFormItem && tyFormItem.formItemError.isShowErrorMsg
-      }
+      nm.b(),
+      nm.m(size),
+      nm.is('focus',focus),
+      nm.is('disabled',Boolean(disabled)),
+      nm.is('readonly',Boolean(readonly)),
+      nm.is('error',tyFormItem && tyFormItem.formItemError.isShowErrorMsg),
     ]"
   >
     <!-- 输入框 -->
@@ -43,7 +41,7 @@
     <!-- 后置内容 -->
     <span
       ref="innerAft"
-      class="ty-input-innerAft"
+      :class="nm.e('innerAft')"
       @click="isPassworld = !isPassworld"
     >
       <TyIcon
@@ -52,7 +50,7 @@
     </span>
     <span
       v-if="isShowClearBtn"
-      :class="['ty-input-clear']"
+      :class="nm.is('clear')"
       :style="{
         position: 'absolute',
         right: '30px',
@@ -64,13 +62,13 @@
   </div>
 </template>
 <script setup>
-import { inputProps } from './props'
+import { useCompMvalue } from '../../../hooks/useCompMvalue'
+import { inputProps,nm } from './context'
 import {
   formContent,
   formItemContent,
   configProviderDisabled
 } from '../../../hooks/symbolNm'
-import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import {
   ref,
   onMounted,
@@ -90,8 +88,8 @@ const props = defineProps(inputProps)
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])
 const { modelValue } = toRefs(props)
 //inject
-const tyForm = inject(formContent,null)
-const tyFormItem = inject(formItemContent,null)
+const tyForm = inject(formContent, null)
+const tyFormItem = inject(formItemContent, null)
 
 // ref
 const limitBlock = ref()
@@ -100,7 +98,6 @@ const outAft = ref()
 const innerAft = ref()
 
 const focus = ref(false)
-const formatValue = ref('')
 let limitBlockWidth = ref(0)
 let innerPreWidth = ref(0)
 let innerAftWidth = ref(0)
@@ -166,25 +163,10 @@ let isShowClearBtn = computed(() => {
   )
 })
 
-watch(
-  model,
-  (newVal, oldVal) => {
-    if (newVal) {
-      if (props?.format) {
-        formatValue.value = props.format(newVal)
-      } else {
-        formatValue.value = ''
-      }
-    } else {
-      formatValue.value = ''
-    }
-  },
-  { immediate: true }
-)
 </script>
 
 <style lang="scss" scoped>
-.ty-input {
+.ty-password {
   display: flex;
   width: 100%;
   position: relative;
@@ -196,7 +178,7 @@ watch(
   // transition: all var(--time-5);
   overflow: hidden;
 
-  .ty-input-innerAft {
+  &__innerAft {
     height: 100%;
     display: flex;
     align-items: center;
@@ -218,13 +200,42 @@ watch(
     outline: unset;
     color: var(--text-1);
     background-color: var(--fill-2);
+    &[type='password']::-ms-reveal {
+      display: none;
+    }
+  }
+// ------------------------  input尺寸样式  ------------------------
+  $inputSize: (mini, small, medium, large);
+
+  @mixin addInputSize($name) {
+    &--#{$name} {
+      height: var(--size-#{$name});
+      line-height: var(--size-#{$name});
+    }
   }
 
-  input[type='password']::-ms-reveal {
-    display: none;
+  @each $name in $inputSize {
+    @include addInputSize($name);
   }
 
-  .ty-input-clear {
+  &:hover:not(.is-disabled) {
+    background-color: var(--fill-3);
+
+    input {
+      background-color: var(--fill-3);
+    }
+
+    .ty-password-clear {
+      display: flex;
+      align-items: center;
+    }
+
+    .ty-password-innerAft {
+      // display: none;
+    }
+  }
+
+  &.is-clear {
     height: 100%;
     top: 0;
     display: none;
@@ -235,44 +246,23 @@ watch(
       display: inline-block;
       content: '\eb99';
     }
-  }
 
-  .ty-input-clear:hover {
-    display: flex;
-    align-items: center;
-
-    &::before {
-      font-family: 'toyaricon' !important;
-      font-style: normal;
-      display: inline-block;
-      content: '\eb97';
-      cursor: pointer;
-    }
-  }
-
-  &:hover:not(.is-disabled) {
-    background-color: var(--fill-3);
-
-    input {
-      background-color: var(--fill-3);
-    }
-
-    .ty-input-clear {
+    &:hover{
       display: flex;
       align-items: center;
-    }
 
-    .ty-input-innerAft {
-      // display: none;
-    }
+      &::before {
+        font-family: 'toyaricon' !important;
+        font-style: normal;
+        display: inline-block;
+        content: '\eb97';
+        cursor: pointer;
+        }
+      }
   }
 
   &.is-focus {
     background-color: var(--color-bg-2);
-    // box-shadow: 0px 0px var(--primary-6),
-    //   0px 0px var(--primary-6),
-    //   0px 0x var(--primary-6),
-    //   0px 0px var(--primary-6);
     border: 1px solid var(--primary-6);
 
     input {
@@ -281,10 +271,6 @@ watch(
   }
 
   &.is-error {
-    // box-shadow: 1px 1px var(--danger-6),
-    //   -1px 1px var(--danger-6),
-    //   1px -1px var(--danger-6),
-    //   -1px -1px var(--danger-6);
     border: 1px solid var(--danger-6);
   }
 
@@ -311,17 +297,5 @@ watch(
   }
 }
 
-// ------------------------  input尺寸样式  ------------------------
-$inputSize: (mini, small, medium, large);
 
-@mixin addInputSize($name) {
-  .ty-input-#{$name} {
-    height: var(--size-#{$name});
-    line-height: var(--size-#{$name});
-  }
-}
-
-@each $name in $inputSize {
-  @include addInputSize($name);
-}
 </style>
