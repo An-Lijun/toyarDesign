@@ -1,35 +1,22 @@
 <template>
-  <label class="ty-radio">
+  <label :class="nm.b()">
     <input
       type="radio"
       v-model="model"
       :value="value"
-      :class="[`ty-radio-${size}`]"
+      :class="[nm.m(size)]"
     />
     <slot></slot>
   </label>
 </template>
 <script setup>
-import { useCompMvalue } from '../../hooks/useCompMvalue'
-const emit = defineEmits(['update:modelValue'])
-const props = defineProps({
-  size: {
-    type: String,
-    default: 'small',
-    validator: value => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
-  },
-  modelValue: {
-    type: [String, Number],
-    required: true,
-    default: ''
-  },
-  value: {
-    type: String,
-    required: true
-  }
+import { useCompMvalue } from '../../../hooks/useCompMvalue'
+import {radioProps,radioEmits,nm} from './context'
+defineOptions({
+  name:'TyRadio'
 })
+const props = defineProps(radioProps )
+const emit = defineEmits(radioEmits)
 const { model } = useCompMvalue(props, emit)
 </script>
 <style lang="scss" scoped>
@@ -46,8 +33,7 @@ const { model } = useCompMvalue(props, emit)
     margin: unset;
     margin-right: 10px;
     background-color: var(--fill-2);
-  }
-  input[type='radio']:checked::after {
+    &[type='radio']:checked::after {
     content: '';
     box-sizing: border-box;
     position: absolute;
@@ -59,9 +45,10 @@ const { model } = useCompMvalue(props, emit)
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  }
   $inputSize: (mini, small, medium, large);
   @mixin addRadioSize($name) {
-    .ty-radio-#{$name} {
+    .ty-radio--#{$name} {
       height: var(--size-#{$name});
       width: var(--size-#{$name});
       line-height: var(--size-#{$name});

@@ -1,22 +1,23 @@
 <template>
   <transition name="ty-message-fade">
+    
     <div
       ref="messageRef"
       v-show="visible"
       :style="{
         top: `${topValue}px`
       }"
-      :class="['ty-message', `ty-message-${type}`]"
+      :class="[nm.b(), nm.m(type)]"
     >
-      <div class="ty-message-icon">
+      <div :class="nm.e('icon')">
         <slot name="icon">
           <TyIcon :icon="msgIconObj[type]"></TyIcon>
         </slot>
       </div>
-      <div class="ty-message-msg">
+      <div :class="nm.e('msg')">
         {{ msg }}
       </div>
-      <div class="ty-message-close">
+      <div :class="nm.e('close')">
         <slot name="close">
           <TyIcon icon="ty-close-fill"></TyIcon>
         </slot>
@@ -27,23 +28,14 @@
 <script setup>
 import TyIcon from '../../icon'
 import {ref,onMounted,nextTick  } from 'vue';
+import {msgProps,msgEmit,nm} from './context.ts'
+
 defineOptions({
   name: 'TyMessage'
 })
-const props = defineProps({
-  msg: {
-    type: String,
-    required: true
-  },
-  options: {
-    type: Object
-  },
-  top: {
-    type: String,
-    default: '0'
-  }
-})
-const emit = defineEmits(['close'])
+
+const props = defineProps(msgProps)
+const emit = defineEmits(msgEmit)
 const messageRef = ref()
 const visible = ref(false)
 let topValue = ref(props.top)
@@ -120,8 +112,8 @@ defineExpose({
   transition: all 1s ease;
   box-sizing: border-box;
 
-  .ty-message-icon,
-  .ty-message-close {
+  &__icon,
+  &__close {
     width: 40px;
     margin: 0 10px;
     display: flex;
@@ -129,7 +121,7 @@ defineExpose({
     justify-content: center;
   }
 
-  .ty-message-msg {
+  &__msg {
     flex: 1;
     text-align: left;
     word-wrap: break-word;
@@ -138,13 +130,13 @@ defineExpose({
 
   // ---------------Message状态样式
   @mixin addMessageState($state, $value) {
-    &.ty-message-#{$state} {
+    &.ty-message--#{$state} {
       background-color: var(--#{$value}-2);
       border: 1px solid var(--#{$value}-3);
       color: var(--#{$value}-5);
 
-      .ty-message-icon,
-      .ty-message-close {
+      .ty-message__icon,
+      .ty-message__close {
         --toyar-gray-10: var(--#{$value}-7);
       }
     }

@@ -51,6 +51,9 @@ const openChildMenu = () => {
     padding: 0 10px;
     border-radius: 5px;
     user-select: none;
+    &:hover{
+      cursor: pointer;
+    }
   }
 
   &__index {
@@ -77,6 +80,7 @@ const openChildMenu = () => {
   }
   &:hover {
     background-color: var(--toyar-gray-2);
+
   }
 
   &__flag.is-opened {

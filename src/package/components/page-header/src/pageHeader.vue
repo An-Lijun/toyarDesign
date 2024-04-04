@@ -1,24 +1,23 @@
 <template>
-  <div class="ty-pageHeader">
-    <slot name="head">
-    </slot>
-    <div class="ty-pageHeader-heading">
-      <div class="ty-pageHeader-back" v-if="props.showBack" @click="emit('back')">
+  <div :class="nm.b()">
+    <slot name="head"> </slot>
+    <div :class="nm.e('heading')">
+      <div :class="nm.e('back')" v-if="props.showBack" @click="emit('back')">
         <slot name="back">
           <TyIcon icon="ty-arrow-left-fill"></TyIcon>
         </slot>
       </div>
       <TyDivider
-      v-if="props.showBack"
+        v-if="props.showBack"
         style="--toyar-gray-2: var(--toyar-gray-10)"
         direction="column"
       ></TyDivider>
-      <div class="ty-pageHeader-title">
+      <div :class="nm.e('title')">
         <slot name="title">
           {{ title }}
         </slot>
       </div>
-      <div class="ty-pageHeader-subTitle">
+      <div :class="nm.e('subTitle')">
         <slot name="subTitle">
           {{ subTitle }}
         </slot>
@@ -27,38 +26,30 @@
   </div>
 </template>
 <script setup>
-const props = defineProps({
-  title: {
-    type: String,
-    default: ''
-  },
-  subTitle: {
-    type: String,
-    default: ''
-  },
-  showBack: {
-    type: Boolean,
-    default: true
-  }
+import { hdProps, hdEmits, nm } from './context'
+defineOptions({
+  name:'TyPageHeader'
 })
-const emit = defineEmits(['back'])
+
+const props = defineProps(hdProps)
+const emit = defineEmits(hdEmits)
 </script>
 <style lang="scss" scoped>
 .ty-pageHeader {
   padding: 20px;
-  .ty-pageHeader-heading {
+  &__heading {
     height: 30px;
     align-items: center;
     display: flex;
     font-size: 26px;
-    .ty-pageHeader-title {
-      color: var(--text-1);
-    }
-    .ty-pageHeader-subTitle {
-      color: var(--text-4);
-      margin-left: 20px;
-      font-size: 20px;
-    }
+  }
+  &__title {
+    color: var(--text-1);
+  }
+  &__subTitle {
+    color: var(--text-4);
+    margin-left: 20px;
+    font-size: 20px;
   }
 }
 </style>

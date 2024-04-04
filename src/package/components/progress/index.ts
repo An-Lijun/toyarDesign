@@ -1,5 +1,4 @@
 import TyProgress from './src/progress.vue'
-TyProgress.install = app=>{
-    app.component('TyProgress',TyProgress)
-}
-export default TyProgress 
+
+import { installComp } from '../../utils'
+export default installComp(TyProgress)
