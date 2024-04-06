@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ty-result', `ty-result-${type}`]">
+  <div :class="[nm.b(),nm.m(type)]">
     <div class="ty-result-icon">
       <TyIcon :icon="msgIconObj[type]"  :color="`var(--${colorObj[type]}-5)`" 
         :style="{
@@ -7,35 +7,22 @@
         }"
       />
     </div>
-    <div class="ty-result-title" v-if="title">
+    <div :class="nm.e('title') " v-if="title">
       {{ title }}
     </div>
-    <div class="ty-result-subTitle" v-if="subTitle">
+    <div  :class="nm.e('subTitle') "  v-if="subTitle">
       {{ subTitle }}
     </div>
   </div>
 </template>
 <script setup>
 import TyIcon from '../../icon'
-const props = defineProps({
-  type: {
-    type: String,
-    required: true,
-    validator(value) {
-      return ['info', 'success', 'warning', 'error'].includes(value)
-    }
-  },
-  title: {
-    type: String
-  },
-  subTitle: {
-    type: String
-  },
-  size:{
-    type:String,
-    default:'100'
-  }
+import {resProps,nm} from './context'
+
+defineOptions({
+  name:'TyResult'
 })
+const props = defineProps(resProps)
 
 const msgIconObj = {
   info: 'ty-information-fill',
@@ -59,16 +46,15 @@ const colorObj = {
   height:100%;
 
 
-  .ty-result-title {
+  &__title {
     font-size: 30px;
     margin: 20px 0 15px 0;
     color:var(--text-1);
   }
 
-  .ty-result-subTitle {
+  &__subTitle {
     font-size: 20px;
     color:var(--text-2);
-
   }
 }
 </style>

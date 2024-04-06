@@ -1,8 +1,8 @@
 <template>
-  <div class="ty-tab" :class="[props.type,props.position]" ref="tab">
+  <div :class="[nm.b(),props.type,props.position]" ref="tab">
     <header>
-      <div class="inner">
-        <div v-if="props.type === 'normal'" class="ty-tabs__active-bar" :style="style"></div>
+      <div :class="nm.e('inner')">
+        <div v-if="props.type === 'normal'" :class="nm.e('active-bar')" :style="style"></div>
         <span
           style="margin: 0 10px"
           v-for="item in header"
@@ -25,27 +25,17 @@
 import { provide, watch, ref, nextTick, computed,onMounted} from 'vue'
 import tabHeader from './tab-header.vue'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
-const props = defineProps({
-  modelValue: {
-    type: String
-  },
-  type: {
-    type: String,
-    default: 'normal'
-  },
-  position: {
-    type: String,
-    default: 'top'
-  },
-  trigger: {
-    type: String,
-    default: 'click'
-  }
+import {tabsEmits,tabsProps ,nm} from './context'
+
+defineOptions({
+  name:'TyTabs'
 })
+const props = defineProps(tabsProps)
+const emit = defineEmits(tabsEmits)
+
 const tab = ref()
 const header = ref([])
 
-const emit = defineEmits(['update:modelValue'])
 const { model } = useCompMvalue(props, emit)
 const itemChange = value => {
   emit('update:modelValue', value)
@@ -128,7 +118,7 @@ provide('tabValue', {
 </script>
 
 <style lang="scss" scoped>
-.ty-tab.normal {
+.ty-tabs.normal {
   border: 1px solid var(--border-color-3);
   header {
     width: 100%;
@@ -139,7 +129,7 @@ provide('tabValue', {
     background-color: var(--color-bg-2);
     transition: background-color 0.5s;
 
-    .inner {
+    .ty-tabs__inner {
       margin-bottom: -1;
       position: relative;
       .ty-tabs__active-bar {
@@ -184,7 +174,7 @@ provide('tabValue', {
       height: auto;
       border: unset;
       border-right: 1px solid var(--border-color-3);
-      .inner {
+      .ty-tabs__inner {
         display: flex;
         flex-direction: column;
         margin-right: -1px;
@@ -219,7 +209,7 @@ provide('tabValue', {
       height: auto;
       border: unset;
       border-right: 1px solid var(--border-color-3);
-      .inner {
+      .ty-tabs__inner {
         display: flex;
         flex-direction: column;
         margin-right: -1px;
@@ -247,7 +237,7 @@ provide('tabValue', {
   }
 }
 
-.ty-tab.card {
+.ty-tabs.card {
   border: 1px solid var(--border-color-3);
   header {
     width: 100%;
@@ -258,7 +248,7 @@ provide('tabValue', {
     background-color: var(--color-bg-2);
     transition: background-color 0.5s;
 
-    .inner {
+    .ty-tabs__inner {
       margin-bottom: -1;
     }
 
@@ -299,7 +289,7 @@ provide('tabValue', {
       height: auto;
       border: unset;
       border-right: 1px solid var(--border-color-3);
-      .inner {
+      .ty-tabs__inner {
         display: flex;
         flex-direction: column;
         margin-right: -1px;
@@ -329,7 +319,7 @@ provide('tabValue', {
       height: auto;
       border: unset;
       border-left: 1px solid var(--border-color-3);
-      .inner {
+      .ty-tabs__inner{
         display: flex;
         flex-direction: column;
         margin-left: -1px;

@@ -1,19 +1,17 @@
 <template>
   <div
     :class="[
-      'ty-switch',
-      `ty-switch-${size}`,
-      `ty-switch-${type}`,
-      {
-        isOpen: isOpen
-      }
+      nm.b(),
+      nm.m(size),
+      nm.m(type),
+      nm.is('open',isOpen)
     ]"
     @click="change"
   >
     <span v-if="props.checkedText && isOpen" class="checkedText">
       {{ props.checkedText }}
     </span>
-    <div class="ty-switch-boll"></div>
+    <div :class="nm.e('boll')"></div>
     <span v-if="props.uncheckedText && !isOpen" class="uncheckedText">
       {{ props.uncheckedText }}
     </span>
@@ -22,43 +20,14 @@
 <script setup>
 import { computed } from 'vue';
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
+import {switchProps,switchEmits,nm} from './context'
 
-const props = defineProps({
-  size: {
-    type: String,
-    default: 'small',
-    validator: value => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
-  },
-  uncheckedText: {
-    type: String,
-    default: ''
-  },
-  checkedText: {
-    type: String,
-    default: ''
-  },
-  modelValue: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
-  openValue:{
-    type:String,
-  },
-  closeValue:{
-    type:String,
-  },
-  type:{
-    type:String,
-    default: 'round',
-      validator: value => {
-        return ['round', 'tube', 'inline'].includes(value)
-      }
-    }
+defineOptions({
+  name:'TySwitch'
 })
-const emit = defineEmits(['update:modelValue'])
+const props = defineProps(switchProps)
+const emit = defineEmits(switchEmits)
+
 const { model } = useCompMvalue(props, emit)
 const isOpen =computed(()=>{
   if (typeof model.value === 'boolean') {
@@ -93,7 +62,7 @@ const change = () => {
   &:hover {
     cursor: pointer;
   }
-  .ty-switch-boll {
+  &__boll {
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -101,13 +70,13 @@ const change = () => {
     position: absolute;
     transition: all 0.5s;
   }
-  &.ty-switch-tube{
+  &--tube{
     border-radius: 4px;
-    .ty-switch-boll{
+    .ty-switch__boll{
       border-radius: 4px;
     }
   }
-  &.ty-switch-inline{
+  &--inline{
     border-radius: 4px;
     height: 6px;
     .ty-switch-inline{
@@ -131,20 +100,20 @@ $size: (
   )
 );
 @mixin addSize($name, $value) {
-  .ty-switch-#{$name} {
+  .ty-switch--#{$name} {
     height: var(--size-#{$name});
     line-height: var(--size-#{$name});
     padding: 0 var(--padding-#{$value});
     width: calc(var(--size-#{$name}));
     font-size: var(--padding-#{$value});
-    .ty-switch-boll {
+    .ty-switch__boll {
       height: calc(var(--size-#{$name}) - var(--padding-#{$value}));
       width: calc(var(--size-#{$name}) - var(--padding-#{$value}));
       left: calc(var(--padding-#{$value}) / 2);
     }
-    &.isOpen {
+    &.is-open {
       background-color: var(--primary-6);
-      .ty-switch-boll {
+      .ty-switch__boll {
         right: calc(var(--padding-#{$value}) / 2);
         left: unset;
       }
@@ -160,5 +129,4 @@ $size: (
 @each $name, $value in $size {
   @include addSize($name, $value);
 }
-
 </style>

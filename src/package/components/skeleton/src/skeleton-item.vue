@@ -1,9 +1,12 @@
 <template>
-  <div class="ty-skeleton-item">
+  <div :class="nm.bem('item')">
   </div>
 </template>
 <script setup>
-
+import {nm} from './context'
+defineOptions({
+    name:'TySkeletonItem'
+})
 </script>
 <style lang="scss" scoped>
 @keyframes skeletonLoading {

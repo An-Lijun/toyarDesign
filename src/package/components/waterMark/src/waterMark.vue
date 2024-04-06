@@ -1,7 +1,7 @@
 <template>
-  <div class="ty-waterMark" ref="maskContainer">
+  <div :class="nm.b()" ref="maskContainer">
     <div
-      class="ty-waterMark-mark"
+      :class="nm.e('mark')"
       ref="mark"
       :style="{
         backgroundImage: `${bgUrl}`
@@ -11,16 +11,12 @@
   </div>
 </template>
 <script setup>
-import { ref,onMounted } from 'vue'
-const props = defineProps({
-  markInfo: {
-    type: String || Array,
-    required: true
-  },
-  options: {
-    type: Object
-  }
+import { ref, onMounted } from 'vue'
+import { waterProps, nm } from './context'
+defineOptions({
+  name:'TyWaterMark'
 })
+const props = defineProps(waterProps)
 const defaultOptions = {
   fontColor: 'rgba(210,210,230,0.7)',
   fontSize: 30,
@@ -31,7 +27,7 @@ const defaultOptions = {
   rotate: (-30 * Math.PI) / 180,
   offsetX: 0,
   offsetY: 0,
-  antiTamper:false
+  antiTamper: false
 }
 const options = Object.assign(defaultOptions, props.options)
 const bgUrl = ref('')
@@ -122,21 +118,20 @@ let mutOb = new MutationObserver(records => {
   })
 })
 onMounted(() => {
-  if(options.antiTamper){
+  if (options.antiTamper) {
     mutOb.observe(maskContainer.value, {
-    childList: true,
-    attributes: true,
-    subtree: true
-  })
+      childList: true,
+      attributes: true,
+      subtree: true
+    })
   }
-
 }),
   createMark()
 </script>
 <style lang="scss" scoped>
 .ty-waterMark {
   position: relative;
-  .ty-waterMark-mark {
+  &__mark {
     position: absolute;
     top: 0;
     left: 0;

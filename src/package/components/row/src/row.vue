@@ -12,30 +12,15 @@
 <script lang="ts" setup name="TyRow">
 import { provide, computed } from 'vue'
 import {rowContent} from '../../../hooks/symbolNm'
-import useNmSpace from '../../../hooks/useBem';
-const props = defineProps({
-  type: {
-    type: String,
-    default: 'line'
-  },
-  gutter: {
-    type: Number,
-    default: 0
-  },
-  justify: {
-    type: String,
-    default: 'top'
-  },
-  align: {
-    type: String,
-    default: 'center'
-  }
+import {rowProps ,nm} from './context'
+defineOptions({
+  name:'TyRow'
 })
+const props = defineProps(rowProps)
 provide(rowContent, {
   value: props.gutter
 })
 
-const nm =useNmSpace('row')
 const compJustify = computed(() => {
   switch (props.justify) {
     case 'start':

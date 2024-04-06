@@ -1,5 +1,4 @@
 import TyRow from './src/row.vue'
-TyRow.install = app=>{
-    app.component('TyRow',TyRow)
-}
-export default TyRow 
+
+import { installComp } from '../../utils'
+export default installComp(TyRow)

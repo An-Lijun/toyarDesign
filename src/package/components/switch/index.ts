@@ -1,5 +1,4 @@
 import TySwitch from './src/switch.vue'
-TySwitch.install = app=>{
-    app.component('TySwitch',TySwitch)
-}
-export default TySwitch 
+
+import { installComp } from '../../utils'
+export default installComp(TySwitch)

@@ -1,6 +1,6 @@
 <template>
   <i
-    :class="['toyar', icon]"
+    :class="['toyar', nm.b(), icon]"
     :style="{
       fontSize: props.size > 0 ? size + 'px' : 'unset',
       color: color
@@ -9,7 +9,7 @@
   </i>
 </template>
 <script lang="ts" setup>
-import { iconProps } from './context'
+import { iconProps,nm } from './context'
 defineOptions({
   name:'TyIcon'
 })

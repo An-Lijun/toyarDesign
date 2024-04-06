@@ -1,5 +1,5 @@
 <template>
-  <table class="ty-table">
+  <table :class="nm.b()">
       <thead>
         <tr>
           <th v-for="(item, index) in columns" :key="index">
@@ -22,18 +22,12 @@
 </template>
 <script setup>
 import {useSlots} from 'vue'
-const props = defineProps({
-  columns:{
-    type:Array,
-    default:()=>{
-      return []
-    },
-  },
-  data:Array,
-    default:()=>{
-      return []
-    },
+import {tableProps,nm} from './context' 
+
+defineOptions({
+  name:'TyTable'
 })
+const props = defineProps(tableProps)
 </script>
 <style lang="scss" scoped>
 

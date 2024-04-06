@@ -1,13 +1,11 @@
 <template>
   <div ref="root" :class="[
-    'ty-select',
-    `ty-select-${size}`,
-    {
-      'is-focus': focus,
-      'is-disabled': disabled,
-      'is-readonly': readonly,
-      'is-error':tyFormItem && tyFormItem.formItemError.isShowErrorMsg
-    }
+    nm.b(),
+    nm.m(size),
+    nm.is('focus',focus),
+    nm.is('disabled',disabled),
+    nm.is('readonly',readonly),
+    nm.is('error',tyFormItem && tyFormItem.formItemError.isShowErrorMsg)
   ]">
 
     <!-- 输入框 -->
@@ -15,12 +13,12 @@
      @input="handleInput" 
      @blur="handleBlur" 
      @focus="handleFocus" />
-    <span v-if="isShowClearBtn" class="ty-select-clear" :style="{
+    <span v-if="isShowClearBtn" :class="nm.e('clear')" :style="{
       position: 'absolute',
       right: '10px',
     }" @click="clear">
     </span>
-    <ul class="ty-select-group" v-show="isShowOption">
+    <ul :class="nm.e('group')" v-show="isShowOption">
        <slot> </slot>
     </ul>
   </div>
@@ -30,38 +28,19 @@ import {selectContent} from '../../../hooks/symbolNm'
 import { formContent,formItemContent} from '../../../hooks/symbolNm'
 import {TySelectOptions} from './symbol'
 import { ref, onMounted, toRefs,reactive , useAttrs, watch , provide} from 'vue'
-const props = defineProps({
-  size: {
-    type: String,
-    default: 'small',
-    validator: value => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
-  },
-  clearable: {
-    type: Boolean,
-    default: true
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  modelValue: {
-    type: [String, Number],
-    required: true,
-    default: ''
-  }
-})
+import {selProps,selEmits,nm} from './context'
+
+defineOptions({
+    name:'TySelect'
+  })
+const props = defineProps(selProps)
+const emit = defineEmits(selEmits)
+
 const options = {}
 const tyForm = inject(formContent,null);
 const tyFormItem =inject(formItemContent,null);
 const{disabled,readonly,modelValue,size} =toRefs(props)
 const root = ref();
-const emit = defineEmits(['blur', 'input', 'update:modelValue'])
 const nativeInp = ref()
 const focus = ref(false)
 let outAftWidth = ref(0)
@@ -123,7 +102,6 @@ provide(selectContent,{setNativeInp,isShowOption})
   box-sizing: border-box;
   transition: all var(--time-5);
 
-
   input {
     width: 100%;
     flex-grow: 1;
@@ -147,7 +125,7 @@ provide(selectContent,{setNativeInp,isShowOption})
 
   }
 
-  .ty-select-clear{
+  .ty-select__clear{
     display: none;
     &:before {
     font-family: 'toyaricon' !important;
@@ -157,7 +135,7 @@ provide(selectContent,{setNativeInp,isShowOption})
   }
   }
 
-  .ty-select-clear:hover {
+  .ty-select__clear:hover {
     &::before {
       font-family: 'toyaricon' !important;
       font-style: normal;
@@ -173,7 +151,7 @@ provide(selectContent,{setNativeInp,isShowOption})
     input {
       background-color: var(--fill-3);
     }
-    .ty-select-clear{
+    .ty-select__clear{
       display: block; 
     }
   }
@@ -217,7 +195,7 @@ $inputSize: (
 );
 
 @mixin addInputSize($name) {
-  .ty-select-#{$name} {
+  .ty-select--#{$name} {
     height: var(--size-#{$name});
     line-height: var(--size-#{$name});
   }
@@ -226,7 +204,7 @@ $inputSize: (
 @each $name in $inputSize {
   @include addInputSize($name);
 }
-.ty-select-group{
+.ty-select__group{
   position: absolute;
   z-index: 2;
   top: 10px;

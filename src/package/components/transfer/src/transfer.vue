@@ -1,6 +1,6 @@
 <template>
-  <div class="ty-transfer">
-    <div class="left">
+  <div :class="nm.b()">
+    <div :class="nm.e('left')">
       <header>
         <TyCheckBox
           @change="handleLfAllChange"
@@ -13,8 +13,8 @@
           >源数据</TyCheckBox
         >
       </header>
-      <div class="container" v-if="data.length">
-        <div class="item" v-for="item in data">
+      <div :class="nm.e('container')" v-if="data.length">
+        <div :class="nm.e('item')" v-for="item in data">
           <TyCheckBox
             @change="handleLfChange"
             :disabled="leftDiabeld"
@@ -30,7 +30,7 @@
         <TyEmpty></TyEmpty>
       </div>
     </div>
-    <div class="center">
+    <div :class="nm.e('center')">
       <span>
         <TyIcon
           :size="25"
@@ -46,7 +46,7 @@
         ></TyIcon>
       </span>
     </div>
-    <div class="right">
+    <div :class="nm.e('right')">
       <header>
         <TyCheckBox
           @change="handleRtAllChange"
@@ -59,8 +59,8 @@
           >选中数据</TyCheckBox
         >
       </header>
-      <div class="container" v-if="model.length">
-        <div class="item" v-for="item in model">
+      <div :class="nm.e('container')" v-if="model.length">
+        <div :class="nm.e('item')" v-for="item in model">
           <TyCheckBox
           @change="handleRtChange"
             :disabled="rightDiabeld"
@@ -84,18 +84,14 @@ import TyIcon from '../../icon'
 import TyCheckBox from '../../check-box'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import TyEmpty from '../../empty'
+import {transProps,transEmits,nm}from './context'
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true
-  },
-  data: {
-    type: Array,
-    required: true
-  }
+defineOptions({
+  name:'TyTransfer'
 })
-const emit = defineEmits(['update:modelValue'])
+const props = defineProps(transProps)
+const emit = defineEmits(transEmits)
+
 const style = '--size-mini:15px;--fill-2:var(--fill-4)'
 const { model } = useCompMvalue(props, emit)
 const data = ref(props.data)
@@ -192,8 +188,8 @@ const rightHarf = computed(() => {
 .ty-transfer {
   display: inline-flex;
   align-items: center;
-  .left,
-  .right {
+  &__left,
+  &__right {
     min-height: 250px;
     min-width: 180px;
     border: 1px solid var(--border-color-2);
@@ -204,13 +200,13 @@ const rightHarf = computed(() => {
       padding: 0 5px;
       background-color: var(--fill-2);
     }
-    .item {
+    .ty-transfer__item {
       height: 30px;
       line-height: 30px;
       padding: 0 5px;
     }
   }
-  .center {
+  &__center {
     display: flex;
     flex-direction: column;
     margin: 0 10px;

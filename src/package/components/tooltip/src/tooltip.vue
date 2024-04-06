@@ -1,6 +1,6 @@
 <template>
-  <div class="ty-tooltip" v-on="eventMaps">
-    <div class="tip" :style="style" v-show="isShowTip">
+  <div :class="nm.b()" v-on="eventMaps">
+    <div :class="nm.e('tip')" :style="style" v-show="isShowTip">
       {{ props.content }}
     </div>
     <slot></slot>
@@ -8,20 +8,12 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-const props = defineProps({
-  content: {
-    type: String,
-    default: ''
-  },
-  placement: {
-    type: String,
-    default: 'top'
-  },
-  trigger: {
-    type: String,
-    default: 'hover'
-  }
+import {toolProps,nm} from './context'
+
+defineOptions({
+  name:'TyTooltip'
 })
+const props = defineProps(toolProps)
 let eventMaps = ref({})
 let isShowTip = ref(false)
 const handleClick = () => {
@@ -68,7 +60,7 @@ let style = ref(getPlacement())
   position: relative;
   display: inline;
 
-  .tip {
+  &__tip {
     position: absolute;
     display: block;
     z-index: 99;

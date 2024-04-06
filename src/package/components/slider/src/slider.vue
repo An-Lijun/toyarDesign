@@ -1,33 +1,18 @@
 <template>
-  <div class="ty-slider" :style="style" ref="sliderBox" >
-      <div class="ty-slider-boll" ref="tyboll" :style="bollStyle" @mousedown="slider"></div>
+  <div :class="nm.b()" :style="style" ref="sliderBox" >
+      <div :class="nm.e('boll')" ref="tyboll" :style="bollStyle" @mousedown="slider"></div>
   </div>
 </template>
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
+import {sliderProps,sliderEmits,nm} from './context'
 
-const props = defineProps({
-  modelValue: {
-    type: [String, Number],
-    required: true,
-    default: ''
-  },
-  min:{
-    type:String||Number,
-    default:0
-  },
-  max:{
-    type:String||Number,
-    default:100
-  },
-  width:{
-    type:String||Number,
-    default:10
-  }
+defineOptions({
+  name:'TySlider'
 })
-
-const emit = defineEmits(['update:modelValue'])
+const props = defineProps(sliderProps)
+const emit = defineEmits(sliderEmits)
 const fn = ()=>{
   const fl =model.value/ minx
    const moveX=fl*maxWidth
@@ -83,7 +68,7 @@ onMounted(()=>{
   margin: 5px 0;
   border-radius: 16px;
   background-color: var(--fill-4);
-  .ty-slider-boll{
+  &__boll{
     background-color: #fff;
     border:3px solid var(--primary-6);
     box-sizing: border-box;

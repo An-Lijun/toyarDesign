@@ -1,3 +1,4 @@
+import useNmSpace from "../../../hooks/useBem"
 
 export  const iconProps={
   icon: {
@@ -9,6 +10,8 @@ export  const iconProps={
     default: 0
   },
   color:{
-    type:String,
+    type:String
   }
 }
+
+export const nm =useNmSpace('icon')

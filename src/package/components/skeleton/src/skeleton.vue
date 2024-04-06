@@ -1,11 +1,16 @@
 <template>
-  <div class="ty-skeleton" ref="skeleton">
+  <div :class="nm.b()" ref="skeleton">
     <skeletonItem v-for="item in count"/>
   </div>
 </template>
 <script setup>
   import skeletonItem from './skeleton-item.vue';
   import {onMounted,ref} from 'vue'
+  import {nm} from './context'
+
+  defineOptions({
+    name:'TySkeleton'
+  })
   const skeleton =ref()
   const count =ref(1)
   onMounted(()=>{
