@@ -3,7 +3,6 @@
 ## 基础用法
 
 :::demo
-
 ```html
 <TyInputPassword v-model="inp" />
 ```

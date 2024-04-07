@@ -1,10 +1,16 @@
 <template>
-  <label :class="[nm.b(), nm.is('harf', canHarf),
-   nm.is('disabled', disabled)]">
+  <label
+    :class="[
+      nm.b(),
+      nm.is('harf', canHarf),
+      nm.is('disabled', disabled),
+      nm.is('readonly', readonly)
+    ]"
+  >
     <input
       type="checkbox"
-      @click="handleChange"
-      :disabled="props.disabled"
+      :disabled="disabled"
+      :readonly="readonly"
       v-model="model"
       :value="value"
       :class="[nm.m(size)]"
@@ -12,14 +18,19 @@
     <slot />
   </label>
 </template>
-<script setup lang='ts' name="TyCheckBox">
+<script setup lang="ts" name="TyCheckBox">
+import { computed, inject } from 'vue'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { nm, checkProps, checkEmits } from './context'
+import { formContent, formItemContent } from '../../../hooks/symbolNm'
+
 defineOptions({
-  name:'TyCheckBox'
+  name: 'TyCheckBox'
 })
 const props = defineProps(checkProps)
 const emit = defineEmits(checkEmits)
+const tyForm = inject(formContent, null)
+const tyFormItem = inject(formItemContent, null)
 
 const handleChange = val => {
   setTimeout(() => {
@@ -29,6 +40,31 @@ const handleChange = val => {
 }
 const { model } = useCompMvalue(props, emit, {
   setFn: handleChange
+})
+
+// computed 继承属性
+const disabled = computed(() => {
+  return (
+    props.disabled ||
+    tyFormItem?.disabled ||
+    tyForm?.disabled ||
+    props.max&&props.max <= model.value.length&&!props.modelValue.includes(props.value) ||
+    false
+  )
+})
+const readonly = computed(() => {
+  return (
+    props.readonly ||
+    tyFormItem?.readonly ||
+    tyForm?.readonly ||
+    props.max&& props.max <= model.value.length 
+    &&!props.modelValue.includes(props.value)
+    ||
+    false
+  )
+})
+const size = computed(() => {
+  return props.size || tyFormItem?.size || tyForm?.size || 'small'
 })
 </script>
 <style lang="scss" scoped>
@@ -91,11 +127,12 @@ const { model } = useCompMvalue(props, emit, {
       justify-content: center;
     }
   }
-  &.is-disabled {
+  &.is-disabled,
+  &.is-readonly {
     color: var(--text-4);
     input {
       background-color: var(--fill-3);
-      &::after{
+      &::after {
         color: var(--text-4) !important;
       }
       &[type='checkbox']:checked {

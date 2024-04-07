@@ -9,7 +9,7 @@
   <TyTable :columns="columns" :data="tableData"> </TyTable>
 </TyWaterMark>
 <hr>
-<TyWaterMark markInfo="/toyar.png" :options="{width:400,height:100,rotate:0}">
+<TyWaterMark :markInfo="getAssetsFile('./toyar.png')" :options="{width:400,height:100,rotate:0}">
   <TyTable :columns="columns" :data="tableData"> </TyTable>
 </TyWaterMark>
 <hr>
@@ -72,6 +72,10 @@ const tableData = [
     address: '长春'
   },
 ]
+
+const getAssetsFile = (url) => {
+   return new URL(`${url}`, import.meta.url).href
+}
 </script>
 <style lang="less" scoped>
 </style>

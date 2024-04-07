@@ -53,6 +53,10 @@ export const buttonProps = {
         value
       );
     }
+  },
+  loading:{
+    type: Boolean,
+    default:false
   }
 }
 export const nm = useNmSpace('button')

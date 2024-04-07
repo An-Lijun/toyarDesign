@@ -14,9 +14,23 @@
     >
     <!-- @click="handleClick" -->
     <span v-if="type === 'link'">
-      <slot></slot>
+      <span v-show="loading" :class="nm.is('loading')">
+        <TyIcon icon="ty-loader-2-line" > </TyIcon>
+      </span>
+      <span :class="nm.is('opacity',loading)">
+        <slot ></slot>
+
+      </span>
     </span>
-    <slot v-else></slot>
+    <span  v-else>
+      <span v-show="loading" :class="nm.is('loading')">
+        <TyIcon icon="ty-loader-2-line" > </TyIcon>
+      </span>
+      <span :class="nm.is('opacity',loading)">
+        <slot ></slot>
+
+      </span>
+    </span>
   </button>
 </template>
 
@@ -32,10 +46,18 @@ const props = defineProps(buttonProps)
 const inputInject = inject(configProviderDisabled,null)
 
 const mergeDisabled = computed(() => {
-  return inputInject?.disabled || props?.disabled
+  return inputInject?.disabled || props?.disabled ||props?.loading
 })
 </script>
 <style lang="scss" scoped>
+@keyframes load{
+  0%{
+    transform: translate(-50%,-50%) rotate(0deg);
+  }
+  100%{
+    transform:  translate(-50%,-50%) rotate(360deg);
+  }
+}
 // ------------------------  按钮base样式  ------------------------
 .ty-button {
   display: inline-block;
@@ -229,7 +251,7 @@ const mergeDisabled = computed(() => {
       line-height: var(--size-#{$name});
       padding: 0 var(--padding-#{$value});
     }
-    &--#{$name}.ty-button-circle {
+    &--#{$name}.ty-button--circle {
       height: var(--size-#{$name});
       width: var(--size-#{$name});
       padding: unset;
@@ -238,11 +260,21 @@ const mergeDisabled = computed(() => {
   @each $name, $value in $btnSize {
     @include addBtnSize($name, $value);
   }
-
   // ------------------------  按钮block  ------------------------
 
   &.is-block {
     width: 100%;
+  }
+  .is-loading{
+    display: inline-block;
+    animation: load 2s linear infinite ;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    
+  }
+  .is-opacity{
+    opacity: 0;
   }
 }
 </style>

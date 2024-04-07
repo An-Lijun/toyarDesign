@@ -67,7 +67,7 @@ const handleClick = $event => {
 
   &__item {
     &.is-actived {
-      --toyar-gray-10: var(--toyar-yellow-6);
+      color: var(--toyar-yellow-6) ;
     }
     &:hover {
       cursor: pointer;

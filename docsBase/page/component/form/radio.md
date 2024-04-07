@@ -31,9 +31,34 @@ const isC = ref('')
 import { ref } from 'vue'
 const isC = ref('')
 ```
-
 :::
 
+
+## 禁用
+
+:::demo
+```html
+<TyRadio v-model="isC" :value="2" size="mini" disabled>123</TyRadio>
+```
+
+```js
+import { ref } from 'vue'
+const isC = ref('')
+```
+:::
+
+## 只读
+
+:::demo
+```html
+<TyRadio v-model="isC" :value="2" size="mini" readonly>123</TyRadio>
+```
+
+```js
+import { ref } from 'vue'
+const isC = ref('')
+```
+:::
 <script setup>
   import {ref} from 'vue'
  const isC =ref('')

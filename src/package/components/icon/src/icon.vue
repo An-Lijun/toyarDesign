@@ -3,7 +3,7 @@
     :class="['toyar', nm.b(), icon]"
     :style="{
       fontSize: props.size > 0 ? size + 'px' : 'unset',
-      color: color
+      color: color?color :'inherit'
     }"
   >
   </i>

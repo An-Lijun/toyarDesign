@@ -31,7 +31,7 @@
 import { ref } from 'vue'
 import { popProps, nm } from './context'
 defineOptions({
-  name:'TyPagination'
+  name:'TyPopconfirm'
 })
 const props = defineProps(popProps)
 let isShowConfirm = ref(false)

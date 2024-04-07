@@ -1,5 +1,5 @@
-import TyButtonGroup from './button-group.vue'
-TyButtonGroup.install = app=>{
-    app.component('TyButtonGroup',TyButtonGroup)
-}
-export default TyButtonGroup 
+import TyButtonGroup from './src/button-group.vue'
+
+import {installComp} from '../../utils'
+
+export default installComp(TyButtonGroup) 

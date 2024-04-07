@@ -25,6 +25,14 @@ export const checkProps ={
   disabled:{
     type:Boolean,
     default:false
+  },
+  readonly:{
+    type:Boolean,
+    default:false
+  },
+  max:{
+    type:[String, Number],
+    default: ''
   }
 }
 

@@ -4,7 +4,7 @@ export const radioProps ={
   size: {
     type: String,
     default: 'small',
-    validator: value => {
+    validator: (value:string) => {
       return ['mini', 'small', 'medium', 'large'].includes(value)
     }
   },
@@ -16,6 +16,14 @@ export const radioProps ={
   value: {
     type: String,
     required: true
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  readonly: {
+    type: Boolean,
+    default: false
   }
 }
 export const radioEmits =['update:modelValue']
