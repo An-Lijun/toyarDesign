@@ -1,15 +1,17 @@
 <template>
   <TyInput type="number" v-model="model" 
     v-bind="attrs"
+    @input="handleInput"
+    @blur="handleBlur"
     >
     <template #outPre>
-      <TyButton @click="handleMinus"  style="height: 100%;">
-        <TyIcon color="#fff" icon="ty-subtract-line"></TyIcon>
+      <TyButton @click="handleMinus"  style="height: 100%; line-height: 100%;">
+        <TyIcon icon="ty-subtract-line"></TyIcon>
       </TyButton>
     </template>
     <template #outAft>
-      <TyButton @click="handleAdd"  style="height: 100%;">
-        <TyIcon color="#fff" icon="ty-add-fill"></TyIcon>
+      <TyButton @click="handleAdd"  style="height: 100%; line-height: 100%;">
+        <TyIcon icon="ty-add-fill"></TyIcon>
       </TyButton>
     </template>
   </TyInput>
@@ -28,10 +30,25 @@ const emit = defineEmits(inputEmits)
 const { model } = useCompMvalue(props, emit)
 
 const handleMinus = ()=>{
-  model.value--
+  model.value-=props.step
 }
 const handleAdd = ()=>{
-  model.value++
+  model.value=Number(model.value) + Number(props.step)
+}
+function handleInput (value) {
+  emit('input', value)
+}
+function handleBlur(){
+  let value =model.value
+  console.log(value);
+  if(props.stepStrictly){
+    let coun = parseInt(value/ props.step)
+    let left = value - coun*props.step
+    let right = (coun+1)*props.step-value
+
+    let noCoun = left<right?coun:coun+1
+    emit('update:modelValue', noCoun*props.step) 
+  }
 }
 </script>
 

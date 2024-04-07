@@ -13,6 +13,10 @@ export const inputProps={
     type:Boolean,
     default:false
   },
+  stepStrictly:{
+    type:Boolean,
+    default:false
+  },
   step:{
     type:Number,
     default:1

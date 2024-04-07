@@ -46,6 +46,8 @@
     <input
       :maxlength="attrs.maxlength"
       v-show="isShowFormat"
+      @focus="handleFocus"
+      @keydown.enter="handleEnter"
       :class="[
         nm.is('outPre', outPreWidth > 0),
         nm.is('outAft', outAftWidth > 0)
@@ -170,7 +172,7 @@ import {
 } from 'vue'
 
 defineOptions({
-  name:'TyInput'
+  name: 'TyInput'
 })
 
 // 属性
@@ -203,13 +205,13 @@ const disabled = computed(() => {
   return props.disabled || tyFormItem?.disabled || tyForm?.disabled || false
 })
 const readonly = computed(() => {
-  return props.readonly || tyFormItem?.readonly || tyForm?.readonly|| false
+  return props.readonly || tyFormItem?.readonly || tyForm?.readonly || false
 })
 const size = computed(() => {
   return props.size || tyFormItem?.size || tyForm?.size || 'small'
 })
 
-const provideInp = reactive({ disabled })
+const provideInp = reactive({ disabled, readonly })
 const { model } = useCompMvalue(props, emit)
 provide(configProviderDisabled, provideInp)
 
@@ -238,9 +240,9 @@ function handleBlur (event) {
   if (tyForm && tyFormItem && tyFormItem.prop) {
     tyForm.validate(tyFormItem.prop, 'blur')
   }
+  emit('blur', event)
   isShowFormat.value = true
   focus.value = false
-  emit('blur', event)
 }
 
 function handleClear () {
@@ -253,6 +255,7 @@ function handleEnter () {
 }
 
 function handleFocus () {
+  handleToFocus()
   focus.value = true
 }
 
@@ -465,6 +468,5 @@ watch(
       // cursor: no-drop;
     }
   }
-
 }
 </style>

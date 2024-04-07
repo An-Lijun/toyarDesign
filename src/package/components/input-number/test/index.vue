@@ -15,7 +15,10 @@
     <hr>
     <TyInputNumber v-model="inp"  size="large" />
     <hr>
-
+    <TyInputNumber v-model="inp" disabled  size="large" />
+    <hr>
+    <TyInputNumber v-model="inp" readonly  size="large" />
+    <hr>
   </div>
 </template>
 <script setup>

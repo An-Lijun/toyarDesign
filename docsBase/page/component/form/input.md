@@ -3,7 +3,6 @@
 ## 基础用法
 
 :::demo
-
 ```html
 <TyInput v-model="inp" />
 ```
@@ -12,7 +11,6 @@
 import { ref } from 'vue'
 const inp = ref('')
 ```
-
 :::
 
 ## 属性

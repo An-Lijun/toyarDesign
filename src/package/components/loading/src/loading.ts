@@ -17,6 +17,7 @@ const createLoading = (append=document.body) => {
     close
   }
 }
+
 export default {
   created(el,vnode) {
   },

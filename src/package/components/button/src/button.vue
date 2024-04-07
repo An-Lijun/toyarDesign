@@ -8,9 +8,11 @@
       nm.m(size),
       nm.m(shape),
       nm.is('disabled',mergeDisabled),
+      nm.is('readonly',mergeReadonly),
       nm.is('block',block),
     ]"
     :disabled="mergeDisabled"
+    :readonly="mergeReadonly"
     >
     <!-- @click="handleClick" -->
     <span v-if="type === 'link'">
@@ -47,6 +49,10 @@ const inputInject = inject(configProviderDisabled,null)
 
 const mergeDisabled = computed(() => {
   return inputInject?.disabled || props?.disabled ||props?.loading
+})
+
+const mergeReadonly = computed(() => {
+  return inputInject?.readonly || props?.readonly ||props?.loading
 })
 </script>
 <style lang="scss" scoped>
@@ -94,6 +100,7 @@ const mergeDisabled = computed(() => {
       }
     }
     //基础按钮的禁用样式
+    &--normal.ty-button--#{$state}.is-readonly,
     &--normal.ty-button--#{$state}.is-disabled {
       &,
       &:hover,
@@ -153,6 +160,9 @@ const mergeDisabled = computed(() => {
       }
     }
     //次级按钮 虚线按钮 文字按钮 的禁用状态
+    &--secondary.ty-button--#{$state}.is-readonly,
+    &--dashed.ty-button--#{$state}.is-readonly,
+    &--text.ty-button--#{$state}.is-readonly,
     &--secondary.ty-button--#{$state}.is-disabled,
     &--dashed.ty-button--#{$state}.is-disabled,
     &--text.ty-button--#{$state}.is-disabled {
@@ -189,6 +199,7 @@ const mergeDisabled = computed(() => {
       }
     }
     // 链接按钮 的禁用状态
+    &--link.ty-button--#{$state}.is-readonly,
     &--link.ty-button--#{$state}.is-disabled {
       &,
       &:hover,
