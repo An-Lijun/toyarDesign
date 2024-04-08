@@ -44,7 +44,7 @@
     </span>
     <!-- 输入框 -->
     <input
-      :maxlength="attrs.maxlength"
+      v-bind="attrs"
       v-show="isShowFormat"
       @focus="handleFocus"
       @keydown.enter="handleEnter"
@@ -69,7 +69,7 @@
     />
     <input
       :type="attrs.type || 'text'"
-      :maxlength="attrs.maxlength"
+      v-bind="attrs"
       ref="nativeInp"
       v-show="!isShowFormat"
       v-model="model"

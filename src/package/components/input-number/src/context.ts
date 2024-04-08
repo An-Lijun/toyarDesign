@@ -1,17 +1,13 @@
 import { computed } from 'vue'
+
 export const inputProps={
   modelValue: {
     type: [ Number,String],
     required: true,
     default: ''
   },
-  format:{
-    type:Function,
-    default:(value:string)=> value
-  },
-  isDouble:{
-    type:Boolean,
-    default:false
+  precision:{
+    type:Number
   },
   stepStrictly:{
     type:Boolean,
@@ -20,9 +16,14 @@ export const inputProps={
   step:{
     type:Number,
     default:1
+  },
+  maxlength:{
+    type:[Number,String,Object]
   }
 }
+
 export const inputEmits =['blur', 'input', 'update:modelValue']
+
 /**
  * 计算props的值进行v-model绑定
  */

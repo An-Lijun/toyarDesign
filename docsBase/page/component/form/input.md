@@ -3,6 +3,7 @@
 ## 基础用法
 
 :::demo
+
 ```html
 <TyInput v-model="inp" />
 ```
@@ -11,7 +12,16 @@
 import { ref } from 'vue'
 const inp = ref('')
 ```
+
 :::
+
+## placeholder
+
+:::demo(clearable,size)
+
+```html
+<TyInput v-model="inp" size="large" placeholder="请输入" />
+```
 
 ## 属性
 
@@ -254,17 +264,19 @@ function numberToWords(input) {
 
 <div class="listTb">
 
-| 属性       | 描述                           | 类型     | 值                        | 默认          |
-| ---------- | ------------------------------ | -------- | ------------------------- | ------------- |
-| size       | 组件大小                       | string   | mini/ small/ medium/ mini | mini          |
-| clearable  | 是否展示清除按钮               | boolean  | --                        | true          |
-| disabled   | 是否禁用                       | boolean  | --                        | false         |
-| readonly   | 是否只读                       | boolean  | --                        | false         |
-| modelValue | v-model 绑定值(required)       | string   | number                    | ''            |
-| showLimit  | 是否展示输入数量配合 manlength | boolean  | --                        | false         |
-| format     | 格式化展示(仅用于展示)         | Function | --                        | value=> value |
-| outPreText | 前置文字组件                   | string   | --                        | none          |
-| outAftText | 后置文字组件                   | string   | --                        | none          |
+| 属性        | 描述                           | 类型     | 值                        | 默认          |
+| ----------- | ------------------------------ | -------- | ------------------------- | ------------- |
+| size        | 组件大小                       | string   | mini/ small/ medium/ mini | mini          |
+| clearable   | 是否展示清除按钮               | boolean  | --                        | true          |
+| maxlength   | 最大可输入长度                 | number   | --                        | --            |
+| placeholder | 占位符                         | string   | --                        | --            |
+| disabled    | 是否禁用                       | boolean  | --                        | false         |
+| readonly    | 是否只读                       | boolean  | --                        | false         |
+| modelValue  | v-model 绑定值(required)       | string   | number                    | ''            |
+| showLimit   | 是否展示输入数量配合 manlength | boolean  | --                        | false         |
+| format      | 格式化展示(仅用于展示)         | Function | --                        | value=> value |
+| outPreText  | 前置文字组件                   | string   | --                        | none          |
+| outAftText  | 后置文字组件                   | string   | --                        | none          |
 
 </div>
 
