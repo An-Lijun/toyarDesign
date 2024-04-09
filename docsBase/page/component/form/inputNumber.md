@@ -232,7 +232,7 @@ function formatFn(input) {
 | modelValue   | v-model 绑定值(required)                               | string                              | number                    | ''            |
 | size         | 组件大小                                               | string                              | mini/ small/ medium/ mini | mini          |
 | clearable    | 是否展示清除按钮                                       | boolean                             | --                        | true          |
-| maxlength    | 最大可输入长度当为 Object 则精确控制证书和小数部分长度 | number                              | Object{int:Xxx,doub:xxx}  | --            |
+| maxlength    | 最大可输入长度当为 Object 则精确控制证书和小数部分长度 | number/'Object{int:Xxx,doub:xxx}  '   | --                        | --            |
 | placeholder  | 占位符                                                 | string                              | --                        | --            |
 | disabled     | 是否禁用                                               | boolean                             | --                        | false         |
 | readonly     | 是否只读                                               | boolean                             | --                        | false         |

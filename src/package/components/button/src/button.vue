@@ -224,7 +224,7 @@ const mergeReadonly = computed(() => {
       2
     ),
     round: (
-      8
+      16
     ),
     circle: (
       circle

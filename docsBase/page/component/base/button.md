@@ -108,8 +108,8 @@
 <ty-button block>默认按钮</ty-button>
 <ty-button class="mt-10" shape="round" block>默认按钮</ty-button>
 ```
-:::
 
+:::
 
 ## loading
 
@@ -120,27 +120,27 @@
 <hr />
 <ty-button :loading="loading">默认按钮</ty-button>
 ```
-:::
 
+:::
 
 ## 按钮组
 
 :::demo buttonGrouop
 
 ```html
-  <TyButtonGroup>
-<ty-button >默认按钮A</ty-button>
-<ty-button >默认按钮B</ty-button>
-<ty-button >默认按钮C</ty-button>
-  </TyButtonGroup>
+<TyButtonGroup>
+  <ty-button>默认按钮A</ty-button>
+  <ty-button>默认按钮B</ty-button>
+  <ty-button>默认按钮C</ty-button>
+</TyButtonGroup>
 
-<hr>
-  <TyButtonGroup>
-<ty-button > <TyIcon icon="ty-arrow-left-s-line"></TyIcon> last</ty-button>
-<ty-button >  next <TyIcon icon="ty-arrow-right-s-line"></TyIcon></ty-button>
-
-  </TyButtonGroup>
+<hr />
+<TyButtonGroup>
+  <ty-button> <TyIcon icon="ty-arrow-left-s-line"></TyIcon> last</ty-button>
+  <ty-button> next <TyIcon icon="ty-arrow-right-s-line"></TyIcon></ty-button>
+</TyButtonGroup>
 ```
+
 :::
 
 ## 属性(Attributes)

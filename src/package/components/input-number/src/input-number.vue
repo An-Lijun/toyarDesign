@@ -1,5 +1,6 @@
 <template>
   <TyInput
+    type="number"
     v-model="model"
     v-bind="attrs"
     @input="handleInput"

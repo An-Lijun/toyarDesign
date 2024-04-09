@@ -27,6 +27,10 @@ export const selProps ={
     type: [String, Number],
     required: true,
     default: ''
+  },
+  placeholder:{
+    type: String,
+    default: ''
   }
 }
 
@@ -43,6 +47,10 @@ export const opProps ={
   value:{
     type: String,
     default: ''
+  },
+  disabled:{
+    type:Boolean,
+    default:false
   }
 }
 export const opEmits =['update:modelValue']

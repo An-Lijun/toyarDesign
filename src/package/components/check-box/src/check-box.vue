@@ -30,7 +30,7 @@ defineOptions({
 const props = defineProps(checkProps)
 const emit = defineEmits(checkEmits)
 const tyForm = inject(formContent, null)
-const tyFormItem = inject(formItemContent, null)
+const tyFormItem = inject(formItemContent, null) 
 
 const handleChange = val => {
   setTimeout(() => {
@@ -48,7 +48,9 @@ const disabled = computed(() => {
     props.disabled ||
     tyFormItem?.disabled ||
     tyForm?.disabled ||
-    props.max&&props.max <= model.value.length&&!props.modelValue.includes(props.value) ||
+    (props.max &&
+      props.max <= model.value.length &&
+      !props.modelValue.includes(props.value)) ||
     false
   )
 })
@@ -57,9 +59,9 @@ const readonly = computed(() => {
     props.readonly ||
     tyFormItem?.readonly ||
     tyForm?.readonly ||
-    props.max&& props.max <= model.value.length 
-    &&!props.modelValue.includes(props.value)
-    ||
+    (props.max &&
+      props.max <= model.value.length &&
+      !props.modelValue.includes(props.value)) ||
     false
   )
 })
@@ -137,6 +139,9 @@ const size = computed(() => {
       }
       &[type='checkbox']:checked {
         background-color: var(--primary-3);
+      }
+      &:hover {
+        cursor: not-allowed;
       }
     }
   }
