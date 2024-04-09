@@ -2,43 +2,60 @@
   <label
     :class="[
       nm.b(),
-      nm.is('disabled',disabled),
-      nm.is('readonly',readonly),
+      nm.is('disabled', disabled),
+      nm.is('readonly', readonly),
       nm.is('error', tyFormItem && tyFormItem.formItemError.isShowErrorMsg)
     ]"
   >
-    <input type="radio" v-model="model" :value="value" :class="[nm.m(size)]" />
+    <input
+      type="radio"
+      v-model="model"
+      @click="handleChange"
+      :value="value"
+      :class="[nm.m(size)]"
+      :disabled="disabled"
+    />
     <slot></slot>
   </label>
 </template>
 <script setup>
+import { inject, computed } from 'vue'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { radioProps, radioEmits, nm } from './context'
 import {
   formContent,
   formItemContent,
-  configProviderDisabled
+  configProviderDisabled,
+  radioGroup
 } from '../../../hooks/symbolNm'
-
 defineOptions({
   name: 'TyRadio'
 })
 const props = defineProps(radioProps)
 const emit = defineEmits(radioEmits)
 
-const { model } = useCompMvalue(props, emit)
+let { model } = useCompMvalue(props, emit)
 const tyForm = inject(formContent, null)
 const tyFormItem = inject(formItemContent, null)
+const tyRadioGroup = inject(radioGroup, null)
+
 // computed 继承属性
 const disabled = computed(() => {
-  return props.disabled || tyFormItem?.disabled || tyForm?.disabled || false
+  return props.disabled ||tyRadioGroup?.disabled || tyFormItem?.disabled || tyForm?.disabled || false
 })
 const readonly = computed(() => {
-  return props.readonly || tyFormItem?.readonly || tyForm?.readonly|| false
+  return props.readonly || tyFormItem?.readonly || tyForm?.readonly || false
 })
 const size = computed(() => {
-  return props.size || tyFormItem?.size || tyForm?.size || 'small'
+  return props.size|| tyRadioGroup?.size || tyFormItem?.size || tyForm?.size || 'small'
 })
+if (tyRadioGroup) {
+  model=tyRadioGroup.groupValue
+}
+
+const handleChange = () => {
+  emit('change', props.value)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -82,7 +99,8 @@ const size = computed(() => {
   @each $name in $inputSize {
     @include addRadioSize($name);
   }
-  &.is-disabled,&.is-readonly {
+  &.is-disabled,
+  &.is-readonly {
     input {
       border-color: var(--primary-3);
       &[type='radio']:checked::after {

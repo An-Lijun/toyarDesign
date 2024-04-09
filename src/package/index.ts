@@ -9,7 +9,7 @@ import TyFormItem from './components/form-item'
 import TyInput from './components/input'
 import TySelect from './components/select'
 import TyCheckBox from './components/check-box'
-import TyRadio from './components/radio'
+import {TyRadio,TyRadioGroup} from './components/radio'
 import TyCalendar from './components/calendar'
 import TyDialog from './components/dialog'
 import TyBackTop from './components/back-top'
@@ -69,6 +69,7 @@ const install = app => {
     app.use(TySelect),
     app.use(TyCheckBox),
     app.use(TyRadio),
+    app.use(TyRadioGroup),
     app.use(TyCalendar),
     app.use(TyDialog),
     app.use(TyBackTop),

@@ -7,5 +7,7 @@ export const carouselContent =Symbol(`${t}SelectContent`)
 export const rowContent =Symbol(`${t}RowContent`)
 
 export const selectOptions =Symbol(`${t}SelectOptions`)
+export const radioGroup =Symbol(`${t}RadioGroup`)
+
 
 
