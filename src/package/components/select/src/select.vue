@@ -15,7 +15,7 @@
       type="text"
       ref="nativeInp"
       :placeholder="placeholder"
-      @click="isShowOption = true"
+      @click.stop="isShowOption = true"
       :disabled="disabled"
       @input="handleInput"
       @blur="handleBlur"
@@ -46,9 +46,19 @@ import { selectContent } from '../../../hooks/symbolNm'
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { selectOptions } from '../../../hooks/symbolNm'
 
-import { ref, onMounted, toRefs, reactive, useAttrs, watch, provide } from 'vue'
+import {
+  ref,
+  onMounted,
+  toRefs,
+  reactive,
+  useAttrs,
+  watch,
+  provide,
+  computed,
+  inject,
+  onUnmounted
+} from 'vue'
 import { selProps, selEmits, nm } from './context'
-
 defineOptions({
   name: 'TySelect'
 })
@@ -81,7 +91,7 @@ function getValue () {
   return props.modelValue
 }
 function handleInput (event) {
-  emit('update:modelValue', event.target.value)
+  // emit('update:modelValue', event.target.value)
 }
 function handleBlur (event) {
   if (tyForm && tyFormItem && tyFormItem.prop) {
@@ -91,7 +101,11 @@ function handleBlur (event) {
   emit('blur', event)
 }
 function clear () {
-  emit('update:modelValue', '')
+  if (props.multiple) {
+    emit('update:modelValue', [])
+  } else {
+    emit('update:modelValue', '')
+  }
 }
 function handleFocus () {
   focus.value = true
@@ -108,7 +122,22 @@ watch(
     setNativeInp(newVal, options[newVal] || '')
   }
 )
-provide(selectContent, { setNativeInp, isShowOption, getValue })
+const closeOption = () => {
+  isShowOption.value = false
+}
+onMounted(() => {
+  document.addEventListener('click', closeOption)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', closeOption)
+})
+provide(selectContent, {
+  setNativeInp,
+  isShowOption,
+  getValue,
+  options,
+  multiple: props.multiple
+})
 </script>
 
 <style lang="scss" scoped>
@@ -181,7 +210,6 @@ provide(selectContent, { setNativeInp, isShowOption, getValue })
     }
     .ty-select__clear {
       background-color: var(--fill-3);
-
       display: block;
     }
   }

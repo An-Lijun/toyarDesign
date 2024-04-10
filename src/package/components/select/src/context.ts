@@ -11,6 +11,10 @@ export const selProps ={
       return ['mini', 'small', 'medium', 'large'].includes(value)
     }
   },
+  multiple:{
+    type: Boolean,
+    default: false
+  },
   clearable: {
     type: Boolean,
     default: true
@@ -24,9 +28,8 @@ export const selProps ={
     default: false
   },
   modelValue: {
-    type: [String, Number],
+    type: [String, Number,Array],
     required: true,
-    default: ''
   },
   placeholder:{
     type: String,
@@ -34,6 +37,12 @@ export const selProps ={
   }
 }
 
+export const groupProps ={
+  title:{
+    type:String,
+    default:''
+  }
+}
 export const selEmits =['blur', 'input', 'update:modelValue']
 
 

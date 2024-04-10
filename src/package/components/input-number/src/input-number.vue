@@ -4,7 +4,9 @@
     v-model="model"
     v-bind="attrs"
     @input="handleInput"
-    @blur="handleBlur"
+    @focus="handleFocus"
+    @blur="handleBlur(false)"
+    @clear="handleClear"
     :maxlength="maxlength"
   >
     <template #outPre>
@@ -20,21 +22,7 @@
   </TyInput>
 </template>
 <script setup lang="ts">
-import {
-  formContent,
-  formItemContent,
-  configProviderDisabled
-} from '../../../hooks/symbolNm'
-import {
-  ref,
-  onMounted,
-  toRefs,
-  reactive,
-  useSlots,
-  watch,
-  useAttrs,
-  computed 
-} from 'vue'
+import { watch, useAttrs, computed } from 'vue'
 import { inputProps, useCompMvalue, inputEmits } from './context'
 
 defineOptions({
@@ -44,6 +32,7 @@ const attrs = useAttrs()
 
 const props = defineProps(inputProps)
 const emit = defineEmits(inputEmits)
+
 const { model } = useCompMvalue(props, emit)
 
 function getStringType(value: any): String {
@@ -52,7 +41,7 @@ function getStringType(value: any): String {
 function is(value: any, type: string): boolean {
   return getStringType(value) === `[object ${type.toLowerCase()}]`
 }
-const fomatFloat = function (value, n) {
+const fomatFloat = function (value:number, n:number) {
   let per = Math.pow(10, n)
   let f = Math.round(value * per) / per
   let s = f.toString()
@@ -65,10 +54,16 @@ const fomatFloat = function (value, n) {
   }
   return s
 }
-function handleBlur() {
+function handleFocus() {
+  emit('focus')
+}
+function handleClear(){
+  emit('clear')
+}
+function handleBlur(bo: boolean) {
   let value = model.value
   if (props.stepStrictly) {
-    let coun = parseInt(value / props.step)
+    let coun = parseInt(String(value / props.step))
     let left = value - coun * props.step
     let right = (coun + 1) * props.step - value
     let noCoun = left < right ? coun : coun + 1
@@ -80,21 +75,26 @@ function handleBlur() {
   if (props.precision) {
     emit('update:modelValue', fomatFloat(value, props.precision))
   }
+  if (!bo) {
+    emit('blur')
+  }
 }
 const handleMinus = () => {
   model.value -= props.step
   setTimeout(() => {
-    handleBlur()
+    handleBlur(true)
+    emit('change', model.value)
   })
 }
 const handleAdd = () => {
   model.value = Number(model.value) + Number(props.step)
   setTimeout(() => {
-    handleBlur()
+    handleBlur(true)
+    emit('change', model.value)
   })
 }
-function handleInput(value) {
-  emit('input', value)
+function handleInput(value:number) {
+  emit('change', value)
 }
 
 /**
@@ -104,32 +104,36 @@ function handleInput(value) {
 const maxlength = computed(() => {
   if (!props.maxlength) {
     return Number.MAX_VALUE
-  } 
+  }
   return props.maxlength
 })
-if (is(props.maxlength,'object')) {
+if (is(props.maxlength, 'object')) {
   let lastRealData
-  let timmer =null
+  let timmer = null
   watch(
     () => model.value,
-    (newV,oldV) => {
+    (newV, oldV) => {
       clearTimeout(timmer)
-      let reg = new RegExp(`^(0|[1-9]\\d{0,${props.maxlength.int-1}})(\\.\\d{1,${props.maxlength.doub}})?$`)
-      if(reg.test(newV)){
-        lastRealData =newV
+      let reg = new RegExp(
+        `^(0|[1-9]\\d{0,${props.maxlength.int - 1}})(\\.\\d{1,${
+          props.maxlength.doub
+        }})?$`
+      )
+      if (reg.test(newV)) {
+        lastRealData = newV
       }
-      timmer = setTimeout(()=>{
-        emit('update:modelValue',lastRealData)
-      },500)
+      timmer = setTimeout(() => {
+        emit('update:modelValue', lastRealData)
+      }, 500)
     }
   )
-    // 
-    // let val = String(model.value).indexOf('.')
-    // if (val === -1) {
-    //   return props.maxlength.int + 1
-    // }
-    // return parseInt(Number(props.maxlength.int) + Number(props.maxlength.doub))
-  }
+  //
+  // let val = String(model.value).indexOf('.')
+  // if (val === -1) {
+  //   return props.maxlength.int + 1
+  // }
+  // return parseInt(Number(props.maxlength.int) + Number(props.maxlength.doub))
+}
 </script>
 
 <style lang="scss" scoped>

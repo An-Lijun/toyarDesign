@@ -22,7 +22,7 @@ export const inputProps={
   }
 }
 
-export const inputEmits =['blur', 'input', 'update:modelValue']
+export const inputEmits =['blur','clear', 'change', 'focus','update:modelValue']
 
 /**
  * 计算props的值进行v-model绑定

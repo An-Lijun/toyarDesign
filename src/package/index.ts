@@ -114,6 +114,7 @@ export {
   TyForm,
   TyFormItem,
   TyInput,
+  TySelect,
   TyCheckBox,
   TyCheckBoxGroup,
   TyRadio,

@@ -20,6 +20,10 @@ export default     {
       link: `${root}inputNumber`,
     },
     {
+      text: "Select",
+      link: `${root}select`,
+    },
+    {
       text: "InputPassword",
       link: `${root}inputPassword`,
     },

@@ -45,7 +45,20 @@ const inp = ref('')
 import { ref } from 'vue'
 const inp = ref('')
 ```
+:::
 
+## 事件
+
+:::demo
+
+```html
+<TyInputNumber v-model="inp" @clear="()=>{console.log('clear')}"  @change="(value)=>{console.log(value)}" @focus="()=>{console.log('focus')}" @blur="()=>{console.log('blur')}"/>
+```
+
+```js
+import { ref } from 'vue'
+const inp = ref('')
+```
 :::
 
 ## 只读
@@ -123,7 +136,6 @@ const inp = ref('')
 import { ref } from 'vue'
 const inp = ref('')
 ```
-
 :::
 
 ## precision 精度
@@ -240,6 +252,21 @@ function formatFn(input) {
 | step         | 每次+-按钮增加或删除的步长                             | number                              | --                        | 1             |
 | stepStrictly | 是否开启严格步长意味着手动输入时也要是步长的倍数       | boolean                             | --                        | false         |
 | precision    | 精度 当步长严格和精度同时存在时以精度为准              | 保留小数点后几位如果是整数则默认.00 | --                        | --            |
+
+</div>
+
+
+## 事件(emit)
+
+<div class="listTb">
+
+| 名称    | 描述         |
+| ------- | ------------ |
+| blur | 失焦 |
+| focus | 聚焦 |
+| enter | 回车 |
+| clear | 清除 |
+| change | 输入或者+-按钮 |
 
 </div>
 

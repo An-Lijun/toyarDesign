@@ -1,7 +1,14 @@
 <template>
-  <li :class="[opNm.b(),opNm.is('selected',_selectContent.getValue() === value),opNm.is('disabled',disabled)]" @click="selectOption">
+  <li
+    :class="[
+      opNm.b(),
+      opNm.is('selected', _selectContent.getValue() === value || Array.isArray(_selectContent.getValue()) && _selectContent.getValue().includes(value)),
+      opNm.is('disabled', disabled)
+    ]"
+    @click.stop="selectOption"
+  >
     <slot>
-      {{ label }} 
+      {{ label }}
     </slot>
   </li>
 </template>
@@ -9,21 +16,38 @@
 import { selectOptions } from '../../../hooks/symbolNm'
 import { inject, onMounted } from 'vue'
 import { opNm, opProps, opEmits } from './context'
-import {selectContent} from '../../../hooks/symbolNm'
+import { selectContent } from '../../../hooks/symbolNm'
 
 defineOptions({
-    name:'TyOption'
-  })
+  name: 'TySelectOption'
+})
 const props = defineProps(opProps)
 const emit = defineEmits(opEmits)
 const _selectContent = inject(selectContent, null)
 const setOption = inject(selectOptions, null)
 function selectOption () {
-  if(props.disabled){
+  if (props.disabled) {
     return
   }
-  _selectContent.setNativeInp(props.value, props.label)
-  _selectContent.isShowOption.value = false
+  let value = props.value
+  let label = props.label
+  if(_selectContent.multiple){
+    let data = _selectContent.getValue()
+    console.log(data);
+    if(Array.isArray(data)){
+      if(data.includes(value)){
+        data= data.filter(item => item !== value)
+      }else{
+        data.push(value)
+      }
+    }
+    value = data
+    label =data.map(item=>_selectContent.options[item]||'').join(',')
+  }
+  _selectContent.setNativeInp(value, label)
+  if(!_selectContent.multiple){
+    _selectContent.isShowOption.value = false
+  }
 }
 onMounted(() => {
   setOption(props.label, props.value)
@@ -31,17 +55,17 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 li.ty-option {
-    padding: 0 12px;
-    &:hover {
-      background-color: var(--fill-2);
-      cursor: pointer;
-    }
-    &.is-selected{
-      color: var(--primary-6);
-    }
-    &.is-disabled{
-      color: var(--text-4);
-      cursor: not-allowed;
-    }
+  padding: 0 12px;
+  &:hover {
+    background-color: var(--fill-2);
+    cursor: pointer;
+  }
+  &.is-selected {
+    color: var(--primary-6);
+  }
+  &.is-disabled {
+    color: var(--text-4);
+    cursor: not-allowed;
+  }
 }
 </style>
