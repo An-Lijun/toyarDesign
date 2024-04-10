@@ -2,8 +2,8 @@
   <div
     :class="[nm.b(), compJustify, compAlign]"
     :style="{
-      marginLeft: gutter / 2 + 'px',
-      marginRight: gutter / 2 + 'px'
+      marginLeft: gutter + 'px',
+      marginRight: gutter + 'px'
     }"
   >
     <slot> </slot>

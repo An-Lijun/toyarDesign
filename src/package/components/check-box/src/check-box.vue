@@ -26,29 +26,40 @@ defineOptions({
 })
 const props = defineProps(checkProps)
 const emit = defineEmits(checkEmits)
-const tyForm = inject(formContent, null)
-const tyFormItem = inject(formItemContent, null)
-const tyCheckBoxGroup = inject(checkBoxGroup, null)
+const tyForm = inject(formContent, null) as {
+  disabled: Boolean
+  size: number
+} | null
+const tyFormItem = inject(formItemContent, null) as {
+  disabled: Boolean
+  size: number
+} | null
+const tyCheckBoxGroup = inject(checkBoxGroup, null) as {
+  disabled: Boolean
+  max: number
+  size: number
+  emitChange: Function
+} | null
 
 let { model } = useCompMvalue(props, emit)
 
 // computed 继承属性
 const disabled = computed(() => {
-    
   return (
     props.disabled ||
     tyCheckBoxGroup?.disabled ||
     tyFormItem?.disabled ||
     tyForm?.disabled ||
     (tyCheckBoxGroup &&
-      model.value.includes&&
+      Array.isArray(model.value) &&
+      model.value.includes &&
       tyCheckBoxGroup.max &&
       tyCheckBoxGroup.max <= model.value.length &&
       !model.value.includes(props.value)) ||
     (props &&
       props.max &&
-      props.modelValue &&
-      props.modelValue.includes&&
+      Array.isArray(props.modelValue) &&
+      (props.modelValue as Array<any>).includes &&
       props.max <= model.value.length &&
       !props.modelValue.includes(props.value)) ||
     false
@@ -56,12 +67,17 @@ const disabled = computed(() => {
 })
 
 const size = computed(() => {
-  return props.size ||tyCheckBoxGroup?.size || tyFormItem?.size || tyForm?.size || 'small'
+  return (
+    props.size ||
+    tyCheckBoxGroup?.size ||
+    tyFormItem?.size ||
+    tyForm?.size ||
+    'small'
+  )
 })
 
-
 if (tyCheckBoxGroup) {
-  model=tyCheckBoxGroup.groupValue
+  model = tyCheckBoxGroup.groupValue
 }
 
 const handleChange = () => {

@@ -17,7 +17,7 @@ defineOptions({
   name:'TyCol'
 })
 const props = defineProps(colProps)
-const gutter = inject(rowContent, null)
+const gutter = inject(rowContent, null) as {value:number}|null
 
 const compStyle = computed(() => {
   if (props.span instanceof Object) {
@@ -27,7 +27,7 @@ const compStyle = computed(() => {
     }
     return style
   }
-  return  nm.bem(props.span)
+  return nm.bem(String(props.span))
 })
 </script>
 <style lang="scss" scoped>

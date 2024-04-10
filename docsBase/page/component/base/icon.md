@@ -68,10 +68,10 @@
 :::demo size 控制图标大小(默认 1em)单位 px
 
 ```html
-<ty-icon size="15" icon="ty-arrow-up-circle-fill" class="mw-10"></ty-icon>
-<ty-icon size="20" icon="ty-arrow-down-circle-fill" class="mw-10"></ty-icon>
-<ty-icon size="25" icon="ty-arrow-right-circle-fill" class="mw-10"></ty-icon>
-<ty-icon size="30" icon="ty-arrow-left-circle-fill" class="mw-10"></ty-icon>
+<ty-icon :size="15" icon="ty-arrow-up-circle-fill" class="mw-10"></ty-icon>
+<ty-icon :size="20" icon="ty-arrow-down-circle-fill" class="mw-10"></ty-icon>
+<ty-icon :size="25" icon="ty-arrow-right-circle-fill" class="mw-10"></ty-icon>
+<ty-icon :size="30" icon="ty-arrow-left-circle-fill" class="mw-10"></ty-icon>
 ```
 
 :::
