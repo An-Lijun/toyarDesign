@@ -46,7 +46,6 @@
     <input
       v-bind="attrs"
       v-show="isShowFormat"
-      @focus="handleFocus"
       @keydown.enter="handleEnter"
       :class="[
         nm.is('outPre', outPreWidth > 0),
@@ -230,6 +229,8 @@ function handleInput (event) {
 }
 
 function handleToFocus () {
+  focus.value = true
+
   isShowFormat.value = false
   setTimeout(() => {
     nativeInp.value.focus()
@@ -255,8 +256,8 @@ function handleEnter () {
 }
 
 function handleFocus () {
-  handleToFocus()
-  focus.value = true
+  emit('focus')
+  // handleToFocus()
 }
 
 let isShowClearBtn = computed(() => {

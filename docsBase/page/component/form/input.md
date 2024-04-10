@@ -137,7 +137,20 @@ const inp = ref('')
 import { ref } from 'vue'
 const inp = ref('')
 ```
+:::
 
+## 事件
+
+:::demo
+
+```html
+<TyInput v-model="inp" @enter="()=>{console.log('enter')}" @input="(val)=>{console.log(val)}" @clear="()=>{console.log('clear')}" @focus="()=>{console.log('focus')}" @blur="()=>{console.log('blur')}"> </TyInput>
+```
+
+```js
+import { ref } from 'vue'
+const inp = ref('')
+```
 :::
 
 ## 格式化展示
@@ -292,3 +305,20 @@ function numberToWords(input) {
 | outAft   | 后置元素     |
 
 </div>
+
+
+
+## 事件(emit)
+
+<div class="listTb">
+
+| 名称    | 描述         |
+| ------- | ------------ |
+| blur | 失焦 |
+| focus | 聚焦 |
+| enter | 回车 |
+| clear | 清除 |
+| input | 输入 |
+
+</div>
+

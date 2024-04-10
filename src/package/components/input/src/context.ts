@@ -42,6 +42,6 @@ export const inputProps = {
     type:String
   }
 }
-export const inputEmits =['blur', 'input', 'update:modelValue']
+export const inputEmits =['blur','focus','enter', 'clear','input', 'update:modelValue']
 
 export const nm = useNmSpace('input')
