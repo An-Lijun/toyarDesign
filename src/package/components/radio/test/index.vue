@@ -1,6 +1,13 @@
 <template>
   <div class="divRoot">
-    {{ isC }}
+    <hr>
+    {{ isC11 }}
+    <button @click="isC11=2">123</button>
+
+    <TyRadio   v-model="isC11"   :value="1" size="mini" @change="(val)=>{console.log('change',val)}">123</TyRadio>
+      <TyRadio  v-model="isC11" :value="2" size="small" @change="(val)=>{console.log('change',val)}">456</TyRadio>
+      <hr>
+      {{ isC }}
     <button @click="isC=2">123</button>
     <TyRadioGroup v-model="isC" @change="(val)=>{console.log('change',val)}">
       <TyRadio  :value="1" size="mini">123</TyRadio>
@@ -45,6 +52,8 @@
 import { ref } from 'vue'
 const isC = ref('')
 const tForm = ref()
+const isC11 = ref()
+
 
 const formData = ref({
   isC1: ''

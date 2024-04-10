@@ -1,5 +1,5 @@
 <template>
-  <div class="divRoot">
+  <div :class="nm.bem('group')">
     <slot></slot>
   </div>
 </template>
@@ -16,13 +16,13 @@ const props = defineProps(radioGroupProps)
 const emit = defineEmits(radioGroupEmits)
 const { model } = useCompMvalue(props, emit)
 
-watch(model,()=>{
-  emit('change',model.value)
-})
 provide(radioGroup, {
   groupValue:model,
   size:props.size,
-  disabled:props.disabled
+  disabled:props.disabled,
+  emitChange:(value)=>{
+    emit('change',value)
+  }
 })
 
 </script>

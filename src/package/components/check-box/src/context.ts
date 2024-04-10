@@ -4,7 +4,6 @@ export const nm = useNmSpace('check-box')
 export const checkProps ={
   size: {
     type: String,
-    default: 'small',
     validator: (value:string) => {
       return TY_SIZE.includes(value)
     }

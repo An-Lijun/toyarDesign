@@ -1,5 +1,12 @@
 <template>
   <div class="divRoot">
+    <h6>{{ isT }}</h6>
+    <button @click="isT=['南']">123</button>
+<TyCheckBox v-model="isT" value="东" size="mini" @change="(v)=>{console.log(v)}">东</TyCheckBox>
+<TyCheckBox v-model="isT" value="南" size="small" @change="(v)=>{console.log(v)}">南</TyCheckBox>
+<TyCheckBox v-model="isT" value="西" size="medium" @change="(v)=>{console.log(v)}">西</TyCheckBox>
+<TyCheckBox v-model="isT" value="北" size="large" @change="(v)=>{console.log(v)}">北</TyCheckBox>
+    <hr>
     <TyCheckBox v-model="r2" readonly :size="item">22</TyCheckBox>
 
 
@@ -46,6 +53,8 @@
 import { ref } from 'vue'
 
 let r1 = ref(false)
+let isT = ref([])
+
 const tForm = ref()
 
 const formData = ref({

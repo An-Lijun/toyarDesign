@@ -11,7 +11,7 @@
       type="checkbox"
       :disabled="disabled"
       :readonly="readonly"
-      v-model="model"
+       v-model="model"
       :value="value"
       :class="[nm.m(size)]"
     />
@@ -19,7 +19,7 @@
   </label>
 </template>
 <script setup lang="ts" name="TyCheckBox">
-import { computed, inject } from 'vue'
+import { computed, inject, watch } from 'vue'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { nm, checkProps, checkEmits } from './context'
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
@@ -39,7 +39,8 @@ const handleChange = val => {
   return val
 }
 const { model } = useCompMvalue(props, emit, {
-  setFn: handleChange
+  // setFn:handleChange,
+  // watchChange: handleChange
 })
 
 // computed 继承属性
@@ -68,6 +69,11 @@ const readonly = computed(() => {
 const size = computed(() => {
   return props.size || tyFormItem?.size || tyForm?.size || 'small'
 })
+
+// watch(,(val)=>{
+//   // console.log("--------");
+//   emit('change', val)
+// })
 </script>
 <style lang="scss" scoped>
 .ty-check-box {

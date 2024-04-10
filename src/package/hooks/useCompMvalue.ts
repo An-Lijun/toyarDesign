@@ -6,6 +6,9 @@ import { computed, watch } from 'vue'
 export const useCompMvalue= (props,emitFn,options={})=>{
   const model = computed({
     get() {
+      if(options.setFn){
+        options.setFn( props.modelValue)
+      }
       return props.modelValue 
     },
     set(val) {
@@ -16,7 +19,7 @@ export const useCompMvalue= (props,emitFn,options={})=>{
     }
   })
   if(options.watchChange){
-    watch(model,options.watchChange)
+    watch(()=>props.modelValue,options.watchChange)
   }
   return {model}
 }

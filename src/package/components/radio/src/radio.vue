@@ -54,7 +54,11 @@ if (tyRadioGroup) {
 }
 
 const handleChange = () => {
-  emit('change', props.value)
+  if(tyRadioGroup){
+    tyRadioGroup.emitChange(props.value)
+  }else{
+    emit('change', props.value)
+  }
 }
 </script>
 
