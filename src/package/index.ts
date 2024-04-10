@@ -8,7 +8,7 @@ import TyForm from './components/form'
 import TyFormItem from './components/form-item'
 import TyInput from './components/input'
 import TySelect from './components/select'
-import TyCheckBox from './components/check-box'
+import {TyCheckBox,TyCheckBoxGroup} from './components/check-box'
 import {TyRadio,TyRadioGroup} from './components/radio'
 import TyCalendar from './components/calendar'
 import TyDialog from './components/dialog'
@@ -53,7 +53,6 @@ import TyTransfer from './components/transfer'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
-import './assets/i.scss'
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 const install = app => {
@@ -69,7 +68,6 @@ const install = app => {
     app.use(TySelect),
     app.use(TyCheckBox),
     app.use(TyRadio),
-    app.use(TyRadioGroup),
     app.use(TyCalendar),
     app.use(TyDialog),
     app.use(TyBackTop),
@@ -117,7 +115,9 @@ export {
   TyFormItem,
   TyInput,
   TyCheckBox,
+  TyCheckBoxGroup,
   TyRadio,
+  TyRadioGroup,
   TyCalendar,
   TyDialog,
   TyBackTop,

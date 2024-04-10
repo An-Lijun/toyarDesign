@@ -1,17 +1,10 @@
 <template>
-  <label
-    :class="[
-      nm.b(),
-      nm.is('harf', canHarf),
-      nm.is('disabled', disabled),
-      nm.is('readonly', readonly)
-    ]"
-  >
+  <label :class="[nm.b(), nm.is('harf', canHarf), nm.is('disabled', disabled)]">
     <input
       type="checkbox"
+      @click="handleChange"
       :disabled="disabled"
-      :readonly="readonly"
-       v-model="model"
+      v-model="model"
       :value="value"
       :class="[nm.m(size)]"
     />
@@ -19,10 +12,14 @@
   </label>
 </template>
 <script setup lang="ts" name="TyCheckBox">
-import { computed, inject, watch } from 'vue'
+import { computed, inject } from 'vue'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { nm, checkProps, checkEmits } from './context'
-import { formContent, formItemContent } from '../../../hooks/symbolNm'
+import {
+  formContent,
+  formItemContent,
+  checkBoxGroup
+} from '../../../hooks/symbolNm'
 
 defineOptions({
   name: 'TyCheckBox'
@@ -30,50 +27,54 @@ defineOptions({
 const props = defineProps(checkProps)
 const emit = defineEmits(checkEmits)
 const tyForm = inject(formContent, null)
-const tyFormItem = inject(formItemContent, null) 
+const tyFormItem = inject(formItemContent, null)
+const tyCheckBoxGroup = inject(checkBoxGroup, null)
 
-const handleChange = val => {
-  setTimeout(() => {
-    emit('change', val)
-  })
-  return val
-}
-const { model } = useCompMvalue(props, emit, {
-  // setFn:handleChange,
-  // watchChange: handleChange
-})
+let { model } = useCompMvalue(props, emit)
 
 // computed 继承属性
 const disabled = computed(() => {
+    
   return (
     props.disabled ||
+    tyCheckBoxGroup?.disabled ||
     tyFormItem?.disabled ||
     tyForm?.disabled ||
-    (props.max &&
+    (tyCheckBoxGroup &&
+      model.value.includes&&
+      tyCheckBoxGroup.max &&
+      tyCheckBoxGroup.max <= model.value.length &&
+      !model.value.includes(props.value)) ||
+    (props &&
+      props.max &&
+      props.modelValue &&
+      props.modelValue.includes&&
       props.max <= model.value.length &&
       !props.modelValue.includes(props.value)) ||
     false
   )
-})
-const readonly = computed(() => {
-  return (
-    props.readonly ||
-    tyFormItem?.readonly ||
-    tyForm?.readonly ||
-    (props.max &&
-      props.max <= model.value.length &&
-      !props.modelValue.includes(props.value)) ||
-    false
-  )
-})
-const size = computed(() => {
-  return props.size || tyFormItem?.size || tyForm?.size || 'small'
 })
 
-// watch(,(val)=>{
-//   // console.log("--------");
-//   emit('change', val)
-// })
+const size = computed(() => {
+  return props.size ||tyCheckBoxGroup?.size || tyFormItem?.size || tyForm?.size || 'small'
+})
+
+
+if (tyCheckBoxGroup) {
+  model=tyCheckBoxGroup.groupValue
+}
+
+const handleChange = () => {
+  if (tyCheckBoxGroup) {
+    setTimeout(() => {
+      tyCheckBoxGroup.emitChange(model.value)
+    })
+  } else {
+    setTimeout(() => {
+      emit('change', model.value)
+    })
+  }
+}
 </script>
 <style lang="scss" scoped>
 .ty-check-box {
@@ -135,8 +136,7 @@ const size = computed(() => {
       justify-content: center;
     }
   }
-  &.is-disabled,
-  &.is-readonly {
+  &.is-disabled {
     color: var(--text-4);
     input {
       background-color: var(--fill-3);

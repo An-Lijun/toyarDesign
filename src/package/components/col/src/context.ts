@@ -2,7 +2,7 @@ import useNmSpace from '../../../hooks/useBem'
 
 export const colProps ={
   span: {
-    type: Number || Object,
+    type: [Number, Object],
     default: 24
   },
   offset: {

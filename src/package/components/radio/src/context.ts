@@ -8,8 +8,8 @@ export const radioGroupProps ={
     }
   },
   modelValue: {
-    type: [String, Number],
     required: true,
+    type: [String, Number],
     default: ''
   },
   disabled: {
@@ -32,11 +32,10 @@ export const radioProps ={
   },
   modelValue: {
     type: [String, Number],
-    required: true,
     default: ''
   },
   value: {
-    type: String,
+    type: [String,Number],
     required: true
   },
   disabled: {

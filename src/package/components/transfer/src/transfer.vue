@@ -81,7 +81,7 @@
 <script setup>
 import { ref } from 'vue'
 import TyIcon from '../../icon'
-import TyCheckBox from '../../check-box'
+import {TyCheckBox} from '../../check-box'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import TyEmpty from '../../empty'
 import {transProps,transEmits,nm}from './context'

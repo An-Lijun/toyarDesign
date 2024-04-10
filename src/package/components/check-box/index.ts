@@ -1,6 +1,12 @@
 
 
-import {installComp} from '../../utils'
+import { installComp } from '../../utils'
 import TyCheckBox from './src/check-box.vue'
+import TyCheckBoxGroup from './src/check-box-group.vue'
 
-export default installComp(TyCheckBox) 
+installComp([TyCheckBox, TyCheckBoxGroup])
+
+export {
+  TyCheckBox,
+  TyCheckBoxGroup
+}
