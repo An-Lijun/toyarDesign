@@ -4,7 +4,6 @@
       nm.b(),
       nm.is('disabled', disabled),
       nm.is('readonly', readonly),
-      nm.is('error', tyFormItem && tyFormItem.formItemError.isShowErrorMsg)
     ]"
   >
     <input

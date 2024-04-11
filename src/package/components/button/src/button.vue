@@ -21,7 +21,6 @@
       </span>
       <span :class="nm.is('opacity',loading)">
         <slot ></slot>
-
       </span>
     </span>
     <span  v-else>
@@ -45,14 +44,17 @@ defineOptions({
   name:'TyButton'
 })
 const props = defineProps(buttonProps)
-const inputInject = inject(configProviderDisabled,null)
+const inputInject = inject(configProviderDisabled,null) as {
+  disabled:boolean,
+  readonly:boolean
+}|null
 
 const mergeDisabled = computed(() => {
   return inputInject?.disabled || props?.disabled ||props?.loading
 })
 
 const mergeReadonly = computed(() => {
-  return inputInject?.readonly || props?.readonly ||props?.loading
+  return inputInject?.readonly  ||props?.loading
 })
 </script>
 <style lang="scss" scoped>

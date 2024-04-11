@@ -4,7 +4,8 @@
       nm.b(),
       nm.m(size),
       nm.m(type),
-      nm.is('open',isOpen)
+      nm.is('open',isOpen),
+      nm.is('disabled', disabled),
     ]"
     @click="change"
   >
@@ -18,15 +19,21 @@
   </div>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { computed,inject } from 'vue';
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import {switchProps,switchEmits,nm} from './context'
-
+import {
+  formContent,
+  formItemContent
+} from '../../../hooks/symbolNm'
 defineOptions({
   name:'TySwitch'
 })
+
 const props = defineProps(switchProps)
 const emit = defineEmits(switchEmits)
+const tyForm = inject(formContent, null)
+const tyFormItem = inject(formItemContent, null)
 
 const { model } = useCompMvalue(props, emit)
 const isOpen =computed(()=>{
@@ -35,11 +42,21 @@ const isOpen =computed(()=>{
   }
   return model.value === props.openValue
 })
+
+// computed 继承属性
+const disabled = computed(() => {
+  return props.disabled || tyFormItem?.disabled || tyForm?.disabled || false
+})
+
 const change = () => {
+  if(props.disabled){
+    return
+  }
   if (typeof model.value === 'boolean') {
    return model.value = !model.value
   }
   model.value = model.value===props.openValue? props.closeValue:props.openValue
+  emit('change',model.value)
 }
 </script>
 <style lang="scss" scoped>
@@ -82,6 +99,16 @@ const change = () => {
     .ty-switch-inline{
       border-radius: 4px;
     }
+  }
+  &.is-disabled{
+    color: var(--text-4);
+    background-color: var(--fill-3);
+    &:hover{
+      cursor: not-allowed;
+    }
+  }
+  &.is-disabled.is-open{
+    background-color: var(--primary-3);
   }
   
 }

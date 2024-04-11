@@ -75,7 +75,6 @@
 
 :::
 
-
 ## 添加开关描述
 
 :::demo
@@ -96,20 +95,69 @@
 ```JavaScript
   const isSwitch1 = ref('1')
 ```
+
 :::
+
+## disabled
+
+:::demo
+
+```html
+{{isSwitch1}}
+<TySwitch
+  disabled
+  v-model="isSwitch1"
+  openValue="1"
+  type="tube"
+  closeValue="2"
+  size="mini"
+  uncheckedText="off"
+  checkedText="on"
+/>
+```
+
+```JavaScript
+  const isSwitch1 = ref('1')
+```
+:::
+
+
+## 事件
+
+:::demo
+
+```html
+{{isSwitch1}}
+<TySwitch
+  @change="(value)=>{console.log(value)}"
+  v-model="isSwitch1"
+  openValue="1"
+  type="tube"
+  closeValue="2"
+  size="mini"
+  uncheckedText="off"
+  checkedText="on"
+/>
+```
+
+```JavaScript
+  const isSwitch1 = ref('1')
+```
+:::
+
 ## 属性(Attributes)
 
 <div class="listTb">
 
-| 属性  | 描述       | 类型   | 值                        | 默认 |
-| ----- | ---------- | ------ | ------------------------- | ---- |
-| size  | 组件大小   | string | mini/ small/ medium/ mini | mini |
-| type | 组件类型 | string | round/ tube/ inline/  | 'round' |
-| uncheckedText | 组件未选中描述 | string | -- | '' |
-| checkedText | 组件选中描述 | string | -- | '' |
-| openValue | 组件打开值 | string/Boolean | -- | true |
-| closeValue | 组件打开值 | string/Boolean | -- | false |
-
+| 属性          | 描述           | 类型           | 值                        | 默认    |
+| ------------- | -------------- | -------------- | ------------------------- | ------- |
+| size          | 组件大小       | string         | mini/ small/ medium/ mini | mini    |
+| type          | 组件类型       | string         | round/ tube/ inline/      | 'round' |
+| uncheckedText | 组件未选中描述 | string         | --                        | ''      |
+| disabled      | 禁用           | boolean        | --                        | false   |
+| checkedText   | 组件选中描述   | string         | --                        | ''      |
+| openValue     | 组件打开值     | string/Boolean | --                        | true    |
+| closeValue    | 组件打开值     | string/Boolean | --                        | false   |
 
 </div>
 

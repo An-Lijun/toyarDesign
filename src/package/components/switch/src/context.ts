@@ -17,12 +17,16 @@ export const switchProps ={
     default: ''
   },
   modelValue: {
-    type: Boolean,
+    type: [Boolean,String,Number],
     required: true,
     default: false
   },
   openValue:{
     type:String,
+  },
+  disabled:{
+    type:Boolean,
+    default:false
   },
   closeValue:{
     type:String,
@@ -35,6 +39,6 @@ export const switchProps ={
       }
     }
 }
-export const switchEmits =['update:modelValue']
+export const switchEmits =['update:modelValue','change']
 
 export const nm =useNmSpace('switch')

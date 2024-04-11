@@ -13,7 +13,7 @@ export const buttonProps = {
     }
   },
   type:{
-    type: String,
+    type:String,
     default: "normal",
     validator: (value:string) => {
       return ["normal", "secondary",  "dashed",'text','link'].includes(
