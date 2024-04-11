@@ -8,7 +8,7 @@
         ref="tyDialog"
         v-show="modelValue"
       >
-        <div :class="nm.e('header')" ref="tyDialogHeader">
+        <div :class="[nm.e('header'),nm.is('underLine',isUnderLine)]" ref="tyDialogHeader" >
           <slot name="title">
             <!-- 将span放到slot内，这样不仅可以定义title文本，还可以定义样式等 -->
             <span :class="nm.e('title')">
@@ -73,8 +73,6 @@ onMounted(() => {
 })
 
 function handleClose () {
-  console.log("11111111");
-  
   emits('update:modelValue', false)
 }
 </script>
@@ -87,7 +85,7 @@ function handleClose () {
   left: 0;
   overflow: auto;
   margin: 0;
-  z-index: var(--zindex-9);
+  z-index: var(--zindex-50);
   background-color: var(--opcity-5);
   color: var(--text-1);
 
@@ -101,7 +99,6 @@ function handleClose () {
     width: 30%;
 
     &__header {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       padding: 20px 20px 10px;
       cursor: move;
 
@@ -125,6 +122,9 @@ function handleClose () {
         .ty-icon-close {
           vertical-align: bottom;
         }
+      }
+      &.is-underLine{
+        border-bottom: 1px solid var(--border-color-2);
       }
     }
 

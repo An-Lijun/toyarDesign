@@ -20,6 +20,10 @@ export const dialogProp={
   },
   info:{
     type:String,
+  },
+  isUnderLine:{
+    type: Boolean,
+    default: true,
   }
   
 }

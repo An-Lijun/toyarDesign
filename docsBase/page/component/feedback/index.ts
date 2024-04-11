@@ -4,6 +4,10 @@ export default    {
   text: "反馈组件",
   items: [
     {
+      text: "Alert",
+      link: `${root}alert`,
+    },
+    {
       text: "Result",
       link: `${root}result`,
     },
