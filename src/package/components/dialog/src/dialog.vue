@@ -1,12 +1,12 @@
 <template>
   <!-- @click.self避免冒泡，只有点击自己时才能触发   -->
-  <div :class="nm.e('wrapper')" @click.self="handleClose" v-show="modelValue">
+  <div :class="nm.e('wrapper')" @click.self="handleClose" v-show="modelValue||showValue">
     <transition name="dialog-fade">
       <div
         :class="nm.b()"
         :style="{ width, top }"
         ref="tyDialog"
-        v-show="modelValue"
+        v-show="modelValue||showValue"
       >
         <div :class="[nm.e('header'),nm.is('underLine',isUnderLine)]" ref="tyDialogHeader" >
           <slot name="title">
@@ -42,9 +42,9 @@ import { dialogProp, dialogEmit, nm } from './context'
 defineOptions({
   name:'TyDialog'
 })
- defineProps(dialogProp)
+defineProps(dialogProp)
 const emits = defineEmits(dialogEmit)
-
+let showValue= ref(false)
 const tyDialogHeader = ref()
 const tyDialog = ref()
 let x = 0
@@ -71,10 +71,13 @@ onMounted(() => {
     }
   })
 })
-
+showValue
 function handleClose () {
   emits('update:modelValue', false)
 }
+defineExpose({
+  showValue
+})
 </script>
 <style lang="scss" scoped>
 .ty-dialog__wrapper {

@@ -22,5 +22,9 @@ export default {
       text: "图标列表",
       link: `${root}iconList`,
     },
+    {
+      text: "回到顶部",
+      link: `${root}backTop`,
+    },
   ]
 }

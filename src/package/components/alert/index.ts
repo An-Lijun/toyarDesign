@@ -16,7 +16,6 @@ interface IOption {
   },
 }
 
-let visible = ref(false)
 let doc = document || null
 
 const genOptions = (options) => {
@@ -77,10 +76,8 @@ const createAlert = (info: String, options: IOption, div: HTMLDivElement) => {
     dialog,
     {
       info,
-      modelValue: visible,
       isUnderLine: false,
       'onUpdate:modelValue': () => {
-        visible.value = false
         if (doc) {
           doc?.body.removeChild(div)
         }
@@ -122,7 +119,8 @@ export default function AlertJs(
       render(instance, div)
       doc?.body.appendChild(div)
       nextTick(() => {
-        visible.value = true
+        
+        instance.component.exposed.showValue.value=true
       })
     }
   }

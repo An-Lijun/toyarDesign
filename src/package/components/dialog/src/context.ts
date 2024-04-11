@@ -15,7 +15,6 @@ export const dialogProp={
   },
   modelValue: {
     type: Boolean,
-    required: true,
     default: false,
   },
   info:{

@@ -10,7 +10,6 @@
 <ty-button state="warning" class="mw-10">警告按钮</ty-button>
 <ty-button state="success" class="mw-10">成功按钮</ty-button>
 ```
-
 :::
 
 ## 按钮类型(type)

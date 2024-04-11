@@ -8,6 +8,10 @@ export default    {
       link: `${root}alert`,
     },
     {
+      text: "Dialog",
+      link: `${root}dialog`,
+    },
+    {
       text: "Result",
       link: `${root}result`,
     },

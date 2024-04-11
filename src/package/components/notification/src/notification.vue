@@ -73,7 +73,7 @@ const floatNoti = value => {
   topValue.value = topValue.value - value
 }
 onMounted(() => {
-  ;(visible.value = true),
+  (visible.value = true),
     nextTick(() => {
       getCompHeight()
     })

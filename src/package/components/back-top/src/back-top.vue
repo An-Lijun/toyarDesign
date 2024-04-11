@@ -36,11 +36,13 @@ onMounted(() => {
 function back() {
   var timer = setInterval(() => {
     let top = backTop.value.parentNode.scrollTop;
-    parentNode.scrollTop -= 50;
+    let move = parseInt(top/10)
+    move= move<=1? 1 :move
+    parentNode.scrollTop -= move;
     if (top <= 0) {
       clearInterval(timer);
     }
-  }, 20);
+  }, 50);
 }
 onBeforeUnmount(()=>{
   parentNode.removeEventListener('scroll',scrollFn)
