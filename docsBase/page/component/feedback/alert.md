@@ -10,7 +10,7 @@
 
 ```
 ```js
-import {TyAlert} from 'xxx'
+import {TyAlert} from 'toyarDesign'
 const alert =()=>{
   TyAlert('你好')
 }
@@ -27,9 +27,34 @@ const alert =()=>{
 
 ```
 ```js
-import {TyAlert} from 'xxx'
+import {TyAlert} from 'toyarDesign'
 const alert1 =()=>{
   TyAlert('你好',{title:'测试'})
+}
+```
+:::
+
+## footer 按钮
+
+:::demo
+
+```html
+<TyButton @click="alert2">123</TyButton>
+
+```
+```js
+import {TyAlert} from 'toyarDesign'
+const alert2 =()=>{
+  TyAlert('你好',{
+    title:'测试',
+    type:'success',
+    sure:{
+      text:'OK',
+      code:()=>{
+        console.log('ok')
+      }
+    }
+  })
 }
 ```
 :::
@@ -46,5 +71,18 @@ const alert =()=>{
 }
 const alert1 =()=>{
   TyAlert('你好',{title:'测试',type:'error'})
+}
+
+const alert2 =()=>{
+  TyAlert('你好',{
+    title:'测试',
+    type:'success',
+    sure:{
+      text:'OK',
+      code:()=>{
+        console.log('ok')
+      }
+    }
+  })
 }
   </script>

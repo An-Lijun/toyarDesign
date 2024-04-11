@@ -69,6 +69,8 @@ const tableData = [
 | top        | dialog 距离顶部距离    | string  | --  | 15vh   |
 | modelValue | dialogv-model required | boolean | --  | false  |
 | info       | dialog 内容            | string  | --  | --     |
+| isUnderLine       | 是否显示header下划线           | boolean  | --  | true   |
+
 
 </div>
 

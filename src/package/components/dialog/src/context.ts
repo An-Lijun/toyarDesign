@@ -25,7 +25,6 @@ export const dialogProp={
     type: Boolean,
     default: true,
   }
-  
 }
 export const dialogEmit=["update:modelValue"]
 
