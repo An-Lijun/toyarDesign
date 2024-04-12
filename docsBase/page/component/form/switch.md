@@ -11,7 +11,6 @@
 ```JavaScript
   const isSwitch = ref(false)
 ```
-
 :::
 
 ## size

@@ -4,24 +4,32 @@ export default {
   text: "展示组件",
   items: [
     {
-      text: "pageHeader",
+      text: "PageHeader",
       link: `${root}pageHeader`,
     },
     {
-      text: "image",
+      text: "Carousel",
+      link: `${root}carousel`,
+    },
+    {
+      text: "Image",
       link: `${root}image`,
     },
     {
-      text: "table",
+      text: "Table",
       link: `${root}table`,
     },
     {
-      text: "badge",
+      text: "Badge",
       link: `${root}badge`,
     },
     {
-      text: "empty",
+      text: "Empty",
       link: `${root}empty`,
+    },
+    {
+      text: "Skeleton",
+      link: `${root}skeleton`,
     }
   ],
 }

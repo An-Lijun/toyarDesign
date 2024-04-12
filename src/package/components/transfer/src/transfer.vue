@@ -79,7 +79,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref,computed } from 'vue'
 import TyIcon from '../../icon'
 import {TyCheckBox} from '../../check-box'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'

@@ -1,7 +1,6 @@
 <template>
   <div class="divRoot">
     <TySlider style="width:300px;margin-left: 50px;"  v-model="isProgress"/>
-
   </div>
 </template>
 <script setup>

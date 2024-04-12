@@ -14,9 +14,18 @@
   >
     <!-- 输入框 -->
     <input
+      v-show="isShowFormat"
+      v-bind="attrs"
+      type="text"
+      @click="showFormatFn"
+      :disabled="disabled"
+      :value="formatValue"
+    />
+    <input
+      v-show="!isShowFormat"
+      v-bind="attrs"
       type="text"
       ref="nativeInp"
-      @click="isShowCalendar = true"
       :disabled="disabled"
       @input="handleInput"
       @blur="handleBlur"
@@ -63,17 +72,18 @@
         </div>
       </header>
       <main>
-        <div v-for="(item, index) in befMonth" class="dis day">
+        <div v-for="(item, index) in befMonth" :key="index" class="dis day">
           <span>{{ item }}</span>
         </div>
         <div
           v-for="(item, index) in nowMonth"
+          :key="index"
           class="day"
           @click="selectDay(item)"
         >
           <span>{{ item }}</span>
         </div>
-        <div v-for="(item, index) in aftMonth" class="dis day">
+        <div v-for="(item, index) in aftMonth" :key="index" class="dis day">
           <span>{{ item }}</span>
         </div>
       </main>
@@ -82,17 +92,23 @@
 </template>
 <script setup lang='ts' name="TyCalendar">
 import { calendarProp, calendarEmit,nm } from './context'
-import { formItemContent} from '../../../hooks/symbolNm'
+import { formContent,formItemContent} from '../../../hooks/symbolNm'
+import { inject,ref,computed,watch,useAttrs} from 'vue';
+
 defineOptions({
   name:'TyCalendar'
 })
+const attrs = useAttrs()
 const props = defineProps(calendarProp)
 const emit = defineEmits(calendarEmit)
+const tyForm = inject(formContent, null)
 const tyFormItem =inject(formItemContent,null);
+const isShowFormat = ref(true)
 
 const focus = ref(false)
 const nativeInp = ref()
 const isShowCalendar = ref(false)
+const formatValue = ref('')
 const weekArr = ['日', '一', '二', '三', '四', '五', '六']
 const countDate = [new Date().getFullYear(), new Date().getMonth()]
 let nowDate = ref('')
@@ -100,11 +116,23 @@ let befMonth = ref([])
 let nowMonth = ref(0)
 let aftMonth = ref(0)
 
+
+// computed 继承属性
+const disabled = computed(() => {
+  return props.disabled || tyFormItem?.disabled || tyForm?.disabled || false
+})
+const readonly = computed(() => {
+  return props.readonly || tyFormItem?.readonly || tyForm?.readonly || false
+})
+const size = computed(() => {
+  return props.size || tyFormItem?.size || tyForm?.size || 'small'
+})
+
 let isShowClearBtn = computed(() => {
-  return props.modelValue !== '' && props.clearable && !props.disabled
+  return props.modelValue !== '' && props.clearable && !disabled.value
 })
 const handleFocus = () => {}
-const render = dateArr => {
+const render =( dateArr:Array<any>) => {
   // 1.获取当前年月日
   let date = new Date(dateArr[0], dateArr[1])
   let year = date.getFullYear()
@@ -155,22 +183,68 @@ const nextYear = () => {
   countDate[0] = countDate[0] + 1
   render(countDate)
 }
-const selectDay = day => {
+const selectDay = (day:string) => {
+  isShowFormat.value =true
   isShowCalendar.value = false
-  nativeInp.value.value = `${countDate[0]}-${countDate[1] + 1}-${day}`
-  emit('update:modelValue', `${countDate[0]}-${countDate[1] + 1}-${day}`)
+  let data =`${countDate[0]}-${String(countDate[1] + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`
+  nativeInp.value.value = data
+  emit('update:modelValue', data)
 }
 const clear = () => {
   nativeInp.value.value = ``
   emit('update:modelValue', ``)
 }
+const handleInput =()=>{
 
+}
+const handleBlur = () =>{
+  isShowFormat.value =true
+}
+const showFormatFn=()=>{
+  isShowCalendar.value =true
+  isShowFormat.value =false
+}
+function formatTime (timestamp:string|Date, fmtString:string) {
+  // yyyy-MM-dd hh:mm:ss
+  let result = fmtString;
+  const date = new Date(timestamp);
+  const dateObj:any = {
+    'y+': date.getFullYear(),
+    'M+': date.getMonth() + 1,
+    'd+': date.getDate(),
+    'h+': date.getHours(),
+    'm+': date.getMinutes(),
+    's+': date.getSeconds()
+  };
+  for (const key in dateObj) {
+    const keyRe = new RegExp(key);
+    //如果有这个校验规则,
+    if (keyRe.test(result)) {
+      const value = `${dateObj[key]}`.padStart(2, '0');
+      result = result.replace(keyRe, value);
+    }
+  }
+  return result;
+}
 watch(
   () => props.modelValue,
-  () => {
-    nativeInp.value.value = `${props.modelValue}`
-  }
+  (newVal, oldVal) => {
+    if(nativeInp&&nativeInp.value){
+      nativeInp.value.value = `${props.modelValue}`
+    }
+    if (newVal) {
+      if (props?.format) {
+        formatValue.value = formatTime(newVal,props?.format)
+      } else {
+        formatValue.value = ''
+      }
+    } else {
+      formatValue.value = ''
+    }
+  },
+  { immediate: true }
 )
+
 </script>
 
 <style lang="scss" scoped>

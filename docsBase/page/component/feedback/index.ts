@@ -24,7 +24,11 @@ export default    {
       link: `${root}notification`,
     },
     {
-      text: "loading",
+      text: "Tooltip",
+      link: `${root}tooltip`,
+    },
+    {
+      text: "Loading",
       link: `${root}loading`,
     },
   ]

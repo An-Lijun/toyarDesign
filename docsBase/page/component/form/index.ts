@@ -24,6 +24,10 @@ export default     {
       link: `${root}select`,
     },
     {
+      text: "Calendar",
+      link: `${root}calendar`,
+    },
+    {
       text: "InputPassword",
       link: `${root}inputPassword`,
     },
@@ -38,6 +42,15 @@ export default     {
     {
       text: "switch",
       link: `${root}switch`,
-    }
+    },
+    {
+      text: "transfer",
+      link: `${root}transfer`,
+    },
+    {
+      text: "slider",
+      link: `${root}slider`,
+    },
+    
   ]
 }

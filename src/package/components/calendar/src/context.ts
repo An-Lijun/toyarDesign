@@ -3,7 +3,6 @@ import useNmSpace from '../../../hooks/useBem'
 export const calendarProp={
   size: {
     type: String,
-    default: 'small',
     validator:( value:string) => {
       return ['mini', 'small', 'medium', 'large'].includes(value)
     }
@@ -24,7 +23,10 @@ export const calendarProp={
     type: String,
     required: true,
     default: ''
-  }
+  },
+  format:{
+    type:String,
+  },
 }
 export const calendarEmit =['blur', 'input', 'update:modelValue']
 

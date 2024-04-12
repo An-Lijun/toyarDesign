@@ -9,10 +9,9 @@
   <TyResult type="info" title="标题" subTitle="子标题"></TyResult>
 </div>
 ```
-
 :::
 
-  <hr />
+<hr />
 
 :::demo
 
@@ -58,6 +57,7 @@
 ```
 :::
   <hr />
+  
 ## 属性(Attributes)
 
 <div class="listTb">
