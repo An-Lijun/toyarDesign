@@ -53,7 +53,7 @@ const start = () => {
 }
 const carouselEnter = () => clearInterval(timmer)
 const carouselLeave = () => timmer = start()
-const toLeft = () => now.value === 0?now.value = list.value.length - 1: now.value-1
+const toLeft = () => now.value =  now.value === 0?list.value.length - 1: now.value-1
 const toRight = () => now.value = now.value=== list.value.length - 1? 0: now.value+1
 
 watch(now, () => {
