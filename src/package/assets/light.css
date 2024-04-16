@@ -175,5 +175,7 @@
   --fill-white:#fff;
   --text-white:#fff;
 
-  --tooltip:#1d2129
+  --tooltip:#1d2129;
+  --menu:var(--primary-6)
+  
 }

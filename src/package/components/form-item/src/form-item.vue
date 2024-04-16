@@ -9,10 +9,12 @@
         minWidth: `${tyForm.labelWidth}px`
       }"
     >
-      <template v-if="tyForm.label">
+      <!-- <template v-if="tyForm.label">
         {{ tyForm.label }}
-      </template>
-      <slot name="label" v-else></slot>
+      </template> -->
+      <slot name="label">
+          {{ label }}
+      </slot>
     </label>
     <div :class="nm.e('content')">
       <slot></slot>

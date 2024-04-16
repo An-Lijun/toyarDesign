@@ -13,8 +13,12 @@
     </button>
     <hr />
 
-    <TySelect v-model="selectValue" style="margin-bottom: 20px"  placeholder="请选择">
-      <TyOption
+    <TySelect
+      v-model="selectValue"
+      style="margin-bottom: 20px"
+      placeholder="请选择"
+    >
+      <TySelectOption
         v-for="(item, index) in [
           { label: '香蕉', value: 'xj' },
           { label: '橘子', value: 'jz' }
@@ -23,61 +27,70 @@
         :label="item.label"
         :value="item.value"
       >
-      </TyOption>
+      </TySelectOption>
     </TySelect>
 
-
-
-    <TySelect v-model="selectValue" style="margin-bottom: 20px"  placeholder="请选择">
-      <TyOption
+    <TySelect
+      v-model="selectValue"
+      style="margin-bottom: 20px"
+      placeholder="请选择"
+    >
+      <TySelectOption
         v-for="(item, index) in [
           { label: '香蕉', value: 'xj' },
           { label: '橘子', value: 'jz' },
-          { label: '西瓜', value: 'xg' ,disabled:true},
+          { label: '西瓜', value: 'xg', disabled: true }
         ]"
         :key="index"
         :label="item.label"
         :value="item.value"
         :disabled="item.disabled"
       >
-      </TyOption>
+      </TySelectOption>
     </TySelect>
 
-
-    <TySelect v-model="selectValue" style="margin-bottom: 20px" placeholder="请选择" disabled>
-      <TyOption
+    <TySelect
+      v-model="selectValue"
+      style="margin-bottom: 20px"
+      placeholder="请选择"
+      disabled
+    >
+      <TySelectOption
         v-for="(item, index) in [
           { label: '香蕉', value: 'xj' },
           { label: '橘子', value: 'jz' },
-          { label: '西瓜', value: 'xg' ,disabled:true},
+          { label: '西瓜', value: 'xg', disabled: true }
         ]"
         :key="index"
         :label="item.label"
         :value="item.value"
         :disabled="item.disabled"
       >
-      </TyOption>
+      </TySelectOption>
     </TySelect>
 
-
-    <TySelect v-model="selectValue" style="margin-bottom: 20px" placeholder="请选择" >
-      <TyOption
+    <TySelect
+      v-model="selectValue"
+      style="margin-bottom: 20px"
+      placeholder="请选择"
+    >
+      <TySelectOption
         v-for="(item, index) in [
           { label: '香蕉', value: 'xj' },
           { label: '橘子', value: 'jz' },
-          { label: '西瓜', value: 'xg' ,disabled:true},
+          { label: '西瓜', value: 'xg', disabled: true }
         ]"
         :key="index"
         :label="item.label"
         :value="item.value"
         :disabled="item.disabled"
       >
-        <div style="display: flex;justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between">
           <span>{{ item.value }}</span>
 
           <span>{{ item.label }}</span>
         </div>
-      </TyOption>
+      </TySelectOption>
     </TySelect>
   </div>
 </template>

@@ -10,6 +10,10 @@ export const itemProps ={
   readonly:{
     type:Boolean,
     default: false
+  },
+  label:{
+    type:String,
+    default: ''
   }
 
 }

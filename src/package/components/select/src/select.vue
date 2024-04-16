@@ -36,8 +36,8 @@
     >
     </span>
     <ul :class="nm.e('group')" v-show="isShowOption">
-      <slot> </slot>
       <div :class="nm.e('arrow')"></div>
+      <slot> </slot>
     </ul>
   </div>
 </template>

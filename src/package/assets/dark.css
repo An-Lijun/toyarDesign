@@ -160,5 +160,6 @@ html[toyar-theme='dark'] {
 
   --fill-white:#f6f6f6;
   --text-white:#4E5969;
-  --tooltip:#373739
+  --tooltip:#373739;
+  --menu:#232324;
 }

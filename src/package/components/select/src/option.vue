@@ -33,7 +33,6 @@ function selectOption () {
   let label = props.label
   if(_selectContent.multiple){
     let data = _selectContent.getValue()
-    console.log(data);
     if(Array.isArray(data)){
       if(data.includes(value)){
         data= data.filter(item => item !== value)
