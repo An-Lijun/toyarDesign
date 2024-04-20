@@ -2,7 +2,7 @@
   "name": "toyar-design",
   "description": "一个用于Vue3.x的ui组件库",
   "main": "./dist/index.js",
-"type":"module",
+  "type": "module",
   "module": "./dist",
   "files": [
     "/dist/*"
@@ -13,7 +13,7 @@
     "toyar"
   ],
   "private": false,
-  "version": "0.0.12",
+  "version": "0.0.13",
   "scripts": {
     "dev": "vite",
     "build": "vite build -f es",
