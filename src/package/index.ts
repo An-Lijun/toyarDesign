@@ -99,7 +99,7 @@ const install = app => {
     app.use(TyRate),
     app.use(TyTransfer),
     app.use(TyPoppover),
-    app.use(TyBreadcrumb),
+    app.use(TyBreadcrumb)
 }
 
 export default {
