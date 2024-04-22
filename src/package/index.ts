@@ -50,6 +50,7 @@ import { TyList,TyListItem } from './components/list'
 import TyRate from './components/rate'
 import TyTransfer from './components/transfer'
 import TyPoppover from './components/poppover'
+import {TyBreadcrumb,TyBreadcrumbItem} from './components/breadcrumb'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -97,7 +98,8 @@ const install = app => {
     app.use(TyList),
     app.use(TyRate),
     app.use(TyTransfer),
-    app.use(TyPoppover)
+    app.use(TyPoppover),
+    app.use(TyBreadcrumb),
 }
 
 export default {
@@ -159,5 +161,6 @@ export {
   TyList,TyListItem ,
   TyRate,
   TyTransfer,
-  TyPoppover
+  TyPoppover,
+  TyBreadcrumb,TyBreadcrumbItem
 } //按需引入
