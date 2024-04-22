@@ -13,7 +13,7 @@
     "toyar"
   ],
   "private": false,
-  "version": "0.0.20",
+  "version": "0.0.21-0",
   "scripts": {
     "dev": "vite",
     "build": "vite build -f es",
@@ -24,7 +24,6 @@
     "docs:serve": "vitepress serve docsBase",
     "publish": "npm version patch && npm run build && npm publish && exit 1",
     "pub": "node ./src/shell/index.js"
-
   },
   "dependencies": {
     "@vuepress/plugin-register-components": "^2.0.0-rc.15",
