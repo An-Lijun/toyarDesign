@@ -56,6 +56,7 @@ import './icon/toyaricon.css'
 import './assets/index.scss'
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
+
 const install = app => {
     app.use(TyIcon),
     app.use(TyButton),
@@ -102,12 +103,20 @@ const install = app => {
     app.use(TyBreadcrumb)
 }
 
+// 切换主题
+const TyThemeChange=()=>{
+  let html = document.documentElement
+  html.setAttribute('toyar-theme', html.getAttribute('toyar-theme')==='light'?'dark':'light')
+}
+
+
 export default {
   version: '0.0.1',
   install
 } //全量引入
 
 export {
+  TyThemeChange,
   TyIcon,
   TyButton,
   TyButtonGroup,

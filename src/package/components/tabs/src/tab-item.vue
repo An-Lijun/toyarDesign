@@ -1,6 +1,7 @@
 <template>
   <div v-show="model === props.name">
-    <div>{{ props.title }}</div>
+    <!-- <div>{{ props.title }}</div> -->
+    <slot></slot>
   </div>
 </template>
 <script setup>
