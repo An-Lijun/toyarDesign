@@ -9,6 +9,10 @@ export const cardProp={
   shadow: {
     type: String,
     default: 'none'
+  },
+  isLoading:{
+    type: Boolean,
+    default:false
   }
 }
 export const nm = useNmSpace('card')

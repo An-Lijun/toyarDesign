@@ -1,5 +1,5 @@
 <template>
-  <div v-show="model === props.name">
+  <div v-if="model === props.name">
     <!-- <div>{{ props.title }}</div> -->
     <slot></slot>
   </div>
@@ -19,7 +19,7 @@ const props = defineProps({
     required: true
   },
 })
-const {model,itemChange,setHeader} =inject('tabValue',{})
+const {model,itemChange,setHeader,is} =inject('tabValue',{})
 setHeader && setHeader({
   name:props.name,
   title:props.title

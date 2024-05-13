@@ -1,5 +1,17 @@
 <template>
   <div class="divRoot">
+    <br />
+    <TyCard :isLoading="isLoading">
+      <template #header>
+        <div>66666666</div>
+        <br>
+        <h1>123465</h1>
+        <div>
+          456789
+        </div>
+      </template>
+      123
+    </TyCard>
     <TyCard> 123 </TyCard>
     <br />
     <TyCard>
@@ -39,5 +51,10 @@
     <br />
   </div>
 </template>
-<script setup></script>
+<script setup>
+let isLoading =ref(true)
+setTimeout(()=>{
+  isLoading.value=false
+},2500)
+</script>
 <style lang="less" scoped></style>

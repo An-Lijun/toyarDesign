@@ -4,20 +4,22 @@
       nm.b(),
       nm.is('border', border),
       nm.is('shadow', shadow === 'shadow'),
-      nm.is('hoverShadow', shadow === 'hover')
+      nm.is('hoverShadow', shadow === 'hover'),
     ]"
   >
-    <header :class="nm.e('header')" v-if="useSlots().header">
+    <TySkeleton v-if="isLoading"/>
+    <header :class="nm.e('header')" v-if="!isLoading && useSlots().header">
       <slot name="header"></slot>
     </header>
-    <main :class="nm.e('main')">
+    <main :class="nm.e('main')" v-if="!isLoading">
       <slot></slot>
     </main>
   </div>
 </template>
 <script setup lang='ts' name="TyCard">
-import { useSlots, computed } from 'vue'
+import { useSlots } from 'vue'
 import { cardProp,nm } from './context'
+import TySkeleton from '../../skeleton'
 defineOptions({
   name:'TyCard'
 })
