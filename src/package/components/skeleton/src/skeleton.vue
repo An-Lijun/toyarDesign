@@ -1,6 +1,7 @@
 <template>
-  <div :class="[nm.b(),nm.is('more',count>1)]" ref="skeleton">
+  <div :class="[nm.b(),nm.is('more',count>1)]" >
     <skeletonItem v-for="item in count"/>
+    <slot></slot>
   </div>
 </template>
 <script setup>
@@ -11,12 +12,11 @@
   defineOptions({
     name:'TySkeleton'
   })
-  const skeleton =ref()
-  const count =ref(1)
-  onMounted(()=>{
-   const height= skeleton.value.getBoundingClientRect().height;
-   count.value= parseInt(height/60,10) +1
-  })
+  const props=defineProps({
+  count:{
+    type:Number
+  }
+})
 </script>
 <style lang="scss" scoped>
 

@@ -166,6 +166,10 @@ if (menuData) {
     }
     &.is-opend {
       grid-template-rows: 1fr;
+      // .ty-menu-item{
+      //   background-color: red !important;
+      // }
+      background-color: var(--menu-open);
     }
   }
 

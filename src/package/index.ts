@@ -42,7 +42,7 @@ import TyLoadingDirc from './components/loading'
 import TyEmpty from './components/empty'
 import TyProgress from './components/progress'
 import TySlider from './components/slider'
-import TySkeleton from './components/skeleton'
+import {TySkeleton,TySkeletonItem} from './components/skeleton'
 import TyCarousel from './components/carousel'
 import TyTooltip from './components/tooltip'
 import TyPopconfirm from './components/popconfirm'
@@ -163,7 +163,7 @@ export {
   TyEmpty,
   TyProgress,
   TySlider,
-  TySkeleton,
+  TySkeleton,TySkeletonItem,
   TyCarousel,
   TyTooltip,
   TyPopconfirm,

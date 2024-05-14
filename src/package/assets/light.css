@@ -176,6 +176,6 @@
   --text-white:#fff;
 
   --tooltip:#1d2129;
-  --menu:var(--primary-6)
-  
+  --menu:var(--primary-6);
+  --menu-open:#0c2135;
 }
