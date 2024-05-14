@@ -1,5 +1,5 @@
 <template>
-  <div :class="nm.b()" ref="skeleton">
+  <div :class="[nm.b(),nm.is('more',count>1)]" ref="skeleton">
     <skeletonItem v-for="item in count"/>
   </div>
 </template>
@@ -26,5 +26,13 @@
   height: 100%;
   padding: 10px 0;
   overflow: hidden;
+
+}
+.is-more{
+  .ty-skeleton-item{
+    &:last-child{
+      width: 50%;
+    }
+  }
 }
 </style>

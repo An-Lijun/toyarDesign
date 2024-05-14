@@ -55,6 +55,6 @@
 let isLoading =ref(true)
 setTimeout(()=>{
   isLoading.value=false
-},2500)
+},210500)
 </script>
 <style lang="less" scoped></style>

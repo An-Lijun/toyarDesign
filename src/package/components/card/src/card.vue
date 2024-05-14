@@ -7,10 +7,11 @@
       nm.is('hoverShadow', shadow === 'hover'),
     ]"
   >
-    <TySkeleton v-if="isLoading"/>
-    <header :class="nm.e('header')" v-if="!isLoading && useSlots().header">
+    
+    <header :class="nm.e('header')" v-if="useSlots().header">
       <slot name="header"></slot>
     </header>
+    <TySkeleton v-if="isLoading"/>
     <main :class="nm.e('main')" v-if="!isLoading">
       <slot></slot>
     </main>

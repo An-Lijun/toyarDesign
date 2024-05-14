@@ -18,8 +18,10 @@ defineOptions({
   }
 }
 .ty-skeleton-item{
-  height: 30px;
-  margin-bottom: 30px;
+  height: 25px;
+  border-radius: 4px;
+  margin:  0 10px;
+  margin-bottom: 15px;
   background: linear-gradient(
     90deg,
     var(--fill-2) 25%,
@@ -28,6 +30,6 @@ defineOptions({
   );
   background-size: 400% 100%;
   background-repeat: no-repeat;
-  animation: skeletonLoading 1.5s cubic-bezier(0, 0, 1, 1) infinite;
+  animation: skeletonLoading 1s cubic-bezier(0, 0, 1, 1) infinite;
 }
 </style>
