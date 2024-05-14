@@ -2,7 +2,6 @@
   <div class="divRoot">
     <div >
     <TySkeleton :count="7"/>
-
   </div>
 <br>
 <hr>

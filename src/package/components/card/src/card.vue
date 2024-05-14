@@ -11,7 +11,7 @@
     <header :class="nm.e('header')" v-if="useSlots().header">
       <slot name="header"></slot>
     </header>
-    <TySkeleton v-if="isLoading"/>
+    <TySkeleton v-if="isLoading" :count="5" />
     <main :class="nm.e('main')" v-if="!isLoading">
       <slot></slot>
     </main>
