@@ -17,13 +17,11 @@ defineOptions({
 })
 const compLevel = injectLevel()
 const menuData = inject('menu', null)
+const subMenu = inject('subMenu', null)
 const emit = defineEmits(['click'])
 let isShowRef = ref(true)
 const handleClick=()=>{
-  if(menuData.isFold){
-     menuData.setOpenId('')
-  }
-  emit('click')
+  subMenu.childClick()
 }
 if (menuData) {
   watch(
@@ -44,7 +42,6 @@ if (menuData) {
   line-height: 40px;
   list-style: none;
   padding: 0 14px;
-  border-radius: 5px;
   user-select: none;
   margin-bottom: 4px;
   &:hover {

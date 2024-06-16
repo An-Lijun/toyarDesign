@@ -1,5 +1,6 @@
 import { isRef, computed, ref,provide,inject } from "vue";
 import { MenuLevelProvide } from '../symbol'
+
 export function provideLevel(level:string) {
   const compLevel = computed(() => (isRef(level) ? level.value : level));
   provide(
@@ -9,14 +10,10 @@ export function provideLevel(level:string) {
 }
 export  function injectLevel(provideNext) {
   const levelContext = inject(MenuLevelProvide,null);
-  if(levelContext){
-    
-  }
   const compLevel = computed(() => levelContext?.value || 0);
   if (provideNext) {
     const nextLevel = computed(() => compLevel.value + 1);
     provideLevel(nextLevel);
   }
   return compLevel
-
 }

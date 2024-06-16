@@ -29,7 +29,7 @@
     <div
       :style="{
         transform: !isShowRef
-          ? `translate(${menuData.width[compLevel]}px,-40px)`
+          ? `translate(${width}px,-40px)`
           : ''
       }"
       :class="[
@@ -39,7 +39,7 @@
       ]"
     >
       <ul>
-        <slot></slot>
+        <slot ></slot>
       </ul>
     </div>
   </div>
@@ -47,34 +47,37 @@
 <script setup lang="ts" name="TySubMenu">
 import { injectLevel } from './hooks/level.ts'
 import { subNm } from './context'
-import { inject, ref, watch, onMounted } from 'vue'
+import { inject, ref, watch } from 'vue'
+
 defineOptions({
   name: 'TySubMenu'
 })
 const props = defineProps({
-  index: String
+  index: String,
+  option:{
+    type:Array
+  },
+  data:String
 })
-
 let flag = ref(false)
 const compLevel = injectLevel(true)
 const menuData = inject('menu', {})
-const subMenu = ref()
+const subMenu = ref() // menuref
 let isShowRef = ref(true)
 
-const openChildMenu = () => {
+let width = ref(0)
+const openChildMenu = (cValue) => {
   let data = subMenu.value.getBoundingClientRect().width + 10
   if(compLevel.value ===0){
     data+= subMenu.value.getBoundingClientRect().left
-    console.log(subMenu.value.getBoundingClientRect().left);
-    
   }
-  menuData.width[compLevel.value] = data
-
+  width.value =data
   menuData.setOpenId(props.index)
   setTimeout(() => {
-    flag.value = !flag.value
+      flag.value = !flag.value
   })
 }
+
 
 if (menuData) {
   watch(
@@ -92,11 +95,10 @@ if (menuData) {
   watch(
     () => menuData.openId,
     newVal => {
-      console.log(newVal.value)
-      console.log(props.index)
-
       if (
-        newVal !== props.index &&
+        newVal !== props.index && 
+        menuData.isFold.value
+        &&
         !String(newVal.value).startsWith(props.index)
       ) {
         flag.value = false
@@ -107,6 +109,14 @@ if (menuData) {
     }
   )
 }
+
+provide('subMenu', {
+  childClick:()=>{
+    if(menuData.isFold.value){
+      menuData.setOpenId('')
+    }
+  }
+})
 </script>
 <style lang="scss" scoped>
 .ty-sub-menu {
@@ -121,7 +131,6 @@ if (menuData) {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
-    border-radius: 5px;
     user-select: none;
     &:hover {
       cursor: pointer;
@@ -190,7 +199,6 @@ if (menuData) {
         grid-template-rows: 1fr;
         overflow: unset;
         & > ul {
-          border-radius: 4px;
           display: block;
           box-sizing: border-box;
           border: 1px solid var(--border-color-2) !important;
