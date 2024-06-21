@@ -14,23 +14,35 @@ import menuItem from './menuItem.vue'
 import subMenu from './menuItem.vue'
 import optionsRender from './optionsRender'
 import { provideLevel } from './hooks/level.ts'
-import { nm, menuProps } from './context'
+import { nm, menuProps ,emits} from './context'
+import { useCompMvalue } from '../../../hooks/useCompMvalue'
 
 defineOptions({
   name: 'TyMenu'
 })
-
 const props = defineProps(menuProps)
+const emit = defineEmits(emits)
+const { model } = useCompMvalue(props, emit,{
+  setFn:(value)=> {
+    emit('change',value)
+    return value
+  }
+})
 const openId = ref('')
 // 给menu 注入层级
-provideLevel(0)
 provide('menu', {
   isFold: computed(() => props.isFold),
   lastMenuFn: null,
   setOpenId: value => {
     openId.value = value
   },
-  openId
+  openId,
+  model:computed(()=>{
+    return model.value
+  }),
+  setModel:(val)=>{
+    model.value = val
+  }
 })
 
 watch(

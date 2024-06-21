@@ -1,5 +1,8 @@
 <template>
-  <li :class="nm.bem('item')" @click="handleClick">
+  <li
+    :class="[nm.bem('item'), nm.is('active', menuData.model.value == mkey)]"
+    @click="handleClick"
+  >
     <span
       v-if="isShowRef"
       :class="nm.bem('item', 'index')"
@@ -15,12 +18,18 @@ import { injectLevel } from './hooks/level.ts'
 defineOptions({
   name: 'TyMenuItem'
 })
+const props = defineProps({
+  mkey: {
+    type: String
+  }
+})
 const compLevel = injectLevel()
 const menuData = inject('menu', null)
 const subMenu = inject('subMenu', null)
 const emit = defineEmits(['click'])
 let isShowRef = ref(true)
-const handleClick=()=>{
+const handleClick = () => {
+  menuData.setModel(props.mkey)
   subMenu.childClick()
 }
 if (menuData) {
@@ -45,13 +54,17 @@ if (menuData) {
   user-select: none;
   margin-bottom: 4px;
   &:hover {
-    background-color: var(--toyar-gray-2);
+    background-color: var(--toyar-gray-4);
     cursor: pointer;
   }
   &__index {
     width: 20px;
     display: inline-block;
     height: 100%;
+  }
+  &.is-active {
+    background-color: var(--primary-6);
+    color: #fff;
   }
 }
 </style>

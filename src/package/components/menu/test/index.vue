@@ -5,7 +5,7 @@
       }
       ">提交</TyButton>
     <div>
-      <TyMenu :isFold="isFold">
+      <TyMenu v-model="value1" :isFold="isFold" @change="change">
         <template #header>
           <div style="
               height: 50px;
@@ -56,8 +56,8 @@
           </template>
           <template #title> Navigation1 </template>
 
-          <TyMenuItem index="1-1"> menu1 </TyMenuItem>
-          <TyMenuItem index="1-2"> menu2 </TyMenuItem>
+          <TyMenuItem index="1-1" mkey="xx1"> menu1 </TyMenuItem>
+          <TyMenuItem index="1-2" mkey="xx2"> menu2 </TyMenuItem>
           <TyMenuItem index="1-3"> menu3 </TyMenuItem>
         </TySubMenu>
         <TySubMenu index="2">
@@ -65,20 +65,22 @@
             <TyIcon icon="ty-palette-fill"></TyIcon>
           </template>
           <template #title> Navigation2 </template>
-          <TyMenuItem index="2-1"> menu1 </TyMenuItem>
-          <TyMenuItem index="2-2"> menu2 </TyMenuItem>
+          <TyMenuItem index="2-1" mkey="xx31"> menu1 </TyMenuItem>
+          <TyMenuItem index="2-2" mkey="xx32"> menu2 </TyMenuItem>
           <TySubMenu index="2-3">
             <template #icon>
               <TyIcon icon="ty-bug-2-fill"></TyIcon>
             </template>
             <template #title> Navigation2-1 </template>
-            <TyMenuItem index="2-3-1"> menu1 </TyMenuItem>
-            <TyMenuItem index="2-3-2"> menu2 </TyMenuItem>
+            <TyMenuItem index="2-3-1"  mkey="xx3"> menu1 </TyMenuItem>
+            <TyMenuItem index="2-3-2"  mkey="xx4">  menu2 </TyMenuItem>
           </TySubMenu>
         </TySubMenu>
       </TyMenu>
       <br>
-      <TyMenu :isFold="isFold" :option="[
+
+      <h1>{{ value1 }}</h1>
+      <TyMenu v-model="value1"  :isFold="isFold" :option="[
       {
         label: 'xxx',
         key: 'xxx1',
@@ -88,12 +90,20 @@
           key: 'xxx1',
           icon: 'icon',
           type: 'subMenu',
-          children: [{
+          children: [
+            {
             label: 'xxx',
-            key: 'xxx1',
+            key: 'aaa',
             icon: 'icon',
             type: 'menu'
-          }]
+          },
+          {
+            label: 'xxx',
+            key: 'aaa1',
+            icon: 'icon',
+            type: 'menu'
+          }
+        ]
         }],
         type: 'subMenu'
       }
@@ -151,5 +161,9 @@ import { ref } from 'vue'
 import { TyMenu } from '..';
 
 let isFold = ref(false)
+let value1 =ref('aaa')
+const change=(val)=>{
+  console.log(val);
+}
 </script>
 <style lang="less" scoped></style>

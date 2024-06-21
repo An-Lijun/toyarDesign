@@ -3,7 +3,7 @@
     :class="[nm.b(),compStyle]"
     :style="{
       marginLeft: (100 / 24) * offset + '%',
-      padding: 0 + ' ' + gutter?.value + 'px' + ' ' + gutter?.value + 'px' 
+      padding: 0 + ' ' + gutter?.value/2 + 'px' + ' ' + gutter?.value + 'px' 
     }"
   >
     <slot></slot>

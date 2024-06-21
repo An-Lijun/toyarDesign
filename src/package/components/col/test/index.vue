@@ -201,9 +201,9 @@
       </div>
     </div>
 
-    <div class="sg-container">
-      <div class="mb-10">
-        <ty-row :gutter="4">
+    <div class="sg-container" style="background-color: deeppink;">
+      <div >
+        <ty-row :gutter="10">
           <ty-col
             :span="{
               xxl: 4,
@@ -212,7 +212,50 @@
               md: 12,
               sm: 24
             }"
-            style="margin-bottom: 10px"
+          >
+            <div class="colBox"></div>
+          </ty-col>
+          <ty-col
+            :span="{
+              xxl: 4,
+              xl: 6,
+              lg: 8,
+              md: 12,
+              sm: 24
+            }"
+          >
+            <div class="colBox"></div>
+          </ty-col>
+          <ty-col
+            :span="{
+              xxl: 4,
+              xl: 6,
+              lg: 8,
+              md: 12,
+              sm: 24
+            }"
+          >
+            <div class="colBox"></div>
+          </ty-col>
+          <ty-col
+            :span="{
+              xxl: 4,
+              xl: 6,
+              lg: 8,
+              md: 12,
+              sm: 24
+            }"
+          >
+            <div class="colBox"></div>
+          </ty-col>
+          <ty-col
+            :span="{
+              xxl: 4,
+              xl: 6,
+              lg: 8,
+              md: 12,
+              sm: 24
+            }"
           >
             <div class="colBox"></div>
           </ty-col>
@@ -226,7 +269,6 @@
 .colBox{
   background-color: var(--primary-6);
   height: 30px;
-  margin: 5px 0;
 }
 .sg-container{
   margin-top: 30px;

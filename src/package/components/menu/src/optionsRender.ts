@@ -22,24 +22,23 @@ export default defineComponent({
       return h(TySubMenu,
         {
 
-        }, 
+        },
         {
-        default: () => {
-          return item.children.map(ite => this.genMenu(h, ite))
-        },
-        title: () => {
-          return item.label
-        },
-        icon:()=>{
-          return h(TyIcon,{
-            icon:'ty-palette-fill'
-          })
+          default: () => item.children.map(ite => this.genMenu(h, ite)),
+          title: () => {
+            return item.label
+          },
+          icon: () =>
+            h(TyIcon, {
+              icon: 'ty-palette-fill'
+            })
         }
-      }
       )
     },
     renderItem(h, item) {
-      return h(TyMenuItem, {}, item.label)
+      return h(TyMenuItem, {
+        mkey:item.key
+      }, ()=>item.label)
     },
   },
   render(props) {

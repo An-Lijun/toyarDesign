@@ -66,7 +66,7 @@ const subMenu = ref() // menuref
 let isShowRef = ref(true)
 
 let width = ref(0)
-const openChildMenu = (cValue) => {
+const openChildMenu = () => {
   let data = subMenu.value.getBoundingClientRect().width + 10
   if(compLevel.value ===0){
     data+= subMenu.value.getBoundingClientRect().left
@@ -124,7 +124,7 @@ provide('subMenu', {
   color: var(--text-2);
   position: relative;
   &:hover {
-    background-color: var(--toyar-gray-2);
+    // background-color: var(--toyar-gray-2);
   }
   &__inner {
     line-height: 40px;
