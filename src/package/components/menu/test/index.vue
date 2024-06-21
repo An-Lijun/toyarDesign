@@ -80,34 +80,7 @@
       <br>
 
       <h1>{{ value1 }}</h1>
-      <TyMenu v-model="value1"  :isFold="isFold" :option="[
-      {
-        label: 'xxx',
-        key: 'xxx1',
-        icon: 'ty-palette-fill',
-        children: [{
-          label: 'xxx',
-          key: 'xxx1',
-          icon: 'icon',
-          type: 'subMenu',
-          children: [
-            {
-            label: 'xxx',
-            key: 'aaa',
-            icon: 'icon',
-            type: 'menu'
-          },
-          {
-            label: 'xxx',
-            key: 'aaa1',
-            icon: 'icon',
-            type: 'menu'
-          }
-        ]
-        }],
-        type: 'subMenu'
-      }
-    ]" :data="11">
+      <TyMenu v-model="value1"  :isFold="isFold" :option="opt" :data="11">
         <template #header>
           <div style="
               height: 50px;
@@ -165,5 +138,37 @@ let value1 =ref('aaa')
 const change=(val)=>{
   console.log(val);
 }
+let opt=[
+      {
+        label: 'xxx',
+        key: 'xxx1',
+        icon: 'ty-palette-fill',
+        children: [{
+          label: 'xxx',
+          key: 'xxx1',
+          icon: 'icon',
+          type: 'subMenu',
+          children: [
+            {
+            label: 'xxx',
+            key: 'aaa',
+            icon: 'icon',
+            type: 'menu'
+          },
+          {
+            label: 'button',
+            key: 'button',
+            icon: 'icon',
+            type: 'menu',
+            path:'/button',
+            selClick:(item)=>{
+              console.log(item);
+            }
+          }
+        ]
+        }],
+        type: 'subMenu'
+      }
+    ]
 </script>
 <style lang="less" scoped></style>

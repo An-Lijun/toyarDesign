@@ -1,13 +1,18 @@
 import TySubMenu from "./subMenu.vue"
 import TyMenuItem from "./menuItem.vue"
 import TyIcon from "../../icon/index"
-import { defineComponent, defineProps, renderSlot, h } from "vue"
-
+import { defineComponent, getCurrentInstance, h } from "vue"
+import { useRouter } from 'vue-router'
 export default defineComponent({
   name: 'optionsRender',
   props: {
     option: {
       type: Array
+    }
+  },
+  data() {
+    return {
+      router: useRouter()
     }
   },
   methods: {
@@ -37,8 +42,17 @@ export default defineComponent({
     },
     renderItem(h, item) {
       return h(TyMenuItem, {
-        mkey:item.key
-      }, ()=>item.label)
+        mkey: item.key,
+        onclick: () => {
+          if(item.selClick){
+            return item.selClick(item)
+          }
+          if (this.router &&item.path) {
+            
+             this.router.push(item.path)
+          }
+        }
+      }, () => item.label)
     },
   },
   render(props) {
