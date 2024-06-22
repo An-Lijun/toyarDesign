@@ -29,7 +29,7 @@ export default defineComponent({
           },
           icon: () =>
             h(TyIcon, {
-              icon: 'ty-palette-fill'
+              icon: item.icon
             })
         }
       )
