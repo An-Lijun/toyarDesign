@@ -45,7 +45,7 @@
 
 ## Map
 
-<iconList :iconArr="Map"/>
+<iconList :iconArr="Map1"/>
 
 ## Media
 
@@ -4052,15 +4052,18 @@ import iconList from '../../../.vitepress/iconList.vue'
       alias: ['in', 'picture', 'in']
     }
   ]
-  const Map=[
+  const Map1=[
     {
       icon: 'ty-map-pin-line',
       belong: 'Map',
+      type: 'line',
+
       alias: ['pin', 'line', 'pin']
     },
     {
       icon: 'ty-map-pin-fill',
       belong: 'Map',
+      type: 'fill',
       alias: ['pin', 'fill', 'pin']
     },
     {
@@ -4162,91 +4165,115 @@ import iconList from '../../../.vitepress/iconList.vue'
     {
       icon: 'ty-pin-distance-line',
       belong: 'Map',
+      type: 'line',
       alias: ['distance', 'line', 'distance']
     },
     {
       icon: 'ty-pin-distance-fill',
       belong: 'Map',
+      type: 'line',
       alias: ['distance', 'fill', 'distance']
     },
     {
       icon: 'ty-pushpin-line',
       belong: 'Map',
+      type: 'line',
       alias: ['line', null, 'line']
     },
     {
       icon: 'ty-pushpin-fill',
       belong: 'Map',
+      type: 'fill',
       alias: ['fill', null, 'fill']
     },
     {
       icon: 'ty-unpin-line',
       belong: 'Map',
+      type: 'line',
       alias: ['line', null, 'line']
     },
     {
       icon: 'ty-unpin-fill',
       belong: 'Map',
+      type: 'line',
+
       alias: ['fill', null, 'fill']
     },
     {
       icon: 'ty-pushpin-2-line',
       belong: 'Map',
+      type: 'line',
+
       alias: ['2', 'line', '2']
     },
     {
       icon: 'ty-pushpin-2-fill',
       belong: 'Map',
+      type: 'line',
+
       alias: ['2', 'fill', '2']
     },
     {
       icon: 'ty-compass-line',
       belong: 'Map',
+      type: 'line',
+
       alias: ['line', null, 'line']
     },
     {
       icon: 'ty-compass-fill',
       belong: 'Map',
+      type: 'fill',
+
       alias: ['fill', null, 'fill']
     },
     {
       icon: 'ty-compass-2-line',
       belong: 'Map',
+      type: 'line',
+
       alias: ['2', 'line', '2']
     },
     {
       icon: 'ty-compass-2-fill',
       belong: 'Map',
+      type: 'fill',
       alias: ['2', 'fill', '2']
     },
     {
       icon: 'ty-compass-3-line',
       belong: 'Map',
+      type: 'line',
       alias: ['3', 'line', '3']
     },
     {
       icon: 'ty-compass-3-fill',
       belong: 'Map',
+      type: 'fill',
       alias: ['3', 'fill', '3']
     },
     {
       icon: 'ty-compass-4-line',
       belong: 'Map',
+      type: 'line',
       alias: ['4', 'line', '4']
     },
     {
       icon: 'ty-compass-4-fill',
       belong: 'Map',
+      type: 'fill',
       alias: ['4', 'fill', '4']
     },
     {
       icon: 'ty-compass-discover-line',
       belong: 'Map',
+      type: 'line',
       alias: ['discover', 'line', 'discover']
     },
     {
       icon: 'ty-compass-discover-fill',
       belong: 'Map',
+      type: 'fill',
       alias: ['discover', 'fill', 'discover']
     },
     {

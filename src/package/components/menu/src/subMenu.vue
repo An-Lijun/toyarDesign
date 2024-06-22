@@ -194,6 +194,7 @@ provide('subMenu', {
       overflow: auto;
       position: fixed;
       left: 0px;
+      z-index: 150;
 
       &.is-opend {
         grid-template-rows: 1fr;

@@ -20,6 +20,7 @@ const props = defineProps(waterProps)
 const defaultOptions = {
   fontColor: 'rgba(210,210,230,0.7)',
   fontSize: 30,
+  fontSizeSed:25,
   fontFamily: 'Arial',
   zIndex: 999,
   width: 200,
@@ -30,6 +31,7 @@ const defaultOptions = {
   antiTamper: false
 }
 const options = Object.assign(defaultOptions, props.options)
+console.log(options);
 const bgUrl = ref('')
 const mark = ref()
 const maskContainer = ref()
@@ -76,12 +78,13 @@ const createMark = () => {
     ctx.fillText(
       props.markInfo[0],
       options.offsetX,
-      options.offsetY - options.fontSize / 2
+      options.offsetY - options.fontSize / 1.5
     )
+    ctx.font = `${options.fontSizeSed}px ${options.fontFamily}`
     ctx.fillText(
       props.markInfo[1],
       options.offsetX,
-      options.offsetY + options.fontSize / 2
+      options.offsetY + options.fontSize / 1.5
     )
     setUrl(canvas.toDataURL('image/png'))
   } else {
@@ -131,12 +134,15 @@ onMounted(() => {
 <style lang="scss" scoped>
 .ty-waterMark {
   position: relative;
+  height: 100%;
   &__mark {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
+    z-index: 999;
   }
 }
 </style>

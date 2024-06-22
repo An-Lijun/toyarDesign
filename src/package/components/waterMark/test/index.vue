@@ -1,8 +1,11 @@
 <template>
   <div class="divRoot">
 
-<TyWaterMark markInfo="TyDesign">
-  <TyTable :columns="columns" :data="tableData"> </TyTable>
+<TyWaterMark :options="{
+      width:500,
+      height:300
+   }"   markInfo="TyDesign">
+  <TyTable  :columns="columns" :data="tableData"> </TyTable>
 </TyWaterMark>
 <hr>
 <TyWaterMark :markInfo="['TyDesign',time]" :options="{width:300,height:300}">
@@ -18,6 +21,7 @@
   :options="{
   fontColor:'red',
   fontSize:20,
+  fontSizeSed:20,
   fontFamily: 'Arial',
   zIndex:80,
   width: 150,
