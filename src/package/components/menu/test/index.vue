@@ -160,10 +160,8 @@ let opt=[
             key: 'button',
             icon: 'icon',
             type: 'menu',
-            path:'/button',
-            selClick:(item)=>{
-              console.log(item);
-            }
+            path:'/button'
+       
           }
         ]
         }],
