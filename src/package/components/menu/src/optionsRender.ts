@@ -38,14 +38,22 @@ export default defineComponent({
       return h(TyMenuItem, {
         mkey: item.key,
         onclick: () => {
-          if(item.selClick){
+          if (item.selClick) {
             return item.selClick(item)
           }
-          if (this.$router &&item.path) {
+          if (this.$router && item.path) {
             this.$router.push(item.path)
           }
         }
-      }, () => item.label)
+      },
+        {
+          icon: () =>
+            h(TyIcon, {
+              icon: item.icon
+            }),
+          default: () => item.label
+        }
+      )
     },
   },
   render(props) {

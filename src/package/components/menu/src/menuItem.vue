@@ -1,13 +1,10 @@
 <template>
-  <li
-    :class="[nm.bem('item'), nm.is('active', menuData.model.value == mkey)]"
-    @click="handleClick"
-  >
-    <span
-      v-if="isShowRef"
-      :class="nm.bem('item', 'index')"
-      v-for="item in compLevel"
-    >
+  <li :class="[nm.bem('item'), nm.is('active', menuData.model.value == mkey)]" @click="handleClick">
+    <span v-if="isShowRef" :class="nm.bem('item', 'index')" v-for="item in compLevel">
+    </span>
+    <span style="margin-right: 10px;">
+      <slot name="icon"></slot>
+
     </span>
     <slot></slot>
   </li>
@@ -53,15 +50,19 @@ if (menuData) {
   padding: 0 14px;
   user-select: none;
   margin-bottom: 4px;
+  color: var(--text-2);
+
   &:hover {
     background-color: var(--toyar-gray-4);
     cursor: pointer;
   }
+
   &__index {
     width: 20px;
     display: inline-block;
     height: 100%;
   }
+
   &.is-active {
     background-color: var(--primary-6);
     color: #fff;

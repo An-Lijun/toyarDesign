@@ -122,7 +122,7 @@ let mutOb = new MutationObserver(records => {
 })
 onMounted(() => {
   if (options.antiTamper) {
-    mutOb.observe(maskContainer.value, {
+    mutOb.observe(mark.value, {
       childList: true,
       attributes: true,
       subtree: true
