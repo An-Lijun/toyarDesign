@@ -139,10 +139,9 @@ const change = (val) => {
   console.log(val);
 }
 let opt = [
-
   {
     label: 'xxx',
-    key: 'xxx1',
+    key: 'xxx111',
     icon: 'ty-palette-fill',
     children: [{
       label: 'xxx',
@@ -153,13 +152,11 @@ let opt = [
         {
           label: 'xxx',
           key: 'aaa',
-          icon: 'icon',
           type: 'menu'
         },
         {
           label: 'button',
           key: 'button',
-          icon: 'icon',
           type: 'menu',
           path: '/button'
 
@@ -171,7 +168,12 @@ let opt = [
   {
     icon: 'ty-palette-fill',
     label: 'xxx',
-    key: 'aaa',
+    key: 'aaa1',
+    type: 'menu'
+  },
+  {
+    label: 'xxx',
+    key: 'aaa31',
     type: 'menu'
   }
 ]

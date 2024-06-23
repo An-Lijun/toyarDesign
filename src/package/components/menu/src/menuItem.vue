@@ -1,12 +1,10 @@
 <template>
-  <li :class="[nm.bem('item'), nm.is('level', useSlots().icon), 
-       nm.is('fold', !isShowRef)
+  <li :class="[nm.bem('item'), nm.is('level', Boolean(useSlots().icon)),
+  nm.is('fold', !isShowRef)
     , nm.is('active', menuData.model.value == mkey)]" @click="handleClick">
     <span v-if="isShowRef" :class="nm.bem('item', 'index')" v-for="item in compLevel">
     </span>
-    <span :class="nm.bem('item', 'icon')" :style="{
-    '--toyar-gray-10': flag ? 'var(--toyar-xblue-6)' : ''
-  }">
+    <span :class="nm.bem('item', 'icon')" v-if="Boolean(useSlots().icon)"> 
       <slot name="icon"></slot>
     </span>
     <span :class="nm.bem('item', 'label')">
@@ -33,6 +31,9 @@ const emit = defineEmits(['click'])
 let isShowRef = ref(true)
 const handleClick = () => {
   menuData.setModel(props.mkey)
+  if(!subMenu){
+    return
+  }
   subMenu.childClick()
 }
 if (menuData) {
@@ -57,6 +58,7 @@ if (menuData) {
   user-select: none;
   margin-bottom: 4px;
   color: var(--text-2);
+  font-size: var(--font-body-3);
 
   &__icon {
     width: 50px;

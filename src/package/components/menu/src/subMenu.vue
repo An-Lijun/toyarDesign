@@ -123,6 +123,7 @@ provide('subMenu', {
   width: 100%;
   color: var(--text-2);
   position: relative;
+  font-size: var(--font-body-3);
   &:hover {
     // background-color: var(--toyar-gray-2);
   }

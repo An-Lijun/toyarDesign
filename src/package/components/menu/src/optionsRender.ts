@@ -35,6 +35,16 @@ export default defineComponent({
       )
     },
     renderItem(h, item) {
+      let option = {
+        default: () => item.label
+      }
+      if (item.icon) {
+        option.icon = () =>
+          h(TyIcon, {
+            icon: item.icon
+          })
+      }
+
       return h(TyMenuItem, {
         mkey: item.key,
         onclick: () => {
@@ -46,13 +56,7 @@ export default defineComponent({
           }
         }
       },
-        {
-          icon: () =>
-            h(TyIcon, {
-              icon: item.icon
-            }),
-          default: () => item.label
-        }
+        option
       )
     },
   },
