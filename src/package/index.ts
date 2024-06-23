@@ -51,6 +51,7 @@ import TyRate from './components/rate'
 import TyTransfer from './components/transfer'
 import TyPoppover from './components/poppover'
 import {TyBreadcrumb,TyBreadcrumbItem} from './components/breadcrumb'
+import TyDescriptions from './components/descriptions'
 
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -100,7 +101,8 @@ const install = app => {
     app.use(TyRate),
     app.use(TyTransfer),
     app.use(TyPoppover),
-    app.use(TyBreadcrumb)
+    app.use(TyBreadcrumb),
+    app.use(TyDescriptions)
 }
 
 // 切换主题
@@ -171,5 +173,6 @@ export {
   TyRate,
   TyTransfer,
   TyPoppover,
-  TyBreadcrumb,TyBreadcrumbItem
+  TyBreadcrumb,TyBreadcrumbItem,
+  TyDescriptions
 } //按需引入

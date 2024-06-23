@@ -1,8 +1,8 @@
 <template>
   <div class="divRoot">
     <TyButton @click="() => {
-        isFold = !isFold
-      }
+      isFold = !isFold
+    }
       ">提交</TyButton>
     <div>
       <TyMenu v-model="value1" :isFold="isFold" @change="change">
@@ -72,15 +72,15 @@
               <TyIcon icon="ty-bug-2-fill"></TyIcon>
             </template>
             <template #title> Navigation2-1 </template>
-            <TyMenuItem index="2-3-1"  mkey="xx3"> menu1 </TyMenuItem>
-            <TyMenuItem index="2-3-2"  mkey="xx4">  menu2 </TyMenuItem>
+            <TyMenuItem index="2-3-1" mkey="xx3"> menu1 </TyMenuItem>
+            <TyMenuItem index="2-3-2" mkey="xx4"> menu2 </TyMenuItem>
           </TySubMenu>
         </TySubMenu>
       </TyMenu>
       <br>
 
       <h1>{{ value1 }}</h1>
-      <TyMenu v-model="value1"  :isFold="isFold" :option="opt" :data="11">
+      <TyMenu v-model="value1" :isFold="isFold" :option="opt" :data="11">
         <template #header>
           <div style="
               height: 50px;
@@ -134,39 +134,46 @@ import { ref } from 'vue'
 import { TyMenu } from '..';
 
 let isFold = ref(false)
-let value1 =ref('aaa')
-const change=(val)=>{
+let value1 = ref('aaa')
+const change = (val) => {
   console.log(val);
 }
-let opt=[
-      {
-        label: 'xxx',
-        key: 'xxx1',
-        icon: 'ty-palette-fill',
-        children: [{
+let opt = [
+
+  {
+    label: 'xxx',
+    key: 'xxx1',
+    icon: 'ty-palette-fill',
+    children: [{
+      label: 'xxx',
+      key: 'xxx1',
+      icon: 'icon',
+      type: 'subMenu',
+      children: [
+        {
           label: 'xxx',
-          key: 'xxx1',
+          key: 'aaa',
           icon: 'icon',
-          type: 'subMenu',
-          children: [
-            {
-            label: 'xxx',
-            key: 'aaa',
-            icon: 'icon',
-            type: 'menu'
-          },
-          {
-            label: 'button',
-            key: 'button',
-            icon: 'icon',
-            type: 'menu',
-            path:'/button'
-       
-          }
-        ]
-        }],
-        type: 'subMenu'
-      }
-    ]
+          type: 'menu'
+        },
+        {
+          label: 'button',
+          key: 'button',
+          icon: 'icon',
+          type: 'menu',
+          path: '/button'
+
+        }
+      ]
+    }],
+    type: 'subMenu'
+  },
+  {
+    icon: 'ty-palette-fill',
+    label: 'xxx',
+    key: 'aaa',
+    type: 'menu'
+  }
+]
 </script>
 <style lang="less" scoped></style>

@@ -1,17 +1,23 @@
 <template>
-  <li :class="[nm.bem('item'), nm.is('active', menuData.model.value == mkey)]" @click="handleClick">
+  <li :class="[nm.bem('item'), nm.is('level', useSlots().icon), 
+       nm.is('fold', !isShowRef)
+    , nm.is('active', menuData.model.value == mkey)]" @click="handleClick">
     <span v-if="isShowRef" :class="nm.bem('item', 'index')" v-for="item in compLevel">
     </span>
-    <span style="margin-right: 10px;">
+    <span :class="nm.bem('item', 'icon')" :style="{
+    '--toyar-gray-10': flag ? 'var(--toyar-xblue-6)' : ''
+  }">
       <slot name="icon"></slot>
-
     </span>
-    <slot></slot>
+    <span :class="nm.bem('item', 'label')">
+      <slot></slot>
+    </span>
   </li>
 </template>
 <script setup>
 import { nm } from './context'
 import { injectLevel } from './hooks/level.ts'
+import { useSlots } from "vue";
 defineOptions({
   name: 'TyMenuItem'
 })
@@ -47,10 +53,18 @@ if (menuData) {
 .ty-menu-item {
   line-height: 40px;
   list-style: none;
-  padding: 0 14px;
+  padding: 0 10px;
   user-select: none;
   margin-bottom: 4px;
   color: var(--text-2);
+
+  &__icon {
+    width: 50px;
+    min-width: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   &:hover {
     background-color: var(--toyar-gray-4);
@@ -66,6 +80,19 @@ if (menuData) {
   &.is-active {
     background-color: var(--primary-6);
     color: #fff;
+  }
+
+  &.is-level.is-fold {
+    padding: unset;
+
+    .ty-menu-item__icon {
+      width: 40px;
+      min-width: 40px;
+    }
+
+    .ty-menu-item__label {
+      display: none;
+    }
   }
 }
 </style>

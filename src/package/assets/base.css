@@ -142,6 +142,14 @@
   --padding-4: 14px;
   --padding-5: 15px;
   --padding-9: 19px;
+  /* margin尺寸 */
+  --margin-4: 4px;
+  --margin-11: 11px;
+  --margin-12: 12px;
+  --margin-13: 13px;
+  --margin-14: 14px;
+  --margin-15: 15px;
+  --margin-19: 19px;
 
   /* 背景色 */
   --color-bg-1: var(--bg-1);
