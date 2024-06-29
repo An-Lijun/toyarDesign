@@ -1,0 +1,193 @@
+:root {
+
+  /*  ---------------------------------------   功能色调   --------------------------------------- */
+  /* 7 click 6常规 5hover 4特殊场景 3 一般禁用2 文字禁用1 浅色/白底悬浮*/
+  $themeColor: (
+    primary:(xblue),
+    /* 主色 */
+    link:(xblue),
+    /* 链接色 */
+    success:(green),
+    /* 成功色 */
+    warning:(orange),
+    /* 警示色 */
+    danger:(red)
+    /* 错误色 */
+  );
+
+@each $name, $value in $themeColor {
+  @for $i from 1 through 7 {
+    --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
+  }
+}
+
+/*  ---------------------------------------   边框   --------------------------------------- */
+
+/* 边框宽度 1常规 2中 3 粗 */
+@for $i from 0 through 3 {
+  --border-#{$i}: #{$i}px;
+}
+
+/* 边框圆角 */
+$borderRadiusLs: (
+  0:(0px),
+  2:(2px),
+  4:(4px),
+  8:(8px),
+  16:(16px),
+  circle:(50%),
+);
+
+@each $name, $value in $borderRadiusLs {
+  --border-radius-#{$name}: #{$value};
+}
+
+/* 边框颜色 1浅色 2一般 3深色悬浮 4重色按钮描边*/
+$borderColorLs: (
+  1:(2),
+  2:(3),
+  3:(4),
+  4:(6)
+);
+
+@each $name, $value in $borderRadiusLs {
+  --border-color-#{$name}: var(--toyar-gray-#{$value});
+}
+
+
+/*  ---------------------------------------   字体   --------------------------------------- */
+
+$fontLs: (
+  /* 水印文字 */
+  caption:(12px),
+  /*辅助文案/次要文案*/
+  body-1:(12px),
+  /*正文-常规-小*/
+  body-2:(13px),
+  /*正文-常规*/
+  body-3:(14px),
+  /*标题小*/
+  title-1:(16px),
+  /*标题中*/
+  title-2:(20px),
+  /*标题大*/
+  title-3:(24px),
+  /*运营标题小*/
+  dis-1:(36px),
+  /*运营标题中*/
+  dis-2:(48px),
+  /*运营标题大*/
+  dis-3:(56px),
+);
+
+@each $name, $value in $fontLs {
+  --font-#{$name} : #{$value};
+}
+
+
+
+/* 字体粗细(字重) 100~900 + 别名*/
+$fontWeightLs: (
+  UltraLight:(1),
+  Thin:(2),
+  Light:(3),
+  Regular:(4),
+  Medium:(5),
+  SemiBold:(6),
+  Bold:(7),
+  Extrablack:(8),
+  BBlack:(9),
+);
+
+@each $name, $value in $fontWeightLs {
+  --font-weight-#{$value} : #{$value}00;
+  --font-weight-#{$name}: #{$value}00;
+}
+
+/* 文字颜色 */
+$textLs: (
+  1:(10),
+  2:(8),
+  3:(6),
+  4:(4)
+);
+/* 白色文字 */
+--text-0: var(--text-white);
+
+/*1 强调/正文标题 2 次强调/正文标题 3 次要信息 4 置灰信息*/
+@each $name, $value in $textLs {
+  --text-#{$name} : --toyar-gray-#{$value};
+}
+
+/* 行高 */
+--line-height:1.5715*1em;
+
+/*  ---------------------------------------   组件尺寸   --------------------------------------- */
+
+/* 尺寸  */
+
+@for $size from 0 through 5 {
+  --size-#{$size}: #{$size * 4px};
+}
+
+$sizeLs: (
+  mini:(24px),
+  small:(28px),
+  medium:(32px),
+  large:(36px)
+);
+
+@each $name, $value in $sizeLs {
+  --size-#{$name}: #{$value};
+}
+
+/* padding尺寸 */
+@for $padding from 1 through 20 {
+  --padding-#{$padding}: 1#{$padding}px;
+}
+
+/* 背景色 */
+@for $i from 1 through 5 {
+  --color-bg-#{$i}: var(--bg-#{$i});
+}
+
+/* 阴影 */
+@for $i from 1 through 5 {
+  --box-shadow-#{$i}: var(--shadow-#{$i});
+}
+
+/* 填充颜色 */
+/*4 重/特殊场景  3深/灰底悬浮 2常规/白底悬浮 1 浅/禁用*/
+@for $i from 1 through 4 {
+  --fill-#{$i}: var(--toyar-gray-#{$i});
+}
+
+--fill-0: var(--fill-white);
+/*浅/禁用*/
+
+/*  ---------------------------------------   其他   --------------------------------------- */
+
+/* 时间 */
+@for $i from 1 through 9 {
+  --time-#{$i}: 0.#{$i}s;
+}
+
+/* 层级 */
+$zIndexLs: (
+  1:(1),
+  3:(2),
+  5:(3),
+  7:(4),
+  9:(5),
+  50:(6),
+  import:(99)
+);
+
+@each $name, $value in $zIndexLs {
+  --zindex-#{$name}: #{$value};
+}
+
+@for $i from 1 through 5 {
+  --opcity-#{$i}: var(--opcity-color-#{$i});
+}
+}

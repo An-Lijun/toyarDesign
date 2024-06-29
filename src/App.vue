@@ -27,7 +27,6 @@ let theme =ref(false)
 watch(
  theme,
   (newVal, oldVal) => {
-    console.log(newVal,theme);
     document.getElementsByTagName('html')[0].setAttribute('toyar-theme', newVal?'dark':'light')
   }
 )

@@ -71,7 +71,6 @@ onMounted(() => {
     }
   })
 })
-showValue
 function handleClose () {
   emits('update:modelValue', false)
 }

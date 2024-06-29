@@ -52,7 +52,8 @@ import TyTransfer from './components/transfer'
 import TyPoppover from './components/poppover'
 import {TyBreadcrumb,TyBreadcrumbItem} from './components/breadcrumb'
 import TyDescriptions from './components/descriptions'
-
+import TyCaution from './components/caution'
+import TyConfigProvider from './components/configProvider'
 import './icon/toyaricon.css'
 import './assets/index.scss'
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
@@ -102,7 +103,9 @@ const install = app => {
     app.use(TyTransfer),
     app.use(TyPoppover),
     app.use(TyBreadcrumb),
-    app.use(TyDescriptions)
+    app.use(TyDescriptions),
+    app.use(TyCaution),
+    app.use(TyConfigProvider)
 }
 
 // 切换主题
@@ -174,5 +177,7 @@ export {
   TyTransfer,
   TyPoppover,
   TyBreadcrumb,TyBreadcrumbItem,
-  TyDescriptions
+  TyDescriptions,
+  TyCaution,
+  TyConfigProvider
 } //按需引入

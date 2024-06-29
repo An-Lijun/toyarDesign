@@ -1,7 +1,7 @@
 <template>
   <div :class="[nm.b(),nm.m(type)]">
     <div class="ty-result-icon">
-      <TyIcon :icon="msgIconObj[type]"  :color="`var(--${colorObj[type]}-5)`" 
+      <TyIcon :icon="msgIconObj[type]" :color="`var(--${colorObj[type]}-5)`" 
         :style="{
           fontSize: `${size}px`
         }"

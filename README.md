@@ -164,5 +164,11 @@ css命名使用BEMI命名并抽取useBEMhooks
 如果是多单词采用-分割而不是驼峰
 如 : buttonGroup 应写为 button-group
 
+## 工程
+scss 抛出变量 生成js
+:export {
+  titleColor: $titleColor;
+}
+
 
 
