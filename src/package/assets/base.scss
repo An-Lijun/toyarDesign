@@ -43,14 +43,14 @@ $borderRadiusLs: (
 }
 
 /* 边框颜色 1浅色 2一般 3深色悬浮 4重色按钮描边*/
-$borderColorLs: (
+$borderLs: (
   1:(2),
   2:(3),
   3:(4),
   4:(6)
 );
 
-@each $name, $value in $borderRadiusLs {
+@each $name, $value in $borderLs {
   --border-color-#{$name}: var(--toyar-gray-#{$value});
 }
 
@@ -116,7 +116,7 @@ $textLs: (
 
 /*1 强调/正文标题 2 次强调/正文标题 3 次要信息 4 置灰信息*/
 @each $name, $value in $textLs {
-  --text-#{$name} : --toyar-gray-#{$value};
+  --text-#{$name} : var(--toyar-gray-#{$value});
 }
 
 /* 行高 */
