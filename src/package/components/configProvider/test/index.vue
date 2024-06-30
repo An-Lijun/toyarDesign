@@ -5,7 +5,7 @@
     {{ color }}
     <span style="background-color: var(--toyar-xblue-7);">2123</span>
 
-    <TyConfigProvider :theme="theme" :options="{resetPrimary:color}">
+    <TyConfigProvider :theme="theme" :options="{resetPrimary:color}" >
       123
       <TyButton>123</TyButton>
       <span style="background-color: var(--toyar-xblue-7);">2123</span>

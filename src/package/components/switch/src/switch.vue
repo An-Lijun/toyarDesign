@@ -7,7 +7,7 @@
       nm.is('open',isOpen),
       nm.is('disabled', disabled),
     ]"
-    @click="change"
+    @click="click"
   >
     <span v-if="props.checkedText && isOpen" class="checkedText">
       {{ props.checkedText }}
@@ -48,7 +48,7 @@ const disabled = computed(() => {
   return props.disabled || tyFormItem?.disabled || tyForm?.disabled || false
 })
 
-const change = () => {
+const click = () => {
   if(props.disabled){
     return
   }

@@ -1,11 +1,15 @@
 <template>
   <div :class="nm.b()" v-on="eventMaps">
-    <div :class="[nm.e('content'), nm.is(placement)]" :style="style" v-show="isShowConfirm">
-      <main>
-        <slot name="content">
-          {{ props.content }}
-        </slot>
-      </main>
+    <div v-show="isShowConfirm">
+      <div :style="style" :class="[nm.e('content')]">
+        <main>
+          <slot name="content">
+            {{ props.content }}
+          </slot>
+        </main>
+      </div>
+      <div :class="[nm.e('arrows'), nm.is(placement)]">
+      </div>
     </div>
     <span ref="defaultSlot" style="display: inline-block;">
       <slot></slot>
@@ -98,7 +102,7 @@ onMounted(() => {
         return {
           top: '0',
           left: '50%',
-          transform: `translate(calc(0% - ${width / 2}px), 50%)`,
+          transform: `translate(calc(0% - ${width / 2}px),  calc(50% + 5px))`,
           '--ui-width': width + 'px',
           '--ui-height': width + 'px',
         }
@@ -106,13 +110,13 @@ onMounted(() => {
         return {
           top: '0',
           left: '50%',
-          transform: 'translate(-50%, calc(50% - 5px))'
+          transform: 'translate(-50%, calc(50% + 5px))'
         }
       case 'br':
         return {
           top: '0',
           right: '0%',
-          transform: `translate(calc(0% ), 50%)`,
+          transform: `translate(0% , calc(50% + 5px))`,
           '--ui-width': width + 'px',
           '--ui-height': width + 'px',
         }
@@ -127,6 +131,74 @@ onMounted(() => {
   position: relative;
   display: inline;
   color: var(--text-2);
+
+  &__arrows {
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--toyar-gray-3);
+    bottom: -20px;
+    background-color: var(--bg-5);
+    transform: rotate(45deg);
+    z-index: 95;
+    border-radius: 3px;
+
+    &.is-tl {
+      position: absolute;
+      bottom:0px;
+      left: 50%;
+      border-top-color: var(--bg-5);
+      transform: translate(-50%, -33px) rotate(45deg);
+      border: 1px solid var(--toyar-gray-3);
+    }
+
+    &.is-top {
+      position: absolute;
+      bottom: unset;
+      bottom: 0px;
+      left: 50%;
+      border-top-color: var(--bg-5);
+      transform: translate(-50%, -33px) rotate(45deg);
+    }
+
+    &.is-tr {
+      position: absolute;
+      bottom: unset;
+      bottom: 0px;
+      border-top-color: var(--bg-5);
+      transform: translate(-50%, -33px) rotate(45deg);
+      right: 0%;
+    }
+
+    &.is-bl {
+      position: absolute;
+      bottom: unset;
+      top: 0px;
+      left: 0px;
+      border-bottom-color: var(--bg-5);
+      transform: translate(50%, 39px) rotate(45deg);
+    }
+
+    &.is-bottom {
+      position: absolute;
+      bottom: unset;
+      top: 0px;
+      left: 50%;
+      border-bottom-color: var(--bg-5);
+      transform: translate(-50%, 39px) rotate(45deg);
+    }
+
+    &.is-br {
+      position: absolute;
+      bottom: unset;
+      top: 0px;
+      left: 50%;
+      border-bottom-color: var(--bg-5);
+      right: 0;
+      transform: translate(-50%, 39px) rotate(45deg);
+    }
+  }
 
   &__content {
     position: absolute;
@@ -143,91 +215,9 @@ onMounted(() => {
       text-align: left;
     }
 
-    &:after {
-      content: '';
-      display: inline-block;
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border: 1px solid var(--toyar-gray-3);
-      bottom: -20px;
-      background-color: var(--bg-5);
-      transform: rotate(45deg);
-      z-index: 95;
-    }
 
-    &.is-tl {
-      &:after {
-        position: absolute;
-        bottom: unset;
-        bottom: -20px;
-        border-top-color: var(--bg-5);
-        transform: translate(-50%, -12px) rotate(45deg);
-        border: 1px solid var(--toyar-gray-3);
-        ;
 
-      }
-    }
 
-    &.is-top {
-      &:after {
-        position: absolute;
-        bottom: unset;
-        bottom: -20px;
-        left: 50%;
-
-        border-top-color: var(--bg-5);
-        transform: translate(-50%, -12px) rotate(45deg);
-
-      }
-    }
-
-    &.is-tr {
-      &:after {
-        position: absolute;
-        bottom: unset;
-        bottom: -20px;
-
-        border-top-color: var(--bg-5);
-        transform: translate(-50%, -12px) rotate(45deg);
-        right: 0%;
-      }
-    }
-
-    &.is-bl {
-      &:after {
-        position: absolute;
-        bottom: unset;
-        top: -20px;
-
-        border-bottom-color: var(--bg-5);
-        transform: translate(0%, 12px) rotate(45deg);
-      }
-    }
-
-    &.is-bottom {
-      &:after {
-        position: absolute;
-        bottom: unset;
-        top: -20px;
-        left: 50%;
-
-        border-bottom-color: var(--bg-5);
-        transform: translate(-50%, 12px) rotate(45deg);
-      }
-    }
-
-    &.is-br {
-      &:after {
-        position: absolute;
-        bottom: unset;
-        top: -20px;
-
-        border-bottom-color: var(--bg-5);
-        right: 0;
-        transform: translate(-50%, 12px) rotate(45deg);
-      }
-    }
   }
 }
 </style>
