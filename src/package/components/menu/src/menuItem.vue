@@ -45,7 +45,8 @@ if (menuData) {
       }, 300)
     },
     {
-      deep: true
+      deep: true,
+      immediate:true
     }
   )
 }
@@ -59,7 +60,9 @@ if (menuData) {
   margin-bottom: 4px;
   color: var(--text-2);
   font-size: var(--font-body-3);
-
+  white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
   &__icon {
     width: 50px;
     min-width: 50px;
@@ -78,7 +81,11 @@ if (menuData) {
     display: inline-block;
     height: 100%;
   }
-
+  &__label{
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+  }
   &.is-active {
     background-color: var(--primary-6);
     color: #fff;

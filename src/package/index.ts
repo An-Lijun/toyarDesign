@@ -55,7 +55,8 @@ import TyDescriptions from './components/descriptions'
 import TyCaution from './components/caution'
 import TyConfigProvider from './components/configProvider'
 import TyDrawer from './components/drawer'
-
+import TyTrigger from './components/trigger'
+import generateColor from '@/package/color/index.js'
 import './icon/toyaricon.css'
 import './assets/index.scss'
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
@@ -108,7 +109,8 @@ const install = app => {
     app.use(TyDescriptions),
     app.use(TyCaution),
     app.use(TyConfigProvider),
-    app.use(TyDrawer)
+    app.use(TyDrawer),
+    app.use(TyTrigger)
 }
 
 // 切换主题
@@ -183,5 +185,7 @@ export {
   TyDescriptions,
   TyCaution,
   TyConfigProvider,
-  TyDrawer
+  TyDrawer,
+  TyTrigger,
+  generateColor
 } //按需引入

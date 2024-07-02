@@ -3,7 +3,7 @@
     :class="['toyar', nm.b(), icon]"
     :style="{
       fontSize: props.size > 0 ? size + 'px' : 'unset',
-      color: color?color :'inherit'
+      color: color?color :'var(--toyar-gray-10)'
     }"
   >
   </i>
@@ -19,5 +19,6 @@ const props = defineProps(iconProps)
 .ty-icon {
   font-size: 1em;
   color: var(--toyar-gray-10);
+  // color: var(--text-2);
 }
 </style>

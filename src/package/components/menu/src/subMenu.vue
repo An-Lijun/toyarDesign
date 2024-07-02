@@ -88,7 +88,8 @@ if (menuData) {
       }, 300)
     },
     {
-      deep: true
+      deep: true,
+      immediate:true
     }
   )
 

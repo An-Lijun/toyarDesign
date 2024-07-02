@@ -133,7 +133,7 @@
 import { ref } from 'vue'
 import { TyMenu } from '..';
 
-let isFold = ref(false)
+let isFold = ref(true)
 let value1 = ref('aaa')
 const change = (val) => {
   console.log(val);
