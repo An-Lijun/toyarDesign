@@ -91,9 +91,12 @@ defineOptions({
 })
 const props = defineProps(transProps)
 const emit = defineEmits(transEmits)
+const model = defineModel('modelValue',{
+  type:Array
+})
 
 const style = '--size-mini:15px;--fill-2:var(--fill-4)'
-const { model } = useCompMvalue(props, emit)
+
 const data = ref(props.data)
 
 let check = ref([])

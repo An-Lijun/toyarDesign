@@ -2,7 +2,7 @@ import useNmSpace from '../../../hooks/useBem';
 
 export const waterProps ={
   markInfo: {
-    type: String || Array,
+    type: [String,Array],
     required: true
   },
   options: {

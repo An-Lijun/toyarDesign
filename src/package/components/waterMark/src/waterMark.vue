@@ -31,7 +31,6 @@ const defaultOptions = {
   antiTamper: false
 }
 const options = Object.assign(defaultOptions, props.options)
-console.log(options);
 const bgUrl = ref('')
 const mark = ref()
 const maskContainer = ref()
