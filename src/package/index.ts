@@ -55,7 +55,7 @@ import TyDescriptions from './components/descriptions'
 import TyCaution from './components/caution'
 import TyConfigProvider from './components/configProvider'
 import TyDrawer from './components/drawer'
-import TyTrigger from './components/trigger'
+// import TyTrigger from './components/trigger'
 import generateColor from '@/package/color/index.js'
 import './icon/toyaricon.css'
 import './assets/index.scss'
@@ -109,9 +109,9 @@ const install = app => {
     app.use(TyDescriptions),
     app.use(TyCaution),
     app.use(TyConfigProvider),
-    app.use(TyDrawer),
-    app.use(TyTrigger)
-}
+    app.use(TyDrawer)
+  }
+  // app.use(TyTrigger)
 
 // 切换主题
 const TyThemeChange=()=>{
@@ -186,6 +186,6 @@ export {
   TyCaution,
   TyConfigProvider,
   TyDrawer,
-  TyTrigger,
   generateColor
 } //按需引入
+// TyTrigger,

@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@vuepress/plugin-register-components": "^2.0.0-rc.15",
-    "vue": "^3.3.4"
+    "vue": "^3.4.31"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

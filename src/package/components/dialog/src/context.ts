@@ -13,10 +13,7 @@ export const dialogProp={
     type: String,
     default: "15vh",
   },
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
+
   info:{
     type:String,
   },
@@ -25,6 +22,6 @@ export const dialogProp={
     default: true,
   }
 }
-export const dialogEmit=["update:modelValue"]
+export const dialogEmit=[]
 
 export const  nm = useNmSpace('dialog')

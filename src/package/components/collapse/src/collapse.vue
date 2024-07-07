@@ -7,17 +7,16 @@
 </template>
 <script setup lang="ts" name="TyCollapse">
 import {provide} from 'vue'
-import {useCompMvalue} from '../../../hooks/useCompMvalue'
 import {colProps,colEmt,nm} from './context'
 defineOptions({
   name:'TyCollapse'
 })
 const props = defineProps(colProps)
 const emit = defineEmits(colEmt)
+const model = defineModel({ required: true })
 
-const {model} =useCompMvalue(props,emit)
-const itemChange=(value:boolean)=>{
-  emit('update:modelValue',value)
+const itemChange=(value)=>{
+  model.value= value
 } 
 provide('collapseValue',{
   model,

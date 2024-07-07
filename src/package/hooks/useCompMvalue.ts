@@ -1,4 +1,4 @@
-import { computed, watch } from 'vue'
+  import { computed, watch } from 'vue'
 
 /*
  * 计算props的值进行v-model绑定

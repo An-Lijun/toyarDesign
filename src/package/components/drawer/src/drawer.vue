@@ -30,7 +30,6 @@
 </template>
 <script setup>
 import { dProps, nm, dEmits } from './context'
-import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { onMounted, onUnmounted } from 'vue';
 defineOptions({
   name: 'TyDrawer'
@@ -38,7 +37,9 @@ defineOptions({
 
 const props = defineProps(dProps)
 const emit = defineEmits(dEmits)
-const { model } = useCompMvalue(props, emit)
+const model = defineModel('modelValue',{
+  required:true
+})
 
 let close = () => {
   model.value = false

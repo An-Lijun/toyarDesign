@@ -1,9 +1,6 @@
 import useNmSpace from "../../../hooks/useBem"
 
 export const colProps ={
-  modelValue: {
-    type: Array
-  },
   disabled: {
     type: Boolean,
     default:false
@@ -34,6 +31,6 @@ export const itemProp={
     required: true
   }
 }
-export const colEmt=['update:modelValue']
+export const colEmt=[]
 
 export const nm = useNmSpace('collapse')
