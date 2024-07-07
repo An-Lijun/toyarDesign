@@ -6,7 +6,7 @@ export  const iconProps={
     default: ""
   },
   size: {
-    type:Number,
+    type:[Number,String],
     default: 0
   },
   color:{

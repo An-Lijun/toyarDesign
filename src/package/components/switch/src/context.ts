@@ -16,20 +16,15 @@ export const switchProps ={
     type: String,
     default: ''
   },
-  modelValue: {
-    type: [Boolean,String,Number],
-    required: true,
-    default: false
-  },
   openValue:{
-    type:String,
+    type:[String,Boolean],
   },
   disabled:{
     type:Boolean,
     default:false
   },
   closeValue:{
-    type:String,
+    type:[String,Boolean],
   },
   type:{
     type:String,

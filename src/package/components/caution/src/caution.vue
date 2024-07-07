@@ -2,10 +2,10 @@
   <div :class="nm.b()" :style="style">
     <div :class="[nm.e('title')]">
       <TyIcon :icon="cauIconObj[type]" :color="`var(--${colorObj[type]}-5)`" 
-        :style="{
-          fontSize: `${size}px`
-        }"
       />
+        <!-- :style="{
+          fontSize: `${size}px`
+        }" -->
       <span>
         {{ title }}
       </span>

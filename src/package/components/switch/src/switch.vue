@@ -35,7 +35,11 @@ const emit = defineEmits(switchEmits)
 const tyForm = inject(formContent, null)
 const tyFormItem = inject(formItemContent, null)
 
-const { model } = useCompMvalue(props, emit)
+const model =defineModel('modelValue',{
+  type:[Array,String,Number,Boolean],
+  required:true
+})
+// const { model } = useCompMvalue(props, emit)
 const isOpen =computed(()=>{
   if (typeof model.value === 'boolean') {
     return model.value

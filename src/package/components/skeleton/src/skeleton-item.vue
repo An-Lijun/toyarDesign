@@ -26,7 +26,6 @@ if(props.width){
 if(props.height){
   style.value.height=`${props.height}`
 }
-console.log(style.value);
 
 </script>
 <style lang="scss" scoped>

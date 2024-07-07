@@ -2,11 +2,11 @@ import useNmSpace from '../../../hooks/useBem'
 
 export const badgeProp={
   text: {
-    type: String,
+    type: [String,Number],
     default: ""
   },
   max:{
-    type:String||Number,
+    type:[String,Number],
     default:99
   },
   dot:{

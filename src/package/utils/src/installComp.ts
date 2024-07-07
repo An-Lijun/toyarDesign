@@ -1,6 +1,9 @@
 import type { Component,Plugin} from 'vue'
 
 export default (component:Component|Array<Component>) => {
+  if(!component){
+    return
+  }
   if(Array.isArray(component)){
     const base = component[0] as Plugin
     

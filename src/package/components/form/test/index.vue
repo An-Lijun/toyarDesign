@@ -1,7 +1,7 @@
 <template>
   <div class="divRoot">
     <TyForm ref="form1" :formData="formData" :rules="rules">
-    <TyRow :gutter="num">
+    <TyRow :gutter="24">
       <TyCol :span="12">
         <TyFormItem prop="dd">
           <template #label> 金额 </template>

@@ -10,13 +10,8 @@ export const checkProps ={
       return TY_SIZE.includes(value)
     }
   },
-  modelValue: {
-    type: [Array,Boolean],
-    default: ''
-  },
   value:{
     type:[String,Number],
-    required:true
   },
   canHarf:{
     type:Boolean,
@@ -32,7 +27,7 @@ export const checkProps ={
   }
 }
 
-export const checkEmits =['update:modelValue','change']
+export const checkEmits =['change']
 
 
 export const checkGroupProps ={

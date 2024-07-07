@@ -7,7 +7,7 @@
 <TyCheckBox v-model="isT" value="西" size="medium" @change="(v)=>{console.log(v)}">西</TyCheckBox>
 <TyCheckBox v-model="isT" value="北" size="large" @change="(v)=>{console.log(v)}">北</TyCheckBox>
     <hr>
-    <TyCheckBox v-model="r2" readonly :size="item">22</TyCheckBox>
+    <TyCheckBox v-model="r2" readonly >22</TyCheckBox>
 
 
     <TyCheckBox v-model="r1">11</TyCheckBox>
@@ -43,7 +43,7 @@
 
     <TyForm :formData="formData" :rules="rules">
       <TyFormItem >
-        <TyCheckBox v-model="r2" :size="item">22</TyCheckBox>
+        <TyCheckBox v-model="formData.r2" :size="item">22</TyCheckBox>
       </TyFormItem>
     </TyForm>
     <TyButton @click="sub"> 123 </TyButton>
@@ -56,10 +56,11 @@ let r1 = ref(false)
 let isT = ref([])
 
 const tForm = ref()
-
+const r2 = ref('')
 const formData = ref({
   r2: ''
 })
+const item ='large'
 const rules = {
   r2: [{ required: true, message: `r2 是必填字段`, trigger: ['blur'] }]
 }

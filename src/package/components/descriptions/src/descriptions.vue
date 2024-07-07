@@ -22,6 +22,9 @@
 </template>
 <script setup lang="ts">
 import { descProp, nm } from './context'
+defineOptions({
+  name:'TyDescriptions'
+})
 const props = defineProps(descProp)
 
 const getChunkArray= (array:Array<any>, size:number = 1):Array<Array<any>> =>{
