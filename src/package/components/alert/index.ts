@@ -3,23 +3,10 @@ import { createVNode, render, nextTick, h } from 'vue'
 import dialog from '../dialog/src/dialog.vue'
 import TyButton from '../button/src/button.vue'
 import TyIcon from '../icon/src/icon.vue'
-import { TY_MOOD } from '@/package/constant/index'
+import { TY_MOOD, TY_MOOD_LS } from '@/package/constant/index'
 
-import type { IOption, strObj } from './type'
-
-
-const msgIconObj: strObj = {
-  info: 'ty-information-fill',
-  success: 'ty-checkbox-circle-fill',
-  warning: 'ty-information-fill',
-  error: 'ty-close-circle-fill',
-}
-const defOptions = {
-  title: '提示',
-  type: 'info',
-  isUnderLine: false
-}
-
+import type { IOption} from './type'
+import {defaultDialogOptions, dialogIconMap} from './content'
 const genOptions = (options: IOption) => {
   let footerBtn = []
   if (options.sure) {
@@ -27,7 +14,7 @@ const genOptions = (options: IOption) => {
       h(
         TyButton,
         {
-          state: options.type,
+          state: TY_MOOD[options.type],
           onClick: options.sure.code || (() => { })
         },
         options.sure.text || '确认'
@@ -40,7 +27,7 @@ const genOptions = (options: IOption) => {
         TyButton,
         {
           type: 'secondary',
-          state: options.type,
+          state: TY_MOOD[options.type],
           onClick: options.cancel.code || (() => { })
         },
         options.cancel.text || '取消'
@@ -66,7 +53,6 @@ const createAlert = (info: string, options: IOption, div: HTMLDivElement) => {
   return createVNode(
     dialog,
     {
-      info,
       isUnderLine: options.isUnderLine,
       modelValue: true,
       'onUpdate:modelValue': () => {
@@ -74,7 +60,7 @@ const createAlert = (info: string, options: IOption, div: HTMLDivElement) => {
       }
     },
     {
-      title: h(
+      title: () => h(
         'div',
         {
           style: {
@@ -82,17 +68,22 @@ const createAlert = (info: string, options: IOption, div: HTMLDivElement) => {
             alignItems: 'center'
           }
         },
-        [h(TyIcon, {
-          icon: msgIconObj[options.type],
-          style: {
-            color: `var(--${TY_MOOD[options.type]}-6)`,
-            fontSize: '24px',
-            marginRight: '10px'
-          }
-        }),
-          info]
+        [
+          h(TyIcon, {
+            icon: dialogIconMap[options.type],
+            style: {
+              color: `var(--${TY_MOOD[options.type]}-6)`,
+              fontSize: '24px',
+              marginRight: '10px'
+            },
+            size: 24
+          }),
+          options.title
+        ],
       ),
-      footer
+      default: () => info,
+      footer: () => footer,
+
     }
   )
 }
@@ -101,15 +92,22 @@ export default function AlertJs(
   info: string,
   options: IOption
 ) {
-    const div = document.createElement('div')
-    if (div) {
-      const instance = createAlert(info,options, div)
-      render(instance, div)
-      document.body.appendChild(div)
-      nextTick(() => {
-        instance!.component!.exposed!.showValue.value = true
-      })
-    }
+  if (!TY_MOOD_LS.includes(options.type)) {
+    throw new Error(`type:${options.type} is not in ${TY_MOOD_LS}`)
+  }
+  if (Object.prototype.toString.call(info) !== '[object String]') {
+    throw new Error(`info:${info} is not a string`)
+  }
+
+  const div = document.createElement('div')
+  if (div) {
+    const instance = createAlert(info, Object.assign(defaultDialogOptions, options), div)
+    render(instance, div)
+    document.body.appendChild(div)
+    nextTick(() => {
+      instance!.component!.exposed!.showValue.value = true
+    })
+  }
 }
 
 

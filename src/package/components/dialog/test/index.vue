@@ -48,8 +48,8 @@ const tableData = [
 ]
 const openDialog=()=>{
   TyAlert('123456789',{
-    title:'标题',
-    content:'内容',
+    title:'标题11',
+    type:'error',
     sure:{
       text:'确定',
       code:()=>{

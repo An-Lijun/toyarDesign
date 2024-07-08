@@ -39,6 +39,7 @@
 import { computed } from 'vue'
 import { buttonProps ,nm} from './context.ts'
 import {  inject  } from 'vue'
+import TyIcon from '../../icon/src/icon.vue'
 import {configProviderDisabled} from '../../../hooks/symbolNm'
 defineOptions({
   name:'TyButton'
