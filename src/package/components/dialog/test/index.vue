@@ -15,10 +15,11 @@
           </template>
       </TyTable>
     </TyDialog>
+    <TyButton @click="openDialog">js函数打开</TyButton>
   </div>
 </template>
 <script setup>
-import { TyButton } from '@/package';
+import { TyButton,TyAlert } from '@/package';
 import { ref } from 'vue';
 
 let isShow1 =ref(false)
@@ -45,6 +46,24 @@ const tableData = [
     address: '长春'
   }
 ]
+const openDialog=()=>{
+  TyAlert('123456789',{
+    title:'标题',
+    content:'内容',
+    sure:{
+      text:'确定',
+      code:()=>{
+        console.log('点击了确定')
+      }
+    },
+    cancel:{
+      text:'取消',
+      code:()=>{
+        console.log('点击了取消')
+      }
+    }
+  })
+}
 </script>
 <style lang="less" scoped>
 </style>

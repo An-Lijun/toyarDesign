@@ -1,127 +1,116 @@
-import { createVNode, ref, render, nextTick, h } from 'vue'
-import dialog from '../dialog/src/dialog.vue'
-import TyIcon from '../icon'
-import TyButton from '../button'
+import { createVNode, render, nextTick, h } from 'vue'
 
-interface IOption {
-  title: String,
-  type: String,
-  sure: {
-    text: String,
-    code: Function
-  },
-  concel: {
-    text: String,
-    code: Function
-  },
+import dialog from '../dialog/src/dialog.vue'
+import TyButton from '../button/src/button.vue'
+import TyIcon from '../icon/src/icon.vue'
+import { TY_MOOD } from '@/package/constant/index'
+
+import type { IOption, strObj } from './type'
+
+
+const msgIconObj: strObj = {
+  info: 'ty-information-fill',
+  success: 'ty-checkbox-circle-fill',
+  warning: 'ty-information-fill',
+  error: 'ty-close-circle-fill',
+}
+const defOptions = {
+  title: '提示',
+  type: 'info',
+  isUnderLine: false
 }
 
-let doc = document || null
-
-const genOptions = (options) => {
-  const footerObj = {}
+const genOptions = (options: IOption) => {
   let footerBtn = []
-
   if (options.sure) {
     footerBtn.push(
-      h(TyButton, {
-        state:options.type,
-        onClick:options.sure.code||(()=>{})
-      }, options.sure.text || '确认')
+      h(
+        TyButton,
+        {
+          state: options.type,
+          onClick: options.sure.code || (() => { })
+        },
+        options.sure.text || '确认'
+      )
     )
   }
-  if (options.concel) {
+  if (options.cancel) {
     footerBtn.push(
-      h(TyButton, {
-        type: 'secondary',
-        state:options.type,
-        onClick:options.concel.code||(()=>{})
-      }, options.concel.text || '取消')
+      h(
+        TyButton,
+        {
+          type: 'secondary',
+          state: options.type,
+          onClick: options.cancel.code || (() => { })
+        },
+        options.cancel.text || '取消'
+      )
     )
   }
-  if (options.sure || options.concel) {
-    footerObj.footer = h(
-      'div',
-      {
-        style: {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }
-      },
-      [
-        ...footerBtn
-      ]
-    )
-  }
-  return footerObj
-    
+  return footerBtn.length ? h(
+    'div',
+    {
+      style: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }
+    },
+    footerBtn
+  ) : null
 }
 
-const createAlert = (info: String, options: IOption, div: HTMLDivElement) => {
-  const msgIconObj = {
-    info: 'ty-information-fill',
-    success: 'ty-checkbox-circle-fill',
-    warning: 'ty-information-fill',
-    error: 'ty-close-circle-fill'
-  }
-  const colorObj = {
-    info: 'primary',
-    success: 'success',
-    warning: 'warning',
-    error: 'danger'
-  }
-  const footerObj = genOptions(options)
-  const instance = createVNode(
+const createAlert = (info: string, options: IOption, div: HTMLDivElement) => {
+  const footer = genOptions(options) || null
+
+  return createVNode(
     dialog,
     {
       info,
-      isUnderLine: false,
+      isUnderLine: options.isUnderLine,
+      modelValue: true,
       'onUpdate:modelValue': () => {
-        if (doc) {
-          doc?.body.removeChild(div)
-        }
+        document.body.removeChild(div)
       }
     },
     {
-      title: h('div', {
-        style:{
-          display:'flex',
-          alignItems: 'center'
-        }
-      }, [
-        h(TyIcon, {
-          icon: msgIconObj[options.type] || msgIconObj['info'],
+      title: h(
+        'div',
+        {
           style: {
-            color: `var(--${colorObj[options.type]}-6)`,
-            fontSize:'24px',
+            display: 'flex',
+            alignItems: 'center'
+          }
+        },
+        [h(TyIcon, {
+          icon: msgIconObj[options.type],
+          style: {
+            color: `var(--${TY_MOOD[options.type]}-6)`,
+            fontSize: '24px',
             marginRight: '10px'
           }
         }),
-        info
-      ]),
-      ...footerObj
+          info]
+      ),
+      footer
     }
   )
-  return instance
 }
 
 export default function AlertJs(
-  info: String,
-  options = {
-    title: '提示'
-  }
+  info: string,
+  options: IOption
 ) {
-  if (doc) {
-    const div = doc?.createElement('div')
+    const div = document.createElement('div')
     if (div) {
-      const instance = createAlert(info, options, div)
+      const instance = createAlert(info,options, div)
       render(instance, div)
-      doc?.body.appendChild(div)
+      document.body.appendChild(div)
       nextTick(() => {
-        
-        instance.component.exposed.showValue.value=true
+        instance!.component!.exposed!.showValue.value = true
       })
     }
-  }
 }
+
+
+
