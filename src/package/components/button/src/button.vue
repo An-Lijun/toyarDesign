@@ -14,22 +14,12 @@
     :disabled="mergeDisabled"
     :readonly="mergeReadonly"
     >
-    <!-- @click="handleClick" -->
-    <span v-if="type === 'link'">
-      <span v-show="loading" :class="nm.is('loading')">
+    <span >
+      <span v-show="loading" :class="nm.is('loading',loading)">
         <TyIcon icon="ty-loader-2-line" > </TyIcon>
       </span>
       <span :class="nm.is('opacity',loading)">
         <slot ></slot>
-      </span>
-    </span>
-    <span  v-else>
-      <span v-show="loading" :class="nm.is('loading')">
-        <TyIcon icon="ty-loader-2-line" > </TyIcon>
-      </span>
-      <span :class="nm.is('opacity',loading)">
-        <slot ></slot>
-
       </span>
     </span>
   </button>
@@ -45,20 +35,22 @@ defineOptions({
   name:'TyButton'
 })
 const props = defineProps(buttonProps)
+
 const inputInject = inject(configProviderDisabled,null) as {
   disabled:boolean,
   readonly:boolean
 }|null
 
 const mergeDisabled = computed(() => {
-  return inputInject?.disabled || props?.disabled ||props?.loading
+  return inputInject?.disabled || props?.disabled || props?.loading
 })
 
 const mergeReadonly = computed(() => {
-  return inputInject?.readonly  ||props?.loading
+  return inputInject?.readonly  || props?.loading
 })
 </script>
 <style lang="scss" scoped>
+
 @keyframes load{
   0%{
     transform: translate(-50%,-50%) rotate(0deg);

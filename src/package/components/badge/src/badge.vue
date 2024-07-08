@@ -9,6 +9,7 @@
 <script setup lang='ts' name="TyBadge">
 import { computed } from 'vue'
 import { badgeProp,nm } from './context'
+
 defineOptions({
   name:'TyBadge'
 })
@@ -18,13 +19,14 @@ const text = computed(() => {
   if (props.dot) {
     return ''
   }
-  if (!isNaN(props.text)) {
-    // '⁺'
-    return props.text > props.max ? props.max + '+' : props.text
+  if (!isNaN(props.text as number)) {
+    const text = Number(props.text)
+    return text > props.max ? props.max + '+' : text
   }
   return props.text
 })
 </script>
+
 <style lang="scss" scoped>
 .ty-badge {
   position: relative;
@@ -35,10 +37,10 @@ const text = computed(() => {
     top: 2px;
     right: 2px;
     transform: translate(50%, -50%);
-    border-radius: 20px;
-    padding: 0 6px;
+    border-radius: var(--border-radius-20);
+    padding:var(--padding-0)  var(--padding-4);
     min-width: 20px;
-    font-size: 12px;
+    font-size: var(--body-1);
     box-shadow: 0 0 0 2px #fff;
     color: #fff;
     height: 20px;
@@ -55,7 +57,7 @@ const text = computed(() => {
       width: 10px;
       min-width: 10px;
       height: 10px;
-      border-radius: 50%;
+      border-radius: var(--border-radius-circle);
       line-height: 4px;
       padding: unset;
     }

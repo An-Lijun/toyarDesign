@@ -6,7 +6,7 @@ export const badgeProp={
     default: ""
   },
   max:{
-    type:[String,Number],
+    type:Number,
     default:99
   },
   dot:{
