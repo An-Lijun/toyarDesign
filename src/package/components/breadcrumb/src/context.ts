@@ -1,9 +1,9 @@
+import { buildProps } from '@/package/utils/buildProps'
 import useNmSpace from '../../../hooks/useBem'
 
 export const nm = useNmSpace('breadcrumb')
 
 export const nmI = useNmSpace('breadcrumb-item')
-
 export const breadProps =buildProps({
   separator:{
     type:String,
