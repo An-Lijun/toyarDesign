@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
 
-export const tableProps ={
+export const tableProps =buildProps({
   columns:{
     type:Array,
     default:()=>{
@@ -11,6 +12,6 @@ export const tableProps ={
     default:()=>{
       return []
     },
-}
+})
 
 export const nm =useNmSpace('table')

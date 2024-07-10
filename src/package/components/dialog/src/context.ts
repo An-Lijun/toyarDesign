@@ -1,6 +1,7 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../hooks/useBem"
 
-export const dialogProp={
+export const dialogProp=buildProps({
   title: {
     type: String,
     default: "提示",
@@ -21,7 +22,8 @@ export const dialogProp={
     type: Boolean,
     default: true,
   }
-}
+})
+
 export const dialogEmit=[]
 
 export const  nm = useNmSpace('dialog')

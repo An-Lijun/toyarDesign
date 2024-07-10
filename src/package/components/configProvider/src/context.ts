@@ -1,6 +1,7 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../hooks/useBem"
 
-export const cProps ={
+export const cProps =buildProps({
   theme:{
     type:String,
     default:'light'
@@ -9,6 +10,6 @@ export const cProps ={
     type: Object,
     default:()=>({})
   },
-}
+})
 
 export const nm = useNmSpace('configProvider')

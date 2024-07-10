@@ -1,14 +1,13 @@
 import useNmSpace from '../../../hooks/useBem'
 import { TY_SIZE } from '../../../constant'
+import { buildProps } from '@/package/utils/buildProps'
 
 export const nm = useNmSpace('check-box')
 
-export const checkProps ={
+export const checkProps =buildProps({
   size: {
     type: String,
-    validator: (value:string) => {
-      return TY_SIZE.includes(value)
-    }
+    values:TY_SIZE
   },
   value:{
     type:[String,Number],
@@ -25,17 +24,15 @@ export const checkProps ={
     type:[String, Number],
     default: ''
   }
-}
+})
 
 export const checkEmits =['change']
 
 
-export const checkGroupProps ={
+export const checkGroupProps = buildProps({
   size: {
     type: String,
-    validator: (value:string) => {
-      return TY_SIZE.includes(value)
-    }
+    values:TY_SIZE
   },
   modelValue: {
     type: [Array,Boolean],
@@ -49,6 +46,6 @@ export const checkGroupProps ={
     type:[String, Number],
     default: ''
   }
-}
+})
 
 export const checkGroupEmits =['update:modelValue','change']

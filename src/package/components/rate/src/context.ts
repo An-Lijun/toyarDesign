@@ -1,6 +1,7 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
 
-export const rateProps ={
+export const rateProps =buildProps({
   modelValue: {
     type: String,
     default:0
@@ -13,7 +14,7 @@ export const rateProps ={
     type: Boolean,
     default: false
   }
-}
+})
 
 export const rateEmits =['update:modelValue']
  

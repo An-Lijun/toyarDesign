@@ -1,14 +1,11 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
+import { TY_MOOD_LS } from "@/package/constant"
 
-export const notProps ={
+export const notProps =buildProps({
   type: {
     type: String,
-    validator (value:string) {
-      if (value) {
-        return ['info', 'success', 'warning', 'error'].includes(value)
-      }
-      return true
-    }
+    values:TY_MOOD_LS
   },
   title: {
     type: String,
@@ -23,7 +20,7 @@ export const notProps ={
   time:{
     type: String
   }
-}
+})
 export const notEmits =['close']
 
 export const nm = useNmSpace('notification')

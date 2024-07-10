@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
 
-export const rowProps ={
+export const rowProps =buildProps({
   type: {
     type: String,
     default: 'line'
@@ -17,6 +18,7 @@ export const rowProps ={
     type: String,
     default: 'center'
   }
-}
+})
+
 export const nm =useNmSpace('row')
  

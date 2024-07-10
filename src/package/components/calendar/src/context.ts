@@ -1,11 +1,11 @@
+import { TY_SIZE } from '@/package/constant'
 import useNmSpace from '../../../hooks/useBem'
+import { buildProps } from '@/package/utils/buildProps'
 
-export const calendarProp={
+export const calendarProp=buildProps({
   size: {
     type: String,
-    validator:( value:string) => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
+    values:TY_SIZE
   },
   clearable: {
     type: Boolean,
@@ -27,7 +27,7 @@ export const calendarProp={
   format:{
     type:String,
   },
-}
+})
 export const calendarEmit =['blur', 'input', 'update:modelValue']
 
 export const nm = useNmSpace('calendar')

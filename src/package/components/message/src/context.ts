@@ -1,7 +1,8 @@
 
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
 
-export const msgProps= {
+export const msgProps= buildProps({
   msg: {
     type: String,
     required: true
@@ -13,7 +14,7 @@ export const msgProps= {
     type: String,
     default: '0'
   }
-}
+})
 
 export const msgEmit=['close']
 

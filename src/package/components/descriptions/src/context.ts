@@ -1,7 +1,8 @@
 import useNmSpace from "../../../hooks/useBem"
 import { TY_SIZE} from '../../../constant';
+import { buildProps } from "@/package/utils/buildProps";
 
-export const descProp={
+export const descProp=buildProps({
   title: {
     type: String,
     default: "",
@@ -16,20 +17,12 @@ export const descProp={
   size:{
     type: String,
     default: "small",
-    validator: (value:string) => {
-      return TY_SIZE.includes(
-        value
-      );
-    }
+    values:TY_SIZE
   },
   align:{
     type: String,
     default: "center",
-    validator: (value:string) => {
-      return ['left','center','right'].includes(
-        value
-      );
-    }
+    values:['left','center','right']
   },
   layout:{
     type: String,
@@ -40,6 +33,6 @@ export const descProp={
       );
     }
   }
-}
+})
 
 export const  nm = useNmSpace('descriptions')

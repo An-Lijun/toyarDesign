@@ -1,6 +1,6 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
-
-export const waterProps ={
+export const waterProps =buildProps({
   markInfo: {
     type: [String,Array],
     required: true
@@ -8,7 +8,7 @@ export const waterProps ={
   options: {
     type: Object
   }
-}
+})
 export const nm =useNmSpace('waterMark')
 
 export const defaultOptions = {

@@ -1,15 +1,15 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
+import { TY_SIZE } from '@/package/constant';
 
 
 export const nm =useNmSpace('select')
 
-export const selProps ={
+export const selProps =buildProps({
   size: {
     type: String,
     default: 'small',
-    validator: (value:string) => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
+    valuse :TY_SIZE
   },
   multiple:{
     type: Boolean,
@@ -35,7 +35,7 @@ export const selProps ={
     type: String,
     default: ''
   }
-}
+})
 
 export const groupProps ={
   title:{
@@ -48,7 +48,7 @@ export const selEmits =['blur', 'input', 'update:modelValue']
 
 export const opNm =useNmSpace('option')
 
-export const opProps ={
+export const opProps =buildProps({
   label: {
     type: String,
     default: ''
@@ -61,5 +61,6 @@ export const opProps ={
     type:Boolean,
     default:false
   }
-}
+})
+
 export const opEmits =['update:modelValue']

@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps'
 import useNmSpace from '../../../hooks/useBem'
 
-export const colProps ={
+export const colProps =buildProps({
   span: {
     type: [Number, Object,String],
     default: 24
@@ -9,6 +10,6 @@ export const colProps ={
     type: Number,
     default: 0
   }
-}
+})
 export const nm = useNmSpace('col')
  

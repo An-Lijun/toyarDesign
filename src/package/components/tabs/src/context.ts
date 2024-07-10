@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
 
-export const tabsProps ={
+export const tabsProps =buildProps({
   modelValue: {
     type: String
   },
@@ -16,7 +17,7 @@ export const tabsProps ={
     type: String,
     default: 'click'
   }
-}
+})
 export const tabsEmits =['update:modelValue']
 
 export const nm = useNmSpace('tabs')

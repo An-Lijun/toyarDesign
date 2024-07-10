@@ -1,20 +1,17 @@
+import { buildProps } from "@/package/utils/buildProps";
 import useNmSpace from "../../../hooks/useBem";
 
-export const dividerProps={
+export const dividerProps=buildProps({
   direction: {
     type: String,
     default: "row",
-    validator: (value:string) => {
-      return ["row", "column"].includes(value);
-    },
+    values:["row", "column"]
   },
   position: {
     type: String,
     default: "center",
-    validator: (value:string) => {
-      return ["center", "left", "right",'bottom','top'].includes(value);
-    },
+    values:["center", "left", "right",'bottom','top']
   },
-}
+})
 
 export const nm =useNmSpace('divider')

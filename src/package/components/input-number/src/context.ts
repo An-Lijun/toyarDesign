@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps'
 import { computed } from 'vue'
 
-export const inputProps={
+export const inputProps=buildProps({
   modelValue: {
     type: [ Number,String],
     required: true,
@@ -20,7 +21,7 @@ export const inputProps={
   maxlength:{
     type:[Number,String,Object]
   }
-}
+})
 
 export const inputEmits =['blur','clear', 'change', 'focus','update:modelValue']
 

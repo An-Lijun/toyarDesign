@@ -1,7 +1,8 @@
 
 import useNmSpace from '../../../hooks/useBem'
+import { buildProps } from '@/package/utils/buildProps'
 
-export const cardProp={
+export const cardProp=buildProps({
   border: {
     type: Boolean,
     default: true
@@ -14,5 +15,5 @@ export const cardProp={
     type: Boolean,
     default:false
   }
-}
+})
 export const nm = useNmSpace('card')

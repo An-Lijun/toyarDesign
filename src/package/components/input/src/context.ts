@@ -1,14 +1,14 @@
 
 // inputProp
 
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
+import { TY_SIZE } from "@/package/constant"
 
-export const inputProps = {
+export const inputProps = buildProps({
   size: {
     type: String,
-    validator: (value:string) => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
+    values:TY_SIZE
   },
   clearable: {
     type: Boolean,
@@ -41,7 +41,8 @@ export const inputProps = {
   outAftText:{
     type:String
   }
-}
+})
+
 export const inputEmits =['blur','focus','enter', 'clear','input', 'update:modelValue']
 
 export const nm = useNmSpace('input')

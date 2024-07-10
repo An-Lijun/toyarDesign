@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
 
-export const cProps ={
+export const cProps =buildProps({
   type:{
     type: String,
     default: 'info'
@@ -8,6 +9,6 @@ export const cProps ={
   title:{
     type:String
   }
-}
+})
 
 export const nm = useNmSpace('caution')

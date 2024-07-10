@@ -1,6 +1,7 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
 
-export const popProps ={
+export const popProps =buildProps({
   placement: {
     type: String,
     default: 'top'
@@ -25,5 +26,6 @@ export const popProps ={
     type:Boolean,
     default:true
   }
-}
+})
+
 export const nm =useNmSpace('popconfirm')

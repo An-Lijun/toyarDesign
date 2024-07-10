@@ -1,6 +1,7 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../hooks/useBem"
 
-export const imgProps ={
+export const imgProps = buildProps({
   src: {
     type: String,
     required: true
@@ -12,19 +13,16 @@ export const imgProps ={
   shape: {
     type: String,
     default: 'square',
-    validator(value:string) {
-      return ['square', 'circle'].includes(value)
-    }
+    values: ['square', 'circle']
+
   },
   fit: {
     type: String,
-    default:'none',
-    validator(value:string) {
-      return ['none', 'fill', 'contain', 'cover', 'scale-down'].includes(value)
-    }
+    default: 'none',
+    values: ['none', 'fill', 'contain', 'cover', 'scale-down']
   },
   alt: {
     type: String
   }
-}
+})
 export const nm = useNmSpace('image')

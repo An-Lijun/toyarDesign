@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps'
 import useNmSpace from '../../../hooks/useBem'
 
-export const backTopProps = {
+export const backTopProps = buildProps({
   vHeight: {
     type: Number,
     default: 200,
@@ -17,7 +18,7 @@ export const backTopProps = {
     type: Boolean,
     default: false, 
   }
-}
+})
 // "circle" //square
 
 export  const nm = useNmSpace('backTop')

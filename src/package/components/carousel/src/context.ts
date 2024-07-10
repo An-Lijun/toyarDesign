@@ -1,6 +1,7 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
 
-export const carProps ={
+export const carProps =buildProps({
   showIndicator:{
     type:Boolean,
     default:true
@@ -9,6 +10,6 @@ export const carProps ={
     type:Number,
     default:3000
   }
-}
+})
 
 export const nm = useNmSpace('carousel')

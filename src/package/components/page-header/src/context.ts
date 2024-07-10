@@ -1,7 +1,8 @@
 
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
 
-export const hdProps ={
+export const hdProps =buildProps({
   title: {
     type: String,
     default: ''
@@ -14,7 +15,7 @@ export const hdProps ={
     type: Boolean,
     default: true
   }
-}
+})
 
 export const hdEmits =['back']
 

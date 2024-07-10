@@ -1,6 +1,7 @@
 import useNmSpace from '../../../hooks/useBem'
+import { buildProps } from '@/package/utils/buildProps'
 
-export const badgeProp={
+export const badgeProp=buildProps({
   text: {
     type: [String,Number],
     default: ""
@@ -17,6 +18,6 @@ export const badgeProp={
     type:String,
     default:'danger'
   }
-}
+})
 
 export  const nm = useNmSpace('badge')

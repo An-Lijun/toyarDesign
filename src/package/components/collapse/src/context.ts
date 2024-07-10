@@ -1,6 +1,7 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../hooks/useBem"
 
-export const colProps ={
+export const colProps =buildProps({
   disabled: {
     type: Boolean,
     default:false
@@ -21,8 +22,8 @@ export const colProps ={
     type: Boolean,
     default:false
   }
-}
-export const itemProp={
+})
+export const itemProp=buildProps({
   title: {
     type: String
   },
@@ -30,7 +31,7 @@ export const itemProp={
     type: String,
     required: true
   }
-}
+})
 export const colEmt=[]
 
 export const nm = useNmSpace('collapse')

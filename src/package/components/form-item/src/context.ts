@@ -1,7 +1,8 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../hooks/useBem"
 
 
-export const itemProps ={
+export const itemProps =buildProps({
   prop: String,
   disabled:{
     type:Boolean,
@@ -15,7 +16,6 @@ export const itemProps ={
     type:String,
     default: ''
   }
-
-}
+})
 
 export const nm = useNmSpace('form-item')

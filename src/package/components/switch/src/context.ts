@@ -1,12 +1,12 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
+import { TY_SIZE } from '@/package/constant';
 
-export const switchProps ={
+export const switchProps =buildProps({
   size: {
     type: String,
     default: 'small',
-    validator: (value:string) => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
+    values:TY_SIZE
   },
   uncheckedText: {
     type: String,
@@ -29,11 +29,10 @@ export const switchProps ={
   type:{
     type:String,
     default: 'round',
-      validator: (value:string) => {
-        return ['round', 'tube', 'inline'].includes(value)
-      }
-    }
-}
+    values:['round', 'tube', 'inline']
+  }
+})
+
 export const switchEmits =['update:modelValue','change']
 
 export const nm =useNmSpace('switch')

@@ -1,6 +1,8 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
+import { TY_SIZE } from "@/package/constant"
 
-export const listProps ={
+export const listProps =buildProps({
   header: {
     type: String,
     default: ''
@@ -8,10 +10,8 @@ export const listProps ={
   size: {
     type: String,
     default: 'small',
-    validator: (value:string) => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
+    values:TY_SIZE
   }
-}
+})
 
 export const listNm = useNmSpace('list')

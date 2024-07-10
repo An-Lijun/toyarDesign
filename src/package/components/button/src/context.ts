@@ -1,62 +1,47 @@
 import useNmSpace from '../../../hooks/useBem'
+import { buildProps } from '@/package/utils/buildProps';
+import { TY_STATE, TY_SIZE } from '../../../constant';
 
-import { TY_STATE,TY_SIZE} from '../../../constant';
-
-export const buttonProps = {
-  state: {
-    type: String,
-    default: "primary",
-    validator: (value:any) => {
-      return TY_STATE.includes(
-        value
-      );
+export const buttonProps = buildProps(
+  {
+    state: {
+      type: String,
+      values: TY_STATE,
+      default: "primary",
+    },
+    type: {
+      type: String,
+      default: "normal",
+      values: ["normal", "secondary", "dashed", 'text', 'link']
+    },
+    block: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: "small",
+      values: TY_SIZE
+    },
+    'html-type': {
+      type: String,
+      default: "button",
+      values: ["button", "submit", "reset"]
+    },
+    shape: {
+      type: String,
+      default: "square",
+      valuse: ["square", "round", "circle"]
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
-  },
-  type:{
-    type:String,
-    default: "normal",
-    validator: (value:string) => {
-      return ["normal", "secondary",  "dashed",'text','link'].includes(
-        value
-      );
-    }
-  },
-  block:{
-    type:Boolean,
-    default:false
-  },
-  disabled:{
-    type:Boolean,
-    default:false
-  },
-  size:{
-    type: String,
-    default: "small",
-    validator: (value:string) => {
-      return TY_SIZE.includes(
-        value
-      );
-    }
-  },
-  'html-type':{
-    type: String,
-    default: "button",
-    validator: (value:string) => {
-      return ["button", "submit", "reset"].includes(value);
-    }
-  },
-  shape:{
-    type: String,
-    default: "square",
-    validator: (value:string) => {
-      return ["square", "round", "circle"].includes(
-        value
-      );
-    }
-  },
-  loading:{
-    type: Boolean,
-    default:false
   }
-}
+)
+
 export const nm = useNmSpace('button')

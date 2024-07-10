@@ -1,7 +1,8 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
 
 
-export const prgProps={
+export const prgProps=buildProps({
   modelValue: {
     type: [String, Number],
     required: true,
@@ -23,7 +24,7 @@ export const prgProps={
     type: String,
     default: 50
   }
-}
+})
 
 export const prgEmits =['update:modelValue']
 

@@ -1,11 +1,11 @@
+import { buildProps } from "@/package/utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
+import { TY_SIZE } from "@/package/constant"
 
-export const radioGroupProps ={
+export const radioGroupProps =buildProps({
   size: {
     type: String,
-    validator: (value:string) => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
+    values:TY_SIZE
   },
   modelValue: {
     required: true,
@@ -20,15 +20,13 @@ export const radioGroupProps ={
     type: Boolean,
     default: false
   }
-}
+})
 export const radioGroupEmits =['update:modelValue','change']
 
-export const radioProps ={
+export const radioProps =buildProps({
   size: {
     type: String,
-    validator: (value:string) => {
-      return ['mini', 'small', 'medium', 'large'].includes(value)
-    }
+    values:TY_SIZE
   },
   modelValue: {
     type: [String, Number],
@@ -46,7 +44,8 @@ export const radioProps ={
     type: Boolean,
     default: false
   }
-}
+})
+
 export const radioEmits =['update:modelValue','change']
 
 export const nm =useNmSpace('radio')

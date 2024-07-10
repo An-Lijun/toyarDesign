@@ -1,6 +1,6 @@
+import { buildProps } from '@/package/utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
-
-export const toolProps={
+export const toolProps=buildProps({
   content: {
     type: String,
     default: ''
@@ -13,5 +13,6 @@ export const toolProps={
     type: String,
     default: 'hover'
   }
-}
+})
+
 export const nm = useNmSpace('tooltip')
