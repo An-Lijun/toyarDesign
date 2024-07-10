@@ -2,20 +2,20 @@
 
   /*  ---------------------------------------   功能色调   --------------------------------------- */
   /* 7 click 6常规 5hover 4特殊场景 3 一般禁用2 文字禁用1 浅色/白底悬浮*/
-  $themeColor: (
-    primary:(xblue),
+  $themeColorMap: (
+    primary:('xblue'),
     /* 主色 */
-    link:(xblue),
+    link:('xblue'),
     /* 链接色 */
-    success:(green),
+    success:('green'),
     /* 成功色 */
-    warning:(orange),
+    warning:('orange'),
     /* 警示色 */
-    danger:(red)
+    danger:('red')
     /* 错误色 */
   );
 
-@each $name, $value in $themeColor {
+@each $name, $value in $themeColorMap {
   @for $i from 1 through 7 {
     --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
   }
@@ -29,16 +29,22 @@
 }
 
 /* 边框圆角 */
-$borderRadiusLs: (
+$borderRadiusList: (
   0:(0px),
   2:(2px),
   4:(4px),
+  6:(6px),
   8:(8px),
+  10:(10px),
+  12:(12px),
+  14:(14px),
   16:(16px),
+  18:(18px),
+  20:(20px),
   circle:(50%),
 );
 
-@each $name, $value in $borderRadiusLs {
+@each $name, $value in $borderRadiusList {
   --border-radius-#{$name}: #{$value};
 }
 
@@ -57,7 +63,7 @@ $borderLs: (
 
 /*  ---------------------------------------   字体   --------------------------------------- */
 
-$fontLs: (
+$fontList: (
   /* 水印文字 */
   caption:(12px),
   /*辅助文案/次要文案*/
@@ -80,7 +86,7 @@ $fontLs: (
   dis-3:(56px),
 );
 
-@each $name, $value in $fontLs {
+@each $name, $value in $fontList {
   --font-#{$name} : #{$value};
 }
 

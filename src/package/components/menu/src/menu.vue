@@ -5,13 +5,11 @@
     </header>
     <div :class="nm.e('inner')">
       <slot v-if="!option"> </slot>
-      <optionsRender v-else :option="option" :a1="123"/>
+      <optionsRender v-else :option="option"/>
     </div>
   </section>
 </template>
 <script setup>
-import menuItem from './menuItem.vue'
-import subMenu from './menuItem.vue'
 import optionsRender from './optionsRender'
 import { provideLevel } from './hooks/level.ts'
 import { nm, menuProps ,emits} from './context'

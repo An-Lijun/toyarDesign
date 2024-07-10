@@ -17,11 +17,8 @@
 </template>
 <script setup lang="ts">
 import {routes} from './router'
-
-
 import { ref, watch} from 'vue'
 import { TyMessage, TyAlert, TyNotification,TyLoading } from './package/index'
-
 let theme =ref(false)
 
 watch(

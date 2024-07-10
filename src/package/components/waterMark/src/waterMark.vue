@@ -1,113 +1,104 @@
 <template>
   <div :class="nm.b()" ref="maskContainer">
-    <div
-      :class="nm.e('mark')"
-      ref="mark"
-      :style="{
-        backgroundImage: `${bgUrl}`
-      }"
-    ></div>
+    <div :class="nm.e('mark')" ref="mark" :style="{
+    backgroundImage: `${bgUrl}`
+  }"></div>
     <slot></slot>
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
-import { waterProps, nm } from './context'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { waterProps, nm, defaultOptions } from './context'
+import xss from 'xss'
+import useDebounce from '@/package/hooks/useDebounce'
+import { URL_REGULAR_EXPRESSION, PICTURE_EXPRESSION } from '@/package/utils/regular'
 defineOptions({
-  name:'TyWaterMark'
+  name: 'TyWaterMark'
 })
 const props = defineProps(waterProps)
-const defaultOptions = {
-  fontColor: 'rgba(210,210,230,0.7)',
-  fontSize: 30,
-  fontSizeSed:25,
-  fontFamily: 'Arial',
-  zIndex: 999,
-  width: 200,
-  height: 200,
-  rotate: (-30 * Math.PI) / 180,
-  offsetX: 0,
-  offsetY: 0,
-  antiTamper: false
-}
-const options = Object.assign(defaultOptions, props.options)
+
+const options = Object.assign({}, defaultOptions, props.options)
+const canvas = document.createElement('canvas')
+canvas.width = options.width
+canvas.height = options.height
+const ctx = canvas.getContext('2d')
+ctx.fillStyle = options.fontColor
+ctx.font = `${options.fontSize}px ${options.fontFamily}`
+ctx.textAlign = 'center'
+ctx.textBaseline = 'middle'
+ctx.translate(options.width / 2, options.height / 2)
+ctx.rotate(options.rotate)
+
 const bgUrl = ref('')
 const mark = ref()
 const maskContainer = ref()
+
 const isImageByReg = (str, type = 'http') => {
-  //尾缀是图片
-  const PICTURE_EXPRESSION = /\.(png|jpe?g|gif|svg)(\?.*)?$/
-  //http
-  const URL_REGULAR_EXPRESSION =
-    /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
   if (type === 'http') {
     return PICTURE_EXPRESSION.test(str)
   } else {
     return URL_REGULAR_EXPRESSION.test(str)
   }
 }
+
 const isImageByDom = str => {
   let img = document.createElement('img')
   img.src = str
   return new Promise(function (resolve, reject) {
     img.onerror = () => {
-      reject(undefined)
+      reject('img is not exist')
     }
     img.onload = () => {
       resolve(img)
     }
   })
 }
-//--------------
 const setUrl = img => {
   bgUrl.value = `url(${img})`
 }
-const createMark = () => {
-  const canvas = document.createElement('canvas')
-  canvas.width = options.width
-  canvas.height = options.height
-  const ctx = canvas.getContext('2d')
-  ctx.fillStyle = options.fontColor
-  ctx.font = `${options.fontSize}px ${options.fontFamily}`
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'middle'
-  ctx.translate(options.width / 2, options.height / 2)
-  ctx.rotate(options.rotate)
+
+
+const createMark = async () => {
+  if(!props.markInfo){
+    throw new Error('markInfo is required')
+  }
+
   if (Array.isArray(props.markInfo)) {
     ctx.fillText(
-      props.markInfo[0],
+      xss(props.markInfo[0] || ''),
       options.offsetX,
       options.offsetY - options.fontSize / 1.5
     )
     ctx.font = `${options.fontSizeSed}px ${options.fontFamily}`
     ctx.fillText(
-      props.markInfo[1],
+      xss(props.markInfo[1] || ''),
       options.offsetX,
       options.offsetY + options.fontSize / 1.5
     )
-    setUrl(canvas.toDataURL('image/png'))
   } else {
-    isImageByDom(props.markInfo)
-      .then(img => {
-        ctx.drawImage(
-          img,
-          -options.width / 2,
-          -options.height / 2,
-          options.width,
-          options.height
-        )
-        setUrl(canvas.toDataURL('image/png'))
-      })
-      .catch(() => {
-        ctx.fillText(
-          props.markInfo,
-          defaultOptions.offsetX,
-          defaultOptions.offsetY
-        )
-        setUrl(canvas.toDataURL('image/png'))
-      })
+    try {
+      const img = await isImageByDom(props.markInfo)
+      ctx.drawImage(
+        img,
+        -options.width / 2,
+        -options.height / 2,
+        options.width,
+        options.height
+      )
+    } catch (error) {
+      ctx.fillText(
+        xss(props.markInfo),
+        options.offsetX,
+        options.offsetY
+      )
+    }
+
   }
+  setUrl(canvas.toDataURL('image/png'))
 }
+
+const createMarkDeb = useDebounce(createMark, 1000, true)
+
 let mutOb = new MutationObserver(records => {
   records.forEach(el => {
     if (el.target === mark.value) {
@@ -115,25 +106,31 @@ let mutOb = new MutationObserver(records => {
       mark.value.style.opacity = '1'
     }
     if (el.removedNodes[0] === mark.value) {
-      createMark()
+      createMarkDeb()
     }
   })
 })
+
 onMounted(() => {
   if (options.antiTamper) {
     mutOb.observe(mark.value, {
-      childList: true,
+      childList: false,
       attributes: true,
       subtree: true
     })
   }
-}),
-  createMark()
+  createMarkDeb()
+})
+
+onBeforeUnmount(() => {
+  mutOb.disconnect();
+})
 </script>
 <style lang="scss" scoped>
 .ty-waterMark {
   position: relative;
   height: 100%;
+
   &__mark {
     position: absolute;
     top: 0;
