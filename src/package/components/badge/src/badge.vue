@@ -48,6 +48,8 @@ const text = computed(() => {
     text-align: center;
     user-select: none;
     overflow: hidden;
+    padding: 1px;
+    font-size: 12px;
   }
 
   &.is-dot {

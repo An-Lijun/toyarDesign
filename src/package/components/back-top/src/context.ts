@@ -6,6 +6,10 @@ export const backTopProps = buildProps({
     type: Number,
     default: 200,
   },
+  target: {
+    type: String,
+    default: '',
+  },
   right: {
     type: Number,
     default: 40,

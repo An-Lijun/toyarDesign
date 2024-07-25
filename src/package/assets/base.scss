@@ -147,9 +147,11 @@ $sizeLs: (
   --size-#{$name}: #{$value};
 }
 
-/* padding尺寸 */
+/* padding尺寸 marin尺寸*/
 @for $padding from 1 through 20 {
   --padding-#{$padding}: 1#{$padding}px;
+  --margin-#{$padding}: 1#{$padding}px;
+
 }
 
 /* 背景色 */

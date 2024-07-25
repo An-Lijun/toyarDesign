@@ -16,11 +16,14 @@
       </TyTable>
     </TyDialog>
     <TyButton @click="openDialog">js函数打开</TyButton>
+
+    <TyButton @click="openDialogRender">js函数+render打开</TyButton>
+
   </div>
 </template>
 <script setup>
 import { TyButton,TyAlert } from '@/package';
-import { ref } from 'vue';
+import { ref ,h} from 'vue';
 
 let isShow1 =ref(false)
 let isShow2 =ref(false)
@@ -49,6 +52,32 @@ const tableData = [
 const openDialog=()=>{
   TyAlert('123456789',{
     title:'标题11',
+    type:'error',
+    sure:{
+      text:'确定',
+      code:()=>{
+        console.log('点击了确定')
+      }
+    },
+    cancel:{
+      text:'取消',
+      code:()=>{
+        console.log('点击了取消')
+      }
+    }
+  })
+}
+
+const openDialogRender =()=>{
+  TyAlert('123456789',{
+    title: h(
+        TyButton,
+        {
+          state: 'primary',
+          onClick: (() => { })
+        },
+        '确认'
+      ),
     type:'error',
     sure:{
       text:'确定',

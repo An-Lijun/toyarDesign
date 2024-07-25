@@ -1,3 +1,5 @@
+import './icon/toyaricon.css'
+import './assets/index.scss'
 import TyIcon from './components/icon'
 import TyButton from './components/button'
 import TyButtonGroup from './components/button-group'
@@ -10,7 +12,7 @@ import TyInput from './components/input'
 import TySelect from './components/select'
 import {TyCheckBox,TyCheckBoxGroup} from './components/check-box'
 import {TyRadio,TyRadioGroup} from './components/radio'
-import TyCalendar from './components/calendar'
+import TyDatePicker from './components/date-picker'
 import TyDialog from './components/dialog'
 import TyBackTop from './components/back-top'
 import TyCard from './components/card'
@@ -57,8 +59,7 @@ import TyConfigProvider from './components/configProvider'
 import TyDrawer from './components/drawer'
 // import TyTrigger from './components/trigger'
 import generateColor from '@/package/color/index.js'
-import './icon/toyaricon.css'
-import './assets/index.scss'
+
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 
@@ -75,7 +76,7 @@ const install = app => {
     app.use(TySelect),
     app.use(TyCheckBox),
     app.use(TyRadio),
-    app.use(TyCalendar),
+    app.use(TyDatePicker),
     app.use(TyDialog),
     app.use(TyBackTop),
     app.use(TyCard),
@@ -141,7 +142,7 @@ export {
   TyCheckBoxGroup,
   TyRadio,
   TyRadioGroup,
-  TyCalendar,
+  TyDatePicker,
   TyDialog,
   TyBackTop,
   TyCard,

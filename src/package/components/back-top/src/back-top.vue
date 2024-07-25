@@ -1,72 +1,68 @@
 <template>
-  <div
-    class="ty-backTop"
-    :class="[
-      nm.is('circle',circle)
-    ]"
-    @click="back()"
-    ref="backTop"
-    v-show="scollHeight >= vHeight"
-  >
-    <TyIcon icon="ty-arrow-up-s-fill"></TyIcon>
+  <div v-show="scollHeight >= vHeight" :class="[
+    nm.b(),
+    nm.is('circle', circle)
+  ]" @click="back()" ref="backTop">
+    <slot>
+      <TyIcon icon="ty-arrow-up-s-fill" style="color:#fff;"></TyIcon>
+    </slot>
   </div>
 </template>
 <script lang='ts' setup name='TyBackTop'>
-import { onMounted,onBeforeUnmount,ref} from "vue";
-import {backTopProps,nm} from './context'
+import { onMounted, onBeforeUnmount, ref,shallowRef } from "vue";
+import { backTopProps, nm } from './context'
+
 defineOptions({
-  name:'TyBackTop'
+  name: 'TyBackTop'
 })
 const props = defineProps(backTopProps)
 const backTop = ref();
+const el = shallowRef<HTMLElement>()
+
 let scollHeight = ref(0);
-let parentNode:Element;
-let scrollFn=()=>{
-  scollHeight.value = backTop.value.parentNode.scrollTop;
+let parentNode: Element;
+let scrollFn = () => {
+  scollHeight.value =  el.value?.scrollTop || 0;
 }
 onMounted(() => {
-  parentNode =backTop.value.parentNode
-  if(parentNode){
+  el.value = document.querySelector(props.target)
+  if(!el.value){
+    throw new Error('target is not found')
+  }
+
+  if ( el.value ) {
     backTop.value.style.right = props.right + "px";
     backTop.value.style.bottom = props.bottom + "px";
-    parentNode.addEventListener('scroll',scrollFn)
+    el.value.addEventListener('scroll', scrollFn)
   }
+  
 });
 
 function back() {
-  var timer = setInterval(() => {
-    let top = backTop.value.parentNode.scrollTop;
-    let move = parseInt(top/10)
-    move= move<=1? 1 :move
-    parentNode.scrollTop -= move;
-    if (top <= 0) {
-      clearInterval(timer);
-    }
-  }, 50);
+  el.value?.scrollTo({ top: 0, behavior: 'smooth' })
 }
-onBeforeUnmount(()=>{
-  parentNode.removeEventListener('scroll',scrollFn)
-
+onBeforeUnmount(() => {
+  parentNode.removeEventListener('scroll', scrollFn)
 })
 </script>
 <style lang="scss" scoped>
 .ty-backTop {
-  position: fixed;
+  position: absolute ;
+  z-index: 97;
   cursor: pointer;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-1);
-  color: var(--text-1);
+  background-color: var(--primary-6);
+  color: var(--text-white);
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   border-radius: 5px;
+
   &.is-circle {
     border-radius: var(--border-radius-circle);
   }
 }
-
 </style>
-

@@ -22,6 +22,17 @@
       <br>
     </template>
     <hr>
+
+    <template  v-for="size in sizes">
+      <TyButton :size="size" v-for="item in type"   shape="square" :type="item">1</TyButton>
+     
+      <br>
+    </template>
+    <template  v-for="size in sizes">
+     <TyButton :size="size" v-for="item in type"   shape="circle" :type="item">1</TyButton>
+    <br>
+  </template>
+    <br>
       <TyButton block>1</TyButton>
       <br>
   </div>
