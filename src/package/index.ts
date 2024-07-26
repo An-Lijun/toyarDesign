@@ -60,6 +60,7 @@ import TyDrawer from './components/drawer'
 import TyCalendar from './components/calendar'
 import TySpace from './components/space'
 import TyAvatar from './components/avatar'
+import TyAvatarGroup from './components/avatar-group'
 
 
 // import TyTrigger from './components/trigger'
@@ -121,7 +122,8 @@ const install = app => {
     app.use(TyDrawer),
     app.use(TyCalendar),
     app.use(TySpace),
-    app.use(TyAvatar)
+    app.use(TyAvatar),
+    app.use(TyAvatarGroup)
   }
   // app.use(TyTrigger)
 
@@ -201,6 +203,6 @@ export {
   generateColor,
   TyCalendar,
   TySpace,
-  TyAvatar
+  TyAvatar,TyAvatarGroup
 } //按需引入
 // TyTrigger,

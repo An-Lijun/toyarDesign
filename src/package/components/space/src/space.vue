@@ -44,7 +44,7 @@ export default defineComponent({
       let arr =[]
       let len = defaultSlot.length - 1
       let marginKey = [`${ props.direction==='row'? 'marginRight':'marginBottom'}`]
-      let marginValue =sizeValue[props.size]
+      let marginValue =sizeValue[props.size] ||props.size +'px'
       defaultSlot.forEach((item,index) => {
         arr.push(
           h('div', {
