@@ -32,9 +32,12 @@ watch(
 html{
   background-color: var(--color-bg-1);
 }
+a{
+  padding: 0 5px;
+
+}
 .router-link-exact-active{
   background-color: blue;
-  padding: 0 5px;
   color: #fff;
 }
 </style>

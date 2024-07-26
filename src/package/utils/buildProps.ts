@@ -16,7 +16,7 @@ const buildProp = prop => {
   }
   const initValidator = () => {
     if (validator) return validator
-    if (values) return (value: any) => values.includes(value)
+    if (values && Array.isArray(values)) return (value: any) => values.includes(value)
     return
   }
 

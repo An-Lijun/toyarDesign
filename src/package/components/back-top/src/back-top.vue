@@ -20,7 +20,6 @@ const backTop = ref();
 const el = shallowRef<HTMLElement>()
 
 let scollHeight = ref(0);
-let parentNode: Element;
 let scrollFn = () => {
   scollHeight.value =  el.value?.scrollTop || 0;
 }
@@ -42,7 +41,7 @@ function back() {
   el.value?.scrollTo({ top: 0, behavior: 'smooth' })
 }
 onBeforeUnmount(() => {
-  parentNode.removeEventListener('scroll', scrollFn)
+  el.value.removeEventListener('scroll', scrollFn)
 })
 </script>
 <style lang="scss" scoped>
