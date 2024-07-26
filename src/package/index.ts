@@ -57,6 +57,7 @@ import TyDescriptions from './components/descriptions'
 import TyCaution from './components/caution'
 import TyConfigProvider from './components/configProvider'
 import TyDrawer from './components/drawer'
+import TyCalendar from './components/calendar'
 // import TyTrigger from './components/trigger'
 import generateColor from '@/package/color/index.js'
 
@@ -110,7 +111,8 @@ const install = app => {
     app.use(TyDescriptions),
     app.use(TyCaution),
     app.use(TyConfigProvider),
-    app.use(TyDrawer)
+    app.use(TyDrawer),
+    app.use(TyCalendar)
   }
   // app.use(TyTrigger)
 
@@ -187,6 +189,7 @@ export {
   TyCaution,
   TyConfigProvider,
   TyDrawer,
-  generateColor
+  generateColor,
+  TyCalendar
 } //按需引入
 // TyTrigger,
