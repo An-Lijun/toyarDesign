@@ -129,7 +129,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .ty-poppover {
   position: relative;
-  display: inline;
+  display: inline-flex;
   color: var(--text-2);
 
   &__arrows {

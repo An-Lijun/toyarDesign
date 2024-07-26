@@ -2,20 +2,23 @@
   <div class="divRoot">
     <div style="text-align: center;">
       <TyPoppover content="6666611116" trigger="click">
+        <TyButton>
+
         6666611116
+          </TyButton>
       </TyPoppover>
       <hr>
       <TyPoppover content="6666611116" trigger="click" placement="bottom">
-        <span>
+        <TyButton>
           6666611116
-        </span>
+        </TyButton>
       </TyPoppover>
 
       <hr>
       <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="bottom">
-        <span>
+        <TyButton>
           66666111116
-        </span>
+        </TyButton>
       </TyPoppover>
     </div>
 
