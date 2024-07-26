@@ -29,12 +29,48 @@ export default defineComponent({
     // 帮我获取default 插槽 内容
     const slots = useSlots()
     const defaultSlot = slots.default ? slots.default() : []
+    const splitSlot = slots.split ? slots.split() : null
+
 
     const sizeValue = {
       "mini": '4px',
       "small": '8px',
       "medium":'12px',
       'large': '16px',
+    }
+
+    const getChildren =()=>{
+
+      let arr =[]
+      let len = defaultSlot.length - 1
+      let marginKey = [`${ props.direction==='row'? 'marginRight':'marginBottom'}`]
+      let marginValue =sizeValue[props.size]
+      defaultSlot.forEach((item,index) => {
+        arr.push(
+          h('div', {
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              [marginKey]: marginValue
+            }
+          },item)
+        )
+
+        if(splitSlot && index !== len ){
+          arr.push(
+            h('div', {
+              style: {
+                display: 'flex',
+                alignItems: 'center',
+                [marginKey]: marginValue
+              }
+            },splitSlot)
+          )
+        }
+
+      })
+
+      return arr
     }
     return () =>
       h('div', {
@@ -43,13 +79,7 @@ export default defineComponent({
           alignItems: 'center',
           flexDirection:props.direction
         }
-      }, defaultSlot.map(item => h('div', {
-        style: {
-          display: 'flex',
-          alignItems: 'center',
-          [`${ props.direction==='row'? 'marginRight':'marginBottom'}`]: sizeValue[props.size]
-        }
-      }, item)))
+      }, getChildren())
   }
 })
 </script>

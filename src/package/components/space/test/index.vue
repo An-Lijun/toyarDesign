@@ -6,6 +6,9 @@
       <span style="display: inline-block; height: 15px;line-height: 15px;">
         222
       </span>
+      <template #split>
+        |
+      </template>
     </TySpace>
     <br>
     <hr>
