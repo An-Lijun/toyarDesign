@@ -58,8 +58,15 @@ import TyCaution from './components/caution'
 import TyConfigProvider from './components/configProvider'
 import TyDrawer from './components/drawer'
 import TyCalendar from './components/calendar'
+import TySpace from './components/space'
+
+
+
 // import TyTrigger from './components/trigger'
 import generateColor from '@/package/color/index.js'
+
+
+
 
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
@@ -112,7 +119,8 @@ const install = app => {
     app.use(TyCaution),
     app.use(TyConfigProvider),
     app.use(TyDrawer),
-    app.use(TyCalendar)
+    app.use(TyCalendar),
+    app.use(TySpace)
   }
   // app.use(TyTrigger)
 
@@ -190,6 +198,7 @@ export {
   TyConfigProvider,
   TyDrawer,
   generateColor,
-  TyCalendar
+  TyCalendar,
+  TySpace
 } //按需引入
 // TyTrigger,
