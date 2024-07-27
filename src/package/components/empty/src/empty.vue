@@ -1,7 +1,9 @@
 <template>
   <div :class="nm.b()">
     <div :class="nm.e('inner')">
-      <TyIcon icon="ty-inbox-2-line"></TyIcon>
+      <slot name="icon">
+        <TyIcon icon="ty-inbox-2-line"></TyIcon>
+      </slot>
       <span>
         {{ title }}
       </span>

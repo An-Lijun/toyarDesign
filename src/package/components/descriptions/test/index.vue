@@ -1,5 +1,26 @@
 <template>
   <div class="divRoot">
+
+    <TyDescriptions title="User Info" border :data="[
+      {
+        label: 'Name',
+        value: 'Socrates',
+      }, {
+        label: 'Mobile',
+        value: '123-1234-1234',
+      }, {
+        label: 'Residence',
+        value: 'Beijing'
+      }, {
+        label: 'Hometown',
+        value: 'Beijing',
+      }, {
+        label: 'Address',
+        value: 'Yingdu Building, Zhichun Road, Beijing'
+      }
+    ]" />
+    <hr>
+    <hr>
     <!-- <h2>测试标题</h2> -->
     <TyDescriptions title="User Info" :data="[
       {

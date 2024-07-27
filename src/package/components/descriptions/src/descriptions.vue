@@ -148,64 +148,96 @@ const relData = getChunkArray(props.data, props.column)
 
 .is-border {
 
-  table {
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid var(--border-color-2);
 
-    .ty-descriptions__label {
-      background-color: var(--fill-2);
 
+
+  &.ty-descriptions--column {
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid var(--border-color-2);
     }
-  }
 
-  td {
-    border-right: 1px solid var(--border-color-2);
-    border-bottom: 1px solid var(--border-color-2);
-    box-sizing: border-box;
-  }
-
-  td:last-child {
-    border-right: unset;
-  }
-
-  tr:last-child {
     td {
-      border-bottom: unset;
+      border-right: 1px solid var(--border-color-2);
+      border-bottom: 1px solid var(--border-color-2);
+      box-sizing: border-box;
+    }
+
+    td:last-child {
+      border-right: unset;
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: unset;
+      }
+    }
+
+    &.ty-descriptions--mini {
+
+      .ty-descriptions__label,
+      .ty-descriptions__value {
+        padding: 3px 20px;
+      }
+    }
+
+    &.ty-descriptions--small {
+
+      .ty-descriptions__label,
+      .ty-descriptions__value {
+        padding: 3px 20px;
+        font-size: 14px;
+
+      }
+    }
+
+    &.ty-descriptions--medium {
+
+      .ty-descriptions__label,
+      .ty-descriptions__value {
+        padding: 5px 20px;
+        font-size: 16px;
+      }
+    }
+
+    &.ty-descriptions--large {
+
+      .ty-descriptions__label,
+      .ty-descriptions__value {
+        padding: 9px 20px;
+        font-size: 18px;
+      }
     }
   }
-
-
-
-  .ty-descriptions--left {
-    .ty-descriptions__label {
-      text-align: left;
-    }
-  }
-
-  .ty-descriptions--right {
-    .ty-descriptions__label {
-      text-align: right;
-    }
-  }
-
-  .ty-descriptions--center {
-    .ty-descriptions__label {
-      text-align: center;
-    }
-  }
-
-
-
-
-
-
-
-
-
-
 
   &.ty-descriptions--row {
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid var(--border-color-2);
+
+      .ty-descriptions__label {
+        background-color: var(--fill-2);
+
+      }
+    }
+
+    td {
+      border-right: 1px solid var(--border-color-2);
+      border-bottom: 1px solid var(--border-color-2);
+      box-sizing: border-box;
+    }
+
+    td:last-child {
+      border-right: unset;
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: unset;
+      }
+    }
 
     &.ty-descriptions--mini {
 
