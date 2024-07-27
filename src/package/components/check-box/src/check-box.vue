@@ -75,7 +75,7 @@ const size = computed(() => {
 })
 
 if (tyCheckBoxGroup) {
-  model = tyCheckBoxGroup?.groupValue
+  model.value = tyCheckBoxGroup?.groupValue
 }
 
 const handleChange = () => {
