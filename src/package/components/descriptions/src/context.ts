@@ -21,17 +21,21 @@ export const descProp=buildProps({
   },
   align:{
     type: String,
-    default: "center",
+    default: "left",
     values:['left','center','right']
   },
   layout:{
     type: String,
-    default: "cloumn",
+    default: "column",
     validator: (value:string) => {
-      return ['cloumn','row'].includes(
+      return ['column','row'].includes(
         value
       );
     }
+  },
+  border:{
+    type:Boolean,
+    default:false
   }
 })
 
