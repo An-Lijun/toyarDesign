@@ -18,13 +18,13 @@
 <script setup lang="ts">
 import {routes} from './router'
 import { ref, watch} from 'vue'
-import { TyMessage, TyAlert, TyNotification,TyLoading } from './package/index'
+import { TyMessage, TyAlert, TyNotification,TyLoading ,TyThemeChange} from './package/index'
 let theme =ref(false)
 
 watch(
  theme,
   (newVal, oldVal) => {
-    document.getElementsByTagName('html')[0].setAttribute('toyar-theme', newVal?'dark':'light')
+    TyThemeChange()
   }
 )
 </script>

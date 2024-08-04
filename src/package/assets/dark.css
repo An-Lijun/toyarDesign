@@ -1,4 +1,4 @@
-html[toyar-theme='dark'] {
+html[toyar-theme='dark'],.ty-dark {
   --toyar-red-1: #4D000A;
   --toyar-red-2: #770611;
   --toyar-red-3: #A1161F;

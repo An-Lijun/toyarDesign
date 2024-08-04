@@ -1,3 +1,4 @@
+
 import './icon/toyaricon.css'
 import './assets/index.scss'
 import TyIcon from './components/icon'
@@ -61,15 +62,10 @@ import TyCalendar from './components/calendar'
 import TySpace from './components/space'
 import TyAvatar from './components/avatar'
 import TyAvatarGroup from './components/avatar-group'
-
-
+import {TyThemeChange} from './hooks/changeTheme'
 // import TyTrigger from './components/trigger'
 import generateColor from '@/package/color/index.js'
 
-
-
-
-document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 
 const install = app => {
@@ -126,12 +122,9 @@ const install = app => {
     app.use(TyAvatarGroup)
   }
   // app.use(TyTrigger)
+document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
-// 切换主题
-const TyThemeChange=()=>{
-  let html = document.documentElement
-  html.setAttribute('toyar-theme', html.getAttribute('toyar-theme')==='light'?'dark':'light')
-}
+
 
 
 export default {

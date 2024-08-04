@@ -20,7 +20,7 @@ export default defineComponent({
     renderSub(h, item) {
       return h(TySubMenu,
         {
-
+          _mItem:item,
         },
         {
           default: () => item.children.map(ite => this.genMenu(h, ite)),
@@ -47,6 +47,7 @@ export default defineComponent({
 
       return h(TyMenuItem, {
         mkey: item.key,
+        _mItem:item,
         onclick: () => {
           if (item.selClick) {
             return item.selClick(item)

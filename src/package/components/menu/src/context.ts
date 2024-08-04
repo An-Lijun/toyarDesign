@@ -16,7 +16,13 @@ export const menuProps=buildProps({
   isFold:{
     type:Boolean,
     default:false
+  },
+  theme:{
+    type: String,
+    values:['design','dark','light','rDesign'],
+    default:'design',
+    required: true,
   }
 })
 
-export const emits =['update:modelValue','change']
+export const emits =['update:modelValue','change','open','subOpen']

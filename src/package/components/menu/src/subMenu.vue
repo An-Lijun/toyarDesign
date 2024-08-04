@@ -61,7 +61,7 @@ const props = defineProps({
 })
 let flag = ref(false)
 const compLevel = injectLevel(true)
-const menuData = inject('menu', {})
+const menuProvide = inject('menu', {})
 const subMenu = ref() // menuref
 let isShowRef = ref(true)
 
@@ -72,16 +72,17 @@ const openChildMenu = () => {
     data+= subMenu.value.getBoundingClientRect().left
   }
   width.value =data
-  menuData.setOpenId(props.index)
+  menuProvide.setOpenId(props.index)
+  menuProvide.clickSubMenu(props._mItem)
   setTimeout(() => {
       flag.value = !flag.value
   })
 }
 
 
-if (menuData) {
+if (menuProvide) {
   watch(
-    () => menuData.isFold,
+    () => menuProvide.isFold,
     newVal => {
       setTimeout(() => {
         isShowRef.value = !newVal.value
@@ -94,11 +95,11 @@ if (menuData) {
   )
 
   watch(
-    () => menuData.openId,
+    () => menuProvide.openId,
     newVal => {
       if (
         newVal !== props.index && 
-        menuData.isFold.value
+        menuProvide.isFold.value
         &&
         !String(newVal.value).startsWith(props.index)
       ) {
@@ -113,8 +114,8 @@ if (menuData) {
 
 provide('subMenu', {
   childClick:()=>{
-    if(menuData.isFold.value){
-      menuData.setOpenId('')
+    if(menuProvide.isFold.value){
+      menuProvide.setOpenId('')
     }
   }
 })

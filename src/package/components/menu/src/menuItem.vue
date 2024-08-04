@@ -1,7 +1,7 @@
 <template>
   <li :class="[nm.bem('item'), nm.is('level', Boolean(useSlots().icon)),
   nm.is('fold', !isShowRef)
-    , nm.is('active', menuData.model.value == mkey)]" @click="handleClick">
+    , nm.is('active', menuProvide.model.value == mkey)]" @click="handleClick">
     <span v-if="isShowRef" :class="nm.bem('item', 'index')" v-for="item in compLevel">
     </span>
     <span :class="nm.bem('item', 'icon')" v-if="Boolean(useSlots().icon)"> 
@@ -22,23 +22,30 @@ defineOptions({
 const props = defineProps({
   mkey: {
     type: String
+  },
+  _mItem:{
+    type:Object
   }
 })
 const compLevel = injectLevel()
-const menuData = inject('menu', null)
+const menuProvide = inject('menu', null)
 const subMenu = inject('subMenu', null)
 const emit = defineEmits(['click'])
 let isShowRef = ref(true)
 const handleClick = () => {
-  menuData.setModel(props.mkey)
+  
+  menuProvide.setModel(props.mkey)
   if(!subMenu){
     return
   }
+  if(props._mItem&& menuProvide.model.value!==props.mkey){
+    menuProvide.clickMenu(props._mItem)
+  }
   subMenu.childClick()
 }
-if (menuData) {
+if (menuProvide) {
   watch(
-    () => menuData.isFold,
+    () => menuProvide.isFold,
     newVal => {
       setTimeout(() => {
         isShowRef.value = !newVal.value

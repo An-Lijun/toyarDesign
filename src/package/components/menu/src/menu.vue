@@ -1,5 +1,5 @@
 <template>
-  <section :class="[nm.b(), nm.is('fold', isFold)]">
+  <section :class="[nm.b(), nm.is('fold', isFold),getTheme]">
     <header>
       <slot name="header"></slot>
     </header>
@@ -14,7 +14,7 @@ import optionsRender from './optionsRender'
 import { provideLevel } from './hooks/level.ts'
 import { nm, menuProps ,emits} from './context'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
-
+import {nowTheme} from '../../../hooks/changeTheme'
 defineOptions({
   name: 'TyMenu'
 })
@@ -27,6 +27,21 @@ const { model } = useCompMvalue(props, emit,{
   }
 })
 const openId = ref('')
+const getTheme = computed(()=>{
+  switch (props.theme) {
+    case 'design':
+      return ''
+    case 'dark':
+      return 'ty-dark'
+    case 'light':
+      return 'ty-light'
+    case 'rDesign':
+      return nowTheme.value==='dark'?'ty-light':'ty-dark'
+    default:
+      break;
+  }
+}) 
+
 // 给menu 注入层级
 provide('menu', {
   isFold: computed(() => props.isFold),
@@ -40,6 +55,12 @@ provide('menu', {
   }),
   setModel:(val)=>{
     model.value = val
+  },
+  clickMenu:(menu)=>{
+    emit('open',menu)
+  },
+  clickSubMenu:(subMenu)=>{
+    emit('subOpen',subMenu)
   }
 })
 
