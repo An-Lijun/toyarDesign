@@ -35,28 +35,19 @@ export default defineComponent({
     const sizeValue = {
       "mini": '4px',
       "small": '8px',
-      "medium":'12px',
+      "medium": '12px',
       'large': '16px',
     }
 
-    const getChildren =()=>{
+    const getChildren = () => {
 
-      let arr =[]
+      let arr = []
       let len = defaultSlot.length - 1
-      let marginKey = [`${ props.direction==='row'? 'marginRight':'marginBottom'}`]
-      let marginValue =sizeValue[props.size] ||props.size +'px'
-      defaultSlot.forEach((item,index) => {
-        arr.push(
-          h('div', {
-            style: {
-              display: 'flex',
-              alignItems: 'center',
-              [marginKey]: marginValue
-            }
-          },item)
-        )
-
-        if(splitSlot && index !== len ){
+      let marginKey = [`${props.direction === 'row' ? 'marginRight' : 'marginBottom'}`]
+      let marginValue = sizeValue[props.size] || props.size + 'px'
+      const genChild = (list) => {
+        let len = list.length-1
+        return list.map((item, index) => {
           arr.push(
             h('div', {
               style: {
@@ -64,7 +55,49 @@ export default defineComponent({
                 alignItems: 'center',
                 [marginKey]: marginValue
               }
-            },splitSlot)
+            }, item)
+          )
+
+          if (splitSlot && index !== len) {
+            arr.push(
+              h('div', {
+                style: {
+                  display: 'flex',
+                  alignItems: 'center',
+                  [marginKey]: marginValue
+                }
+              }, splitSlot)
+            )
+          }
+
+        })
+      }
+
+      defaultSlot.forEach((item, index) => {
+        if (Array.isArray(item.children)) {
+          genChild(item.children)
+        } else {
+          arr.push(
+            h('div', {
+              style: {
+                display: 'flex',
+                alignItems: 'center',
+                [marginKey]: marginValue
+              }
+            }, item)
+          )
+        }
+
+
+        if (splitSlot && index !== len) {
+          arr.push(
+            h('div', {
+              style: {
+                display: 'flex',
+                alignItems: 'center',
+                [marginKey]: marginValue
+              }
+            }, splitSlot)
           )
         }
 
@@ -77,7 +110,7 @@ export default defineComponent({
         style: {
           display: 'inline-flex',
           alignItems: 'center',
-          flexDirection:props.direction
+          flexDirection: props.direction
         }
       }, getChildren())
   }

@@ -8,6 +8,10 @@ export const cProps =buildProps({
   },
   title:{
     type:String
+  },
+  isShowIcon:{
+    type:Boolean,
+    default:true
   }
 })
 
