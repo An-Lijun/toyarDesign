@@ -2,7 +2,9 @@
   <div :class="[nm.b(), nm.m(props.status), nm.is('dot', dot)]">
     <slot></slot>
     <span :class="nm.e('text')">
-      {{ text }}
+      <slot name="icon">
+        {{ text }}
+      </slot>
     </span>
   </div>
 </template>

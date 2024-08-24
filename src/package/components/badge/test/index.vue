@@ -17,6 +17,12 @@
     <TyBadge class="mg" :max="5" text="优化" v-for=" item in ['primary', 'success', 'warning', 'danger']" :status="item">
       <TyButton >1</TyButton>
     </TyBadge>
+    <TyBadge class="mg" :max="5" text="优化" v-for=" item in ['primary', 'success', 'warning', 'danger']" :status="item">
+      <TyButton >1</TyButton>
+      <template #icon>
+        <TyIcon icon="ty-arrow-down-circle-fill" color="#fff"></TyIcon>
+      </template>
+    </TyBadge>
   </div>
 </template>
 <script setup>
