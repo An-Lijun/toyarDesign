@@ -41,7 +41,7 @@ function back() {
   el.value?.scrollTo({ top: 0, behavior: 'smooth' })
 }
 onBeforeUnmount(() => {
-  el.value.removeEventListener('scroll', scrollFn)
+  el.value?.removeEventListener('scroll', scrollFn)
 })
 </script>
 <style lang="scss" scoped>
@@ -55,7 +55,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   background-color: var(--primary-6);
-  color: var(--text-white);
+  color: #fff;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   border-radius: 5px;

@@ -49,6 +49,18 @@
 
 :::
 
+
+## 块级形状(block)
+
+:::demo block 控制按钮是否充满一行
+
+```html
+<ty-button block>默认按钮</ty-button>
+<ty-button class="mt-10" shape="round" block>默认按钮</ty-button>
+```
+:::
+
+
 ## 按钮禁用(disabled)
 
 :::demo disabled 按钮禁用
@@ -79,7 +91,19 @@
 <ty-button size="medium" state="warning" class="mw-10">警告按钮</ty-button>
 <ty-button size="large" state="success" class="mw-10">成功按钮</ty-button>
 ```
+:::
 
+
+## htmlType
+
+:::demo size 控制按钮大小
+
+```html
+<ty-button htmlType="button" class="mw-10">默认按钮</ty-button>
+<ty-button  htmlType="submit" state="danger" class="mw-10">危险按钮</ty-button>
+<ty-button  htmlType="reset"  state="warning" class="mw-10">警告按钮</ty-button>
+<ty-button  state="success" class="mw-10">成功按钮</ty-button>
+```
 :::
 
 ## 按钮形状(shape)
@@ -99,16 +123,7 @@
 
 :::
 
-## 块级形状(block)
 
-:::demo block 控制按钮是否充满一行
-
-```html
-<ty-button block>默认按钮</ty-button>
-<ty-button class="mt-10" shape="round" block>默认按钮</ty-button>
-```
-
-:::
 
 ## loading
 
@@ -135,10 +150,15 @@
 
 <hr />
 <TyButtonGroup>
-  <ty-button> <TyIcon icon="ty-arrow-left-s-line"></TyIcon> last</ty-button>
-  <ty-button> next <TyIcon icon="ty-arrow-right-s-line"></TyIcon></ty-button>
+  <ty-button> <TyIcon style="color:#fff" icon="ty-arrow-left-s-line"></TyIcon> last</ty-button>
+  <ty-button> next <TyIcon style="color:#fff"  icon="ty-arrow-right-s-line"></TyIcon></ty-button>
 </TyButtonGroup>
-```
+
+<hr />
+<TyButtonGroup>
+  <ty-button size="large" state="danger"> <TyIcon  style="color:#fff"  icon="ty-arrow-left-s-line"></TyIcon> last</ty-button>
+  <ty-button size="large"  state="danger"> next <TyIcon  style="color:#fff"  icon="ty-arrow-right-s-line"></TyIcon></ty-button>
+</TyButtonGroup>
 
 :::
 
@@ -150,11 +170,11 @@
 | -------- | -------------- | ------- | ----------------------------------------- | ------- |
 | state    | 按钮的状态     | string  | primary / success / warning / danger      | primary |
 | type     | 按钮的类型     | string  | normal / secondary / dashed / text / link | normal  |
-| size     | 按钮的大小     | string  | mini / small / medium / large             | small   |
-| shape    | 按钮的圆角     | string  | square/round/circle                       | square  |
-| disabled | 按钮是否禁用   | boolean | false/true                                | false   |
 | block    | 是否是块级按钮 | boolean | false/true                                | false   |
+| disabled | 按钮是否禁用   | boolean | false/true                                | false   |
+| size     | 按钮的大小     | string  | mini / small / medium / large             | small   |
 | htmlType | html 原生 type | string  | button / submit / reset                   | button  |
+| shape    | 按钮的圆角     | string  | square/round/circle                       | square  |
 | loading  | 是否加载       | Boolean | false/true                                | false   |
 
 </div>
@@ -175,10 +195,11 @@
 
 | 变量名                 | 变量值 | 描述                                                                     |
 | ---------------------- | ------ | ------------------------------------------------------------------------ |
+| --line-height          |1.5715*1em | 文字行高                                                             |
 | --time-1               | 0.1s   | 动画时间                                                                 |
-| --font-weight-5        | 500    | font-weight                                                              |
+| --font-weight-5        | 500    | font-weight文字粗细                                                       |
 | --border-1             | 1px    | border                                                                   |
-| --font-body-3          | 1px    | font-size                                                                |
+| --font-body-3          | 14px   | font-size                                                                |
 | --border-radius-4      | 4px    | border-radius                                                            |
 | --text-0               | --     | normal 类型时 button 字体颜色                                            |
 | --`state`-6            | --     | state 类型时 button 常规 背景色边框色                                    |

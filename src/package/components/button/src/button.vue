@@ -16,7 +16,7 @@
     >
     <span >
       <span v-show="loading" :class="nm.is('loading',loading)">
-        <TyIcon icon="ty-loader-2-line" > </TyIcon>
+        <TyIcon style="color: #fff;" icon="ty-loader-2-line" > </TyIcon>
       </span>
       <span :class="nm.is('opacity',loading)">
         <slot ></slot>

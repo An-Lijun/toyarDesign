@@ -6,10 +6,6 @@ export const backTopProps = buildProps({
     type: Number,
     default: 200,
   },
-  target: {
-    type: String,
-    default: '',
-  },
   right: {
     type: Number,
     default: 40,
@@ -17,6 +13,10 @@ export const backTopProps = buildProps({
   bottom: {
     type: Number,
     default: 40,
+  },
+  target: {
+    type: String,
+    default: '',
   },
   circle: {
     type: Boolean,
