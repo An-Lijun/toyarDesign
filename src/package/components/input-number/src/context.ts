@@ -1,4 +1,4 @@
-import { buildProps } from '@/package/utils/buildProps'
+import { buildProps } from '../../../utils/buildProps'
 import { computed } from 'vue'
 
 export const inputProps=buildProps({

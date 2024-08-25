@@ -1,6 +1,6 @@
-import { TY_SIZE } from '@/package/constant'
+import { TY_SIZE } from '../../../constant'
 import useNmSpace from '../../../hooks/useBem'
-import { buildProps } from '@/package/utils/buildProps'
+import { buildProps } from '../../../utils/buildProps'
 
 export const datePickerProp=buildProps({
   size: {

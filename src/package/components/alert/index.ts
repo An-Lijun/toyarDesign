@@ -3,7 +3,7 @@ import { createVNode, render, nextTick, h } from 'vue'
 import dialog from '../dialog/src/dialog.vue'
 import TyButton from '../button/src/button.vue'
 import TyIcon from '../icon/src/icon.vue'
-import { TY_MOOD, TY_MOOD_LS } from '@/package/constant/index'
+import { TY_MOOD, TY_MOOD_LS } from '../../constant/index'
 
 import type { IOption} from './type'
 import {defaultDialogOptions, dialogIconMap} from './content'

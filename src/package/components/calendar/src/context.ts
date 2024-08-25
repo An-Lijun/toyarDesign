@@ -1,5 +1,5 @@
 import useNmSpace from '../../../hooks/useBem'
-import { buildProps } from '@/package/utils/buildProps'
+import { buildProps } from '../../../utils/buildProps'
 
 export const calendarProp=buildProps({
 

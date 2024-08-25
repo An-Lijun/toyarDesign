@@ -1,6 +1,6 @@
-import { buildProps } from "@/package/utils/buildProps"
+import { buildProps } from "../../../utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
-import { TY_SIZE } from "@/package/constant"
+import { TY_SIZE } from "../../../constant"
 
 export const inputProps=buildProps({
   size: {

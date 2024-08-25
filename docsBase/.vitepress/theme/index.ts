@@ -7,8 +7,8 @@ export default {
   enhanceApp({ app }) {
     setTimeout(() => {
       let ctb = document.querySelector('.content-body')
-      let btn = ctb?.querySelector('.VPSwitch')
-      btn.onclick=(e)=>{
+      let btn = ctb?.querySelector('.VPSwitch') as HTMLButtonElement
+      btn!.onclick=(e)=>{
         let day ='light'
         if(btn?.getAttribute('aria-checked')==='true'){
           day='dark'

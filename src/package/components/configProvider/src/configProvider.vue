@@ -7,7 +7,7 @@
 import { cProps, nm } from './context'
 import light from './light.module.scss'
 import dark from './dark.module.scss'
-import generate from '@/package/color/index.js'
+import generate from '../../../color/index.js'
 defineOptions({
   name: 'TyConfigProvider'
 })

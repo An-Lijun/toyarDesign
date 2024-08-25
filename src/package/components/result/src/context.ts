@@ -1,7 +1,7 @@
 
-import { buildProps } from "@/package/utils/buildProps"
+import { buildProps } from "../../../utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
-import { TY_MOOD_LS } from "@/package/constant"
+import { TY_MOOD_LS } from "../../../constant"
 
 export const resProps =buildProps({
   type: {

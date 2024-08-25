@@ -64,7 +64,7 @@ import TyAvatar from './components/avatar'
 import TyAvatarGroup from './components/avatar-group'
 import {TyThemeChange} from './hooks/changeTheme'
 // import TyTrigger from './components/trigger'
-import generateColor from '@/package/color/index.js'
+import generateColor from './color/index.js'
 
 
 

@@ -10,8 +10,8 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { waterProps, nm, defaultOptions } from './context'
 import xss from 'xss'
-import useDebounce from '@/package/hooks/useDebounce'
-import { URL_REGULAR_EXPRESSION, PICTURE_EXPRESSION } from '@/package/utils/regular'
+import useDebounce from '../../../hooks/useDebounce'
+import { URL_REGULAR_EXPRESSION, PICTURE_EXPRESSION } from '../../../utils/regular'
 defineOptions({
   name: 'TyWaterMark'
 })

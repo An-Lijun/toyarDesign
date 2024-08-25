@@ -1,5 +1,5 @@
 import useNmSpace from '../../../hooks/useBem'
-import { buildProps } from '@/package/utils/buildProps';
+import { buildProps } from '../../../utils/buildProps';
 import { TY_STATE, TY_SIZE } from '../../../constant';
 
 export const buttonProps = buildProps(
