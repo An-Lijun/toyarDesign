@@ -11,5 +11,9 @@
 
 3. vitepress 不能使用本地的alias
 
+4. vitepress 不能用document的问题
 
+解决方案
+1. 在monted使用mounted 异步安装组件
+2. index.js 中不能使用组件也可以在monted去使用外部暴露的函数进行调用,注意index.js里面绝对不能有document
 
