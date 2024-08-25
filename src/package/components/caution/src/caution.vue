@@ -45,6 +45,7 @@ const style = {
   padding: var(--padding-4) var(--padding-6);
   border-radius: var(--border-radius-4);
   display: flex;
+  align-items: center;
   &__content{
     width: 100%;
   }

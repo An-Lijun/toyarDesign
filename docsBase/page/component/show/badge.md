@@ -144,8 +144,29 @@
     <TyButton>提交</TyButton>
   </TyBadge>
 </div>
-```
 
+
+```
+:::
+
+
+## 修改徽章内容
+:::demo
+```html
+<div style="margin-top:20px">
+  <TyBadge
+    status="primary"
+    max="15"
+    style="margin-right:30px"
+  >
+    <TyButton>提交</TyButton>
+    <template #icon>
+      <TyIcon icon="ty-arrow-down-circle-fill" color="#fff"></TyIcon>
+
+    </template>
+  </TyBadge>
+</div>
+```
 :::
 
 ## 属性(Attributes)
@@ -167,6 +188,24 @@
 
 | 名称    | 描述         |
 | ------- | ------------ |
-| default | radio 的描述 |
+| default | 内容 |
+| icon | 徽章内容默认text |
+
+
+</div>
+
+
+
+## 变量(cssVariables)
+
+<div class="cssVar">
+
+| 变量名                 | 变量值 | 描述               |
+| ---------------------- | ------ | ------------------ |
+| --border-radius-20         | 20px    | 默认圆角           |
+| --padding-4      | 4px    | 内边距             |
+| --font-body-1 | 12px    | 默认文字大小 |
+| --`state`-6 | --    | 徽标颜色 |
+
 
 </div>

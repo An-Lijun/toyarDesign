@@ -10,7 +10,7 @@
 </template>
 <script setup>
 import { backTopProps, nm } from './context'
-
+import {ref,onMounted} from 'vue'
 defineOptions({
   name: 'TyAvatar'
 })

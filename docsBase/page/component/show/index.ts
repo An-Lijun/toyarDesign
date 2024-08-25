@@ -3,6 +3,19 @@ const root ='/page/component/show/'
 export default {
   text: "展示组件",
   items: [
+    
+    {
+      text: "Avatar/头像",
+      link: `${root}avatar`,
+    },
+    {
+      text: "Calendar/日历",
+      link: `${root}calendar`,
+    },
+    {
+      text: "Caution/告警",
+      link: `${root}caution`,
+    },
     {
       text: "PageHeader",
       link: `${root}pageHeader`,

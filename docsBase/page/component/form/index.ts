@@ -24,8 +24,8 @@ export default     {
       link: `${root}select`,
     },
     {
-      text: "Calendar",
-      link: `${root}calendar`,
+      text: "DatePicker",
+      link: `${root}DatePicker`,
     },
     {
       text: "InputPassword",

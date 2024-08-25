@@ -42,7 +42,7 @@ const text = computed(() => {
     border-radius: var(--border-radius-20);
     padding:var(--padding-0)  var(--padding-4);
     min-width: 20px;
-    font-size: var(--body-1);
+    font-size: var(--font-body-1);
     box-shadow: 0 0 0 2px #fff;
     color: #fff;
     height: 20px;

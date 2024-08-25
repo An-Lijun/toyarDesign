@@ -6,7 +6,7 @@
 
 ```html
 <div>{{cal1}}</div>
-<TyCalendar v-model="cal1"></TyCalendar>
+<TyDatePicker v-model="cal1"></TyDatePicker>
 ```
 
 ```js
@@ -22,7 +22,7 @@ const cal1 = ref('')
 
 ```html
 <div>{{cal1}}</div>
-<TyCalendar v-model="cal1" placeholder='请选择'></TyCalendar>
+<TyDatePicker v-model="cal1" placeholder='请选择'></TyDatePicker>
 ```
 ```js
 import { ref } from 'vue'
@@ -34,7 +34,7 @@ const cal1 = ref('')
 :::demo
 ```html
 <div>{{cal1}}</div>
-<TyCalendar v-model="cal1" placeholder='请选择' format='yyyy年MM月dd日'></TyCalendar>
+<TyDatePicker v-model="cal1" placeholder='请选择' format='yyyy年MM月dd日'></TyDatePicker>
 ```
 ```js
 import { ref } from 'vue'
@@ -46,7 +46,7 @@ const cal1 = ref('')
 :::demo
 ```html
 <div>{{cal1}}</div>
-<TyCalendar v-model="cal1" disabled></TyCalendar>
+<TyDatePicker v-model="cal1" disabled></TyDatePicker>
 ```
 
 ```js
@@ -61,13 +61,13 @@ const cal1 = ref('')
 <div>{{cal1}}</div>
 <TyForm>
   <TyFormItem disabled>
-  <TyCalendar v-model="cal1" ></TyCalendar>
+  <TyDatePicker v-model="cal1" ></TyDatePicker>
 </TyFormItem>
 </TyForm>
 <hr>
 <TyForm disabled>
   <TyFormItem >
-  <TyCalendar v-model="cal1" ></TyCalendar>
+  <TyDatePicker v-model="cal1" ></TyDatePicker>
 </TyFormItem>
 </TyForm>
 ```
@@ -81,7 +81,7 @@ const cal1 = ref('')
 :::demo
 ```html
 <div>{{cal1}}</div>
-<TyCalendar v-model="cal1" readonly></TyCalendar>
+<TyDatePicker v-model="cal1" readonly></TyDatePicker>
 ```
 
 ```js
@@ -96,13 +96,13 @@ const cal1 = ref('')
 
 <TyForm>
   <TyFormItem size='large'>
-  <TyCalendar v-model="cal1" ></TyCalendar>
+  <TyDatePicker v-model="cal1" ></TyDatePicker>
 </TyFormItem>
 </TyForm>
 <hr>
 <TyForm size='mini'>
   <TyFormItem >
-  <TyCalendar v-model="cal1" ></TyCalendar>
+  <TyDatePicker v-model="cal1" ></TyDatePicker>
 </TyFormItem>
 </TyForm>
 
@@ -117,13 +117,13 @@ const cal1 = ref('')
 ## size
 :::demo
 ```html
-<TyCalendar v-model="cal1" size='mini'></TyCalendar>
+<TyDatePicker v-model="cal1" size='mini'></TyDatePicker>
 <hr>
-<TyCalendar v-model="cal1" size='small'></TyCalendar>
+<TyDatePicker v-model="cal1" size='small'></TyDatePicker>
 <hr>
-<TyCalendar v-model="cal1" size='medium'></TyCalendar>
+<TyDatePicker v-model="cal1" size='medium'></TyDatePicker>
 <hr>
-<TyCalendar v-model="cal1" size='large'></TyCalendar>
+<TyDatePicker v-model="cal1" size='large'></TyDatePicker>
 
 ```
 ```js

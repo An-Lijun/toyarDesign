@@ -3,9 +3,14 @@
 <script>
 import { h, defineComponent, useSlots } from 'vue'
 
-
 export default defineComponent({
   name: 'TyAvatarGroup',
+  props: {
+    offset: {
+      type: Number,
+      default: 8
+    }
+  },
   setup(props) {
     // 帮我获取default 插槽 内容
     const slots = useSlots()
@@ -16,8 +21,8 @@ export default defineComponent({
       defaultSlot.map(item => h(item, {
         style: {
           zIndex: len--,
-          marginLeft:'-8px',
-          border:'2px solid #fff',
+          marginLeft: `-${props.offset}px`,
+          border: '2px solid #fff',
         }
       }))
     return () => h('div', {}, getChildren())
