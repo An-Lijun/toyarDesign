@@ -98,21 +98,18 @@ export default function AlertJs(
   info: string,
   options: IOption
 ) {
-  if (!TY_MOOD_LS.includes(options.type)) {
-    throw new Error(`type:${options.type} is not in ${TY_MOOD_LS}`)
-  }
   if (Object.prototype.toString.call(info) !== '[object String]') {
     throw new Error(`info:${info} is not a string`)
   }
-
   const div = document.createElement('div')
-  if (div) {
     const instance = createAlert(info, Object.assign(defaultDialogOptions, options), div)
     render(instance, div)
     document.body.appendChild(div)
     nextTick(() => {
       instance!.component!.exposed!.showValue.value = true
     })
+  return {
+    distroy: ()=>{ document.body.removeChild(div)}
   }
 }
 

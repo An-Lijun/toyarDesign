@@ -23,8 +23,12 @@ export default {
       link: `${root}iconList`,
     },
     {
-      text: "回到顶部",
+      text: "回到顶部/BackTop",
       link: `${root}backTop`,
+    },
+    {
+      text: "全局配置/ConfigProvider",
+      link: `${root}configProvider`,
     },
   ]
 }

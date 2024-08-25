@@ -50,13 +50,14 @@ const tableData = [
   }
 ]
 const openDialog=()=>{
-  TyAlert('123456789',{
+ const {distroy} =TyAlert('123456789',{
     title:'标题11',
     type:'error',
     sure:{
       text:'确定',
       code:()=>{
         console.log('点击了确定')
+        distroy()
       }
     },
     cancel:{

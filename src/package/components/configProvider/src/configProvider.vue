@@ -8,6 +8,7 @@ import { cProps, nm } from './context'
 import light from './light.module.scss'
 import dark from './dark.module.scss'
 import generate from '../../../color/index.js'
+import {ref,watch} from 'vue'
 defineOptions({
   name: 'TyConfigProvider'
 })

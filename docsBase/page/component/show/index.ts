@@ -17,31 +17,35 @@ export default {
       link: `${root}caution`,
     },
     {
-      text: "PageHeader",
+      text: "页头/PageHeader",
       link: `${root}pageHeader`,
     },
     {
-      text: "Carousel",
+      text: "图片轮播/Carousel",
       link: `${root}carousel`,
     },
     {
-      text: "Image",
+      text: "图片/Image",
       link: `${root}image`,
     },
     {
-      text: "Table",
+      text: "表格/Table",
       link: `${root}table`,
     },
     {
-      text: "Badge",
+      text: "表格/Descriptions",
+      link: `${root}descriptions`,
+    },
+    {
+      text: "徽标/Badge",
       link: `${root}badge`,
     },
     {
-      text: "Empty",
+      text: "空状态/Empty",
       link: `${root}empty`,
     },
     {
-      text: "Skeleton",
+      text: "骨架屏/Skeleton",
       link: `${root}skeleton`,
     }
   ],

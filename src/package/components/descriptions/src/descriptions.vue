@@ -5,7 +5,9 @@
     </div>
     <div :class="nm.e('body')">
       <table :class="nm.e('table')">
-        <template v-for="row in relData">
+        <tbody>
+
+          <template v-for="row in relData">
           <tr :class="nm.e('row')">
             <template v-for="td in row">
               <td colspan="1" v-if="layout === 'column'">
@@ -22,6 +24,7 @@
             </template>
           </tr>
         </template>
+        </tbody>
       </table>
     </div>
   </div>
@@ -59,6 +62,11 @@ const relData = getChunkArray(props.data, props.column)
 
   &__table {
     width: 100%;
+    display: table;
+    & tr.ty-descriptions__row {
+      background: unset;
+      border: unset;
+    }
   }
 
   &__title {

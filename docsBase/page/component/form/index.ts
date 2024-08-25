@@ -4,43 +4,43 @@ export default     {
   text: "表单组件",
   items: [
     {
-      text: "Form",
+      text: "表单/Form",
       link: `${root}form`,
     },
     {
-      text: "FormItem",
+      text: "表单项/FormItem",
       link: `${root}formItem`,
     },
     {
-      text: "Input",
+      text: "文本输入框/Input",
       link: `${root}input`,
     },
     {
-      text: "InputNumber",
+      text: "数字输入框/InputNumber",
       link: `${root}inputNumber`,
     },
     {
-      text: "Select",
+      text: "下拉选择框/Select",
       link: `${root}select`,
     },
     {
-      text: "DatePicker",
+      text: "日期选择器/DatePicker",
       link: `${root}DatePicker`,
     },
     {
-      text: "InputPassword",
+      text: "密码输入框/InputPassword",
       link: `${root}inputPassword`,
     },
     {
-      text: "radio",
+      text: "单选框/Radio",
       link: `${root}radio`,
     },
     {
-      text: "checkBox",
+      text: "多选框/CheckBox",
       link: `${root}checkBox`,
     },
     {
-      text: "switch",
+      text: "开关/Switch",
       link: `${root}switch`,
     },
     {

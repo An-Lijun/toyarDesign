@@ -59,6 +59,33 @@ const alert2 =()=>{
 ```
 :::
 
+
+## 控制关闭
+
+:::demo
+
+```html
+<TyButton @click="alert3">123</TyButton>
+
+```
+```js
+import {TyAlert} from 'toyarDesign'
+const alert3 =()=>{
+ const {distroy} = TyAlert('你好',{
+    title:'测试',
+    type:'success',
+    sure:{
+      text:'OK',
+      code:()=>{
+        console.log('ok')
+        distroy()
+      }
+    }
+  })
+}
+```
+:::
+
 <script setup>
 let TyAlert =()=>{}
 if(document){
@@ -81,6 +108,20 @@ const alert2 =()=>{
       text:'OK',
       code:()=>{
         console.log('ok')
+      }
+    }
+  })
+}
+
+const alert3 =()=>{
+ const {distroy} = TyAlert('你好',{
+    title:'测试',
+    type:'success',
+    sure:{
+      text:'OK',
+      code:()=>{
+        console.log('ok')
+        distroy()
       }
     }
   })

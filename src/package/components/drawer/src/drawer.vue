@@ -30,7 +30,7 @@
 </template>
 <script setup>
 import { dProps, nm, dEmits } from './context'
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted,ref } from 'vue';
 defineOptions({
   name: 'TyDrawer'
 })
