@@ -4,14 +4,14 @@
 :::demo
 ```html
 
-  <TyImage src="/js.jpg" class="bd" />
-  <TyImage src="/js.jpg"  class="bd ml-10"  shape="circle"/>
+  <TyImage src="../../../assets/js.jpg" class="bd" />
+  <TyImage src="../../../assets/js.jpg"  class="bd ml-10"  shape="circle"/>
 
-  <TyImage src="/js.jpg"  class="bd ml-10" fit="none" />
-  <TyImage src="/js.jpg"  class="bd ml-10" fit="fill" />
-  <TyImage src="/js.jpg"  class="bd ml-10" fit="contain" />
-  <TyImage src="/js.jpg"  class="bd ml-10" fit="cover" />
-  <TyImage src="/js.jpg"  class="bd ml-10" fit="scale-down" />
+  <TyImage src="../../../assets/js.jpg"  class="bd ml-10" fit="none" />
+  <TyImage src="../../../assets/js.jpg"  class="bd ml-10" fit="fill" />
+  <TyImage src="../../../assets/js.jpg"  class="bd ml-10" fit="contain" />
+  <TyImage src="../../../assets/js.jpg"  class="bd ml-10" fit="cover" />
+  <TyImage src="../../../assets/js.jpg"  class="bd ml-10" fit="scale-down" />
 
 ```
 :::
@@ -20,7 +20,7 @@
 :::demo
 ```html
 
-  <TyImage src="/js.jpg"  size="150"/>
+  <TyImage src="../../../assets/js.jpg"  size="150"/>
 ```
 :::
 
@@ -28,9 +28,9 @@
 :::demo
 ```html
 
-  <TyImage src="/js.jpg"  fit="contain" class="ml-10"/>
+  <TyImage src="../../../assets/js.jpg"  fit="contain" class="ml-10"/>
 
-  <TyImage src="/js.jpg"  fit="cover" class="ml-10"/>
+  <TyImage src="../../../assets/js.jpg"  fit="cover" class="ml-10"/>
 ```
 :::
 
@@ -38,9 +38,9 @@
 :::demo
 ```html
 
-  <TyImage src="/js.jpg"  class="ml-10" />
+  <TyImage src="../../../assets/js.jpg"  class="ml-10" />
 
-  <TyImage src="/js.jpg"  class="ml-10"  shape="circle" alt="图片"/>
+  <TyImage src="../../../assets/js.jpg"  class="ml-10"  shape="circle" alt="图片"/>
 ```
 :::
 
