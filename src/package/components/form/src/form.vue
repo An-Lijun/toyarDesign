@@ -1,5 +1,5 @@
 <template>
-  <form :class="nm.b()" >
+  <form :class="[nm.b(),nm.is(layout)]" >
     <slot></slot>
   </form>
 </template>
@@ -54,6 +54,9 @@ function validateAll() {
 function validate(prop:string) {
   return new Promise((resolve,reject)=>{
     const fns = fieldList[prop].fns
+    if(!fns.length){
+      resolve('success')
+    }
     const errList = []
     for (let index = 0; index < fns.length; index++) {
       const data = fns[index](prop)
@@ -94,4 +97,16 @@ defineExpose({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.is-vertical{
+  :deep(.ty-form-item){
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .ty-form-item__label{
+      text-align: left;
+      margin-bottom: 8px;
+    }
+  }
+}
+</style>

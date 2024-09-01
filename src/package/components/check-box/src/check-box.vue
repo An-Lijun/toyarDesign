@@ -2,12 +2,13 @@
   <label :class="[nm.b(), nm.is('harf', canHarf), nm.is('disabled', disabled)]">
     <input type="checkbox" @click="handleChange" :disabled="disabled" v-model="model" :value="value"
       :class="[nm.m(size)]" />
-    <slot />
+    <span :class="[nm.e('container')]">
+      <slot />
+    </span>
   </label>
 </template>
 <script setup lang="ts" name="TyCheckBox">
 import { computed, inject } from 'vue'
-import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { nm, checkProps, checkEmits } from './context'
 import {
   formContent,
@@ -79,9 +80,10 @@ if (tyCheckBoxGroup) {
 }
 
 const handleChange = () => {
+  
   if (tyCheckBoxGroup) {
     setTimeout(() => {
-      tyCheckBoxGroup.emitChange(model.value)
+      tyCheckBoxGroup.emitChange(props.value)
     })
   } else {
     setTimeout(() => {
@@ -119,6 +121,9 @@ const handleChange = () => {
     medium,
     large
   );
+  &__container{
+    margin-right: 10px;
+  }
 
 @mixin addCheckBoxSize($name) {
   &--#{$name} {

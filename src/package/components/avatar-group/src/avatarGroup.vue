@@ -22,7 +22,7 @@ export default defineComponent({
         style: {
           zIndex: len--,
           marginLeft: `-${props.offset}px`,
-          border: '2px solid #fff',
+          border: '2px solid var(--color-bg-1)',
         }
       }))
     return () => h('div', {}, getChildren())

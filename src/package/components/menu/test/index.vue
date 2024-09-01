@@ -139,7 +139,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import { TyMenu } from '..';
+
 
 let isFold = ref(true)
 let value1 = ref('aaa')

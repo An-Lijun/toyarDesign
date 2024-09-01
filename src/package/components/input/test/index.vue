@@ -62,11 +62,42 @@
     </ty-button>
   </template>
 </TyInput>
+<TyInput  v-model="inp2" @blur="inpBlur" @input="inpInput"
+  @focus="inpFocus"
+  @enter="inpEnter"
+  @clear="inpClear"
+  clearable
+> 
+
+</TyInput>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue'
 const inp = ref('')
+const inp2 = ref('')
+
+
+
+const inpBlur=(data)=>{
+  console.log('blur');
+  
+}
+const inpInput=(data)=>{
+  console.log('inpInput',data);
+  
+}
+const inpFocus=(data)=>{
+  console.log('inpFocus');
+  
+}
+const inpEnter=(data)=>{
+  console.log('inpEnter');
+}
+const inpClear=(data)=>{
+  console.log('inpClear');
+}
+
 </script>
 <style lang="less" scoped>
 </style>

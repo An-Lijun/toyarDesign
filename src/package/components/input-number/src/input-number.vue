@@ -11,12 +11,12 @@
   >
     <template #outPre>
       <TyButton @click="handleMinus" style="height: 100%; line-height: 100%">
-        <TyIcon icon="ty-subtract-line"></TyIcon>
+        <TyIcon icon="ty-subtract-line" color="#fff"></TyIcon>
       </TyButton>
     </template>
     <template #outAft>
       <TyButton @click="handleAdd" style="height: 100%; line-height: 100%">
-        <TyIcon icon="ty-add-fill"></TyIcon>
+        <TyIcon icon="ty-add-fill" color="#fff"></TyIcon>
       </TyButton>
     </template>
   </TyInput>

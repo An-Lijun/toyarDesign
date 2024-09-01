@@ -14,7 +14,9 @@
       :class="[nm.m(size)]"
       :disabled="disabled"
     />
-    <slot></slot>
+    <span :class="nm.e('container')">
+      <slot></slot>
+    </span>
   </label>
 </template>
 <script setup>
@@ -67,6 +69,7 @@ const handleChange = () => {
   align-items: center;
   user-select: none;
   box-sizing: border-box;
+
   input {
     appearance: none;
     border-radius: var(--border-radius-circle);
@@ -87,6 +90,9 @@ const handleChange = () => {
       top: 50%;
       transform: translate(-50%, -50%);
     }
+  }
+  &__container{
+    margin-right: 10px;
   }
   &:hover {
     cursor: pointer;

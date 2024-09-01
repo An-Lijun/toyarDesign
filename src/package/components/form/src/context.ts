@@ -15,5 +15,10 @@ export const formProps =buildProps({
   size: String,
   disabled: Boolean,
   readonly: Boolean,
+  layout:{
+    type: String,
+    default:'inline',
+    values:['vertical','inline']
+  }
 })
 export const nm =useNmSpace('form')

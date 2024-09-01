@@ -47,7 +47,7 @@
 <script setup lang="ts" name="TySubMenu">
 import { injectLevel } from './hooks/level.ts'
 import { subNm } from './context'
-import { inject, ref, watch } from 'vue'
+import { inject, ref, watch,provide } from 'vue'
 
 defineOptions({
   name: 'TySubMenu'

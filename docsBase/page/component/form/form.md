@@ -33,8 +33,11 @@ const formData = ref({
       </TyFormItem>
     </TyCol>
     <TyCol :span="12">
-      <ty-button @click="submit">submit</ty-button>
-      <ty-button @click="reset">reset</ty-button>
+     <TySpace style=" margin-bottom: 20px;">
+       <ty-button @click="submit">submit</ty-button>
+       <ty-button @click="reset">reset</ty-button> 
+     </TySpace>
+
     </TyCol>
   </TyRow>
 </TyForm>
@@ -98,6 +101,9 @@ function reset() {
 ```
 
 ```js
+
+
+
 import { ref } from 'vue'
 const formData = ref({
   inp: '',
@@ -114,7 +120,7 @@ const rules = {
 }
 function submit1() {
   form2.value
-    .validate('nm')
+    .validateAll('nm')
     .then(res => {
       console.log('success', res)
     })
@@ -123,7 +129,102 @@ function submit1() {
     })
 }
 function reset1() {
-  form2.value.clearValidate('nm')
+  form2.value.clearValidateAll('nm')
+}
+```
+
+:::
+
+
+## 表单校验2(部分表单)
+
+:::demo 
+
+```html
+{{formData10}}
+<TyForm ref="form10" :formData="formData10" :rules="rules10">
+  <TyRow :gutter="10">
+    <TyCol :span="24">
+      <TyFormItem prop="inp">
+        <template #label> 姓名 </template>
+        <TyInput v-model="formData10.username"> </TyInput>
+      </TyFormItem>
+    </TyCol>
+    <TyCol :span="24">
+      <TyFormItem prop="nm">
+        <template #label> 年龄 </template>
+       <TyInputNumber v-model="formData10.age" :min="1" :max="120" :step="1" /> 
+      </TyFormItem>
+    </TyCol>
+
+    <TyCol :span="24">
+      <TyFormItem prop="nm">
+        <template #label> 性别 </template>
+        <TyRadioGroup v-model="formData10.sex">
+          <TyRadio value="man">
+              男
+          </TyRadio>
+          <TyRadio value="woman">
+              女
+          </TyRadio>
+        </TyRadioGroup>
+      </TyFormItem>
+    </TyCol>
+
+
+    <TyCol :span="24">
+      <TyFormItem prop="nm">
+        <template #label> 爱好 </template>
+          <TyCheckBoxGroup v-model="formData10.hobby">
+            <TyCheckBox value="football">
+                足球
+            </TyCheckBox>
+            <TyCheckBox value="basketball">
+                篮球
+            </TyCheckBox>
+          </TyCheckBoxGroup> 
+      </TyFormItem>
+    </TyCol>
+    <TyCol :span="24">
+        <TySpace style="width:100%;">
+          <ty-button @click="submit1">submit</ty-button>
+          <ty-button @click="reset1">reset</ty-button>
+        </TySpace>
+    </TyCol>
+  </TyRow>
+</TyForm>
+```
+
+```js
+
+
+
+import { ref } from 'vue'
+const formData = ref({
+  inp: '',
+  nm: ''
+})
+const form2 = ref()
+
+const rules = {
+  inp: [
+    { required: true, message: `dd 是必填字段`, trigger: ['blur'] },
+    { min: 2, max: 5 }
+  ],
+  nm: [{ required: true, message: `dd 是必填字段`, trigger: ['blur'] }]
+}
+function submit1() {
+  form2.value
+    .validateAll('nm')
+    .then(res => {
+      console.log('success', res)
+    })
+    .catch(err => {
+      console.log(err, 'err')
+    })
+}
+function reset1() {
+  form2.value.clearValidateAll('nm')
 }
 ```
 
@@ -193,6 +294,60 @@ function reset1() {
 
 :::
 
+
+
+
+## 表单布局
+
+:::demo 全部表单校验
+
+```html
+<TyForm ref="form1" layout="vertical" :formData="formData" :rules="rules">
+  <TyRow :gutter="10">
+    <TyCol :span="12">
+      <TyFormItem prop="inp">
+        <template #label> 金额 </template>
+        <TyInput v-model="formData.inp"> </TyInput>
+      </TyFormItem>
+    </TyCol>
+    <TyCol :span="12">
+      <ty-button @click="submit">submit</ty-button>
+      <ty-button @click="reset">reset</ty-button>
+    </TyCol>
+  </TyRow>
+</TyForm>
+```
+
+```js
+import { ref } from 'vue'
+const formData = ref({
+  inp: ''
+})
+const form1 = ref()
+
+const rules = {
+  inp: [
+    { required: true, message: `dd 是必填字段`, trigger: ['blur'] },
+    { min: 2, max: 5 }
+  ]
+}
+function submit() {
+  form1.value
+    .validateAll()
+    .then(res => {
+      console.log('success', res)
+    })
+    .catch(err => {
+      console.log(err, 'err')
+    })
+}
+function reset() {
+  form1.value.clearValidateAll()
+}
+```
+
+:::
+
 ## 属性(Attributes)
 
 <div class="listTb">
@@ -240,7 +395,7 @@ function reset1() {
       nm:''
     })
     const rules = {
-      'inp': [
+      inp: [
         { required: true, message: `inp 是必填字段`, trigger: ['blur'] },
         { min: 2, max: 5 }
       ],
@@ -260,7 +415,7 @@ function reset1() {
     }
     function submit1() {
       form2.value
-        .validate('nm')
+        .validateAll('nm')
         .then(res => {
           console.log('success', res)
         })
@@ -269,6 +424,14 @@ function reset1() {
         })
     }
 function reset1() {
-  form2.value.clearValidate('nm')
+  form2.value.clearValidateAll('nm')
 }
+
+const formData10 =ref({
+  username:'',
+  sex:'',
+  age:'',
+  hobby:[],
+})
+const rules10 = []
 </script>

@@ -22,7 +22,15 @@ provide(checkBoxGroup, {
   disabled:props.disabled,
   max:props.max,
   emitChange:(value)=>{
-    emit('change',value)
+    let arr=[]
+    if(model.value.includes(value)){
+      arr = model.value.filter(item=>item !==value)
+    }else{
+      arr = [...model.value,value]
+    }
+    console.log(arr);
+    
+    emit('update:modelValue',arr)
   }
 })
 </script>

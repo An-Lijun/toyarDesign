@@ -1,30 +1,20 @@
 <template>
-  <div :class="nm.b()">
-    <label
-      :class="nm.e('label')"
-      :style="{
-        display: 'block',
-        wordBreak: 'break-all',
-        width: `${tyForm.labelWidth}px`,
-        minWidth: `${tyForm.labelWidth}px`
-      }"
-    >
-      <!-- <template v-if="tyForm.label">
-        {{ tyForm.label }}
-      </template> -->
+  <div :class="[nm.b(), nm.is('require', isRequire), nm.is('colon', isColon)]">
+    <label :class="[nm.e('label')]" :style="{
+    display: 'block',
+    wordBreak: 'break-all',
+    width: `${tyForm.labelWidth}px`,
+    minWidth: `${tyForm.labelWidth}px`
+  }">
       <slot name="label">
-          {{ label }}
+        {{ label }}
       </slot>
     </label>
     <div :class="nm.e('content')">
       <slot></slot>
-      <div
-        v-show="formItemError.isShowErrorMsg"
-        :class="nm.e('tip')"
-        :style="{
-          maxWidth: `calc(100% - ${tyForm.labelWidth}px)`
-        }"
-      >
+      <div v-show="formItemError.isShowErrorMsg" :class="nm.e('tip')" :style="{
+    maxWidth: `calc(100% - ${tyForm.labelWidth}px)`
+  }">
         {{ formItemError.errorMsg }}
       </div>
     </div>
@@ -35,7 +25,7 @@ import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { inject, onMounted, toRefs, provide, ref, onBeforeUnmount } from 'vue'
 import { nm, itemProps } from './context'
 defineOptions({
-  name:'TyFormItem'
+  name: 'TyFormItem'
 })
 const tyForm = inject(formContent, null)
 const formItemError = ref({
@@ -43,7 +33,8 @@ const formItemError = ref({
   errorMsg: ''
 })
 const props = defineProps(itemProps)
-
+const isRequire = ref(false)
+const isColon = ref(true)
 const { prop } = toRefs(props)
 provide(formItemContent, {
   ...props,
@@ -54,6 +45,7 @@ const generatorValidate = rules => {
   rules.forEach(rule => {
     let keys = Object.keys(rule)
     if (keys.includes('required')) {
+      isRequire.value = true
       fnArr.push(data => {
         // return new Promise((resolve, reject) => {
         if (!tyForm.formData[data]) {
@@ -136,25 +128,17 @@ onBeforeUnmount(() => {
   align-items: center;
   margin-bottom: 20px;
   position: relative;
+
   &__label {
     width: 100px;
     text-align: right;
     height: 100%;
-
-    &:before {
-      content: '*';
-      color: var(--toyar-red-6);
-      line-height: 100%;
-    }
-
-    &:after {
-      content: ': ';
-      margin-right: 5px;
-    }
   }
+
 
   &__content {
     flex: 1;
+    width: 100%;
 
     .ty-form-item__tip {
       position: absolute;
@@ -165,6 +149,22 @@ onBeforeUnmount(() => {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+  }
+
+}
+
+.is-require {
+  .ty-form-item__label:before {
+    content: '*';
+    color: var(--toyar-red-6);
+    line-height: 100%;
+  }
+}
+
+.is-colon {
+  .ty-form-item__label:after {
+    content: ': ';
+    margin-right: 5px;
   }
 }
 </style>

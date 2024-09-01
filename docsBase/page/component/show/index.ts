@@ -47,6 +47,10 @@ export default {
     {
       text: "骨架屏/Skeleton",
       link: `${root}skeleton`,
+    },   
+    {
+      text: "菜单/Menu",
+      link: `${root}menu`,
     }
   ],
 }

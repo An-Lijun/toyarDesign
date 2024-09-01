@@ -15,6 +15,7 @@ import { provideLevel } from './hooks/level.ts'
 import { nm, menuProps ,emits} from './context'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import {nowTheme} from '../../../hooks/changeTheme'
+import {ref,computed,provide,watch} from 'vue'
 defineOptions({
   name: 'TyMenu'
 })

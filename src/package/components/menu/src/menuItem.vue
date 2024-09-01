@@ -15,7 +15,7 @@
 <script setup>
 import { nm } from './context'
 import { injectLevel } from './hooks/level.ts'
-import { useSlots } from "vue";
+import { useSlots,inject,ref ,watch} from "vue";
 defineOptions({
   name: 'TyMenuItem'
 })
