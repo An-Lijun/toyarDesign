@@ -63,6 +63,9 @@ import TySpace from './components/space'
 import TyAvatar from './components/avatar'
 import TyAvatarGroup from './components/avatar-group'
 import {TyThemeChange} from './hooks/changeTheme'
+import TyScrollBar from './components/scrollbar'
+
+
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
 
@@ -119,7 +122,8 @@ const install = app => {
     app.use(TyCalendar),
     app.use(TySpace),
     app.use(TyAvatar),
-    app.use(TyAvatarGroup)
+    app.use(TyAvatarGroup),
+    app.use(TyScrollBar)
   }
   // app.use(TyTrigger)
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
@@ -196,6 +200,7 @@ export {
   generateColor,
   TyCalendar,
   TySpace,
-  TyAvatar,TyAvatarGroup
+  TyAvatar,TyAvatarGroup,
+  TyScrollBar
 } //按需引入
 // TyTrigger,
