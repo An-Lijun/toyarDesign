@@ -100,11 +100,8 @@ const bottomMove = (e) => {
   moveX = moveX > (containerWidth - 35) ? containerWidth - 35 : moveX
   moveX = moveX <= 0 ? 0 : moveX
   let coucent = moveX / (containerWidth)
-  console.log(moveX);
-
   bottomV.value = `${moveX}px`
   container.value.scrollLeft = `${containerWidth * coucent}`
-
 }
 const bottomMouseDown = (e) => {
   x = e.pageX - bottomBar.value.offsetLeft;
