@@ -1,5 +1,4 @@
 
-import './icon/toyaricon.css'
 import './assets/index.scss'
 import TyIcon from './components/icon'
 import TyButton from './components/button'
