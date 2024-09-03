@@ -1,1 +1,1 @@
-import '../package/icon/toyaricon.module.css'
+import('../package/icon/toyaricon.css')
