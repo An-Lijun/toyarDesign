@@ -12,6 +12,7 @@ export default defineConfig({
     lib: {
       entry:  'src/package/index.ts', // 设置入口文件
       name: 'toyar', // 起个名字，安装、引入用
+      formats: ['es'], // 默认['es', 'umd']
       fileName: (format) => `vite-lib.${format}.js` // 打包后的文件名
     },
     rollupOptions: {
@@ -20,8 +21,10 @@ export default defineConfig({
       external: ['vue'],
       input: {
         main: join(__dirname, 'src/package/index.ts'),
+        icon:join(__dirname, 'src/package/icon.ts'),
       },
       output: {
+        inlineDynamicImports:false,
         chunkFileNames: 'js/[name]-[hash].js',
         assetFileNames(assetInfo){
           // /\.svg$/.test(assetInfo.name)

@@ -1,0 +1,1 @@
+import '../package/icon/toyaricon.module.css'
