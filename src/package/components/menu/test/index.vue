@@ -78,7 +78,8 @@
         </TySubMenu>
       </TyMenu>
       <br>
-
+      <br>
+      <br>
       <h1>{{ value1 }}</h1>
       <div >
         <TyMenu  theme="dark"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op">
@@ -129,11 +130,18 @@
         </TyMenu>
       </div>
       <br>
-      <TyMenu theme="light"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" />
+      <br>
+      <br>
       <br>
 
+      <TyMenu theme="light"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" />
+      <br>
+      <br>
+      <br>
+      <div style="height: 150px;">
       <TyMenu theme="rDesign"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" />
 
+      </div>
     </div>
   </div>
 </template>
@@ -186,6 +194,26 @@ let opt = [
   {
     label: 'xxx',
     key: 'aaa31',
+    type: 'menu'
+  },
+  {
+    label: 'xxx1',
+    key: 'aaa311',
+    type: 'menu'
+  },
+  {
+    label: 'xxx2',
+    key: 'aaa312',
+    type: 'menu'
+  },
+  {
+    label: 'xxx3',
+    key: 'aaa313',
+    type: 'menu'
+  },
+  {
+    label: 'xxx4',
+    key: 'aaa314',
     type: 'menu'
   }
 ]

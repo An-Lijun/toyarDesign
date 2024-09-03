@@ -3,10 +3,13 @@
     <header>
       <slot name="header"></slot>
     </header>
-    <div :class="nm.e('inner')">
+    <TyScrollBar :class="nm.e('inner')" :style="{
+      height: `calc(100% - ${$slots.default?'50px' :'0px'})`
+
+    }">
       <slot v-if="!option"> </slot>
       <optionsRender v-else :option="option"/>
-    </div>
+    </TyScrollBar>
   </section>
 </template>
 <script setup>
@@ -16,6 +19,7 @@ import { nm, menuProps ,emits} from './context'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import {nowTheme} from '../../../hooks/changeTheme'
 import {ref,computed,provide,watch} from 'vue'
+import { TyScrollBar } from '@/package/index.ts'
 defineOptions({
   name: 'TyMenu'
 })

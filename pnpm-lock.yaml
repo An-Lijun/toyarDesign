@@ -36,6 +36,9 @@ importers:
       vite:
         specifier: ^4.4.11
         version: 4.4.11(@types/node@20.12.7)(sass@1.69.5)
+      vite-plugin-chunk-split:
+        specifier: ^0.5.0
+        version: 0.5.0(vite@4.4.11(@types/node@20.12.7)(sass@1.69.5))
       vite-plugin-vue-setup-extend:
         specifier: ^0.4.0
         version: 0.4.0(vite@4.4.11(@types/node@20.12.7)(sass@1.69.5))
@@ -768,6 +771,9 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
+  es-module-lexer@1.5.4:
+    resolution: {integrity: sha512-MVNK56NiMrOwitFB7cqDwq0CQutbw+0BvLshJSse0MUNU+y1FC3bUS/AQg7oUng+/wKrrki7JfmwtVHkVfPLlw==}
+
   esbuild@0.18.20:
     resolution: {integrity: sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA==}
     engines: {node: '>=12'}
@@ -849,6 +855,9 @@ packages:
 
   immutable@4.3.5:
     resolution: {integrity: sha512-8eabxkth9gZatlwl5TBuJnCsoTADlL6ftEr7A4qgdaTsPyreilDSnUk57SO+jfKcNtxPa22U5KK6DSeAYhpBJw==}
+
+  import-meta-resolve@4.1.0:
+    resolution: {integrity: sha512-I6fiaX09Xivtk+THaMfAwnA3MVA5Big1WHF1Dfx9hFuvNIWpXnorlkzhcQf6ehrqQiiZECRt1poOAkPmer3ruw==}
 
   is-binary-path@2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
@@ -1159,6 +1168,11 @@ packages:
   upath@2.0.1:
     resolution: {integrity: sha512-1uEe95xksV1O0CYKXo8vQvN1JEbtJp7lb7C5U9HMsIp6IVwntkH/oNUzyVNQSd4S1sYk2FpSSW44FqMc8qee5w==}
     engines: {node: '>=4'}
+
+  vite-plugin-chunk-split@0.5.0:
+    resolution: {integrity: sha512-pasNKLhH+ICjoCF6HoKKvgmZ1LEPSCIKAa8Lz0ZpMyQC9bLmCLT7UxgKMULewsc9SUw89OX0udsGiIQCtr8wLA==}
+    peerDependencies:
+      vite: ^4 || ^5
 
   vite-plugin-vue-setup-extend@0.4.0:
     resolution: {integrity: sha512-WMbjPCui75fboFoUTHhdbXzu4Y/bJMv5N9QT9a7do3wNMNHHqrk+Tn2jrSJU0LS5fGl/EG+FEDBYVUeWIkDqXQ==}
@@ -1997,6 +2011,8 @@ snapshots:
 
   envinfo@7.12.0: {}
 
+  es-module-lexer@1.5.4: {}
+
   esbuild@0.18.20:
     optionalDependencies:
       '@esbuild/android-arm': 0.18.20
@@ -2118,6 +2134,8 @@ snapshots:
   ignore@5.3.1: {}
 
   immutable@4.3.5: {}
+
+  import-meta-resolve@4.1.0: {}
 
   is-binary-path@2.1.0:
     dependencies:
@@ -2413,6 +2431,13 @@ snapshots:
       webpack-virtual-modules: 0.6.1
 
   upath@2.0.1: {}
+
+  vite-plugin-chunk-split@0.5.0(vite@4.4.11(@types/node@20.12.7)(sass@1.69.5)):
+    dependencies:
+      es-module-lexer: 1.5.4
+      import-meta-resolve: 4.1.0
+      magic-string: 0.30.10
+      vite: 4.4.11(@types/node@20.12.7)(sass@1.69.5)
 
   vite-plugin-vue-setup-extend@0.4.0(vite@4.4.11(@types/node@20.12.7)(sass@1.69.5)):
     dependencies:

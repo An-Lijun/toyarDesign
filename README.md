@@ -170,5 +170,7 @@ scss 抛出变量 生成js
   titleColor: $titleColor;
 }
 
-
+## 拆包策略
+这里所有的svg图片都拆分出去打包
+icon 字体图标拆包
 

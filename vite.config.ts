@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { join } from "path";
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'//setUp name
 import autoImport from 'unplugin-auto-import/vite'//引入语法
-
+import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
@@ -51,5 +51,11 @@ export default defineConfig({
       '@': join(__dirname, "src"),
     },
   },
-  plugins: [vue(), VueSetupExtend(), autoImport({ imports: ['vue'] })],
+  plugins: [vue(), VueSetupExtend(), autoImport({ imports: ['vue'] }),chunkSplitPlugin({
+
+    customSplitting: {
+      // All files in `src/container` will be merged together in `container` chunk
+      'style1': [/\.css$/]
+    }
+  })],
 })
