@@ -1,13 +1,56 @@
-
 <template>
   <div class="divRoot">
-    <TyTable
-    :columns="[
+
+
+    <TyTable size="mini" :columns="[
       { title: '姓名', key: 'name' },
       { title: '年龄', key: 'age' },
       { title: '地址', key: 'address' }
-    ]"
-    :data="[
+    ]" :data="[
+     ]">
+      <template #operation="scroped">
+        <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
+      </template>
+    </TyTable>
+
+    <TyTable 
+  
+    
+    align="right" :borders="['out','row','column']" size="mini" :columns="[
+      { title: '姓名',width:'80px', key: 'name',
+          showOverflow:'tooltip'
+       },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
+      {
+        name: '张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三',
+        age: '18',
+        address: '南京'
+        
+      },
+      {
+        name: '李四',
+        age: '18',
+        address: '上海'
+      },
+      {
+        name: '张二麻子',
+        age: '18',
+        address: '长春'
+      }
+    ]">
+      <template #operation="scroped">
+        <TyButton @click="fnner(scroped.row)">{{ scroped.row.address }}</TyButton>
+      </template>
+    </TyTable>
+
+
+    <TyTable size="small" :columns="[
+      { title: '姓名', key: 'name' },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
       {
         name: '张三',
         age: '18',
@@ -23,18 +66,142 @@
         age: '18',
         address: '长春'
       }
-    ]"
-  >
-    <template #operation="scroped">
-      <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
-    </template>
-  </TyTable>
+    ]">
+      <template #operation="scroped">
+        <TyButton @click="fnner(scroped.row)">{{ scroped.row.address }}</TyButton>
+      </template>
+    </TyTable>
+
+    <TyTable  size="medium"  :columns="[
+      { title: '姓名', key: 'name' },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
+      {
+        name: '张三',
+        age: '18',
+        address: '南京'
+      },
+      {
+        name: '李四',
+        age: '18',
+        address: '上海'
+      },
+      {
+        name: '张二麻子',
+        age: '18',
+        address: '长春'
+      }
+    ]">
+      <template #operation="scroped">
+        <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
+      </template>
+    </TyTable>
+    <TyTable size="large" :columns="[
+      { title: '姓名', key: 'name' },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
+      {
+        name: '张三',
+        age: '18',
+        address: '南京'
+      },
+      {
+        name: '李四',
+        age: '18',
+        address: '上海'
+      },
+      {
+        name: '张二麻子',
+        age: '18',
+        address: '长春'
+      }
+    ]">
+      <template #operation="scroped">
+        <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
+      </template>
+    </TyTable>
+
+    <br>
+    {{ rowSelection.selectedRows }}
+    <TyTable  
+      :rowSelection="rowSelection" 
+      rowKey="name"
+      :columns="[
+        { title: '姓名', key: 'name' },
+        { title: '年龄', key: 'age' },
+        { title: '地址', key: 'address' }
+      ]" :data="[
+        {
+          name: '张三',
+          age: '18',
+          address: '南京'
+        },
+        {
+          name: '李四',
+          age: '18',
+          address: '上海'
+        },
+        {
+          name: '张二麻子',
+          age: '18',
+          address: '长春'
+        }
+      ]"
+    >
+    </TyTable>
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {{ rowSelection2.selectedRows }}
+    <TyTable  
+      :rowSelection="rowSelection2" 
+      rowKey="name"
+      :columns="[
+        { title: '姓名', key: 'name' },
+        { title: '年龄', key: 'age' },
+        { title: '地址', key: 'address' }
+      ]" :data="[
+        {
+          name: '张三',
+          age: '18',
+          address: '南京'
+        },
+        {
+          name: '李四',
+          age: '18',
+          address: '上海'
+        },
+        {
+          name: '张二麻子',
+          age: '18',
+          address: '长春'
+        }
+      ]"
+    >
+    </TyTable>
   </div>
 </template>
 <script setup>
+import {ref} from 'vue'
+const rowSelection =ref({
+  type:'radio',
+  selectedRows:[]
+})
+
+const rowSelection2 =ref({
+  type:'checkbox',
+  selectedRows:[]
+})
+
 const fnner = row => {
   console.log(row)
 }
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

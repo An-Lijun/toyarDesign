@@ -12,7 +12,7 @@ const buildProp = prop => {
   const { values, required, default:defVal, type, validator } = prop
   let defaultValue = defVal ;
   if (hasTypeIn(defaultValue, ['object', 'array'])) {
-    defaultValue = () => (defaultValue)
+    defaultValue = () => (JSON.parse(JSON.stringify(defVal)))
   }
   const initValidator = () => {
     if (validator) return validator

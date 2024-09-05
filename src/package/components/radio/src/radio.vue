@@ -13,6 +13,9 @@
       :value="value"
       :class="[nm.m(size)]"
       :disabled="disabled"
+      :style="{
+        marginRight: '10px'
+      }"
     />
     <span :class="nm.e('container')">
       <slot></slot>
@@ -68,7 +71,6 @@ const handleChange = () => {
   display: inline-flex;
   align-items: center;
   user-select: none;
-  box-sizing: border-box;
 
   input {
     appearance: none;
@@ -76,10 +78,11 @@ const handleChange = () => {
     border: var(--border-5) solid var(--toyar-gray-10);
     position: relative;
     margin: unset;
-    margin-right: 10px;
+    
     background-color: var(--fill-2);
     box-sizing: border-box;
-
+    width: 20px;
+    height: 20px;
     &[type='radio']:checked{
       background-color: var(--primary-6);
       border: var(--border-5) solid var(--primary-6);
@@ -90,8 +93,8 @@ const handleChange = () => {
       position: absolute;
       border-radius: var(--border-radius-circle);
       background-color: #fff;
-      width: 40%;
-      height: 40%;
+      width: 50%;
+      height: 50%;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
@@ -107,17 +110,17 @@ const handleChange = () => {
   &:hover {
     cursor: pointer;
   }
-  $inputSize: (mini, small, medium, large);
-  @mixin addRadioSize($name) {
-    .ty-radio--#{$name} {
-      height: var(--size-#{$name});
-      width: var(--size-#{$name});
-      line-height: var(--size-#{$name});
-    }
-  }
-  @each $name in $inputSize {
-    @include addRadioSize($name);
-  }
+  // $inputSize: (mini, small, medium, large);
+  // @mixin addRadioSize($name) {
+  //   .ty-radio--#{$name} {
+  //     height: var(--size-#{$name});
+  //     width: var(--size-#{$name});
+  //     line-height: var(--size-#{$name});
+  //   }
+  // }
+  // @each $name in $inputSize {
+  //   @include addRadioSize($name);
+  // }
   &.is-disabled,
   &.is-readonly {
     input {

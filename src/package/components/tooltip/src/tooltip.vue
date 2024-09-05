@@ -3,7 +3,9 @@
     <div :class="nm.e('tip')" :style="style" v-show="isShowTip">
       {{ props.content }}
     </div>
-    <slot></slot>
+    <span>
+      <slot></slot>
+    </span>
   </div>
 </template>
 <script setup>
@@ -58,19 +60,20 @@ let style = ref(getPlacement())
 <style lang="scss" scoped>
 .ty-tooltip {
   position: relative;
-  display: inline;
+  display: inline-flex;
+  width: 100%;
 
   &__tip {
     position: absolute;
-    display: block;
+    display: inline-block;
     z-index: 99;
     background-color: var(--tooltip);
     border-radius: 5px;
-    height: 30px;
+    min-height: 30px;
     line-height: 30px;
     padding: 0 10px;
     color: #fff;
-    white-space: nowrap;
+    
     &:after {
       content: '';
       display: inline-block;
