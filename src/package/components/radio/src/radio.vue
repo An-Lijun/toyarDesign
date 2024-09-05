@@ -73,22 +73,32 @@ const handleChange = () => {
   input {
     appearance: none;
     border-radius: var(--border-radius-circle);
-    border: var(--border-2) solid var(--primary-6);
+    border: var(--border-5) solid var(--toyar-gray-10);
     position: relative;
     margin: unset;
     margin-right: 10px;
     background-color: var(--fill-2);
+    box-sizing: border-box;
+
+    &[type='radio']:checked{
+      background-color: var(--primary-6);
+      border: var(--border-5) solid var(--primary-6);
+    }
     &[type='radio']:checked::after {
       content: '';
       box-sizing: border-box;
       position: absolute;
       border-radius: var(--border-radius-circle);
-      background-color: var(--primary-6);
-      width: 60%;
-      height: 60%;
+      background-color: #fff;
+      width: 40%;
+      height: 40%;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+    }
+    &:hover:not(:checked){
+      box-shadow: 0 0 0 4px var(--toyar-gray-4);
+      cursor: pointer;
     }
   }
   &__container{
@@ -114,6 +124,9 @@ const handleChange = () => {
       border-color: var(--primary-3);
       &[type='radio']:checked::after {
         background-color: var(--primary-3);
+      }
+      &:hover{
+        box-shadow: unset;
       }
     }
     color: var(--text-4);
