@@ -22,6 +22,7 @@ export default defineConfig({
       input: {
         main: join(__dirname, 'src/package/index.ts'),
         icon:join(__dirname, 'src/package/icon.ts'),
+        module:join(__dirname, 'src/package/module.ts'),
       },
       output: {
         inlineDynamicImports:false,
@@ -55,7 +56,9 @@ export default defineConfig({
 
     customSplitting: {
       // All files in `src/container` will be merged together in `container` chunk
-      'style1': [/\.css$/]
+      // 'style1': [/\.css$/]
+      'component':[/\.vue/]
+
     }
   })],
 })

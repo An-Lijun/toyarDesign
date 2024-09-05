@@ -15,11 +15,11 @@
           <slot name="source"></slot>
         </div>
     </div>
-    <div v-show="!isShow" class="showBox">
-        <span class="icon"></span> <span class="etc" @click="isShow=!isShow">展开代码</span>
+    <div v-show="!isShow" class="showBox" @click="isShow=!isShow">
+        <span class="icon"></span> <span class="etc" >展开代码</span>
      </div>
-      <div v-show="isShow" class="disBox">
-        <span class="icon"></span> <span class="etc" @click="isShow=!isShow">收起代码</span>
+      <div v-show="isShow" class="disBox" @click="isShow=!isShow">
+        <span class="icon"></span> <span class="etc" >收起代码</span>
       </div>
   </div>
 </template>

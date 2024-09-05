@@ -19,7 +19,7 @@ import { nm, menuProps ,emits} from './context'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import {nowTheme} from '../../../hooks/changeTheme'
 import {ref,computed,provide,watch} from 'vue'
-import { TyScrollBar } from '@/package/index.ts'
+import { TyScrollBar } from '../../scrollbar'
 defineOptions({
   name: 'TyMenu'
 })

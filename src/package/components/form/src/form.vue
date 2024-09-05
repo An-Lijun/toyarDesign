@@ -1,15 +1,17 @@
 <template>
-  <form :class="[nm.b(),nm.is(layout)]" >
+  <form :class="[nm.b(),nm.is(layout)]">
     <slot></slot>
   </form>
 </template>
 <script lang='ts' setup name="TyForm">
 import { formContent } from '../../../hooks/symbolNm'
 import { provide } from "vue";
+import {getUniqueId} from '../../../utils/getUniqueId'
 import {formProps,nm} from './context'
 defineOptions({
   name:'TyForm'
 })
+
 
 interface IfieldList{
   [index: string]: {
@@ -21,8 +23,9 @@ type TerrList =Array<{[index: string]:string}>
 
 const props = defineProps(formProps);
 const fieldList:IfieldList={};
-
+const formID = getUniqueId()
 function addValidate(prop:string, fns:Array<Function>, clearValidate:Function) {
+  
   fieldList[prop] = {
     fns:fns,
     clearValidate
@@ -81,19 +84,32 @@ function clearValidate(prop:string) {
   fieldList[prop].clearValidate();
 }
 
+function scrollTo(propId){
+  const el =document.getElementById(`${formID}_${propId}`);
+  if(el){
+    el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+  }
+}
+
+
 provide(formContent, {
   ...props,
   validate,
   addValidate,
   validateAll,
-  removeValidate
+  removeValidate,
+  formID
 })
 
 defineExpose({
   validate,
   validateAll,
   clearValidate,
-  clearValidateAll
+  clearValidateAll,
+  scrollTo
 });
 </script>
 

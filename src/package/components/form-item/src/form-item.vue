@@ -1,5 +1,5 @@
 <template>
-  <div :class="[nm.b(), nm.is('require', isRequire), nm.is('colon', isColon)]">
+  <div :class="[nm.b(), nm.is('require', isRequire), nm.is('colon', isColon)]" :id="`${tyForm.formID}_${prop}`">
     <label :class="[nm.e('label')]" :style="{
     display: 'block',
     wordBreak: 'break-all',
@@ -111,6 +111,8 @@ const clearValidate = () => {
 }
 onMounted(() => {
   if (prop && Object.keys(tyForm.rules).includes(prop.value)) {
+    console.log(prop.value,'-----------');
+    
     tyForm.addValidate(
       prop.value,
       generatorValidate(tyForm.rules[prop.value]),
