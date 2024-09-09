@@ -17,3 +17,6 @@
 1. 在monted使用mounted 异步安装组件
 2. index.js 中不能使用组件也可以在monted去使用外部暴露的函数进行调用,注意index.js里面绝对不能有document
 
+
+
+5. table hover tooltip显示问题 我需要自己算吗

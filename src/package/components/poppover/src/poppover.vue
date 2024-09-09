@@ -214,10 +214,6 @@ onMounted(() => {
       margin-bottom: 20px;
       text-align: left;
     }
-
-
-
-
   }
 }
 </style>

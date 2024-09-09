@@ -14,7 +14,7 @@
     </TyTable>
 
     <TyTable 
-  
+    stripe
     
     align="right" :borders="['out','row','column']" size="mini" :columns="[
       { title: '姓名',width:'80px', key: 'name',

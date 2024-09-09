@@ -38,7 +38,12 @@ export const tableProps =buildProps({
     type:String,
     values:['ellipsis','title','tooltip','none'],
     default:''
+  },
+  stripe:{
+    type:Boolean,
+    default:false
   }
+  
 })
 
 export const nm =useNmSpace('table')

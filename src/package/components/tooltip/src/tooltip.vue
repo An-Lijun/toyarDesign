@@ -1,6 +1,6 @@
 <template>
   <div :class="nm.b()" v-on="eventMaps">
-    <div :class="nm.e('tip')" :style="style" v-show="isShowTip">
+    <div :class="nm.e('tip')" :style="style" >
       {{ props.content }}
     </div>
     <span>
@@ -44,6 +44,7 @@ switch (props.trigger) {
       click: handleClick
     }
 }
+// v-show="isShowTip"
 // top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end
 const getPlacement = () => {
   switch (props.placement) {
@@ -60,7 +61,7 @@ let style = ref(getPlacement())
 <style lang="scss" scoped>
 .ty-tooltip {
   position: relative;
-  display: inline-flex;
+  display: block;
   width: 100%;
 
   &__tip {
@@ -72,7 +73,13 @@ let style = ref(getPlacement())
     min-height: 30px;
     line-height: 30px;
     padding: 0 10px;
+    // width: 3%;
+    white-space:auto;
+    min-width: 200%;
+    max-width: 250%;
+    // width: 150%;
     color: #fff;
+    text-align: center;
     
     &:after {
       content: '';
