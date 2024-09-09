@@ -18,7 +18,7 @@
     <div :class="nm.e('indicators')">
       <slot name="indicator">
         <li
-          v-for="(item, index) in list"
+          v-for="(, index) in list"
           :class="{
             active: index === now
           }"
@@ -31,6 +31,7 @@
 import { onMounted, ref, provide, watch } from 'vue'
 import {carouselContent} from '../../../hooks/symbolNm'
 import {carProps,nm} from './context'
+import type {Ref} from 'vue'
 defineOptions({
   name:'TyCarousel'
 })
@@ -39,10 +40,10 @@ const props = defineProps(carProps)
 const carousel = ref()
 let baseWidth = 0
 let width = ref(0)
-let list = ref([])
+let list:Ref<Array<string>> = ref([])
 
 let now = ref(0)
-let timmer = null
+let timmer:null|NodeJS.Timeout  = null
 const start = () => {
   return setInterval(() => {
     now.value++
@@ -51,7 +52,7 @@ const start = () => {
     }
   }, props.interval)
 }
-const carouselEnter = () => clearInterval(timmer)
+const carouselEnter = () => clearInterval((timmer as NodeJS.Timeout))
 const carouselLeave = () => timmer = start()
 const toLeft = () => now.value =  now.value === 0?list.value.length - 1: now.value-1
 const toRight = () => now.value = now.value=== list.value.length - 1? 0: now.value+1
@@ -67,9 +68,12 @@ onMounted(() => {
 const setItem = () => {
   list.value.push(String(list.value.length))
 }
-provide(carouselContent, {
+
+const provideCarousel ={
   setItem
-})
+}
+export type ProvideCarousel = typeof provideCarousel
+provide(carouselContent,provideCarousel)
 </script>
 <style lang="scss" scoped>
 .ty-carousel {

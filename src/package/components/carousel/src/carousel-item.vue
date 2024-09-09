@@ -7,10 +7,11 @@
 import {inject,onMounted} from 'vue'
 import {carouselContent} from '../../../hooks/symbolNm'
 import { nm } from './context';
+import type {ProvideCarousel} from './carousel.vue'
 defineOptions({
   name:'TyCarouselItem'
 })
-const {setItem} =inject(carouselContent,{})
+const {setItem} =inject(carouselContent,{}) as ProvideCarousel
 onMounted(() => {
   setItem()
 })

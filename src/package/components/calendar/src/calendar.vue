@@ -51,7 +51,7 @@
 <script setup lang='ts' name="TyCalendar">
 import { calendarProp, calendarEmit, nm } from './context'
 import { ref } from 'vue';
-
+import type {Ref} from 'vue'
 defineOptions({
   name: 'TyCalendar'
 })
@@ -62,7 +62,7 @@ const weekArr = ['周日', '周一', '周二', '周三', '周四', '周五', '�
 const countDate = [new Date().getFullYear(), new Date().getMonth()]
 let nowDate = ref('')
 let nowStr = ref('')
-let befMonth = ref([])
+let befMonth:Ref<Array<number>> = ref([])
 let nowMonth = ref(0)
 let aftMonth = ref(0)
 
@@ -123,7 +123,7 @@ const nextYear = () => {
   countDate[0] = countDate[0] + 1
   render(countDate)
 }
-const selectDay = (day: string) => {
+const selectDay = (day: number) => {
   let data = `${countDate[0]}-${String(countDate[1] + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
   emit('click', data)
 }

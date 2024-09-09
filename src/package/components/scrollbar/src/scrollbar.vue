@@ -50,9 +50,7 @@ onMounted(() => {
 
 })
 
-
 const handleScroll = (ev) => {
-  
   if (stop) {
     return
   }
@@ -63,7 +61,6 @@ const handleScroll = (ev) => {
     left = leftV
     return
   }
-  
   let value = Math.floor(ev.target.scrollTop / compHeight * 100)
   rightTopV.value = value <= 20 ? `${value}px` : `calc( ${value}% - 35px)`
 }
@@ -88,7 +85,6 @@ const rightMouseDown = (e) => {
     document?.addEventListener("mouseup", () => {
       document.removeEventListener('mousemove', rightMove)
       stop = false
-
     });
   }
 }
@@ -111,7 +107,6 @@ const bottomMouseDown = (e) => {
     document?.addEventListener("mouseup", () => {
       document.removeEventListener('mousemove', bottomMove)
       stop = false
-
     });
   }
 }
