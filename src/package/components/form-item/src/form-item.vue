@@ -24,6 +24,7 @@
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { inject, onMounted, toRefs, provide, ref, onBeforeUnmount } from 'vue'
 import { nm, itemProps } from './context'
+import generatorValidate from './index'
 defineOptions({
   name: 'TyFormItem'
 })
@@ -40,82 +41,16 @@ provide(formItemContent, {
   ...props,
   formItemError: formItemError.value
 })
-const generatorValidate = rules => {
-  const fnArr = []
-  rules.forEach(rule => {
-    let keys = Object.keys(rule)
-    if (keys.includes('required')) {
-      isRequire.value = true
-      fnArr.push(data => {
-        // return new Promise((resolve, reject) => {
-        if (!tyForm.formData[data]) {
-          formItemError.value.isShowErrorMsg = true
-          formItemError.value.errorMsg = rule.message || `${data} is required`
-          return prop.value
-        }
-        formItemError.value.isShowErrorMsg = false
-        // resolve()
-        // })
-      })
-    }
-    if (keys.includes('min') || keys.includes('max')) {
-      fnArr.push(data => {
-        let errMsg = ''
-        if (keys.includes('min')) {
-          errMsg += rule.message || `${data} length must > ${rule.min}`
-        }
-        if (keys.includes('max')) {
-          if (keys.includes('min')) {
-            errMsg += ' and '
-          }
-          errMsg += rule.message || `${data} length must < ${rule.max}`
-        }
-        if (keys.includes('min')) {
-          if (`${tyForm.formData[data]}`.length <= rule.min) {
-            formItemError.value.isShowErrorMsg = true
-            formItemError.value.errorMsg = errMsg
-            return prop.value
-          }
-        }
-        if (keys.includes('max')) {
-          if (`${tyForm.formData[data]}`.length >= rule.max) {
-            formItemError.value.isShowErrorMsg = true
-            formItemError.value.errorMsg = errMsg
-            return prop.value
-          }
-        }
-        formItemError.value.isShowErrorMsg = false
-      })
-    }
-    if (keys.includes('validate')) {
-      const cb = data => {
-        if (!data) {
-          formItemError.value.isShowErrorMsg = false
-          formItemError.value.errorMsg = ''
-          return
-        }
-        formItemError.value.isShowErrorMsg = true
-        formItemError.value.errorMsg = data
-        return prop.value
-      }
-      fnArr.push(data => {
-        rule.validate(tyForm.formData[data] || '', cb)
-      })
-    }
-  })
-  return fnArr
-}
+
 const clearValidate = () => {
   formItemError.value.isShowErrorMsg = false
   formItemError.value.errorMsg = ''
 }
 onMounted(() => {
   if (prop && Object.keys(tyForm.rules).includes(prop.value)) {
-    console.log(prop.value,'-----------');
-    
     tyForm.addValidate(
       prop.value,
-      generatorValidate(tyForm.rules[prop.value]),
+      generatorValidate(tyForm.rules[prop.value],formItemError,isRequire,tyForm,prop),
       clearValidate
     )
   }
@@ -123,6 +58,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   tyForm.removeValidate(prop.value)
 })
+
 </script>
 <style lang="scss" scoped>
 .ty-form-item {

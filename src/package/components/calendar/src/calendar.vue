@@ -50,15 +50,14 @@
 </template>
 <script setup lang='ts' name="TyCalendar">
 import { calendarProp, calendarEmit, nm } from './context'
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 defineOptions({
   name: 'TyCalendar'
 })
-const props = defineProps(calendarProp)
+ defineProps(calendarProp)
 const emit = defineEmits(calendarEmit)
 
-const formatValue = ref('')
 const weekArr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 const countDate = [new Date().getFullYear(), new Date().getMonth()]
 let nowDate = ref('')

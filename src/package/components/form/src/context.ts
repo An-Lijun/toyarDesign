@@ -22,3 +22,5 @@ export const formProps =buildProps({
   }
 })
 export const nm =useNmSpace('form')
+
+export type FormProps = typeof formProps

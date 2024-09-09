@@ -24,7 +24,7 @@ import TySkeleton from '../../skeleton'
 defineOptions({
   name:'TyCard'
 })
-const props = defineProps(cardProp)
+defineProps(cardProp)
 
 </script>
 <style lang="scss" scoped>

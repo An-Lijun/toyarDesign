@@ -8,10 +8,10 @@ import { formContent } from '../../../hooks/symbolNm'
 import { provide } from "vue";
 import {getUniqueId} from '../../../utils/getUniqueId'
 import {formProps,nm} from './context'
+import type {FormProps} from './context'
 defineOptions({
   name:'TyForm'
 })
-
 
 interface IfieldList{
   [index: string]: {
@@ -21,11 +21,12 @@ interface IfieldList{
 }
 type TerrList =Array<{[index: string]:string}>
 
-const props = defineProps(formProps);
+const props:FormProps = defineProps(formProps);
 const fieldList:IfieldList={};
 const formID = getUniqueId()
+
+// 添加 校验
 function addValidate(prop:string, fns:Array<Function>, clearValidate:Function) {
-  
   fieldList[prop] = {
     fns:fns,
     clearValidate
@@ -36,11 +37,11 @@ function removeValidate(prop:string) {
 }
 function validateAll() {
   return new Promise((resolve, reject) => {
-    let keys = Object.keys(fieldList);
     const errList:TerrList = []
-    keys.forEach((key, index) => {
+    Object.keys(fieldList).forEach(key => {
       const fns = fieldList[key].fns;
-      for (let index = 0; index < fns.length; index++) {
+      const len = fns.length
+      for (let index = 0; index < len; index++) {
         const data = fns[index](key)
         if (data) {
           return errList.push(data)
@@ -84,7 +85,7 @@ function clearValidate(prop:string) {
   fieldList[prop].clearValidate();
 }
 
-function scrollTo(propId){
+function scrollTo(propId:string){
   const el =document.getElementById(`${formID}_${propId}`);
   if(el){
     el.scrollIntoView({
@@ -94,15 +95,16 @@ function scrollTo(propId){
   }
 }
 
-
-provide(formContent, {
+const formContentProvide= {
   ...props,
   validate,
   addValidate,
   validateAll,
   removeValidate,
   formID
-})
+}
+export type FormContentProvide = typeof formContentProvide
+provide(formContent,formContentProvide)
 
 defineExpose({
   validate,
