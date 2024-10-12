@@ -36,6 +36,7 @@ defineOptions({
 })
 const props = defineProps(buttonProps)
 
+// 当处于input时候需要被input的disabled readonly控制
 const inputInject = inject(configProviderDisabled,null) as {
   disabled:boolean,
   readonly:boolean

@@ -35,7 +35,7 @@ export const buttonProps = buildProps(
     shape: {
       type: String,
       default: "square",
-      valuse: ["square", "round", "circle"]
+      values: ["square", "round", "circle"]
     },
     loading: {
       type: Boolean,

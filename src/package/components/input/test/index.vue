@@ -4,7 +4,8 @@
 
     <hr>
     <TyInput v-model="inp" :clearable="false"/>
-
+    <hr>
+    <TyInput v-model="inp"  size="mini" :showLimit="true" maxlength="10" />
     <hr>
     <TyInput v-model="inp"  size="mini" />
 
@@ -19,13 +20,13 @@
     <hr />
     <TyInput v-model="inp" >
   <template #outPre>
-    <ty-button>btn</ty-button>
+    <TyButton>btn</TyButton>
   </template>
 </TyInput>
 <hr />
 <TyInput v-model="inp"  disabled>
   <template #outPre>
-    <ty-button>btn</ty-button>
+    <TyButton>btn</TyButton>
   </template>
 </TyInput>
 <hr />
@@ -33,33 +34,33 @@
 <hr />
 <TyInput v-model="inp" size="mini">
   <template #outAft>
-    <ty-button>
+    <TyButton>
       <ty-icon color="#FFF" icon="ty-search-line" />
-    </ty-button>
+    </TyButton>
   </template>
 </TyInput>
 <hr />
 <TyInput v-model="inp" >
   <template #outAft>
-    <ty-button>
+    <TyButton>
       <ty-icon color="#FFF" icon="ty-search-line" />
-    </ty-button>
+    </TyButton>
   </template>
 </TyInput>
 <hr />
 <TyInput v-model="inp" size="medium" >
   <template #outAft>
-    <ty-button  style="height: 100%;">
+    <TyButton  style="height: 100%;">
       <ty-icon color="#FFF" icon="ty-search-line" />
-    </ty-button>
+    </TyButton>
   </template>
 </TyInput>
 <hr />
 <TyInput v-model="inp"  size="large" >
   <template #outAft>
-    <ty-button style="height: 100%;">
+    <TyButton style="height: 100%;">
       <ty-icon color="#FFF" icon="ty-search-line" />
-    </ty-button>
+    </TyButton>
   </template>
 </TyInput>
 <TyInput  v-model="inp2" @blur="inpBlur" @input="inpInput"
@@ -74,6 +75,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+
 const inp = ref('')
 const inp2 = ref('')
 
