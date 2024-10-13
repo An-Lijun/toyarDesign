@@ -1,0 +1,56 @@
+$namespace: 'ty';
+$element: '__';
+$modifier: '--';
+$state: 'is-';
+
+
+/* BEM
+ -------------------------- */
+
+//  block
+@mixin b($block) {
+  $B: $namespace+'-'+$block;
+
+  .#{$B} {
+    @content;
+  }
+};
+
+
+@mixin is($is) {
+  &.#{$state+$is } {
+    @content;
+  }
+}
+
+@mixin m($m) {
+  &#{$modifier+$m}{
+    @content;
+  }
+}
+
+// element
+// @mixin e($element) {
+//   $E: $element !global;
+//   $selector: &;
+//   $currentSelector: "";
+//   @each $unit in $element {
+//     $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
+//   }
+
+//   @if hitAllSpecialNestRule($selector) {
+//     @at-root {
+//       #{$selector} {
+//         #{$currentSelector} {
+//           @content;
+//         }
+//       }
+//     }
+//   } @else {
+//     @at-root {
+//       #{$currentSelector} {
+//         @content;
+//       }
+//     }
+//   }
+// }

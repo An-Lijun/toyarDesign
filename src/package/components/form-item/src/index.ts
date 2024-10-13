@@ -6,7 +6,7 @@ type RuleObj = {
   max?: number,
   validate?: Function
 }
-import { is } from "@/package/utils/is"
+import { is } from "../../../utils/is"
 import type { Ref } from "vue"
 import type { FormProps } from '../../form/src/context'
 import type { FormContentProvide } from '../../form/src/form.vue'
