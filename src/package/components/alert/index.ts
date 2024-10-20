@@ -16,7 +16,7 @@ const genOptions = (options: IOption) => {
         {
           state: TY_MOOD[options.type],
           onClick:  () => { 
-            options.sure && options.sure.code && options.sure.code()
+            options.sure && options.sure.code && typeof options.sure.code === 'function' && options.sure.code()
           }
         },
         options.sure.text || '确认'
@@ -31,7 +31,7 @@ const genOptions = (options: IOption) => {
           type: 'secondary',
           state: TY_MOOD[options.type],
           onClick: () => { 
-            options.cancel &&  options.cancel.code &&options.cancel.code 
+            options.cancel &&  options.cancel.code && typeof options.cancel.code === 'function' &&options.cancel.code 
           }
         },
         options.cancel.text || '取消'
