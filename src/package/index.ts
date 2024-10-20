@@ -1,8 +1,5 @@
 
 import './assets/index.scss'
-import './icon/toyaricon.css'
-import {version} from'../../package.json'
-
 import TyIcon from './components/icon'
 import TyButton from './components/button'
 import TyButtonGroup from './components/button-group'
@@ -128,6 +125,7 @@ const install = app => {
     app.use(TyAvatarGroup),
     app.use(TyScrollBar),
     app.use(TySIcon)
+
     
   }
   // app.use(TyTrigger)
@@ -137,10 +135,76 @@ document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 
 export default {
-  version,
+  version: '0.0.1',
   install
 } //全量引入
 
 export {
-  TyThemeChange
-}
+  TyThemeChange,
+  TyIcon,
+  TyButton,
+  TyButtonGroup,
+  TyDivider,
+  TyRow,
+  TyCol,
+  TyForm,
+  TyFormItem,
+  TyInput,
+  TySelect,
+  TyCheckBox,
+  TyCheckBoxGroup,
+  TyRadio,
+  TyRadioGroup,
+  TyDatePicker,
+  TyDialog,
+  TyBackTop,
+  TyCard,
+  TyTable,
+  TyInputNumber,
+  TyInputPassword,
+  TyContainer,
+  TyMain,
+  TyAside,
+  TyHeader,
+  TyFooter,
+  TyMenu,
+  TySubMenu,
+  TyMenuGroup,
+  TyMenuItem,
+  TyMessage,
+  TyNotification,
+  TyAlert,
+  TyResult,
+  TyImage,
+  TyWaterMark,
+  TyCollapse,TyCollapseItem,
+  TyTabs,TyTabItem,
+  TyBadge,
+  TyPageHeader,
+  TySwitch,
+  TyPagination,
+  TyLoading,
+  TyEmpty,
+  TyProgress,
+  TySlider,
+  TySkeleton,TySkeletonItem,
+  TyCarousel,
+  TyTooltip,
+  TyPopconfirm,
+  TyList,TyListItem ,
+  TyRate,
+  TyTransfer,
+  TyPoppover,
+  TyBreadcrumb,TyBreadcrumbItem,
+  TyDescriptions,
+  TyCaution,
+  TyConfigProvider,
+  TyDrawer,
+  generateColor,
+  TyCalendar,
+  TySpace,
+  TyAvatar,TyAvatarGroup,
+  TyScrollBar,
+  TySIcon
+} //按需引入
+// TyTrigger,
