@@ -1,6 +1,6 @@
 
 import './assets/index.scss'
-import './icon/toyaricon.css'
+import '../package/icon/toyaricon.css'
 import TyIcon from './components/icon'
 import TyButton from './components/button'
 import TyButtonGroup from './components/button-group'
