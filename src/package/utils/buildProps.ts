@@ -54,6 +54,9 @@ const buildProp = (prop: selfPropType) => {
   if (defaultValue !== void 0) {
     props.default = defaultValue
   }
+  if (!props.validator) {
+    delete props.validator
+  }
   
   return props
 }
