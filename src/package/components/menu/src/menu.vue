@@ -1,10 +1,10 @@
 <template>
   <section :class="[nm.b(), nm.is('fold', isFold),getTheme]">
-    <header>
+    <header :class="nm.e('header')">
       <slot name="header"></slot>
     </header>
-    <TyScrollBar :class="nm.e('inner')" :style="{
-      height: `calc(100% - ${$slots.default?'50px' :'0px'})`
+    <TyScrollBar :class="nm.e('inner')" ref="scrollBar" :style="{
+      height: `calc(100% - ${$slots.header?'50px' :'0px'})`
 
     }">
       <slot v-if="!option"> </slot>
@@ -20,17 +20,22 @@ import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import {nowTheme} from '../../../hooks/changeTheme'
 import {ref,computed,provide,watch} from 'vue'
 import { TyScrollBar } from '../../scrollbar'
+
 defineOptions({
   name: 'TyMenu'
 })
 const props = defineProps(menuProps)
 const emit = defineEmits(emits)
+
+const scrollBar = ref()
+
 const { model } = useCompMvalue(props, emit,{
   setFn:(value)=> {
     emit('change',value)
     return value
   }
 })
+
 const openId = ref('')
 const getTheme = computed(()=>{
   switch (props.theme) {
@@ -52,6 +57,9 @@ provide('menu', {
   isFold: computed(() => props.isFold),
   lastMenuFn: null,
   setOpenId: value => {
+    if(scrollBar && scrollBar.value){
+      scrollBar.value.resetScrollBar()
+    }
     openId.value = value
   },
   openId,
@@ -63,9 +71,11 @@ provide('menu', {
   },
   clickMenu:(menu)=>{
     emit('open',menu)
+
   },
   clickSubMenu:(subMenu)=>{
     emit('subOpen',subMenu)
+
   }
 })
 
@@ -92,6 +102,10 @@ watch(
   transition: all 0.5s;
   position: relative;
   overflow: hidden;
+  &__header{
+    height: 50px;
+    overflow: hidden;
+  }
   &.is-fold {
     width: 50px;
     transition: all 0.5s;

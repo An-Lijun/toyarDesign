@@ -159,6 +159,20 @@ css命名使用BEMI命名并抽取useBEMhooks
 
 对于布尔开启状态使用 is-xxx 来表示状态
 
+对于组件内部使用 useNmSpace Hooks 进行命名规范和约束
+对于css使用   @content; 进行类名组装
+
+
+主题变量
+css 主题变量注入到 
+html[toyar-theme='dark'].ty-dark (暗色) 
+html[toyar-theme='light'].ty-light (亮色中)
+
+可使用组件内部 TyThemeChange Hooks 进行主题颜色的替换
+
+
+
+
 ### 文件命名
 
 如果是多单词采用-分割而不是驼峰

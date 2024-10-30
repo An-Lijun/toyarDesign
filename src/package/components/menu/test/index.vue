@@ -1,4 +1,13 @@
 <template>
+
+<div style="height: 150px;">
+      <TyMenu theme="rDesign"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" >
+        <template #header>
+       
+        <h1>{{ value1 }}</h1>
+          </template>
+      </TyMenu>
+</div>
   <div class="divRoot">
     <TyButton @click="() => {
       isFold = !isFold
@@ -138,10 +147,7 @@
       <br>
       <br>
       <br>
-      <div style="height: 150px;">
-      <TyMenu theme="rDesign"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" />
 
-      </div>
     </div>
   </div>
 </template>

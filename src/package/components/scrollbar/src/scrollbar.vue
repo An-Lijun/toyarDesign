@@ -3,14 +3,14 @@
     <div :class="nm.e('container')" ref="container" @scroll="handleScroll($event)">
       <slot />
     </div>
-    <div :class="nm.e('rightBarContainer')">
+    <div :class="nm.e('rightBarContainer')" v-if="isShowRight">
       <div ref="rightBar" :class="nm.e('rightBar')" @mousedown="rightMouseDown($event)" :style="{
     top: rightTopV
   }
     ">
       </div>
     </div>
-    <div :class="nm.e('bottomBarContainer')">
+    <div :class="nm.e('bottomBarContainer')"  v-if="isShowBottom">
       <div :class="nm.e('bottomBar')" ref="bottomBar" @mousedown="bottomMouseDown($event)" :style="{
     left: bottomV
   }">
@@ -33,7 +33,8 @@ let compHeight = 0
 let compWidth = 0 
 let rightTopV = ref('')
 let bottomV = ref('')
-
+let isShowRight =ref(false)
+let isShowBottom =ref(false)
 
 const container = ref('')
 const rightBar = ref('')
@@ -47,9 +48,25 @@ onMounted(() => {
   scrollWidth = container.value.scrollWidth
   compHeight = scrollHeight - containerHeight
   compWidth= scrollWidth - containerWidth
-
+  if(containerHeight <scrollHeight){
+      isShowRight.value = true
+  }
 })
 
+const resetScrollBar =()=>{
+  setTimeout(() => {
+    scrollHeight = container.value.scrollHeight
+    scrollWidth = container.value.scrollWidth
+    compHeight = scrollHeight - containerHeight
+    compWidth= scrollWidth - containerWidth
+    if(containerHeight <scrollHeight){
+      isShowRight.value = true
+    }else{
+      isShowRight.value = false
+    }
+  }, 200);
+  
+}
 const handleScroll = (ev) => {
   if (stop) {
     return
@@ -61,6 +78,8 @@ const handleScroll = (ev) => {
     left = leftV
     return
   }
+  console.log(ev.target.scrollTop , compHeight );
+  
   let value = Math.floor(ev.target.scrollTop / compHeight * 100)
   rightTopV.value = value <= 20 ? `${value}px` : `calc( ${value}% - 35px)`
 }
@@ -110,7 +129,10 @@ const bottomMouseDown = (e) => {
     });
   }
 }
+defineExpose({
+  resetScrollBar,
 
+});
 </script>
 <style lang="scss" scoped>
 .ty-scrollbar {
@@ -147,6 +169,8 @@ const bottomMouseDown = (e) => {
     position: absolute;
     box-sizing: border-box;
     right: 2px;
+    user-select: none;
+-webkit-user-drag: none;
   }
 
   &__bottomBarContainer {
