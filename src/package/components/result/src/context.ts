@@ -1,5 +1,5 @@
 
-import { buildProps } from "../../../utils/buildProps"
+import buildProps from "../../../utils/buildProps"
 import useNmSpace from "../../../../package/hooks/useBem"
 import { TY_MOOD_LS } from "../../../constant"
 

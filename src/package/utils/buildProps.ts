@@ -1,25 +1,5 @@
-import { hasTypeIn } from "./is"
-type propType = { type: any, required?: Boolean, validator?: Function | undefined, default?: any }
-type selfPropType = {
-  values?: Array<any>,
-  required?: Boolean,
-  default?: any,
-  type: any,
-  validator?: Function
-}
-type selfPropsType = {
-  [key: string]: selfPropType
-}
-
-
-const arrayToObject = (arr: any[]) => {
-  const propsObj: any = {}
-  arr.forEach(([key, value]) => {
-    propsObj[key] = value
-  })
-  return propsObj
-}
-
+import { arrayToObject,isWrapperObject } from './index'
+import type { propType, selfPropType, selfPropsType } from './type'
 
 /**
  * 处理组件属性的配置函数
@@ -33,12 +13,17 @@ const arrayToObject = (arr: any[]) => {
  * 
  * @returns {Object} 处理后的属性配置对象
  */
+
 const buildProp = (prop: selfPropType) => {
-  const { values, required, default: defVal, type, validator } = prop
-  let defaultValue = defVal;
-  if (hasTypeIn(defaultValue, ['object', 'array'])) {
-    defaultValue = () => (JSON.parse(JSON.stringify(defVal)))
+  // 如果是包装类类型直接返回type即可
+  if(isWrapperObject(prop)){
+    return {
+      type:prop
+    }
   }
+
+  const { values, required, default: defVal, type, validator } = prop as propType
+
   const initValidator = () => {
     if (validator) return validator
     if (values && Array.isArray(values)) return (value: any) => values.includes(value)
@@ -51,13 +36,13 @@ const buildProp = (prop: selfPropType) => {
   if (required) {
     props.required = required
   }
-  if (defaultValue !== void 0) {
-    props.default = defaultValue
+  if (defVal !== void 0) {
+    props.default = defVal
   }
   if (!props.validator) {
     delete props.validator
   }
-  
+
   return props
 }
 
@@ -68,6 +53,12 @@ const buildProp = (prop: selfPropType) => {
  * @param props - 需要转换的属性对象
  * @returns 转换后的新对象，其中每个属性值都经过 buildProp 处理
  */
-export const buildProps = (props: selfPropsType) => {
-  return arrayToObject(Object.entries(props).map(([key, option]) => [key, buildProp(option)]))
-}
+const buildProps = (props: selfPropsType) =>
+  arrayToObject(
+    Object.entries(props).map(([key, option]) =>
+      [key, buildProp(option)]
+    )
+  )
+
+
+export default buildProps

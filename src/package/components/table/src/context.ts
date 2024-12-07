@@ -1,4 +1,4 @@
-import { buildProps } from '../../../utils/buildProps';
+import buildProps from '../../../utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
 import { TY_SIZE } from "../../../constant"
 

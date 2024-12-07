@@ -32,9 +32,12 @@ function addValidate(prop:string, fns:Array<Function>, clearValidate:Function) {
     clearValidate
   };
 }
+
+//移除 校验
 function removeValidate(prop:string) {
   delete fieldList[prop]
 }
+// 校验全部
 function validateAll() {
   return new Promise((resolve, reject) => {
     const errList:TerrList = []
@@ -55,6 +58,7 @@ function validateAll() {
   })
 
 }
+// 校验单个
 function validate(prop:string) {
   return new Promise((resolve,reject)=>{
     const fns = fieldList[prop].fns
@@ -75,16 +79,19 @@ function validate(prop:string) {
     }
   })
 }
+// 清除全部校验
 function clearValidateAll() {
   let keys = Object.keys(fieldList);
   keys.forEach(key => {
     fieldList[key].clearValidate();
   })
 }
+// 清除单个校验
 function clearValidate(prop:string) {
   fieldList[prop].clearValidate();
 }
 
+// 滚动到指定位置
 function scrollTo(propId:string){
   const el =document.getElementById(`${formID}_${propId}`);
   if(el){
