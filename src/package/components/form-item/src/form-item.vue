@@ -1,20 +1,23 @@
 <template>
   <div :class="[nm.b(), nm.is('require', isRequire), nm.is('colon', isColon)]" :id="`${tyForm.formID}_${prop}`">
     <label :class="[nm.e('label')]" :style="{
-    display: 'block',
-    wordBreak: 'break-all',
-    width: `${tyForm.labelWidth}px`,
-    minWidth: `${tyForm.labelWidth}px`
-  }">
+      display: 'block',
+      wordBreak: 'break-all',
+      width: `${tyForm.labelWidth}px`,
+      minWidth: `${tyForm.labelWidth}px`
+    }">
       <slot name="label">
         {{ label }}
       </slot>
+      <span class="after">
+        {{ tyForm.labelSuffix }}
+      </span>
     </label>
     <div :class="nm.e('content')">
       <slot></slot>
       <div v-show="formItemError.isShowErrorMsg" :class="nm.e('tip')" :style="{
-    maxWidth: `calc(100% - ${tyForm.labelWidth}px)`
-  }">
+        maxWidth: `calc(100% - ${tyForm.labelWidth}px)`
+      }">
         {{ formItemError.errorMsg }}
       </div>
     </div>
@@ -29,19 +32,16 @@ defineOptions({
   name: 'TyFormItem'
 })
 const tyForm = inject(formContent, null)
+
+const props = defineProps(itemProps)
+
 const formItemError = ref({
   isShowErrorMsg: false,
   errorMsg: ''
 })
-const props = defineProps(itemProps)
 const isRequire = ref(false)
 const isColon = ref(true)
 const { prop } = toRefs(props)
-provide(formItemContent, {
-  ...props,
-  formItemError: formItemError.value
-})
-
 const clearValidate = () => {
   formItemError.value.isShowErrorMsg = false
   formItemError.value.errorMsg = ''
@@ -50,13 +50,17 @@ onMounted(() => {
   if (prop && Object.keys(tyForm.rules).includes(prop.value)) {
     tyForm.addValidate(
       prop.value,
-      generatorValidate(tyForm.rules[prop.value],formItemError,isRequire,tyForm,prop),
+      generatorValidate(tyForm.rules[prop.value], formItemError, isRequire, tyForm, prop),
       clearValidate
     )
   }
 })
 onBeforeUnmount(() => {
   tyForm.removeValidate(prop.value)
+})
+provide(formItemContent, {
+  ...props,
+  formItemError: formItemError.value
 })
 
 </script>
@@ -100,9 +104,10 @@ onBeforeUnmount(() => {
 }
 
 .is-colon {
-  .ty-form-item__label:after {
-    content: ': ';
-    margin-right: 5px;
+  .ty-form-item__label {
+    .after {
+      margin-right: 5px;
+    }
   }
 }
 </style>

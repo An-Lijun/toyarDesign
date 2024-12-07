@@ -11,6 +11,10 @@ export const formProps =buildProps({
     type: String,
     default:'100'
   },
+  labelSuffix:{
+    type: String,
+    default: ':'
+  },
   labelPosition: String,
   size: String,
   disabled: Boolean,

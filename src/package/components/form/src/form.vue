@@ -4,22 +4,19 @@
   </form>
 </template>
 <script lang='ts' setup name="TyForm">
-import { formContent } from '../../../hooks/symbolNm'
+import type {IfieldList,TerrList} from '../type'
+
 import { provide } from "vue";
+
+import { formContent } from '../../../hooks/symbolNm'
 import {getUniqueId} from '../../../utils/getUniqueId'
 import {formProps,nm} from './context'
 import type {FormProps} from './context'
+
 defineOptions({
   name:'TyForm'
 })
 
-interface IfieldList{
-  [index: string]: {
-    fns:Array<Function>,
-    clearValidate:Function
-  }
-}
-type TerrList =Array<{[index: string]:string}>
 
 const props:FormProps = defineProps(formProps);
 const fieldList:IfieldList={};
