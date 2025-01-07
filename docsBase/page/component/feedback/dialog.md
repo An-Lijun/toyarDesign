@@ -89,7 +89,7 @@ const tableData = [
 </div>
 
 <script setup>
-  import {ref} from 'vue'
+import {ref} from 'vue'
 let isShow1 =ref(false)
 let isShow2 =ref(false)
 const columns = [

@@ -1,3 +1,4 @@
+import { version } from '../../package.json'
 
 import './assets/index.scss'
 import '../package/icon/toyaricon.css'
@@ -65,7 +66,9 @@ import TyAvatarGroup from './components/avatar-group'
 import {TyThemeChange} from './hooks/changeTheme'
 import TyScrollBar from './components/scrollbar'
 import TySIcon from './components/sIcon'
-
+import TyLogConsole from './components/logConsole'
+import TyAffix from './components/affix'
+import TyCircle from './components/circle'
 
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
@@ -125,9 +128,10 @@ const install = app => {
     app.use(TyAvatar),
     app.use(TyAvatarGroup),
     app.use(TyScrollBar),
-    app.use(TySIcon)
-
-    
+    app.use(TySIcon),
+    app.use(TyLogConsole),
+    app.use(TyAffix),
+    app.use(TyCircle)
   }
   // app.use(TyTrigger)
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
@@ -136,7 +140,7 @@ document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
 
 
 export default {
-  version: '0.0.1',
+  version,
   install
 } //全量引入
 
@@ -206,6 +210,9 @@ export {
   TySpace,
   TyAvatar,TyAvatarGroup,
   TyScrollBar,
-  TySIcon
+  TySIcon,
+  TyLogConsole,
+  TyAffix,
+  TyCircle
 } //按需引入
 // TyTrigger,

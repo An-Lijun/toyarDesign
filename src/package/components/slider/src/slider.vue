@@ -37,8 +37,6 @@ let x = 0;
 let maxWidth =0
 
 const move=(e)=>{
-  e.preventDefault();
-  
     let moveX = e.pageX - x;
     moveX= moveX>=maxWidth?maxWidth:moveX
     moveX= moveX<=0?0 : moveX 
@@ -48,6 +46,7 @@ const move=(e)=>{
     tyboll.value.style.left = moveX + "px";
 }
 const slider =(e)=>{
+  e.preventDefault();
   x = e.pageX - tyboll.value.offsetLeft;
   if(document){
     document?.addEventListener("mousemove", move)

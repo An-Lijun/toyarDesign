@@ -1,12 +1,14 @@
 import { createVNode, render, nextTick, h } from 'vue'
 
+import {is} from '../../utils/is'
 import dialog from '../dialog/src/dialog.vue'
 import TyButton from '../button/src/button.vue'
 import TyIcon from '../icon/src/icon.vue'
-import { TY_MOOD, TY_MOOD_LS } from '../../constant/index'
+import { TY_MOOD } from '../../constant/index'
 
 import type { IOption} from './type'
 import {defaultDialogOptions, dialogIconMap} from './content'
+
 const genOptions = (options: IOption) => {
   let footerBtn = []
   if (options.sure) {
@@ -16,7 +18,7 @@ const genOptions = (options: IOption) => {
         {
           state: TY_MOOD[options.type],
           onClick:  () => { 
-            options.sure && options.sure.code && typeof options.sure.code === 'function' && options.sure.code()
+            options?.sure?.code && is(options.sure.code,'function') && options.sure.code()
           }
         },
         options.sure.text || '确认'
@@ -31,7 +33,7 @@ const genOptions = (options: IOption) => {
           type: 'secondary',
           state: TY_MOOD[options.type],
           onClick: () => { 
-            options.cancel &&  options.cancel.code && typeof options.cancel.code === 'function' &&options.cancel.code 
+            options?.cancel?.code && is(options.cancel.code,'function') && options.cancel.code()
           }
         },
         options.cancel.text || '取消'
@@ -87,7 +89,6 @@ const createAlert = (info: string, options: IOption, div: HTMLDivElement) => {
       ),
       default: () => info,
       footer: () => footer,
-
     }
   )
 }
@@ -96,9 +97,6 @@ export default function AlertJs(
   info: string,
   options: IOption
 ) {
-  if (Object.prototype.toString.call(info) !== '[object String]') {
-    throw new Error(`info:${info} is not a string`)
-  }
   const div = document.createElement('div')
     const instance = createAlert(info, Object.assign(defaultDialogOptions, options), div)
     render(instance, div)

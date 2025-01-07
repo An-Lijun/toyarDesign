@@ -16,8 +16,11 @@
       </TyTable>
     </TyDialog>
     <TyButton @click="openDialog">js函数打开</TyButton>
+    <hr>
 
     <TyButton @click="openDialogRender">js函数+render打开</TyButton>
+    <hr>
+    <TyButton @click="openDialogRender2">js函数+render2内容打开</TyButton>
 
   </div>
 </template>
@@ -91,6 +94,26 @@ const openDialogRender =()=>{
       code:()=>{
         console.log('点击了取消')
       }
+    }
+  })
+}
+
+const openDialogRender2 =()=>{
+  TyAlert(h('a',{style:{color:'red'}},'666666'),{
+    title: h(
+        TyButton,
+        {
+          state: 'primary',
+          onClick: (() => { })
+        },
+        '确认'
+      ),
+    type:'error',
+    sure:{
+      text:'确定',
+      code:()=>{
+        console.log('点击了确定')
+     }
     }
   })
 }
