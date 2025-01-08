@@ -8,6 +8,9 @@ export const affixProps = buildProps({
   },
   offsetBottom: {
     type: Number
+  },
+  target:{
+    type:Element,
   }
 })
 // "circle" //square

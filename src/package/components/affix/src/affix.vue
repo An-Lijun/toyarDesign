@@ -1,6 +1,6 @@
 <template>
     <div ref="affixRef">
-        <div :class="[nm.b(), nm.is('fixed', glAffix)]" :style="styles">
+        <div :class="[nm.b(), nm.is('fixed', isFixed)]" :style="styles">
             <slot></slot>
         </div>
     </div>
@@ -16,9 +16,9 @@ defineOptions({
 
 const props = defineProps(affixProps)
 const affixRef = ref()
-let glAffix = ref(false)
+let isFixed = ref(false)
 let styles = ref({})
-
+const targetDom = props.target||window
 const getScrollVal = (target, top) => {
     let val = target[top ? 'pageYOffset' : 'pageXOffset'];
     if (typeof val !== 'number') {
@@ -40,56 +40,63 @@ const offsetType = computed(() => {
     return props.offsetBottom >= 0 ? 'bottom' : 'top';
 });
 
+const setIsFixed = (value) => {
+    isFixed.value = value;
+}
 const handleScroll = () => {
-    let affix = glAffix.value
-    const scrollTop = getScrollVal(window, true); // window.pageYOffset（ 滚动条距离顶部的偏移量 ）
-    const { top: elOffsetTop, left: elOffsetLeft } = getOffsetVal(affixRef.value); // 获取元素原始的 top left
-    const windowHeight = window.innerHeight; // 获取窗口大小
-    const elHeight = affixRef.value.offsetHeight; // 获取当前元素的height
+    let nowIsFixed = isFixed.value
+    const scrollTop = getScrollVal(window, true);
+    const { top: elOffsetTop, left: elOffsetLeft } = getOffsetVal(affixRef.value);
+    const windowHeight = window.innerHeight;
+    const elHeight = affixRef.value.offsetHeight;
     const offsetTop = props.offsetTop
     const offsetBottom = props.offsetBottom
 
     switch (offsetType.value) {
         case 'top':
-            if (elOffsetTop - offsetTop <= scrollTop && !affix) {
-                glAffix.value = true;
+            if (elOffsetTop - offsetTop <= scrollTop && !nowIsFixed) {
+                setIsFixed(true)
                 styles.value = {
                     top: `${offsetTop}px`,
                     left: `${elOffsetLeft}px`
                 };
-            } else if (elOffsetTop - offsetTop > scrollTop && affix) {
-                glAffix.value = false;
-                styles.value = null;
+            } else if (elOffsetTop - offsetTop > scrollTop && nowIsFixed) {
+                isFixed.value = false;
+                setIsFixed(false)
+                styles.value = {};
             }
             break;
         case 'bottom':
-            if (elOffsetTop + offsetBottom + elHeight > scrollTop + windowHeight && !affix) {
-                glAffix.value = true;
+            if (elOffsetTop + offsetBottom + elHeight > scrollTop + windowHeight && !nowIsFixed) {
+                setIsFixed(true)
                 styles.value = {
                     bottom: `${offsetBottom}px`,
                     left: `${elOffsetLeft}px`
                 };
-            } else if (elOffsetTop + offsetBottom + elHeight < scrollTop + windowHeight && affix) {
-                glAffix.value = false;
-                styles.value = null;
+            } else if (elOffsetTop + offsetBottom + elHeight < scrollTop + windowHeight && nowIsFixed) {
+                setIsFixed(false)
+                styles.value = {};
             }
     }
 }
 
 onMounted(() => {
     handleScroll()
-    on(window, 'scroll', handleScroll);
-    on(window, 'resize', () => {
+    console.log(props.target);
+    
+    on(targetDom, 'scroll', handleScroll);
+    on(targetDom, 'resize', () => {
         if (getOffsetVal(affixRef.value).top - props.offsetTop <= getScrollVal(window, true)) {
-            glAffix.value = false;
+            isFixed.value = false;
+            setIsFixed(false)
         }
         handleScroll();
     });
 })
 
 onBeforeUnmount(() => {
-    off(window, 'scroll', handleScroll);
-    off(window, 'resize', handleScroll);
+    off(targetDom, 'scroll', handleScroll);
+    off(targetDom, 'resize', handleScroll);
 })
 
 
