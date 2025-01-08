@@ -3,7 +3,7 @@
     height: height + 'px',
   }">
     <div ref="contentRef" :class="nm.e('content')">
-      <div v-for="(item, inx) in showLogs" :key="inx" :class="nm.e(item.type)" v-html="itemContent(item)"></div>
+      <div v-for="(item, inx) in logArr" :key="inx" :class="nm.e(item.type)" v-text="itemContent(item)"></div>
     </div>
     <div v-if="isClear" :class="nm.e('footer')">
       <slot name="footer">
@@ -21,44 +21,27 @@ defineOptions({
 });
 const props = defineProps(logProps);
 const contentRef = ref()
-let showLogs = ref([]);
-
+let logArr = ref([]);
 
 const log = (data) => {
-  showLogs.value.push(data)
+  logArr.value.push(data)
   if (contentRef.value) {
     contentRef.value.scrollTop = contentRef.value.scrollHeight;
   }
 }
 
-
 const handlerClear = () => {
-  showLogs.value = [];
+  logArr.value = [];
 };
 const itemContent = (item) => {
-  let pre = null;
-  let custom = "";
+  let pre = '';
   if (item.custom) {
-    custom = "【" + item.custom + "】";
+    pre = "【" + item.custom + "】"
+  } else if (['warn', 'error', 'debugger'].includes(item.type.toLowerCase(0))) {
+    pre = "【" + item.type.toUpperCase() + "】";
   } else {
-    switch (item.type.toLowerCase(0)) {
-      case "custom":
-        pre = custom;
-        break;
-      case "warn":
-        pre = "【WARN】";
-        break;
-      case "error":
-        pre = "【ERROR】";
-        break;
-      case "debugger":
-        pre = "【DEBUGGER】";
-        break;
-      default:
-        pre = "【INFO】";
-    }
+    pre = "【INFO】";
   }
-
   return pre + " " + item.info;
 };
 
