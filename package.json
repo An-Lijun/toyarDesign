@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@vuepress/plugin-register-components": "^2.0.0-rc.15",
+    "robinson": "^1.0.10",
     "vue": "^3.4.31",
     "xss": "^1.0.15"
   },

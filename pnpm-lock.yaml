@@ -11,6 +11,9 @@ importers:
       '@vuepress/plugin-register-components':
         specifier: ^2.0.0-rc.15
         version: 2.0.0-rc.15(vuepress@2.0.0-rc.8(typescript@5.0.2)(vue@3.4.31(typescript@5.0.2)))
+      robinson:
+        specifier: ^1.0.10
+        version: 1.0.10
       vue:
         specifier: ^3.4.31
         version: 3.4.31(typescript@5.0.2)
@@ -707,6 +710,9 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
+  big.js@6.2.2:
+    resolution: {integrity: sha512-y/ie+Faknx7sZA5MfGA2xKlu0GDv8RWrXGsmlteyJQ2lvoKv9GBK/fpRMc2qlSoBAgNxrixICFCBefIq8WCQpQ==}
+
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
@@ -746,6 +752,9 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
+
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
@@ -1047,6 +1056,9 @@ packages:
   reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+
+  robinson@1.0.10:
+    resolution: {integrity: sha512-01V7fYTKHae6X9o+t+pIqHdsuVWIP2AkVHmRCs+ig0jh4rDdCscfmG6B+NMlyxIguiU1TOnSIA/vH1IUvDDJNQ==}
 
   rollup@3.29.4:
     resolution: {integrity: sha512-oWzmBZwvYrU0iJHtDmhsm662rC15FRXmcjCk1xD771dFDx5jJ02ufAQQTn0etB2emNk4J9EZg/yWKpsn9BWGRw==}
@@ -1961,6 +1973,8 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
+  big.js@6.2.2: {}
+
   binary-extensions@2.3.0: {}
 
   brace-expansion@2.0.1:
@@ -1998,6 +2012,8 @@ snapshots:
   cssfilter@0.0.10: {}
 
   csstype@3.1.3: {}
+
+  dayjs@1.11.13: {}
 
   de-indent@1.0.2: {}
 
@@ -2311,6 +2327,11 @@ snapshots:
       signal-exit: 3.0.7
 
   reusify@1.0.4: {}
+
+  robinson@1.0.10:
+    dependencies:
+      big.js: 6.2.2
+      dayjs: 1.11.13
 
   rollup@3.29.4:
     optionalDependencies:

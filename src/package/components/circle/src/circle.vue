@@ -7,7 +7,12 @@
     <svg viewBox="0 0 100 100">
       <path :d="pathString" :stroke="trailColor" :stroke-width="trailWidth" :fill-opacity="0" />
       <path :d="pathString" :stroke-linecap="strokeLinecap" :stroke="colors" :stroke-width="strokeWidth"
-        fill-opacity="0" :style="pathStyle" />
+        fill-opacity="0" :style="{
+          strokeDasharray: `${Math.PI * 2 * radius}px ${Math.PI * 2 * radius}px`,
+          strokeDashoffset: `${((100 - percent) / 100) * Math.PI * 2 * radius}px`,
+          transition : 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease'
+        }" />
+   
     </svg>
     <div :class="nm.e('inner')">
       <slot></slot>
@@ -33,20 +38,7 @@ const pathString = computed(() => {
         a ${radius.value},${radius.value} 0 1 1 0,-${2 * radius.value}`;
 });
 
-const len = computed(() => {
-  return Math.PI * 2 * radius.value;
-})
-
-
-const pathStyle = computed(() => {
-  return {
-    'stroke-dasharray': `${len.value}px ${len.value}px`,
-    'stroke-dashoffset': `${((100 - props.percent) / 100) * len.value}px`,
-    transition: 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease'
-  };
-})
 const changeColor = () => {
-  // ie firefox 起始样式兼容处理 bug 65986
   colors.value = props.strokeColor;
   if (props.percent == 0) {
     colors.value = props.trailColor;
