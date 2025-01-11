@@ -1,72 +1,88 @@
 <template>
-  <div :class="[nm.e('box')]">
-    <header>
-      <div :class="[nm.e('com')]">
-        <div :class="[nm.e('sel')]">
-          <div class="lastYear" @click="lastYear">
-            <TyIcon icon="ty-arrow-left-double-line" />
+  <div :class="[nm.b()]">
+    <header :class="nm.e('header')">
+      <slot name="controller">
+        <div :class="[nm.e('com')]">
+          <div :class="[nm.e('sel')]">
+            <div class="lastYear" @click="lastYear">
+              <TyIcon icon="ty-arrow-left-double-line" />
+            </div>
+            <div class="lastMonth" @click="lastMonth">
+              <TyIcon icon="ty-arrow-left-s-line" />
+            </div>
+            <div class="nowDate">{{ nowDate }}</div>
+            <div class="nextMonth" @click="nextMonth">
+              <TyIcon icon="ty-arrow-right-s-line" />
+            </div>
+            <div class="nextYear" @click="nextYear">
+              <TyIcon icon="ty-arrow-right-double-line" />
+            </div>
           </div>
-          <div class="lastMonth" @click="lastMonth">
-            <TyIcon icon="ty-arrow-left-s-line" />
-          </div>
-          <div class="nowDate">{{ nowDate }}</div>
-          <div class="nextMonth" @click="nextMonth">
-            <TyIcon icon="ty-arrow-right-s-line" />
-          </div>
-          <div class="nextYear" @click="nextYear">
-            <TyIcon icon="ty-arrow-right-double-line" />
-          </div>
-
+          <TyButton type="text" @click="goTday">今天</TyButton>
         </div>
-        <TyButton type="text" @click="goTday">今天</TyButton>
-
-
-      </div>
-      <div :class="[nm.e('week')]">
-        <div v-for="(item, index) in weekArr" :key="index" class="weekItem">
-          {{ item }}
-        </div>
-      </div>
+      </slot>
     </header>
-    <main>
-      <div v-for="(item, index) in befMonth" :key="index" class="dis day">
-        <span class="date">{{ item }}</span>
-        <slot :day="`${nowStr}-${item}`"></slot>
+    <div :class="[nm.e('week')]">
+      <div v-for="(item, index) in weekArr" :key="index" class="weekItem">
+        {{ item }}
       </div>
-      <div v-for="(item, index) in nowMonth" :key="index" class="day" @click="selectDay(item)"
-       :class="{ 'today-date': `${nowStr}-${item}` ==  nowDateStr}"
-      > 
-        <span class="date">{{ `${nowStr}-${item}` ==  nowDateStr ? '今' :item }}</span>
-        <slot :day="`${nowStr}-${item}`"></slot>
+    </div>
 
+    <main :class="[nm.e('main')]">
+      <!-- 上个月 -->
+      <div v-for="(item, index) in befMonth" :key="index" class="dis dayItem" :style="{
+        height: dayItemHeight + 'px'
+      }">
+        <slot name="dayItem" :data="{ day: `${nowMonthStr}-${padZero(item)}`, type: 'before' }">
+          <span class="date">{{ item }}</span>
+        </slot>
       </div>
-      <div v-for="(item, index) in aftMonth" :key="index" class="dis day">
-        <span class="date">{{ item }}</span>
-        <slot :day="`${nowStr}-${item}`"></slot>
 
+      <!-- 本月  -->
+      <div v-for="(item, index) in nowMonth" :key="index" class="dayItem" @click="selectDay(item)" :class="{
+        'today-date': `${nowMonthStr}-${padZero(item)}` == nowDateStr
+      }">
+        <slot name="dayItem" :data="{ day: `${nowMonthStr}-${padZero(item)}`, type: 'now' }">
+          <span class="date">{{
+            `${nowMonthStr}-${padZero(item)}` == nowDateStr ? '今' : item
+          }}</span>
+        </slot>
+      </div>
+
+      <!-- 下个月 -->
+      <div v-for="(item, index) in aftMonth" :key="index" class="dis dayItem">
+        <slot name="dayItem" :data="{ day: `${nowMonthStr}-${padZero(item)}`, type: 'after' }">
+          <span class="date">{{ item }}</span>
+        </slot>
       </div>
     </main>
   </div>
 </template>
-<script setup lang='ts' name="TyCalendar">
+<script setup lang="ts" name="TyCalendar">
 import { calendarProp, calendarEmit, nm } from './context'
-import { ref } from 'vue';
-import type {Ref} from 'vue'
+import { ref } from 'vue'
+import { formatDate } from 'robinson'
+import type { Ref } from 'vue'
+
 defineOptions({
   name: 'TyCalendar'
 })
- defineProps(calendarProp)
+defineProps(calendarProp)
 const emit = defineEmits(calendarEmit)
 
-const weekArr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 const countDate = [new Date().getFullYear(), new Date().getMonth()]
 let nowDate = ref('')
-let nowStr = ref('')
-let befMonth:Ref<Array<number>> = ref([])
+let nowMonthStr = ref('')
+let befMonth: Ref<Array<number>> = ref([])
 let nowMonth = ref(0)
 let aftMonth = ref(0)
 
-let nowDateStr = formatTime(new Date(), 'yyyy-MM-dd')
+const weekArr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+let nowDateStr = formatDate(new Date())
+
+const padZero = (num: number) => {
+  return String(num).padStart(2, '0')
+}
 const render = (dateArr: Array<any>) => {
   // 1.获取当前年月日
   let date = new Date(dateArr[0], dateArr[1])
@@ -74,8 +90,7 @@ const render = (dateArr: Array<any>) => {
   let month = date.getMonth()
   // 2.展示当前年月日
   nowDate.value = `${dateArr[0]}年 ${dateArr[1] + 1}月`
-  nowStr.value = `${dateArr[0]}-${String(dateArr[1] + 1).padStart(2, '0')}`
-
+  nowMonthStr.value = `${dateArr[0]}-${padZero(dateArr[1] + 1)}`
 
   // 3.计算上个月展示几天
   befMonth.value = []
@@ -98,8 +113,8 @@ const lastYear = () => {
   countDate[0] = countDate[0] - 1
   render(countDate)
 }
-const goTday=()=>{
-  render([new Date().getFullYear(), new Date().getMonth()]) 
+const goTday = () => {
+  render([new Date().getFullYear(), new Date().getMonth()])
 }
 const lastMonth = () => {
   if (countDate[1] === 0) {
@@ -123,160 +138,144 @@ const nextYear = () => {
   countDate[0] = countDate[0] + 1
   render(countDate)
 }
-const selectDay = (day: number) => {
-  let data = `${countDate[0]}-${String(countDate[1] + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+const selectDay = (dayItem: number) => {
+  let data = `${countDate[0]}-${String(countDate[1] + 1).padStart(
+    2,
+    '0'
+  )}-${String(dayItem).padStart(2, '0')}`
   emit('click', data)
 }
 
+defineExpose({
+  lastYear,
+  lastMonth,
+  nextMonth,
+  nextYear,
+  goTday,
+  getNowDate: () => nowDate.value
 
-function formatTime(timestamp: string | Date, fmtString: string) {
-  // yyyy-MM-dd hh:mm:ss
-  let result = fmtString;
-  const date = new Date(timestamp);
-  const dateObj: any = {
-    'y+': date.getFullYear(),
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
-    'h+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds()
-  };
-  for (const key in dateObj) {
-    const keyRe = new RegExp(key);
-    //如果有这个校验规则,
-    if (keyRe.test(result)) {
-      const value = `${dateObj[key]}`.padStart(2, '0');
-      result = result.replace(keyRe, value);
-    }
-  }
-  return result;
-}
-
+})
 
 </script>
 
 <style lang="scss" scoped>
 .ty-calendar {
   border-radius: var(--border-radius-4);
+  width: 100%;
+  z-index: 5;
+  border: var(--border-1) solid var(--fill-3);
+  background-color: var(--color-bg-5);
+  border-radius: var(--border-radius-4);
+  color: var(--text-1);
+  padding: 25px;
+  box-sizing: border-box;
+  user-select: none;
   min-width: 500px;
   color: var(--text-1);
-  display: flex;
-  user-select: none;
 
-  &__box {
-    width: 100%;
-    z-index: 5;
-    border: var(--border-1) solid var(--fill-3);
-    background-color: var(--color-bg-5);
-    // --bg-5
-    border-radius: var(--border-radius-4);
-    user-calendar: none;
-    color: var(--text-1);
-    box-sizing: border-box;
-    padding: 25px;
-    box-sizing: border-box;
-
-    header {
-      .ty-calendar__com {
-        display: flex;
-        justify-content: space-between;
-        padding: 15px 0px;
-
-        .ty-calendar__sel{
-          i:not(.nowDate):hover {
-            color: var(--primary-6) !important;
-            cursor: pointer;
-          }
-        }
-
-      }
+  &__header {
+    .ty-calendar__com {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0px;
 
       .ty-calendar__sel {
-        display: flex;
-        width: 40%;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .ty-calendar__week {
-        font-size: var(--font-body-1);
-        padding-bottom: 5px;
-        margin-bottom: 5px;
-        div {
-          display: inline-block;
-          width: calc(100% / 7);
-          text-align: right;
-          box-sizing: border-box;
-          padding-right: 5px;
+        i:not(.nowDate):hover {
+          color: var(--primary-6) !important;
+          cursor: pointer;
         }
       }
     }
 
-    main {
-      box-sizing: border-box;
+    .ty-calendar__sel {
       display: flex;
-      flex-wrap: wrap;
+      width: 40%;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .day {
+
+  }
+
+  &__week {
+    font-size: var(--font-body-1);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+
+    div {
+      display: inline-block;
+      width: calc(100% / 7);
+      text-align: right;
+      box-sizing: border-box;
+      padding-right: 5px;
+    }
+  }
+
+  &__main {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+
+    .dayItem {
+      display: inline-block;
+      width: calc(100% / 7);
+      min-height: 110px;
+      text-align: center;
+      // border-radius: var(--border-radius-4);
+      border-left: 1px solid var(--toyar-gray-3);
+      border-top: 1px solid var(--toyar-gray-3);
+      box-sizing: border-box;
+      position: relative;
+
+      .date {
         display: inline-block;
-        width: calc(100% / 7);
-        min-height: 110px;
+        height: 25px;
+        width: 25px;
         text-align: center;
-        // border-radius: var(--border-radius-4);
-        border-left: 1px solid var(--toyar-gray-3);
-        border-top: 1px solid var(--toyar-gray-3);
-        box-sizing: border-box;
-        position: relative;
+        line-height: 25px;
+        border-radius: var(--border-radius-circle);
+        position: absolute;
+        font-size: 12px;
+        top: 5px;
+        right: 5px;
+      }
 
-        .date {
-          display: inline-block;
-          height: 25px;
-          width: 25px;
-          text-align: center;
-          line-height: 25px;
-          border-radius: var(--border-radius-circle);
-          position: absolute;
-          font-size: 12px;
-          top: 5px;
-          right: 5px;
-        }
+      &:hover {
+        cursor: pointer;
 
-        &:hover {
-          cursor: pointer;
-
-          span {
-            color: #fff;
-            background-color: var(--primary-6);
-          }
-        }
-        &.today-date span{
+        span {
           color: #fff;
           background-color: var(--primary-6);
         }
       }
 
-      .dis {
-        color: var(--text-4);
+      &.today-date span {
+        color: #fff;
+        background-color: var(--primary-6);
+      }
+    }
 
-        &:hover {
-          cursor: not-allowed;
-          
-          span {
-            color: var(--text-4);
-            background-color: unset;
-          }
+    .dis {
+      color: var(--text-4);
+
+      &:hover {
+        cursor: not-allowed;
+
+        span {
+          color: var(--text-4);
+          background-color: unset;
         }
       }
+    }
 
-      .day.day:nth-child(7n - 6) {
-        // background-color: red;
-        border-left: unset;
-      }
+    .dayItem.dayItem:nth-child(7n - 6) {
+      // background-color: red;
+      border-left: unset;
+    }
 
-      .day.day:nth-child(7n) {
-        // background-color: red;
-        border-right: unset;
-      }
+    .dayItem.dayItem:nth-child(7n) {
+      // background-color: red;
+      border-right: unset;
     }
   }
 }

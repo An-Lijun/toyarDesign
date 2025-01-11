@@ -1,7 +1,13 @@
 <template>
   <label :class="[nm.b(), nm.is('harf', canHarf), nm.is('disabled', disabled)]">
-    <input type="checkbox" @click="handleChange" :disabled="disabled" v-model="model" :value="value"
-      :class="[nm.m(size)]" />
+    <input type="checkbox" hidden @click="handleChange" :disabled="disabled" v-model="model" :value="value" />
+    <div :class="[nm.e('out'),nm.m(size)]">
+      <div :class="[nm.e('input')]">
+        <TyIcon icon="ty-subtract-line" :class="nm.e('icon')" v-if="canHarf"></TyIcon>
+        <TyIcon icon="ty-check-line" :class="nm.e('icon')" v-else>
+        </TyIcon>
+      </div>
+    </div>
     <span :class="[nm.e('container')]">
       <slot />
     </span>
@@ -23,7 +29,7 @@ const props = defineProps(checkProps)
 const emit = defineEmits(checkEmits)
 const model = defineModel('modelValue', {
   required: true,
-  type: [Boolean,Array]
+  type: [Boolean, Array]
 })
 
 const tyForm = inject(formContent, null) as {
@@ -80,7 +86,7 @@ if (tyCheckBoxGroup) {
 }
 
 const handleChange = () => {
-  
+
   if (tyCheckBoxGroup) {
     setTimeout(() => {
       tyCheckBoxGroup.emitChange(props.value)
@@ -99,15 +105,37 @@ const handleChange = () => {
   user-select: none;
   color: var(--text-1);
 
-  input {
+  &__icon {
+    display: none;
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__out {
+    border-radius: var(--border-radius-circle);
+    margin-right: 10px;
+    transition: background-color 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--fill-3);
+    }
+  }
+
+  &__input {
     appearance: none;
     border-radius: var(--border-radius-4);
-    background-color: var(--fill-2);
+    // background-color: var(--fill-2);
+    border: 2px solid var(--fill-2);
     text-align: center;
     margin: unset;
     box-sizing: border-box;
     position: relative;
-    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 
     &:hover {
       cursor: pointer;
@@ -116,75 +144,64 @@ const handleChange = () => {
 
   // ------------------------  checkBox尺寸样式  ------------------------
   $inputSize: (
-    mini,
-    small,
-    medium,
-    large
+    mini:5,
+    small:8,
+    medium:11,
+    large:14
   );
-  &__container{
-    margin-right: 10px;
-  }
 
-@mixin addCheckBoxSize($name) {
+&__container {
+  margin-right: 10px;
+}
+
+@mixin addCheckBoxSize($name,$value) {
   &--#{$name} {
-    height: var(--size-#{$name});
-    width: var(--size-#{$name});
-    line-height: var(--size-#{$name});
-    font-size: calc(var(--size-#{$name}) / 2);
+    .ty-check-box__input {
+      height: var(--size-#{$name});
+      width: var(--size-#{$name});
+      line-height: var(--size-#{$name});
+      font-size: calc(var(--size-#{$name}) / 2);
+    }
+    padding: #{$value}px;
   }
 }
 
-@each $name in $inputSize {
-  @include addCheckBoxSize($name);
+@each $name,$value in $inputSize {
+  @include addCheckBoxSize($name,$value);
 }
 
-input[type='checkbox']:checked {
-  background-color: var(--primary-6);
+input:checked+.ty-check-box__out {
+  background-color: unset !important;
 
-  &::after {
-    box-sizing: border-box;
-    content: '✔';
-    color: white;
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  .ty-check-box__input {
+    background-color: var(--primary-6);
     display: flex;
-    align-items: center;
     justify-content: center;
-  }
-}
+    align-items: center;
+    border-color: var(--primary-6);
 
-&.is-harf {
-  input[type='checkbox']:checked::after {
-    box-sizing: border-box;
-    content: '—';
-    color: white;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .ty-check-box__icon {
+      display: inline-flex;
+      position: absolute;
+    }
+
   }
 }
 
 &.is-disabled {
   color: var(--text-4);
 
-  input {
+  .ty-check-box__input {
     background-color: var(--fill-3);
-
-    &::after {
-      color: var(--text-4) !important;
-    }
-
-    &[type='checkbox']:checked {
-      background-color: var(--primary-3);
-    }
+    border-color: var(--fill-3);
 
     &:hover {
       cursor: not-allowed;
     }
+  }
+
+  .ty-check-box__out {
+    background: unset;
   }
 }
 }

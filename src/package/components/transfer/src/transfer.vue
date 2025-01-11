@@ -95,7 +95,7 @@ const model = defineModel('modelValue',{
   type:Array
 })
 
-const style = '--size-mini:15px;--fill-2:var(--fill-4)'
+const style = '--border-radius-4:2px;--size-mini:15px;--fill-2:var(--fill-4)'
 
 const data = ref(props.data)
 
@@ -223,6 +223,11 @@ const rightHarf = computed(() => {
       height: 30px;
       background-color: var(--fill-2);
       margin: 5px 0;
+    }
+  }
+  ::v-deep .ty-check-box {
+    input::after {
+      border-width: 1px;
     }
   }
 }

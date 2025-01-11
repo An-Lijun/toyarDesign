@@ -2,13 +2,25 @@ import buildProps from '../../../utils/buildProps';
 import useNmSpace from '../../../hooks/useBem';
 
 export const carProps =buildProps({
-  showIndicator:{
-    type:Boolean,
-    default:true
-  },
+
   interval:{
     type:Number,
     default:3000
+  },
+
+  arrowMode:{
+    type:String,
+    default:'hover',
+    values:['hover','always','never']
+  },
+  easing:{
+    type:String,
+    default:'ease',
+    // values:['ease','linear','ease-in','ease-out','ease-in-out']
+  },
+  isAutoPlay:{
+    type:Boolean,
+    default:true
   }
 })
 

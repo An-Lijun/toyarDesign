@@ -2,8 +2,8 @@
   <i
     :class="['toyar', nm.b(), icon]"
     :style="{
-      fontSize: props.size > 0 ? size + 'px' : 'unset',
-      color: color?color :'var(--toyar-gray-10)'
+      fontSize: size > 0 ? size + 'px' : 'unset',
+      color: color?color :''
     }"
   >
   </i>
@@ -18,6 +18,9 @@ const props = defineProps(iconProps)
 <style lang="scss" scoped>
 .ty-icon {
   font-size: 1em;
-  color: var(--toyar-gray-10);
+  color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

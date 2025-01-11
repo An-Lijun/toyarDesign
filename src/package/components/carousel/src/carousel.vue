@@ -1,49 +1,40 @@
 <template>
-  <div
-    :class="nm.b()"
-    ref="carousel"
-    @mouseenter.prevent="carouselEnter"
-    @mouseleave.prevent="carouselLeave"
-  >
-    <ul
-      :style="{
-        transform: `translateX(${width}px)`
-      }"
-    >
+  <div :class="nm.b()" ref="carousel" @mouseenter.prevent="carouselEnter" @mouseleave.prevent="carouselLeave">
+    <ul :style="{
+      transform: `translateX(${width}px)`,
+      transition: `transform 0.5s ${easing}`
+    }">
       <slot> </slot>
     </ul>
 
-    <div :class="nm.e('leftIndicator')" @click="toLeft" v-if="showIndicator"></div>
-    <div :class="nm.e('rightIndicator')" @click="toRight" v-if="showIndicator"></div>
+    <div :class="nm.e('leftIndicator')" @click="toLeft" v-if="isShowArrow"></div>
+    <div :class="nm.e('rightIndicator')" @click="toRight" v-if="isShowArrow"></div>
     <div :class="nm.e('indicators')">
       <slot name="indicator">
-        <li
-          v-for="(, index) in list"
-          :class="{
-            active: index === now
-          }"
-        ></li>
+        <li v-for="(, index) in list" :key="index" :class="{
+          active: index === now
+        }"></li>
       </slot>
     </div>
   </div>
 </template>
 <script setup lang='ts' name="TyCarousel">
-import { onMounted, ref, provide, watch } from 'vue'
-import {carouselContent} from '../../../hooks/symbolNm'
-import {carProps,nm} from './context'
-import type {Ref} from 'vue'
+import { onMounted, ref, provide, watch, computed } from 'vue'
+import { carouselContent } from '../../../hooks/symbolNm'
+import { carProps, nm } from './context'
+import type { Ref } from 'vue'
 defineOptions({
-  name:'TyCarousel'
+  name: 'TyCarousel'
 })
 const props = defineProps(carProps)
 
 const carousel = ref()
 let baseWidth = 0
 let width = ref(0)
-let list:Ref<Array<string>> = ref([])
-
+let list: Ref<Array<string>> = ref([])
 let now = ref(0)
-let timmer:null|NodeJS.Timeout  = null
+let timmer: null | NodeJS.Timeout = null
+let isHower = ref(false)
 const start = () => {
   return setInterval(() => {
     now.value++
@@ -52,28 +43,48 @@ const start = () => {
     }
   }, props.interval)
 }
-const carouselEnter = () => clearInterval((timmer as NodeJS.Timeout))
-const carouselLeave = () => timmer = start()
-const toLeft = () => now.value =  now.value === 0?list.value.length - 1: now.value-1
-const toRight = () => now.value = now.value=== list.value.length - 1? 0: now.value+1
-
+const carouselEnter = () => {
+  isHower.value = true
+  if (!props.isAutoPlay) return
+  clearInterval((timmer as NodeJS.Timeout))
+}
+const carouselLeave = () => {
+  isHower.value = false
+  if (!props.isAutoPlay) return
+  timmer = start()
+}
+const toLeft = () => now.value = now.value === 0 ? list.value.length - 1 : now.value - 1
+const toRight = () => now.value = now.value === list.value.length - 1 ? 0 : now.value + 1
+const isShowArrow = computed(() => {
+  switch (props.arrowMode) {
+    case 'always':
+      return true
+    case 'hover':
+      return isHower.value
+    default:
+      return false
+  }
+})
 watch(now, () => {
   width.value = -(now.value * baseWidth)
 })
 
 onMounted(() => {
   baseWidth = carousel.value.getBoundingClientRect().width
+  console.log(props.isAutoPlay);
+  
+  if (!props.isAutoPlay) return
   timmer = start()
 })
 const setItem = () => {
   list.value.push(String(list.value.length))
 }
 
-const provideCarousel ={
+const provideCarousel = {
   setItem
 }
 export type ProvideCarousel = typeof provideCarousel
-provide(carouselContent,provideCarousel)
+provide(carouselContent, provideCarousel)
 </script>
 <style lang="scss" scoped>
 .ty-carousel {
@@ -83,6 +94,7 @@ provide(carouselContent,provideCarousel)
   justify-content: center;
   align-items: center;
   position: relative;
+
   ul {
     display: flex;
     flex-shrink: 0;
@@ -92,6 +104,7 @@ provide(carouselContent,provideCarousel)
     padding: unset;
     transition: all 0.5s;
   }
+
   &__leftIndicator {
     width: 30px;
     height: 40px;
@@ -102,11 +115,13 @@ provide(carouselContent,provideCarousel)
     border-radius: 50% 0 0 50%;
     background-color: rgba(0, 0, 0, 0.2);
     transition: all 0.5s;
+
     &:hover {
       background: #000;
       cursor: pointer;
     }
   }
+
   &__rightIndicator {
     width: 30px;
     height: 40px;
@@ -117,15 +132,18 @@ provide(carouselContent,provideCarousel)
     border-radius: 0 50% 50% 0;
     background-color: rgba(0, 0, 0, 0.2);
     transition: all 0.5s;
+
     &:hover {
       background: #000;
       cursor: pointer;
     }
   }
+
   &__indicators {
     position: absolute;
     bottom: 10px;
     display: flex;
+
     li {
       list-style: none;
       padding: unset;
@@ -135,6 +153,7 @@ provide(carouselContent,provideCarousel)
       height: 10px;
       margin: 0 5px;
       background-color: rgba(255, 255, 255, 0.3);
+
       &.active {
         background-color: rgba(255, 255, 255, 0.9);
       }
