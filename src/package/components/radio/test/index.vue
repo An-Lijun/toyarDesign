@@ -11,8 +11,8 @@
     <button @click="isC=2">123</button>
     <TyRadioGroup v-model="isC" @change="(val)=>{console.log('change',val)}">
       <TyRadio  :value="1" size="mini">123</TyRadio>
-      <TyRadio  :value="2" size="small">456</TyRadio>
-      <TyRadio  :value="3" size="small">456</TyRadio>
+      <TyRadio  :value="2" size="small" disabled>456</TyRadio>
+      <TyRadio  :value="3" size="small" disabled>456</TyRadio>
     </TyRadioGroup>
     <hr>
 

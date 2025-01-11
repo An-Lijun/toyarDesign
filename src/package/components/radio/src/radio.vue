@@ -75,11 +75,11 @@ const handleChange = () => {
   input {
     appearance: none;
     border-radius: var(--border-radius-circle);
-    border: var(--border-5) solid var(--toyar-gray-10);
+    border: var(--border-3) solid var(--fill-2);
     position: relative;
     margin: unset;
     
-    background-color: var(--fill-2);
+    // background-color: var(--fill-2);
     box-sizing: border-box;
     width: 20px;
     height: 20px;
@@ -100,7 +100,8 @@ const handleChange = () => {
       transform: translate(-50%, -50%);
     }
     &:hover:not(:checked){
-      box-shadow: 0 0 0 4px var(--toyar-gray-4);
+      box-shadow: 0 0 0 4px var(--fill-3);
+      transition: all .5s;
       cursor: pointer;
     }
   }
@@ -124,12 +125,15 @@ const handleChange = () => {
   &.is-disabled,
   &.is-readonly {
     input {
-      border-color: var(--primary-3);
-      &[type='radio']:checked::after {
-        background-color: var(--primary-3);
+      border-color: var(--fill-3);
+      background-color: var(--fill-2);
+      &[type='radio']:checked {
+        background-color: var(--fill-3)!important;
+        border-color: var(--primary-3)!important;
       }
       &:hover{
         box-shadow: unset;
+        cursor: no-drop;
       }
     }
     color: var(--text-4);

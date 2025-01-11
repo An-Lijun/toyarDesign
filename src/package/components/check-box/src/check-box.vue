@@ -127,7 +127,7 @@ const handleChange = () => {
     appearance: none;
     border-radius: var(--border-radius-4);
     // background-color: var(--fill-2);
-    border: 2px solid var(--fill-2);
+    border: 3px solid var(--fill-2);
     text-align: center;
     margin: unset;
     box-sizing: border-box;
@@ -192,8 +192,8 @@ input:checked+.ty-check-box__out {
   color: var(--text-4);
 
   .ty-check-box__input {
-    background-color: var(--fill-3);
     border-color: var(--fill-3);
+    background-color: var(--fill-2);
 
     &:hover {
       cursor: not-allowed;
@@ -202,6 +202,7 @@ input:checked+.ty-check-box__out {
 
   .ty-check-box__out {
     background: unset;
+
   }
 }
 }
