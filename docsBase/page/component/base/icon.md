@@ -1,5 +1,5 @@
 # Icon 字体图标
-
+这里有 ToyarDesign 内置的大量图标。详细列表请看 <a href="/page/component/base/iconList.html">图标列表</a>
 ## 基础用法
 
 :::demo 基础用法

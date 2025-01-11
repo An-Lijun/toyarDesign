@@ -13,6 +13,11 @@ export default defineComponent({
       validator: (value) => ['start', 'end', 'center', 'baseline'].includes(value),
       default: 'center'
     },
+    justify: {
+      type: String,
+      validator: (value) => ['start', 'end', 'center', 'between', 'around', 'evenly'].includes(value),
+      default: 'start'
+    },
     direction: {
       type: String,
       validator: (value) => ['row', 'column'].includes(value),
@@ -35,8 +40,8 @@ export default defineComponent({
     const sizeValue = {
       "mini": '4px',
       "small": '8px',
-      "medium": '12px',
-      'large': '16px',
+      "medium": '1px',
+      'large': 'px',
     }
 
     const getChildren = () => {
@@ -108,8 +113,10 @@ export default defineComponent({
     return () =>
       h('div', {
         style: {
-          display: 'inline-flex',
-          alignItems: 'center',
+          display: props.direction === 'row'?'inline-flex':'',
+          alignItems: props.align ,
+          width:'100%',
+          justifyContent: props.justify,
           flexDirection: props.direction
         }
       }, getChildren())

@@ -5,15 +5,15 @@ export default {
   items: [
     
     {
-      text: "Avatar/头像",
+      text: "头像/Avatar",
       link: `${root}avatar`,
     },
     {
-      text: "Calendar/日历",
+      text: "日历/Calendar",
       link: `${root}calendar`,
     },
     {
-      text: "Caution/告警",
+      text: "告警/Caution",
       link: `${root}caution`,
     },
     {

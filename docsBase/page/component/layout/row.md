@@ -1,9 +1,8 @@
 # Row 栅格行
 
 ## 基础用法
-
+展示了最基本的 24 等分应用。
 :::demo state 修改按钮类状态
-
 ```html
 <div class="sg-container">
   <div class="mb-10 ">
@@ -69,7 +68,7 @@
 :::
 
 ## 设置内部间距(gutter)
-
+通过在 Row 上指定 gutter 可以增加栅格的区域间隔。
 :::demo gutter
 
 ```html
@@ -115,7 +114,7 @@
 :::
 
 ## 设置内部对齐方式(justify)
-
+通过 justify 来进行水平布局。
 :::demo gutter
 
 ```html
@@ -181,7 +180,7 @@
 :::
 
 ## 设置内部对齐方式(align)
-
+通过 align 来进行垂直布局。
 :::demo gutter
 
 ```html

@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-import { TySpace } from '@/package/index.ts';
+import TySpace from '../../space/index';
 import { nm, breadProps } from './context.ts'
 const props = defineProps(breadProps)
 defineOptions({

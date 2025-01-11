@@ -436,12 +436,12 @@ watch(
     }
   }
 
-  &.is-focus {
-    background-color: var(--color-bg-2);
+  &.is-focus:not(.is-disabled)  {
+    background-color: unset;
     border: 1px solid var(--primary-6);
-
+    
     input {
-      background-color: var(--color-bg-2);
+      background-color: unset;
     }
   }
 

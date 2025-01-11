@@ -8,6 +8,15 @@
 <div class="mt-10">
   <ty-divider></ty-divider>
 </div>
+
+```
+:::
+
+## 带有图标的分隔线
+
+:::demo 带有图标的分割线
+
+```html
 <div class="mt-10">
   <ty-divider>
     <ty-icon icon="ty-arrow-up-circle-fill" class="mw-10"></ty-icon>

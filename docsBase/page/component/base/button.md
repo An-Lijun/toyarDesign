@@ -1,9 +1,8 @@
 # Button 按钮
 
 ## 基础用法(state)
-
+按钮分为 `primary` 主色 `danger` - 危险色 `warning` - 警告色`success` - 成功色四种 
 :::demo state 修改按钮类状态
-
 ```html
 <ty-button class="mw-10">默认按钮</ty-button>
 <ty-button state="danger" class="mw-10">危险按钮</ty-button>
@@ -13,7 +12,7 @@
 :::
 
 ## 按钮类型(type)
-
+按钮分为 `normal` - 主要按钮、`secondary` - 次要按钮（默认）、`dashed` - 虚线按钮 `text` - 文字按钮、`link` - 链接按钮 五种
 :::demo type 修改按钮类型
 
 ```html
@@ -50,7 +49,7 @@
 :::
 
 
-## 块级形状(block)
+## 长按钮(block)
 
 :::demo block 控制按钮是否充满一行
 
@@ -62,7 +61,6 @@
 
 
 ## 按钮禁用(disabled)
-
 :::demo disabled 按钮禁用
 
 ```html
@@ -82,6 +80,7 @@
 :::
 
 ## 按钮大小(size)
+按钮分为 `mini` 极小 `default`默认  `medium` 中等 `large` 大型四种尺寸。
 
 :::demo size 控制按钮大小
 
@@ -95,6 +94,7 @@
 
 
 ## htmlType
+原生的htmltype `submit` `reset` `button` `success`
 
 :::demo size 控制按钮大小
 
@@ -107,7 +107,7 @@
 :::
 
 ## 按钮形状(shape)
-
+按钮分为 square - 长方形（默认）、circle - 圆形、round - 全圆角三种形状。
 :::demo shape 按钮圆角形状
 
 ```html
@@ -126,7 +126,7 @@
 
 
 ## loading
-
+通过设置 loading 可以让按钮处于加载中状态。处于加载中状态的按钮不会触发点击事件。
 :::demo loading
 
 ```html
@@ -138,7 +138,7 @@
 :::
 
 ## 按钮组
-
+通过 `<TyButtonGroup>` 组件使按钮以组合方式出现。可用在同级多项操作中。
 :::demo buttonGrouop
 
 ```html

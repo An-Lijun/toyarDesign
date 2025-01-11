@@ -83,12 +83,12 @@ const relData = getChunkArray(props.data, props.column)
   }
 
   &__label {
-    color: var(--text-3);
+    color: var(--text-1);
     font-weight: 500;
   }
 
   &__value {
-    color: var(--text-1);
+    color: var(--text-2);
     font-weight: 400;
   }
 }

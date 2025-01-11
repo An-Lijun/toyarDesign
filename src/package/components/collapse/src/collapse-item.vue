@@ -1,5 +1,11 @@
 <template>
-  <div :class="[nm.bem('item'), nm.is('disabled', disabled), nm.is('left', position)]">
+  <div
+    :class="[
+      nm.bem('item'),
+      nm.is('disabled', disabled),
+      nm.is('left', position)
+    ]"
+  >
     <header @dblclick="changeFlg()">
       <span>{{ title }}</span>
       <div
@@ -13,7 +19,10 @@
         ></TyIcon>
       </div>
     </header>
-    <div :class="[nm.bem('item','content'), nm.is('open',isOpen) ]" v-if="isDestroy">
+    <div
+      :class="[nm.bem('item', 'content'), nm.is('open', isOpen)]"
+      v-if="isDestroy"
+    >
       <div>
         <slot></slot>
       </div>
@@ -24,11 +33,12 @@
 import { computed, inject } from 'vue'
 import { nm, itemProp } from './context'
 defineOptions({
-  name:'TyCollapseItem'
+  name: 'TyCollapseItem'
 })
 
 const props = defineProps(itemProp)
-const { model, itemChange, disabled, accordion, hide, position, destroy } =inject('collapseValue', null)
+const { model, itemChange, disabled, accordion, hide, position, destroy } =
+  inject('collapseValue', null)
 
 const changeFlg = () => {
   if (disabled) {
@@ -67,7 +77,6 @@ const isDestroy = computed(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
-
   header {
     display: flex;
     justify-content: space-between;
@@ -95,7 +104,9 @@ const isDestroy = computed(() => {
     grid-template-rows: 0fr;
     transition: 0.3s;
     overflow: hidden;
-    color: var(--text-3);
+    // color: var(--text-3);
+    background-color: var(--fill-1);
+
     div {
       min-height: 0;
     }

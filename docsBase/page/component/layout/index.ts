@@ -4,7 +4,7 @@ export default    {
   text: "布局组件",
   items: [
     {
-      text: "container",
+      text: "容器/container",
       link: `${root}container`,
     },
     {
@@ -15,6 +15,9 @@ export default    {
       text: "栅格列/Col",
       link: `${root}col`,
     },
-
+    {
+      text: "间距/Space",
+      link: `${root}space`,
+    },
   ],
 }
