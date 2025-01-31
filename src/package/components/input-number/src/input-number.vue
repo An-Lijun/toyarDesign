@@ -8,6 +8,7 @@
     @blur="handleBlur(false)"
     @clear="handleClear"
     :maxlength="maxlength"
+    inputmode="numeric"
   >
     <template #outPre>
       <TyButton @click="handleMinus" style="height: 100%; line-height: 100%">
@@ -33,7 +34,7 @@ const attrs = useAttrs()
 const props = defineProps(inputProps)
 const emit = defineEmits(inputEmits)
 
-const { model } = useCompMvalue(props, emit)
+const model = defineModel('modelValue')
 
 function getStringType(value: any): String {
   return Object.prototype.toString.call(value).toLowerCase()

@@ -21,6 +21,21 @@ export const carProps =buildProps({
   isAutoPlay:{
     type:Boolean,
     default:true
+  },
+  indicatorType:{
+    type:String,
+    default:'line',
+    values:['dot','line','slider']
+  },
+  indicatorPosition:{
+    type:String,
+    default:'right',
+    values:['top','left','right','bottom']
+  },
+  direction:{
+    type:String,
+    default:'horizontal',
+    values:['horizontal','vertical']
   }
 })
 

@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 export const inputProps=buildProps({
   modelValue: {
-    type: [ Number,String],
+    type: [ Number],
     required: true,
     default: ''
   },

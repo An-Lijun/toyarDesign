@@ -32,15 +32,9 @@ export const inputProps = buildProps({
     default:false
   },
   format:{
-    type:Function,
-    default:(value:String|Number)=> value
+    type:Function
   },
-  outPreText:{
-    type:String
-  },
-  outAftText:{
-    type:String
-  }
+
 })
 
 export const inputEmits =['blur','focus','enter', 'clear','input', 'update:modelValue']

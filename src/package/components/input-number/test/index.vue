@@ -1,5 +1,6 @@
 <template>
   <div class="divRoot">
+    {{ inp }}
     <TyInputNumber v-model="inp" />
 
     <hr>

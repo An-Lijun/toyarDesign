@@ -1,19 +1,21 @@
 <template>
   <div :class="nm.b()" ref="carousel" @mouseenter.prevent="carouselEnter" @mouseleave.prevent="carouselLeave">
     <ul :style="{
-      transform: `translateX(${width}px)`,
-      transition: `transform 0.5s ${easing}`
+      transform: `translate${direction === 'horizontal' ? 'X' : 'Y'}(${translateValue}px)`,
+      transition: `transform 0.5s ${easing}`,
+      flexDirection: direction === 'horizontal' ? 'row' : 'column',
     }">
       <slot> </slot>
     </ul>
 
     <div :class="nm.e('leftIndicator')" @click="toLeft" v-if="isShowArrow"></div>
     <div :class="nm.e('rightIndicator')" @click="toRight" v-if="isShowArrow"></div>
-    <div :class="nm.e('indicators')">
+    <div :class="[nm.e('indicators'), nm.m(indicatorPosition)]">
       <slot name="indicator">
-        <li v-for="(, index) in list" :key="index" :class="{
-          active: index === now
-        }"></li>
+        <li v-for="(, index) in list" :key="index" :class="[
+          index === now ? 'active' : '',
+          indicatorType
+        ]" @click="selectIndicator(index)"></li>
       </slot>
     </div>
   </div>
@@ -30,7 +32,9 @@ const props = defineProps(carProps)
 
 const carousel = ref()
 let baseWidth = 0
-let width = ref(0)
+let baseHeight = 0
+
+let translateValue = ref(0)
 let list: Ref<Array<string>> = ref([])
 let now = ref(0)
 let timmer: null | NodeJS.Timeout = null
@@ -53,8 +57,14 @@ const carouselLeave = () => {
   if (!props.isAutoPlay) return
   timmer = start()
 }
+
 const toLeft = () => now.value = now.value === 0 ? list.value.length - 1 : now.value - 1
 const toRight = () => now.value = now.value === list.value.length - 1 ? 0 : now.value + 1
+
+const selectIndicator = (index) => {
+  now.value = index
+}
+
 const isShowArrow = computed(() => {
   switch (props.arrowMode) {
     case 'always':
@@ -66,13 +76,15 @@ const isShowArrow = computed(() => {
   }
 })
 watch(now, () => {
-  width.value = -(now.value * baseWidth)
+  translateValue.value = -(now.value * (props.direction === 'horizontal' ? baseWidth : baseHeight))
 })
 
 onMounted(() => {
-  baseWidth = carousel.value.getBoundingClientRect().width
-  console.log(props.isAutoPlay);
-  
+  const { width, height } = carousel.value.getBoundingClientRect()
+  baseWidth = width
+  baseHeight = height
+  console.log(baseHeight);
+
   if (!props.isAutoPlay) return
   timmer = start()
 })
@@ -134,17 +146,16 @@ provide(carouselContent, provideCarousel)
     transition: all 0.5s;
 
     &:hover {
-      background: #000;
+      background: rgba(0, 0, 0, 0.5);
       cursor: pointer;
     }
   }
 
   &__indicators {
     position: absolute;
-    bottom: 10px;
     display: flex;
 
-    li {
+    li.dot {
       list-style: none;
       padding: unset;
       margin: unset;
@@ -157,7 +168,92 @@ provide(carouselContent, provideCarousel)
       &.active {
         background-color: rgba(255, 255, 255, 0.9);
       }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    li.slider {
+      list-style: none;
+      padding: unset;
+      margin: unset;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: rgba(255, 255, 255, 0.3);
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    li.line {
+      list-style: none;
+      padding: unset;
+      margin: unset;
+      width: 15px;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.3);
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &.ty-carousel--bottom {
+      bottom: 10px;
+    }
+
+    &.ty-carousel--top {
+      top: 10px;
+    }
+
+    &.ty-carousel--left {
+      left: 10px;
+      flex-direction: column;
+
+      .dot {
+        margin-bottom: 10px;
+      }
+
+      .line {
+        width: 4px;
+        height: 15px;
+      }
+
+      .slider {
+        margin-bottom: 10px;
+      }
+    }
+
+    &.ty-carousel--right {
+      right: 10px;
+      flex-direction: column;
+
+      .dot {
+        margin-bottom: 10px;
+      }
+
+      .line {
+        width: 4px;
+        height: 15px;
+      }
+
+      .slider {
+        margin-bottom: 10px;
+      }
     }
   }
+
+
 }
 </style>

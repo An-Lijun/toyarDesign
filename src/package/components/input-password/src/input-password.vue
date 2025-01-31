@@ -88,6 +88,7 @@ defineOptions({
 const attrs = useAttrs()
 const props = defineProps(inputProps)
 const emit = defineEmits(['blur', 'input', 'update:modelValue'])
+const model = defineModel('modelValue')
 const { modelValue } = toRefs(props)
 //inject
 const tyForm = inject(formContent, null)
@@ -116,7 +117,6 @@ const size = computed(() => {
 })
 
 const provideInp = reactive({ disabled })
-const { model } = useCompMvalue(props, emit)
 provide(configProviderDisabled, provideInp)
 
 onMounted(() => {
