@@ -24,7 +24,7 @@
 
     <TyRow>
       <TyCol span="8">
-        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="tl">
+        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="top-start">
 
           <TyButton>
             左上
@@ -40,7 +40,7 @@
         </TyPoppover>
       </TyCol>
       <TyCol span="8">
-        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="tr">
+        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="top-end">
 
           <TyButton>
             右上
@@ -48,8 +48,9 @@
         </TyPoppover>
       </TyCol>
 
+      
       <TyCol span="8" style="margin-top: 100px;">
-        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="bl">
+        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="bottom-start">
 
           <TyButton>
             左下
@@ -64,7 +65,7 @@
         </TyPoppover>
       </TyCol>
       <TyCol span="8" style="margin-top: 100px;">
-        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="br">
+        <TyPoppover content="6666611111111111111111111111111111111111116" trigger="click" placement="bottom-end">
           <TyButton>
             右下
           </TyButton>

@@ -1,7 +1,7 @@
 <template>
   <transition>
-    <div :class="nm.b()" ref="textRef" v-on="eventMaps">
-      <div :class="nm.e('tip')" v-show="isShowTip" ref="tipRef" id="reff">
+    <div :class="nm.b()" ref="containerRef" v-on="eventMaps">
+      <div :class="nm.e('tip')" v-show="isShowTip" ref="popRef">
         {{ props.content }}
         <div ref="arrowRef" data-popper-arrow :class="nm.e('arrow')">
         </div>
@@ -23,22 +23,17 @@ const props = defineProps(toolProps)
 let eventMaps = ref({})
 let isShowTip = ref(false)
 
-const tipRef = ref();
+const popRef = ref();
 const arrowRef = ref();
-const textRef = ref();
+const containerRef = ref();
 let popperInstance = null
 const handleClick = () => {
-
   isShowTip.value = !isShowTip.value
   createInstance()
-
 }
 const handleEnter = () => {
-
   isShowTip.value = true
   createInstance()
-
-
 }
 const handleLeave = () => {
   isShowTip.value = false
@@ -71,7 +66,7 @@ const destroyPopper = () => {
 }
 const createInstance = () => {
 
-  popperInstance = createPopper(unref(textRef), unref(tipRef), {
+  popperInstance = createPopper(unref(containerRef), unref(popRef), {
     placement: props.placement,
     modifiers: [
       {
@@ -89,15 +84,11 @@ const createInstance = () => {
       }
     ]
   });
-    nextTick(() => {
-      // 异步更新
-      popperInstance.update()
-    })
+  nextTick(() => {
+    // 异步更新
+    popperInstance.update()
+  })
 }
-onMounted(() => {
-  createInstance()
-})
-
 
 
 </script>
@@ -150,7 +141,7 @@ onMounted(() => {
   transform-origin: center top;
 }
 
-[data-popper-placement="right"]{
+[data-popper-placement="right"] {
   .ty-tooltip__arrow {
     position: absolute;
     width: 0;
@@ -159,26 +150,13 @@ onMounted(() => {
     border-width: 8px;
     /* 调整箭头大小 */
     border-color: transparent var(--tooltip) transparent transparent;
-    left:-13px;
+    left: -13px;
     z-index: 999;
     /* 调整箭头颜色 */
   }
 }
-[data-popper-placement="top"]{
-  .ty-tooltip__arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 8px;
-    /* 调整箭头大小 */
-    border-color: var(--tooltip) transparent transparent transparent  ;
-    z-index: 999;
-    bottom: -13px;
-    /* 调整箭头颜色 */
-  }
-}
-[data-popper-placement="bottom"]{
+
+[data-popper-placement="top"] {
   .ty-tooltip__arrow {
     position: absolute;
     width: 0;
@@ -187,14 +165,30 @@ onMounted(() => {
     border-width: 8px;
     /* 调整箭头大小 */
     border-color: var(--tooltip) transparent transparent transparent;
-    border-color: transparent  transparent  var(--tooltip) transparent;
+    z-index: 999;
+    bottom: -13px;
+    /* 调整箭头颜色 */
+  }
+}
 
-    top:-13px;
+[data-popper-placement="bottom"] {
+  .ty-tooltip__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: var(--tooltip) transparent transparent transparent;
+    border-color: transparent transparent var(--tooltip) transparent;
+
+    top: -13px;
     z-index: 999;
     /* 调整箭头颜色 */
   }
 }
-[data-popper-placement="left"]{
+
+[data-popper-placement="left"] {
   .ty-tooltip__arrow {
     position: absolute;
     width: 0;
@@ -203,12 +197,13 @@ onMounted(() => {
     border-width: 8px;
     /* 调整箭头大小 */
     border-color: transparent transparent transparent var(--tooltip);
-    right:-13px;
+    right: -13px;
     z-index: 999;
     /* 调整箭头颜色 */
   }
 }
-[data-popper-placement="right"]{
+
+[data-popper-placement="right"] {
   .ty-tooltip__arrow {
     position: absolute;
     width: 0;
@@ -217,7 +212,7 @@ onMounted(() => {
     border-width: 8px;
     /* 调整箭头大小 */
     border-color: transparent var(--tooltip) transparent transparent;
-    left:-13px;
+    left: -13px;
     z-index: 999;
     /* 调整箭头颜色 */
   }

@@ -1,16 +1,15 @@
 <template>
-  <div :class="nm.b()" v-on="eventMaps">
-    <div v-show="isShowConfirm">
-      <div :style="style" :class="[nm.e('content')]">
+  <div :class="nm.b()" v-on="eventMaps"  ref="containerRef">
+      <div :class="[nm.e('content')]"  v-show="isShowConfirm" ref="popRef">
         <main>
           <slot name="content">
             {{ props.content }}
           </slot>
         </main>
+        <div ref="arrowRef" data-popper-arrow :class="nm.e('arrow')">
+        </div>
       </div>
-      <div :class="[nm.e('arrows'), nm.is(placement)]">
-      </div>
-    </div>
+
     <span ref="defaultSlot" style="display: inline-block;">
       <slot></slot>
     </span>
@@ -19,10 +18,17 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { popProps, nm } from './context'
+import { arrow, createPopper } from '@popperjs/core';
+
 defineOptions({
   name: 'TyPoppover'
 })
 const props = defineProps(popProps)
+
+let popperInstance = null
+const popRef = ref();
+const arrowRef = ref();
+const containerRef = ref();
 
 const defaultSlot = ref()
 let eventMaps = ref({})
@@ -31,9 +37,13 @@ let now = false
 const handleClick = (e) => {
   setTimeout(() => {
     isShowConfirm.value = !isShowConfirm.value
+    createInstance()
+
   })
 }
 const handleEnter = () => {
+  createInstance()
+
   isShowConfirm.value = true
   now = true
 }
@@ -70,60 +80,31 @@ switch (props.trigger) {
       click: handleClick
     }
 }
-let style = ref('')
-onMounted(() => {
-  let { width, height } = getComputedStyle(defaultSlot.value)
-  width = width.slice(0, -2)
-  height = height.slice(0, -2)
+const createInstance = () => {
+  popperInstance = createPopper(unref(containerRef), unref(popRef), {
+    placement: props.placement,
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          // 偏移值 左右，上下
+          offset: [0, 10]
+        }
+      },
+      {
+        name: 'arrow',
+        options: {
+          element: unref(arrowRef),
+        }
+      }
+    ]
+  });
+  nextTick(() => {
+    // 异步更新
+    popperInstance.update()
+  })
+}
 
-  const getPlacement = () => {
-    switch (props.placement) {
-      case 'tl':
-        return {
-          top: '0',
-          left: '50%',
-          transform: `translate(calc(0% - ${width / 2}px), calc(-100% - 15px))`,
-          '--ui-width': width + 'px',
-          '--ui-height': width + 'px',
-        }
-      case 'top':
-        return {
-          top: '0',
-          left: '50%',
-          transform: 'translate(-50%, calc(-100% - 15px))'
-        }
-      case 'tr':
-        return {
-          top: '0',
-          right: '0%',
-          transform: `translate(calc(0%), calc(-100% - 15px))`
-        }
-      case 'bl':
-        return {
-          top: '0',
-          left: '50%',
-          transform: `translate(calc(0% - ${width / 2}px),  calc(50% + 5px))`,
-          '--ui-width': width + 'px',
-          '--ui-height': width + 'px',
-        }
-      case 'bottom':
-        return {
-          top: '0',
-          left: '50%',
-          transform: 'translate(-50%, calc(50% + 5px))'
-        }
-      case 'br':
-        return {
-          top: '0',
-          right: '0%',
-          transform: `translate(0% , calc(50% + 5px))`,
-          '--ui-width': width + 'px',
-          '--ui-height': width + 'px',
-        }
-    }
-  }
-  style.value = getPlacement()
-})
 
 </script>
 <style lang="scss" scoped>
@@ -132,88 +113,174 @@ onMounted(() => {
   display: inline-block;
   color: var(--text-2);
 
-  &__arrows {
-    display: inline-block;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 1px solid var(--toyar-gray-3);
-    bottom: -20px;
-    background-color: var(--bg-5);
-    transform: rotate(45deg);
-    z-index: 95;
-    border-radius: 3px;
-
-    &.is-tl {
-      position: absolute;
-      bottom:0px;
-      left: 50%;
-      border-top-color: var(--bg-5);
-      transform: translate(-50%, -33px) rotate(45deg);
-      border: 1px solid var(--toyar-gray-3);
-    }
-
-    &.is-top {
-      position: absolute;
-      bottom: unset;
-      bottom: 0px;
-      left: 50%;
-      border-top-color: var(--bg-5);
-      transform: translate(-50%, -33px) rotate(45deg);
-    }
-
-    &.is-tr {
-      position: absolute;
-      bottom: unset;
-      bottom: 0px;
-      border-top-color: var(--bg-5);
-      transform: translate(-50%, -33px) rotate(45deg);
-      right: 0%;
-    }
-
-    &.is-bl {
-      position: absolute;
-      bottom: unset;
-      top: 0px;
-      left: 0px;
-      border-bottom-color: var(--bg-5);
-      transform: translate(50%, 39px) rotate(45deg);
-    }
-
-    &.is-bottom {
-      position: absolute;
-      bottom: unset;
-      top: 0px;
-      left: 50%;
-      border-bottom-color: var(--bg-5);
-      transform: translate(-50%, 39px) rotate(45deg);
-    }
-
-    &.is-br {
-      position: absolute;
-      bottom: unset;
-      top: 0px;
-      left: 50%;
-      border-bottom-color: var(--bg-5);
-      right: 0;
-      transform: translate(-50%, 39px) rotate(45deg);
-    }
-  }
-
   &__content {
     position: absolute;
     display: block;
     z-index: 99;
     min-width: 180px;
     padding: 20px;
-    background-color: var(--bg-5);
+    background-color: var(--tooltip);
     border-radius: 4px;
     border: 1px solid var(--toyar-gray-3);
+    z-index: 999;
+    color: #fff;
 
     &>main {
       margin-bottom: 20px;
       text-align: left;
     }
+  }
+}
+
+
+
+
+[data-popper-placement="right"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: transparent var(--tooltip) transparent transparent;
+    left: -13px;
+    z-index: 999;
+    /* 调整箭头颜色 */
+  }
+}
+
+[data-popper-placement="top"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: var(--tooltip) transparent transparent transparent;
+    z-index: 999;
+    bottom: -13px;
+    /* 调整箭头颜色 */
+  }
+}
+
+[data-popper-placement="bottom"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: transparent transparent var(--tooltip) transparent;
+
+    top: -13px;
+    z-index: 999;
+    /* 调整箭头颜色 */
+  }
+}
+
+[data-popper-placement="left"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: transparent transparent transparent var(--tooltip);
+    right: -13px;
+    z-index: 999;
+    /* 调整箭头颜色 */
+  }
+}
+
+[data-popper-placement="right"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: transparent var(--tooltip) transparent transparent;
+    left: -13px;
+    z-index: 999;
+    /* 调整箭头颜色 */
+  }
+}
+
+[data-popper-placement="top-end"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: var(--tooltip) transparent transparent transparent;
+    z-index: 999;
+    bottom: -13px;
+    /* 调整箭头颜色 */
+  }
+}
+[data-popper-placement="top-end"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: var(--tooltip) transparent transparent transparent;
+    z-index: 999;
+    bottom: -13px;
+    /* 调整箭头颜色 */
+  }
+}
+[data-popper-placement="top-start"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: var(--tooltip) transparent transparent transparent;
+    z-index: 999;
+    bottom: -13px;
+    /* 调整箭头颜色 */
+  }
+}
+[data-popper-placement="bottom-end"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: transparent transparent var(--tooltip) transparent;
+
+    z-index: 999;
+    top: -13px;
+    /* 调整箭头颜色 */
+  }
+}
+[data-popper-placement="bottom-start"] {
+  .ty-poppover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: transparent transparent var(--tooltip) transparent;
+
+    z-index: 999;
+    top: -13px;
+    /* 调整箭头颜色 */
   }
 }
 </style>
