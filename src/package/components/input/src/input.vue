@@ -53,7 +53,7 @@
           20
           }px`
       }
-    ]" :disabled="disabled" :readonly="readonly" @input="handleInput" @blur="handleBlur" @focus="handleFocus"
+    ]" :disabled="disabled" :readonly="readonly" @input="handleInput" @blur="handleBlur" @focus="handleFocus" @click="handleToFocus"
       @keydown.enter="handleEnter" />
 
     <!-- 后置内容 -->

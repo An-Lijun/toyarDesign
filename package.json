@@ -26,6 +26,7 @@
     "pub2": "node ./src/shell/index.js"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@vuepress/plugin-register-components": "^2.0.0-rc.15",
     "robinson": "^1.0.10",
     "vue": "^3.4.31",

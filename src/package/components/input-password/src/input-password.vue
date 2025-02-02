@@ -129,6 +129,7 @@ function handleInput (event) {
 }
 
 function handleToFocus () {
+  focus.value = true
   setTimeout(() => {
     nativeInp.value.focus()
   })
@@ -263,7 +264,7 @@ let isShowClearBtn = computed(() => {
       }
   }
 
-  &.is-focus {
+  &.is-focus:not(.is-disabled) {
     background-color: var(--color-bg-2);
     border: 1px solid var(--primary-6);
 

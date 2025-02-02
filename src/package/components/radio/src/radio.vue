@@ -75,7 +75,7 @@ const handleChange = () => {
   input {
     appearance: none;
     border-radius: var(--border-radius-circle);
-    border: var(--border-3) solid var(--fill-2);
+    border: var(--border-3) solid var(--fill-3);
     position: relative;
     margin: unset;
     
