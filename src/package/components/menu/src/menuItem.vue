@@ -1,10 +1,11 @@
 <template>
-  <li :class="[nm.bem('item'), nm.is('level', Boolean(useSlots().icon)),
-  nm.is('fold', !isShowRef)
+  <li :class="[nm.bem('item'), nm.is('level', Boolean(useSlots().icon)),nm.is('fold', !isShowRef)
     , nm.is('active', menuProvide.model.value == mkey)]" @click="handleClick">
-    <span v-if="isShowRef" :class="nm.bem('item', 'index')" v-for="item in compLevel">
-    </span>
-    <span :class="nm.bem('item', 'icon')" v-if="Boolean(useSlots().icon)"> 
+
+    <template v-if="isShowRef">
+      <menuIndex :compLevel="compLevel" />
+    </template>
+    <span :class="nm.bem('item', 'icon')">
       <slot name="icon"></slot>
     </span>
     <span :class="nm.bem('item', 'label')">
@@ -15,7 +16,9 @@
 <script setup>
 import { nm } from './context'
 import { injectLevel } from './hooks/level.ts'
-import { useSlots,inject,ref ,watch} from "vue";
+import { useSlots, inject, ref, watch } from "vue";
+import menuIndex from './menuIndex.vue'
+
 defineOptions({
   name: 'TyMenuItem'
 })
@@ -23,8 +26,8 @@ const props = defineProps({
   mkey: {
     type: String
   },
-  _mItem:{
-    type:Object
+  _mItem: {
+    type: Object
   }
 })
 const compLevel = injectLevel()
@@ -33,12 +36,12 @@ const subMenu = inject('subMenu', null)
 const emit = defineEmits(['click'])
 let isShowRef = ref(true)
 const handleClick = () => {
-  
+
   menuProvide.setModel(props.mkey)
-  if(!subMenu){
+  if (!subMenu) {
     return
   }
-  if(props._mItem&& menuProvide.model.value!==props.mkey){
+  if (props._mItem && menuProvide.model.value !== props.mkey) {
     menuProvide.clickMenu(props._mItem)
   }
   subMenu.childClick()
@@ -47,13 +50,11 @@ if (menuProvide) {
   watch(
     () => menuProvide.isFold,
     newVal => {
-      setTimeout(() => {
         isShowRef.value = !newVal.value
-      }, 300)
     },
     {
       deep: true,
-      immediate:true
+      immediate: true
     }
   )
 }
@@ -68,8 +69,9 @@ if (menuProvide) {
   color: var(--text-2);
   font-size: var(--font-body-3);
   white-space: nowrap;
-    text-overflow:ellipsis;
-    overflow:hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
   &__icon {
     width: 50px;
     min-width: 50px;
@@ -83,16 +85,12 @@ if (menuProvide) {
     cursor: pointer;
   }
 
-  &__index {
-    width: 20px;
-    display: inline-block;
-    height: 100%;
-  }
-  &__label{
+  &__label {
     white-space: nowrap;
-    text-overflow:ellipsis;
-    overflow:hidden;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
+
   &.is-active {
     background-color: var(--primary-6);
     color: #fff;

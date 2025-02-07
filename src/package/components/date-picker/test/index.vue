@@ -5,7 +5,16 @@
       {{ cal }}
     </h6>
     <div style="width: 500px;">
-      <TyDatePicker v-model="cal"></TyDatePicker>
+      <TyDatePicker v-model="cal" opType="week"></TyDatePicker>
+    </div>
+    <div style="width: 500px;">
+      <TyDatePicker v-model="cal" opType="month"></TyDatePicker>
+    </div>
+    <div style="width: 500px;">
+      <TyDatePicker v-model="cal" opType="season"></TyDatePicker>
+    </div>
+    <div style="width: 500px;">
+      <TyDatePicker v-model="cal" opType="year"></TyDatePicker>
     </div>
     <br>
     <div style="width: 500px;">

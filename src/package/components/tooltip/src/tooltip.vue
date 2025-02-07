@@ -27,7 +27,8 @@ const popRef = ref();
 const arrowRef = ref();
 const containerRef = ref();
 let popperInstance = null
-const handleClick = () => {
+const handleClick = (e) => {
+  e.stopPropagation()    
   isShowTip.value = !isShowTip.value
   createInstance()
 }
@@ -89,8 +90,15 @@ const createInstance = () => {
     popperInstance.update()
   })
 }
-
-
+const closeTooltip = () => {
+  isShowTip.value = false
+}
+onMounted(() => {
+  document.addEventListener('click', closeTooltip)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', closeTooltip)
+})
 </script>
 <style lang="scss" scoped>
 .ty-tooltip {

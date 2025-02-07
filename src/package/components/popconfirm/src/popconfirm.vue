@@ -1,5 +1,5 @@
 <template>
-  <div :class="nm.b()" @click="handleShow" ref="containerRef">
+  <div :class="nm.b()" @click.stop="handleShow" ref="containerRef">
     <div ref="popRef" :class="nm.e('confirm')"  v-show="isShowConfirm">
       <main>
         <slot name="content">
@@ -71,6 +71,15 @@ const createInstance = () => {
     popperInstance.update()
   })
 }
+const closePopconfirm = () => {
+  isShowConfirm.value = false
+}
+onMounted(() => {
+  document.addEventListener('click', closePopconfirm)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', closePopconfirm)
+})
 
 </script>
 <style lang="scss" scoped>

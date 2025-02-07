@@ -1,45 +1,32 @@
 <template>
   <div :class="[subNm.b(), subNm.is('fold', !isShowRef)]" ref="subMenu">
     <div :class="subNm.e('inner')" @click="openChildMenu">
-      <span
-        v-if="isShowRef"
-        :class="subNm.e('index')"
-        v-for="item in compLevel"
-        :key="item"
-      >
-      </span>
-      <div
-        :class="subNm.e('icon')"
-        :style="{
-          '--toyar-gray-10': flag ? 'var(--toyar-xblue-6)' : ''
-        }"
-      >
+
+      <template v-if="isShowRef">
+        <menuIndex :compLevel="compLevel" />
+      </template>
+
+      <div :class="subNm.e('icon')" :style="compStyle">
         <slot name="icon"></slot>
       </div>
       <div :class="subNm.e('text')" v-if="isShowRef">
         <slot name="title"></slot>
       </div>
-      <div
-        :class="[subNm.e('flag'), subNm.is('opened', flag)]"
-        v-if="isShowRef ? true : compLevel > 0"
-      >
+      <div :class="[subNm.e('arrow'), subNm.is('opened', isOpened)]" v-if="isShowRef ? true : compLevel > 0">
         <TyIcon icon="ty-arrow-down-s-line"></TyIcon>
       </div>
     </div>
-    <div
-      :style="{
-        transform: !isShowRef
-          ? `translate(${width}px,-40px)`
-          : ''
-      }"
-      :class="[
-        subNm.e('content'),
-        subNm.is('opend', flag),
-        subNm.is('fold', !isShowRef)
-      ]"
-    >
+    <div :style="{
+      transform: !isShowRef
+        ? `translate(${width}px,-40px)`
+        : ''
+    }" :class="[
+      subNm.e('content'),
+      subNm.is('opend', isOpened),
+      subNm.is('fold', !isShowRef)
+    ]">
       <ul>
-        <slot ></slot>
+        <slot></slot>
       </ul>
     </div>
   </div>
@@ -47,19 +34,19 @@
 <script setup lang="ts" name="TySubMenu">
 import { injectLevel } from './hooks/level.ts'
 import { subNm } from './context'
-import { inject, ref, watch,provide } from 'vue'
-
+import { inject, ref, watch, provide, computed } from 'vue'
+import menuIndex from './menuIndex.vue'
 defineOptions({
   name: 'TySubMenu'
 })
 const props = defineProps({
   index: String,
-  option:{
-    type:Array
+  option: {
+    type: Array
   },
-  data:String
+  data: String
 })
-let flag = ref(false)
+let isOpened = ref(false)
 const compLevel = injectLevel(true)
 const menuProvide = inject('menu', {})
 const subMenu = ref() // menuref
@@ -67,30 +54,33 @@ let isShowRef = ref(true)
 
 let width = ref(0)
 const openChildMenu = () => {
-  let data = subMenu.value.getBoundingClientRect().width + 10
-  if(compLevel.value ===0){
-    data+= subMenu.value.getBoundingClientRect().left
+  if (menuProvide.isFold.value) {
+    let data = subMenu.value.getBoundingClientRect().width + 10
+    if (compLevel.value === 0) {
+      data += subMenu.value.getBoundingClientRect().left
+    }
+    width.value = data
   }
-  width.value =data
   menuProvide.setOpenId(props.index)
   menuProvide.clickSubMenu(props._mItem)
   setTimeout(() => {
-      flag.value = !flag.value
+    isOpened.value = !isOpened.value
   })
 }
 
+const compStyle = computed(() => {
+  return { '--toyar-gray-10': isOpened.value ? 'var(--toyar-xblue-6)' : '' }
+})
 
 if (menuProvide) {
   watch(
     () => menuProvide.isFold,
     newVal => {
-      setTimeout(() => {
-        isShowRef.value = !newVal.value
-      }, 300)
+      isShowRef.value = !newVal.value
     },
     {
       deep: true,
-      immediate:true
+      immediate: true
     }
   )
 
@@ -98,12 +88,12 @@ if (menuProvide) {
     () => menuProvide.openId,
     newVal => {
       if (
-        newVal !== props.index && 
+        newVal !== props.index &&
         menuProvide.isFold.value
         &&
         !String(newVal.value).startsWith(props.index)
       ) {
-        flag.value = false
+        isOpened.value = false
       }
     },
     {
@@ -113,8 +103,8 @@ if (menuProvide) {
 }
 
 provide('subMenu', {
-  childClick:()=>{
-    if(menuProvide.isFold.value){
+  childClick: () => {
+    if (menuProvide.isFold.value) {
       menuProvide.setOpenId('')
     }
   }
@@ -126,25 +116,24 @@ provide('subMenu', {
   color: var(--text-2);
   position: relative;
   font-size: var(--font-body-3);
+
   &:hover {
     // background-color: var(--toyar-gray-2);
   }
+
   &__inner {
     line-height: 40px;
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
     user-select: none;
+
     &:hover {
       cursor: pointer;
     }
   }
 
-  &__index {
-    width: 10px;
-    display: inline-block;
-    height: 100%;
-  }
+
   &__icon {
     width: 50px;
     min-width: 50px;
@@ -152,30 +141,36 @@ provide('subMenu', {
     align-items: center;
     justify-content: center;
   }
+
   &__text {
     flex: 1;
   }
-  &__flag {
+
+  &__arrow {
     width: 40px;
     min-width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  &__flag.is-opened {
+
+  &__arrow.is-opened {
     transform: rotate(180deg);
   }
+
   &__content {
     display: grid;
     grid-template-rows: 0fr;
     transition: 0.3s;
     overflow: hidden;
-    & > ul {
+
+    &>ul {
       min-height: 0;
       margin: unset;
       padding: unset;
       border: unset;
     }
+
     &.is-opend {
       grid-template-rows: 1fr;
       // .ty-menu-item{
@@ -186,14 +181,16 @@ provide('subMenu', {
   }
 
   &.is-fold {
-    & > .ty-sub-menu__inner {
+    &>.ty-sub-menu__inner {
       padding: unset;
-      & > .ty-sub-menu__icon {
+
+      &>.ty-sub-menu__icon {
         width: 40px;
         min-width: 40px;
       }
     }
-    & > .ty-sub-menu__content {
+
+    &>.ty-sub-menu__content {
       overflow: auto;
       position: fixed;
       left: 0px;
@@ -202,17 +199,20 @@ provide('subMenu', {
       &.is-opend {
         grid-template-rows: 1fr;
         overflow: unset;
-        & > ul {
+
+        &>ul {
           display: block;
           box-sizing: border-box;
           border: 1px solid var(--border-color-2) !important;
         }
       }
     }
-    .is-fold.ty-sub-menu__content > ul {
+
+    .is-fold.ty-sub-menu__content>ul {
       box-sizing: border-box;
       border: unset;
     }
   }
+
 }
 </style>

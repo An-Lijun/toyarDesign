@@ -27,6 +27,13 @@ export const datePickerProp=buildProps({
   format:{
     type:String,
   },
+  formatValue:{
+    type:Function,
+  },
+  opType:{
+    type:String,
+    default:'day'
+  }
 })
 export const  datePickerEmit =['blur', 'input', 'update:modelValue']
 

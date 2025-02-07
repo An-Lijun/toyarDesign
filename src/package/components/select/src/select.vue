@@ -1,42 +1,26 @@
 <template>
-  <div
-    ref="root"
-    :class="[
-      nm.b(),
-      nm.m(size),
-      nm.is('focus', focus),
-      nm.is('disabled', disabled),
-      nm.is('readonly', readonly),
-      nm.is('error', tyFormItem && tyFormItem.formItemError.isShowErrorMsg)
-    ]"
-  >
+  <div ref="containerRef" :class="[
+    nm.b(),
+    nm.m(size),
+    nm.is('focus', focus),
+    nm.is('disabled', disabled),
+    nm.is('readonly', readonly),
+    nm.is('error', tyFormItem && tyFormItem.formItemError.isShowErrorMsg)
+  ]">
     <!-- 输入框 -->
-    <input
-      type="text"
-      ref="nativeInp"
-      :placeholder="placeholder"
-      @click.stop="isShowOption = true"
-      :disabled="disabled"
-      @input="handleInput"
-      @blur="handleBlur"
-      @focus="handleFocus"
-    />
+    <input type="text" ref="nativeInp" :placeholder="placeholder" @click.stop="handleClick" :disabled="disabled"
+      @input="handleInput" @blur="handleBlur" @focus="handleFocus" />
 
     <span ref="innerAft" :class="[nm.e('innerAft')]">
       <TyIcon icon="ty-arrow-down-s-line"></TyIcon>
     </span>
-    <span
-      v-if="isShowClearBtn"
-      :class="nm.e('clear')"
-      :style="{
-        position: 'absolute',
-        right: '10px'
-      }"
-      @click="clear"
-    >
+    <span v-if="isShowClearBtn" :class="nm.e('clear')" :style="{
+      position: 'absolute',
+      right: '10px'
+    }" @click="clear">
     </span>
-    <ul :class="nm.e('group')" v-show="isShowOption">
-      <div :class="nm.e('arrow')"></div>
+    <ul :class="nm.e('group')" v-show="isShowOption" ref="popRef">
+      <div :class="nm.e('arrow')" ref="arrowRef"></div>
       <slot> </slot>
     </ul>
   </div>
@@ -45,6 +29,7 @@
 import { selectContent } from '../../../hooks/symbolNm'
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { selectOptions } from '../../../hooks/symbolNm'
+import { arrow, createPopper } from '@popperjs/core';
 
 import {
   ref,
@@ -69,11 +54,18 @@ const options = {}
 const tyForm = inject(formContent, null)
 const tyFormItem = inject(formItemContent, null)
 const { disabled, readonly, modelValue, size } = toRefs(props)
-const root = ref()
+const container = ref()
 const nativeInp = ref()
 const focus = ref(false)
 let outAftWidth = ref(0)
-
+let popperInstance = null
+const popRef = ref();
+const arrowRef = ref();
+const containerRef = ref();
+const handleClick = () => {
+  createInstance()
+  isShowOption.value = true
+}
 provide(selectOptions, (label, value) => {
   options[value] = label
 })
@@ -83,31 +75,31 @@ onMounted(() => {
   setNativeInp(props.modelValue, '')
 })
 const isShowOption = ref(false)
-function setNativeInp (value, label) {
+function setNativeInp(value, label) {
   nativeInp.value.value = label
   emit('update:modelValue', value)
 }
-function getValue () {
+function getValue() {
   return props.modelValue
 }
-function handleInput (event) {
+function handleInput(event) {
   // emit('update:modelValue', event.target.value)
 }
-function handleBlur (event) {
+function handleBlur(event) {
   if (tyForm && tyFormItem && tyFormItem.prop) {
     tyForm.validate(tyFormItem.prop, 'blur')
   }
   focus.value = false
   emit('blur', event)
 }
-function clear () {
+function clear() {
   if (props.multiple) {
     emit('update:modelValue', [])
   } else {
     emit('update:modelValue', '')
   }
 }
-function handleFocus () {
+function handleFocus() {
   focus.value = true
 }
 let isShowClearBtn = computed(() => {
@@ -124,6 +116,31 @@ watch(
 )
 const closeOption = () => {
   isShowOption.value = false
+}
+
+const createInstance = () => {
+  popperInstance = createPopper(unref(containerRef), unref(popRef), {
+    placement: 'bottom',
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          // 偏移值 左右，上下
+          offset: [0, 10]
+        }
+      },
+      {
+        name: 'arrow',
+        options: {
+          element: unref(arrowRef),
+        }
+      }
+    ]
+  });
+  nextTick(() => {
+    // 异步更新
+    popperInstance.update()
+  })
 }
 onMounted(() => {
   document.addEventListener('click', closeOption)
@@ -163,6 +180,7 @@ provide(selectContent, {
     color: var(--text-1);
     background-color: var(--fill-2);
     padding: 0 30px 0 10px;
+
     &.is-outPre {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
@@ -173,6 +191,7 @@ provide(selectContent, {
       border-bottom-right-radius: 0;
     }
   }
+
   &__innerAft {
     height: 100%;
     display: flex;
@@ -181,6 +200,7 @@ provide(selectContent, {
     right: 10px;
     top: 0;
   }
+
   .ty-select__clear {
     display: none;
     height: 100%;
@@ -191,6 +211,7 @@ provide(selectContent, {
       display: inline-block;
       content: '\eb99';
     }
+
     &:hover {
       &::before {
         font-family: 'toyaricon' !important;
@@ -208,6 +229,7 @@ provide(selectContent, {
     input {
       background-color: var(--fill-3);
     }
+
     .ty-select__clear {
       background-color: var(--fill-3);
       display: block;
@@ -218,6 +240,7 @@ provide(selectContent, {
     background-color: var(--color-bg-2);
     box-shadow: 1px 1px var(--primary-6), -1px 1px var(--primary-6),
       1px -1px var(--primary-6), -1px -1px var(--primary-6);
+
     input {
       background-color: var(--color-bg-2);
     }
@@ -227,6 +250,7 @@ provide(selectContent, {
     box-shadow: 1px 1px var(--danger-6), -1px 1px var(--danger-6),
       1px -1px var(--danger-6), -1px -1px var(--danger-6);
   }
+
   &.is-disabled {
     background-color: var(--fill-2);
     color: var(--text-4);
@@ -240,7 +264,12 @@ provide(selectContent, {
 }
 
 // ------------------------  input尺寸样式  ------------------------
-$inputSize: (mini, small, medium, large);
+$inputSize: (
+  mini,
+  small,
+  medium,
+  large
+);
 
 @mixin addInputSize($name) {
   .ty-select--#{$name} {
@@ -252,46 +281,110 @@ $inputSize: (mini, small, medium, large);
 @each $name in $inputSize {
   @include addInputSize($name);
 }
+
 .ty-select__group {
-  position: absolute;
   z-index: 2;
-  top: 20px;
   box-sizing: border-box;
   list-style: none;
   padding: unset;
   border: 1px solid var(--fill-3);
-
   background-color: var(--color-bg-1);
   box-shadow: var(--box-shadow-5);
   width: 100%;
   border-radius: var(--border-radius-4);
   padding: 5px 0;
+  z-index: 1000;
 }
-.ty-select__arrow {
-  position: absolute;
-  border: 1px solid var(--fill-3);
-  // border-width: 8px;
-  // border-color: transparent;
-  border-bottom: unset;
-  border-left: unset;
-  background-color: var(--color-bg-1);
-  width: 8px;
-  height: 8px;
-  // border-bottom-width: 0;
-  top: -0.5px;
-  left: 50%;
-  z-index: -1;
-  transform: translate(-50%, -50%) rotate(-45deg);
 
-  // &::before{
-  //   content: '';
+// .ty-select__arrow {
+//   position: absolute;
+//   border: 1px solid var(--fill-3);
+//   // border-width: 8px;
+//   // border-color: transparent;
+//   border-bottom: unset;
+//   border-left: unset;
+//   background-color: var(--color-bg-1);
+//   width: 8px;
+//   height: 8px;
+//   // border-bottom-width: 0;
+//   top: -0.5px;
+//   left: 50%;
+//   z-index: -1;
+//   transform: translate(-50%, -50%) rotate(-45deg);
 
-  //   display: block;
-  //   position: absolute;
-  //   border:8px solid transparent;
-  //   border-bottom-color:  var(--color-bg-1);
-  //   left: -8px;
-  //   bottom: -10px;
-  // }
+//   // &::before{
+//   //   content: '';
+
+//   //   display: block;
+//   //   position: absolute;
+//   //   border:8px solid transparent;
+//   //   border-bottom-color:  var(--color-bg-1);
+//   //   left: -8px;
+//   //   bottom: -10px;
+//   // }
+// }
+
+[data-popper-placement="top"] {
+  .ty-select__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px;
+    /* 调整箭头大小 */
+    border-color: var(--fill-3) transparent transparent transparent;
+    z-index: -1;
+    bottom: -13px;
+    display: flex;
+    /* 调整箭头颜色 */
+    &::after {
+      content: '';
+      display: inline-block;
+
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px;
+      transform: translate(-8px,-9px);
+
+      /* 调整箭头大小 */
+      border-color: var(--color-bg-1) transparent transparent transparent;
+    }
+  }
+}
+
+[data-popper-placement="bottom"] {
+  .ty-select__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 1px;
+    display: flex;
+
+    top: 1px;
+    border-style: solid;
+    border-width: 6px;
+    /* 调整箭头大小 */
+    border-color: transparent transparent var(--fill-3) transparent;
+    top: -13px;
+    z-index: -1;
+
+    /* 调整箭头颜色 */
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px;
+      left: -50%;
+      /* 调整箭头大小 */
+      border-color: transparent transparent var(--color-bg-1) transparent;
+      transform: translate(-8px,-7px);
+
+    }
+  }
 }
 </style>

@@ -71,7 +71,7 @@
       top: '0',
       transform: `translateX(-${limitBlockWidth > 0 ? limitBlockWidth + outAftWidth - 10 : outAftWidth
         }px)`
-    }" @click="handleClear">
+    }" @click.stop="handleClear">
     </span>
 
     <span :class="nm.is('limit')" v-if="showLimit" ref="limitBlock" :style="{
@@ -173,6 +173,7 @@ function handleInput(event) {
 }
 
 function handleToFocus() {
+  emit('focus')
   focus.value = true
   isShowFormatSelf = false
   setTimeout(() => {
@@ -190,8 +191,10 @@ function handleBlur(event) {
 }
 
 function handleClear() {
+  focus.value = false
   emit('update:modelValue', '')
   emit('clear')
+
 }
 
 function handleEnter() {

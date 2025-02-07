@@ -3,10 +3,11 @@
     <header :class="nm.e('header')">
       <slot name="header"></slot>
     </header>
-    <TyScrollBar :class="nm.e('inner')" ref="scrollBar" :style="{
-      height: `calc(100% - ${$slots.header?'50px' :'0px'})`
-
-    }">
+    <TyScrollBar :class="nm.e('inner')" ref="scrollBar" 
+      :style="{
+        height: `calc(100% - ${$slots.header?'50px' :'0px'})`
+      }"
+    >
       <slot v-if="!option"> </slot>
       <optionsRender v-else :option="option"/>
     </TyScrollBar>
@@ -26,15 +27,10 @@ defineOptions({
 })
 const props = defineProps(menuProps)
 const emit = defineEmits(emits)
+const model = defineModel()
 
 const scrollBar = ref()
 
-const { model } = useCompMvalue(props, emit,{
-  setFn:(value)=> {
-    emit('change',value)
-    return value
-  }
-})
 
 const openId = ref('')
 const getTheme = computed(()=>{
@@ -75,7 +71,6 @@ provide('menu', {
   },
   clickSubMenu:(subMenu)=>{
     emit('subOpen',subMenu)
-
   }
 })
 

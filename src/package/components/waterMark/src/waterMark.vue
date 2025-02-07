@@ -1,8 +1,6 @@
 <template>
   <div :class="nm.b()" ref="maskContainer">
-    <div :class="nm.e('mark')" ref="mark" :style="{
-    backgroundImage: `${bgUrl}`
-  }"></div>
+    <div :class="nm.e('mark')" ref="mark" ></div>
     <slot></slot>
   </div>
 </template>
@@ -16,6 +14,7 @@ defineOptions({
   name: 'TyWaterMark'
 })
 const props = defineProps(waterProps)
+let url
 
 const options = Object.assign({}, defaultOptions, props.options)
 const canvas = document.createElement('canvas')
@@ -29,7 +28,6 @@ ctx.textBaseline = 'middle'
 ctx.translate(options.width / 2, options.height / 2)
 ctx.rotate(options.rotate)
 
-const bgUrl = ref('')
 const mark = ref()
 const maskContainer = ref()
 
@@ -53,8 +51,8 @@ const isImageByDom = str => {
     }
   })
 }
-const setUrl = img => {
-  bgUrl.value = `url(${img})`
+const setUrl = () => {
+  mark.value.style.backgroundImage = `url(${url})`
 }
 
 
@@ -94,16 +92,18 @@ const createMark = async () => {
     }
 
   }
-  setUrl(canvas.toDataURL('image/png'))
+  url =canvas.toDataURL('image/png')
+  setUrl()
 }
 
-const createMarkDeb = useDebounce(createMark, 1000, true)
+const createMarkDeb = useDebounce(createMark, 1500, true)
 
 let mutOb = new MutationObserver(records => {
   records.forEach(el => {
     if (el.target === mark.value) {
       mark.value.style.display = 'block'
       mark.value.style.opacity = '1'
+      setUrl()
     }
     if (el.removedNodes[0] === mark.value) {
       createMarkDeb()

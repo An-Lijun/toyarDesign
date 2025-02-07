@@ -8,6 +8,7 @@
           </template>
       </TyMenu>
 </div>
+<h1>{{ value1 }}</h1>
   <div class="divRoot">
     <TyButton @click="() => {
       isFold = !isFold
