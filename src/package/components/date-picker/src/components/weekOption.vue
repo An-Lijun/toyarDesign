@@ -23,7 +23,7 @@
   </header>
   <main>
     <div v-for="(item, index) in showDay" :key="index" class="row"  @click="selectDay(item[0])">
-      <span v-for="ite in item" class="day">{{ ite }}</span>
+      <span v-for="ite in item" class="day">{{ ite.value }}</span>
     </div>
   </main>
 </template>
@@ -40,6 +40,7 @@ let aftMonth = ref(0)
 let showDay = ref([])
 const render = (dateArr: Array<any>) => {
   // 1.获取当前年月日
+  showDay.value = []
   let date = new Date(dateArr[0], dateArr[1])
   let year = date.getFullYear()
   let month = date.getMonth()
@@ -52,24 +53,35 @@ const render = (dateArr: Array<any>) => {
   let index = 0
   while (flag) {
     let lastDay = new Date(year, month, index)
-    befMonth.value.unshift(lastDay.getDate())
+
+    befMonth.value.unshift({
+      key:`${month ===0?year-1:year}-${month ===0?12:month}-${lastDay.getDate()}`,
+      value:lastDay.getDate()
+    })
     index--
     if (lastDay.getDay() == 1) {
       flag = false
     }
   }
+  
   //  4. 计算当前月份展示几天
   nowMonth.value = new Date(year, month + 1, 0).getDate()
-  aftMonth.value = 43 - befMonth.value.length - nowMonth.value
+  aftMonth.value = 42 - befMonth.value.length - nowMonth.value
   let countArr = []
 
   countArr.push(...befMonth.value)
 
   for (let i = 1; i <= nowMonth.value; i++) {
-    countArr.push(i)
+    countArr.push({
+      key:`${year}-${month + 1}-${i}`,
+      value:i
+    })
   }
   for (let i = 1; i <= aftMonth.value; i++) {
-    countArr.push(i)
+    countArr.push({
+      key:`${month ===11?year+1:year}-${month ===11?1:month + 2}-${i}`,
+      value:i
+    })
   }
 
   let arr = []
@@ -81,8 +93,6 @@ const render = (dateArr: Array<any>) => {
     }
     arr.push(countArr[i])
   }
-  console.log(showDay.value);
-
 }
 render(countDate)
 const lastYear = () => {
@@ -126,10 +136,8 @@ function getWeekNumber(date) {
     return weekNumber;
 }
 const selectDay = (day: string) => {
-  
-  let data = `${countDate[0]}-${String(countDate[1] + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
-  console.log(getWeekNumber(data));
-  // emit('selectData', data)
+  let date = new Date(day.key)
+  emit('selectData', `${date.getFullYear()}-${String(date.getMonth() + 1)}第${getWeekNumber(day.key)}周`)
 }
 
 </script>

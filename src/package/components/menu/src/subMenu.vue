@@ -1,6 +1,6 @@
 <template>
-  <div :class="[subNm.b(), subNm.is('fold', !isShowRef)]" ref="subMenu">
-    <div :class="subNm.e('inner')" @click="openChildMenu">
+  <div :class="[subNm.b(), subNm.is('fold', !isShowRef)]" ref="subMenu" >
+    <div :class="subNm.e('inner')" @click.stop="openChildMenu">
 
       <template v-if="isShowRef">
         <menuIndex :compLevel="compLevel" />
@@ -16,17 +16,16 @@
         <TyIcon icon="ty-arrow-down-s-line"></TyIcon>
       </div>
     </div>
-    <div :style="{
-      transform: !isShowRef
-        ? `translate(${width}px,-40px)`
-        : ''
-    }" :class="[
-      subNm.e('content'),
-      subNm.is('opend', isOpened),
-      subNm.is('fold', !isShowRef)
-    ]">
-      <ul>
+    <div 
+      :class="[
+        subNm.e('content'),
+        subNm.is('opend', isOpened),
+        subNm.is('fold', !isShowRef)
+      ]">
+      <ul ref="popRef">
         <slot></slot>
+        <div :class="subNm.e('arrowLeft')" ref="arrowRef" v-if="isShowRef">
+        </div>
       </ul>
     </div>
   </div>
@@ -34,8 +33,10 @@
 <script setup lang="ts" name="TySubMenu">
 import { injectLevel } from './hooks/level.ts'
 import { subNm } from './context'
-import { inject, ref, watch, provide, computed } from 'vue'
+import { inject, ref, watch, unref, computed } from 'vue'
 import menuIndex from './menuIndex.vue'
+import { arrow, createPopper } from '@popperjs/core';
+
 defineOptions({
   name: 'TySubMenu'
 })
@@ -52,17 +53,44 @@ const menuProvide = inject('menu', {})
 const subMenu = ref() // menuref
 let isShowRef = ref(true)
 
-let width = ref(0)
+let popperInstance = null
+const popRef = ref();
+const arrowRef = ref();
+const createInstance = () => {
+  popperInstance = createPopper(unref(subMenu), unref(popRef), {
+    placement: 'right',
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          // 偏移值 左右，上下
+          offset: [0, 20]
+        }
+      },
+      {
+        name: 'arrow',
+        options: {
+          element: unref(arrowRef),
+        }
+      }
+    ]
+  });
+  nextTick(() => {
+    // 异步更新
+    popperInstance.update()
+  })
+}
+
 const openChildMenu = () => {
-  if (menuProvide.isFold.value) {
-    let data = subMenu.value.getBoundingClientRect().width + 10
-    if (compLevel.value === 0) {
-      data += subMenu.value.getBoundingClientRect().left
-    }
-    width.value = data
-  }
+  
   menuProvide.clickSubMenu(props.index)
+  if(menuProvide.isFold.value){
+    createInstance()
+  }else{
+    popperInstance?.destroy()
+  }
   isOpened.value = !isOpened.value
+  
 }
 
 const compStyle = computed(() => {
@@ -81,6 +109,15 @@ if (menuProvide) {
     }
   )
 }
+const clickFn = () => {
+  if(menuProvide.isFold.value){
+    isOpened.value = false
+  }
+}
+window.addEventListener('click', clickFn)
+onUnmounted(() => {
+  window.removeEventListener('click', clickFn)
+})
 
 </script>
 <style lang="scss" scoped>
@@ -150,6 +187,9 @@ if (menuProvide) {
       //   background-color: red !important;
       // }
       background-color: var(--menu-open);
+      ul{
+        border-radius: 3px;
+      }
     }
   }
 
@@ -176,16 +216,34 @@ if (menuProvide) {
         &>ul {
           display: block;
           box-sizing: border-box;
-          border: 1px solid var(--border-color-2) !important;
+          background-color: var(--color-bg-2);
+          color: var(--text-2);
+          border: 1px solid var(--color-bg-2);
         }
       }
     }
 
     .is-fold.ty-sub-menu__content>ul {
       box-sizing: border-box;
-      border: unset;
     }
   }
 
+}
+
+[data-popper-placement="right"] {
+  .ty-sub-menu__arrowLeft {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    /* 调整箭头大小 */
+    border-color: transparent  var(--color-bg-2) transparent transparent;
+    left: -16px;
+    z-index: 999;
+
+    /* 调整箭头颜色 */
+  }
 }
 </style>

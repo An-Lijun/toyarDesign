@@ -120,7 +120,7 @@ const selectData = (data) => {
   emit('update:modelValue', data)
 }
 function formatTime(timestamp: string | Date) {
-  if (props.opType === 'year' || props.opType === 'season' || props.opType === 'week') {
+  if (['year', 'season', 'week'].includes(props.opType)) {
     return timestamp
   }
 
