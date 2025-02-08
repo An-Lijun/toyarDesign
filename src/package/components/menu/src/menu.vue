@@ -1,25 +1,23 @@
 <template>
-  <section :class="[nm.b(), nm.is('fold', isFold),getTheme]">
+  <section :class="[nm.b(), nm.is('fold', isFold), getTheme]">
     <header :class="nm.e('header')">
       <slot name="header"></slot>
     </header>
-    <TyScrollBar :class="nm.e('inner')" ref="scrollBar" 
-      :style="{
-        height: `calc(100% - ${$slots.header?'50px' :'0px'})`
-      }"
-    >
+    <TyScrollBar :class="nm.e('inner')" ref="scrollBar" :style="{
+      height: `calc(100% - ${$slots.header ? '50px' : '0px'})`
+    }">
       <slot v-if="!option"> </slot>
-      <optionsRender v-else :option="option"/>
+      <optionsRender v-else :option="option" />
     </TyScrollBar>
   </section>
 </template>
 <script setup>
 import optionsRender from './optionsRender'
 import { provideLevel } from './hooks/level.ts'
-import { nm, menuProps ,emits} from './context'
+import { nm, menuProps, emits } from './context'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
-import {nowTheme} from '../../../hooks/changeTheme'
-import {ref,computed,provide,watch} from 'vue'
+import { nowTheme } from '../../../hooks/changeTheme'
+import { ref, computed, provide, watch } from 'vue'
 import { TyScrollBar } from '../../scrollbar'
 
 defineOptions({
@@ -28,61 +26,49 @@ defineOptions({
 const props = defineProps(menuProps)
 const emit = defineEmits(emits)
 const model = defineModel()
+const opend = defineModel('opend', {
+  type: Array,
+  default: () => []
+})
 
 const scrollBar = ref()
-
-
-const openId = ref('')
-const getTheme = computed(()=>{
+const getTheme = computed(() => {
   switch (props.theme) {
-    case 'design':
-      return ''
     case 'dark':
-      return 'ty-dark'
     case 'light':
-      return 'ty-light'
+      return 'ty' + props.theme
     case 'rDesign':
-      return nowTheme.value==='dark'?'ty-light':'ty-dark'
-    default:
-      break;
+      return nowTheme.value === 'dark' ? 'ty-light' : 'ty-dark'
   }
-}) 
+})
 
 // 给menu 注入层级
 provide('menu', {
   isFold: computed(() => props.isFold),
   lastMenuFn: null,
-  setOpenId: value => {
-    if(scrollBar && scrollBar.value){
-      scrollBar.value.resetScrollBar()
-    }
-    openId.value = value
-  },
-  openId,
-  model:computed(()=>{
+  model: computed(() => {
     return model.value
   }),
-  setModel:(val)=>{
+  setModel: (val) => {
     model.value = val
+    emit('change', val)
   },
-  clickMenu:(menu)=>{
-    emit('open',menu)
-
-  },
-  clickSubMenu:(subMenu)=>{
-    emit('subOpen',subMenu)
+  clickSubMenu: (subMenu) => {
+    if (opend.value.includes(subMenu)) {
+      opend.value = opend.value.filter(item => item !== subMenu)
+    } else {
+      opend.value = [...opend.value, subMenu]
+    }
+    setTimeout(() => {
+      if (scrollBar && scrollBar.value) {
+        scrollBar.value.resetScrollBar()
+      }
+    })
+    emit('opendChange', subMenu)
   }
 })
 
-watch(
-  () => props.isFold,
-  newVal => {
-    openId.value = ''
-  },
-  {
-    deep: true
-  }
-)
+
 
 </script>
 <style lang="scss" scoped>
@@ -97,10 +83,12 @@ watch(
   transition: all 0.5s;
   position: relative;
   overflow: hidden;
-  &__header{
+
+  &__header {
     height: 50px;
     overflow: hidden;
   }
+
   &.is-fold {
     width: 50px;
     transition: all 0.5s;

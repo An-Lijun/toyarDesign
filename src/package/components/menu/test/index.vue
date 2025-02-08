@@ -9,13 +9,15 @@
       </TyMenu>
 </div>
 <h1>{{ value1 }}</h1>
+<h2>{{ value2 }}</h2>
+<h3>{{ opend }}</h3>
   <div class="divRoot">
     <TyButton @click="() => {
       isFold = !isFold
     }
       ">提交</TyButton>
     <div>
-      <TyMenu v-model="value1" :isFold="isFold" @change="change">
+      <TyMenu v-model="value2" v-model:opend="opend" :isFold="isFold" @change="change">
         <template #header>
           <div style="
               height: 50px;
@@ -158,6 +160,8 @@ import { ref } from 'vue'
 
 let isFold = ref(true)
 let value1 = ref('aaa')
+let value2 =ref('')
+let opend =ref([])
 const change = (val) => {
   // console.log(val);
 }

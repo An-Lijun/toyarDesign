@@ -7,7 +7,7 @@ export const subNm =useNmSpace('sub-menu')
 
 export const menuProps=buildProps({
   modelValue: {
-    type: [String, Number,Array],
+    type: [String, Number],
     required: true,
   },
   option:{

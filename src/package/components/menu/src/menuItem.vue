@@ -32,7 +32,6 @@ const props = defineProps({
 })
 const compLevel = injectLevel()
 const menuProvide = inject('menu', null)
-const subMenu = inject('subMenu', null)
 const emit = defineEmits(['click'])
 let isShowRef = ref(true)
 const handleClick = () => {
@@ -42,9 +41,8 @@ const handleClick = () => {
     return
   }
   if (props._mItem && menuProvide.model.value !== props.mkey) {
-    menuProvide.clickMenu(props._mItem)
+    menuProvide.setModel(props._mItem)
   }
-  subMenu.childClick()
 }
 if (menuProvide) {
   watch(

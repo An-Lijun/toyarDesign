@@ -61,11 +61,8 @@ const openChildMenu = () => {
     }
     width.value = data
   }
-  menuProvide.setOpenId(props.index)
-  menuProvide.clickSubMenu(props._mItem)
-  setTimeout(() => {
-    isOpened.value = !isOpened.value
-  })
+  menuProvide.clickSubMenu(props.index)
+  isOpened.value = !isOpened.value
 }
 
 const compStyle = computed(() => {
@@ -83,32 +80,8 @@ if (menuProvide) {
       immediate: true
     }
   )
-
-  watch(
-    () => menuProvide.openId,
-    newVal => {
-      if (
-        newVal !== props.index &&
-        menuProvide.isFold.value
-        &&
-        !String(newVal.value).startsWith(props.index)
-      ) {
-        isOpened.value = false
-      }
-    },
-    {
-      deep: true
-    }
-  )
 }
 
-provide('subMenu', {
-  childClick: () => {
-    if (menuProvide.isFold.value) {
-      menuProvide.setOpenId('')
-    }
-  }
-})
 </script>
 <style lang="scss" scoped>
 .ty-sub-menu {
