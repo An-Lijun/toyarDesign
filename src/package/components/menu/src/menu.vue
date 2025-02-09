@@ -92,6 +92,9 @@ provide('menu', {
   &.is-fold {
     width: 50px;
     transition: all 0.5s;
+    ::v-deep(.ty-menu__index){
+      display: none;
+    }
   }
 }
 </style>

@@ -1,30 +1,24 @@
 <template>
-  <div :class="[subNm.b(), subNm.is('fold', !isShowRef)]" ref="subMenu" >
+  <div :class="[subNm.b()]" ref="subMenu">
     <div :class="subNm.e('inner')" @click.stop="openChildMenu">
-
-      <template v-if="isShowRef">
-        <menuIndex :compLevel="compLevel" />
-      </template>
-
+      <menuIndex :compLevel="compLevel" class="menuIndex" />
       <div :class="subNm.e('icon')" :style="compStyle">
         <slot name="icon"></slot>
       </div>
-      <div :class="subNm.e('text')" v-if="isShowRef">
+      <div :class="subNm.e('text')">
         <slot name="title"></slot>
       </div>
-      <div :class="[subNm.e('arrow'), subNm.is('opened', isOpened)]" v-if="isShowRef ? true : compLevel > 0">
+      <div :class="[subNm.e('arrow'), subNm.is('opened', isOpened)]" >
         <TyIcon icon="ty-arrow-down-s-line"></TyIcon>
       </div>
     </div>
-    <div 
-      :class="[
-        subNm.e('content'),
-        subNm.is('opend', isOpened),
-        subNm.is('fold', !isShowRef)
-      ]">
+    <div :class="[
+      subNm.e('content'),
+      subNm.is('opend', isOpened),
+    ]">
       <ul ref="popRef">
         <slot></slot>
-        <div :class="subNm.e('arrowLeft')" ref="arrowRef" v-if="isShowRef">
+        <div :class="subNm.e('arrowLeft')" ref="arrowRef">
         </div>
       </ul>
     </div>
@@ -33,7 +27,7 @@
 <script setup lang="ts" name="TySubMenu">
 import { injectLevel } from './hooks/level.ts'
 import { subNm } from './context'
-import { inject, ref, watch, unref, computed } from 'vue'
+import { inject, ref, unref, computed } from 'vue'
 import menuIndex from './menuIndex.vue'
 import { arrow, createPopper } from '@popperjs/core';
 
@@ -51,7 +45,6 @@ let isOpened = ref(false)
 const compLevel = injectLevel(true)
 const menuProvide = inject('menu', {})
 const subMenu = ref() // menuref
-let isShowRef = ref(true)
 
 let popperInstance = null
 const popRef = ref();
@@ -82,35 +75,24 @@ const createInstance = () => {
 }
 
 const openChildMenu = () => {
-  
+
   menuProvide.clickSubMenu(props.index)
-  if(menuProvide.isFold.value){
+  if (menuProvide.isFold.value) {
     createInstance()
-  }else{
+  } else {
     popperInstance?.destroy()
   }
   isOpened.value = !isOpened.value
-  
+
 }
 
 const compStyle = computed(() => {
   return { '--toyar-gray-10': isOpened.value ? 'var(--toyar-xblue-6)' : '' }
 })
 
-if (menuProvide) {
-  watch(
-    () => menuProvide.isFold,
-    newVal => {
-      isShowRef.value = !newVal.value
-    },
-    {
-      deep: true,
-      immediate: true
-    }
-  )
-}
+
 const clickFn = () => {
-  if(menuProvide.isFold.value){
+  if (menuProvide.isFold.value) {
     isOpened.value = false
   }
 }
@@ -187,46 +169,14 @@ onUnmounted(() => {
       //   background-color: red !important;
       // }
       background-color: var(--menu-open);
-      ul{
+
+      ul {
         border-radius: 3px;
       }
     }
   }
 
-  &.is-fold {
-    &>.ty-sub-menu__inner {
-      padding: unset;
 
-      &>.ty-sub-menu__icon {
-        width: 40px;
-        min-width: 40px;
-      }
-    }
-
-    &>.ty-sub-menu__content {
-      overflow: auto;
-      position: fixed;
-      left: 0px;
-      z-index: 150;
-
-      &.is-opend {
-        grid-template-rows: 1fr;
-        overflow: unset;
-
-        &>ul {
-          display: block;
-          box-sizing: border-box;
-          background-color: var(--color-bg-2);
-          color: var(--text-2);
-          border: 1px solid var(--color-bg-2);
-        }
-      }
-    }
-
-    .is-fold.ty-sub-menu__content>ul {
-      box-sizing: border-box;
-    }
-  }
 
 }
 
@@ -239,11 +189,50 @@ onUnmounted(() => {
     border-style: solid;
     border-width: 8px;
     /* 调整箭头大小 */
-    border-color: transparent  var(--color-bg-2) transparent transparent;
+    border-color: transparent var(--color-bg-2) transparent transparent;
     left: -16px;
     z-index: 999;
 
     /* 调整箭头颜色 */
+  }
+}
+
+.is-fold {
+  & .ty-sub-menu__inner {
+    padding: unset;
+
+    &>.ty-sub-menu__icon {
+      width: 40px;
+      min-width: 40px;
+    }
+  }
+
+  & .ty-sub-menu__content {
+    overflow: auto;
+    position: fixed;
+    left: 0px;
+    z-index: 150;
+
+    &.is-opend {
+      grid-template-rows: 1fr;
+      overflow: unset;
+
+      &>ul {
+        display: block;
+        box-sizing: border-box;
+        background-color: var(--color-bg-2);
+        color: var(--text-2);
+        border: 1px solid var(--color-bg-2);
+      }
+    }
+  }
+}
+.ty-menu:not(.is-fold){
+  .ty-sub-menu__content{
+    ul{
+      position: relative!important;
+      transform: unset!important;
+    }
   }
 }
 </style>

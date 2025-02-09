@@ -1,10 +1,8 @@
 <template>
-  <li :class="[nm.bem('item'), nm.is('level', Boolean(useSlots().icon)),nm.is('fold', !isShowRef)
+  <li :class="[nm.bem('item'), nm.is('level', Boolean(useSlots().icon))
     , nm.is('active', menuProvide.model.value == mkey)]" @click="handleClick">
 
-    <template v-if="isShowRef">
-      <menuIndex :compLevel="compLevel" />
-    </template>
+    <menuIndex :compLevel="compLevel" />
     <span :class="nm.bem('item', 'icon')">
       <slot name="icon"></slot>
     </span>
@@ -16,7 +14,7 @@
 <script setup>
 import { nm } from './context'
 import { injectLevel } from './hooks/level.ts'
-import { useSlots, inject, ref, watch } from "vue";
+import { useSlots, inject, ref } from "vue";
 import menuIndex from './menuIndex.vue'
 
 defineOptions({
@@ -33,7 +31,6 @@ const props = defineProps({
 const compLevel = injectLevel()
 const menuProvide = inject('menu', null)
 const emit = defineEmits(['click'])
-let isShowRef = ref(true)
 const handleClick = () => {
 
   menuProvide.setModel(props.mkey)
@@ -44,18 +41,7 @@ const handleClick = () => {
     menuProvide.setModel(props._mItem)
   }
 }
-if (menuProvide) {
-  watch(
-    () => menuProvide.isFold,
-    newVal => {
-        isShowRef.value = !newVal.value
-    },
-    {
-      deep: true,
-      immediate: true
-    }
-  )
-}
+
 </script>
 <style lang="scss" scoped>
 .ty-menu-item {
@@ -94,10 +80,13 @@ if (menuProvide) {
     color: #fff;
   }
 
-  &.is-level.is-fold {
-    padding: unset;
 
-    .ty-menu-item__icon {
+}
+.is-fold {
+  .is-level{
+    padding: unset;
+  }
+    .ty-menu-item__icon{
       width: 40px;
       min-width: 40px;
     }
@@ -106,5 +95,4 @@ if (menuProvide) {
       display: none;
     }
   }
-}
 </style>
