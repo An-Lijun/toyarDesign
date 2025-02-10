@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-      <div style="display: flex;flex-wrap: wrap;">
-        <div v-for="element in iconArr" class="iconBox" @click="copy(element.icon)">
+      <div style="display: flex;flex-wrap: wrap;" ref="lazyLoadRef">
+        <div v-for="element in icons" class="iconBox" @click="copy(element.icon)">
           <div class="icon">
             <i :class="`toyar ${element.icon}`"> </i>
           </div>
@@ -13,13 +13,17 @@
   </div>
 </template>
 <script setup>
+import { ref, onMounted } from 'vue'
+import icon from '../../src/package/components/icon'
 const props = defineProps({
   iconArr: {
-    type: Array,
+    type: String,
     required:true
   }
 })
 
+const icons = ref([])
+const lazyLoadRef = ref()
 let TyMessage = () => {}
 if (document) {
   import('../../src/package/index.ts').then(res => {
@@ -30,14 +34,32 @@ const copy = (item) => {
   navigator.clipboard.writeText(item);
   TyMessage('复制成功~')
 }
+const loadComponent= ()=>{
+  import(`./icons/${props.iconArr}.js`).then(res => {
+    icons.value =res[props.iconArr]
+  })
+}
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // 当占位元素进入视口时
+          loadComponent();
+          // 停止观察
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    // 开始观察占位元素
+      observer.observe(lazyLoadRef.value);
+})
 </script>
 <style lang="scss" scoped>
 header,
 .container {
-  // width: 1200px;
-  // margin: 0 auto;
   margin-bottom: 20px;
   box-sizing: border-box;
+  min-height: 500px;
 }
 
 .titleBox {
