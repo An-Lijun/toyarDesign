@@ -72,13 +72,13 @@ const dirList = all.reduce((acc, item) => {
 
 
 let str = `
-${dirList.map(item => `import ${item} from './components/icons/src/${item}.vue'`).join('\n')}
+${dirList.map(item => `import ${item} from './src/${item}.vue'`).join('\n')}
 export {
 ${dirList.join(',\n')}
 }
 `
 
-fs.writeFileSync(path.resolve(`./icons/index.ts`), str)
+fs.writeFileSync(path.resolve(`./components/icons/index.ts`), str)
 
 
 

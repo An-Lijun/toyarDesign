@@ -1,7 +1,7 @@
 # 字体图标列表
 
-## arrow
-  <iconList iconArr="arrow"/> 
+## Arrows
+  <iconList iconArr="Arrows"/> 
 
 ## Buildings
 

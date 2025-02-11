@@ -1,314 +1,924 @@
-export const HealthMedical = [
+export const  HealthMedical=[
   {
-    icon: 'ty-heart-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-heart-line",
+    "belong": "HealthMedical",
+    "name": "heart",
+    "alias": [
+      "heart",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-heart-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-heart-fill",
+    "belong": "HealthMedical",
+    "name": "heart",
+    "alias": [
+      "heart",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-heart-2-line',
-    belong: 'Health & Medical',
-    alias: ['2', 'line', '2']
+    "icon": "ty-heart-2-line",
+    "belong": "HealthMedical",
+    "name": "heart-2",
+    "alias": [
+      "heart",
+      "2",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-heart-2-fill',
-    belong: 'Health & Medical',
-    alias: ['2', 'fill', '2']
+    "icon": "ty-heart-2-fill",
+    "belong": "HealthMedical",
+    "name": "heart-2",
+    "alias": [
+      "heart",
+      "2",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-heart-3-line',
-    belong: 'Health & Medical',
-    alias: ['3', 'line', '3']
+    "icon": "ty-heart-3-line",
+    "belong": "HealthMedical",
+    "name": "heart-3",
+    "alias": [
+      "heart",
+      "3",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-heart-3-fill',
-    belong: 'Health & Medical',
-    alias: ['3', 'fill', '3']
+    "icon": "ty-heart-3-fill",
+    "belong": "HealthMedical",
+    "name": "heart-3",
+    "alias": [
+      "heart",
+      "3",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-heart-add-line',
-    belong: 'Health & Medical',
-    alias: ['add', 'line', 'add']
+    "icon": "ty-heart-add-line",
+    "belong": "HealthMedical",
+    "name": "heart-add",
+    "alias": [
+      "heart",
+      "add",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-heart-add-fill',
-    belong: 'Health & Medical',
-    alias: ['add', 'fill', 'add']
+    "icon": "ty-heart-add-fill",
+    "belong": "HealthMedical",
+    "name": "heart-add",
+    "alias": [
+      "heart",
+      "add",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-dislike-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-heart-add-2-line",
+    "belong": "HealthMedical",
+    "name": "heart-add-2",
+    "alias": [
+      "heart",
+      "add",
+      "2",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-dislike-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-heart-add-2-fill",
+    "belong": "HealthMedical",
+    "name": "heart-add-2",
+    "alias": [
+      "heart",
+      "add",
+      "2",
+      "like",
+      "love",
+      "favorite",
+      "心",
+      "喜欢",
+      "爱",
+      "收藏"
+    ]
   },
   {
-    icon: 'ty-hearts-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-dislike-line",
+    "belong": "HealthMedical",
+    "name": "dislike",
+    "alias": [
+      "dislike",
+      "like",
+      "love",
+      "remove favorite",
+      "心",
+      "不喜欢",
+      "取消收藏"
+    ]
   },
   {
-    icon: 'ty-hearts-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-dislike-fill",
+    "belong": "HealthMedical",
+    "name": "dislike",
+    "alias": [
+      "dislike",
+      "like",
+      "love",
+      "remove favorite",
+      "心",
+      "不喜欢",
+      "取消收藏"
+    ]
   },
   {
-    icon: 'ty-heart-pulse-line',
-    belong: 'Health & Medical',
-    alias: ['pulse', 'line', 'pulse']
+    "icon": "ty-hearts-line",
+    "belong": "HealthMedical",
+    "name": "hearts",
+    "alias": [
+      "hearts",
+      "romance",
+      "爱情",
+      "浪漫",
+      "心"
+    ]
   },
   {
-    icon: 'ty-heart-pulse-fill',
-    belong: 'Health & Medical',
-    alias: ['pulse', 'fill', 'pulse']
+    "icon": "ty-hearts-fill",
+    "belong": "HealthMedical",
+    "name": "hearts",
+    "alias": [
+      "hearts",
+      "romance",
+      "爱情",
+      "浪漫",
+      "心"
+    ]
   },
   {
-    icon: 'ty-pulse-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-heart-pulse-line",
+    "belong": "HealthMedical",
+    "name": "heart-pulse",
+    "alias": [
+      "heart",
+      "pulse",
+      "heart rate",
+      "脉搏",
+      "心率"
+    ]
   },
   {
-    icon: 'ty-pulse-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-heart-pulse-fill",
+    "belong": "HealthMedical",
+    "name": "heart-pulse",
+    "alias": [
+      "heart",
+      "pulse",
+      "heart rate",
+      "脉搏",
+      "心率"
+    ]
   },
   {
-    icon: 'ty-empathize-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-pulse-line",
+    "belong": "HealthMedical",
+    "name": "pulse",
+    "alias": [
+      "pulse",
+      "wave",
+      "heart rate",
+      "脉搏",
+      "心率",
+      "波"
+    ]
   },
   {
-    icon: 'ty-empathize-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-pulse-fill",
+    "belong": "HealthMedical",
+    "name": "pulse",
+    "alias": [
+      "pulse",
+      "wave",
+      "heart rate",
+      "脉搏",
+      "心率",
+      "波"
+    ]
   },
   {
-    icon: 'ty-nurse-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-pulse-ai-line",
+    "belong": "HealthMedical",
+    "name": "pulse-ai",
+    "alias": [
+      "pulse",
+      "ai",
+      "wave",
+      "heart rate",
+      "脉搏",
+      "心率",
+      "波",
+      "AI分析"
+    ]
   },
   {
-    icon: 'ty-nurse-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-pulse-ai-fill",
+    "belong": "HealthMedical",
+    "name": "pulse-ai",
+    "alias": [
+      "pulse",
+      "ai",
+      "wave",
+      "heart rate",
+      "脉搏",
+      "心率",
+      "波",
+      "AI分析"
+    ]
   },
   {
-    icon: 'ty-dossier-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-empathize-line",
+    "belong": "HealthMedical",
+    "name": "empathize",
+    "alias": [
+      "empathize",
+      "care",
+      "heart",
+      "同理心",
+      "关爱",
+      "心"
+    ]
   },
   {
-    icon: 'ty-dossier-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-empathize-fill",
+    "belong": "HealthMedical",
+    "name": "empathize",
+    "alias": [
+      "empathize",
+      "care",
+      "heart",
+      "同理心",
+      "关爱",
+      "心"
+    ]
   },
   {
-    icon: 'ty-health-book-line',
-    belong: 'Health & Medical',
-    alias: ['book', 'line', 'book']
+    "icon": "ty-nurse-line",
+    "belong": "HealthMedical",
+    "name": "nurse",
+    "alias": [
+      "nurse",
+      "doctors",
+      "医生",
+      "护士"
+    ]
   },
   {
-    icon: 'ty-health-book-fill',
-    belong: 'Health & Medical',
-    alias: ['book', 'fill', 'book']
+    "icon": "ty-nurse-fill",
+    "belong": "HealthMedical",
+    "name": "nurse",
+    "alias": [
+      "nurse",
+      "doctors",
+      "医生",
+      "护士"
+    ]
   },
   {
-    icon: 'ty-first-aid-kit-line',
-    belong: 'Health & Medical',
-    type: 'line',
-    alias: ['aid', 'kit', 'aid']
+    "icon": "ty-dossier-line",
+    "belong": "HealthMedical",
+    "name": "dossier",
+    "alias": [
+      "dossier",
+      "病例"
+    ]
   },
   {
-    icon: 'ty-first-aid-kit-fill',
-    belong: 'Health & Medical',
-    type: 'fill',
-    alias: ['aid', 'kit', 'aid']
+    "icon": "ty-dossier-fill",
+    "belong": "HealthMedical",
+    "name": "dossier",
+    "alias": [
+      "dossier",
+      "病例"
+    ]
   },
   {
-    icon: 'ty-capsule-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-health-book-line",
+    "belong": "HealthMedical",
+    "name": "health-book",
+    "alias": [
+      "health",
+      "book",
+      "健康手册",
+      "医疗手册"
+    ]
   },
   {
-    icon: 'ty-capsule-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-health-book-fill",
+    "belong": "HealthMedical",
+    "name": "health-book",
+    "alias": [
+      "health",
+      "book",
+      "健康手册",
+      "医疗手册"
+    ]
   },
   {
-    icon: 'ty-medicine-bottle-line',
-    belong: 'Health & Medical',
-    alias: ['bottle', 'line', 'bottle']
+    "icon": "ty-first-aid-kit-line",
+    "belong": "HealthMedical",
+    "name": "first-aid-kit",
+    "alias": [
+      "first",
+      "aid",
+      "kit",
+      "case",
+      "急救箱"
+    ]
   },
   {
-    icon: 'ty-medicine-bottle-fill',
-    belong: 'Health & Medical',
-    alias: ['bottle', 'fill', 'bottle']
+    "icon": "ty-first-aid-kit-fill",
+    "belong": "HealthMedical",
+    "name": "first-aid-kit",
+    "alias": [
+      "first",
+      "aid",
+      "kit",
+      "case",
+      "急救箱"
+    ]
   },
   {
-    icon: 'ty-flask-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-capsule-line",
+    "belong": "HealthMedical",
+    "name": "capsule",
+    "alias": [
+      "capsule",
+      "medicine",
+      "胶囊",
+      "药"
+    ]
   },
   {
-    icon: 'ty-flask-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-capsule-fill",
+    "belong": "HealthMedical",
+    "name": "capsule",
+    "alias": [
+      "capsule",
+      "medicine",
+      "胶囊",
+      "药"
+    ]
   },
   {
-    icon: 'ty-test-tube-line',
-    belong: 'Health & Medical',
-    alias: ['tube', 'line', 'tube']
+    "icon": "ty-medicine-bottle-line",
+    "belong": "HealthMedical",
+    "name": "medicine-bottle",
+    "alias": [
+      "medicine",
+      "bottle",
+      "药瓶"
+    ]
   },
   {
-    icon: 'ty-test-tube-fill',
-    belong: 'Health & Medical',
-    alias: ['tube', 'fill', 'tube']
+    "icon": "ty-medicine-bottle-fill",
+    "belong": "HealthMedical",
+    "name": "medicine-bottle",
+    "alias": [
+      "medicine",
+      "bottle",
+      "药瓶"
+    ]
   },
   {
-    icon: 'ty-microscope-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-flask-line",
+    "belong": "HealthMedical",
+    "name": "flask",
+    "alias": [
+      "flask",
+      "testing",
+      "experimental",
+      "experiment",
+      "烧瓶",
+      "实验",
+      "试验"
+    ]
   },
   {
-    icon: 'ty-microscope-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-flask-fill",
+    "belong": "HealthMedical",
+    "name": "flask",
+    "alias": [
+      "flask",
+      "testing",
+      "experimental",
+      "experiment",
+      "烧瓶",
+      "实验",
+      "试验"
+    ]
   },
   {
-    icon: 'ty-hand-sanitizer-line',
-    belong: 'Health & Medical',
-    alias: ['sanitizer', 'line', 'sanitizer']
+    "icon": "ty-test-tube-line",
+    "belong": "HealthMedical",
+    "name": "test-tube",
+    "alias": [
+      "test",
+      "tube",
+      "testing",
+      "experimental",
+      "experiment",
+      "试管",
+      "实验",
+      "试验"
+    ]
   },
   {
-    icon: 'ty-hand-sanitizer-fill',
-    belong: 'Health & Medical',
-    alias: ['sanitizer', 'fill', 'sanitizer']
+    "icon": "ty-test-tube-fill",
+    "belong": "HealthMedical",
+    "name": "test-tube",
+    "alias": [
+      "test",
+      "tube",
+      "testing",
+      "experimental",
+      "experiment",
+      "试管",
+      "实验",
+      "试验"
+    ]
   },
   {
-    icon: 'ty-mental-health-line',
-    belong: 'Health & Medical',
-    alias: ['health', 'line', 'health']
+    "icon": "ty-dropper-line",
+    "belong": "HealthMedical",
+    "name": "dropper",
+    "alias": [
+      "dropper",
+      "eyedropper",
+      "color picker",
+      "color dropper",
+      "实验",
+      "试验",
+      "胶头滴管",
+      "取色器"
+    ]
   },
   {
-    icon: 'ty-mental-health-fill',
-    belong: 'Health & Medical',
-    alias: ['health', 'fill', 'health']
+    "icon": "ty-dropper-fill",
+    "belong": "HealthMedical",
+    "name": "dropper",
+    "alias": [
+      "dropper",
+      "eyedropper",
+      "color picker",
+      "color dropper",
+      "实验",
+      "试验",
+      "胶头滴管",
+      "取色器"
+    ]
   },
   {
-    icon: 'ty-psychotherapy-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-microscope-line",
+    "belong": "HealthMedical",
+    "name": "microscope",
+    "alias": [
+      "microscope",
+      "testing",
+      "experimental",
+      "experiment",
+      "显微镜",
+      "实验",
+      "试验"
+    ]
   },
   {
-    icon: 'ty-psychotherapy-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-microscope-fill",
+    "belong": "HealthMedical",
+    "name": "microscope",
+    "alias": [
+      "microscope",
+      "testing",
+      "experimental",
+      "experiment",
+      "显微镜",
+      "实验",
+      "试验"
+    ]
   },
   {
-    icon: 'ty-stethoscope-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-hand-sanitizer-line",
+    "belong": "HealthMedical",
+    "name": "hand-sanitizer",
+    "alias": [
+      "hand",
+      "sanitizer",
+      "alcohol",
+      "酒精消毒洗手液"
+    ]
   },
   {
-    icon: 'ty-stethoscope-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-hand-sanitizer-fill",
+    "belong": "HealthMedical",
+    "name": "hand-sanitizer",
+    "alias": [
+      "hand",
+      "sanitizer",
+      "alcohol",
+      "酒精消毒洗手液"
+    ]
   },
   {
-    icon: 'ty-syringe-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-mental-health-line",
+    "belong": "HealthMedical",
+    "name": "mental-health",
+    "alias": [
+      "mental",
+      "health",
+      "心理健康"
+    ]
   },
   {
-    icon: 'ty-syringe-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-mental-health-fill",
+    "belong": "HealthMedical",
+    "name": "mental-health",
+    "alias": [
+      "mental",
+      "health",
+      "心理健康"
+    ]
   },
   {
-    icon: 'ty-thermometer-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-psychotherapy-line",
+    "belong": "HealthMedical",
+    "name": "psychotherapy",
+    "alias": [
+      "psychotherapy",
+      "心理治疗"
+    ]
   },
   {
-    icon: 'ty-thermometer-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-psychotherapy-fill",
+    "belong": "HealthMedical",
+    "name": "psychotherapy",
+    "alias": [
+      "psychotherapy",
+      "心理治疗"
+    ]
   },
   {
-    icon: 'ty-infrared-thermometer-line',
-    belong: 'Health & Medical',
-    alias: ['thermometer', 'line', 'thermometer']
+    "icon": "ty-stethoscope-line",
+    "belong": "HealthMedical",
+    "name": "stethoscope",
+    "alias": [
+      "stethoscope",
+      "听诊器"
+    ]
   },
   {
-    icon: 'ty-infrared-thermometer-fill',
-    belong: 'Health & Medical',
-    alias: ['thermometer', 'fill', 'thermometer']
+    "icon": "ty-stethoscope-fill",
+    "belong": "HealthMedical",
+    "name": "stethoscope",
+    "alias": [
+      "stethoscope",
+      "听诊器"
+    ]
   },
   {
-    icon: 'ty-surgical-mask-line',
-    belong: 'Health & Medical',
-    alias: ['mask', 'line', 'mask']
+    "icon": "ty-syringe-line",
+    "belong": "HealthMedical",
+    "name": "syringe",
+    "alias": [
+      "syringe",
+      "注射器"
+    ]
   },
   {
-    icon: 'ty-surgical-mask-fill',
-    belong: 'Health & Medical',
-    alias: ['mask', 'fill', 'mask']
+    "icon": "ty-syringe-fill",
+    "belong": "HealthMedical",
+    "name": "syringe",
+    "alias": [
+      "syringe",
+      "注射器"
+    ]
   },
   {
-    icon: 'ty-virus-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-thermometer-line",
+    "belong": "HealthMedical",
+    "name": "thermometer",
+    "alias": [
+      "thermometer",
+      "体温计"
+    ]
   },
   {
-    icon: 'ty-virus-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-thermometer-fill",
+    "belong": "HealthMedical",
+    "name": "thermometer",
+    "alias": [
+      "thermometer",
+      "体温计"
+    ]
   },
   {
-    icon: 'ty-lungs-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-infrared-thermometer-line",
+    "belong": "HealthMedical",
+    "name": "infrared-thermometer",
+    "alias": [
+      "infrared",
+      "thermometer",
+      "红外线体温计",
+      "体温枪"
+    ]
   },
   {
-    icon: 'ty-lungs-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-infrared-thermometer-fill",
+    "belong": "HealthMedical",
+    "name": "infrared-thermometer",
+    "alias": [
+      "infrared",
+      "thermometer",
+      "红外线体温计",
+      "体温枪"
+    ]
   },
   {
-    icon: 'ty-rest-time-line',
-    belong: 'Health & Medical',
-    alias: ['time', 'line', 'time']
+    "icon": "ty-surgical-mask-line",
+    "belong": "HealthMedical",
+    "name": "surgical-mask",
+    "alias": [
+      "surgical",
+      "mask",
+      "外科医用口罩"
+    ]
   },
   {
-    icon: 'ty-rest-time-fill',
-    belong: 'Health & Medical',
-    alias: ['time', 'fill', 'time']
+    "icon": "ty-surgical-mask-fill",
+    "belong": "HealthMedical",
+    "name": "surgical-mask",
+    "alias": [
+      "surgical",
+      "mask",
+      "外科医用口罩"
+    ]
   },
   {
-    icon: 'ty-zzz-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-virus-line",
+    "belong": "HealthMedical",
+    "name": "virus",
+    "alias": [
+      "virus",
+      "病毒"
+    ]
   },
   {
-    icon: 'ty-zzz-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-virus-fill",
+    "belong": "HealthMedical",
+    "name": "virus",
+    "alias": [
+      "virus",
+      "病毒"
+    ]
   },
   {
-    icon: 'ty-brain-line',
-    belong: 'Health & Medical',
-    alias: ['line', null, 'line']
+    "icon": "ty-lungs-line",
+    "belong": "HealthMedical",
+    "name": "lungs",
+    "alias": [
+      "lungs",
+      "肺部"
+    ]
   },
   {
-    icon: 'ty-brain-fill',
-    belong: 'Health & Medical',
-    alias: ['fill', null, 'fill']
+    "icon": "ty-lungs-fill",
+    "belong": "HealthMedical",
+    "name": "lungs",
+    "alias": [
+      "lungs",
+      "肺部"
+    ]
+  },
+  {
+    "icon": "ty-rest-time-line",
+    "belong": "HealthMedical",
+    "name": "rest-time",
+    "alias": [
+      "rest",
+      "time",
+      "close",
+      "休息时间",
+      "打烊"
+    ]
+  },
+  {
+    "icon": "ty-rest-time-fill",
+    "belong": "HealthMedical",
+    "name": "rest-time",
+    "alias": [
+      "rest",
+      "time",
+      "close",
+      "休息时间",
+      "打烊"
+    ]
+  },
+  {
+    "icon": "ty-zzz-line",
+    "belong": "HealthMedical",
+    "name": "zzz",
+    "alias": [
+      "zzz",
+      "睡觉"
+    ]
+  },
+  {
+    "icon": "ty-zzz-fill",
+    "belong": "HealthMedical",
+    "name": "zzz",
+    "alias": [
+      "zzz",
+      "睡觉"
+    ]
+  },
+  {
+    "icon": "ty-brain-line",
+    "belong": "HealthMedical",
+    "name": "brain",
+    "alias": [
+      "brain",
+      "think",
+      "ai",
+      "大脑",
+      "思考",
+      "人工智能"
+    ]
+  },
+  {
+    "icon": "ty-brain-fill",
+    "belong": "HealthMedical",
+    "name": "brain",
+    "alias": [
+      "brain",
+      "think",
+      "ai",
+      "大脑",
+      "思考",
+      "人工智能"
+    ]
+  },
+  {
+    "icon": "ty-brain-2-line",
+    "belong": "HealthMedical",
+    "name": "brain-2",
+    "alias": [
+      "brain",
+      "2",
+      "think",
+      "ai",
+      "大脑",
+      "思考",
+      "人工智能"
+    ]
+  },
+  {
+    "icon": "ty-brain-2-fill",
+    "belong": "HealthMedical",
+    "name": "brain-2",
+    "alias": [
+      "brain",
+      "2",
+      "think",
+      "ai",
+      "大脑",
+      "思考",
+      "人工智能"
+    ]
+  },
+  {
+    "icon": "ty-aed-line",
+    "belong": "HealthMedical",
+    "name": "aed",
+    "alias": [
+      "aed",
+      "flash",
+      "心脏电击去颤器"
+    ]
+  },
+  {
+    "icon": "ty-aed-fill",
+    "belong": "HealthMedical",
+    "name": "aed",
+    "alias": [
+      "aed",
+      "flash",
+      "心脏电击去颤器"
+    ]
+  },
+  {
+    "icon": "ty-aed-electrodes-line",
+    "belong": "HealthMedical",
+    "name": "aed-electrodes",
+    "alias": [
+      "aed",
+      "electrodes",
+      "电极"
+    ]
+  },
+  {
+    "icon": "ty-aed-electrodes-fill",
+    "belong": "HealthMedical",
+    "name": "aed-electrodes",
+    "alias": [
+      "aed",
+      "electrodes",
+      "电极"
+    ]
+  },
+  {
+    "icon": "ty-dna-line",
+    "belong": "HealthMedical",
+    "name": "dna",
+    "alias": [
+      "dna",
+      "health",
+      "medical",
+      "people",
+      "DNA",
+      "gene",
+      "基因",
+      "健康",
+      "医疗"
+    ]
+  },
+  {
+    "icon": "ty-dna-fill",
+    "belong": "HealthMedical",
+    "name": "dna",
+    "alias": [
+      "dna",
+      "health",
+      "medical",
+      "people",
+      "DNA",
+      "gene",
+      "基因",
+      "健康",
+      "医疗"
+    ]
   }
 ]

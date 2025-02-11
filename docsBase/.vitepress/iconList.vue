@@ -6,7 +6,10 @@
             <i :class="`toyar ${element.icon}`"> </i>
           </div>
           <div class="desc">
-            {{ element.icon.slice(3, element.icon.length - 5) }}
+            {{ element.icon.slice(3) }}
+          </div>
+          <div class="belong">
+            {{ element.alias.join(' ') }}
           </div>
         </div>
       </div>
@@ -77,8 +80,8 @@ header > .logo {
 }
 
 .iconBox {
-  width: 114px;
-  height: 100px;
+  width: 135px;
+  height: 140px;
   margin-bottom: 20px;
   display: inline-flex;
   flex-direction: column;
@@ -91,14 +94,24 @@ header > .logo {
 }
 
 .icon {
-  font-size: 25px;
+  font-size: 35px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .desc {
   word-break: break-all;
   overflow: hidden;
   font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+.belong{
+  font-size: 10px;
+  padding: 0 15px;
   text-align: center;
 }
 

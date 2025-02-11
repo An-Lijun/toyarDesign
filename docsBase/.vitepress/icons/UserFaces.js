@@ -1,580 +1,1666 @@
-export const UserFaces = [
-  {
-    icon: 'ty-user-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-user-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-user-2-line',
-    belong: 'User & Faces',
-    alias: ['2', 'line', '2']
-  },
-  {
-    icon: 'ty-user-2-fill',
-    belong: 'User & Faces',
-    alias: ['2', 'fill', '2']
-  },
-  {
-    icon: 'ty-user-3-line',
-    belong: 'User & Faces',
-    alias: ['3', 'line', '3']
-  },
-  {
-    icon: 'ty-user-3-fill',
-    belong: 'User & Faces',
-    alias: ['3', 'fill', '3']
-  },
-  {
-    icon: 'ty-user-4-line',
-    belong: 'User & Faces',
-    alias: ['4', 'line', '4']
-  },
-  {
-    icon: 'ty-user-4-fill',
-    belong: 'User & Faces',
-    alias: ['4', 'fill', '4']
-  },
-  {
-    icon: 'ty-user-5-line',
-    belong: 'User & Faces',
-    alias: ['5', 'line', '5']
-  },
-  {
-    icon: 'ty-user-5-fill',
-    belong: 'User & Faces',
-    alias: ['5', 'fill', '5']
-  },
-  {
-    icon: 'ty-user-6-line',
-    belong: 'User & Faces',
-    alias: ['6', 'line', '6']
-  },
-  {
-    icon: 'ty-user-6-fill',
-    belong: 'User & Faces',
-    alias: ['6', 'fill', '6']
-  },
-  {
-    icon: 'ty-user-smile-line',
-    belong: 'User & Faces',
-    alias: ['smile', 'line', 'smile']
-  },
-  {
-    icon: 'ty-user-smile-fill',
-    belong: 'User & Faces',
-    alias: ['smile', 'fill', 'smile']
-  },
-  {
-    icon: 'ty-account-box-line',
-    belong: 'User & Faces',
-    alias: ['box', 'line', 'box']
-  },
-  {
-    icon: 'ty-account-box-fill',
-    belong: 'User & Faces',
-    alias: ['box', 'fill', 'box']
-  },
-  {
-    icon: 'ty-account-circle-line',
-    belong: 'User & Faces',
-    alias: ['circle', 'line', 'circle']
-  },
-  {
-    icon: 'ty-account-circle-fill',
-    belong: 'User & Faces',
-    alias: ['circle', 'fill', 'circle']
-  },
-  {
-    icon: 'ty-account-pin-box-line',
-    belong: 'User & Faces',
-    type: 'line',
-    alias: ['pin', 'box', 'pin']
-  },
-  {
-    icon: 'ty-account-pin-box-fill',
-    belong: 'User & Faces',
-    type: 'fill',
-    alias: ['pin', 'box', 'pin']
-  },
-  {
-    icon: 'ty-account-pin-circle-line',
-    belong: 'User & Faces',
-    type: 'line',
-    alias: ['pin', 'circle', 'pin']
-  },
-  {
-    icon: 'ty-account-pin-circle-fill',
-    belong: 'User & Faces',
-    type: 'fill',
-    alias: ['pin', 'circle', 'pin']
-  },
-  {
-    icon: 'ty-user-add-line',
-    belong: 'User & Faces',
-    alias: ['add', 'line', 'add']
-  },
-  {
-    icon: 'ty-user-add-fill',
-    belong: 'User & Faces',
-    alias: ['add', 'fill', 'add']
-  },
-  {
-    icon: 'ty-user-follow-line',
-    belong: 'User & Faces',
-    alias: ['follow', 'line', 'follow']
-  },
-  {
-    icon: 'ty-user-follow-fill',
-    belong: 'User & Faces',
-    alias: ['follow', 'fill', 'follow']
-  },
-  {
-    icon: 'ty-user-unfollow-line',
-    belong: 'User & Faces',
-    alias: ['unfollow', 'line', 'unfollow']
-  },
-  {
-    icon: 'ty-user-unfollow-fill',
-    belong: 'User & Faces',
-    alias: ['unfollow', 'fill', 'unfollow']
-  },
-  {
-    icon: 'ty-user-shared-line',
-    belong: 'User & Faces',
-    alias: ['shared', 'line', 'shared']
-  },
-  {
-    icon: 'ty-user-shared-fill',
-    belong: 'User & Faces',
-    alias: ['shared', 'fill', 'shared']
-  },
-  {
-    icon: 'ty-user-shared-2-line',
-    belong: 'User & Faces',
-    type: 'line',
-    alias: ['shared', '2', 'shared']
-  },
-  {
-    icon: 'ty-user-shared-2-fill',
-    belong: 'User & Faces',
-    type: 'fill',
-    alias: ['shared', '2', 'shared']
-  },
-  {
-    icon: 'ty-user-received-line',
-    belong: 'User & Faces',
-    alias: ['received', 'line', 'received']
-  },
-  {
-    icon: 'ty-user-received-fill',
-    belong: 'User & Faces',
-    alias: ['received', 'fill', 'received']
-  },
-  {
-    icon: 'ty-user-received-2-line',
-    belong: 'User & Faces',
-    type: 'line',
-    alias: ['received', '2', 'received']
-  },
-  {
-    icon: 'ty-user-received-2-fill',
-    belong: 'User & Faces',
-    type: 'fill',
-    alias: ['received', '2', 'received']
-  },
-  {
-    icon: 'ty-user-location-line',
-    belong: 'User & Faces',
-    alias: ['location', 'line', 'location']
-  },
-  {
-    icon: 'ty-user-location-fill',
-    belong: 'User & Faces',
-    alias: ['location', 'fill', 'location']
-  },
-  {
-    icon: 'ty-user-search-line',
-    belong: 'User & Faces',
-    alias: ['search', 'line', 'search']
-  },
-  {
-    icon: 'ty-user-search-fill',
-    belong: 'User & Faces',
-    alias: ['search', 'fill', 'search']
-  },
-  {
-    icon: 'ty-user-settings-line',
-    belong: 'User & Faces',
-    alias: ['settings', 'line', 'settings']
-  },
-  {
-    icon: 'ty-user-settings-fill',
-    belong: 'User & Faces',
-    alias: ['settings', 'fill', 'settings']
-  },
-  {
-    icon: 'ty-user-star-line',
-    belong: 'User & Faces',
-    alias: ['star', 'line', 'star']
-  },
-  {
-    icon: 'ty-user-star-fill',
-    belong: 'User & Faces',
-    alias: ['star', 'fill', 'star']
-  },
-  {
-    icon: 'ty-user-heart-line',
-    belong: 'User & Faces',
-    alias: ['heart', 'line', 'heart']
-  },
-  {
-    icon: 'ty-user-heart-fill',
-    belong: 'User & Faces',
-    alias: ['heart', 'fill', 'heart']
-  },
-  {
-    icon: 'ty-admin-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-admin-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-user-forbid-line',
-    belong: 'User & Faces',
-    alias: ['forbid', 'line', 'forbid']
-  },
-  {
-    icon: 'ty-user-forbid-fill',
-    belong: 'User & Faces',
-    alias: ['forbid', 'fill', 'forbid']
-  },
-  {
-    icon: 'ty-contacts-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-contacts-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-group-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-group-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-group-2-line',
-    belong: 'User & Faces',
-    alias: ['2', 'line', '2']
-  },
-  {
-    icon: 'ty-group-2-fill',
-    belong: 'User & Faces',
-    alias: ['2', 'fill', '2']
-  },
-  {
-    icon: 'ty-team-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-team-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-user-voice-line',
-    belong: 'User & Faces',
-    alias: ['voice', 'line', 'voice']
-  },
-  {
-    icon: 'ty-user-voice-fill',
-    belong: 'User & Faces',
-    alias: ['voice', 'fill', 'voice']
-  },
-  {
-    icon: 'ty-emotion-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-emotion-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-emotion-2-line',
-    belong: 'User & Faces',
-    alias: ['2', 'line', '2']
-  },
-  {
-    icon: 'ty-emotion-2-fill',
-    belong: 'User & Faces',
-    alias: ['2', 'fill', '2']
-  },
-  {
-    icon: 'ty-emotion-happy-line',
-    belong: 'User & Faces',
-    alias: ['happy', 'line', 'happy']
-  },
-  {
-    icon: 'ty-emotion-happy-fill',
-    belong: 'User & Faces',
-    alias: ['happy', 'fill', 'happy']
-  },
-  {
-    icon: 'ty-emotion-normal-line',
-    belong: 'User & Faces',
-    alias: ['normal', 'line', 'normal']
-  },
-  {
-    icon: 'ty-emotion-normal-fill',
-    belong: 'User & Faces',
-    alias: ['normal', 'fill', 'normal']
-  },
-  {
-    icon: 'ty-emotion-unhappy-line',
-    belong: 'User & Faces',
-    alias: ['unhappy', 'line', 'unhappy']
-  },
-  {
-    icon: 'ty-emotion-unhappy-fill',
-    belong: 'User & Faces',
-    alias: ['unhappy', 'fill', 'unhappy']
-  },
-  {
-    icon: 'ty-emotion-laugh-line',
-    belong: 'User & Faces',
-    alias: ['laugh', 'line', 'laugh']
-  },
-  {
-    icon: 'ty-emotion-laugh-fill',
-    belong: 'User & Faces',
-    alias: ['laugh', 'fill', 'laugh']
-  },
-  {
-    icon: 'ty-emotion-sad-line',
-    belong: 'User & Faces',
-    alias: ['sad', 'line', 'sad']
-  },
-  {
-    icon: 'ty-emotion-sad-fill',
-    belong: 'User & Faces',
-    alias: ['sad', 'fill', 'sad']
-  },
-  {
-    icon: 'ty-skull-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-skull-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-skull-2-line',
-    belong: 'User & Faces',
-    alias: ['2', 'line', '2']
-  },
-  {
-    icon: 'ty-skull-2-fill',
-    belong: 'User & Faces',
-    alias: ['2', 'fill', '2']
-  },
-  {
-    icon: 'ty-men-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-men-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-women-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-women-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-travesti-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-travesti-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-genderless-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-genderless-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-open-arm-line',
-    belong: 'User & Faces',
-    alias: ['arm', 'line', 'arm']
-  },
-  {
-    icon: 'ty-open-arm-fill',
-    belong: 'User & Faces',
-    alias: ['arm', 'fill', 'arm']
-  },
-  {
-    icon: 'ty-body-scan-line',
-    belong: 'User & Faces',
-    alias: ['scan', 'line', 'scan']
-  },
-  {
-    icon: 'ty-body-scan-fill',
-    belong: 'User & Faces',
-    alias: ['scan', 'fill', 'scan']
-  },
-  {
-    icon: 'ty-parent-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-parent-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-robot-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-robot-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-robot-2-line',
-    belong: 'User & Faces',
-    alias: ['2', 'line', '2']
-  },
-  {
-    icon: 'ty-robot-2-fill',
-    belong: 'User & Faces',
-    alias: ['2', 'fill', '2']
-  },
-  {
-    icon: 'ty-aliens-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-aliens-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-bear-smile-line',
-    belong: 'User & Faces',
-    alias: ['smile', 'line', 'smile']
-  },
-  {
-    icon: 'ty-bear-smile-fill',
-    belong: 'User & Faces',
-    alias: ['smile', 'fill', 'smile']
-  },
-  {
-    icon: 'ty-mickey-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-mickey-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-criminal-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-criminal-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-ghost-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-ghost-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
-  },
-  {
-    icon: 'ty-ghost-2-line',
-    belong: 'User & Faces',
-    alias: ['2', 'line', '2']
-  },
-  {
-    icon: 'ty-ghost-2-fill',
-    belong: 'User & Faces',
-    alias: ['2', 'fill', '2']
-  },
-  {
-    icon: 'ty-ghost-smile-line',
-    belong: 'User & Faces',
-    alias: ['smile', 'line', 'smile']
-  },
-  {
-    icon: 'ty-ghost-smile-fill',
-    belong: 'User & Faces',
-    alias: ['smile', 'fill', 'smile']
-  },
-  {
-    icon: 'ty-star-smile-line',
-    belong: 'User & Faces',
-    alias: ['smile', 'line', 'smile']
-  },
-  {
-    icon: 'ty-star-smile-fill',
-    belong: 'User & Faces',
-    alias: ['smile', 'fill', 'smile']
-  },
-  {
-    icon: 'ty-spy-line',
-    belong: 'User & Faces',
-    alias: ['line', null, 'line']
-  },
-  {
-    icon: 'ty-spy-fill',
-    belong: 'User & Faces',
-    alias: ['fill', null, 'fill']
+export const  UserFaces=[
+  {
+    "icon": "ty-user-line",
+    "belong": "UserFaces",
+    "name": "user",
+    "alias": [
+      "user",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-fill",
+    "belong": "UserFaces",
+    "name": "user",
+    "alias": [
+      "user",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-2-line",
+    "belong": "UserFaces",
+    "name": "user-2",
+    "alias": [
+      "user",
+      "2",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-2-fill",
+    "belong": "UserFaces",
+    "name": "user-2",
+    "alias": [
+      "user",
+      "2",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-3-line",
+    "belong": "UserFaces",
+    "name": "user-3",
+    "alias": [
+      "user",
+      "3",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-3-fill",
+    "belong": "UserFaces",
+    "name": "user-3",
+    "alias": [
+      "user",
+      "3",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-4-line",
+    "belong": "UserFaces",
+    "name": "user-4",
+    "alias": [
+      "user",
+      "4",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-4-fill",
+    "belong": "UserFaces",
+    "name": "user-4",
+    "alias": [
+      "user",
+      "4",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-5-line",
+    "belong": "UserFaces",
+    "name": "user-5",
+    "alias": [
+      "user",
+      "5",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-5-fill",
+    "belong": "UserFaces",
+    "name": "user-5",
+    "alias": [
+      "user",
+      "5",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-6-line",
+    "belong": "UserFaces",
+    "name": "user-6",
+    "alias": [
+      "user",
+      "6",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-6-fill",
+    "belong": "UserFaces",
+    "name": "user-6",
+    "alias": [
+      "user",
+      "6",
+      "person",
+      "people",
+      "用户"
+    ]
+  },
+  {
+    "icon": "ty-user-smile-line",
+    "belong": "UserFaces",
+    "name": "user-smile",
+    "alias": [
+      "user",
+      "smile",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-user-smile-fill",
+    "belong": "UserFaces",
+    "name": "user-smile",
+    "alias": [
+      "user",
+      "smile",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-box-line",
+    "belong": "UserFaces",
+    "name": "account-box",
+    "alias": [
+      "account",
+      "box",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-box-fill",
+    "belong": "UserFaces",
+    "name": "account-box",
+    "alias": [
+      "account",
+      "box",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-box-2-line",
+    "belong": "UserFaces",
+    "name": "account-box-2",
+    "alias": [
+      "account",
+      "box",
+      "2",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-box-2-fill",
+    "belong": "UserFaces",
+    "name": "account-box-2",
+    "alias": [
+      "account",
+      "box",
+      "2",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-circle-line",
+    "belong": "UserFaces",
+    "name": "account-circle",
+    "alias": [
+      "account",
+      "circle",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-circle-fill",
+    "belong": "UserFaces",
+    "name": "account-circle",
+    "alias": [
+      "account",
+      "circle",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-circle-2-line",
+    "belong": "UserFaces",
+    "name": "account-circle-2",
+    "alias": [
+      "account",
+      "circle",
+      "2",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-circle-2-fill",
+    "belong": "UserFaces",
+    "name": "account-circle-2",
+    "alias": [
+      "account",
+      "circle",
+      "2",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-pin-box-line",
+    "belong": "UserFaces",
+    "name": "account-pin-box",
+    "alias": [
+      "account",
+      "pin",
+      "box",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-pin-box-fill",
+    "belong": "UserFaces",
+    "name": "account-pin-box",
+    "alias": [
+      "account",
+      "pin",
+      "box",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-pin-circle-line",
+    "belong": "UserFaces",
+    "name": "account-pin-circle",
+    "alias": [
+      "account",
+      "pin",
+      "circle",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-account-pin-circle-fill",
+    "belong": "UserFaces",
+    "name": "account-pin-circle",
+    "alias": [
+      "account",
+      "pin",
+      "circle",
+      "person",
+      "people",
+      "用户",
+      "微笑"
+    ]
+  },
+  {
+    "icon": "ty-user-add-line",
+    "belong": "UserFaces",
+    "name": "user-add",
+    "alias": [
+      "user",
+      "add",
+      "person",
+      "people",
+      "用户",
+      "添加",
+      "新增"
+    ]
+  },
+  {
+    "icon": "ty-user-add-fill",
+    "belong": "UserFaces",
+    "name": "user-add",
+    "alias": [
+      "user",
+      "add",
+      "person",
+      "people",
+      "用户",
+      "添加",
+      "新增"
+    ]
+  },
+  {
+    "icon": "ty-user-minus-line",
+    "belong": "UserFaces",
+    "name": "user-minus",
+    "alias": [
+      "user",
+      "minus",
+      "person",
+      "peopl",
+      "unfollow",
+      "用户",
+      "减少",
+      "移除"
+    ]
+  },
+  {
+    "icon": "ty-user-minus-fill",
+    "belong": "UserFaces",
+    "name": "user-minus",
+    "alias": [
+      "user",
+      "minus",
+      "person",
+      "peopl",
+      "unfollow",
+      "用户",
+      "减少",
+      "移除"
+    ]
+  },
+  {
+    "icon": "ty-user-follow-line",
+    "belong": "UserFaces",
+    "name": "user-follow",
+    "alias": [
+      "user",
+      "follow",
+      "person",
+      "people",
+      "关注"
+    ]
+  },
+  {
+    "icon": "ty-user-follow-fill",
+    "belong": "UserFaces",
+    "name": "user-follow",
+    "alias": [
+      "user",
+      "follow",
+      "person",
+      "people",
+      "关注"
+    ]
+  },
+  {
+    "icon": "ty-user-unfollow-line",
+    "belong": "UserFaces",
+    "name": "user-unfollow",
+    "alias": [
+      "user",
+      "unfollow",
+      "person",
+      "people",
+      "rejected",
+      "用户",
+      "取消关注",
+      "拒绝",
+      "错误"
+    ]
+  },
+  {
+    "icon": "ty-user-unfollow-fill",
+    "belong": "UserFaces",
+    "name": "user-unfollow",
+    "alias": [
+      "user",
+      "unfollow",
+      "person",
+      "people",
+      "rejected",
+      "用户",
+      "取消关注",
+      "拒绝",
+      "错误"
+    ]
+  },
+  {
+    "icon": "ty-user-shared-line",
+    "belong": "UserFaces",
+    "name": "user-shared",
+    "alias": [
+      "user",
+      "shared",
+      "transfer",
+      "用户",
+      "我分享的",
+      "发送",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-shared-fill",
+    "belong": "UserFaces",
+    "name": "user-shared",
+    "alias": [
+      "user",
+      "shared",
+      "transfer",
+      "用户",
+      "我分享的",
+      "发送",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-shared-2-line",
+    "belong": "UserFaces",
+    "name": "user-shared-2",
+    "alias": [
+      "user",
+      "shared",
+      "2",
+      "transfer",
+      "用户",
+      "我分享的",
+      "发送",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-shared-2-fill",
+    "belong": "UserFaces",
+    "name": "user-shared-2",
+    "alias": [
+      "user",
+      "shared",
+      "2",
+      "transfer",
+      "用户",
+      "我分享的",
+      "发送",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-received-line",
+    "belong": "UserFaces",
+    "name": "user-received",
+    "alias": [
+      "user",
+      "received",
+      "用户",
+      "我接收的",
+      "收取",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-received-fill",
+    "belong": "UserFaces",
+    "name": "user-received",
+    "alias": [
+      "user",
+      "received",
+      "用户",
+      "我接收的",
+      "收取",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-received-2-line",
+    "belong": "UserFaces",
+    "name": "user-received-2",
+    "alias": [
+      "user",
+      "received",
+      "2",
+      "用户",
+      "我接收的",
+      "收取",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-received-2-fill",
+    "belong": "UserFaces",
+    "name": "user-received-2",
+    "alias": [
+      "user",
+      "received",
+      "2",
+      "用户",
+      "我接收的",
+      "收取",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-location-line",
+    "belong": "UserFaces",
+    "name": "user-location",
+    "alias": [
+      "user",
+      "location",
+      "用户",
+      "定位",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-location-fill",
+    "belong": "UserFaces",
+    "name": "user-location",
+    "alias": [
+      "user",
+      "location",
+      "用户",
+      "定位",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-search-line",
+    "belong": "UserFaces",
+    "name": "user-search",
+    "alias": [
+      "user",
+      "search",
+      "用户",
+      "查找",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-search-fill",
+    "belong": "UserFaces",
+    "name": "user-search",
+    "alias": [
+      "user",
+      "search",
+      "用户",
+      "查找",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-settings-line",
+    "belong": "UserFaces",
+    "name": "user-settings",
+    "alias": [
+      "user",
+      "settings",
+      "admin",
+      "用户",
+      "设置",
+      "管理员",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-settings-fill",
+    "belong": "UserFaces",
+    "name": "user-settings",
+    "alias": [
+      "user",
+      "settings",
+      "admin",
+      "用户",
+      "设置",
+      "管理员",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-star-line",
+    "belong": "UserFaces",
+    "name": "user-star",
+    "alias": [
+      "user",
+      "star",
+      "用户",
+      "关注",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-star-fill",
+    "belong": "UserFaces",
+    "name": "user-star",
+    "alias": [
+      "user",
+      "star",
+      "用户",
+      "关注",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-heart-line",
+    "belong": "UserFaces",
+    "name": "user-heart",
+    "alias": [
+      "user",
+      "heart",
+      "用户",
+      "关注",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-heart-fill",
+    "belong": "UserFaces",
+    "name": "user-heart",
+    "alias": [
+      "user",
+      "heart",
+      "用户",
+      "关注",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-admin-line",
+    "belong": "UserFaces",
+    "name": "admin",
+    "alias": [
+      "admin",
+      "admin",
+      "用户",
+      "管理员",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-admin-fill",
+    "belong": "UserFaces",
+    "name": "admin",
+    "alias": [
+      "admin",
+      "admin",
+      "用户",
+      "管理员",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-forbid-line",
+    "belong": "UserFaces",
+    "name": "user-forbid",
+    "alias": [
+      "user",
+      "forbid",
+      "terminated",
+      "禁止",
+      "终止"
+    ]
+  },
+  {
+    "icon": "ty-user-forbid-fill",
+    "belong": "UserFaces",
+    "name": "user-forbid",
+    "alias": [
+      "user",
+      "forbid",
+      "terminated",
+      "禁止",
+      "终止"
+    ]
+  },
+  {
+    "icon": "ty-contacts-line",
+    "belong": "UserFaces",
+    "name": "contacts",
+    "alias": [
+      "contacts",
+      "联系人"
+    ]
+  },
+  {
+    "icon": "ty-contacts-fill",
+    "belong": "UserFaces",
+    "name": "contacts",
+    "alias": [
+      "contacts",
+      "联系人"
+    ]
+  },
+  {
+    "icon": "ty-group-line",
+    "belong": "UserFaces",
+    "name": "group",
+    "alias": [
+      "group",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-group-fill",
+    "belong": "UserFaces",
+    "name": "group",
+    "alias": [
+      "group",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-group-2-line",
+    "belong": "UserFaces",
+    "name": "group-2",
+    "alias": [
+      "group",
+      "2",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-group-2-fill",
+    "belong": "UserFaces",
+    "name": "group-2",
+    "alias": [
+      "group",
+      "2",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-group-3-line",
+    "belong": "UserFaces",
+    "name": "group-3",
+    "alias": [
+      "group",
+      "3",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-group-3-fill",
+    "belong": "UserFaces",
+    "name": "group-3",
+    "alias": [
+      "group",
+      "3",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-team-line",
+    "belong": "UserFaces",
+    "name": "team",
+    "alias": [
+      "team",
+      "团队",
+      "小组",
+      "群主",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-team-fill",
+    "belong": "UserFaces",
+    "name": "team",
+    "alias": [
+      "team",
+      "团队",
+      "小组",
+      "群主",
+      "person",
+      "people"
+    ]
+  },
+  {
+    "icon": "ty-user-voice-line",
+    "belong": "UserFaces",
+    "name": "user-voice",
+    "alias": [
+      "user",
+      "voice",
+      "用户",
+      "录音",
+      "演讲"
+    ]
+  },
+  {
+    "icon": "ty-user-voice-fill",
+    "belong": "UserFaces",
+    "name": "user-voice",
+    "alias": [
+      "user",
+      "voice",
+      "用户",
+      "录音",
+      "演讲"
+    ]
+  },
+  {
+    "icon": "ty-emotion-line",
+    "belong": "UserFaces",
+    "name": "emotion",
+    "alias": [
+      "emotion",
+      "表情",
+      "笑脸"
+    ]
+  },
+  {
+    "icon": "ty-emotion-fill",
+    "belong": "UserFaces",
+    "name": "emotion",
+    "alias": [
+      "emotion",
+      "表情",
+      "笑脸"
+    ]
+  },
+  {
+    "icon": "ty-emotion-2-line",
+    "belong": "UserFaces",
+    "name": "emotion-2",
+    "alias": [
+      "emotion",
+      "2",
+      "表情",
+      "笑脸"
+    ]
+  },
+  {
+    "icon": "ty-emotion-2-fill",
+    "belong": "UserFaces",
+    "name": "emotion-2",
+    "alias": [
+      "emotion",
+      "2",
+      "表情",
+      "笑脸"
+    ]
+  },
+  {
+    "icon": "ty-emotion-happy-line",
+    "belong": "UserFaces",
+    "name": "emotion-happy",
+    "alias": [
+      "emotion",
+      "happy",
+      "表情",
+      "开心"
+    ]
+  },
+  {
+    "icon": "ty-emotion-happy-fill",
+    "belong": "UserFaces",
+    "name": "emotion-happy",
+    "alias": [
+      "emotion",
+      "happy",
+      "表情",
+      "开心"
+    ]
+  },
+  {
+    "icon": "ty-emotion-normal-line",
+    "belong": "UserFaces",
+    "name": "emotion-normal",
+    "alias": [
+      "emotion",
+      "normal",
+      "表情",
+      "一般"
+    ]
+  },
+  {
+    "icon": "ty-emotion-normal-fill",
+    "belong": "UserFaces",
+    "name": "emotion-normal",
+    "alias": [
+      "emotion",
+      "normal",
+      "表情",
+      "一般"
+    ]
+  },
+  {
+    "icon": "ty-emotion-unhappy-line",
+    "belong": "UserFaces",
+    "name": "emotion-unhappy",
+    "alias": [
+      "emotion",
+      "unhappy",
+      "表情",
+      "不开心"
+    ]
+  },
+  {
+    "icon": "ty-emotion-unhappy-fill",
+    "belong": "UserFaces",
+    "name": "emotion-unhappy",
+    "alias": [
+      "emotion",
+      "unhappy",
+      "表情",
+      "不开心"
+    ]
+  },
+  {
+    "icon": "ty-emotion-laugh-line",
+    "belong": "UserFaces",
+    "name": "emotion-laugh",
+    "alias": [
+      "emotion",
+      "laugh",
+      "comedy",
+      "happy",
+      "表情",
+      "大笑",
+      "笑脸",
+      "开心",
+      "喜剧"
+    ]
+  },
+  {
+    "icon": "ty-emotion-laugh-fill",
+    "belong": "UserFaces",
+    "name": "emotion-laugh",
+    "alias": [
+      "emotion",
+      "laugh",
+      "comedy",
+      "happy",
+      "表情",
+      "大笑",
+      "笑脸",
+      "开心",
+      "喜剧"
+    ]
+  },
+  {
+    "icon": "ty-emotion-sad-line",
+    "belong": "UserFaces",
+    "name": "emotion-sad",
+    "alias": [
+      "emotion",
+      "sad",
+      "drama",
+      "tears",
+      "悲剧",
+      "哭泣",
+      "泪"
+    ]
+  },
+  {
+    "icon": "ty-emotion-sad-fill",
+    "belong": "UserFaces",
+    "name": "emotion-sad",
+    "alias": [
+      "emotion",
+      "sad",
+      "drama",
+      "tears",
+      "悲剧",
+      "哭泣",
+      "泪"
+    ]
+  },
+  {
+    "icon": "ty-skull-line",
+    "belong": "UserFaces",
+    "name": "skull",
+    "alias": [
+      "skull",
+      "ghost",
+      "骷髅",
+      "鬼怪"
+    ]
+  },
+  {
+    "icon": "ty-skull-fill",
+    "belong": "UserFaces",
+    "name": "skull",
+    "alias": [
+      "skull",
+      "ghost",
+      "骷髅",
+      "鬼怪"
+    ]
+  },
+  {
+    "icon": "ty-skull-2-line",
+    "belong": "UserFaces",
+    "name": "skull-2",
+    "alias": [
+      "skull",
+      "2",
+      "ghost",
+      "horror",
+      "thriller",
+      "骷髅",
+      "鬼怪",
+      "恐惧",
+      "恐怖"
+    ]
+  },
+  {
+    "icon": "ty-skull-2-fill",
+    "belong": "UserFaces",
+    "name": "skull-2",
+    "alias": [
+      "skull",
+      "2",
+      "ghost",
+      "horror",
+      "thriller",
+      "骷髅",
+      "鬼怪",
+      "恐惧",
+      "恐怖"
+    ]
+  },
+  {
+    "icon": "ty-men-line",
+    "belong": "UserFaces",
+    "name": "men",
+    "alias": [
+      "men",
+      "gender",
+      "man",
+      "male",
+      "男人",
+      "男性"
+    ]
+  },
+  {
+    "icon": "ty-men-fill",
+    "belong": "UserFaces",
+    "name": "men",
+    "alias": [
+      "men",
+      "gender",
+      "man",
+      "male",
+      "男人",
+      "男性"
+    ]
+  },
+  {
+    "icon": "ty-women-line",
+    "belong": "UserFaces",
+    "name": "women",
+    "alias": [
+      "women",
+      "gender",
+      "woman",
+      "female",
+      "女人",
+      "女性"
+    ]
+  },
+  {
+    "icon": "ty-women-fill",
+    "belong": "UserFaces",
+    "name": "women",
+    "alias": [
+      "women",
+      "gender",
+      "woman",
+      "female",
+      "女人",
+      "女性"
+    ]
+  },
+  {
+    "icon": "ty-travesti-line",
+    "belong": "UserFaces",
+    "name": "travesti",
+    "alias": [
+      "travesti",
+      "女人",
+      "女性"
+    ]
+  },
+  {
+    "icon": "ty-travesti-fill",
+    "belong": "UserFaces",
+    "name": "travesti",
+    "alias": [
+      "travesti",
+      "女人",
+      "女性"
+    ]
+  },
+  {
+    "icon": "ty-genderless-line",
+    "belong": "UserFaces",
+    "name": "genderless",
+    "alias": [
+      "genderless",
+      "女人",
+      "女性"
+    ]
+  },
+  {
+    "icon": "ty-genderless-fill",
+    "belong": "UserFaces",
+    "name": "genderless",
+    "alias": [
+      "genderless",
+      "女人",
+      "女性"
+    ]
+  },
+  {
+    "icon": "ty-open-arm-line",
+    "belong": "UserFaces",
+    "name": "open-arm",
+    "alias": [
+      "open",
+      "arm",
+      "张开双臂"
+    ]
+  },
+  {
+    "icon": "ty-open-arm-fill",
+    "belong": "UserFaces",
+    "name": "open-arm",
+    "alias": [
+      "open",
+      "arm",
+      "张开双臂"
+    ]
+  },
+  {
+    "icon": "ty-body-scan-line",
+    "belong": "UserFaces",
+    "name": "body-scan",
+    "alias": [
+      "body",
+      "scan",
+      "gesture recognition",
+      "body",
+      "扫描身体",
+      "体态识别",
+      "动作之别",
+      "手势识别"
+    ]
+  },
+  {
+    "icon": "ty-body-scan-fill",
+    "belong": "UserFaces",
+    "name": "body-scan",
+    "alias": [
+      "body",
+      "scan",
+      "gesture recognition",
+      "body",
+      "扫描身体",
+      "体态识别",
+      "动作之别",
+      "手势识别"
+    ]
+  },
+  {
+    "icon": "ty-parent-line",
+    "belong": "UserFaces",
+    "name": "parent",
+    "alias": [
+      "parent",
+      "patriarch",
+      "父母",
+      "亲子",
+      "家长"
+    ]
+  },
+  {
+    "icon": "ty-parent-fill",
+    "belong": "UserFaces",
+    "name": "parent",
+    "alias": [
+      "parent",
+      "patriarch",
+      "父母",
+      "亲子",
+      "家长"
+    ]
+  },
+  {
+    "icon": "ty-user-community-line",
+    "belong": "UserFaces",
+    "name": "user-community",
+    "alias": [
+      "user",
+      "community",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-user-community-fill",
+    "belong": "UserFaces",
+    "name": "user-community",
+    "alias": [
+      "user",
+      "community",
+      "team",
+      "团队",
+      "群组",
+      "person",
+      "people",
+      "multiple users",
+      "user group",
+      "community",
+      "社区"
+    ]
+  },
+  {
+    "icon": "ty-robot-line",
+    "belong": "UserFaces",
+    "name": "robot",
+    "alias": [
+      "robot",
+      "AI",
+      "mechanic",
+      "机器人"
+    ]
+  },
+  {
+    "icon": "ty-robot-fill",
+    "belong": "UserFaces",
+    "name": "robot",
+    "alias": [
+      "robot",
+      "AI",
+      "mechanic",
+      "机器人"
+    ]
+  },
+  {
+    "icon": "ty-robot-2-line",
+    "belong": "UserFaces",
+    "name": "robot-2",
+    "alias": [
+      "robot",
+      "2",
+      "AI",
+      "mechanic",
+      "机器人"
+    ]
+  },
+  {
+    "icon": "ty-robot-2-fill",
+    "belong": "UserFaces",
+    "name": "robot-2",
+    "alias": [
+      "robot",
+      "2",
+      "AI",
+      "mechanic",
+      "机器人"
+    ]
+  },
+  {
+    "icon": "ty-robot-3-line",
+    "belong": "UserFaces",
+    "name": "robot-3",
+    "alias": [
+      "robot",
+      "3",
+      "AI",
+      "mechanic",
+      "机器人"
+    ]
+  },
+  {
+    "icon": "ty-robot-3-fill",
+    "belong": "UserFaces",
+    "name": "robot-3",
+    "alias": [
+      "robot",
+      "3",
+      "AI",
+      "mechanic",
+      "机器人"
+    ]
+  },
+  {
+    "icon": "ty-aliens-line",
+    "belong": "UserFaces",
+    "name": "aliens",
+    "alias": [
+      "aliens",
+      "science fiction",
+      "ET",
+      "外星人",
+      "科幻小说"
+    ]
+  },
+  {
+    "icon": "ty-aliens-fill",
+    "belong": "UserFaces",
+    "name": "aliens",
+    "alias": [
+      "aliens",
+      "science fiction",
+      "ET",
+      "外星人",
+      "科幻小说"
+    ]
+  },
+  {
+    "icon": "ty-bear-smile-line",
+    "belong": "UserFaces",
+    "name": "bear-smile",
+    "alias": [
+      "bear",
+      "smile",
+      "cartoon",
+      "anime",
+      "cartoon",
+      "小熊",
+      "微笑",
+      "儿童",
+      "动画片",
+      "卡通",
+      "动漫"
+    ]
+  },
+  {
+    "icon": "ty-bear-smile-fill",
+    "belong": "UserFaces",
+    "name": "bear-smile",
+    "alias": [
+      "bear",
+      "smile",
+      "cartoon",
+      "anime",
+      "cartoon",
+      "小熊",
+      "微笑",
+      "儿童",
+      "动画片",
+      "卡通",
+      "动漫"
+    ]
+  },
+  {
+    "icon": "ty-mickey-line",
+    "belong": "UserFaces",
+    "name": "mickey",
+    "alias": [
+      "mickey",
+      "cartoon",
+      "disney",
+      "迪士尼",
+      "米老鼠",
+      "微笑",
+      "儿童",
+      "动画片"
+    ]
+  },
+  {
+    "icon": "ty-mickey-fill",
+    "belong": "UserFaces",
+    "name": "mickey",
+    "alias": [
+      "mickey",
+      "cartoon",
+      "disney",
+      "迪士尼",
+      "米老鼠",
+      "微笑",
+      "儿童",
+      "动画片"
+    ]
+  },
+  {
+    "icon": "ty-criminal-line",
+    "belong": "UserFaces",
+    "name": "criminal",
+    "alias": [
+      "criminal",
+      "horror",
+      "thriller",
+      "罪犯",
+      "犯罪",
+      "恐怖"
+    ]
+  },
+  {
+    "icon": "ty-criminal-fill",
+    "belong": "UserFaces",
+    "name": "criminal",
+    "alias": [
+      "criminal",
+      "horror",
+      "thriller",
+      "罪犯",
+      "犯罪",
+      "恐怖"
+    ]
+  },
+  {
+    "icon": "ty-ghost-line",
+    "belong": "UserFaces",
+    "name": "ghost",
+    "alias": [
+      "ghost",
+      "horror",
+      "thriller",
+      "鬼怪",
+      "恐怖",
+      "恐惧"
+    ]
+  },
+  {
+    "icon": "ty-ghost-fill",
+    "belong": "UserFaces",
+    "name": "ghost",
+    "alias": [
+      "ghost",
+      "horror",
+      "thriller",
+      "鬼怪",
+      "恐怖",
+      "恐惧"
+    ]
+  },
+  {
+    "icon": "ty-ghost-2-line",
+    "belong": "UserFaces",
+    "name": "ghost-2",
+    "alias": [
+      "ghost",
+      "2",
+      "horror",
+      "鬼怪",
+      "恐怖",
+      "恐惧"
+    ]
+  },
+  {
+    "icon": "ty-ghost-2-fill",
+    "belong": "UserFaces",
+    "name": "ghost-2",
+    "alias": [
+      "ghost",
+      "2",
+      "horror",
+      "鬼怪",
+      "恐怖",
+      "恐惧"
+    ]
+  },
+  {
+    "icon": "ty-ghost-smile-line",
+    "belong": "UserFaces",
+    "name": "ghost-smile",
+    "alias": [
+      "ghost",
+      "smile",
+      "鬼怪",
+      "笑"
+    ]
+  },
+  {
+    "icon": "ty-ghost-smile-fill",
+    "belong": "UserFaces",
+    "name": "ghost-smile",
+    "alias": [
+      "ghost",
+      "smile",
+      "鬼怪",
+      "笑"
+    ]
+  },
+  {
+    "icon": "ty-star-smile-line",
+    "belong": "UserFaces",
+    "name": "star-smile",
+    "alias": [
+      "star",
+      "smile",
+      "animation",
+      "动画",
+      "微笑",
+      "星星"
+    ]
+  },
+  {
+    "icon": "ty-star-smile-fill",
+    "belong": "UserFaces",
+    "name": "star-smile",
+    "alias": [
+      "star",
+      "smile",
+      "animation",
+      "动画",
+      "微笑",
+      "星星"
+    ]
+  },
+  {
+    "icon": "ty-spy-line",
+    "belong": "UserFaces",
+    "name": "spy",
+    "alias": [
+      "spy",
+      "incognito mode",
+      "detective",
+      "secret",
+      "间谍",
+      "侦探",
+      "无痕模式",
+      "隐私模式"
+    ]
+  },
+  {
+    "icon": "ty-spy-fill",
+    "belong": "UserFaces",
+    "name": "spy",
+    "alias": [
+      "spy",
+      "incognito mode",
+      "detective",
+      "secret",
+      "间谍",
+      "侦探",
+      "无痕模式",
+      "隐私模式"
+    ]
   }
 ]
