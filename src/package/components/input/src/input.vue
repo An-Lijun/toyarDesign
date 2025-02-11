@@ -257,7 +257,7 @@ if (props.format) {
     display: flex;
     align-items: center;
 
-    ::v-deep() .ty-button {
+    :deep(.ty-button) {
       border-radius: 0;
     }
   }
@@ -286,7 +286,7 @@ if (props.format) {
     align-items: center;
     font-size: var(--font-body-1);
 
-    ::v-deep() .ty-button {
+    :deep(.ty-button) {
       border-radius: 0;
     }
   }

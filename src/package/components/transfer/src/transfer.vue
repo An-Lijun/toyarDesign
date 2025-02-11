@@ -225,8 +225,8 @@ const rightHarf = computed(() => {
       margin: 5px 0;
     }
   }
-  ::v-deep .ty-check-box {
-    input::after {
+  :deep(.ty-check-box) {
+    .ty-check-box__input{
       border-width: 1px;
     }
   }

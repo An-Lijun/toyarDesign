@@ -69,6 +69,7 @@ import TySIcon from './components/sIcon'
 import TyLogConsole from './components/logConsole'
 import TyAffix from './components/affix'
 import TyCircle from './components/circle'
+import TyUpload from './components/upload'
 
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
@@ -131,7 +132,8 @@ const install = app => {
     app.use(TySIcon),
     app.use(TyLogConsole),
     app.use(TyAffix),
-    app.use(TyCircle)
+    app.use(TyCircle),
+    app.use(TyUpload)
   }
   // app.use(TyTrigger)
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
@@ -213,6 +215,8 @@ export {
   TySIcon,
   TyLogConsole,
   TyAffix,
-  TyCircle
+  TyCircle,
+  TyUpload
 } //按需引入
 // TyTrigger,
+export *  from './components/icons'

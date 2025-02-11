@@ -138,13 +138,13 @@ if (is(props.maxlength, 'object')) {
 </script>
 
 <style lang="scss" scoped>
-::v-deep input::-webkit-outer-spin-button,
-::v-deep input::-webkit-inner-spin-button {
+:deep(input)::-webkit-outer-spin-button,
+:deep(input)::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
   margin: 0;
 }
 
-::v-deep input[type='number'] {
+:deep(input)[type='number'] {
   -moz-appearance: textfield;
 }
 </style>

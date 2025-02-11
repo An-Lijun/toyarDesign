@@ -145,7 +145,7 @@ defineExpose({
       text-align: right;
       box-sizing: border-box;
 
-      ::v-deep .ty-button:first-child {
+      :deep(.ty-button):first-child {
         margin-right: 20px;
       }
     }

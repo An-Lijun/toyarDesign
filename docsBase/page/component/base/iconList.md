@@ -39,9 +39,17 @@
 
 <iconList iconArr="Finance"/>
 
+## Food
+
+<iconList iconArr="Food"/>
+
 ## HealthMedical
 
 <iconList iconArr="HealthMedical"/>
+
+## Logos
+
+<iconList iconArr="Logos"/>
 
 ## Map
 
@@ -62,6 +70,8 @@
 ## Weather
 
 <iconList iconArr="Weather"/>
+
+
 
 ## Others
 

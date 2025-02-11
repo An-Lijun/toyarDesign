@@ -14,7 +14,6 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import icon from '../../src/package/components/icon'
 const props = defineProps({
   iconArr: {
     type: String,
