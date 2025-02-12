@@ -70,6 +70,8 @@ import TyLogConsole from './components/logConsole'
 import TyAffix from './components/affix'
 import TyCircle from './components/circle'
 import TyUpload from './components/upload'
+import TyTimePicker from './components/time-picker'
+
 
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
@@ -133,7 +135,8 @@ const install = app => {
     app.use(TyLogConsole),
     app.use(TyAffix),
     app.use(TyCircle),
-    app.use(TyUpload)
+    app.use(TyUpload),
+    app.use(TyTimePicker)
   }
   // app.use(TyTrigger)
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
@@ -216,7 +219,8 @@ export {
   TyLogConsole,
   TyAffix,
   TyCircle,
-  TyUpload
+  TyUpload,
+  TyTimePicker
 } //按需引入
 // TyTrigger,
 export *  from './components/icons'

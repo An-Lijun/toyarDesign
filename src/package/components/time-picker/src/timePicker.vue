@@ -13,48 +13,60 @@
     <TyInput v-model="model" :format="formatTime" v-bind="attrs" @input="handleInput" @focus="handleFocus"
       @blur="handleBlur(false)" @clear="handleClear" :maxlength="maxlength" inputmode="numeric">
       <template #innerAft>
-        <TyIcon icon="ty-calendar-line" />
+        <TyIcon icon="ty-calendar-schedule-line" />
       </template>
     </TyInput>
-    <div ref="popRef" :class="[nm.e('box')]" v-show="isShowDatePicker" :style="`top: var(--size-${size});`">
-      <component :is="opType" @selectData="selectData"></component>
+    <div ref="popRef" :class="[nm.e('box')]" v-show="isShowTimePicker" :style="`top: var(--size-${size});`">
+      <div :class="nm.e('content')">
+        <div>
+          <div :class="nm.e('hour')">
+            <span v-for="item in hours" :key="item" @click="selectHour(item)">
+              {{item}}
+            </span>
+          </div>
+          <div :class="nm.e('minute')">
+            <span v-for="item in minutes" :key="item" @click="selectMinute(item)">
+              {{item}}
+            </span>
+          </div>
+          <div :class="nm.e('second')">
+            <span v-for="item in seconds" :key="item" @click="selectSecond(item)">
+              {{item}}
+            </span>
+          </div>
+        </div>
+        <footer>
+          <TyButton @click="confirm">
+            确定
+          </TyButton>
+        </footer>
+      </div>
+
       <div ref="arrowRef" data-popper-arrow :class="nm.e('arrow')">
       </div>
     </div>
   </div>
 </template>
-<script setup lang='ts' name="TyDatePicker">
-import { datePickerProp, datePickerEmit, nm } from './context'
+<script setup>
+import {nm,timeEmits,timeProps} from './context'
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { inject, ref, computed, watch, useAttrs } from 'vue';
 import { arrow, createPopper } from '@popperjs/core';
 
-import dayOption from './components/dayOption.vue'
-import yearOption from './components/yearOption.vue'
-import seasonOption from './components/seasonOption.vue'
-import weekOption from './components/weekOption.vue'
-import monthOption from './components/monthOption.vue'
-
-
 defineOptions({
-  name: 'TyDatePicker'
+  name:'TyTimePicker'
 })
-
+const props = defineProps(timeProps)
+const emit = defineEmits(timeEmits)
 const model = defineModel()
-
-const attrs = useAttrs()
-const props = defineProps(datePickerProp)
-const emit = defineEmits(datePickerEmit)
-const tyForm = inject(formContent, null)
 const tyFormItem = inject(formItemContent, null);
-const focus = ref(false)
-const isShowDatePicker = ref(false)
-const formatValue = ref('')
+const tyForm = inject(formContent, null)
 
 let popperInstance = null
 const popRef = ref();
 const arrowRef = ref();
 const containerRef = ref();
+const isShowTimePicker = ref(false)
 
 // computed 继承属性
 const disabled = computed(() => {
@@ -67,24 +79,25 @@ const size = computed(() => {
   return props.size || tyFormItem?.size || tyForm?.size || 'small'
 })
 
-const opType = computed(() => {
-  switch (props.opType) {
-    case 'day':
-      return dayOption
-    case 'year':
-      return yearOption
-    case 'season':
-      return seasonOption
-    case 'month':
-      return monthOption
-    case 'week':
-      return weekOption
+const hours =ref(24)
+const minutes =ref(60)
+const seconds =ref(60)
+const values =[]
+const selectHour=(val) => {
+  value[0]=val
+}
 
-  }
-})
-const handleClear = () => {
+const selectMinute=(val) => {
+  value[1]=val
 
 }
+
+const selectSecond =(val) => {
+  value[2]=val
+}
+
+const confirm=()
+
 const createInstance = () => {
   popperInstance = createPopper(unref(containerRef), unref(popRef), {
     placement: 'bottom',
@@ -110,107 +123,52 @@ const createInstance = () => {
   })
 }
 const handleFocus = () => {
-  isShowDatePicker.value = true
+  isShowTimePicker.value = true
   createInstance()
 }
-
-const selectData = (data) => {
-  isShowDatePicker.value = false
-  emit('update:modelValue', data)
-}
-function formatTime(timestamp: string | Date) {
-  if (['year', 'season', 'week'].includes(props.opType)) {
-    return timestamp
-  }
-
-  // yyyy-MM-dd hh:mm:ss
-  let result = props.format || 'yyyy-MM-dd';
-  const date = new Date(timestamp);
-  const dateObj: any = {
-    'y+': date.getFullYear(),
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
-    'h+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds()
-  };
-  for (const key in dateObj) {
-    const keyRe = new RegExp(key);
-    //如果有这个校验规则,
-    if (keyRe.test(result)) {
-      const value = `${dateObj[key]}`.padStart(2, '0');
-      result = result.replace(keyRe, value);
-    }
-  }
-  return result;
-}
-watch(
-  () => props.modelValue,
-  (newVal, oldVal) => {
-
-    if (newVal) {
-      if (props?.formatValue) {
-        formatValue.value = props.formatValue(newVal)
-      } else {
-        formatValue.value = ''
-      }
-    } else {
-      formatValue.value = ''
-    }
-  },
-  { immediate: true }
-)
 
 </script>
 
 <style lang="scss" scoped>
-.ty-datePicker {
-  border-radius: var(--border-radius-4);
 
-  color: var(--text-1);
-  display: flex;
-  position: relative;
-  user-select: none;
+.ty-timePicker {
+  &__content{
+    height:100px;
+    min-width: 150px;
+    &>div{
+      display:flex;
 
-  &__box {
-    position: absolute;
-    width: 100%;
-    z-index: 5;
-    padding: 10px;
-    border: var(--border-1) solid var(--fill-3);
-    background-color: var(--color-bg-5);
-    // --bg-5
-    box-shadow: var(--box-shadow-5);
-    border-radius: var(--border-radius-4);
-    // user-calendar: none;
-    color: var(--text-1);
-    box-sizing: border-box;
+    }
+  }
+  &__hour{
+    display:flex;
+    flex-direction: column;
+    height:100%;
+    overflow:auto;
+    padding: 0 10px;
+  }
+  &__minute{
+    display:flex;
+    flex-direction: column;
+    overflow:auto;
+    height:100%;
+    padding: 0 10px;
 
   }
+  &__second{
+    display:flex;
+    flex-direction: column;
+    overflow:auto;
+    height:100%;
+    padding: 0 10px;
 
-  // ------------------------  input尺寸样式  ------------------------
-  $inputSize: (
-    mini,
-    small,
-    medium,
-    large
-  );
-
-@mixin addInputSize($name) {
-  &--#{$name} {
-    height: var(--size-#{$name});
-    line-height: var(--size-#{$name});
   }
 }
 
-@each $name in $inputSize {
-  @include addInputSize($name);
-}
-}
 
 
 [data-popper-placement="top"] {
-  .ty-datePicker__arrow {
+  .ty-timePicker__arrow {
     position: absolute;
     width: 0;
     height: 0;
@@ -241,7 +199,7 @@ watch(
 }
 
 [data-popper-placement="bottom"] {
-  .ty-datePicker__arrow {
+  .ty-timePicker__arrow {
     position: absolute;
     width: 0;
     height: 0;
