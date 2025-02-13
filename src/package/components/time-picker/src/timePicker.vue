@@ -96,7 +96,9 @@ const selectSecond =(val) => {
   value[2]=val
 }
 
-const confirm=()
+const confirm=()=>{
+  model.value = values.join(':')
+}
 
 const createInstance = () => {
   popperInstance = createPopper(unref(containerRef), unref(popRef), {
