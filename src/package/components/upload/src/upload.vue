@@ -1,6 +1,6 @@
 <template>
   <div :class="nm.b()" draggable="" @click="uploadClick" @dragover="dragover($event)" @drop="drop($event)">
-    <input id="" ref="uploadRef" type="file" hidden @change="uploadChange($event)">
+    <input id="" ref="uploadRef" type="file" hidden @change="uploadChange($event)" :accept="accept">
     <div>
       <i class="el-icon-upload2" style="color: #999999;font-size: 20px;" />
     </div>
@@ -29,7 +29,7 @@ const uploadChange = (e) => {
   }
 }
 const dragover = (e) => {
-  if (!props.disabled) {
+  if (!props.disabled && props.drag) {
     e.stopPropagation()
     // 阻止默认事件（与drop事件结合，阻止拖拽文件在浏览器打开的默认行为）
     e.preventDefault()

@@ -12,6 +12,7 @@ import { formContent } from '../../../hooks/symbolNm'
 import {getUniqueId} from '../../../utils/getUniqueId'
 import {formProps,nm} from './context'
 import type {FormProps} from './context'
+import type {Ref} from 'vue'
 
 defineOptions({
   name:'TyForm'
@@ -23,9 +24,9 @@ const fieldList:IfieldList={};
 const formID = getUniqueId()
 
 // 添加 校验
-function addValidate(prop:string, fns:Array<Function>, clearValidate:Function) {
+function addValidate(prop:string, formItemData:{formItemError:Ref,validateFnLs:Array<Function>}, clearValidate:Function) {
   fieldList[prop] = {
-    fns:fns,
+    formItemData,
     clearValidate
   };
 }
@@ -39,11 +40,13 @@ function validateAll() {
   return new Promise((resolve, reject) => {
     const errList:TerrList = []
     Object.keys(fieldList).forEach(key => {
-      const fns = fieldList[key].fns;
-      const len = fns.length
+      const {formItemError, validateFnLs} = fieldList[key].formItemData;
+      const len = validateFnLs.length
       for (let index = 0; index < len; index++) {
-        const data = fns[index](key)
+        const data = validateFnLs[index](key)
         if (data) {
+          formItemError.value.isShowErrorMsg = true;
+          formItemError.value.errorMsg =data;
           return errList.push(data)
         }
       }
@@ -58,7 +61,7 @@ function validateAll() {
 // 校验单个
 function validate(prop:string) {
   return new Promise((resolve,reject)=>{
-    const fns = fieldList[prop].fns
+    const fns = fieldList[prop].formItemData.validateFnLs
     if(!fns.length){
       resolve('success')
     }

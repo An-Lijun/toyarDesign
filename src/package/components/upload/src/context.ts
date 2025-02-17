@@ -9,6 +9,14 @@ export const upProps =buildProps({
   dragger:{
     type:Boolean,
     default:false
+  },
+  drag:{
+    type:Boolean,
+    default:false
+  },
+  accept:{
+    type:String,
+    default:''
   }
 })
 
