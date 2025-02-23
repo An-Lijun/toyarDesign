@@ -1,117 +1,120 @@
 <template>
-    <template v-for="(tr, index) in data" :key="index">
+  <template v-for="(tr, index) in selfData" :key="index">
 
-      <tr >
-        <td v-if="rowSelection">
-          <TyRadio
-            :value="tr[rowKey]"
-            size="mini"
-            v-if="rowSelection.type === 'radio'"
-            v-model="rowSelection.selectedRows"
-          >
-          </TyRadio>
-          <TyCheckBox
-            :value="tr[rowKey]"
-            v-model="rowSelection.selectedRows"
-            v-else
-          >
-          </TyCheckBox>
+    <tr>
+      <td v-if="rowSelection">
+        <TyRadio :value="tr[rowKey]" size="mini" v-if="rowSelection.type === 'radio'"
+          v-model="rowSelection.selectedRows">
+        </TyRadio>
+        <TyCheckBox :value="tr[rowKey]" v-model="rowSelection.selectedRows" v-else>
+        </TyCheckBox>
+      </td>
+
+      <template v-for="(td, indx) in columns" :key="indx">
+        <td v-if="
+          (showOverflow === 'title' && td.showOverflow !== 'none') ||
+          td.showOverflow === 'title'
+        " :style="{
+          minWidth: td.minWidth,
+          width: td.width,
+          maxWidth: td.maxWidth
+        }" :class="getColumnOverflow(td.showOverflow)" :title="tr[td.key]">
+
+<template v-if=" indx == 0">
+            <span class="td__index" v-for="item in tdDndex"></span>
+            <TyIcon v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
+              action: tr.isShowChildren
+            }"></TyIcon>
+          </template>
+          {{ tr[td.key] }}
         </td>
 
-        <template v-for="(td, indx) in columns" :key="indx">
-          <td
-            v-if="
-              (showOverflow === 'title' && td.showOverflow !== 'none') ||
-              td.showOverflow === 'title'
-            "
-            :style="{
-              minWidth: td.minWidth,
-              width: td.width,
-              maxWidth: td.maxWidth
-            }"
-            :class="getColumnOverflow(td.showOverflow)"
-            :title="tr[td.key]"
-          >
-            {{ tr[td.key] }}
-          </td>
+        <td v-else-if="
+          (showOverflow === 'tooltip' && td.showOverflow !== 'none') ||
+          td.showOverflow == 'tooltip'
+        " :style="{
+          minWidth: td.minWidth,
+          width: td.width,
+          maxWidth: td.maxWidth
+        }">
 
-          <td
-            v-else-if="
-              (showOverflow === 'tooltip' && td.showOverflow !== 'none') ||
-              td.showOverflow == 'tooltip'
-            "
-            :style="{
+          <template v-if="indx == 0">
+            <span class="td__index" v-for="item in tdDndex"></span>
+            <TyIcon v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
+              action: tr.isShowChildren
+            }"></TyIcon>
+          </template>
+          <TyTooltip :content="tr[td.key]">
+            <div :style="{
               minWidth: td.minWidth,
               width: td.width,
               maxWidth: td.maxWidth
-            }"
-          >
-            <TyTooltip :content="tr[td.key]">
-              <div
-                :style="{
-                  minWidth: td.minWidth,
-                  width: td.width,
-                  maxWidth: td.maxWidth
-                }"
-                :class="getColumnOverflow(td.showOverflow)"
-              >
-                {{ tr[td.key] }}
-              </div>
-            </TyTooltip>
-          </td>
+            }" :class="getColumnOverflow(td.showOverflow)">
+              {{ tr[td.key] }}
+            </div>
+          </TyTooltip>
+        </td>
 
-          <td
-            v-else
-            :style="{
-              minWidth: td.minWidth,
-              width: td.width,
-              maxWidth: td.maxWidth
-            }"
-            :class="getColumnOverflow(td.showOverflow)"
-          >
-            {{ tr[td.key] }}
-          </td>
+        <td v-else :style="{
+          minWidth: td.minWidth,
+          width: td.width,
+          maxWidth: td.maxWidth
+        }" :class="getColumnOverflow(td.showOverflow)">
+          <template v-if="indx == 0">
+            <span class="td__index" v-for="item in tdDndex"></span>
+            <TyIcon  v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
+              action: tr.isShowChildren
+            }"></TyIcon>
+          </template>
+          {{ tr[td.key] }}
+        </td>
+      </template>
+      <td v-if="useSlots().operation">
+        <slot name="operation" :row="tr" :index="index"></slot>
+      </td>
+
+    </tr>
+    <template v-if="tr.children">
+      <trContainer v-if="tr.isShowChildren" :rowSelection="rowSelection" :data="tr.children" :tdDndex="tdDndex + 1"
+        :columns="columns">
+        <template #operation="{ row, index }" v-if="useSlots().operation">
+          <slot name="operation" :row="row"></slot>
         </template>
-        <td v-if="useSlots().operation">
-          <slot name="operation" :row="tr" :index="index"></slot>
-        </td>
-    
-      </tr>
-      <template v-if="tr.children">
-          <trContainer
-          :rowSelection="rowSelection" 
-            :data="tr.children"
-            :index="index + 1"
-            :columns="columns"
-          ></trContainer>
-      </template> 
+      </trContainer>
     </template>
+  </template>
 
 </template>
-<script setup >
+<script setup>
 import { useSlots } from 'vue'
 
 defineOptions({
   name: 'trContainer'
 })
 const props = defineProps({
-  index: { type: Number, default: 0 },
-  data:{
+  tdDndex: { type: Number, default: 0 },
+  data: {
     type: Array,
     default: () => []
   },
-  columns:{
+  columns: {
     type: Array,
     default: () => []
   },
-  showOverflow:{
-    type:String,
-    default:''
+  showOverflow: {
+    type: String,
+    default: ''
   },
-  rowSelection:{
-    type:Object
+  rowSelection: {
+    type: Object
   },
 })
+
+const handleClick = (val) => {
+  console.log('111111111111111');
+
+  val.isShowChildren = !val.isShowChildren
+}
 const getColumnOverflow = value => {
   if (value === 'none') {
     return false
@@ -126,6 +129,11 @@ const getColumnOverflow = value => {
   }
   return ''
 }
+const selfData = ref([])
+selfData.value = props.data.map(item => {
+  item.isShowChildren = false
+  return item
+})
 </script>
 <style lang="scss" scoped>
 .showOverflow {
@@ -137,5 +145,19 @@ const getColumnOverflow = value => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.action {
+  transform: rotate(90deg);
+}
+
+.td__index {
+  display: inline-block;
+  height: 100%;
+  width: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>
