@@ -9,64 +9,23 @@
     <thead>
       <tr>
         <th v-if="rowSelection" style="width: 12px"></th>
-        <th v-for="(item, index) in columns" :key="index">
+        <th v-for="(item, index) in columns" :key="index" :style="{
+          minWidth: item.minWidth,
+          width: item.width,
+          maxWidth: item.maxWidth
+        }">
+
           {{ item.title }}
         </th>
         <th v-if="useSlots().operation">操作</th>
       </tr>
     </thead>
     <tbody v-if="data.length">
-      <tr v-for="(tr, index) in data" :key="index">
-        <td v-if="rowSelection">
-          <TyRadio :value="tr[rowKey]" size="mini" v-if="rowSelection.type === 'radio'"
-            v-model="rowSelection.selectedRows">
-          </TyRadio>
-          <TyCheckBox :value="tr[rowKey]" v-model="rowSelection.selectedRows" v-else>
-          </TyCheckBox>
-        </td>
-
-        <template v-for="(td, indx) in columns" :key="indx">
-          <td v-if="(showOverflow === 'title' && td.showOverflow !== 'none') || td.showOverflow === 'title'" :style="{
-    minWidth: td.minWidth,
-    width: td.width,
-    maxWidth: td.maxWidth
-  }" :class="getColumnOverflow(td.showOverflow)" :title="tr[td.key]">{{ tr[td.key] }}</td>
-
-
-
-          <td v-else-if="(showOverflow === 'tooltip' && td.showOverflow !== 'none') || td.showOverflow == 'tooltip'"
-            :style="{
-    minWidth: td.minWidth,
-    width: td.width,
-    maxWidth: td.maxWidth
-  }">
-            <TyTooltip :content="tr[td.key]">
-              <div :style="{
-    minWidth: td.minWidth,
-    width: td.width,
-    maxWidth: td.maxWidth
-  }" :class="getColumnOverflow(td.showOverflow)">
-                {{ tr[td.key] }}
-              </div>
-            </TyTooltip>
-          </td>
-
-
-
-          <td v-else :style="{
-    minWidth: td.minWidth,
-    width: td.width,
-    maxWidth: td.maxWidth
-  }" :class="getColumnOverflow(td.showOverflow)">{{ tr[td.key] }}</td>
-
+      <trContainer :rowSelection="rowSelection" :data="data" :columns="columns" :showOverflow="showOverflow">
+        <template #operation="{ row, index }" v-if="useSlots().operation">
+          <slot name="operation" :row="row"></slot>
         </template>
-
-
-
-        <td v-if="useSlots().operation">
-          <slot name="operation" :row="tr" :index="index"></slot>
-        </td>
-      </tr>
+      </trContainer>
     </tbody>
 
     <tbody v-else>
@@ -87,38 +46,24 @@
 <script setup>
 import { useSlots } from 'vue'
 import { tableProps, nm } from './context'
+import trContainer from './components/trContainer.vue'
 defineOptions({
   name: 'TyTable'
 })
 const props = defineProps(tableProps)
 
-const getColumnOverflow = (value) => {
-
-  if (value === 'none') {
-    return false
-  }
-  value = value ?? props.showOverflow
-
-  if (['title', 'tooltip'].includes(value)) {
-    return 'showOverflow'
-  }
-  if (value === 'ellipsis') {
-    return 'showOverflow-ellipsis'
-  }
-  return ''
-}
 
 </script>
 <style lang="scss" scoped>
 .ty-table {
-  // overflow: hidden;  
+  // overflow: hidden;
   display: table;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 4px;
   box-sizing: border-box;
-
+  table-layout: auto;
   tr {
     border-radius: inherit;
 
@@ -155,20 +100,18 @@ const getColumnOverflow = (value) => {
     }
   }
 
-
-
   tbody {
-    tr {
-      &:last-child {
-        td {
-          border-bottom: unset !important;
-        }
-      }
+    // :deep(tr) {
+    //   &:last-child {
+    //     td {
+    //       border-bottom: unset !important;
+    //     }
+    //   }
 
-      td:last-child {
-        border-right: unset !important;
-      }
-    }
+    //   :deep(td):last-child {
+    //     border-right: unset !important;
+    //   }
+    // }
   }
 
   $tableSize: (
@@ -180,7 +123,7 @@ const getColumnOverflow = (value) => {
 
 @mixin addTableSize($size, $value) {
   &--#{$size} {
-    tr {
+    :deep(tr) {
 
       th,
       td {
@@ -203,20 +146,19 @@ const getColumnOverflow = (value) => {
 
 &--row {
 
-  th,
-  td {
+  :deep(th),
+  :deep(td) {
     border-bottom: 1px solid var(--border-color-2);
   }
 }
 
 &--column {
 
-  th,
-  td {
+  :deep(th),
+  :deep(td) {
     border-right: 1px solid var(--border-color-2);
   }
 }
-
 
 $tableAlign: (
   'left',
@@ -235,9 +177,6 @@ $tableAlign: (
 @each $aign in $tableAlign {
   @include addTableAlign($aign);
 }
-
-
-
 }
 
 .is-stripe {
@@ -246,16 +185,5 @@ $tableAlign: (
       background-color: var(--toyar-gray-6);
     }
   }
-}
-
-.showOverflow {
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.showOverflow-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 </style>

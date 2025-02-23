@@ -2,32 +2,82 @@
   <div class="divRoot">
 
 
+
+    {{ rowSelection.selectedRows }}
+    <TyTable :rowSelection="rowSelection" rowKey="name" :columns="[
+      { title: '姓名', key: 'name' },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
+        {
+          name: '张三',
+          age: '18',
+          address: '南京'
+        },
+        {
+          name: '李四',
+          age: '18',
+          address: '上海'
+        },
+        {
+          name: '张二麻子',
+          age: '18',
+          address: '长春'
+        }
+      ]">
+    </TyTable>
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {{ rowSelection2.selectedRows }}
+    <TyTable :rowSelection="rowSelection2" rowKey="name" :columns="[
+      { title: '姓名', key: 'name' },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
+        {
+          name: '张三',
+          age: '18',
+          address: '南京'
+        },
+        {
+          name: '李四',
+          age: '18',
+          address: '上海'
+        },
+        {
+          name: '张二麻子',
+          age: '18',
+          address: '长春'
+        }
+      ]">
+    </TyTable>
+
     <TyTable size="mini" :columns="[
       { title: '姓名', key: 'name' },
       { title: '年龄', key: 'age' },
       { title: '地址', key: 'address' }
     ]" :data="[
-     ]">
+    ]">
       <template #operation="scroped">
         <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
       </template>
     </TyTable>
-
-    <TyTable 
-    stripe
-    
-    align="right" :borders="['out','row','column']" size="mini" :columns="[
-      { title: '姓名',width:'80px', key: 'name',
-          showOverflow:'tooltip'
-       },
+    <br>
+    <TyTable size="large" :columns="[
+      { title: '姓名', key: 'name' },
       { title: '年龄', key: 'age' },
       { title: '地址', key: 'address' }
     ]" :data="[
       {
-        name: '张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三',
+        name: '张三',
         age: '18',
         address: '南京'
-        
       },
       {
         name: '李四',
@@ -41,8 +91,59 @@
       }
     ]">
       <template #operation="scroped">
-        <TyButton @click="fnner(scroped.row)">{{ scroped.row.address }}</TyButton>
+        <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
       </template>
+    </TyTable>
+    <TyTable size="medium" :columns="[
+      { title: '姓名', key: 'name' },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
+      {
+        name: '张三',
+        age: '18',
+        address: '南京'
+      },
+      {
+        name: '李四',
+        age: '18',
+        address: '上海'
+      },
+      {
+        name: '张二麻子',
+        age: '18',
+        address: '长春'
+      }
+    ]">
+      <template #operation="scroped">
+        <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
+      </template>
+    </TyTable>
+    <TyTable stripe align="right" :borders="['out', 'row', 'column']" size="mini" :columns="[
+      {
+        title: '姓名', width: '80px', key: 'name',
+        showOverflow: 'tooltip'
+      },
+      { title: '年龄', key: 'age' },
+      { title: '地址', key: 'address' }
+    ]" :data="[
+      {
+        name: '张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三',
+        age: '18',
+        address: '南京'
+
+      },
+      {
+        name: '李四',
+        age: '18',
+        address: '上海'
+      },
+      {
+        name: '张二麻子',
+        age: '18',
+        address: '长春'
+      }
+    ]">
     </TyTable>
 
 
@@ -72,132 +173,18 @@
       </template>
     </TyTable>
 
-    <TyTable  size="medium"  :columns="[
-      { title: '姓名', key: 'name' },
-      { title: '年龄', key: 'age' },
-      { title: '地址', key: 'address' }
-    ]" :data="[
-      {
-        name: '张三',
-        age: '18',
-        address: '南京'
-      },
-      {
-        name: '李四',
-        age: '18',
-        address: '上海'
-      },
-      {
-        name: '张二麻子',
-        age: '18',
-        address: '长春'
-      }
-    ]">
-      <template #operation="scroped">
-        <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
-      </template>
-    </TyTable>
-    <TyTable size="large" :columns="[
-      { title: '姓名', key: 'name' },
-      { title: '年龄', key: 'age' },
-      { title: '地址', key: 'address' }
-    ]" :data="[
-      {
-        name: '张三',
-        age: '18',
-        address: '南京'
-      },
-      {
-        name: '李四',
-        age: '18',
-        address: '上海'
-      },
-      {
-        name: '张二麻子',
-        age: '18',
-        address: '长春'
-      }
-    ]">
-      <template #operation="scroped">
-        <TyButton @click="fnner(scroped.row)">{{ scroped.row.name }}</TyButton>
-      </template>
-    </TyTable>
-
-    <br>
-    {{ rowSelection.selectedRows }}
-    <TyTable  
-      :rowSelection="rowSelection" 
-      rowKey="name"
-      :columns="[
-        { title: '姓名', key: 'name' },
-        { title: '年龄', key: 'age' },
-        { title: '地址', key: 'address' }
-      ]" :data="[
-        {
-          name: '张三',
-          age: '18',
-          address: '南京'
-        },
-        {
-          name: '李四',
-          age: '18',
-          address: '上海'
-        },
-        {
-          name: '张二麻子',
-          age: '18',
-          address: '长春'
-        }
-      ]"
-    >
-    </TyTable>
-
-
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-    {{ rowSelection2.selectedRows }}
-    <TyTable  
-      :rowSelection="rowSelection2" 
-      rowKey="name"
-      :columns="[
-        { title: '姓名', key: 'name' },
-        { title: '年龄', key: 'age' },
-        { title: '地址', key: 'address' }
-      ]" :data="[
-        {
-          name: '张三',
-          age: '18',
-          address: '南京'
-        },
-        {
-          name: '李四',
-          age: '18',
-          address: '上海'
-        },
-        {
-          name: '张二麻子',
-          age: '18',
-          address: '长春'
-        }
-      ]"
-    >
-    </TyTable>
   </div>
 </template>
 <script setup>
-import {ref} from 'vue'
-const rowSelection =ref({
-  type:'radio',
-  selectedRows:[]
+import { ref } from 'vue'
+const rowSelection = ref({
+  type: 'radio',
+  selectedRows: []
 })
 
-const rowSelection2 =ref({
-  type:'checkbox',
-  selectedRows:[]
+const rowSelection2 = ref({
+  type: 'checkbox',
+  selectedRows: []
 })
 
 const fnner = row => {
