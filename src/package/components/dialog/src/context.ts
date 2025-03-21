@@ -21,6 +21,10 @@ export const dialogProp=buildProps({
   isUnderLine:{
     type: Boolean,
     default: true,
+  },
+  isTeleport:{
+    type: Boolean,
+    default: true,
   }
 })
 

@@ -39,7 +39,7 @@
           20
           }px`
       }
-    ]" :disabled="disabled" :readonly="readonly" :value="formatValue" @click="handleToFocus" />
+    ]" :disabled="disabled" :readonly="readonly" :value="formatValue" @click="handleToFocus" ref="nativeFormatInp" />
 
 
     <input :type="attrs.type || 'text'" v-bind="attrs" ref="nativeInp" v-show="!isShowFormat" v-model="model" :class="[
@@ -53,7 +53,7 @@
           20
           }px`
       }
-    ]" :disabled="disabled" :readonly="readonly" @input="handleInput" @blur="handleBlur" @focus="handleFocus" @click="handleToFocus"
+    ]" :disabled="disabled" :readonly="readonly" @input="handleInput" @blur="handleBlur" @click="handleToFocus"
       @keydown.enter="handleEnter" />
 
     <!-- 后置内容 -->
@@ -129,7 +129,7 @@ const outPre = ref()
 const innerPre = ref()
 const outAft = ref()
 const innerAft = ref()
-
+const nativeFormatInp = ref()
 const focus = ref(false)
 let outPreWidth = ref(0)
 const formatValue = ref('')
@@ -137,10 +137,10 @@ let limitBlockWidth = ref(0)
 let innerPreWidth = ref(0)
 let outAftWidth = ref(0)
 let innerAftWidth = ref(0)
-let isShowFormatSelf = true
+let isShowFormatSelf = ref(true)
 
 const isShowFormat = computed(() => {
-  return props.format && isShowFormatSelf
+  return props.format && isShowFormatSelf.value
 })
 
 
@@ -175,7 +175,7 @@ function handleInput(event) {
 function handleToFocus() {
   emit('focus')
   focus.value = true
-  isShowFormatSelf = false
+  isShowFormatSelf.value = false
   setTimeout(() => {
     nativeInp.value.focus()
   })
@@ -186,8 +186,11 @@ function handleBlur(event) {
     tyForm.validate(tyFormItem.prop, 'blur')
   }
   emit('blur', event)
-  isShowFormatSelf = true
+  isShowFormatSelf.value = true
   focus.value = false
+  if(nativeFormatInp?.value){
+    nativeFormatInp.value.blur()
+  }
 }
 
 function handleClear() {
@@ -201,10 +204,7 @@ function handleEnter() {
   emit('enter', model.value)
 }
 
-function handleFocus() {
-  emit('focus')
-  // handleToFocus()
-}
+
 
 let isShowClearBtn = computed(() => {
   return (

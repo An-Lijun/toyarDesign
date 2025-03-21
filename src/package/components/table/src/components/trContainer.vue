@@ -20,7 +20,7 @@
           maxWidth: td.maxWidth
         }" :class="getColumnOverflow(td.showOverflow)" :title="tr[td.key]">
 
-<template v-if=" indx == 0">
+          <template v-if="indx == 0">
             <span class="td__index" v-for="item in tdDndex"></span>
             <TyIcon v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
               action: tr.isShowChildren
@@ -62,7 +62,7 @@
         }" :class="getColumnOverflow(td.showOverflow)">
           <template v-if="indx == 0">
             <span class="td__index" v-for="item in tdDndex"></span>
-            <TyIcon  v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
+            <TyIcon v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
               action: tr.isShowChildren
             }"></TyIcon>
           </template>

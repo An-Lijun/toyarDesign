@@ -34,9 +34,6 @@ const emit = defineEmits(['click'])
 const handleClick = () => {
 
   menuProvide.setModel(props.mkey)
-  if (!subMenu) {
-    return
-  }
   if (props._mItem && menuProvide.model.value !== props.mkey) {
     menuProvide.setModel(props._mItem)
   }
@@ -92,7 +89,7 @@ const handleClick = () => {
     }
 
     .ty-menu-item__label {
-      display: none;
+      // display: none;
     }
   }
 </style>

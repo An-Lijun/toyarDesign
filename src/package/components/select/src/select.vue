@@ -12,14 +12,14 @@
       @input="handleInput" @blur="handleBlur" @focus="handleFocus" />
 
     <span ref="innerAft" :class="[nm.e('innerAft')]">
-      <TyIcon icon="ty-arrow-down-s-line"></TyIcon>
+      <TyIcon :icon="icon"></TyIcon>
     </span>
     <span v-if="isShowClearBtn" :class="nm.e('clear')" :style="{
       position: 'absolute',
       right: '10px'
     }" @click="clear">
     </span>
-    <ul :class="nm.e('group')" v-show="isShowOption" ref="popRef">
+    <ul :class="nm.e('group')" v-show="isShowOption" ref="popRef" :style="{width: width}">
       <div :class="nm.e('arrow')" ref="arrowRef"></div>
       <slot> </slot>
     </ul>
@@ -155,6 +155,14 @@ provide(selectContent, {
   options,
   multiple: props.multiple
 })
+defineExpose({
+  selectVal:(value) => {
+    nativeInp.value.value = value
+
+    emit('update:modelValue', value)
+  }
+});
+
 </script>
 
 <style lang="scss" scoped>

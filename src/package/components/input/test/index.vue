@@ -3,7 +3,15 @@
     <div>
       {{ inp }}
     </div>
-    <TyInput v-model="inp" />
+    <TyInput v-model="inp" 
+    :format="()=>{}"
+    @blur="()=>{console.log('blur')}"
+    @focus="()=>{console.log('focus')}"
+    @enter="()=>{console.log('enter')}"
+    @clear="()=>{console.log('clear')}"
+    @input="(v)=>{console.log('input',v)}"
+
+    />
 
     <hr>
     <TyInput v-model="inp" :clearable="false"/>

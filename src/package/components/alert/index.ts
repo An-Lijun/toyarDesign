@@ -61,6 +61,7 @@ const createAlert = (info: string, options: IOption, div: HTMLDivElement) => {
     {
       isUnderLine: options.isUnderLine,
       modelValue: true,
+      isTeleport:false,
       'onUpdate:modelValue': () => {
         document.body.removeChild(div)
       }
@@ -101,11 +102,14 @@ export default function AlertJs(
     const instance = createAlert(info, Object.assign(defaultDialogOptions, options), div)
     render(instance, div)
     document.body.appendChild(div)
+
     nextTick(() => {
       instance!.component!.exposed!.showValue.value = true
     })
   return {
-    distroy: ()=>{ document.body.removeChild(div)}
+    distroy: ()=>{ 
+      document.body.removeChild(div)
+    }
   }
 }
 

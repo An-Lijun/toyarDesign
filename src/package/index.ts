@@ -76,7 +76,7 @@ import TyTimePicker from './components/time-picker'
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
 
-
+import allIcons from './iconList.js'
 
 const install = app => {
     app.use(TyIcon),
@@ -220,7 +220,8 @@ export {
   TyAffix,
   TyCircle,
   TyUpload,
-  TyTimePicker
+  TyTimePicker,
+  allIcons
 } //按需引入
 // TyTrigger,
 export *  from './components/icons'

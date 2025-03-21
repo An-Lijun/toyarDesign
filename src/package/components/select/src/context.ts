@@ -34,6 +34,14 @@ export const selProps =buildProps({
   placeholder:{
     type: String,
     default: ''
+  },
+  icon:{
+    type:String,
+    default:'ty-arrow-down-s-line'
+  },
+  width:{
+    type:String,
+    default:'100%'
   }
 })
 

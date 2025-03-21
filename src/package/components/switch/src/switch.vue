@@ -56,9 +56,6 @@ const click = () => {
   if(props.disabled){
     return
   }
-  if (typeof model.value === 'boolean') {
-   return model.value = !model.value
-  }
   model.value = model.value===props.openValue? props.closeValue:props.openValue
   emit('change',model.value)
 }

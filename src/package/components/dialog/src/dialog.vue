@@ -1,38 +1,73 @@
 <template>
-  <!-- @click.self避免冒泡，只有点击自己时才能触发   -->
-  <div :class="nm.e('wrapper')" @click.self="handleClose" v-show="model||showValue">
-    <transition name="dialog-fade">
-      <div
-        :class="nm.b()"
-        :style="{ width, top }"
-        ref="tyDialog"
-        v-show="model||showValue"
-      >
-        <div :class="[nm.e('header'),nm.is('underLine',isUnderLine)]" ref="tyDialogHeader" >
-          <slot name="title">
-            <!-- 将span放到slot内，这样不仅可以定义title文本，还可以定义样式等 -->
-            <span :class="nm.e('title')">
-              {{ title }}
-            </span>
-          </slot>
-          <button :class="nm.e('headerBtn')" @click="handleClose">
-            <TyIcon icon="ty-close-fill"></TyIcon>
-          </button>
+  <Teleport to="body" v-if="isTeleport">
+    <!-- @click.self避免冒泡，只有点击自己时才能触发   -->
+    <div :class="nm.e('wrapper')" @click.self="handleClose" v-show="model||showValue">
+      <transition name="dialog-fade">
+        <div
+          :class="nm.b()"
+          :style="{ width, top }"
+          ref="tyDialog"
+          v-show="model||showValue"
+        >
+          <div :class="[nm.e('header'),nm.is('underLine',isUnderLine)]" ref="tyDialogHeader" >
+            <slot name="title">
+              <!-- 将span放到slot内，这样不仅可以定义title文本，还可以定义样式等 -->
+              <span :class="nm.e('title')">
+                {{ title }}
+              </span>
+            </slot>
+            <button :class="nm.e('headerBtn')" @click="handleClose">
+              <TyIcon icon="ty-close-fill"></TyIcon>
+            </button>
+          </div>
+          <div :class="nm.e('body')">
+            <!-- 内容可能是除span以外的其他内容，比如列表等，所以在这里使用插槽，并且不规定插槽内具体的标签 -->
+            <!-- 并且在这里使用匿名插槽，使用匿名插槽的好处就是不用指定名称，这样在不使用<template v-slot>指定插槽内容的时候，也可以自定义内容 -->
+            <slot>
+              {{ info }}
+            </slot>
+          </div>
+          <div :class="nm.e('footer')" v-if="useSlots().footer">
+            <!-- 如果footer不传递内容，则不显示footer -->
+            <slot name="footer"> </slot>
+          </div>
         </div>
-        <div :class="nm.e('body')">
-          <!-- 内容可能是除span以外的其他内容，比如列表等，所以在这里使用插槽，并且不规定插槽内具体的标签 -->
-          <!-- 并且在这里使用匿名插槽，使用匿名插槽的好处就是不用指定名称，这样在不使用<template v-slot>指定插槽内容的时候，也可以自定义内容 -->
-          <slot>
-            {{ info }}
-          </slot>
+      </transition>
+    </div>
+  </Teleport>
+  <div v-else :class="nm.e('wrapper')" @click.self="handleClose" v-show="model||showValue">
+      <transition name="dialog-fade">
+        <div
+          :class="nm.b()"
+          :style="{ width, top }"
+          ref="tyDialog"
+          v-show="model||showValue"
+        >
+          <div :class="[nm.e('header'),nm.is('underLine',isUnderLine)]" ref="tyDialogHeader" >
+            <slot name="title">
+              <!-- 将span放到slot内，这样不仅可以定义title文本，还可以定义样式等 -->
+              <span :class="nm.e('title')">
+                {{ title }}
+              </span>
+            </slot>
+            <button :class="nm.e('headerBtn')" @click="handleClose">
+              <TyIcon icon="ty-close-fill"></TyIcon>
+            </button>
+          </div>
+          <div :class="nm.e('body')">
+            <!-- 内容可能是除span以外的其他内容，比如列表等，所以在这里使用插槽，并且不规定插槽内具体的标签 -->
+            <!-- 并且在这里使用匿名插槽，使用匿名插槽的好处就是不用指定名称，这样在不使用<template v-slot>指定插槽内容的时候，也可以自定义内容 -->
+            <slot>
+              {{ info }}
+            </slot>
+          </div>
+          <div :class="nm.e('footer')" v-if="useSlots().footer">
+            <!-- 如果footer不传递内容，则不显示footer -->
+            <slot name="footer"> </slot>
+          </div>
         </div>
-        <div :class="nm.e('footer')" v-if="useSlots().footer">
-          <!-- 如果footer不传递内容，则不显示footer -->
-          <slot name="footer"> </slot>
-        </div>
-      </div>
-    </transition>
-  </div>
+      </transition>
+    </div>
 </template>
 <script lang="ts" setup name="TyDialog">
 

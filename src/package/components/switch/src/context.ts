@@ -18,6 +18,7 @@ export const switchProps =buildProps({
   },
   openValue:{
     type:[String,Boolean],
+    default:true
   },
   disabled:{
     type:Boolean,
@@ -25,6 +26,7 @@ export const switchProps =buildProps({
   },
   closeValue:{
     type:[String,Boolean],
+    default:false
   },
   type:{
     type:String,

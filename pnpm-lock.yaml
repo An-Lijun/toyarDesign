@@ -14,9 +14,6 @@ importers:
       '@vuepress/plugin-register-components':
         specifier: ^2.0.0-rc.15
         version: 2.0.0-rc.15(vuepress@2.0.0-rc.8(typescript@5.0.2)(vue@3.4.31(typescript@5.0.2)))
-      popper.js:
-        specifier: ^1.16.1
-        version: 1.16.1
       robinson:
         specifier: ^1.0.10
         version: 1.0.10
@@ -1039,10 +1036,6 @@ packages:
 
   pkg-types@1.0.3:
     resolution: {integrity: sha512-nN7pYi0AQqJnoLPC9eHFQ8AcyaixBUOwvqc5TDnIKCMEE6I0y8P7OKA7fPexsXGCGxQDl/cmrLAp26LhcwxZ4A==}
-
-  popper.js@1.16.1:
-    resolution: {integrity: sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==}
-    deprecated: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
 
   postcss@8.4.38:
     resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
@@ -2319,8 +2312,6 @@ snapshots:
       jsonc-parser: 3.2.1
       mlly: 1.6.1
       pathe: 1.1.2
-
-  popper.js@1.16.1: {}
 
   postcss@8.4.38:
     dependencies:

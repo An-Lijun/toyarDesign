@@ -1,10 +1,10 @@
 <template>
   <div class="divRoot">
     {{ isSwitch }}
-  <TySwitch v-model="isSwitch" size="mini"/>
+  <TySwitch v-model="isSwitch" size="mini" @change="(val)=>{console.log(val)}"/>
   <hr>
   {{ isSwitch1 }}
-  <TySwitch v-model="isSwitch1" openValue="1" closeValue="2" size="small"/>
+  <TySwitch v-model="isSwitch1" openValue="1" closeValue="2" size="small" @change="(val)=>{console.log(val)}"/>
 
   <TySwitch v-model="isSwitch" type="tube" size="medium"/>TyLoading
   <hr>

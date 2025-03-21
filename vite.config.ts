@@ -15,6 +15,7 @@ export default defineConfig({
       formats: ['es'], // 默认['es', 'umd']
       fileName: (format) => `vite-lib.${format}.js` // 打包后的文件名
     },
+    clearScreen: true,
     rollupOptions: {
       //忽略打包vue文件
       //input: ["index.ts"],
@@ -45,6 +46,12 @@ export default defineConfig({
         exports: "named",
       },
     }
+  },
+  css: {
+    modules: {
+      // 自定义 hash 生成规则
+      generateScopedName: '[name]__[local]___[hash:base64:5]',
+    },
   },
   resolve:{
     alias: {

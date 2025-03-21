@@ -115,6 +115,7 @@ onUnmounted(() => {
 
   &__inner {
     line-height: 40px;
+    height: 40px;
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
