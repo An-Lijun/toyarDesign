@@ -5,103 +5,125 @@
         </div>
     </div>
 </template>
-<script setup>
-import { onBeforeUnmount, onMounted, ref } from "vue";
-import { nm, affixProps } from "./context";
-import { on, off } from '../../../utils/dom'
 
+<script setup>
+import { onBeforeUnmount, onMounted, ref, computed } from "vue";
+import { nm, affixProps } from "./context";
+import { debounce,bind,unBind } from "robinson";
 defineOptions({
     name: "TyAffix",
 });
 
-const props = defineProps(affixProps)
-const affixRef = ref()
-let isFixed = ref(false)
-let styles = ref({})
-const targetDom = props.target||window
-const getScrollVal = (target, top) => {
-    let val = target[top ? 'pageYOffset' : 'pageXOffset'];
-    if (typeof val !== 'number') {
-        val = window.document.documentElement[top ? 'scrollTop' : 'scrollLeft'];
-    }
-    return val;
-}
+const props = defineProps(affixProps);
+const affixRef = ref(null);
+let isFixed = ref(false);
+let styles = ref({});
+const targetDom = props.target || window;
 
+// 缓存变量
+let cachedElRect = null;
+let cachedScrollTop = 0;
+
+// 校验并获取滚动值
+const getScrollVal = (target, top) => {
+    if (!target || !(target instanceof HTMLElement || target === window)) return 0;
+    if (target === window) {
+        return top ? window.pageYOffset : window.pageXOffset;
+    }
+    return top ? target.scrollTop : target.scrollLeft;
+};
+
+// 校验并获取元素偏移值
 const getOffsetVal = (element) => {
+    if (!element || !(element instanceof HTMLElement)) return { top: 0, left: 0 };
+    if (cachedElRect && element === affixRef.value) {
+        return cachedElRect;
+    }
     const { top, left } = element.getBoundingClientRect();
     const { clientTop = 0, clientLeft = 0 } = window.document.body;
-    return {
+    cachedElRect = {
         top: top + getScrollVal(window, true) - clientTop,
         left: left + getScrollVal(window) - clientLeft
     };
-}
+    return cachedElRect;
+};
 
-const offsetType = computed(() => {
-    return props.offsetBottom >= 0 ? 'bottom' : 'top';
-});
+// 计算 offset 类型
+const offsetType = computed(() => props.offsetBottom >= 0 ? 'bottom' : 'top');
 
-const setIsFixed = (value) => {
+// 设置固定状态
+let pendingStyles = {};
+const applyStyles = () => {
+    styles.value = pendingStyles;
+    pendingStyles = {};
+};
+const setIsFixed = (value, style = {}) => {
     isFixed.value = value;
-}
+    Object.assign(pendingStyles, style);
+    requestAnimationFrame(applyStyles);
+};
+const offsetTop = Number(props.offsetTop) || 0;
+const offsetBottom = Number(props.offsetBottom) || 0;
+// 处理滚动逻辑
 const handleScroll = () => {
-    let nowIsFixed = isFixed.value
-    const scrollTop = getScrollVal(window, true);
-    const { top: elOffsetTop, left: elOffsetLeft } = getOffsetVal(affixRef.value);
+    if (!affixRef.value) return;
+
+    const scrollTop = getScrollVal(targetDom, true);
+    const elOffset = getOffsetVal(affixRef.value);
+
+    // 缓存滚动值和偏移值
+    if (scrollTop === cachedScrollTop && elOffset.top === cachedElRect?.top) return;
+    cachedScrollTop = scrollTop;
+    cachedElRect = elOffset;
+
+    const { top: elOffsetTop, left: elOffsetLeft } = elOffset;
     const windowHeight = window.innerHeight;
     const elHeight = affixRef.value.offsetHeight;
-    const offsetTop = props.offsetTop
-    const offsetBottom = props.offsetBottom
+
+
 
     switch (offsetType.value) {
         case 'top':
-            if (elOffsetTop - offsetTop <= scrollTop && !nowIsFixed) {
-                setIsFixed(true)
-                styles.value = {
-                    top: `${offsetTop}px`,
-                    left: `${elOffsetLeft}px`
-                };
-            } else if (elOffsetTop - offsetTop > scrollTop && nowIsFixed) {
-                isFixed.value = false;
-                setIsFixed(false)
-                styles.value = {};
+            if (elOffsetTop - offsetTop <= scrollTop && !isFixed.value) {
+                setIsFixed(true, { top: `${offsetTop}px`, left: `${elOffsetLeft}px` });
+            } else if (elOffsetTop - offsetTop > scrollTop && isFixed.value) {
+                setIsFixed(false, {});
             }
             break;
         case 'bottom':
-            if (elOffsetTop + offsetBottom + elHeight > scrollTop + windowHeight && !nowIsFixed) {
-                setIsFixed(true)
-                styles.value = {
-                    bottom: `${offsetBottom}px`,
-                    left: `${elOffsetLeft}px`
-                };
-            } else if (elOffsetTop + offsetBottom + elHeight < scrollTop + windowHeight && nowIsFixed) {
-                setIsFixed(false)
-                styles.value = {};
+            if (elOffsetTop + offsetBottom + elHeight > scrollTop + windowHeight && !isFixed.value) {
+                setIsFixed(true, { bottom: `${offsetBottom}px`, left: `${elOffsetLeft}px` });
+            } else if (elOffsetTop + offsetBottom + elHeight < scrollTop + windowHeight && isFixed.value) {
+                setIsFixed(false, {});
             }
     }
-}
+};
 
+// 监听滚动和窗口大小变化
 onMounted(() => {
-    handleScroll()
-    console.log(props.target);
-    
-    on(targetDom, 'scroll', handleScroll);
-    on(targetDom, 'resize', () => {
-        if (getOffsetVal(affixRef.value).top - props.offsetTop <= getScrollVal(window, true)) {
-            isFixed.value = false;
-            setIsFixed(false)
+    handleScroll();
+    const handleResize = () => {
+        if (!affixRef.value) return;
+        const elOffset = getOffsetVal(affixRef.value);
+        
+        if (elOffset.top - offsetTop <= getScrollVal(targetDom, true)) {
+            setIsFixed(false, {});
         }
         handleScroll();
-    });
-})
+    };
+
+    const debouncedHandleScroll = debounce(handleScroll, 50);
+    const debouncedHandleResize = debounce(handleResize, 50);
+
+    bind(targetDom, 'scroll', () => requestAnimationFrame(debouncedHandleScroll), { passive: true });
+    bind(window, 'resize', () => requestAnimationFrame(debouncedHandleResize), { passive: true });
+});
 
 onBeforeUnmount(() => {
-    off(targetDom, 'scroll', handleScroll);
-    off(targetDom, 'resize', handleScroll);
-})
-
-
+    unBind(targetDom, 'scroll', handleScroll);
+    unBind(window, 'resize', handleScroll);
+});
 </script>
-
 
 <style lang="scss" scoped>
 .ty-affix {
