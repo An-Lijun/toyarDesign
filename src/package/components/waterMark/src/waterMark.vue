@@ -1,22 +1,33 @@
 <template>
   <div :class="nm.b()" ref="maskContainer">
-    <div :class="nm.e('mark')" ref="mark" ></div>
+    <div :class="nm.e('mark')" ref="mark"></div>
     <slot></slot>
   </div>
 </template>
+
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { waterProps, nm, defaultOptions } from './context'
 import xss from 'xss'
 import useDebounce from '../../../hooks/useDebounce'
 import { URL_REGULAR_EXPRESSION, PICTURE_EXPRESSION } from '../../../utils/regular'
+
 defineOptions({
   name: 'TyWaterMark'
 })
-const props = defineProps(waterProps)
-let url
 
+const props = defineProps(waterProps)
+// 提取常量
+const OFFSET_MULTIPLIER = 1.5
+const DEBOUNCE_DELAY = 1500
+let url,mutOb
+
+// 合并默认选项和用户选项，并进行校验
 const options = Object.assign({}, defaultOptions, props.options)
+if (!options.width || !options.height) {
+  throw new Error('Width and height must be provided in options')
+}
+// 创建 Canvas 和上下文
 const canvas = document.createElement('canvas')
 canvas.width = options.width
 canvas.height = options.height
@@ -31,6 +42,7 @@ ctx.rotate(options.rotate)
 const mark = ref()
 const maskContainer = ref()
 
+// 定义正则匹配函数
 const isImageByReg = (str, type = 'http') => {
   if (type === 'http') {
     return PICTURE_EXPRESSION.test(str)
@@ -40,38 +52,38 @@ const isImageByReg = (str, type = 'http') => {
 }
 
 const isImageByDom = str => {
-  let img = document.createElement('img')
-  img.src = str
-  return new Promise(function (resolve, reject) {
-    img.onerror = () => {
-      reject('img is not exist')
-    }
-    img.onload = () => {
-      resolve(img)
-    }
+  return new Promise((resolve, reject) => {
+    const img = document.createElement('img')
+    img.onerror = () => reject(new Error('Image does not exist'))
+    img.onload = () => resolve(img)
+    img.src = str
   })
 }
+// 设置背景图片
 const setUrl = () => {
   mark.value.style.backgroundImage = `url(${url})`
 }
 
-
+// 创建水印
 const createMark = async () => {
-  if(!props.markInfo){
+  if (!props.markInfo) {
     throw new Error('markInfo is required')
   }
 
   if (Array.isArray(props.markInfo)) {
+    if (props.markInfo.length < 2) {
+      console.warn('markInfo array should have at least two elements')
+    }
     ctx.fillText(
-      xss(props.markInfo[0] || ''),
+      xss(props.markInfo[0] || '', { whiteList: {} }), // 确保 xss 配置严格
       options.offsetX,
-      options.offsetY - options.fontSize / 1.5
+      options.offsetY - options.fontSize / OFFSET_MULTIPLIER
     )
     ctx.font = `${options.fontSizeSed}px ${options.fontFamily}`
     ctx.fillText(
-      xss(props.markInfo[1] || ''),
+      xss(props.markInfo[1] || '', { whiteList: {} }),
       options.offsetX,
-      options.offsetY + options.fontSize / 1.5
+      options.offsetY + options.fontSize / OFFSET_MULTIPLIER
     )
   } else {
     try {
@@ -84,31 +96,35 @@ const createMark = async () => {
         options.height
       )
     } catch (error) {
+      console.error('Failed to load image:', error.message)
       ctx.fillText(
-        xss(props.markInfo),
+        xss(props.markInfo, { whiteList: {} }),
         options.offsetX,
         options.offsetY
       )
     }
 
   }
-  url =canvas.toDataURL('image/png')
+  url = canvas.toDataURL('image/png')
   setUrl()
 }
 
-const createMarkDeb = useDebounce(createMark, 1500, true)
+// 防抖处理
+const createMarkDeb = useDebounce(createMark, DEBOUNCE_DELAY, true)
 
-let mutOb = new MutationObserver(records => {
-  records.forEach(el => {
-    if (el.target === mark.value) {
-      mark.value.style.display = 'block'
-      mark.value.style.opacity = '1'
-      setUrl()
-    }
-    if (el.removedNodes[0] === mark.value) {
+// MutationObserver 监听
+ mutOb = new MutationObserver(records => {
+  for (const record of records) {
+    if (record.target === mark.value) {
+      if (record.attributeName === 'style') {
+        mark.value.style.display = 'block'
+        mark.value.style.opacity = '1'
+        setUrl()
+      }
+    } else if (record.removedNodes && record.removedNodes[0] === mark.value) {
       createMarkDeb()
     }
-  })
+  }
 })
 
 onMounted(() => {
@@ -116,6 +132,7 @@ onMounted(() => {
     mutOb.observe(mark.value, {
       childList: false,
       attributes: true,
+      attributeFilter: ['style'], // 仅监听 style 属性变化
       subtree: true
     })
   }
@@ -123,7 +140,9 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  mutOb.disconnect();
+  if(mutOb){
+    mutOb.disconnect()
+  }
 })
 </script>
 <style lang="scss" scoped>
