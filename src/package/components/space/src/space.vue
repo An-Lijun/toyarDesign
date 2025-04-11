@@ -1,10 +1,7 @@
-<!-- setup 语法糖不支持render 语法 -->
-
 <script>
-// 帮我使用render写一个space 组件
+import { h, defineComponent, useSlots } from 'vue'
+import { TY_SIZE } from '../../../constant'
 
-import { h, defineComponent, toRefs, watchEffect, useSlots } from 'vue'
-import { TY_SIZE } from '../../../constant';
 export default defineComponent({
   name: 'TySpace',
   props: {
@@ -30,97 +27,76 @@ export default defineComponent({
     }
   },
   setup(props) {
-
-    // 帮我获取default 插槽 内容
     const slots = useSlots()
     const defaultSlot = slots.default ? slots.default() : []
     const splitSlot = slots.split ? slots.split() : null
 
-
+    // 定义 sizeValue 并提供默认值
     const sizeValue = {
-      "mini": '4px',
-      "small": '8px',
-      "medium": '1px',
-      'large': 'px',
+      mini: '4px',
+      small: '8px',
+      medium: '12px',
+      large: '16px'
     }
 
+    // 获取 marginKey 和 marginValue
+    const getMarginKey = () => props.direction === 'row' ? 'marginRight' : 'marginBottom'
+    const getMarginValue = () => sizeValue[props.size] || `${props.size}px`
+
+    // 辅助函数：生成子元素
+    const generateChild = (child, index, length) =>
+      h('div', {
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          [getMarginKey()]: index < length - 1 ? getMarginValue() : '0px'
+        }
+      }, child)
+
+    // 辅助函数：生成分隔符
+    const generateSplit = () => {
+      if (!splitSlot || !splitSlot.length) return null
+      return h('div', {
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          [getMarginKey()]: getMarginValue()
+        }
+      }, splitSlot)
+    }
+
+    // 主逻辑：生成所有子元素
     const getChildren = () => {
-
-      let arr = []
-      let len = defaultSlot.length - 1
-      let marginKey = [`${props.direction === 'row' ? 'marginRight' : 'marginBottom'}`]
-      let marginValue = sizeValue[props.size] || props.size + 'px'
-      const genChild = (list) => {
-        let len = list.length-1
-        return list.map((item, index) => {
-          arr.push(
-            h('div', {
-              style: {
-                display: 'flex',
-                alignItems: 'center',
-                [marginKey]: marginValue
-              }
-            }, item)
-          )
-
-          if (splitSlot && index !== len) {
-            arr.push(
-              h('div', {
-                style: {
-                  display: 'flex',
-                  alignItems: 'center',
-                  [marginKey]: marginValue
-                }
-              }, splitSlot)
-            )
-          }
-
-        })
-      }
-
+      const children = []
       defaultSlot.forEach((item, index) => {
         if (Array.isArray(item.children)) {
-          genChild(item.children)
+          item.children.forEach((child, childIndex) => {
+            children.push(generateChild(child, childIndex, item.children.length))
+            if (splitSlot && childIndex < item.children.length - 1) {
+              children.push(generateSplit())
+            }
+          })
         } else {
-          arr.push(
-            h('div', {
-              style: {
-                display: 'flex',
-                alignItems: 'center',
-                [marginKey]: marginValue
-              }
-            }, item)
-          )
+          children.push(generateChild(item, index, defaultSlot.length))
         }
 
-
-        if (splitSlot && index !== len) {
-          arr.push(
-            h('div', {
-              style: {
-                display: 'flex',
-                alignItems: 'center',
-                [marginKey]: marginValue
-              }
-            }, splitSlot)
-          )
+        if (splitSlot && index < defaultSlot.length - 1) {
+          children.push(generateSplit())
         }
-
       })
-
-      return arr
+      return children
     }
+
     return () =>
       h('div', {
         style: {
-          display: props.direction === 'row'?'inline-flex':'',
-          alignItems: props.align ,
-          width:'100%',
+          display: props.direction === 'row' ? 'inline-flex' : 'flex',
+          alignItems: props.align,
           justifyContent: props.justify,
-          flexDirection: props.direction
+          flexDirection: props.direction,
+          width: '100%'
         }
       }, getChildren())
   }
 })
 </script>
-k
