@@ -4,9 +4,9 @@
       <header>
         <TyCheckBox
           @change="handleLfAllChange"
-          :disabled="leftDiabeld"
+          :disabled="leftDisabled"
           :canHarf="leftHarf"
-          :style="style"
+          :style="checkBoxStyle"
           v-model="leftAllCheck"
           :value="1"
           size="mini"
@@ -14,12 +14,12 @@
         >
       </header>
       <div :class="nm.e('container')" v-if="data.length">
-        <div :class="nm.e('item')" v-for="item in data">
+        <div :class="nm.e('item')" v-for="item in data" :key="item.value">
           <TyCheckBox
             @change="handleLfChange"
-            :disabled="leftDiabeld"
-            :style="style"
-            v-model="check"
+            :disabled="leftDisabled"
+            :style="checkBoxStyle"
+            v-model="leftCheck"
             :value="item.value"
             size="mini"
             >{{ item.label }}</TyCheckBox
@@ -31,14 +31,14 @@
       </div>
     </div>
     <div :class="nm.e('center')">
-      <span>
+      <span :class="nm.is('rightDisabled', rightDiabeld)">
         <TyIcon
           :size="25"
           icon="ty-arrow-right-s-line"
           @click="handleToRight"
         ></TyIcon>
       </span>
-      <span>
+      <span :class="nm.is('leftDisabled', leftDisabled)">
         <TyIcon
           :size="25"
           icon="ty-arrow-left-s-line"
@@ -52,7 +52,7 @@
           @change="handleRtAllChange"
           :disabled="rightDiabeld"
           :canHarf="rightHarf"
-          :style="style"
+          :style="checkBoxStyle"
           v-model="rightAllCheck"
           :value="1"
           size="mini"
@@ -60,12 +60,12 @@
         >
       </header>
       <div :class="nm.e('container')" v-if="model.length">
-        <div :class="nm.e('item')" v-for="item in model">
+        <div :class="nm.e('item')" v-for="item in model" :key="item.value">
           <TyCheckBox
-          @change="handleRtChange"
+            @change="handleRtChange"
             :disabled="rightDiabeld"
-            :style="style"
-            v-model="check"
+            :style="checkBoxStyle"
+            v-model="rightCheck"
             :value="item.value"
             size="mini"
             >{{ item.label }}</TyCheckBox
@@ -78,115 +78,133 @@
     </div>
   </div>
 </template>
+
 <script setup>
-import { ref,computed } from 'vue'
+import { ref, computed } from 'vue'
 import TyIcon from '../../icon'
-import {TyCheckBox} from '../../check-box'
+import { TyCheckBox } from '../../check-box'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import TyEmpty from '../../empty'
-import {transProps,transEmits,nm}from './context'
+import { transProps, transEmits, nm } from './context'
 
 defineOptions({
-  name:'TyTransfer'
+  name: 'TyTransfer'
 })
+// 动态样式
+const checkBoxStyle = {
+  '--border-radius-4': '2px',
+  '--size-mini': '15px',
+  '--fill-2': 'var(--fill-4)'
+}
 const props = defineProps(transProps)
 const emit = defineEmits(transEmits)
-const model = defineModel('modelValue',{
-  type:Array
+const model = defineModel('modelValue', {
+  type: Array,
+  default: () => []
 })
 
-const style = '--border-radius-4:2px;--size-mini:15px;--fill-2:var(--fill-4)'
+// 初始化数据并确保为数组
+const data = ref(Array.isArray(props.data) ? props.data : [])
 
-const data = ref(props.data)
+// 左右两侧的选择状态
+const leftCheck = ref([])
+const rightCheck = ref([])
 
-let check = ref([])
-
-let leftDiabeld = ref(false)
+let leftDisabled = ref(false)
 let rightDiabeld = ref(false)
 
+
+
+// 移动数据到右侧
 const handleToRight = () => {
-  let arr = data.value.filter(item => check.value.includes(item.value))
-  data.value = data.value.filter(item => !check.value.includes(item.value))
-  model.value.push(...arr)
-  check.value = []
+  const selectedItems = data.value.filter(item => leftCheck.value.includes(item.value))
+  data.value = data.value.filter(item => !leftCheck.value.includes(item.value))
+  model.value.push(...selectedItems)
+  leftCheck.value = []
   rightDiabeld.value = false
 }
+
+// 移动数据到左侧
 const handleToLeft = () => {
-  let arr = model.value.filter(item => check.value.includes(item.value))
-  model.value = model.value.filter(item => !check.value.includes(item.value))
-  data.value.push(...arr)
-  check.value = []
-  leftDiabeld.value = false
+  const selectedItems = model.value.filter(item => rightCheck.value.includes(item.value))
+  model.value = model.value.filter(item => !rightCheck.value.includes(item.value))
+  data.value.push(...selectedItems)
+  rightCheck.value = []
+  leftDisabled.value = false
 }
 
-const handleLfChange=(val)=>{
-  if(val.length){
-    return rightDiabeld.value = true
-  }
+// 左侧单个选择变化
+const handleLfChange = (val) => {
+  if (val.length) {
+    rightDiabeld.value = true
+  } else {
     rightDiabeld.value = false
-}
-const handleRtChange=(val)=>{
-  if(val.length){
-    return leftDiabeld.value = true
   }
-  leftDiabeld.value = false
 }
-const handleLfAllChange=(val)=>{
-  if(val.length){
-    check.value=data.value.map(item=> item.value)
-    return rightDiabeld.value = true
-  }
-  rightDiabeld.value = false
-  check.value=[]
-}
-const handleRtAllChange=(val)=>{
-  if(val.length){
-    check.value=model.value.map(item=> item.value)
-    return leftDiabeld.value = true
-  }
-  check.value=[]
-  leftDiabeld.value = false
-}
-// ty-arrow-right-s-line
-// ty-arrow-left-s-line
-let leftAllCheck = ref([])
-let rightAllCheck = ref([])
 
-const leftHarf = computed(() => {
-  if( leftDiabeld.value){
-    leftAllCheck.value=[]
-    return
+// 右侧单个选择变化
+const handleRtChange = (val) => {
+  if (val.length) {
+    leftDisabled.value = true
+  } else {
+    leftDisabled.value = false
   }
-  const flag = check.value.length === data.value.length
-  if(check.value.length){
-    leftAllCheck.value=[1]
+}
+
+// 左侧全选变化
+const handleLfAllChange = (val) => {
+  if (val.length) {
+    leftCheck.value = data.value.map(item => item.value)
+    rightDiabeld.value = true
+  } else {
+    leftCheck.value = []
+    rightDiabeld.value = false
   }
-  if(flag){
-    leftAllCheck.value=[1]
+}
+
+// 右侧全选变化
+const handleRtAllChange = (val) => {
+  if (val.length) {
+    rightCheck.value = model.value.map(item => item.value)
+    leftDisabled.value = true
+  } else {
+    rightCheck.value = []
+    leftDisabled.value = false
   }
-  if(!check.value.length){
-    leftAllCheck.value=[]
+}
+
+// 计算半选状态的通用函数
+const computeHalfState = (total, checked, disabled, allCheck) => {
+  if (disabled.value) {
+    allCheck.value = []
+    return false
   }
-  return !flag
-})
-const rightHarf = computed(() => {
-  if(rightDiabeld.value){
-    rightAllCheck.value=[]
-    return
+  const isFullChecked = total.length === checked.value.length
+  if (checked.value.length) {
+    allCheck.value = [1]
   }
-  const flag = model.value.length === check.value.length
-  if(check.value.length){
-    rightAllCheck.value=[1]
+  if (isFullChecked) {
+    allCheck.value = [1]
   }
-  if(flag){
-    rightAllCheck.value=[1]
+  if (!checked.value.length) {
+    allCheck.value = []
   }
-  if(!check.value.length){
-    rightAllCheck.value=[]
-  }
-  return !flag
-})
+  return !isFullChecked
+}
+
+// 左侧半选状态
+const leftAllCheck = ref([])
+const leftHarf = computed(() =>
+  computeHalfState(data.value, leftCheck, leftDisabled, leftAllCheck)
+)
+
+// 右侧半选状态
+const rightAllCheck = ref([])
+const rightHarf = computed(() =>
+  computeHalfState(model.value, rightCheck, rightDiabeld, rightAllCheck)
+)
 </script>
+
 <style lang="scss" scoped>
 .ty-transfer {
   display: inline-flex;
@@ -222,11 +240,29 @@ const rightHarf = computed(() => {
       width: 30px;
       height: 30px;
       background-color: var(--fill-2);
+      color: var(--text-4);
       margin: 5px 0;
+
+      &.is-rightDisabled{
+        background-color: var(--fill-2);
+        color:var(--toyar-gray-10);
+
+        &:hover {
+        cursor: pointer;
+      }
+      }
+      &.is-leftDisabled{
+        background-color: var(--fill-2);
+        color:var(--toyar-gray-10);
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
   :deep(.ty-check-box) {
-    .ty-check-box__input{
+    .ty-check-box__input {
       border-width: 1px;
     }
   }
