@@ -1,7 +1,5 @@
-<!-- setup 语法糖不支持render 语法 -->
-
 <script>
-import { h, defineComponent, useSlots } from 'vue'
+import { h, defineComponent, useSlots, watchEffect } from 'vue'
 
 export default defineComponent({
   name: 'TyAvatarGroup',
@@ -12,20 +10,35 @@ export default defineComponent({
     }
   },
   setup(props) {
-    // 帮我获取default 插槽 内容
     const slots = useSlots()
-    const defaultSlot = slots.default ? slots.default() : []
-    let len = defaultSlot.length
 
-    const getChildren = () =>
-      defaultSlot.map(item => h(item, {
-        style: {
-          zIndex: len--,
-          marginLeft: `-${props.offset}px`,
-          border: '2px solid var(--color-bg-1)',
-        }
-      }))
-    return () => h('div', {}, getChildren())
+    // 动态获取插槽内容并处理
+    const getChildren = () => {
+      const defaultSlot = slots.default?.() || []
+      if (defaultSlot.length === 0) {
+        console.warn('TyAvatarGroup: No children found in default slot.')
+        return []
+      }
+
+      return defaultSlot.map((item, index) => {
+        const zIndex = defaultSlot.length - index
+        return h(item, {
+          style: {
+            zIndex: zIndex.toString(),
+            marginLeft: `-${props.offset}px`,
+            border: '2px solid var(--color-bg-1)',
+          }
+        })
+      })
+    }
+
+    // 使用 watchEffect 确保在插槽内容或 props 变化时重新渲染
+    let children = []
+    watchEffect(() => {
+      children = getChildren()
+    })
+
+    return () => h('div', {}, children)
   }
 })
 </script>
