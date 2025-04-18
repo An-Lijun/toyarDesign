@@ -1,13 +1,11 @@
 <template>
   <div :class="nm.b()" v-on="eventMaps">
     <div v-show="isShowConfirm">
-      <div :style="style" :class="[nm.e('content')]">
-        <main>
+        <main :style="style" :class="[nm.e('content')]">
           <slot name="content">
             {{ props.content }}
           </slot>
         </main>
-      </div>
       <div :class="[nm.e('arrows'), nm.is(placement)]">
       </div>
     </div>
