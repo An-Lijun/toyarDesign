@@ -1,6 +1,5 @@
 <template>
   <div v-if="model === props.name">
-    <!-- <div>{{ props.title }}</div> -->
     <slot></slot>
   </div>
 </template>

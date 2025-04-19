@@ -10,14 +10,14 @@
   </div>
 </template>
 <script  setup lang="ts" name="TyCol">
-import { computed ,inject} from 'vue'
+import { computed ,inject,ref} from 'vue'
 import  {colProps,nm} from './context'
 import {rowContent} from '../../../hooks/symbolNm'
 defineOptions({
   name:'TyCol'
 })
 const props = defineProps(colProps)
-const gutter = inject(rowContent, null) as {value:number}|null
+const gutter = inject(rowContent, null) as {value:number}|null || ref(0)
 
 const compStyle = computed(() => {
   if (props.span instanceof Object) {
