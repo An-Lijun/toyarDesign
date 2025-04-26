@@ -1,0 +1,32 @@
+@mixin sizeMixin {
+
+
+
+  /*  ---------------------------------------   组件尺寸   --------------------------------------- */
+
+  /* 尺寸  */
+
+  @for $size from 0 through 5 {
+    --size-#{$size}: #{$size * 4px};
+  }
+
+  $sizeLs: (
+    mini:(24px),
+    small:(28px),
+    medium:(32px),
+    large:(36px)
+  );
+
+@each $name, $value in $sizeLs {
+  --size-#{$name}: #{$value};
+}
+
+/* padding尺寸 marin尺寸*/
+@for $padding from 1 through 20 {
+  --padding-#{$padding}: 1#{$padding}px;
+  --margin-#{$padding}: 1#{$padding}px;
+
+}
+
+
+}

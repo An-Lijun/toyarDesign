@@ -1,0 +1,14 @@
+/* 文字颜色 */
+$textLs: (
+  1:(10),
+  2:(8),
+  3:(6),
+  4:(4)
+);
+/* 白色文字 */
+// --text-0: var(--text-white);
+
+/*1 强调/正文标题 2 次强调/正文标题 3 次要信息 4 置灰信息*/
+@each $name, $value in $textLs {
+  --text-#{$name} : var(--toyar-gray-#{$value});
+}

@@ -52,6 +52,11 @@ export default defineConfig({
       // 自定义 hash 生成规则
       generateScopedName: '[name]__[local]___[hash:base64:5]',
     },
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler'
+      }
+    }
   },
   resolve:{
     alias: {

@@ -1,0 +1,24 @@
+@mixin themeMixin {
+
+  /*  ---------------------------------------   功能色调   --------------------------------------- */
+  /* 7 click 6  常规 5hover   4特殊场景  3 一般禁用  2 文字禁用    1 浅色/白底悬浮*/
+  $themeColorMap: (
+    primary:('xblue'),
+    /* 主色 */
+    link:('xblue'),
+    /* 链接色 */
+    success:('green'),
+    /* 成功色 */
+    warning:('orange'),
+    /* 警示色 */
+    danger:('red')
+    /* 错误色 */
+  );
+
+// --primary-1:var(--toyar-xblue-1);
+@each $name, $value in $themeColorMap {
+  @for $i from 1 through 7 {
+    --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
+  }
+}
+}

@@ -1,0 +1,30 @@
+@mixin borderWidthMixin {
+
+  /*  ---------------------------------------   边框   --------------------------------------- */
+
+  /* 边框宽度 1常规 2中 3 粗 */
+  @for $i from 0 through 6 {
+    --border-#{$i}: #{$i}px;
+  }
+
+  /* 边框圆角 */
+  $borderRadiusList: (
+    0:(0px),
+    2:(2px),
+    4:(4px),
+    6:(6px),
+    8:(8px),
+    10:(10px),
+    12:(12px),
+    14:(14px),
+    16:(16px),
+    18:(18px),
+    20:(20px),
+    circle:(50%),
+  );
+
+// --border-radius-0: 0px;
+@each $name, $value in $borderRadiusList {
+  --border-radius-#{$name}: #{$value};
+}
+}

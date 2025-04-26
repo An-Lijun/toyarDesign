@@ -1,0 +1,15 @@
+@mixin borderColorMixin {
+
+  /* 边框颜色 1浅色 2一般 3深色悬浮 4重色按钮描边*/
+  $borderLs: (
+    1:(2),
+    2:(3),
+    3:(4),
+    4:(6)
+  );
+
+  // --border-color-1: var(--toyar-gray-2);
+  @each $name, $value in $borderLs {
+    --border-color-#{$name}: var(--toyar-gray-#{$value});
+  }
+}

@@ -1,0 +1,21 @@
+@mixin fillAndBgMixin {
+
+  /* 背景色 */
+  @for $i from 1 through 5 {
+    --color-bg-#{$i}: var(--bg-#{$i});
+  }
+
+  /* 阴影 */
+  @for $i from 1 through 5 {
+    --box-shadow-#{$i}: var(--shadow-#{$i});
+  }
+
+  /* 填充颜色 */
+  /*4 重/特殊场景  3深/灰底悬浮 2常规/白底悬浮 1 浅/禁用*/
+  @for $i from 1 through 4 {
+    --fill-#{$i}: var(--toyar-gray-#{$i});
+  }
+
+  --fill-0: var(--fill-white);
+  /*浅/禁用*/
+}

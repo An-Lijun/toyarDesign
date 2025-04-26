@@ -1,0 +1,30 @@
+@mixin otherMixin {
+
+  /*  ---------------------------------------   其他   --------------------------------------- */
+  /* 行高 */
+  --line-height: 1.5715*1em;
+
+  /* 时间 */
+  @for $i from 1 through 9 {
+    --time-#{$i}: 0.#{$i}s;
+  }
+
+  /* 层级 */
+  $zIndexLs: (
+    1:(1),
+    3:(2),
+    5:(3),
+    7:(4),
+    9:(5),
+    50:(6),
+    import:(99)
+  );
+
+@each $name, $value in $zIndexLs {
+  --zindex-#{$name}: #{$value};
+}
+
+@for $i from 1 through 5 {
+  --opcity-#{$i}: var(--opcity-color-#{$i});
+}
+}

@@ -1,0 +1,22 @@
+@mixin fontWeightMixin {
+
+  /* 字体粗细(字重) 100~900 + 别名*/
+  $fontWeightLs: (
+    UltraLight:(1),
+    Thin:(2),
+    Light:(3),
+    Regular:(4),
+    Medium:(5),
+    SemiBold:(6),
+    Bold:(7),
+    Extrablack:(8),
+    BBlack:(9),
+  );
+
+// --font-weight-1 : 100;
+@each $name, $value in $fontWeightLs {
+  --font-weight-#{$value} : #{$value}00;
+  --font-weight-#{$name}: #{$value}00;
+}
+
+}
