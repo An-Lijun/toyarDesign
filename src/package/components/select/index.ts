@@ -5,3 +5,8 @@ import TySelectGroup from './src/option-group.vue'
 
 import { installComp } from '../../utils'
 export default installComp([TySelect,TySelectOption,TySelectGroup])
+
+
+export{
+  TySelect,TySelectOption,TySelectGroup
+}

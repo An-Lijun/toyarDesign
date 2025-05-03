@@ -11,7 +11,7 @@
     >
       <div :class="nm.e('icon')">
         <slot name="icon">
-          <component :is="cauIconObj[type]" ></component>
+          <component :is="msgIconObj[type]" ></component>
         </slot>
       </div>
       <div :class="nm.e('msg')">

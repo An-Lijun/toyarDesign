@@ -10,7 +10,7 @@ import TyCol from './components/col'
 import TyForm from './components/form'
 import TyFormItem from './components/form-item'
 import TyInput from './components/input'
-import TySelect from './components/select'
+import TySelect,{TySelectOption} from './components/select'
 import {TyCheckBox,TyCheckBoxGroup} from './components/check-box'
 import {TyRadio,TyRadioGroup} from './components/radio'
 import TyDatePicker from './components/date-picker'
@@ -69,7 +69,6 @@ import TyAffix from './components/affix'
 import TyCircle from './components/circle'
 import TyUpload from './components/upload'
 import TyTimePicker from './components/time-picker'
-
 
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
@@ -215,7 +214,7 @@ export {
   TyCircle,
   TyUpload,
   TyTimePicker,
-  allIcons
+  allIcons,
+  TySelectOption
 } //按需引入
 // TyTrigger,
-export *  from './components/icons'

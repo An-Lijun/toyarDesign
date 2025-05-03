@@ -1,11 +1,13 @@
-@use  './src/theme.scss' as useTheme;
-@use  './src/borderWidth.scss' as useBorderWidth;
 @use  './src/borderColor.scss' as useBorderColor;
+@use  './src/borderWidth.scss' as useBorderWidth;
+@use  './src/fillAndBg.scss' as useFillAndBg;
 @use  './src/fontSize.scss' as useFontSize;
 @use  './src/fontWeight.scss' as useFontWeight;
-@use  './src/size.scss' as useSize;
 @use  './src/other.scss' as useOther;
-@use  './src/fillAndBg.scss' as useFillAndBg;
+@use  './src/size.scss' as useSize;
+@use  './src/textColor.scss' as useTextColor;
+@use  './src/theme.scss' as useTheme;
+
 
 :root ,.ty-dark,.ty-light{
   @include useTheme.themeMixin; //--primary-1:var(--toyar-xblue-1);
@@ -16,4 +18,5 @@
   @include useSize.sizeMixin; /* padding尺寸 marin尺寸*/
   @include useOther.otherMixin;
   @include useFillAndBg.fillAndBgMixin;
+  @include useTextColor.textMixin
 }
