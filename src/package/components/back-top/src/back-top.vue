@@ -4,14 +4,14 @@
     nm.is('circle', circle)
   ]" @click="back()" ref="backTop">
     <slot>
-      <TyIcon icon="ty-arrow-up-s-fill" style="color:#fff;"></TyIcon>
+      <TyiArrowUpSFill style="color:#fff;"></TyiArrowUpSFill>
     </slot>
   </div>
 </template>
 <script lang='ts' setup name='TyBackTop'>
 import { onMounted, onBeforeUnmount, ref,shallowRef } from "vue";
 import { backTopProps, nm } from './context'
-
+import {TyiArrowUpSFill} from 'toyaricon'
 defineOptions({
   name: 'TyBackTop'
 })

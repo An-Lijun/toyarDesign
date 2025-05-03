@@ -9,7 +9,7 @@
         <slot name="title"></slot>
       </div>
       <div :class="[subNm.e('arrow'), subNm.is('opened', isOpened)]" >
-        <TyIcon icon="ty-arrow-down-s-line"></TyIcon>
+        <TyiArrowDownSLine/>
       </div>
     </div>
     <div :class="[
@@ -30,7 +30,7 @@ import { subNm } from './context'
 import { inject, ref, unref, computed } from 'vue'
 import menuIndex from './menuIndex.vue'
 import { arrow, createPopper } from '@popperjs/core';
-
+import {TyiArrowDownSLine} from 'toyaricon'
 defineOptions({
   name: 'TySubMenu'
 })

@@ -1,8 +1,6 @@
 <template>
   <div :class="nm.b()" :style="style">
-
-    <TyIcon v-if="isShowIcon" :icon="cauIconObj[type]" :color="`var(--${colorObj[type]}-5)`"
-      style="font-size: 24px;margin-right: 10px;" />
+    <component v-if="isShowIcon"  :is="cauIconObj[type]" :size="size"  style="font-size: 24px;margin-right: 10px;" :color="`var(--${colorObj[type]}-5)`"></component>
     <div :class="nm.e('content')">
       <div :class="[nm.e('title')]">
         <span>
@@ -18,15 +16,17 @@
 </template>
 <script setup>
 import { cProps, nm } from './context'
+import { TyiInformationFill,TyiCheckboxCircleFill,TyiCloseCircleFill } from 'toyaricon'
+
 defineOptions({
   name: 'TyCaution'
 })
 const props = defineProps(cProps)
 const cauIconObj = {
-  info: 'ty-information-fill',
-  success: 'ty-checkbox-circle-fill',
-  warning: 'ty-information-fill',
-  error: 'ty-close-circle-fill'
+  info: TyiInformationFill,
+  success: TyiCheckboxCircleFill,
+  warning: TyiInformationFill,
+  error: TyiCloseCircleFill
 }
 const colorObj = {
   'info': 'primary',

@@ -1,6 +1,23 @@
 import TySubMenu from "./subMenu.vue"
 import TyMenuItem from "./menuItem.vue"
-import TyIcon from "../../icon/index"
+import {defineAsyncComponent} from 'vue'
+function toPascalCase(str) {
+  const words = str.split('-');
+  return words.map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join('');
+}
+const getIcon = (icon) => {
+  return defineAsyncComponent(() => import('toyaricon').then((module) => {
+    if(icon.includes('-')){
+      let str = icon.replace('ty-','tyi-')
+      str = toPascalCase(str)
+      return module[str]
+      }
+    return module[icon]
+  }));
+}
+
 import { defineComponent, getCurrentInstance, h } from "vue"
 export default defineComponent({
   name: 'optionsRender',
@@ -28,8 +45,7 @@ export default defineComponent({
             return item.label
           },
           icon: () =>
-            h(TyIcon, {
-              icon: item.icon
+            h(getIcon(item.icon), {
             })
         }
       )
@@ -40,7 +56,7 @@ export default defineComponent({
       }
       if (item.icon) {
         option.icon = () =>
-          h(TyIcon, {
+          h(getIcon(item.icon), {
             icon: item.icon
           })
       }

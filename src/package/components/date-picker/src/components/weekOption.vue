@@ -2,17 +2,18 @@
   <header>
     <div :class="[nm.e('com')]">
       <div class="lastYear" @click="lastYear">
-        <TyIcon icon="ty-arrow-left-double-line" />
+        <TyiArrowLeftDoubleLine  />
       </div>
       <div class="lastMonth" @click="lastMonth">
-        <TyIcon icon="ty-arrow-left-s-line" />
+        <TyiArrowLeftSLine />
       </div>
       <div class="nowDate">{{ nowDate }}</div>
       <div class="nextMonth" @click="nextMonth">
-        <TyIcon icon="ty-arrow-right-s-line" />
+        <TyiArrowRightSLine />
+
       </div>
       <div class="nextYear" @click="nextYear">
-        <TyIcon icon="ty-arrow-right-double-line" />
+        <TyiArrowRightDoubleLine />
       </div>
     </div>
     <div :class="[nm.e('week')]">
@@ -30,6 +31,8 @@
 <script setup lang='ts'>
 import { nm } from '../context'
 import { ref } from 'vue'
+import {TyiArrowLeftDoubleLine,TyiArrowLeftSLine ,TyiArrowRightSLine,TyiArrowRightDoubleLine} from 'toyaricon'
+
 const emit = defineEmits(['selectData'])
 const weekArr = [ '一', '二', '三', '四', '五', '六','日' ]
 const countDate = [new Date().getFullYear(), new Date().getMonth()]

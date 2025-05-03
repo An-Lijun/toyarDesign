@@ -5,20 +5,20 @@
     </div>
     <div :class="nm.e('items')">
       <div :class="nm.e('left')" @click="preClick">
-        <TyIcon icon="ty-arrow-left-s-line"></TyIcon>
+        <TyiArrowLeftSLine/>
       </div>
       <div :class="[nm.e('item'), item === props.current ? 'active' : '']" v-for="item in items"
         @click="itemClick(item)">
         {{ item }}
       </div>
       <div :class="nm.e('right')" @click="aftClick">
-        <TyIcon icon="ty-arrow-right-s-line"></TyIcon>
+        <TyiArrowRightSLine/>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import TyIcon from '../../icon'
+import {TyiArrowRightSLine,TyiArrowLeftSLine} from 'toyaricon'
 import { pagProps, nm } from './context'
 defineOptions({
   name: 'TyPagination'

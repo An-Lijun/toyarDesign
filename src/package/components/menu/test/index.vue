@@ -64,7 +64,7 @@
         </template>
         <TySubMenu index="1">
           <template #icon>
-            <TyIcon icon="ty-stack-fill"></TyIcon>
+            <TyiStackFill/>
           </template>
           <template #title> Navigation1 </template>
 
@@ -74,14 +74,15 @@
         </TySubMenu>
         <TySubMenu index="2">
           <template #icon>
-            <TyIcon icon="ty-palette-fill"></TyIcon>
+            <TyiPaletteFill/>
           </template>
           <template #title> Navigation2 </template>
           <TyMenuItem index="2-1" mkey="xx31"> menu1 </TyMenuItem>
           <TyMenuItem index="2-2" mkey="xx32"> menu2 </TyMenuItem>
           <TySubMenu index="2-3">
             <template #icon>
-              <TyIcon icon="ty-bug-2-fill"></TyIcon>
+              <TyiBug2Fill ></TyiBug2Fill>
+              <TyiBug2Fill/>
             </template>
             <template #title> Navigation2-1 </template>
             <TyMenuItem index="2-3-1" mkey="xx3"> menu1 </TyMenuItem>
@@ -157,6 +158,7 @@
 <script setup>
 import { ref } from 'vue'
 
+import {TyiStackFill,TyiPaletteFill,TyiBug2Fill} from 'toyaricon'
 
 let isFold = ref(true)
 let value1 = ref('aaa')

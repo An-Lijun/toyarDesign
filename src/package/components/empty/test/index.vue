@@ -10,7 +10,7 @@
  
       <TyEmpty title="修改图标" >
         <template #icon>
-        <TyIcon icon="ty-arrow-left-circle-fill"></TyIcon>
+        <TyiArrowLeftCircleFill/>
       </template>  
       </TyEmpty>
 
@@ -18,7 +18,7 @@
   </div>
 </template>
 <script setup>
-import TyIcon from "../../icon";
+import {TyiArrowLeftCircleFill} from 'toyaricon'
 
 </script>
 <style lang="less" scoped></style>

@@ -7,31 +7,26 @@
         nm.is('actived', actived === -1 ? item <= model : item < actived)
       ]"
     >
-      <TyIcon
-        :data-star="item"
-        :icon="
-          actived === -1
+    <component :data-star="item" :is="actived === -1
             ? item <= model
               ? icon[0]
               : icon[1]
             : item < actived
             ? icon[0]
-            : icon[1]
-        "
-        style="margin: 0 5px"
-        @mouseenter="handleEnter"
-        @mouseleave="handleLeave"
-        @click="handleClick"
-      ></TyIcon>
+            : icon[1]"
+                style="margin: 0 5px"
+          @mouseenter="handleEnter"
+          @mouseleave="handleLeave"
+          @click="handleClick"
+    ></component>
     </span>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue'
-import TyIcon from '../../icon'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { rateProps, rateEmits, nm } from './context'
-
+import {TyiStarHalfFill,TyiStarHalfLine,TyiStarFill,TyiStarLine} from 'toyaricon'
 const props = defineProps(rateProps)
 const emit = defineEmits(rateEmits)
 
@@ -41,8 +36,8 @@ defineOptions({
 })
 const initIcon = () => {
   return props.allowHalf
-    ? ['ty-star-half-fill', 'ty-star-half-line']
-    : ['ty-star-fill', 'ty-star-line']
+    ? [TyiStarHalfFill,TyiStarHalfLine]
+    : [TyiStarFill, TyiStarLine]
 }
 let icon = ref(initIcon())
 let actived = ref(-1)

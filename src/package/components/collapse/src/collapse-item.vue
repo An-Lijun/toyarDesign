@@ -13,10 +13,9 @@
         @click="changeFlg()"
         :class="[nm.e('button'), { rotate: isOpen }]"
       >
-        <TyIcon
+        <TyiArrowRightSLine
           :color="disabled ? 'var(--text-4)' : ''"
-          icon="ty-arrow-right-s-line"
-        ></TyIcon>
+        ></TyiArrowRightSLine>
       </div>
     </header>
     <div
@@ -32,6 +31,7 @@
 <script setup lang="ts" name="TyCollapseItem">
 import { computed, inject } from 'vue'
 import { nm, itemProp } from './context'
+import {TyiArrowRightSLine} from 'toyaricon'
 defineOptions({
   name: 'TyCollapseItem'
 })
@@ -92,6 +92,8 @@ const isDestroy = computed(() => {
 
     .ty-collapse__button {
       transition: transform 0.2s;
+      display: flex;
+      align-items: center;
     }
 
     .rotate {

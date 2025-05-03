@@ -17,7 +17,7 @@
               </span>
             </slot>
             <button :class="nm.e('headerBtn')" @click="handleClose">
-              <TyIcon icon="ty-close-fill"></TyIcon>
+              <TyiCloseFill ></TyiCloseFill>
             </button>
           </div>
           <div :class="nm.e('body')">
@@ -51,7 +51,7 @@
               </span>
             </slot>
             <button :class="nm.e('headerBtn')" @click="handleClose">
-              <TyIcon icon="ty-close-fill"></TyIcon>
+              <TyiCloseFill/>
             </button>
           </div>
           <div :class="nm.e('body')">
@@ -71,7 +71,7 @@
 </template>
 <script lang="ts" setup name="TyDialog">
 
-import TyIcon from '../../icon'
+import { TyiCloseFill} from 'toyaricon'
 import { onMounted, useSlots, ref } from 'vue'
 import { dialogProp, dialogEmit, nm } from './context'
 defineOptions({

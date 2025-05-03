@@ -13,7 +13,7 @@
     <TyInput v-model="model" :format="formatTime" v-bind="attrs" @input="handleInput" @focus="handleFocus"
       @blur="handleBlur(false)" @clear="handleClear" :maxlength="maxlength" inputmode="numeric">
       <template #innerAft>
-        <TyIcon icon="ty-calendar-line" />
+        <TyiCalendarLine/>
       </template>
     </TyInput>
     <div ref="popRef" :class="[nm.e('box')]" v-show="isShowDatePicker" :style="`top: var(--size-${size});`">
@@ -28,7 +28,7 @@ import { datePickerProp, datePickerEmit, nm } from './context'
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { inject, ref, computed, watch, useAttrs } from 'vue';
 import { arrow, createPopper } from '@popperjs/core';
-
+import {TyiCalendarLine} from 'toyaricon'
 import dayOption from './components/dayOption.vue'
 import yearOption from './components/yearOption.vue'
 import seasonOption from './components/seasonOption.vue'

@@ -1,11 +1,7 @@
 <template>
   <div :class="[nm.b(),nm.m(type)]">
     <div class="ty-result-icon">
-      <TyIcon :icon="msgIconObj[type]" :color="`var(--${colorObj[type]}-5)`" 
-        :style="{
-          fontSize: `${size}px`
-        }"
-      />
+      <component :is="msgIconObj[type]" :size="size" :color="`var(--${colorObj[type]}-5)`"></component>
     </div>
     <div :class="nm.e('title') " v-if="title">
       {{ title }}
@@ -16,19 +12,19 @@
   </div>
 </template>
 <script setup>
-import TyIcon from '../../icon'
 import {resProps,nm} from './context'
 
+import { TyiInformationFill,TyiCheckboxCircleFill,TyiCloseCircleFill } from 'toyaricon'
 defineOptions({
   name:'TyResult'
 })
 const props = defineProps(resProps)
 
 const msgIconObj = {
-  info: 'ty-information-fill',
-  success: 'ty-checkbox-circle-fill',
-  warning: 'ty-information-fill',
-  error: 'ty-close-circle-fill'
+  info: TyiInformationFill,
+  success: TyiCheckboxCircleFill,
+  warning: TyiInformationFill,
+  error: TyiCloseCircleFill
 }
 const colorObj = {
   'info': 'primary',

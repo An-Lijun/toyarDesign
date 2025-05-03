@@ -22,9 +22,9 @@
 
           <template v-if="indx == 0">
             <span class="td__index" v-for="item in tdDndex"></span>
-            <TyIcon v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
+            <TyiArrowRightSLine v-if="tr.children" @click="handleClick(tr)" :class="{
               action: tr.isShowChildren
-            }"></TyIcon>
+            }"></TyiArrowRightSLine>
           </template>
           {{ tr[td.key] }}
         </td>
@@ -40,9 +40,9 @@
 
           <template v-if="indx == 0">
             <span class="td__index" v-for="item in tdDndex"></span>
-            <TyIcon v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
+            <TyiArrowRightSLine v-if="tr.children"  @click="handleClick(tr)" :class="{
               action: tr.isShowChildren
-            }"></TyIcon>
+            }"></TyiArrowRightSLine>
           </template>
           <TyTooltip :content="tr[td.key]">
             <div :style="{
@@ -62,9 +62,9 @@
         }" :class="getColumnOverflow(td.showOverflow)">
           <template v-if="indx == 0">
             <span class="td__index" v-for="item in tdDndex"></span>
-            <TyIcon v-if="tr.children" icon="ty-arrow-right-s-line" @click="handleClick(tr)" :class="{
+            <TyiArrowRightSLine v-if="tr.children" @click="handleClick(tr)" :class="{
               action: tr.isShowChildren
-            }"></TyIcon>
+            }"></TyiArrowRightSLine>
           </template>
           {{ tr[td.key] }}
         </td>
@@ -87,7 +87,7 @@
 </template>
 <script setup>
 import { useSlots } from 'vue'
-
+import {TyiArrowRightSLine} from 'toyaricon';
 defineOptions({
   name: 'trContainer'
 })

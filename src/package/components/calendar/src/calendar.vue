@@ -5,17 +5,17 @@
         <div :class="[nm.e('com')]">
           <div :class="[nm.e('sel')]">
             <div class="lastYear" @click="lastYear">
-              <TyIcon icon="ty-arrow-left-double-line" />
+              <TyiArrowLeftDoubleLine icon="ty-arrow-left-double-line" />
             </div>
             <div class="lastMonth" @click="lastMonth">
-              <TyIcon icon="ty-arrow-left-s-line" />
+              <TyiArrowLeftSLine icon="ty-arrow-left-s-line" />
             </div>
             <div class="nowDate">{{ nowDate }}</div>
             <div class="nextMonth" @click="nextMonth">
-              <TyIcon icon="ty-arrow-right-s-line" />
+              <TyiArrowRightSLine icon="ty-arrow-right-s-line" />
             </div>
             <div class="nextYear" @click="nextYear">
-              <TyIcon icon="ty-arrow-right-double-line" />
+              <TyiArrowRightDoubleLine icon="ty-arrow-right-double-line" />
             </div>
           </div>
           <TyButton type="text" @click="goTday">今天</TyButton>
@@ -63,6 +63,7 @@ import { calendarProp, calendarEmit, nm } from './context'
 import { ref } from 'vue'
 import { formatDate } from 'robinson'
 import type { Ref } from 'vue'
+import {TyiArrowLeftDoubleLine,TyiArrowLeftSLine,TyiArrowRightSLine,TyiArrowRightDoubleLine} from 'toyaricon'
 
 defineOptions({
   name: 'TyCalendar'

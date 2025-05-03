@@ -12,12 +12,12 @@
   >
     <template #outPre>
       <TyButton @click="handleMinus" style="height: 100%; line-height: 100%">
-        <TyIcon icon="ty-subtract-line" color="#fff"></TyIcon>
+        <TyiSubtractLine icon="ty-subtract-line" color="#fff"></TyiSubtractLine>
       </TyButton>
     </template>
     <template #outAft>
       <TyButton @click="handleAdd" style="height: 100%; line-height: 100%">
-        <TyIcon icon="ty-add-fill" color="#fff"></TyIcon>
+        <TyiAddFill icon="ty-add-fill" color="#fff"></TyiAddFill>
       </TyButton>
     </template>
   </TyInput>
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { watch, useAttrs, computed } from 'vue'
 import { inputProps, useCompMvalue, inputEmits } from './context'
-
+import {TyiAddFill,TyiSubtractLine} from 'toyaricon'
 defineOptions({
   name: 'TyInputNumber'
 })

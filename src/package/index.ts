@@ -2,7 +2,6 @@ import { version } from '../../package.json'
 
 import './assets/index.scss'
 import '../package/icon/toyaricon.css'
-import TyIcon from './components/icon'
 import TyButton from './components/button'
 import TyButtonGroup from './components/button-group'
 import TyDivider from './components/divider'
@@ -65,7 +64,6 @@ import TyAvatar from './components/avatar'
 import TyAvatarGroup from './components/avatar-group'
 import {TyThemeChange} from './hooks/changeTheme'
 import TyScrollBar from './components/scrollbar'
-import TySIcon from './components/sIcon'
 import TyLogConsole from './components/logConsole'
 import TyAffix from './components/affix'
 import TyCircle from './components/circle'
@@ -79,7 +77,6 @@ import generateColor from './color/index.js'
 import allIcons from './iconList.js'
 
 const install = app => {
-    app.use(TyIcon),
     app.use(TyButton),
     app.use(TyButtonGroup),
     app.use(TyDivider),
@@ -131,7 +128,6 @@ const install = app => {
     app.use(TyAvatar),
     app.use(TyAvatarGroup),
     app.use(TyScrollBar),
-    app.use(TySIcon),
     app.use(TyLogConsole),
     app.use(TyAffix),
     app.use(TyCircle),
@@ -151,7 +147,6 @@ export default {
 
 export {
   TyThemeChange,
-  TyIcon,
   TyButton,
   TyButtonGroup,
   TyDivider,
@@ -215,7 +210,6 @@ export {
   TySpace,
   TyAvatar,TyAvatarGroup,
   TyScrollBar,
-  TySIcon,
   TyLogConsole,
   TyAffix,
   TyCircle,

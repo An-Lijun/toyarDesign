@@ -13,7 +13,7 @@
     <TyInput v-model="model" :format="formatTime" v-bind="attrs" @input="handleInput" @focus="handleFocus"
       @blur="handleBlur(false)" @clear="handleClear" :maxlength="maxlength" inputmode="numeric">
       <template #innerAft>
-        <TyIcon icon="ty-calendar-schedule-line" />
+        <TyiCalendarScheduleLine />
       </template>
     </TyInput>
     <div ref="popRef" :class="[nm.e('box')]" v-show="isShowTimePicker" :style="`top: var(--size-${size});`">
@@ -54,6 +54,7 @@
   </div>
 </template>
 <script setup>
+import {TyiCalendarScheduleLine} from 'toyaricon'
 import { nm, timeEmits, timeProps } from './context'
 import { formContent, formItemContent } from '../../../hooks/symbolNm'
 import { inject, ref, computed, watch, useAttrs } from 'vue';

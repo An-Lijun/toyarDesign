@@ -2,7 +2,7 @@
   <header>
     <div :class="[nm.e('com')]">
       <div class="lastYear" @click="lastYear">
-        <TyIcon icon="ty-arrow-left-double-line" />
+        <TyiArrowLeftDoubleLine  />
       </div>
 
       <div>
@@ -11,7 +11,7 @@
       </div>
 
       <div class="nextYear" @click="nextYear">
-        <TyIcon icon="ty-arrow-right-double-line" />
+        <TyiArrowRightDoubleLine  />
       </div>
     </div>
   </header>
@@ -30,6 +30,7 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
 import { nm } from '../context'
+import{TyiArrowLeftDoubleLine,TyiArrowRightDoubleLine} from 'toyaricon'
 const emit = defineEmits(['selectData'])
 
 let countDate = new Date().getFullYear()

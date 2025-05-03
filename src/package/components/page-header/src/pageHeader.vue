@@ -4,7 +4,7 @@
     <div :class="nm.e('heading')">
       <div :class="nm.e('back')" v-if="props.showBack" @click="emit('back')">
         <slot name="back">
-          <TyIcon icon="ty-arrow-left-fill"></TyIcon>
+          <TyiArrowLeftFill/>
         </slot>
       </div>
       <TyDivider
@@ -27,6 +27,7 @@
 </template>
 <script setup>
 import { hdProps, hdEmits, nm } from './context'
+import {TyiArrowLeftFill} from 'toyaricon'
 defineOptions({
   name:'TyPageHeader'
 })

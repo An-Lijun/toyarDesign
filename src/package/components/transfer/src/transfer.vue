@@ -32,18 +32,16 @@
     </div>
     <div :class="nm.e('center')">
       <span :class="nm.is('rightDisabled', rightDiabeld)">
-        <TyIcon
+        <TyiArrowRightSLine
           :size="25"
-          icon="ty-arrow-right-s-line"
           @click="handleToRight"
-        ></TyIcon>
+        ></TyiArrowRightSLine>
       </span>
       <span :class="nm.is('leftDisabled', leftDisabled)">
-        <TyIcon
+        <TyiArrowLeftSLine
           :size="25"
-          icon="ty-arrow-left-s-line"
           @click="handleToLeft"
-        ></TyIcon>
+        ></TyiArrowLeftSLine>
       </span>
     </div>
     <div :class="nm.e('right')">
@@ -81,7 +79,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import TyIcon from '../../icon'
+import { TyiArrowLeftSLine , TyiArrowRightSLine} from 'toyaricon'
 import { TyCheckBox } from '../../check-box'
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import TyEmpty from '../../empty'

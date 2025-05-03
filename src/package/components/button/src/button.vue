@@ -11,7 +11,7 @@
   ]" :disabled="mergeDisabled" :readonly="mergeReadonly">
     <span>
       <span v-show="loading" :class="nm.is('loading', loading)">
-        <TyIcon style="color: #fff;" icon="ty-loader-2-line"> </TyIcon>
+        <TyiLoader2Line/>
       </span>
       <span :class="nm.is('opacity', loading)">
         <slot></slot>
@@ -24,7 +24,7 @@
 import { computed } from 'vue'
 import { buttonProps, nm } from './context.ts'
 import { inject } from 'vue'
-import TyIcon from '../../icon/src/icon.vue'
+import {TyiLoader2Line} from 'toyaricon'
 import { configProviderDisabled } from '../../../hooks/symbolNm'
 defineOptions({
   name: 'TyButton'

@@ -26,6 +26,9 @@ onMounted(() => {
         pushData()
     }, 100)
 })
+onUnmounted(() => {
+  clearInterval(timer1);
+})
 
 
 </script>

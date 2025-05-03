@@ -12,7 +12,6 @@
       @input="handleInput" @blur="handleBlur" @focus="handleFocus" />
 
     <span ref="innerAft" :class="[nm.e('innerAft')]">
-      <TyIcon :icon="icon"></TyIcon>
     </span>
     <span v-if="isShowClearBtn" :class="nm.e('clear')" :style="{
       position: 'absolute',

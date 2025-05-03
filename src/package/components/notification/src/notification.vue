@@ -9,8 +9,7 @@
       ref="notificationRef"
     >
       <div :class="nm.e('icon')" v-if="type">
-        <TyIcon :icon="msgIconObj[type]" :color="`var(--${colorObj[type]}-5)`">
-        </TyIcon>
+        <component :is="msgIconObj[type]"  :size="size" :color="`var(--${colorObj[type]}-5)`"></component>
       </div>
       <div :class="nm.e('info')">
         <div :class="nm.e('header')">
@@ -18,7 +17,7 @@
             {{ title }}
           </div>
           <div :class="nm.e('close')">
-            <TyIcon icon="ty-close-fill"></TyIcon>
+            <TyiCloseFill/>
           </div>
         </div>
         <div :class="nm.e('body')">
@@ -31,8 +30,9 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
-import TyIcon from '../../icon'
+import {TyiCloseFill} from 'toyaricon'
 import { notProps, notEmits, nm } from './context'
+import { TyiInformationFill,TyiCheckboxCircleFill,TyiCloseCircleFill } from 'toyaricon'
 
 const props = defineProps(notProps)
 const emit = defineEmits(notEmits)
@@ -47,10 +47,10 @@ const colorObj = {
   error: 'danger'
 }
 const msgIconObj = {
-  info: 'ty-information-fill',
-  success: 'ty-checkbox-circle-fill',
-  warning: 'ty-information-fill',
-  error: 'ty-close-circle-fill'
+  info: TyiInformationFill,
+  success: TyiCheckboxCircleFill,
+  warning: TyiInformationFill,
+  error: TyiCloseCircleFill
 }
 let height = ref(0)
 const getCompHeight = () => {

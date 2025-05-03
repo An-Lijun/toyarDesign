@@ -44,9 +44,9 @@
       :class="nm.e('innerAft')"
       @click="isPassworld = !isPassworld"
     >
-      <TyIcon
-        :icon="`${isPassworld ? 'ty-eye-off-line' : 'ty-eye-line'}`"
-      ></TyIcon>
+    <TyiEyeOffLine v-if="isPassworld"/>
+    <TyiEyeLine v-else/>
+ 
     </span>
     <span
       v-if="isShowClearBtn"
@@ -64,6 +64,7 @@
 <script setup>
 import { useCompMvalue } from '../../../hooks/useCompMvalue'
 import { inputProps,nm } from './context'
+import {TyiEyeOffLine,TyiEyeLine} from 'toyaricon'
 import {
   formContent,
   formItemContent,

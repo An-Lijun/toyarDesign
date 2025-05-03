@@ -3,6 +3,9 @@
     <TySwitch v-model="theme"
      :openValue="true" :closeValue="false" 
      uncheckedText="亮" checkedText="暗"></TySwitch>
+  <Tyi24HoursFill/>
+  <Tyi4kFill/> 
+
   </h6>
   <div>
   <span v-for="item in routes" style="margin:0 5px">
@@ -17,6 +20,7 @@
 </template>
 <script setup lang="ts">
 import {routes} from './router'
+import {Tyi24HoursFill,Tyi4kFill} from 'toyaricon'
 import { ref, watch} from 'vue'
 import { TyMessage, TyAlert, TyNotification,TyLoading ,TyThemeChange} from './package/index'
 let theme =ref(false)

@@ -11,7 +11,7 @@
     >
       <div :class="nm.e('icon')">
         <slot name="icon">
-          <TyIcon :icon="msgIconObj[type]"></TyIcon>
+          <component :is="cauIconObj[type]" ></component>
         </slot>
       </div>
       <div :class="nm.e('msg')">
@@ -19,16 +19,17 @@
       </div>
       <div :class="nm.e('close')">
         <slot name="close">
-          <TyIcon icon="ty-close-fill"></TyIcon>
+          <TyiCloseFill/>
         </slot>
       </div>
     </div>
   </transition>
 </template>
 <script setup>
-import TyIcon from '../../icon'
+import {TyiCloseFill} from 'toyaricon'
 import {ref,onMounted,nextTick  } from 'vue';
 import {msgProps,msgEmit,nm} from './context.ts'
+import { TyiInformationFill,TyiCheckboxCircleFill,TyiCloseCircleFill } from 'toyaricon'
 
 defineOptions({
   name: 'TyMessage'
@@ -40,11 +41,11 @@ const messageRef = ref()
 const visible = ref(false)
 let topValue = ref(props.top)
 
-const msgIconObj = {
-  info: 'ty-information-fill',
-  success: 'ty-checkbox-circle-fill',
-  warning: 'ty-information-fill',
-  error: 'ty-close-circle-fill'
+const cauIconObj = {
+  info: TyiInformationFill,
+  success: TyiCheckboxCircleFill,
+  warning: TyiInformationFill,
+  error: TyiCloseCircleFill
 }
 const type = msgIconObj.hasOwnProperty(props.options?.type)
   ? props.options?.type

@@ -3,9 +3,10 @@
     <input type="checkbox" hidden @click="handleChange" :disabled="disabled" v-model="model" :value="value" />
     <div :class="[nm.e('out'),nm.m(size)]">
       <div :class="[nm.e('input')]">
-        <TyIcon icon="ty-subtract-line" :class="nm.e('icon')" v-if="canHarf"></TyIcon>
-        <TyIcon icon="ty-check-line" :class="nm.e('icon')" v-else>
-        </TyIcon>
+        <TyiSubtractLine  :class="nm.e('icon')" v-if="canHarf"></TyiSubtractLine>
+
+        <TyiCheckLine :class="nm.e('icon')" v-else>
+        </TyiCheckLine>
       </div>
     </div>
     <span :class="[nm.e('container')]">
@@ -21,7 +22,7 @@ import {
   formItemContent,
   checkBoxGroup
 } from '../../../hooks/symbolNm'
-
+import {TyiCheckLine,TyiSubtractLine} from 'toyaricon'
 defineOptions({
   name: 'TyCheckBox'
 })

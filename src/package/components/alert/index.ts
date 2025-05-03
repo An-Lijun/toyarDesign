@@ -76,8 +76,7 @@ const createAlert = (info: string, options: IOption, div: HTMLDivElement) => {
           }
         },
         [
-          h(TyIcon, {
-            icon: dialogIconMap[options.type],
+          h(dialogIconMap[options.type], {
             style: {
               color: `var(--${TY_MOOD[options.type]}-6)`,
               fontSize: '24px',
