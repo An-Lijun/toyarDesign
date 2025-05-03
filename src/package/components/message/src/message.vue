@@ -41,7 +41,7 @@ const messageRef = ref()
 const visible = ref(false)
 let topValue = ref(props.top)
 
-const cauIconObj = {
+const msgIconObj = {
   info: TyiInformationFill,
   success: TyiCheckboxCircleFill,
   warning: TyiInformationFill,
