@@ -9,7 +9,11 @@
   >
     <span ref="textRef" :class="[nm.e('text')]" :style="{ transform: textTransform }">
       <slot></slot>
+  
     </span>
+    <span :class="nm.e('trigger')" @click="()=>{emit('trigger')}">
+        <slot name="trigger"></slot>
+      </span>
   </div>
 </template>
 
@@ -42,8 +46,10 @@ const getTextTransform = () => {
 const textTransform = ref('')
 
 onMounted(() => {
-  // 使用 ref 更新响应式样式
-  textTransform.value = getTextTransform()
+  if(props.autoSize){
+    // 使用 ref 更新响应式样式
+    textTransform.value = getTextTransform()
+  }
 })
 </script>
 
@@ -69,6 +75,21 @@ onMounted(() => {
 
   &.is-circle {
     border-radius: var(--border-radius-circle);
+  }
+  &__trigger{
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    padding: 1px;
+    background-color: var(--toyar-gray-3);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+      cursor: pointer;
+    }
+    
   }
 }
 </style>

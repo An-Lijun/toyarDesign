@@ -14,7 +14,7 @@
       <TyAvatar  shape="square">你好</TyAvatar>
       <TyAvatar style="background-color: skyblue;" shape="square">你好</TyAvatar>
     </TyAvatarGroup>
-    <TyAvatarGroup>
+    <TyAvatarGroup max="2">
       <TyAvatar style="background-color: aqua;" shape="circle">123456789</TyAvatar>
       <TyAvatar style="background-color:chocolate;" shape="circle">A</TyAvatar>
       <TyAvatar style="background-color: skyblue;" shape="circle">你好</TyAvatar>

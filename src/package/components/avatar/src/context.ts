@@ -9,7 +9,11 @@ export const backTopProps = buildProps({
     type:String,
     values:['circle','square'],
     default:''
-  }
+  },
+  autoSize:{
+    type:Boolean,
+    default:true
+  },
 })
 // "circle" //square
 
