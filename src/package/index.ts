@@ -69,7 +69,7 @@ import TyAffix from './components/affix'
 import TyCircle from './components/circle'
 import TyUpload from './components/upload'
 import TyTimePicker from './components/time-picker'
-
+import TyColorPicker from './components/color-picker'
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
 
@@ -131,7 +131,8 @@ const install = app => {
     app.use(TyAffix),
     app.use(TyCircle),
     app.use(TyUpload),
-    app.use(TyTimePicker)
+    app.use(TyTimePicker),
+    app.use(TyColorPicker)
   }
   // app.use(TyTrigger)
 document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
@@ -215,6 +216,7 @@ export {
   TyUpload,
   TyTimePicker,
   allIcons,
-  TySelectOption
+  TySelectOption,
+  TyColorPicker
 } //按需引入
 // TyTrigger,
