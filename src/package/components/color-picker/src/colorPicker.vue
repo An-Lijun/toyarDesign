@@ -1,25 +1,32 @@
 <template>
-  <div :class="nm.b()">
-    <div :class="nm.e('container')">
-      <div :class="nm.e('wrap')" ref="wrapRef">
-        <div class="draggable" ref="wrapDraggerRef"></div>
-      </div>
-      <div :class="nm.e('hue')">
-        <div class="draggable" ref="hueDraggerRef"></div>
-
-      </div>
-      <div :class="nm.e('alpha')" ref="alphaRef">
-        <div class="draggable" ref="alphaDraggerRef"></div>
-      </div>
+  <div :class="nm.b()" ref="containerRef">
+    <div :class="nm.e('selector')" @click="handleClick" :style="{
+      background: colorFormat.hexColor
+    }">
+    
     </div>
+    <div :class="nm.e('container')" ref="popRef" v-show="isShowColor" @click.stop="()=>{}">
+        <div :class="nm.e('wrap')" ref="wrapRef">
+          <div class="draggable" ref="wrapDraggerRef"></div>
+        </div>
+        <div :class="nm.e('hue')">
+          <div class="draggable" ref="hueDraggerRef"></div>
+        </div>
+        <div :class="nm.e('alpha')" ref="alphaRef">
+          <div class="draggable" ref="alphaDraggerRef"></div>
+        </div>
+      </div>
     {{ color }}
+    <br>
     {{ colorFormat }}
   </div>
 </template>
 <script setup>
 import { nm } from './context'
 import Draggable from '../../../utils/draggable'
-import { rgbToHsv, hsvToRgb, rgbToHex,transformColorFormat } from './color.js'
+import { rgbToHsv, hsvToRgb, rgbToHex, transformColorFormat } from './color.js'
+import { arrow, createPopper } from '@popperjs/core';
+
 defineOptions({
   name: 'TyColorPicker'
 })
@@ -29,6 +36,12 @@ const wrapDraggerRef = ref(null)
 const hueDraggerRef = ref(null)
 const alphaDraggerRef = ref(null)
 const alphaRef = ref(null)
+const containerRef = ref(null)
+const popRef = ref(null)
+const arrowRef = ref(null)
+const isShowColor = ref(false)
+let popperInstance = null
+
 let containerHeight, containerWidth
 
 const initColor = {
@@ -45,7 +58,30 @@ let colorFormat = ref({
   ...transformColorFormat(color.value),
 })
 
-
+const createInstance = () => {
+  popperInstance = createPopper(unref(containerRef), unref(popRef), {
+    placement: 'bottom',
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          // 偏移值 左右，上下
+          offset: [355, 355]
+        }
+      },
+      {
+        name: 'arrow',
+        options: {
+          element: unref(arrowRef),
+        }
+      }
+    ]
+  });
+  nextTick(() => {
+    // 异步更新
+    popperInstance.update()
+  })
+}
 function handleChangeSaturationValue(dx, dy) {
   const s = 100 * dx / containerWidth;
   const v = 100 * (1 - (dy / containerHeight));
@@ -97,7 +133,7 @@ function updatePageView(dx) {
 						#999 0.75turn ) top left / 16px 16px repeat`
 }
 
-onMounted(() => {
+function addDraggable(){
   const draggableInstance = new Draggable(wrapDraggerRef.value);
   const { width, height } = wrapRef.value.getBoundingClientRect();
   containerWidth = width;
@@ -108,14 +144,12 @@ onMounted(() => {
     updatePageView();
   });
 
-
   const draggableHueInstance = new Draggable(hueDraggerRef.value);
   draggableHueInstance.on('mousemove', ({ dx }) => {
     handleChangeHue(dx);
     hueDraggerRef.value.style.transform = `translate(${dx}px, 0)`;
     updatePageView();
   });
-
 
   const draggableAlphaInstance = new Draggable(alphaDraggerRef.value);
   draggableAlphaInstance.on('mousemove', ({ dx }) => {
@@ -124,12 +158,38 @@ onMounted(() => {
     updatePageView(dx);
   });
 
-
+}
+let isMounted= false
+const handleClick =(e)=>{
+  e.stopPropagation();
+  
+  isShowColor.value = true
+  if(!isMounted){
+    nextTick(() => {
+      addDraggable()
+    })
+  }
+}
+function close(){
+  isShowColor.value = false
+}
+onMounted(() => {
+  window.addEventListener('click', close)
+})
+onUnmounted(() => {
+  window.removeEventListener('click',close)
 })
 
 </script>
 <style lang="scss" scoped>
 .ty-colorPicker {
+  &__selector {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 4px;
+  }
+
   &__container {
     width: 250px;
     height: 270px;
@@ -206,7 +266,6 @@ onMounted(() => {
       height: 16px;
       top: 0;
       left: -8px;
-      background-color: #000;
     }
   }
 

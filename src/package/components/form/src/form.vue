@@ -9,7 +9,7 @@ import type {IfieldList,TerrList} from '../type'
 import { provide } from "vue";
 
 import { formContent } from '../../../hooks/symbolNm'
-import {getUniqueId} from '../../../utils/getUniqueId'
+import {getUniqueId} from 'robinson'
 import {formProps,nm} from './context'
 import type {FormProps} from './context'
 import type {Ref} from 'vue'

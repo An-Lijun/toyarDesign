@@ -26,6 +26,7 @@
 import { watch, useAttrs, computed } from 'vue'
 import { inputProps, useCompMvalue, inputEmits } from './context'
 import {TyiAddFill,TyiSubtractLine} from 'toyaricon'
+import {is} from 'robinson'
 defineOptions({
   name: 'TyInputNumber'
 })
@@ -36,12 +37,6 @@ const emit = defineEmits(inputEmits)
 
 const model = defineModel('modelValue')
 
-function getStringType(value: any): String {
-  return Object.prototype.toString.call(value).toLowerCase()
-}
-function is(value: any, type: string): boolean {
-  return getStringType(value) === `[object ${type.toLowerCase()}]`
-}
 const fomatFloat = function (value:number, n:number) {
   let per = Math.pow(10, n)
   let f = Math.round(value * per) / per

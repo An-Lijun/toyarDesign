@@ -9,7 +9,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { waterProps, nm, defaultOptions } from './context'
 import xss from 'xss'
-import useDebounce from '../../../hooks/useDebounce'
+import {debounce} from 'robinson'
 import { URL_REGULAR_EXPRESSION, PICTURE_EXPRESSION } from '../../../utils/regular'
 
 defineOptions({
@@ -110,7 +110,7 @@ const createMark = async () => {
 }
 
 // 防抖处理
-const createMarkDeb = useDebounce(createMark, DEBOUNCE_DELAY, true)
+const createMarkDeb = debounce(createMark, DEBOUNCE_DELAY, true)
 
 // MutationObserver 监听
  mutOb = new MutationObserver(records => {

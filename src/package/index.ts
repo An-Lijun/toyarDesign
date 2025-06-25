@@ -1,7 +1,6 @@
 import { version } from '../../package.json'
 
 import './assets/index.scss'
-import '../package/icon/toyaricon.css'
 import TyButton from './components/button'
 import TyButtonGroup from './components/button-group'
 import TyDivider from './components/divider'
@@ -73,7 +72,6 @@ import TyColorPicker from './components/color-picker'
 // import TyTrigger from './components/trigger'
 import generateColor from './color/index.js'
 
-import allIcons from './iconList.js'
 
 const install = app => {
     app.use(TyButton),
@@ -215,7 +213,6 @@ export {
   TyCircle,
   TyUpload,
   TyTimePicker,
-  allIcons,
   TySelectOption,
   TyColorPicker
 } //按需引入

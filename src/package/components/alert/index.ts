@@ -1,6 +1,6 @@
 import { createVNode, render, nextTick, h } from 'vue'
 
-import {is} from '../../utils/is'
+import {is} from 'robinson'
 import dialog from '../dialog/src/dialog.vue'
 import TyButton from '../button/src/button.vue'
 import TyIcon from '../icon/src/icon.vue'

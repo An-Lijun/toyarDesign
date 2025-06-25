@@ -9,7 +9,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref, computed } from "vue";
 import { nm, affixProps } from "./context";
-import { on, off } from '../../../utils/dom';
+import { on, off } from 'robinson';
 
 defineOptions({
   name: "TyAffix",
