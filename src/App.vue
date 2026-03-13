@@ -2,7 +2,7 @@
   <h6>
     <TySwitch v-model="theme"
      :openValue="true" :closeValue="false" 
-     uncheckedText="亮" checkedText="暗"></TySwitch>
+     uncheckedText="亮" checkedText="暗" />
   <Tyi24HoursFill/>
   <Tyi4kFill/> 
 

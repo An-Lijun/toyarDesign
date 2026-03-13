@@ -13,7 +13,12 @@
           <TyiInformationFill :size="14"></TyiInformationFill>
         </template>
       </TyAvatar>
-
+      <TyAvatar style="background-color: skyblue;" shape="square" width="150px">
+        666
+        <template #trigger>
+          <TyiInformationFill :size="94"></TyiInformationFill>
+        </template>
+      </TyAvatar>
     </TySpace>
 
   </div>

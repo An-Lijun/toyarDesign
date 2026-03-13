@@ -1,17 +1,22 @@
 <template>
-  <button :type="htmlType" :class="[
-    nm.b(),
-    nm.m(state),
-    nm.m(type),
-    nm.m(size),
-    nm.m(shape),
-    nm.is('disabled', mergeDisabled),
-    nm.is('readonly', mergeReadonly),
-    nm.is('block', block),
-  ]" :disabled="mergeDisabled" :readonly="mergeReadonly">
+  <button
+    :type="htmlType"
+    :class="[
+      nm.b(),
+      nm.m(state),
+      nm.m(type),
+      nm.m(size),
+      nm.m(shape),
+      nm.is('disabled', mergeDisabled),
+      nm.is('readonly', mergeReadonly),
+      nm.is('block', block)
+    ]"
+    :disabled="mergeDisabled"
+    :readonly="mergeReadonly"
+  >
     <span>
       <span v-show="loading" :class="nm.is('loading', loading)">
-        <TyiLoader2Line/>
+        <TyiLoader2Line />
       </span>
       <span :class="nm.is('opacity', loading)">
         <slot></slot>
@@ -20,11 +25,11 @@
   </button>
 </template>
 
-<script setup lang='ts' name="TyButton">
+<script setup lang="ts" name="TyButton">
 import { computed } from 'vue'
 import { buttonProps, nm } from './context.ts'
 import { inject } from 'vue'
-import {TyiLoader2Line} from 'toyaricon'
+import { TyiLoader2Line } from 'toyaricon'
 import { configProviderDisabled } from '../../../hooks/symbolNm'
 defineOptions({
   name: 'TyButton'
@@ -33,7 +38,7 @@ const props = defineProps(buttonProps)
 
 // 当处于input时候需要被input的disabled readonly控制
 const inputInject = inject(configProviderDisabled, null) as {
-  disabled: boolean,
+  disabled: boolean
   readonly: boolean
 } | null
 
@@ -47,13 +52,12 @@ const mergeReadonly = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-
-@keyframes load{
-  0%{
-    transform: translate(-50%,-50%) rotate(0deg);
+@keyframes load {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
-  100%{
-    transform:  translate(-50%,-50%) rotate(360deg);
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 // ------------------------  按钮base样式  ------------------------
@@ -90,20 +94,22 @@ const mergeReadonly = computed(() => {
         border-color: var(--#{$state}-7);
         background-color: var(--#{$state}-7);
       }
-    }
-    //基础按钮的禁用样式
-    &--normal.ty-button--#{$state}.is-readonly,
-    &--normal.ty-button--#{$state}.is-disabled {
-      &,
-      &:hover,
-      &:focus,
-      &:active {
-        color: #fff;
-        cursor: no-drop;
-        background-color: var(--#{$state}-3);
-        border-color: var(--#{$state}-3);
+
+      //基础按钮的禁用样式
+      &.is-readonly,
+      &.is-disabled {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          color: #fff;
+          cursor: no-drop;
+          background-color: var(--#{$state}-3);
+          border-color: var(--#{$state}-3);
+        }
       }
     }
+
     //次级按钮
     &--secondary.ty-button--#{$state} {
       background-color: unset;
@@ -189,22 +195,23 @@ const mergeReadonly = computed(() => {
           border-bottom: var(--border-1) solid var(--#{$state}-7);
         }
       }
-    }
-    // 链接按钮 的禁用状态
-    &--link.ty-button--#{$state}.is-readonly,
-    &--link.ty-button--#{$state}.is-disabled {
-      &,
-      &:hover,
-      &:focus,
-      &:active {
-        color: var(--#{$state}-3);
-        cursor: no-drop;
-        border-color: var(--#{$state}-3);
-        span {
-          border-bottom: var(--border-1) solid var(--#{$state}-3);
+
+      &.is-readonly,
+      &.is-disabled {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          color: var(--#{$state}-3);
+          cursor: no-drop;
+          border-color: var(--#{$state}-3);
+          span {
+            border-bottom: var(--border-1) solid var(--#{$state}-3);
+          }
         }
       }
     }
+    // 链接按钮 的禁用状态
   }
   @each $state in 'primary', 'link', 'success', 'warning', 'danger' {
     @include addBtnState($state);
@@ -268,15 +275,14 @@ const mergeReadonly = computed(() => {
   &.is-block {
     width: 100%;
   }
-  .is-loading{
+  .is-loading {
     display: inline-block;
-    animation: load 2s linear infinite ;
+    animation: load 2s linear infinite;
     position: absolute;
     left: 50%;
     top: 50%;
-    
   }
-  .is-opacity{
+  .is-opacity {
     opacity: 0;
   }
 }

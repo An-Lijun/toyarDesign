@@ -1,19 +1,16 @@
 <template>
-  <div
-    :class="[nm.b(), nm.is('square', shape === 'square'), nm.is('circle', shape === 'circle')]"
-    ref="avatarRef"
+  <div :class="[nm.b(), nm.is('square', shape === 'square'), nm.is('circle', shape === 'circle')]" ref="avatarRef"
     :style="{
       width: width,
       height: width
-    }"
-  >
+    }">
     <span ref="textRef" :class="[nm.e('text')]" :style="{ transform: textTransform }">
       <slot></slot>
-  
+
     </span>
-    <span :class="nm.e('trigger')" @click="()=>{emit('trigger')}">
-        <slot name="trigger"></slot>
-      </span>
+    <span :class="nm.e('trigger')" @click="() => { emit('trigger') }">
+      <slot name="trigger"></slot>
+    </span>
   </div>
 </template>
 
@@ -46,7 +43,7 @@ const getTextTransform = () => {
 const textTransform = ref('')
 
 onMounted(() => {
-  if(props.autoSize){
+  if (props.autoSize) {
     // 使用 ref 更新响应式样式
     textTransform.value = getTextTransform()
   }
@@ -76,20 +73,23 @@ onMounted(() => {
   &.is-circle {
     border-radius: var(--border-radius-circle);
   }
-  &__trigger{
+
+  &__trigger {
     position: absolute;
-    right: -3px;
-    bottom: -3px;
+    right: 0;
+    bottom: 0;
     padding: 1px;
     background-color: var(--toyar-gray-3);
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    &:hover{
+    transform: translate(13%, 13%);
+    &:hover {
       cursor: pointer;
+      background-color: var(--toyar-gray-4);
     }
-    
+
   }
 }
 </style>
