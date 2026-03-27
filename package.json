@@ -23,7 +23,10 @@
     "docs:build1": "node --max_old_space_size=8192 node_modules/vitepress/bin/vitepress.js build docsBase",
     "docs:serve": "vitepress serve docsBase",
     "pub": "npm version patch && npm run build && npm publish && exit 1",
-    "pub2": "node ./src/shell/index.js"
+    "pub2": "node ./src/shell/index.js",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
@@ -34,7 +37,9 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/test-utils": "^2.4.6",
     "@vuepress/plugin-register-components": "2.0.0-rc.15",
+    "jsdom": "20.0.0",
     "markdown-it-container": "^3.0.0",
     "sass": "^1.87.0",
     "typescript": "^5.0.2",
@@ -43,6 +48,7 @@
     "vite-plugin-chunk-split": "^0.5.0",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vitepress": "1.0.0-rc.20",
+    "vitest": "^4.1.0",
     "vue-router": "^4.3.0",
     "vue-tsc": "^1.8.5"
   },

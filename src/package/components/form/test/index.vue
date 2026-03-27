@@ -3,7 +3,7 @@
     <TyForm ref="form1" :formData="formData" :rules="rules">
     <TyRow :gutter="24">
       <TyCol :span="12">
-        <TyFormItem prop="dd">
+        <TyFormItem prop="dd" :isShowStar="false">
           <template #label> 金额 </template>
 
           <TyInput v-model="formData.dd">

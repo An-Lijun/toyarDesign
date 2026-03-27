@@ -15,6 +15,10 @@ export const itemProps =buildProps({
   label:{
     type:String,
     default: ''
+  },
+  isShowStar:{
+    type:Boolean,
+    default:true
   }
 })
 

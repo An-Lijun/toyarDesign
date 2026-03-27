@@ -12,7 +12,7 @@ export const buttonProps = buildProps(
     type: {
       type: String,
       default: "normal",
-      values: ["normal", "secondary", "dashed", 'text', 'link']
+      values: ["normal", "secondary",'outline', "dashed", 'text', 'link']
     },
     block: {
       type: Boolean,

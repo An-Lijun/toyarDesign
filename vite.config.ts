@@ -28,7 +28,6 @@ export default defineConfig({
       external: ['vue'],
       input: {
         main: join(__dirname, 'src/package/index.ts'),
-        icon:join(__dirname, 'src/package/icon.ts'),
       },
       output: {
         inlineDynamicImports:false,

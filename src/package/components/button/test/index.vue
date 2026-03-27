@@ -1,50 +1,51 @@
 <template>
   <div class="divRoot">
-    <template  v-for="state in states">
+    <template v-for="state in states">
       <TyButton :state="state" v-for="item in type" :type="item">111</TyButton>
       <br>
     </template>
-    <hr/>
+    <hr />
 
-    <template  v-for="state in states">
+    <template v-for="state in states">
       <TyButton disabled :state="state" v-for="item in type" :type="item">111</TyButton>
       <br>
     </template>
-    <hr/>
+    <hr />
 
-    <template  v-for="size in sizes">
+    <template v-for="size in sizes">
       <TyButton :size="size" v-for="item in type" :type="item">111</TyButton>
       <br>
     </template>
     <hr>
-    <template  v-for="shape in shapes">
+    <template v-for="shape in shapes">
       <TyButton :shape="shape" v-for="item in type" :type="item">1</TyButton>
       <br>
     </template>
     <hr>
 
-    <template  v-for="size in sizes">
-      <TyButton :size="size" v-for="item in type"   shape="square" :type="item">1</TyButton>
-     
+    <template v-for="size in sizes">
+      <TyButton :size="size" v-for="item in type" shape="square" :type="item">1</TyButton>
+
       <br>
     </template>
-    <template  v-for="size in sizes">
-     <TyButton :size="size" v-for="item in type"   shape="circle" :type="item">1</TyButton>
-    <br>
-  </template>
-    <br>
-      <TyButton block>1</TyButton>
+    <template v-for="size in sizes">
+      <TyButton :size="size" v-for="item in type" shape="circle" :type="item">1</TyButton>
       <br>
+    </template>
+    <br>
+    <TyButton block>1</TyButton>
+    <br>
+    <br>
+    <TyButton block loading>1</TyButton>
+    <br>
   </div>
 </template>
 <script setup>
-import { TY_SIZE,TY_STATE } from '../../../constant';
-  let states=ref(TY_STATE)
-  let sizes= ref(TY_SIZE )
-  let type=ref(['normal','secondary','dashed','text','link'])
-  let shapes=ref(["square", "round", "circle"])
+import { TY_SIZE, TY_STATE } from '../../../constant';
+let states = ref(TY_STATE)
+let sizes = ref(TY_SIZE)
+let type = ref(['normal', 'secondary', 'outline','dashed', 'text', 'link'])
+let shapes = ref(["square", "round", "circle"])
 
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

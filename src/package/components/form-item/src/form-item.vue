@@ -1,5 +1,5 @@
 <template>
-  <div :class="[nm.b(), nm.is('require', isRequire), nm.is('colon', isColon)]" :id="`${tyForm.formID}_${prop}`">
+  <div :class="[nm.b(), nm.is('require', isShowStar&&isRequire), nm.is('colon', isColon)]" :id="`${tyForm.formID}_${prop}`">
     <label :class="[nm.e('label')]" :style="{
       display: 'block',
       wordBreak: 'break-all',
