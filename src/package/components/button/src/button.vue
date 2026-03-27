@@ -32,8 +32,8 @@ const props = defineProps(buttonProps)
 
 // 注入禁用/只读状态
 const inputInject = inject(configProviderDisabled, null) as {
-  disabled: boolean
-  readonly: boolean
+  disabled: false
+  readonly: false
 } | null
 
 // 合并最终状态（loading 自动禁用 + 继承注入状态）
@@ -242,7 +242,7 @@ const loading = computed(() => props.loading)
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    animation: load 2s linear infinite;
+    animation: load 1s linear infinite;
     display: inline-flex;
     align-items: center;
     justify-content: center;
