@@ -8,6 +8,11 @@
 @use  './src/textColor.scss' as useTextColor;
 @use  './src/theme.scss' as useTheme;
 
+// 加载动画
+@keyframes load {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
 
 :root ,.ty-dark,.ty-light{
   @include useTheme.themeMixin; //--primary-1:var(--toyar-xblue-1);

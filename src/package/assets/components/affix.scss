@@ -1,0 +1,6 @@
+.ty-affix {
+    z-index: 1500;
+    &.is-fixed {
+        position: fixed;
+    }
+}
