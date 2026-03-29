@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { join } from "path"
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import autoImport from 'unplugin-auto-import/vite'
+import bemStaticOptimization from './scripts/vite-plugin-bem-static'
 
 const componentName = process.env.COMPONENT_NAME || 'button'
 
@@ -53,5 +54,5 @@ export default defineConfig({
       '@': join(__dirname, "src"),
     },
   },
-  plugins: [vue(), VueSetupExtend(), autoImport({ imports: ['vue'] })],
+  plugins: [bemStaticOptimization(), vue(), VueSetupExtend(), autoImport({ imports: ['vue'] })],
 })

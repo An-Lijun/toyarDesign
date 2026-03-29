@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { join } from "path";
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'//setUp name
 import autoImport from 'unplugin-auto-import/vite'//引入语法
+import bemStaticOptimization from './scripts/vite-plugin-bem-static'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -68,5 +69,5 @@ export default defineConfig({
       '@': join(__dirname, "src"),
     },
   },
-  plugins: [vue(), VueSetupExtend(), autoImport({ imports: ['vue'] })],
+  plugins: [bemStaticOptimization(), vue(), VueSetupExtend(), autoImport({ imports: ['vue'] })],
 })
