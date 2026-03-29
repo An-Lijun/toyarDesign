@@ -4,11 +4,15 @@
     :class="buttonClasses"
     :disabled="mergeDisabled"
     :readonly="mergeReadonly"
+    :aria-disabled="mergeDisabled"
+    @click="handleClick"
   >
     <span>
       <!-- 加载图标 -->
       <span v-if="loading" class="is-loading">
-        <TyiLoader2Line />
+        <slot name="loading">
+          <TyiLoader2Line />
+        </slot>
       </span>
       <!-- 按钮内容 -->
       <span :class="{ 'is-opacity': loading }">
@@ -30,18 +34,23 @@ defineOptions({ name: 'TyButton' })
 // Props 定义
 const props = defineProps(buttonProps)
 
+// 事件定义
+const emit = defineEmits<{
+  click: [event: MouseEvent]
+}>()
+
 // 注入禁用/只读状态
-const inputInject = inject(configProviderDisabled, null) as {
-  disabled: false
+const inputInject = inject(configProviderDisabled, () => ({
+  disabled: false,
   readonly: false
-} | null
+}))
 
 // 合并最终状态（loading 自动禁用 + 继承注入状态）
 const mergeDisabled = computed(() =>
-  inputInject?.disabled || props.disabled || props.loading
+  inputInject.disabled || props.disabled || props.loading
 )
 const mergeReadonly = computed(() =>
-  inputInject?.readonly || props.loading
+  inputInject.readonly || props.loading
 )
 
 // 计算按钮 HTML 类型
@@ -61,6 +70,15 @@ const buttonClasses = computed(() => [
 
 // 加载状态
 const loading = computed(() => props.loading)
+
+// 点击事件处理（禁用时不触发）
+const handleClick = (event: MouseEvent) => {
+  if (mergeDisabled.value || mergeReadonly.value) {
+    event.preventDefault()
+    return
+  }
+  emit('click', event)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -246,6 +264,7 @@ const loading = computed(() => props.loading)
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
   }
 
   .is-opacity { opacity: 0; }
