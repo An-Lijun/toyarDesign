@@ -12,7 +12,7 @@ export const buttonProps = buildProps(
     type: {
       type: String,
       default: "normal",
-      values: ["normal", "secondary",'outline', "dashed", 'text', 'link']
+      values: ["normal", "secondary", 'outline', "dashed", 'text', 'link']
     },
     block: {
       type: Boolean,
@@ -40,7 +40,11 @@ export const buttonProps = buildProps(
     loading: {
       type: Boolean,
       default: false
-    }
+    },
+    tag: {
+      type: String,
+      default: 'button',
+    },
   }
 )
 
