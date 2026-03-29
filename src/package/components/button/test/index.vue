@@ -1,5 +1,6 @@
 <template>
   <div class="divRoot">
+    <UseButtonComp>111111111</UseButtonComp>
     <TyButton id="tat" style="background:red">11111111</TyButton>
     <br>
     <template v-for="state in states">
@@ -44,6 +45,7 @@
 </template>
 <script setup>
 import { TY_SIZE, TY_STATE } from '../../../constant';
+import UseButtonComp from './useButtonComp.vue'
 let states = ref(TY_STATE)
 let sizes = ref(TY_SIZE)
 let type = ref(['normal', 'secondary', 'outline','dashed', 'text', 'link'])
