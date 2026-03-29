@@ -2,8 +2,8 @@ import useNmSpace from '../../../hooks/useBem'
 import buildProps from '../../../utils/buildProps';
 import { TY_STATE, TY_SIZE } from '../../../constant';
 
-export const buttonProps = buildProps(
-  {
+
+export const staticProps ={
     state: {
       type: String,
       values: TY_STATE,
@@ -46,6 +46,14 @@ export const buttonProps = buildProps(
       default: 'button',
     },
   }
-)
+export const buttonProps = buildProps(staticProps)
+
+export interface ButtonEmits {
+  click: [event: MouseEvent]
+}
+
+export const buttonEmits: ButtonEmits = {
+  click: (event: MouseEvent) => true
+}
 
 export const nm = useNmSpace('button')
