@@ -1,6 +1,6 @@
 <template>
     <component :is="tag" ref="affixRef">
-        <div :class="[nm.b(), nm.is('fixed', isFixed)]" :style="styles">
+        <div v-memo="[isFixed, styles]" :class="[nm.b(), nm.is('fixed', isFixed)]" :style="styles">
             <slot></slot>
         </div>
     </component>
