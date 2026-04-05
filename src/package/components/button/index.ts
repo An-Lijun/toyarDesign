@@ -5,7 +5,7 @@ export type { TyButtonInstance } from './src/type.ts'
 import { buttonProps as props, nm, buttonEmits as emits,staticProps as propsData} from './src/context'
 import { default as useButton, type UseButtonReturn } from './src/use-button'
 
-export const useSelfButton = {
+export const useTyButton = {
   props, 
   nm, 
   emits,

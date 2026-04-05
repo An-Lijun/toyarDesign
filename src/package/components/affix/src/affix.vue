@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { nm, affixProps } from "./context";
+import { nm, affixProps,affixEmits } from "./context";
 import useAffix from './use-affix';
 
 defineOptions({
@@ -15,8 +15,6 @@ defineOptions({
 });
 
 const props = defineProps(affixProps);
-const emits = defineEmits<{
-  click: [event: MouseEvent]
-}>()
-const {styles,isFixed,affixRef} = useAffix(props,emits,nm)
+const emits = defineEmits(affixEmits)
+const { styles, isFixed, affixRef } = useAffix(props, emits, nm)
 </script>

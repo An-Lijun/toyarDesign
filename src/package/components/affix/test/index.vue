@@ -26,7 +26,7 @@
             <hr>
         </div>
 
-  
+
 
         <div v-for="item in 5">
             <br>
@@ -55,65 +55,81 @@
         <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
-        </div>        <div v-for="item in 5">
+        </div>
+        <div v-for="item in 5">
             <br>
             <hr>
         </div>
     </div>
-  </template>
-  <script setup>
-  </script>
-  <style>
-  .mg{
+</template>
+<script setup>
+</script>
+<style>
+.mg {
     margin: 0 10px;
-  }
-  </style>
-  
+}
+</style>

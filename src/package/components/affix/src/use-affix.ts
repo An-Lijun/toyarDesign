@@ -1,8 +1,9 @@
 import { debounce, bind, unBind } from "robinson";
-import { onBeforeUnmount, onMounted, ref, computed } from "vue";
+import { onBeforeUnmount, onMounted, ref, computed, type Ref } from "vue";
 // 添加类型定义
 import type { ExtractPropTypes } from 'vue'
 import { affixProps } from './context'
+import useNmSpace from '../../../hooks/useBem'
 
 export interface UseAffixReturn {
   styles: Ref<Record<string, string>>
@@ -14,8 +15,7 @@ export default function useAffix(
   props: ExtractPropTypes<typeof affixProps>,
   emits: (event: 'fixed-change', value: boolean) => void,
   nm: ReturnType<typeof useNmSpace>
-): UseAffixReturn
-export default function useAffix(props: ExtractPropTypes<typeof affixProps>, emits: (event: 'fixed-change', value: boolean) => void, nm: ReturnType<typeof useNmSpace>): UseAffixReturn {
+): UseAffixReturn {
 
   const affixRef = ref(null);
   let isFixed = ref(false);
@@ -60,7 +60,10 @@ export default function useAffix(props: ExtractPropTypes<typeof affixProps>, emi
     pendingStyles = {};
   };
   const setIsFixed = (value, style = {}) => {
-    isFixed.value = value;
+    if (isFixed.value !== value) {
+      isFixed.value = value;
+      emits('fixed-change', value);
+    }
     Object.assign(pendingStyles, style);
     requestAnimationFrame(applyStyles);
   };
@@ -112,14 +115,12 @@ export default function useAffix(props: ExtractPropTypes<typeof affixProps>, emi
 
   const debouncedHandleScroll = debounce(handleScroll, 50);
   const debouncedHandleResize = debounce(handleResize, 50);
-  const reqDebouncedHandleScroll =() => requestAnimationFrame(debouncedHandleScroll)
-  const reqDebouncedHandleResize =() => requestAnimationFrame(debouncedHandleResize)
+  const reqDebouncedHandleScroll = () => requestAnimationFrame(debouncedHandleScroll);
+  const reqDebouncedHandleResize = () => requestAnimationFrame(debouncedHandleResize);
 
   // 监听滚动和窗口大小变化
   onMounted(() => {
     handleScroll();
-
-
     bind(targetDom, 'scroll', reqDebouncedHandleScroll, { passive: true });
     bind(window, 'resize', reqDebouncedHandleResize, { passive: true });
   });

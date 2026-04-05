@@ -1,7 +1,7 @@
 import { version } from '../../package.json'
 
 import './assets/index.scss'
-import TyButton,{useSelfButton} from './components/button'
+import TyButton,{useTyButton} from './components/button'
 import TyButtonGroup from './components/button-group'
 import TyDivider from './components/divider'
 import TyRow from './components/row'
@@ -148,7 +148,7 @@ export default {
 export {
   TyThemeChange,
   TyButton,
-  useSelfButton,
+  useTyButton,
   TyButtonGroup,
   TyDivider,
   TyRow,

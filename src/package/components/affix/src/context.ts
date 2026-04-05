@@ -21,9 +21,9 @@ export const affixProps = buildProps(staticProps)
 
 export const nm = useNmSpace('affix')
 export interface AffixEmits {
-  fixedChange: [event: MouseEvent]
+  (event: 'fixed-change', value: boolean): void
 }
 
-export const AffixEmits: AffixEmits = {
-  fixedChange: (event: MouseEvent) => true
+export const affixEmits: AffixEmits = {
+  'fixed-change': (value: boolean) => true
 }
