@@ -24,7 +24,7 @@ export default function useAffix(
 
   // 缓存变量
   let cachedElRect = null;
-  let cachedScrollTop = 0;
+  let cachedScrollTop = null;
 
   // 校验并获取滚动值
   const getScrollVal = (target, top) => {
@@ -120,9 +120,9 @@ export default function useAffix(
 
   // 监听滚动和窗口大小变化
   onMounted(() => {
-    handleScroll();
     bind(targetDom, 'scroll', reqDebouncedHandleScroll, { passive: true });
     bind(window, 'resize', reqDebouncedHandleResize, { passive: true });
+    handleScroll()
   });
 
   onBeforeUnmount(() => {
