@@ -7,6 +7,9 @@
         <TyAffix :offsetTop="0">
             111
         </TyAffix>
+        <UseAffix :offsetTop="52">
+            useAffix111    
+        </UseAffix>
         <div v-for="item in 5">
             <br>
             <hr>
@@ -127,6 +130,7 @@
     </div>
 </template>
 <script setup>
+import UseAffix from './useAffix.vue'
 </script>
 <style>
 .mg {

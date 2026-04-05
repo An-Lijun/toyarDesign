@@ -64,7 +64,7 @@ import TyAvatarGroup from './components/avatar-group'
 import {TyThemeChange} from './hooks/changeTheme'
 import TyScrollBar from './components/scrollbar'
 import TyLogConsole from './components/logConsole'
-import TyAffix from './components/affix'
+import TyAffix,{useTyAffix} from './components/affix'
 import TyCircle from './components/circle'
 import TyUpload from './components/upload'
 import TyTimePicker from './components/time-picker'
@@ -213,6 +213,7 @@ export {
   TyScrollBar,
   TyLogConsole,
   TyAffix,
+  useTyAffix,
   TyCircle,
   TyUpload,
   TyTimePicker,

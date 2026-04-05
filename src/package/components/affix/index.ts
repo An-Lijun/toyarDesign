@@ -3,7 +3,7 @@ import TyAffix from './src/affix.vue'
 import { affixProps as props, nm, affixEmits as emits, staticProps as propsData } from './src/context'
 import { default as useAffix } from './src/use-affix'
 
-export const useSelfAffix = {
+export const useTyAffix = {
   props, 
   nm, 
   emits,
