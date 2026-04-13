@@ -1,4 +1,6 @@
 import type { Plugin } from 'vite'
+import { existsSync, readFileSync } from 'node:fs'
+import path from 'node:path'
 
 export default function bemStaticOptimization(): Plugin {
   return {
@@ -29,8 +31,8 @@ export default function bemStaticOptimization(): Plugin {
 
           // 检查是否是已知的 BEM 变量名（nm 或类似命名）
           if (originalName === 'nm' || originalName.endsWith('Nm') || originalName.endsWith('NS')) {
-            // 从当前文件路径推断 blockName
-            const blockName = guessBlockNameFromPath(id)
+            // 优先从当前组件同级 context 导出的 useNmSpace 命名中获取 blockName
+            const blockName = guessBlockNameFromContext(id, sourcePath, originalName) || guessBlockNameFromPath(id)
             if (blockName) {
               const prefix = `ty-${blockName}`
               result = replaceStaticCalls(result, localName, prefix, () => { modified = true })
@@ -62,6 +64,75 @@ export default function bemStaticOptimization(): Plugin {
       return null
     }
   }
+}
+
+function guessBlockNameFromContext(filePath: string, importSourcePath: string, exportName: string): string | null {
+  const contextFilePath = resolveImportPath(filePath, importSourcePath)
+  if (!contextFilePath) {
+    return null
+  }
+
+  let contextCode = ''
+  try {
+    contextCode = readFileSync(contextFilePath, 'utf-8')
+  }
+  catch {
+    return null
+  }
+
+  const quoteGroup = `['"\x60]`
+
+  // 1. 精确匹配导出的变量名：export const nm = useNmSpace('button')
+  const exportAssignPattern = new RegExp(
+    `export\\s+const\\s+${escapeRegExp(exportName)}\\s*=\\s*useNmSpace\\s*\\(\\s*${quoteGroup}([^'"\\x60]+)${quoteGroup}\\s*\\)`
+  )
+  const exportAssignMatch = contextCode.match(exportAssignPattern)
+  if (exportAssignMatch?.[1]) {
+    return exportAssignMatch[1]
+  }
+
+  // 2. 匹配非 export 声明（后续可能通过 export {} 导出）
+  const localAssignPattern = new RegExp(
+    `(?:const|let|var)\\s+${escapeRegExp(exportName)}\\s*=\\s*useNmSpace\\s*\\(\\s*${quoteGroup}([^'"\\x60]+)${quoteGroup}\\s*\\)`
+  )
+  const localAssignMatch = contextCode.match(localAssignPattern)
+  if (localAssignMatch?.[1]) {
+    return localAssignMatch[1]
+  }
+
+  // 3. 兜底：同级 context 内第一个 useNmSpace('xxx')
+  const firstNmMatch = contextCode.match(/useNmSpace\s*\(\s*['"\`]([^'"\`]+)['"\`]\s*\)/)
+  if (firstNmMatch?.[1]) {
+    return firstNmMatch[1]
+  }
+
+  return null
+}
+
+function resolveImportPath(currentFilePath: string, importSourcePath: string): string | null {
+  if (!importSourcePath.startsWith('.')) {
+    return null
+  }
+
+  const baseDir = path.dirname(currentFilePath)
+  const resolvedBase = path.resolve(baseDir, importSourcePath)
+  const candidates = [
+    resolvedBase,
+    `${resolvedBase}.ts`,
+    `${resolvedBase}.js`,
+    `${resolvedBase}.mts`,
+    `${resolvedBase}.cts`,
+    path.join(resolvedBase, 'index.ts'),
+    path.join(resolvedBase, 'index.js')
+  ]
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return candidate
+    }
+  }
+
+  return null
 }
 
 // 从当前文件路径推断 blockName

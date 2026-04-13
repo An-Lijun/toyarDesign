@@ -25,5 +25,5 @@
 let pwd= ref('')
 
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 </style>
