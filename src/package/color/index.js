@@ -1,5 +1,8 @@
 
+import Color  from './color/index.js'
 import { colorPalette, colorPaletteDark } from './computed/index.js'
+
+export const TyColor = Color
 
 export default function generate(color, options = {}) {
   const { dark, list, index = 6, format = 'hex' } = options;

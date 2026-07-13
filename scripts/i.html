@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WCAG 颜色对比度测试</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    body {
+      padding: 40px;
+      background: #f5f7fa;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+    }
+    h2 {
+      margin-bottom: 24px;
+      color: #1d2129;
+    }
+    .row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .item {
+      flex: 1;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #4e5969;
+      font-size: 14px;
+    }
+    .color-wrap {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    /* 原生颜色选择器 */
+    input[type="color"] {
+      width: 46px;
+      height: 36px;
+      border: 1px solid #dcdfe6;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 2px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #dcdfe6;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    .preview-box {
+      margin: 24px 0;
+      padding: 40px 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 18px;
+      transition: all 0.3s;
+    }
+    .result {
+      padding: 16px;
+      background: #f2f3f5;
+      border-radius: 8px;
+      line-height: 1.8;
+    }
+    .pass {
+      color: #00b42a;
+      font-weight: 500;
+    }
+    .fail {
+      color: #f53f3f;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>WCAG 颜色对比度测试</h2>
+  <div class="row">
+    <div class="item">
+      <label>前景文字颜色</label>
+      <div class="color-wrap">
+        <input id="frontColorPicker" type="color" value="#89DFD8">
+        <input id="frontColor" type="text" value="#89DFD8" placeholder="#ffffff">
+      </div>
+    </div>
+    <div class="item">
+      <label>背景颜色</label>
+      <div class="color-wrap">
+        <input id="bgColorPicker" type="color" value="#264306">
+        <input id="bgColor" type="text" value="#264306" placeholder="#000000">
+      </div>
+    </div>
+  </div>
+
+  <div id="preview" class="preview-box">
+    测试文本：Hello WCAG 无障碍对比度
+  </div>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  // 解析十六进制
+  function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return [r, g, b];
+  }
+
+  // sRGB 线性换算（WCAG 标准）
+  function srgbToLinear(val) {
+    const s = val / 255;
+    return s <= 0.03928
+      ? s / 12.92
+      : Math.pow((s + 0.055) / 1.055, 2.4);
+  }
+
+  // 相对亮度
+  function getLuminance(hex) {
+    const [r, g, b] = hexToRgb(hex);
+    const R = srgbToLinear(r);
+    const G = srgbToLinear(g);
+    const B = srgbToLinear(b);
+    return 0.2126 * R + 0.7152 * G + 0.0722 * B;
+  }
+
+  // 对比度计算
+  function getContrastRatio(color1, color2) {
+    const L1 = getLuminance(color1);
+    const L2 = getLuminance(color2);
+    const light = Math.max(L1, L2);
+    const dark = Math.min(L1, L2);
+    return (light + 0.05) / (dark + 0.05);
+  }
+
+  // WCAG 等级判断
+  function checkLevel(ratio) {
+    return {
+      normalAA: ratio >= 4.5,
+      normalAAA: ratio >= 7,
+      largeAA: ratio >= 3,
+      largeAAA: ratio >= 4.5
+    };
+  }
+
+  // 同步颜色选择器 & 输入框
+  function bindColorSync() {
+    // 前景
+    const frontPicker = document.getElementById('frontColorPicker');
+    const frontInput = document.getElementById('frontColor');
+    frontPicker.addEventListener('input', () => {
+      frontInput.value = frontPicker.value;
+      update();
+    });
+    frontInput.addEventListener('input', () => {
+      frontPicker.value = frontInput.value;
+      update();
+    });
+
+    // 背景
+    const bgPicker = document.getElementById('bgColorPicker');
+    const bgInput = document.getElementById('bgColor');
+    bgPicker.addEventListener('input', () => {
+      bgInput.value = bgPicker.value;
+      update();
+    });
+    bgInput.addEventListener('input', () => {
+      bgPicker.value = bgInput.value;
+      update();
+    });
+  }
+
+  // 主更新逻辑
+  function update() {
+    const front = document.getElementById('frontColor').value.trim();
+    const bg = document.getElementById('bgColor').value.trim();
+    const preview = document.getElementById('preview');
+    const resultDom = document.getElementById('result');
+
+    try {
+      // 简单校验色值
+      if (!/^#[0-9A-Fa-f]{6}$/.test(front) || !/^#[0-9A-Fa-f]{6}$/.test(bg)) {
+        throw new Error('格式错误');
+      }
+      const ratio = getContrastRatio(front, bg);
+      const level = checkLevel(ratio);
+
+      preview.style.color = front;
+      preview.style.backgroundColor = bg;
+
+      resultDom.innerHTML = `
+        <div>前景相对亮度：${getLuminance(front).toFixed(4)}</div>
+        <div>背景相对亮度：${getLuminance(bg).toFixed(4)}</div>
+        <div>对比度：<strong>${ratio.toFixed(2)} : 1</strong></div>
+        <div>常规文本 AA (≥4.5)：${level.normalAA ? '<span class="pass">合格</span>' : '<span class="fail">不合格</span>'}</div>
+        <div>常规文本 AAA (≥7.0)：${level.normalAAA ? '<span class="pass">合格</span>' : '<span class="fail">不合格</span>'}</div>
+        <div>大尺寸文本 AA (≥3.0)：${level.largeAA ? '<span class="pass">合格</span>' : '<span class="fail">不合格</span>'}</div>
+        <div>大尺寸文本 AAA (≥4.5)：${level.largeAAA ? '<span class="pass">合格</span>' : '<span class="fail">不合格</span>'}</div>
+      `;
+    } catch (e) {
+      resultDom.innerHTML = '<span class="fail">请输入合法6位十六进制颜色 #xxxxxx</span>';
+    }
+  }
+
+  // 初始化
+  bindColorSync();
+  update();
+</script>
+</body>
+</html>

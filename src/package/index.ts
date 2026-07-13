@@ -71,7 +71,7 @@ import TyTimePicker from './components/time-picker'
 import TyColorPicker from './components/color-picker'
 import TySmsCodeInput from './components/smsCodeInput'
 // import TyTrigger from './components/trigger'
-import generateColor from './color/index.js'
+import generateColor, { TyColor } from './color/index.js'
 
 
 const install = app => {
@@ -207,6 +207,7 @@ export {
   TyConfigProvider,
   TyDrawer,
   generateColor,
+  TyColor,
   TyCalendar,
   TySpace,
   TyAvatar,TyAvatarGroup,

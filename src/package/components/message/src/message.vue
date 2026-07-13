@@ -11,7 +11,7 @@
     >
       <div :class="nm.e('icon')">
         <slot name="icon">
-          <component :is="msgIconObj[type]" ></component>
+          <component :is="msgIconObj[type]" :size="18" ></component>
         </slot>
       </div>
       <div :class="nm.e('msg')">
@@ -132,12 +132,14 @@ defineExpose({
   // ---------------Message状态样式
   @mixin addMessageState($state, $value) {
     &.ty-message--#{$state} {
-      background-color: var(--#{$value}-2);
-      border: 1px solid var(--#{$value}-3);
-      color: var(--#{$value}-5);
-
-      .ty-message__icon,
-      .ty-message__close {
+      // background-color: var(--#{$value}-2);
+      // border: 1px solid var(--#{$value}-3);
+      // color: var(--#{$value}-5);
+      background-color: var( --bg-5);
+      border: 1px solid var(--toyar-gray-3);
+      color: var(--toyar-gray-10);
+      .ty-message__icon,.ty-message__icon{
+      // .ty-message__close 
         --toyar-gray-10: var(--#{$value}-7);
       }
     }

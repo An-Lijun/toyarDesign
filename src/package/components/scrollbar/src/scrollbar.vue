@@ -3,136 +3,273 @@
     <div :class="nm.e('container')" ref="container" @scroll="handleScroll($event)">
       <slot />
     </div>
-    <div :class="nm.e('rightBarContainer')" v-if="isShowRight">
+    <div :class="nm.e('rightBarContainer')" v-if="isShowRight" @mousedown="rightBarContainerClick($event)">
       <div ref="rightBar" :class="nm.e('rightBar')" @mousedown="rightMouseDown($event)" :style="{
-    top: rightTopV
-  }
-    ">
+        top: rightTopV,
+        height: rightBarHeight
+      }">
       </div>
     </div>
-    <div :class="nm.e('bottomBarContainer')"  v-if="isShowBottom">
+    <div :class="nm.e('bottomBarContainer')" v-if="isShowBottom" @mousedown="bottomBarContainerClick($event)">
       <div :class="nm.e('bottomBar')" ref="bottomBar" @mousedown="bottomMouseDown($event)" :style="{
-    left: bottomV
-  }">
+        left: bottomV,
+        width: bottomBarWidth
+      }">
       </div>
     </div>
   </div>
 </template>
 <script setup>
 import { nm } from './context';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted, onBeforeUnmount } from 'vue';
 
 defineOptions({
   name: 'TyScrollBar'
 })
+
+const BAR_MIN_SIZE = 24
+const BAR_MAX_RATIO = 0.6
+const BAR_PADDING = 4
+
 let containerHeight = 0
 let containerWidth = 0
 let scrollHeight = 0
 let scrollWidth = 0
-let compHeight = 0
-let compWidth = 0 
-let rightTopV = ref('')
-let bottomV = ref('')
-let isShowRight =ref(false)
-let isShowBottom =ref(false)
 
-const container = ref('')
-const rightBar = ref('')
-const bottomBar = ref('')
-let left=0
-let stop = false
-onMounted(() => {
+let rightTopV = ref('0px')
+let bottomV = ref('0px')
+let rightBarHeight = ref(`${BAR_MIN_SIZE}px`)
+let bottomBarWidth = ref(`${BAR_MIN_SIZE}px`)
+let isShowRight = ref(false)
+let isShowBottom = ref(false)
+
+const container = ref(null)
+const rightBar = ref(null)
+const bottomBar = ref(null)
+
+let isDraggingRight = false
+let isDraggingBottom = false
+let startX = 0
+let startY = 0
+let startScrollLeft = 0
+let startScrollTop = 0
+
+let resizeObserver = null
+let mutationObserver = null
+
+const updateDimensions = () => {
+  if (!container.value) return
+  
   containerHeight = container.value.clientHeight
   containerWidth = container.value.clientWidth
   scrollHeight = container.value.scrollHeight
   scrollWidth = container.value.scrollWidth
-  compHeight = scrollHeight - containerHeight
-  compWidth= scrollWidth - containerWidth
-  if(containerHeight <scrollHeight){
-      isShowRight.value = true
-  }
-})
+  
+  updateBarVisibility()
+  updateBarSizes()
+}
 
-const resetScrollBar =()=>{
+const updateBarVisibility = () => {
+  isShowRight.value = containerHeight < scrollHeight
+  isShowBottom.value = containerWidth < scrollWidth
+}
+
+const updateBarSizes = () => {
+  const rightAvailableHeight = containerHeight - BAR_PADDING * 2
+  const scrollRatio = containerHeight / scrollHeight
+  const rightMaxSize = rightAvailableHeight * BAR_MAX_RATIO
+  const rightSize = Math.max(BAR_MIN_SIZE, Math.min(rightMaxSize, rightAvailableHeight * scrollRatio))
+  rightBarHeight.value = `${rightSize}px`
+  
+  const bottomAvailableWidth = containerWidth - BAR_PADDING * 2
+  const bottomScrollRatio = containerWidth / scrollWidth
+  const bottomMaxSize = bottomAvailableWidth * BAR_MAX_RATIO
+  const bottomSize = Math.max(BAR_MIN_SIZE, Math.min(bottomMaxSize, bottomAvailableWidth * bottomScrollRatio))
+  bottomBarWidth.value = `${bottomSize}px`
+}
+
+const updateBarPositions = () => {
+  if (!container.value) return
+  
+  const scrollTop = container.value.scrollTop
+  const scrollLeft = container.value.scrollLeft
+  
+  const maxScrollTop = scrollHeight - containerHeight
+  const maxScrollLeft = scrollWidth - containerWidth
+  
+  const rightMaxPosition = containerHeight - parseFloat(rightBarHeight.value) - BAR_PADDING
+  const bottomMaxPosition = containerWidth - parseFloat(bottomBarWidth.value) - BAR_PADDING
+  
+  const rightPosition = maxScrollTop > 0 ? (scrollTop / maxScrollTop) * rightMaxPosition : 0
+  const bottomPosition = maxScrollLeft > 0 ? (scrollLeft / maxScrollLeft) * bottomMaxPosition : 0
+  
+  rightTopV.value = `${rightPosition}px`
+  bottomV.value = `${bottomPosition}px`
+}
+
+const handleResize = () => {
+  updateDimensions()
+  updateBarPositions()
+}
+
+const resetScrollBar = () => {
   setTimeout(() => {
-    scrollHeight = container.value.scrollHeight
-    scrollWidth = container.value.scrollWidth
-    compHeight = scrollHeight - containerHeight
-    compWidth= scrollWidth - containerWidth
-    if(containerHeight <scrollHeight){
-      isShowRight.value = true
-    }else{
-      isShowRight.value = false
-    }
-  }, 200);
-  
-}
-const handleScroll = (ev) => {
-  if (stop) {
-    return
-  }
-  let leftV= ev.target.scrollLeft
-  if(left !== leftV){
-    let value = Math.floor(ev.target.scrollLeft / compWidth * 100)
-    bottomV.value = value <= 20 ? `${value}px` : `calc( ${value}% - 25px)`
-    left = leftV
-    return
-  }
-  console.log(ev.target.scrollTop , compHeight );
-  
-  let value = Math.floor(ev.target.scrollTop / compHeight * 100)
-  rightTopV.value = value <= 20 ? `${value}px` : `calc( ${value}% - 35px)`
+    updateDimensions()
+    updateBarPositions()
+  }, 200)
 }
 
-let x, y
+const handleScroll = (ev) => {
+  if (isDraggingRight || isDraggingBottom) {
+    return
+  }
+  updateBarPositions()
+}
+
+const rightBarContainerClick = (e) => {
+  if (e.target === rightBar.value) return
+  
+  const containerRect = container.value?.getBoundingClientRect()
+  if (!containerRect) return
+  
+  const clickY = e.clientY - containerRect.top
+  const barTop = parseFloat(rightTopV.value)
+  
+  if (clickY < barTop) {
+    container.value.scrollTop -= containerHeight * 0.8
+  } else {
+    container.value.scrollTop += containerHeight * 0.8
+  }
+  
+  updateBarPositions()
+}
+
+const bottomBarContainerClick = (e) => {
+  if (e.target === bottomBar.value) return
+  
+  const containerRect = container.value?.getBoundingClientRect()
+  if (!containerRect) return
+  
+  const clickX = e.clientX - containerRect.left
+  const barLeft = parseFloat(bottomV.value)
+  
+  if (clickX < barLeft) {
+    container.value.scrollLeft -= containerWidth * 0.8
+  } else {
+    container.value.scrollLeft += containerWidth * 0.8
+  }
+  
+  updateBarPositions()
+}
 
 const rightMove = (e) => {
-  stop = true
-  e.preventDefault();
-  let moveY = e.pageY - y;
-  moveY = moveY > (containerHeight - 35) ? containerHeight - 35 : moveY
-  moveY = moveY <= 0 ? 0 : moveY
-  rightTopV.value = `${moveY}px`
-
-  let coucent = moveY / (containerHeight)
-  container.value.scrollTop = `${scrollHeight * coucent}`
+  if (!isDraggingRight || !container.value) return
+  
+  e.preventDefault()
+  
+  const maxScrollTop = scrollHeight - containerHeight
+  const rightMaxPosition = containerHeight - parseFloat(rightBarHeight.value) - BAR_PADDING
+  
+  let deltaY = e.pageY - startY
+  let newScrollTop = startScrollTop + (deltaY / rightMaxPosition) * maxScrollTop
+  
+  newScrollTop = Math.max(0, Math.min(maxScrollTop, newScrollTop))
+  container.value.scrollTop = newScrollTop
+  
+  updateBarPositions()
 }
+
+const rightMouseUp = () => {
+  isDraggingRight = false
+  document.removeEventListener('mousemove', rightMove)
+  document.removeEventListener('mouseup', rightMouseUp)
+}
+
 const rightMouseDown = (e) => {
-  y = e.pageY - rightBar.value.offsetTop;
-  if (document) {
-    document?.addEventListener("mousemove", rightMove)
-    document?.addEventListener("mouseup", () => {
-      document.removeEventListener('mousemove', rightMove)
-      stop = false
-    });
-  }
+  isDraggingRight = true
+  startY = e.pageY
+  startScrollTop = container.value?.scrollTop || 0
+  
+  document.addEventListener('mousemove', rightMove)
+  document.addEventListener('mouseup', rightMouseUp)
 }
 
 const bottomMove = (e) => {
-  stop = true
-  e.preventDefault();
-  let moveX = e.pageX - x;
-  moveX = moveX > (containerWidth - 35) ? containerWidth - 35 : moveX
-  moveX = moveX <= 0 ? 0 : moveX
-  let coucent = moveX / (containerWidth)
-  bottomV.value = `${moveX}px`
-  container.value.scrollLeft = `${containerWidth * coucent}`
+  if (!isDraggingBottom || !container.value) return
+  
+  e.preventDefault()
+  
+  const maxScrollLeft = scrollWidth - containerWidth
+  const bottomMaxPosition = containerWidth - parseFloat(bottomBarWidth.value) - BAR_PADDING
+  
+  let deltaX = e.pageX - startX
+  let newScrollLeft = startScrollLeft + (deltaX / bottomMaxPosition) * maxScrollLeft
+  
+  newScrollLeft = Math.max(0, Math.min(maxScrollLeft, newScrollLeft))
+  container.value.scrollLeft = newScrollLeft
+  
+  updateBarPositions()
 }
+
+const bottomMouseUp = () => {
+  isDraggingBottom = false
+  document.removeEventListener('mousemove', bottomMove)
+  document.removeEventListener('mouseup', bottomMouseUp)
+}
+
 const bottomMouseDown = (e) => {
-  x = e.pageX - bottomBar.value.offsetLeft;
-
-  if (document) {
-    document?.addEventListener("mousemove", bottomMove)
-    document?.addEventListener("mouseup", () => {
-      document.removeEventListener('mousemove', bottomMove)
-      stop = false
-    });
-  }
+  isDraggingBottom = true
+  startX = e.pageX
+  startScrollLeft = container.value?.scrollLeft || 0
+  
+  document.addEventListener('mousemove', bottomMove)
+  document.addEventListener('mouseup', bottomMouseUp)
 }
-defineExpose({
-  resetScrollBar,
 
-});
+onMounted(() => {
+  updateDimensions()
+  updateBarPositions()
+  
+  window.addEventListener('resize', handleResize)
+  
+  resizeObserver = new ResizeObserver(handleResize)
+  if (container.value) {
+    resizeObserver.observe(container.value)
+  }
+  
+  mutationObserver = new MutationObserver(() => {
+    resetScrollBar()
+  })
+  if (container.value) {
+    mutationObserver.observe(container.value, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      characterData: true
+    })
+  }
+})
+
+onBeforeUnmount(() => {
+  rightMouseUp()
+  bottomMouseUp()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
+  
+  if (mutationObserver) {
+    mutationObserver.disconnect()
+  }
+})
+
+defineExpose({
+  resetScrollBar
+})
 </script>
 <style lang="scss" scoped>
 .ty-scrollbar {
@@ -147,30 +284,40 @@ defineExpose({
     scrollbar-width: none;
   }
 
+  &__container::-webkit-scrollbar {
+    display: none;
+  }
+
   &__rightBarContainer {
     position: absolute;
-    right: 0px;
+    right: 0;
     top: 0;
     width: 12px;
     height: 100%;
     z-index: 15;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: var(--opcity-color-4);
     opacity: 0;
-    transition: opacity .5s;
-    padding-bottom: 20px;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
     box-sizing: border-box;
+    cursor: pointer;
   }
 
   &__rightBar {
     width: 8px;
-    height: 20px;
-    background-color: var(--toyar-gray-4);
+    background-color: var(--fill-4);
     border-radius: 4px;
     position: absolute;
     box-sizing: border-box;
     right: 2px;
+    top: 2px;
     user-select: none;
--webkit-user-drag: none;
+    -webkit-user-drag: none;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   &__bottomBarContainer {
@@ -180,27 +327,35 @@ defineExpose({
     height: 12px;
     width: calc(100% - 12px);
     z-index: 15;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: var(--opcity-color-4);
     opacity: 0;
-    transition: opacity .5s;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
+    box-sizing: border-box;
+    cursor: pointer;
   }
 
   &__bottomBar {
     height: 8px;
-    width: 20px;
-    background-color: var(--toyar-gray-4);
+    background-color: var(--fill-4);
     border-radius: 4px;
     position: absolute;
     box-sizing: border-box;
     top: 2px;
+    left: 2px;
     user-select: none;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   &:hover {
-
     .ty-scrollbar__rightBarContainer,
     .ty-scrollbar__bottomBarContainer {
       opacity: 1;
+      visibility: visible;
     }
   }
 }
