@@ -1,10 +1,9 @@
-@import url('./base.scss');
-@import url('./dark.scss');
-@import url('./light.scss');
-// @import '../icon//toyaricon.module.css'
+@use './base.scss';
+@use './dark.scss';
+@use './light.scss';
+@use './components/button.scss';
+@use './components/affix.scss';
+
 body{
   color: var(--toyar-gray-10);
 }
-
-@import url('./components/button.scss');
-@import url('./components/affix.scss');

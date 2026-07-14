@@ -1,51 +1,37 @@
- @use './util/hexToRgbRow.scss' as hexToRgbRow; 
-html[toyar-theme='light'],.ty-light {
-  $toyar-colors: (
-    "red": (#FFECE8, #FDCDC5, #FBACA3, #F98981, #F76560, #F53F3F, #CB272D, #A1151E, #770813, #4D000A),
-    "orangered": (#FFF3E8, #FDDDC3, #FCC59F, #FAAC7B, #F99057, #F77234, #CC5120, #A23511, #771F06, #4D0E00),
-    "orange": (#FFF7E8, #FFE4BA, #FFCF8B, #FFB65D, #FF9A2E, #FF7D00, #D25F00, #A64500, #792E00, #4D1B00),
-    "gold": (#FFFCE8, #FDF4BF, #FCE996, #FADC6D, #F9CC45, #F7BA1E, #CC9213, #A26D0A, #774B04, #4D2D00),
-    "yellow": (#FEFFE8, #FEFEBE, #FDFA94, #FCF26B, #FBE842, #FADC19, #CFAF0F, #A38408, #785D03, #4D3800),
-    "lime": (#FCFFE8, #EDF8BB, #DCF190, #C9E968, #B5E241, #9FDB1D, #7EB712, #5F940A, #437004, #2A4D00),
-    "green": (#E8FFEA, #AFF0B5, #7BE188, #4CD263, #23C343, #00B42A, #009A29, #008026, #006622, #004D1C),
-    "cyan": (#E8FFFB, #B7F4EC, #89E9E0, #5EDFD6, #37D4CF, #14C9C9, #0DA5AA, #07828B, #03616C, #00424D),
-    "blue": (#E8F7FF, #C3E7FE, #9FD4FD, #7BC0FC, #57A9FB, #3491FA, #206CCF, #114BA3, #063078, #001A4D),
-    "xblue": (#E8F3FF, #BEDAFF, #94BFFF, #6AA1FF, #4080FF, #165DFF, #0E42D2, #072CA6, #031A79, #000D4D),
-    "purple": (#F5E8FF, #DDBEF6, #C396ED, #A871E3, #8D4EDA, #722ED1, #551DB0, #3C108F, #27066E, #16004D),
-    "pinkpurple": (#FFE8FB, #F7BAEF, #F08EE6, #E865DF, #E13EDB, #D91AD9, #B010B6, #8A0993, #650370, #42004D),
-    "magenta": (#FFE8F1, #FDC2DB, #FB9DC7, #F979B7, #F754A8, #F5319D, #CB1E83, #A11069, #77064F, #4D0034),
-    "gray": (#F7F8FA, #F2F3F5, #E5E6EB, #C9CDD4, #A9AEB8, #86909C, #6B7785, #4E5969, #272E3B, #1D2129)
-  );
+@use './tokens/_tokens.scss' as tokens;
+@use './util/hexToRgbRow.scss' as hexToRgbRow;
 
-  @each $color-name, $color-list in $toyar-colors {
+html[toyar-theme='light'],.ty-light {
+  $colors: tokens.$toyar-light-colors;
+  $bg-list: tokens.$toyar-bg-light;
+  $shadow-list: tokens.$toyar-shadow-light;
+  $opacity-list: tokens.$toyar-opacity-light;
+  $theme-map: tokens.$toyar-light-theme-color-map;
+
+  @each $color-name, $color-list in $colors {
     @for $i from 1 through 10 {
       --toyar-#{$color-name}-#{$i}: #{nth($color-list, $i)};
       --toyar-#{$color-name}-rs-#{$i}: #{hexToRgbRow.hex-to-rgb-raw(nth($color-list, $i))};
     }
   }
 
-  --bg-1:#fff;
-  --bg-2:#fff;
-  --bg-3:#fff;
-  --bg-4:#fff;
-  --bg-5:#fff;
+  @each $name, $value in $theme-map {
+    @for $i from 1 through 7 {
+      --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
+    }
+  }
 
-  --shadow-1:0 0 1px rgba(0, 0, 0, 0.3);
-  --shadow-2:0 -2px 5px rgba(0, 0, 0, 0.1);
-  --shadow-3:0 0 10px rgba(0, 0, 0, 0.1);
-  --shadow-4: 0 0 20px rgba(0, 0, 0, 0.1);
-  --shadow-5:0 4px 10px rgba(0,0,0,.1);
+  @for $i from 1 through 5 {
+    --bg-#{$i}: #{nth($bg-list, $i)};
+  }
 
-  --opcity-color-1:rgba(0, 0, 0, 0.1);
-  --opcity-color-2:rgba(0, 0, 0, 0.2);
-  --opcity-color-3:rgba(0, 0, 0, 0.3);
-  --opcity-color-4:rgba(0, 0, 0, 0.4);
-  --opcity-color-5:rgba(0, 0, 0, 0.5);
-  --opcity-color-6:rgba(0, 0, 0, 0.6);
-  --opcity-color-7:rgba(0, 0, 0, 0.7);
-  --opcity-color-8:rgba(0, 0, 0, 0.8);
-  --opcity-color-9:rgba(0, 0, 0, 0.9);
+  @each $i, $shadow in $shadow-list {
+    --shadow-#{$i}: #{$shadow};
+  }
 
+  @each $i, $opacity in $opacity-list {
+    --opcity-color-#{$i}: #{$opacity};
+  }
 
   --fill-white:#fff;
   --text-white:#fff;
@@ -55,5 +41,5 @@ html[toyar-theme='light'],.ty-light {
   --menu-open:#0c2135;
 
   --color-secondary:var(--toyar-gray-2);
- 
+
 }

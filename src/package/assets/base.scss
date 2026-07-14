@@ -6,21 +6,18 @@
 @use  './src/other.scss' as useOther;
 @use  './src/size.scss' as useSize;
 @use  './src/textColor.scss' as useTextColor;
-@use  './src/theme.scss' as useTheme;
 
-// 加载动画
 @keyframes load {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 :root ,.ty-dark,.ty-light{
-  @include useTheme.themeMixin; //--primary-1:var(--toyar-xblue-1);
-  @include useBorderWidth.borderWidthMixin; // --border-radius-0: 0px;
-  @include useBorderColor.borderColorMixin; // --border-color-1: var(--toyar-gray-2);
-  @include useFontSize.fontSizeMixin; //  --font-caption : 12px;
-  @include useFontWeight.fontWeightMixin; // --font-weight-1 : 100;
-  @include useSize.sizeMixin; /* padding尺寸 marin尺寸*/
+  @include useBorderWidth.borderWidthMixin;
+  @include useBorderColor.borderColorMixin;
+  @include useFontSize.fontSizeMixin;
+  @include useFontWeight.fontWeightMixin;
+  @include useSize.sizeMixin;
   @include useOther.otherMixin;
   @include useFillAndBg.fillAndBgMixin;
   @include useTextColor.textMixin

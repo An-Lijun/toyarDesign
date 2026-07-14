@@ -1,0 +1,23 @@
+@forward './_tokens.scss' as toyar-*;
+
+$toyar-primary-color: 'xblue' !default;
+
+@function toyar-get-color($color-name, $level: 6) {
+  $colors: $toyar-light-colors;
+  @if map-has-key($colors, $color-name) {
+    $color-list: map-get($colors, $color-name);
+    @return nth($color-list, $level);
+  }
+  @return null;
+}
+
+@mixin toyar-theme-override($primary-color: null) {
+  @if $primary-color {
+    :root, .ty-light, .ty-dark {
+      $primary-list: map-get($toyar-light-colors, $primary-color);
+      @for $i from 1 through 10 {
+        --primary-#{$i}: #{nth($primary-list, $i)};
+      }
+    }
+  }
+}
