@@ -1,13 +1,20 @@
+// ========== 浅色模式 CSS 变量生成 ==========
+// 本文件将 SCSS 变量转换为 CSS 变量，供组件运行时使用
+// 选择器：html[toyar-theme='light'] 或 .ty-light
+
 @use './tokens/_tokens.scss' as tokens;
 @use './util/hexToRgbRow.scss' as hexToRgbRow;
 
 html[toyar-theme='light'],.ty-light {
+  // 引入 SCSS 变量
   $colors: tokens.$toyar-light-colors;
   $bg-list: tokens.$toyar-bg-light;
   $shadow-list: tokens.$toyar-shadow-light;
   $opacity-list: tokens.$toyar-opacity-light;
   $theme-map: tokens.$toyar-light-theme-color-map;
 
+  // 1. 生成基础颜色 CSS 变量
+  // 格式：--toyar-{颜色名}-{色阶} 和 --toyar-{颜色名}-rs-{色阶}（RGB格式）
   @each $color-name, $color-list in $colors {
     @for $i from 1 through 10 {
       --toyar-#{$color-name}-#{$i}: #{nth($color-list, $i)};
@@ -15,31 +22,43 @@ html[toyar-theme='light'],.ty-light {
     }
   }
 
+  // 2. 生成语义颜色 CSS 变量（主题映射）
+  // 将 primary/link/success/warning/danger 映射到具体颜色
+  // 格式：--{语义名}-{色阶}
   @each $name, $value in $theme-map {
     @for $i from 1 through 7 {
       --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
     }
   }
 
+  // 3. 生成背景色 CSS 变量
+  // 格式：--bg-{级别}
   @for $i from 1 through 5 {
     --bg-#{$i}: #{nth($bg-list, $i)};
   }
 
+  // 4. 生成阴影 CSS 变量
+  // 格式：--shadow-{级别}
   @each $i, $shadow in $shadow-list {
     --shadow-#{$i}: #{$shadow};
   }
 
+  // 5. 生成透明度 CSS 变量
+  // 格式：--opcity-color-{级别}
   @each $i, $opacity in $opacity-list {
     --opcity-color-#{$i}: #{$opacity};
   }
 
+  // 6. 基础颜色常量
   --fill-white:#fff;
   --text-white:#fff;
 
+  // 7. 组件专用变量
   --tooltip:#1d2129;
   --menu:var(--primary-6);
   --menu-open:#0c2135;
 
+  // 8. 辅助颜色
   --color-secondary:var(--toyar-gray-2);
 
 }

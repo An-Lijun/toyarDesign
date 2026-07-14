@@ -1,8 +1,20 @@
+// ========== 边框颜色 Mixin ==========
+// 生成语义化的边框颜色 CSS 变量
+// 根据 $toyar-border-levels 映射表，将 gray 色系的色阶转换为边框颜色变量
+// 使用方式：@include borderColorMixin;
+
 @use '../tokens/_tokens.scss' as tokens;
 
 @mixin borderColorMixin {
+  // 引入边框层级映射配置
   $borderLs: tokens.$toyar-border-levels;
 
+  // 循环生成边框颜色 CSS 变量
+  // 格式：--border-color-{级别}，值为对应的 gray 色阶
+  // --border-color-1: 最浅（分割线、次要边框）
+  // --border-color-2: 较浅（常规边框）
+  // --border-color-3: 中等（强调边框）
+  // --border-color-4: 较深（高亮边框）
   @each $name, $value in $borderLs {
     --border-color-#{$name}: var(--toyar-gray-#{$value});
   }

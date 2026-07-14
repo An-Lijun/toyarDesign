@@ -1,3 +1,7 @@
+// ========== 基础样式入口 ==========
+// 本文件统一引入所有语义样式 mixin，并应用到全局选择器
+// 选择器：:root、.ty-dark、.ty-light
+
 @use  './src/borderColor.scss' as useBorderColor;
 @use  './src/borderWidth.scss' as useBorderWidth;
 @use  './src/fillAndBg.scss' as useFillAndBg;
@@ -7,11 +11,14 @@
 @use  './src/size.scss' as useSize;
 @use  './src/textColor.scss' as useTextColor;
 
+// 加载动画关键帧（组件加载状态使用）
 @keyframes load {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+// 全局应用所有语义样式 mixin
+// 这些 mixin 将生成语义化的 CSS 变量（如 --text-1、--border-color-1 等）
 :root ,.ty-dark,.ty-light{
   @include useBorderWidth.borderWidthMixin;
   @include useBorderColor.borderColorMixin;

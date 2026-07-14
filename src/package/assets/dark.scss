@@ -1,13 +1,22 @@
+// ========== 深色模式 CSS 变量生成 ==========
+// 本文件将 SCSS 变量转换为 CSS 变量，供组件运行时使用
+// 选择器：html[toyar-theme='dark'] 或 .ty-dark
+// 与浅色模式对称，但颜色值已适配深色背景
+
 @use './tokens/_tokens.scss' as tokens;
 @use './util/hexToRgbRow.scss' as hexToRgbRow;
 
 html[toyar-theme='dark'],.ty-dark {
+  // 引入 SCSS 变量（深色模式专用）
   $colors: tokens.$toyar-dark-colors;
   $bg-list: tokens.$toyar-bg-dark;
   $shadow-list: tokens.$toyar-shadow-dark;
   $opacity-list: tokens.$toyar-opacity-dark;
   $theme-map: tokens.$toyar-dark-theme-color-map;
 
+  // 1. 生成基础颜色 CSS 变量
+  // 格式：--toyar-{颜色名}-{色阶} 和 --toyar-{颜色名}-rs-{色阶}（RGB格式）
+  // 深色模式的色阶与浅色模式对称，实现视觉平衡
   @each $color-name, $color-list in $colors {
     @for $i from 1 through 10 {
       --toyar-#{$color-name}-#{$i}: #{nth($color-list, $i)};
@@ -15,29 +24,45 @@ html[toyar-theme='dark'],.ty-dark {
     }
   }
 
+  // 2. 生成语义颜色 CSS 变量（主题映射）
+  // 将 primary/link/success/warning/danger 映射到具体颜色
+  // 格式：--{语义名}-{色阶}
   @each $name, $value in $theme-map {
     @for $i from 1 through 7 {
       --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
     }
   }
 
+  // 3. 生成背景色 CSS 变量
+  // 格式：--bg-{级别}
+  // 深色模式背景色从深灰到浅灰渐变
   @for $i from 1 through 5 {
     --bg-#{$i}: #{nth($bg-list, $i)};
   }
 
+  // 4. 生成阴影 CSS 变量
+  // 格式：--shadow-{级别}
+  // 深色模式使用浅色阴影，适应深色背景
   @each $i, $shadow in $shadow-list {
     --shadow-#{$i}: #{$shadow};
   }
 
+  // 5. 生成透明度 CSS 变量
+  // 格式：--opcity-color-{级别}
+  // 深色模式基于白色计算透明度
   @each $i, $opacity in $opacity-list {
     --opcity-color-#{$i}: #{$opacity};
   }
 
+  // 6. 基础颜色常量（适配深色背景）
   --fill-white:#f6f6f6;
   --text-white:#4E5969;
+
+  // 7. 组件专用变量（适配深色背景）
   --tooltip:#373739;
   --menu:#232324;
   --menu-open:#2d2d2d;
 
+  // 8. 辅助颜色（使用 RGB 格式实现透明度）
   --color-secondary:rgba(var(--toyar-gray-rs-9),.08)
 }
