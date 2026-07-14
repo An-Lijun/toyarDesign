@@ -1,10 +1,13 @@
 <template>
   <div class="divRoot">
-    <UseButtonComp>111111111</UseButtonComp>
-    <TyButton id="tat" style="background:red">11111111</TyButton>
+  
     <br>
     <template v-for="state in states">
       <TyButton :state="state" v-for="item in type" :type="item">111</TyButton>
+        <TyButton type="aa">11111111</TyButton>
+    <UseButtonComp>111111111</UseButtonComp>
+    
+    <TyButton id="tat" style="background:red">11111111</TyButton>
       <br>
     </template>
     <hr />

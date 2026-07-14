@@ -12,11 +12,12 @@
   transition: var(--time-1);
   font-weight: var(--font-weight-5);
   user-select: none;
-  border: var(--border-1) solid;
+  border: var(--border-1) rgba(var(--toyar-gray-rs-9),.08) solid;
   font-size: var(--font-body-3);
   border-radius: var(--border-radius-4);
   position: relative;
-
+  background:var(--color-secondary);
+  color:  var(--text-2);
   // 按钮状态主题（primary/success等）
   @mixin btn-state-mixin($state) {
     // 实心按钮

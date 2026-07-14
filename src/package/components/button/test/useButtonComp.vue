@@ -1,8 +1,8 @@
 <template>
-  <div :is="tag" :type="htmlType" :class="buttonClasses" :disabled="mergeDisabled" :readonly="mergeReadonly"
+  <component :is="tag" :type="htmlType" :class="buttonClasses" :disabled="mergeDisabled" :readonly="mergeReadonly"
     :aria-disabled="mergeDisabled" @click="handleClick">
     <slot></slot>
-  </div>
+  </component>
 </template>
 <script setup>
 import buildProps from '../../../utils/buildProps';
