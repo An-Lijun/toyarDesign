@@ -164,3 +164,60 @@ $toyar-sizes: (
   medium:(32px),
   large:(36px)
 ) !default;
+
+// ========== 字体系统 (Font System) ==========
+// 字体族（优先使用系统字体，保证跨平台兼容性）
+$toyar-font-family: ('PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif) !default;
+
+// 字体大小（用于组件内文字）
+$toyar-font-size: (
+  caption:(12px),
+  body-1:(12px),
+  body-2:(13px),
+  body-3:(14px),
+  title-1:(16px),
+  title-2:(20px),
+  title-3:(24px),
+  dis-1:(36px),
+  dis-2:(48px),
+  dis-3:(56px),
+) !default;
+
+// 字体粗细（字重）
+$toyar-font-weight: (
+  UltraLight:(1),
+  Thin:(2),
+  Light:(3),
+  Regular:(4),
+  Medium:(5),
+  SemiBold:(6),
+  Bold:(7),
+  Extrablack:(8),
+  BBlack:(9),
+) !default;
+
+// ========== 边框系统 (Border System) ==========
+// 边框圆角
+$toyar-radius: (
+  0:(0px),
+  2:(2px),
+  4:(4px),
+  6:(6px),
+  8:(8px),
+  10:(10px),
+  12:(12px),
+  14:(14px),
+  16:(16px),
+  18:(18px),
+  20:(20px),
+  circle:(50%),
+) !default;
+
+// 边框宽度
+$toyar-border-width: (
+  0: 0,
+  xs: 0.5px,
+  sm: 1px,
+  md: 2px,
+  lg: 3px
+) !default;

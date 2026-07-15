@@ -1,19 +1,11 @@
+@use './tokens/_tokens.scss' as tokens;
+
 :root ,.ty-dark,.ty-light{
 
   /*  ---------------------------------------   功能色调   --------------------------------------- */
   /* 7 click 6常规 5hover 4特殊场景 3 一般禁用2 文字禁用1 浅色/白底悬浮*/
-  $themeColorMap: (
-    primary:('xblue'),
-    /* 主色 */
-    link:('xblue'),
-    /* 链接色 */
-    success:('green'),
-    /* 成功色 */
-    warning:('orange'),
-    /* 警示色 */
-    danger:('red')
-    /* 错误色 */
-  );
+  /* 从 _tokens.scss 引入语义颜色映射 */
+  $themeColorMap: tokens.$toyar-theme-color-map;
 
 @each $name, $value in $themeColorMap {
   @for $i from 1 through 7 {
@@ -28,33 +20,15 @@
   --border-#{$i}: #{$i}px;
 }
 
-/* 边框圆角 */
-$borderRadiusList: (
-  0:(0px),
-  2:(2px),
-  4:(4px),
-  6:(6px),
-  8:(8px),
-  10:(10px),
-  12:(12px),
-  14:(14px),
-  16:(16px),
-  18:(18px),
-  20:(20px),
-  circle:(50%),
-);
+/* 边框圆角（从 _tokens.scss 引入） */
+$borderRadiusList: tokens.$toyar-radius;
 
 @each $name, $value in $borderRadiusList {
   --border-radius-#{$name}: #{$value};
 }
 
-/* 边框颜色 1浅色 2一般 3深色悬浮 4重色按钮描边*/
-$borderLs: (
-  1:(2),
-  2:(3),
-  3:(4),
-  4:(6)
-);
+/* 边框颜色 1浅色 2一般 3深色悬浮 4重色按钮描边（从 _tokens.scss 引入）*/
+$borderLs: tokens.$toyar-border-levels;
 
 @each $name, $value in $borderLs {
   --border-color-#{$name}: var(--toyar-gray-#{$value});
@@ -63,28 +37,8 @@ $borderLs: (
 
 /*  ---------------------------------------   字体   --------------------------------------- */
 
-$fontList: (
-  /* 水印文字 */
-  caption:(12px),
-  /*辅助文案/次要文案*/
-  body-1:(12px),
-  /*正文-常规-小*/
-  body-2:(13px),
-  /*正文-常规*/
-  body-3:(14px),
-  /*标题小*/
-  title-1:(16px),
-  /*标题中*/
-  title-2:(20px),
-  /*标题大*/
-  title-3:(24px),
-  /*运营标题小*/
-  dis-1:(36px),
-  /*运营标题中*/
-  dis-2:(48px),
-  /*运营标题大*/
-  dis-3:(56px),
-);
+/* 字体大小（从 _tokens.scss 引入） */
+$fontList: tokens.$toyar-font-size;
 
 @each $name, $value in $fontList {
   --font-#{$name} : #{$value};
@@ -92,31 +46,16 @@ $fontList: (
 
 
 
-/* 字体粗细(字重) 100~900 + 别名*/
-$fontWeightLs: (
-  UltraLight:(1),
-  Thin:(2),
-  Light:(3),
-  Regular:(4),
-  Medium:(5),
-  SemiBold:(6),
-  Bold:(7),
-  Extrablack:(8),
-  BBlack:(9),
-);
+/* 字体粗细(字重) 100~900 + 别名（从 _tokens.scss 引入）*/
+$fontWeightLs: tokens.$toyar-font-weight;
 
 @each $name, $value in $fontWeightLs {
   --font-weight-#{$value} : #{$value}00;
   --font-weight-#{$name}: #{$value}00;
 }
 
-/* 文字颜色 */
-$textLs: (
-  1:(10),
-  2:(8),
-  3:(6),
-  4:(4)
-);
+/* 文字颜色（从 _tokens.scss 引入）*/
+$textLs: tokens.$toyar-text-levels;
 /* 白色文字 */
 --text-0: var(--text-white);
 
@@ -136,12 +75,8 @@ $textLs: (
   --size-#{$size}: #{$size * 4px};
 }
 
-$sizeLs: (
-  mini:(24px),
-  small:(28px),
-  medium:(32px),
-  large:(36px)
-);
+/* 组件尺寸（从 _tokens.scss 引入）*/
+$sizeLs: tokens.$toyar-sizes;
 
 @each $name, $value in $sizeLs {
   --size-#{$name}: #{$value};
@@ -180,16 +115,8 @@ $sizeLs: (
   --time-#{$i}: 0.#{$i}s;
 }
 
-/* 层级 */
-$zIndexLs: (
-  1:(1),
-  3:(2),
-  5:(3),
-  7:(4),
-  9:(5),
-  50:(6),
-  import:(99)
-);
+/* 层级（从 _tokens.scss 引入）*/
+$zIndexLs: tokens.$toyar-z-index;
 
 @each $name, $value in $zIndexLs {
   --zindex-#{$name}: #{$value};
