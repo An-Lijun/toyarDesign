@@ -23,7 +23,7 @@ export default function useAffix(
   const affixRef = ref<HTMLElement | null>(null);
   const isFixed = ref(false);
   const styles = ref<Record<string, string>>({});
-  const targetDom = props.target || window;
+  const targetDom = computed(() => props.target || window);
 
   let observer: IntersectionObserver | null = null;
   let placeholder: HTMLElement | null = null;
@@ -109,7 +109,7 @@ export default function useAffix(
       isPlaceholderCreated = false;
     }
   };
-  const updateDom = (value: boolean, style: Record<string, string> = {}, position: { left: number } | null, isRemove: Boolean) => {
+  const updateDom = (value: boolean, style: Record<string, string> = {}, position: { left: number } | null, isRemove: boolean) => {
     if (isRemove) {
       removePlaceholder();
     } else {
@@ -127,9 +127,6 @@ export default function useAffix(
     }
 
     clearSizeCache();
-    isPlaceholderCreated = false;
-
-
 
     observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
@@ -138,7 +135,7 @@ export default function useAffix(
       const { top, left } = entry.boundingClientRect;
       const windowHeight = window.innerHeight;
       const { height: elHeight, width } = getElementSize();
-      let fixedValue = false, fixedObject, position = null, isRemove = false;
+      let fixedValue = false, fixedObject: Record<string, string> | undefined, position = null, isRemove = false;
       switch (offsetType.value) {
         case 'top':
           if (top <= offsetTop.value && !isFixed.value) {
@@ -189,7 +186,7 @@ export default function useAffix(
       }
       updateDom(fixedValue, fixedObject, position, isRemove)
     }, {
-      root: targetDom === window ? null : targetDom,
+      root: targetDom.value === window ? null : targetDom.value,
       rootMargin: offsetType.value === 'top'
         ? `-${offsetTop.value}px 0px 0px 0px`
         : `0px 0px -${offsetBottom.value}px 0px`,
@@ -224,14 +221,14 @@ export default function useAffix(
    * 防抖处理的 resize 函数
    * 延迟 150ms 执行，避免高频触发
    */
-  const debouncedResize = debounce(handleResize, 150);
+  type ResizeHandler = (ev: UIEvent) => void;
+  const debouncedResize = debounce(handleResize, 150) as ResizeHandler;
 
   watch(
     () => [props.offsetTop, props.offsetBottom, props.target],
     () => {
       initObserver();
-    },
-    { deep: true }
+    }
   );
 
   onMounted(() => {
