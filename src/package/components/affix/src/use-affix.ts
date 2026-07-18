@@ -1,14 +1,10 @@
-import { onBeforeUnmount, onMounted, ref, computed, type Ref, watch } from "vue";
+import { onBeforeUnmount, onMounted, ref, computed, watch } from "vue";
 import type { ExtractPropTypes } from 'vue'
 import { affixProps } from './context'
 import useNmSpace from '../../../hooks/useBem'
 import { debounce } from 'robinson'
+import { type UseAffixReturn } from './type.ts'
 
-export interface UseAffixReturn {
-  styles: Ref<Record<string, string>>
-  isFixed: Ref<boolean>
-  affixRef: Ref<HTMLElement | null>
-}
 
 /**
  * Affix 组件的核心逻辑 Hook
@@ -90,13 +86,13 @@ export default function useAffix(
    */
   const createPlaceholder = () => {
     if (!affixRef.value || isPlaceholderCreated) return;
-    
+
     const { width, height } = getElementSize();
     placeholder = document.createElement('div');
     placeholder.style.width = `${width}px`;
     placeholder.style.height = `${height}px`;
     placeholder.style.visibility = 'hidden';
-    
+
     if (affixRef.value.parentNode) {
       affixRef.value.parentNode.insertBefore(placeholder, affixRef.value);
       isPlaceholderCreated = true;
@@ -113,6 +109,15 @@ export default function useAffix(
       isPlaceholderCreated = false;
     }
   };
+  const updateDom = (value: boolean, style: Record<string, string> = {}, position: { left: number } | null, isRemove: Boolean) => {
+    if (isRemove) {
+      removePlaceholder();
+    } else {
+      createPlaceholder();
+    }
+    setIsFixed(value, style)
+    cachedElPosition = position
+  }
 
   const initObserver = () => {
     if (!affixRef.value) return;
@@ -124,9 +129,7 @@ export default function useAffix(
     clearSizeCache();
     isPlaceholderCreated = false;
 
-    getElementSize();
 
-    let lastScrollTop = 0;
 
     observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
@@ -134,60 +137,61 @@ export default function useAffix(
 
       const { top, left } = entry.boundingClientRect;
       const windowHeight = window.innerHeight;
-      const { height: elHeight } = getElementSize();
-
+      const { height: elHeight, width } = getElementSize();
+      let fixedValue = false, fixedObject, position = null, isRemove = false;
       switch (offsetType.value) {
         case 'top':
           if (top <= offsetTop.value && !isFixed.value) {
-            const { width } = getElementSize();
-            createPlaceholder();
-            setIsFixed(true, { 
+            fixedValue = true;
+            fixedObject = {
               position: 'fixed',
-              top: `${offsetTop.value}px`, 
+              top: `${offsetTop.value}px`,
               left: `${left}px`,
               width: `${width}px`,
               zIndex: 'var(--zindex-affix)'
-            });
-            cachedElPosition = { left };
+            };
+            position = { left }
+            isRemove = false
+
           } else if (top > offsetTop.value && isFixed.value) {
-            removePlaceholder();
-            setIsFixed(false, {});
-            cachedElPosition = null;
+            fixedValue = false;
+            fixedObject = {};
+            position = null
+            isRemove = true
           }
           break;
         case 'bottom':
-          const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
-          lastScrollTop = currentScrollTop;
-
           if (!isFixed.value) {
             if (windowHeight - top - elHeight <= offsetBottom.value) {
-              const { width } = getElementSize();
-              createPlaceholder();
-              setIsFixed(true, { 
+              fixedValue = true;
+              fixedObject = {
                 position: 'fixed',
-                bottom: `${offsetBottom.value}px`, 
+                bottom: `${offsetBottom.value}px`,
                 left: `${left}px`,
                 width: `${width}px`,
                 zIndex: 'var(--zindex-affix)'
-              });
-              cachedElPosition = { left };
+              };
+              position = { left }
+              isRemove = false
             }
           } else {
             if (placeholder) {
               const placeholderTop = placeholder.getBoundingClientRect().top;
               if (windowHeight - placeholderTop - elHeight > offsetBottom.value) {
-                removePlaceholder();
-                setIsFixed(false, {});
-                cachedElPosition = null;
+                fixedValue = false;
+                fixedObject = {};
+                position = null
+                isRemove = true
               }
             }
           }
           break;
       }
+      updateDom(fixedValue, fixedObject, position, isRemove)
     }, {
       root: targetDom === window ? null : targetDom,
-      rootMargin: offsetType.value === 'top' 
-        ? `-${offsetTop.value}px 0px 0px 0px` 
+      rootMargin: offsetType.value === 'top'
+        ? `-${offsetTop.value}px 0px 0px 0px`
         : `0px 0px -${offsetBottom.value}px 0px`,
       threshold: 0
     });
@@ -204,8 +208,8 @@ export default function useAffix(
       clearSizeCache();
       const { width } = getElementSize();
       const { left } = affixRef.value.getBoundingClientRect();
-      
-      if (left !== cachedElPosition?.left || width !== styles.value.width) {
+
+      if (left !== cachedElPosition?.left || width+'px' !== styles.value.width) {
         setIsFixed(true, {
           ...styles.value,
           left: `${left}px`,
