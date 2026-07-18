@@ -10,6 +10,10 @@ export const configProps =buildProps({
     type: Object,
     default:()=>({})
   },
+  tokens:{
+    type: Object,
+    default:()=>({})
+  },
 })
 
 export const nm = useNmSpace('configProvider')

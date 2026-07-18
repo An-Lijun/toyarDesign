@@ -1,18 +1,14 @@
 @use '../tokens/_tokens.scss' as tokens;
 
 @mixin sizeMixin {
-  @for $size from 0 through 5 {
-    --size-#{$size}: #{$size * 4px};
-  }
 
-  $sizeLs: tokens.$toyar-sizes;
-
-  @each $name, $value in $sizeLs {
+  @each $name, $value in tokens.$toyar-sizes {
     --size-#{$name}: #{$value};
   }
-
-  @for $padding from 1 through 20 {
-    --padding-#{$padding}: 1#{$padding}px;
-    --margin-#{$padding}: 1#{$padding}px;
+  @each $name, $value in tokens.$toyar-padding {
+    --padding-#{$name}: #{$value};
+  }
+  @each $name, $value in tokens.$toyar-margin {
+    --margin-#{$name}: #{$value};
   }
 }

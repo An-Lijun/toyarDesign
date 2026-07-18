@@ -72,6 +72,7 @@ import TyColorPicker from './components/color-picker'
 import TySmsCodeInput from './components/smsCodeInput'
 // import TyTrigger from './components/trigger'
 import generateColor, { TyColor } from './color/index.js'
+import { defaultTokens } from './tokens/defaultTokens.js'
 
 
 const install = app => {
@@ -220,6 +221,7 @@ export {
   TyTimePicker,
   TySelectOption,
   TyColorPicker,
-  TySmsCodeInput
+  TySmsCodeInput,
+  defaultTokens
 } //按需引入
 // TyTrigger,

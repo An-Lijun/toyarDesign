@@ -2,14 +2,11 @@
 // 本文件统一引入所有语义样式 mixin，并应用到全局选择器
 // 选择器：:root、.ty-dark、.ty-light
 
-@use  './src/borderColor.scss' as useBorderColor;
-@use  './src/borderWidth.scss' as useBorderWidth;
+@use  './src/border.scss' as useBorder;
+@use  './src/text.scss' as useText;
 @use  './src/fillAndBg.scss' as useFillAndBg;
-@use  './src/fontSize.scss' as useFontSize;
-@use  './src/fontWeight.scss' as useFontWeight;
 @use  './src/other.scss' as useOther;
 @use  './src/size.scss' as useSize;
-@use  './src/textColor.scss' as useTextColor;
 
 // 加载动画关键帧（组件加载状态使用）
 @keyframes load {
@@ -20,12 +17,9 @@
 // 全局应用所有语义样式 mixin
 // 这些 mixin 将生成语义化的 CSS 变量（如 --text-1、--border-color-1 等）
 :root ,.ty-dark,.ty-light{
-  @include useBorderWidth.borderWidthMixin;
-  @include useBorderColor.borderColorMixin;
-  @include useFontSize.fontSizeMixin;
-  @include useFontWeight.fontWeightMixin;
+  @include useBorder.borderMixin;
+  @include useText.textMixin;
   @include useSize.sizeMixin;
   @include useOther.otherMixin;
   @include useFillAndBg.fillAndBgMixin;
-  @include useTextColor.textMixin
 }

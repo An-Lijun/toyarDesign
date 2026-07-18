@@ -1,0 +1,27 @@
+@use '../tokens/_tokens.scss' as tokens;
+
+@mixin borderMixin {
+  // 引入边框层级映射配置
+  
+
+  // 循环生成边框颜色 CSS 变量
+  // 格式：--border-color-{级别}，值为对应的 gray 色阶
+  // --border-color-1: 最浅（分割线、次要边框）
+  // --border-color-2: 较浅（常规边框）
+  // --border-color-3: 中等（强调边框）
+  // --border-color-4: 较深（高亮边框）
+  @each $name, $value in tokens.$toyar-border-levels {
+    --border-color-#{$name}: var(--toyar-gray-#{$value});
+  }
+  /*  ---------------------------------------   边框   --------------------------------------- */
+  /* 边框宽度 1常规 2中 3 粗 */
+  @each $name, $value in tokens.$toyar-border-width {
+    --border-#{$name}: #{$value};
+  }
+  /* 边框圆角 */
+
+  // --border-radius-0: 0px;
+  @each $name, $value in tokens.$borderRadiusList {
+    --border-radius-#{$name}: #{$value};
+  }
+}

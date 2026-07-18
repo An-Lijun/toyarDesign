@@ -3,17 +3,15 @@
 @mixin otherMixin {
   --line-height: 1.5715*1em;
 
-  @for $i from 1 through 9 {
-    --time-#{$i}: 0.#{$i}s;
+  @each $name, $value in tokens.$toyar-time {
+    --time-#{$name}: #{$value};
   }
 
-  $zIndexLs: tokens.$toyar-z-index;
-
-  @each $name, $value in $zIndexLs {
+  @each $name, $value in tokens.$toyar-z-index {
     --zindex-#{$name}: #{$value};
   }
 
-  @for $i from 1 through 9{
-    --opcity-#{$i}: var(--opcity-color-#{$i});
+  @each $name, $value in tokens.$toyar-opcity {
+    --opcity-#{$name}: var(--opcity-color-#{$value});
   }
 }

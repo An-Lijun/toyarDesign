@@ -1,9 +1,6 @@
-// ========== 颜色系统 (Color System) ==========
+// ============================================= 颜色系统 (Color System) =============================================
 // 每个色系包含 10 个色阶，从 1(最浅) 到 10(最深)
 // 色阶用途：1-3 用于背景/悬停，4-6 用于主要元素，7-10 用于深色文本/边框
-
-// 浅色模式颜色定义
-// key 为颜色名称，value 为 10 个色阶的颜色数组
 $toyar-light-colors: (
   "red": (#FFECE8, #FDCDC5, #FBACA3, #F98981, #F76560, #F53F3F, #CB272D, #A1151E, #770813, #4D000A),
   "orangered": (#FFF3E8, #FDDDC3, #FCC59F, #FAAC7B, #F99057, #F77234, #CC5120, #A23511, #771F06, #4D0E00),
@@ -18,10 +15,7 @@ $toyar-light-colors: (
   "purple": (#F5E8FF, #DDBEF6, #C396ED, #A871E3, #8D4EDA, #722ED1, #551DB0, #3C108F, #27066E, #16004D),
   "pinkpurple": (#FFE8FB, #F7BAEF, #F08EE6, #E865DF, #E13EDB, #D91AD9, #B010B6, #8A0993, #650370, #42004D),
   "magenta": (#FFE8F1, #FDC2DB, #FB9DC7, #F979B7, #F754A8, #F5319D, #CB1E83, #A11069, #77064F, #4D0034),
-  "gray": (#F7F8FA, #F2F3F5, #E5E6EB, #C9CDD4, #A9AEB8, #86909C, #6B7785, #4E5969, #272E3B, #1D2129)
-) !default;
-
-// 深色模式颜色定义
+  "gray": (#F7F8FA, #F2F3F5, #E5E6EB, #C9CDD4, #A9AEB8, #86909C, #6B7785, #4E5969, #272E3B, #1D2129)) !default;
 // 与浅色模式对称，5-10 对应浅色的 1-6，实现深色背景下的视觉平衡
 $toyar-dark-colors: (
   "red": (#4D000A, #770611, #A1161F, #CB2E34, #F54E4E, #F76965, #F98D86, #FBB0A7, #FDD1CA, #FFF0EC),
@@ -37,10 +31,8 @@ $toyar-dark-colors: (
   "purple": (#16004D, #27066E, #3E138F, #5A25B0, #7B3DD1, #8E51DA, #A974E3, #C59AED, #DFC2F6, #F7EDFF),
   "pinkpurple": (#42004D, #650370, #8A0D93, #B01BB6, #D92ED9, #E13DDB, #E866DF, #F092E6, #F7C1F0, #FFF2FD),
   "magenta": (#4D0034, #770850, #A1176C, #CB2B88, #F545A6, #F756A9, #F97AB8, #FB9EC8, #FDC3DB, #FFE8F1),
-  "gray": (#17171A, #2E2E30, #484849, #5F5F60, #78787A, #929293, #ABABAC, #C5C5C5, #DFDFDF, #F6F6F6)
-) !default;
+  "gray": (#17171A, #2E2E30, #484849, #5F5F60, #78787A, #929293, #ABABAC, #C5C5C5, #DFDFDF, #F6F6F6)) !default;
 
-// ========== 语义颜色映射 (Semantic Color Map) ==========
 // 将颜色名称映射到语义角色，实现颜色值与语义的解耦
 // 示例：primary 映射到 xblue，修改主色只需更改映射值
 $toyar-theme-color-map: (
@@ -48,21 +40,22 @@ $toyar-theme-color-map: (
   link:('xblue'),
   success:('green'),
   warning:('orange'),
-  danger:('red')
-) !default;
+  danger:('red')) !default;
 
 // 浅色模式语义映射增量覆盖（默认空，可通过 @use ... with 覆盖）
-$toyar-light-theme-color-map: () !default;
+$toyar-light-theme-color-map: (
+  ) !default;
 
 // 深色模式语义映射增量覆盖（默认空，可通过 @use ... with 覆盖）
-$toyar-dark-theme-color-map: () !default;
+$toyar-dark-theme-color-map: (
+  ) !default;
 
 // 自动合并基类映射与增量覆盖
 // 优先级：增量覆盖 > 基类映射
 $toyar-light-theme-color-map: map-merge($toyar-theme-color-map, $toyar-light-theme-color-map);
 $toyar-dark-theme-color-map: map-merge($toyar-theme-color-map, $toyar-dark-theme-color-map);
 
-// ========== 文字层级映射 (Text Levels) ==========
+// ============================================= 文字系统 (Text System) =============================================
 // 定义文字颜色的深浅层级，对应 gray 色系的色阶
 // level 1: 最深（主标题、重要文本）
 // level 2: 次深（正文、常规文本）
@@ -72,102 +65,16 @@ $toyar-text-levels: (
   1:(10),
   2:(8),
   3:(6),
-  4:(4)
-) !default;
+  4:(4)) !default;
 
-// ========== 边框层级映射 (Border Levels) ==========
-// 定义边框颜色的深浅层级，对应 gray 色系的色阶
-// level 1: 最浅（分割线、次要边框）
-// level 2: 较浅（常规边框）
-// level 3: 中等（强调边框）
-// level 4: 较深（高亮边框）
-$toyar-border-levels: (
-  1:(2),
-  2:(3),
-  3:(4),
-  4:(6)
-) !default;
-
-// ========== 阴影系统 (Shadow System) ==========
-// 浅色模式阴影配置
-// 数字越大，阴影越明显
-$toyar-shadow-light: (
-  1:0 0 1px rgba(0, 0, 0, 0.3),
-  2:0 -2px 5px rgba(0, 0, 0, 0.1),
-  3:0 0 10px rgba(0, 0, 0, 0.1),
-  4:0 0 20px rgba(0, 0, 0, 0.1),
-  5:0 4px 10px rgba(0,0,0,.1)
-) !default;
-
-// 深色模式阴影配置（浅色阴影，适应深色背景）
-$toyar-shadow-dark: (
-  1:0 0 1px rgba(255, 255, 255, 0.3),
-  2:0 -2px 5px rgba(255, 255, 255, 0.1),
-  3:0 0 10px rgba(255, 255, 255, 0.1),
-  4:0 0 20px rgba(255, 255, 255, 0.1),
-  5:0 4px 10px rgba(255,255,255,.1)
-) !default;
-
-// ========== 透明度系统 (Opacity System) ==========
-// 浅色模式透明度配置（基于黑色）
-// 数字越大，透明度越高（颜色越深）
-$toyar-opacity-light: (
-  1:rgba(0, 0, 0, 0.1),
-  2:rgba(0, 0, 0, 0.2),
-  3:rgba(0, 0, 0, 0.3),
-  4:rgba(0, 0, 0, 0.4),
-  5:rgba(0, 0, 0, 0.5),
-  6:rgba(0, 0, 0, 0.6),
-  7:rgba(0, 0, 0, 0.7),
-  8:rgba(0, 0, 0, 0.8),
-  9:rgba(0, 0, 0, 0.9)
-) !default;
-
-// 深色模式透明度配置（基于白色）
-$toyar-opacity-dark: (
-  1:rgba(255, 255, 255, 0.1),
-  2:rgba(255, 255, 255, 0.2),
-  3:rgba(255, 255, 255, 0.3),
-  4:rgba(255, 255, 255, 0.4),
-  5:rgba(255, 255, 255, 0.5),
-  6:rgba(255, 255, 255, 0.6),
-  7:rgba(255, 255, 255, 0.7),
-  8:rgba(255, 255, 255, 0.8),
-  9:rgba(255, 255, 255, 0.9)
-) !default;
-
-// ========== 背景色系统 (Background Color System) ==========
-// 浅色模式背景色（5级，从浅到深）
-$toyar-bg-light: (#fff, #fff, #fff, #fff, #fff) !default;
-
-// 深色模式背景色（5级，从浅到深）
-$toyar-bg-dark: (#17171A, #232324, #2a2a2b, #313132, #373739) !default;
-
-// ========== 层级系统 (Z-Index System) ==========
-// 定义组件的层级关系，避免层级冲突
-// key 为层级名称，value 为层级值
-$toyar-z-index: (
-  1:(1),
-  3:(2),
-  5:(3),
-  7:(4),
-  9:(5),
-  50:(6),
-  import:(99)
-) !default;
-
-// ========== 尺寸系统 (Size System) ==========
-// 定义组件的基础尺寸（用于按钮、输入框等）
-$toyar-sizes: (
-  mini:(24px),
-  small:(28px),
-  medium:(32px),
-  large:(36px)
-) !default;
-
-// ========== 字体系统 (Font System) ==========
 // 字体族（优先使用系统字体，保证跨平台兼容性）
-$toyar-font-family: ('PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif) !default;
+$toyar-font-family: (
+  'PingFang SC',
+  'Microsoft YaHei',
+  'Helvetica Neue',
+  Helvetica,
+  Arial,
+  sans-serif) !default;
 
 // 字体大小（用于组件内文字）
 $toyar-font-size: (
@@ -181,10 +88,10 @@ $toyar-font-size: (
   dis-1:(36px),
   dis-2:(48px),
   dis-3:(56px),
-) !default;
+  ) !default;
 
-// 字体粗细（字重）
-$toyar-font-weight: (
+/* 字体粗细(字重) 100~900 + 别名*/
+$fontWeightLs: (
   UltraLight:(1),
   Thin:(2),
   Light:(3),
@@ -194,11 +101,127 @@ $toyar-font-weight: (
   Bold:(7),
   Extrablack:(8),
   BBlack:(9),
-) !default;
+  ) !default;
 
-// ========== 边框系统 (Border System) ==========
+
+// ============================================= 阴影系统 (Shadow System) =============================================
+// 浅色模式阴影配置
+// 数字越大，阴影越明显
+$toyar-shadow-light: (
+  1:0 0 1px rgba(0, 0, 0, 0.3),
+  2:0 -2px 5px rgba(0, 0, 0, 0.1),
+  3:0 0 10px rgba(0, 0, 0, 0.1),
+  4:0 0 20px rgba(0, 0, 0, 0.1),
+  5:0 4px 10px rgba(0, 0, 0, .1)) !default;
+
+// 深色模式阴影配置（浅色阴影，适应深色背景）
+$toyar-shadow-dark: (
+  1:0 0 1px rgba(255, 255, 255, 0.3),
+  2:0 -2px 5px rgba(255, 255, 255, 0.1),
+  3:0 0 10px rgba(255, 255, 255, 0.1),
+  4:0 0 20px rgba(255, 255, 255, 0.1),
+  5:0 4px 10px rgba(255, 255, 255, .1)) !default;
+
+// ============================================= 透明度系统 (Opacity System) =============================================
+// 浅色模式透明度配置（基于黑色）
+// 数字越大，透明度越高（颜色越深）
+$toyar-opacity-light: (
+  1:rgba(0, 0, 0, 0.1),
+  2:rgba(0, 0, 0, 0.2),
+  3:rgba(0, 0, 0, 0.3),
+  4:rgba(0, 0, 0, 0.4),
+  5:rgba(0, 0, 0, 0.5),
+  6:rgba(0, 0, 0, 0.6),
+  7:rgba(0, 0, 0, 0.7),
+  8:rgba(0, 0, 0, 0.8),
+  9:rgba(0, 0, 0, 0.9)) !default;
+
+// 深色模式透明度配置（基于白色）
+$toyar-opacity-dark: (
+  1:rgba(255, 255, 255, 0.1),
+  2:rgba(255, 255, 255, 0.2),
+  3:rgba(255, 255, 255, 0.3),
+  4:rgba(255, 255, 255, 0.4),
+  5:rgba(255, 255, 255, 0.5),
+  6:rgba(255, 255, 255, 0.6),
+  7:rgba(255, 255, 255, 0.7),
+  8:rgba(255, 255, 255, 0.8),
+  9:rgba(255, 255, 255, 0.9)) !default;
+
+$toyar-opcity: (
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9) !default;
+// ============================================= 背景色系统 (Background Color System) =============================================
+// 浅色模式背景色（5级，从浅到深）
+$toyar-bg-light: (
+  #fff,
+  #fff,
+  #fff,
+  #fff,
+  #fff) !default;
+
+// 深色模式背景色（5级，从浅到深）
+$toyar-bg-dark: (
+  #17171A,
+  #232324,
+  #2a2a2b,
+  #313132,
+  #373739) !default;
+
+// ============================================= 层级系统 (Z-Index System) =============================================
+// 定义组件的层级关系，避免层级冲突
+// key 为层级名称，value 为层级值
+$toyar-z-index: (
+  1:(1),
+  3:(2),
+  5:(3),3
+  7:(4),
+  9:(5),
+  50:(6),
+  import:(99)) !default;
+
+// ============================================= 语义化尺寸系统 (Size System) =============================================
+// 定义组件的基础尺寸（用于按钮、输入框等）
+$toyar-sizes: (
+  mini:(24px),
+  small:(28px),
+  medium:(32px),
+  large:(36px)) !default;
+
+// ============================================= 边框系统 (Border System) =============================================
+// 定义边框颜色的深浅层级，对应 gray 色系的色阶
+// level 1: 最浅（分割线、次要边框）
+// level 2: 较浅（常规边框）
+// level 3: 中等（强调边框）
+// level 4: 较深（高亮边框）
+$toyar-border-levels: (
+  1:(2),
+  2:(3),
+  3:(4),
+  4:(6)) !default;
+
+// 边框宽度
+$toyar-border-width: (
+  0: 0px,
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px,
+  6: 6px,
+  ) !default;
+
+
 // 边框圆角
-$toyar-radius: (
+$borderRadiusList: (
   0:(0px),
   2:(2px),
   4:(4px),
@@ -211,13 +234,78 @@ $toyar-radius: (
   18:(18px),
   20:(20px),
   circle:(50%),
-) !default;
+  ) !default;
 
-// 边框宽度
-$toyar-border-width: (
+// ============================================= 布局 (pm System) =============================================
+
+
+$toyar-padding: (
+  0: 0px,
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px,
+  6: 6px,
+  7: 7px,
+  8: 8px,
+  9: 9px,
+  10: 10px,
+  11: 11px,
+  12: 12px,
+  13: 13px,
+  14: 14px,
+  15: 15px,
+  16: 16px,
+  17: 17px,
+  18: 18px,
+  19: 19px,
+  20: 20px,
+  ) !default;
+
+$toyar-margin: (
+  0: 0px,
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px,
+  6: 6px,
+  7: 7px,
+  8: 8px,
+  9: 9px,
+  10: 10px,
+  11: 11px,
+  12: 12px,
+  13: 13px,
+  14: 14px,
+  15: 15px,
+  16: 16px,
+  17: 17px,
+  18: 18px,
+  19: 19px,
+  20: 20px,
+  ) !default;
+
+$toyar-time: (
   0: 0,
-  xs: 0.5px,
-  sm: 1px,
-  md: 2px,
-  lg: 3px
-) !default;
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12,
+  13: 13,
+  14: 14,
+  15: 15,
+  16: 16,
+  17: 17,
+  18: 18,
+  19: 19,
+  20: 20) !default;

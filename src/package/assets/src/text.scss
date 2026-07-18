@@ -1,0 +1,29 @@
+@use '../tokens/_tokens.scss' as tokens;
+
+@mixin textMixin {
+
+
+  // 循环生成文字颜色 CSS 变量
+  // 格式：--text-{级别}，值为对应的 gray 色阶
+  // --text-1: 最深（主标题、重要文本）
+  // --text-2: 次深（正文、常规文本）
+  // --text-3: 中等（辅助文字、次要信息）
+  // --text-4: 最浅（占位符、禁用文字）
+  @each $name, $value in tokens.$toyar-text-levels {
+    --text-#{$name} : var(--toyar-gray-#{$value});
+  }
+
+  /*  ---------------------------------------   字体   --------------------------------------- */
+
+  //  --font-caption : 12px;
+  @each $name, $value in tokens.$toyar-font-size {
+    --font-#{$name} : #{$value};
+  }
+
+  // --font-weight-1 : 100;
+  @each $name, $value in tokens.$fontWeightLs {
+    --font-weight-#{$value} : #{$value}00;
+    --font-weight-#{$name}: #{$value}00;
+  }
+
+}
