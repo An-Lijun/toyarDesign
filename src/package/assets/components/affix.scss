@@ -1,5 +1,5 @@
 .ty-affix {
-    z-index: 1500;
+    z-index: var(--zindex-affix);
     &.is-fixed {
         position: fixed;
     }

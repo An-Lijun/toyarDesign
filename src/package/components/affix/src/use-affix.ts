@@ -1,8 +1,8 @@
 import { onBeforeUnmount, onMounted, ref, computed, type Ref, watch } from "vue";
-// 添加类型定义
 import type { ExtractPropTypes } from 'vue'
 import { affixProps } from './context'
 import useNmSpace from '../../../hooks/useBem'
+import { debounce } from 'robinson'
 
 export interface UseAffixReturn {
   styles: Ref<Record<string, string>>
@@ -10,6 +10,14 @@ export interface UseAffixReturn {
   affixRef: Ref<HTMLElement | null>
 }
 
+/**
+ * Affix 组件的核心逻辑 Hook
+ * 使用 IntersectionObserver 实现元素的固定定位功能
+ * @param props - 组件属性
+ * @param emits - 事件发射器
+ * @param nm - BEM 命名空间函数
+ * @returns {UseAffixReturn} 返回样式、固定状态和元素引用
+ */
 export default function useAffix(
   props: ExtractPropTypes<typeof affixProps>,
   emits: (event: 'fixed-change', value: boolean) => void,
@@ -21,34 +29,44 @@ export default function useAffix(
   const styles = ref<Record<string, string>>({});
   const targetDom = props.target || window;
 
-  // 缓存变量
-  let cachedElRect: { top: number; left: number } | null = null;
   let observer: IntersectionObserver | null = null;
   let placeholder: HTMLElement | null = null;
 
-  // 计算 offset 类型
   const offsetType = computed(() => props.offsetBottom !== undefined && props.offsetBottom >= 0 ? 'bottom' : 'top');
-  const offsetTop = Number(props.offsetTop) || 0;
-  const offsetBottom = Number(props.offsetBottom) || 0;
+  const offsetTop = computed(() => Number(props.offsetTop) || 0);
+  const offsetBottom = computed(() => Number(props.offsetBottom) || 0);
 
-  // 设置固定状态
+  const isStyleEqual = (a: Record<string, string>, b: Record<string, string>): boolean => {
+    if (Object.keys(a).length !== Object.keys(b).length) return false;
+    for (const key in a) {
+      if (a[key] !== b[key]) return false;
+    }
+    return true;
+  };
+
+  /**
+   * 设置元素的固定状态
+   * @param value - 是否固定
+   * @param style - 固定时的样式
+   */
   const setIsFixed = (value: boolean, style: Record<string, string> = {}) => {
     if (isFixed.value !== value) {
       isFixed.value = value;
       emits('fixed-change', value);
     }
-    // 只有当样式发生变化时才更新
-    if (JSON.stringify(styles.value) !== JSON.stringify(style)) {
+    if (!isStyleEqual(styles.value, style)) {
       styles.value = style;
     }
   };
 
-  // 缓存元素尺寸和位置信息
   let cachedElSize: { width: number; height: number } | null = null;
   let cachedElPosition: { left: number } | null = null;
   let isPlaceholderCreated = false;
 
-  // 获取元素尺寸
+  /**
+   * 获取元素尺寸，带缓存机制
+   * @returns {Object} 元素的宽度和高度
+   */
   const getElementSize = () => {
     if (!affixRef.value) return { width: 0, height: 0 };
     if (cachedElSize) return cachedElSize;
@@ -59,12 +77,17 @@ export default function useAffix(
     return cachedElSize;
   };
 
-  // 清除尺寸缓存
+  /**
+   * 清除尺寸缓存
+   */
   const clearSizeCache = () => {
     cachedElSize = null;
   };
 
-  // 创建占位元素，保持布局稳定
+  /**
+   * 创建占位元素，保持布局稳定
+   * 当元素固定时，占位元素会占据原位置，防止页面跳动
+   */
   const createPlaceholder = () => {
     if (!affixRef.value || isPlaceholderCreated) return;
     
@@ -80,7 +103,9 @@ export default function useAffix(
     }
   };
 
-  // 移除占位元素
+  /**
+   * 移除占位元素
+   */
   const removePlaceholder = () => {
     if (placeholder && placeholder.parentNode) {
       placeholder.parentNode.removeChild(placeholder);
@@ -89,23 +114,20 @@ export default function useAffix(
     }
   };
 
-  // 初始化 IntersectionObserver
   const initObserver = () => {
     if (!affixRef.value) return;
 
-    // 清理之前的观察者
     if (observer) {
       observer.disconnect();
     }
 
-    // 清除缓存
     clearSizeCache();
     isPlaceholderCreated = false;
 
-    // 预计算尺寸
     getElementSize();
 
-    // 创建观察器
+    let lastScrollTop = 0;
+
     observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
       if (!entry) return;
@@ -116,62 +138,73 @@ export default function useAffix(
 
       switch (offsetType.value) {
         case 'top':
-          if (top <= offsetTop && !isFixed.value) {
+          if (top <= offsetTop.value && !isFixed.value) {
             const { width } = getElementSize();
             createPlaceholder();
             setIsFixed(true, { 
               position: 'fixed',
-              top: `${offsetTop}px`, 
+              top: `${offsetTop.value}px`, 
               left: `${left}px`,
               width: `${width}px`,
-              zIndex: '1000'
+              zIndex: 'var(--zindex-affix)'
             });
             cachedElPosition = { left };
-          } else if (top > offsetTop && isFixed.value) {
+          } else if (top > offsetTop.value && isFixed.value) {
             removePlaceholder();
             setIsFixed(false, {});
             cachedElPosition = null;
           }
           break;
         case 'bottom':
-          if (windowHeight - top - elHeight <= offsetBottom && !isFixed.value) {
-            const { width } = getElementSize();
-            createPlaceholder();
-            setIsFixed(true, { 
-              position: 'fixed',
-              bottom: `${offsetBottom}px`, 
-              left: `${left}px`,
-              width: `${width}px`,
-              zIndex: '1000'
-            });
-            cachedElPosition = { left };
-          } else if (windowHeight - top - elHeight > offsetBottom && isFixed.value) {
-            removePlaceholder();
-            setIsFixed(false, {});
-            cachedElPosition = null;
+          const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
+          lastScrollTop = currentScrollTop;
+
+          if (!isFixed.value) {
+            if (windowHeight - top - elHeight <= offsetBottom.value) {
+              const { width } = getElementSize();
+              createPlaceholder();
+              setIsFixed(true, { 
+                position: 'fixed',
+                bottom: `${offsetBottom.value}px`, 
+                left: `${left}px`,
+                width: `${width}px`,
+                zIndex: 'var(--zindex-affix)'
+              });
+              cachedElPosition = { left };
+            }
+          } else {
+            if (placeholder) {
+              const placeholderTop = placeholder.getBoundingClientRect().top;
+              if (windowHeight - placeholderTop - elHeight > offsetBottom.value) {
+                removePlaceholder();
+                setIsFixed(false, {});
+                cachedElPosition = null;
+              }
+            }
           }
           break;
       }
     }, {
       root: targetDom === window ? null : targetDom,
       rootMargin: offsetType.value === 'top' 
-        ? `-${offsetTop}px 0px 0px 0px` 
-        : `0px 0px -${offsetBottom}px 0px`,
+        ? `-${offsetTop.value}px 0px 0px 0px` 
+        : `0px 0px -${offsetBottom.value}px 0px`,
       threshold: 0
     });
 
-    // 开始观察
     observer.observe(affixRef.value);
   };
 
-  // 处理窗口大小变化
+  /**
+   * 处理窗口大小变化
+   * 当窗口尺寸改变时，重新计算固定元素的位置和尺寸
+   */
   const handleResize = () => {
     if (isFixed.value && affixRef.value) {
       clearSizeCache();
       const { width } = getElementSize();
       const { left } = affixRef.value.getBoundingClientRect();
       
-      // 只有当位置或尺寸发生变化时才更新样式
       if (left !== cachedElPosition?.left || width !== styles.value.width) {
         setIsFixed(true, {
           ...styles.value,
@@ -183,7 +216,12 @@ export default function useAffix(
     }
   };
 
-  // 监听 props 变化
+  /**
+   * 防抖处理的 resize 函数
+   * 延迟 150ms 执行，避免高频触发
+   */
+  const debouncedResize = debounce(handleResize, 150);
+
   watch(
     () => [props.offsetTop, props.offsetBottom, props.target],
     () => {
@@ -192,10 +230,9 @@ export default function useAffix(
     { deep: true }
   );
 
-  // 生命周期
   onMounted(() => {
     initObserver();
-    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('resize', debouncedResize, { passive: true });
   });
 
   onBeforeUnmount(() => {
@@ -203,7 +240,7 @@ export default function useAffix(
       observer.disconnect();
     }
     removePlaceholder();
-    window.removeEventListener('resize', handleResize);
+    window.removeEventListener('resize', debouncedResize);
   });
 
   return {

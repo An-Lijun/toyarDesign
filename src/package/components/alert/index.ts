@@ -3,7 +3,6 @@ import { createVNode, render, nextTick, h } from 'vue'
 import {is} from 'robinson'
 import dialog from '../dialog/src/dialog.vue'
 import TyButton from '../button/src/button.vue'
-import TyIcon from '../icon/src/icon.vue'
 import { TY_MOOD } from '../../constant/index'
 
 import type { IOption} from './type'
