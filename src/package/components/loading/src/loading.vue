@@ -12,31 +12,3 @@ import {lodProps,nm} from './context'
 const props = defineProps(lodProps)
 
 </script>
-<style lang="scss" scoped>
-@keyframes load{
-  0%{
-    transform: rotate(0deg);
-  }
-  100%{
-    transform: rotate(360deg);
-  }
-}
-.ty-loading{
-  z-index: 99;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: var(--opcity-5);
-  position: absolute;
-  &__box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: load 2s linear infinite ;
-  }
-  &.is-fixed{
-    position: fixed;
-  }
-}
-</style>

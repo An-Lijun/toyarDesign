@@ -21,15 +21,3 @@ const onClick = () => {
   router.push(props.to)
 }
 </script>
-<style lang="scss" scoped>
-.ty-breadcrumb-item {
-  color: var(--text-1);
-  .is-to{
-    font-weight: bold;
-    &:hover{
-      cursor: pointer;
-      color: var(--primary-6);
-    }
-  }
-}
-</style>

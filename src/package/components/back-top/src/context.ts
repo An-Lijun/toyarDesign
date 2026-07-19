@@ -1,7 +1,7 @@
 import buildProps from '../../../utils/buildProps'
 import useNmSpace from '../../../hooks/useBem'
 
-export const backTopProps = buildProps({
+export const staticProps = {
   vHeight: {
     type: Number,
     default: 200,
@@ -22,7 +22,16 @@ export const backTopProps = buildProps({
     type: Boolean,
     default: false, 
   }
-})
-// "circle" //square
+}
 
-export  const nm = useNmSpace('backTop')
+export const backTopProps = buildProps(staticProps)
+
+export const nm = useNmSpace('backTop')
+
+export interface BackTopEmits {
+  'click': () => boolean
+}
+
+export const backTopEmits: BackTopEmits = {
+  'click': () => true
+}

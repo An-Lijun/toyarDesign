@@ -16,10 +16,3 @@ onMounted(() => {
   setItem()
 })
 </script>
-<style lang="scss" scoped>
-.ty-carousel-item{
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-}
-</style>

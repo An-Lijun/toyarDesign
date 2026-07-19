@@ -23,8 +23,3 @@ defineProps({
 })
 const nm = useNmSpace('header')
 </script>
-<style lang="scss" scoped>
-.ty-header {
-  width: 100%;
-}
-</style>

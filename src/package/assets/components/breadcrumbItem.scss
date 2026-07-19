@@ -1,0 +1,10 @@
+.ty-breadcrumb-item {
+  color: var(--text-1);
+  .is-to{
+    font-weight: bold;
+    &:hover{
+      cursor: pointer;
+      color: var(--primary-6);
+    }
+  }
+}

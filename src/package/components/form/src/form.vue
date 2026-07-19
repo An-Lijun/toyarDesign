@@ -122,16 +122,3 @@ defineExpose({
 });
 </script>
 
-<style lang="scss" scoped>
-.is-vertical{
-  :deep(.ty-form-item){
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    .ty-form-item__label{
-      text-align: left;
-      margin-bottom: 8px;
-    }
-  }
-}
-</style>

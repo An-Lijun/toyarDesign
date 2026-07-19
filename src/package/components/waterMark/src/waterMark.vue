@@ -145,19 +145,4 @@ onBeforeUnmount(() => {
   }
 })
 </script>
-<style lang="scss" scoped>
-.ty-waterMark {
-  position: relative;
-  height: 100%;
 
-  &__mark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 999;
-  }
-}
-</style>

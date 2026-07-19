@@ -1,0 +1,107 @@
+.ty-check-box {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  color: var(--text-1);
+
+  &__icon {
+    display: none;
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__out {
+    border-radius: var(--border-radius-circle);
+    margin-right: 10px;
+    transition: background-color 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--fill-3);
+    }
+  }
+
+  &__input {
+    appearance: none;
+    border-radius: var(--border-radius-4);
+    // background-color: var(--fill-2);
+    border: 3px solid var(--fill-2);
+    text-align: center;
+    margin: unset;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  // ------------------------  checkBox尺寸样式  ------------------------
+  $inputSize: (
+    mini:5,
+    small:8,
+    medium:11,
+    large:14
+  );
+
+&__container {
+  margin-right: 10px;
+}
+
+@mixin addCheckBoxSize($name,$value) {
+  &--#{$name} {
+    .ty-check-box__input {
+      height: var(--size-#{$name});
+      width: var(--size-#{$name});
+      line-height: var(--size-#{$name});
+      font-size: calc(var(--size-#{$name}) / 2);
+    }
+    padding: #{$value}px;
+  }
+}
+
+@each $name,$value in $inputSize {
+  @include addCheckBoxSize($name,$value);
+}
+
+input:checked+.ty-check-box__out {
+  background-color: unset !important;
+
+  .ty-check-box__input {
+    background-color: var(--primary-6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: var(--primary-6);
+
+    .ty-check-box__icon {
+      display: inline-flex;
+      position: absolute;
+    }
+
+  }
+}
+
+&.is-disabled {
+  color: var(--text-4);
+
+  .ty-check-box__input {
+    border-color: var(--fill-3);
+    background-color: var(--fill-2);
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  .ty-check-box__out {
+    background: unset;
+
+  }
+}
+}

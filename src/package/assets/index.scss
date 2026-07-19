@@ -1,8 +1,56 @@
 @use './base.scss';
 @use './dark.scss';
 @use './light.scss';
+
 @use './components/button.scss';
 @use './components/affix.scss';
+@use './components/avatar.scss';
+@use './components/backTop.scss';
+@use './components/buttonGroup.scss';
+@use './components/card.scss';
+@use './components/carousel.scss';
+@use './components/carouselItem.scss';
+@use './components/calendar.scss';
+@use './components/caution.scss';
+@use './components/checkBox.scss';
+@use './components/circle.scss';
+@use './components/col.scss';
+@use './components/collapse.scss';
+@use './components/collapseItem.scss';
+@use './components/waterMark.scss';
+@use './components/smsCodeInput.scss';
+@use './components/slider.scss';
+@use './components/skeleton.scss';
+@use './components/skeletonItem.scss';
+@use './components/switch.scss';
+@use './components/empty.scss';
+@use './components/transfer.scss';
+@use './components/divider.scss';
+@use './components/dialog.scss';
+@use './components/drawer.scss';
+@use './components/descriptions.scss';
+@use './components/form.scss';
+@use './components/formItem.scss';
+@use './components/image.scss';
+@use './components/input.scss';
+@use './components/list.scss';
+@use './components/listItem.scss';
+@use './components/password.scss';
+@use './components/loading.scss';
+@use './components/logConsole.scss';
+@use './components/breadcrumb.scss';
+@use './components/breadcrumbItem.scss';
+@use './components/badge.scss';
+@use './components/colorPicker.scss';
+@use './components/datePicker.scss';
+@use './components/containerCintainer.scss';
+@use './components/containerFooter.scss';
+@use './components/containerHeader.scss';
+@use './components/containerMain.scss';
+
+
+
+
 
 body{
   color: var(--toyar-gray-10);

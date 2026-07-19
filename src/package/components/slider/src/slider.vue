@@ -61,30 +61,4 @@ onMounted(()=>{
 })
 
 </script>
-<style lang="scss" scoped>
-.ty-slider{
-  position: relative;
-  margin: 5px 0;
-  border-radius: 16px;
-  background-color: var(--fill-4);
-  &__boll{
-    background-color: #fff;
-    border:3px solid var(--primary-6);
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 50%;
-    transform: translate(-50%,-25%);
-    transform: all .5s;
 
-    &:hover{
-      cursor: pointer;
-      border-width: 5px;
-    }
-    &:active{
-      cursor: move;
-    }
-  }
-}
-</style>

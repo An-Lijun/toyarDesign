@@ -19,14 +19,3 @@ defineOptions({
 const nm =useNmSpace('container')
 
 </script>
-<style lang="scss" scoped>
-  .ty-container{
-    display: flex;
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    &.is-flexColumn{
-      flex-direction: column;
-    }
-  }
-</style>

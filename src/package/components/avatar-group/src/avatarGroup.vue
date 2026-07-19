@@ -17,5 +17,5 @@ defineOptions({ name: 'TyAvatarGroup' })
 const props = defineProps(avatarGroupProps)
 
 // 逻辑处理
-const { avatars } = useAvatarGroup(props, nm)
+const { avatars } = useAvatarGroup(props)
 </script>

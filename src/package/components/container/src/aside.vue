@@ -21,8 +21,4 @@ defineOptions({
 const nm =useNmSpace('aside')
 
 </script>
-<style lang="scss" scoped>
-  .ty-aside{
-    height: 100%;
-  }
-</style>
+

@@ -24,8 +24,3 @@ defineOptions({
 const nm =useNmSpace('footer')
 
 </script>
-<style lang="scss" scoped>
-  .ty-footer{
-    width: 100%;
-  }
-</style>

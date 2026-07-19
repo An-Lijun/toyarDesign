@@ -1,0 +1,32 @@
+.ty-smsCodeInput {
+  display: flex;
+  align-items: center;
+
+  &__item {
+    width: 50px;
+    height: 50px;
+    border: var(--border-1) solid var(--border-color-3);
+    border-radius: var(--border-radius-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--size-mini);
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+
+    &.is-focus {
+      border-color: var(--primary-7);
+      box-shadow: var(--shadow-2);
+    }
+  }
+
+  &__hiddenInput {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    z-index: -1;
+  }
+
+}

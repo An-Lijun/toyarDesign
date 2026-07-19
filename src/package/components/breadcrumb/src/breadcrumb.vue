@@ -16,8 +16,4 @@ defineOptions({
   name: 'TyBreadcrumb'
 })
 </script>
-<style lang="scss" scoped>
-.ty-breadcrumb {
-  padding: 24px;
-}
-</style>
+

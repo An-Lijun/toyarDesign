@@ -1,7 +1,7 @@
 import buildProps from '../../../utils/buildProps'
 import useNmSpace from '../../../hooks/useBem'
 
-export const backTopProps = buildProps({
+export const staticProps = {
   width:{
     type:Number
   },
@@ -14,7 +14,16 @@ export const backTopProps = buildProps({
     type:Boolean,
     default:true
   },
-})
-// "circle" //square
+}
 
-export  const nm = useNmSpace('avatar')
+export const avatarProps = buildProps(staticProps)
+
+export const nm = useNmSpace('avatar')
+
+export interface AvatarEmits {
+  'trigger': () => boolean
+}
+
+export const avatarEmits: AvatarEmits = {
+  'trigger': () => true
+}

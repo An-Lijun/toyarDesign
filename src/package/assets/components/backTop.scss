@@ -1,0 +1,19 @@
+.ty-backTop {
+  position: absolute ;
+  z-index: 97;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-6);
+  color: #fff;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  border-radius: 5px;
+
+  &.is-circle {
+    border-radius: var(--border-radius-circle);
+  }
+}

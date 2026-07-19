@@ -1,0 +1,41 @@
+.ty-avatar {
+  min-width: 30px;
+  min-height: 30px;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: var(--toyar-gray-4);
+
+  &__text {
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  &.is-square {
+    border-radius: var(--border-radius-4);
+  }
+
+  &.is-circle {
+    border-radius: var(--border-radius-circle);
+  }
+
+  &__trigger {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 1px;
+    background-color: var(--toyar-gray-3);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(13%, 13%);
+    &:hover {
+      cursor: pointer;
+      background-color: var(--toyar-gray-4);
+    }
+
+  }
+}

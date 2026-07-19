@@ -50,19 +50,3 @@ watch(() => props.percent, () => {
 
 
 </script>
-<style lang="scss" scoped>
-.ty-circle {
-  display: inline-block;
-  position: relative;
-
-  &__inner {
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 1;
-  }
-}
-</style>

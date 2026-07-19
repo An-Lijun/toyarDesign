@@ -13,22 +13,3 @@ defineOptions({
 })
 defineProps(imgProps)
 </script>
-<style lang="scss" scoped>
-.ty-image {
-  display: inline-flex;
-
-  &--square {
-    border-radius: 4px;
-    &>img{
-      border-radius: 4px;
-    }
-  }
-
-  &--circle {
-    border-radius: 50%;
-    &>img{
-      border-radius: 50%;
-    }
-  }
-}
-</style>

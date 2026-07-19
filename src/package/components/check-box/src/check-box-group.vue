@@ -34,5 +34,3 @@ provide(checkBoxGroup, {
   }
 })
 </script>
-<style lang="scss" scoped>
-</style>

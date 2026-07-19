@@ -1,11 +1,15 @@
-import { computed, useSlots, type ComputedRef, h } from 'vue'
+import { computed, useSlots, type ComputedRef, h, type VNode } from 'vue'
+import type { ExtractPropTypes } from 'vue'
 import TyAvatar from '../../avatar'
+import { avatarGroupProps } from './context'
 
 export interface UseAvatarGroupReturn {
-  avatars: ComputedRef<Array<any>>
+  avatars: ComputedRef<VNode[]>
 }
 
-export default function useAvatarGroup(props, nm): UseAvatarGroupReturn {
+export default function useAvatarGroup(
+  props: ExtractPropTypes<typeof avatarGroupProps>
+): UseAvatarGroupReturn {
   const slots = useSlots()
 
   const avatars = computed(() => {
@@ -15,7 +19,7 @@ export default function useAvatarGroup(props, nm): UseAvatarGroupReturn {
       return []
     }
 
-    let avatarsList = []
+    let avatarsList: VNode[] = []
     
     // 处理插槽中的每个头像
     for (let i = 0; i < defaultSlot.length; i++) {
@@ -23,7 +27,7 @@ export default function useAvatarGroup(props, nm): UseAvatarGroupReturn {
       const zIndex = defaultSlot.length - i
       
       // 克隆 VNode 并添加样式
-      const clonedVNode = h(item.type, {
+      const clonedVNode = h(item.type as VNode, {
         ...item.props,
         style: {
           ...item.props?.style,
@@ -31,7 +35,7 @@ export default function useAvatarGroup(props, nm): UseAvatarGroupReturn {
           marginLeft: `-${props.offset}px`,
           border: '2px solid var(--color-bg-1)',
         }
-      }, item.children)
+      }, item.children as VNode[])
       
       avatarsList.push(clonedVNode)
     }

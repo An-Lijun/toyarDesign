@@ -1,0 +1,61 @@
+.ty-transfer {
+  display: inline-flex;
+  align-items: center;
+  &__left,
+  &__right {
+    min-height: 250px;
+    min-width: 180px;
+    border: 1px solid var(--border-color-2);
+    box-sizing: border-box;
+    header {
+      height: 30px;
+      line-height: 30px;
+      padding: 0 5px;
+      background-color: var(--fill-2);
+    }
+    .ty-transfer__item {
+      height: 30px;
+      line-height: 30px;
+      padding: 0 5px;
+    }
+  }
+  &__center {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    span {
+      font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background-color: var(--fill-2);
+      color: var(--text-4);
+      margin: 5px 0;
+
+      &.is-rightDisabled{
+        background-color: var(--fill-2);
+        color:var(--toyar-gray-10);
+
+        &:hover {
+        cursor: pointer;
+      }
+      }
+      &.is-leftDisabled{
+        background-color: var(--fill-2);
+        color:var(--toyar-gray-10);
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  :deep(.ty-check-box) {
+    .ty-check-box__input {
+      border-width: 1px;
+    }
+  }
+}

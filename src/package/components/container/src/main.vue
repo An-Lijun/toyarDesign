@@ -11,10 +11,3 @@ defineOptions({
 const nm = useNmSpace('main')
 
 </script>
-<style lang="scss" scoped>
-.ty-main{
-  flex: 1;
-  height: 100%;
-
-}
-</style>
