@@ -295,7 +295,7 @@ defineExpose({
     width: 12px;
     height: 100%;
     z-index: 15;
-    background-color: var(--opcity-color-4);
+    background-color: var(--opacity-color-4);
     opacity: 0;
     visibility: hidden;
     transition: opacity .2s ease, visibility .2s ease;
@@ -327,7 +327,7 @@ defineExpose({
     height: 12px;
     width: calc(100% - 12px);
     z-index: 15;
-    background-color: var(--opcity-color-4);
+    background-color: var(--opacity-color-4);
     opacity: 0;
     visibility: hidden;
     transition: opacity .2s ease, visibility .2s ease;

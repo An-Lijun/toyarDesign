@@ -1,0 +1,5 @@
+@mixin themeContainer($child) {
+  [toyar-theme="#{$child}"] {
+      @content; // 接收内部样式代码块
+  }
+}

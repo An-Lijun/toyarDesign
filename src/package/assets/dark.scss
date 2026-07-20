@@ -30,6 +30,7 @@ html[toyar-theme='dark'],.ty-dark {
   @each $name, $value in $theme-map {
     @for $i from 1 through 7 {
       --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
+      --#{$name}-rs-#{$i}: var(--toyar-#{$value}-rs-#{$i});
     }
   }
 
@@ -48,10 +49,10 @@ html[toyar-theme='dark'],.ty-dark {
   }
 
   // 5. 生成透明度 CSS 变量
-  // 格式：--opcity-color-{级别}
+  // 格式：--opacity-color-{级别}
   // 深色模式基于白色计算透明度
   @each $i, $opacity in $opacity-list {
-    --opcity-color-#{$i}: #{$opacity};
+    --opacity-color-#{$i}: #{$opacity};
   }
 
   // 6. 基础颜色常量（适配深色背景）

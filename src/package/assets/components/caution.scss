@@ -1,19 +1,60 @@
+@use '../util/themeContainer.scss' as util;
+
 .ty-caution {
   padding: var(--padding-4) var(--padding-6);
-  border-radius: var(--border-radius-4);
+  border-radius: var(--border-radius-2);
   display: flex;
   align-items: center;
-  &__content{
+
+  &__content {
     width: 100%;
   }
+
   &__title {
     color: var(--text-1);
     font-weight: 500;
     font-size: 16px;
   }
+
   &__subTitle {
     color: var(--text-2);
     font-size: 14px;
     margin-top: 10px;
+  }
+
+  &--info {
+    background: var(--primary-1);
+  }
+
+  &--success {
+    background: var(--success-1);
+  }
+
+  &--warning {
+    background: var(--warning-1);
+  }
+
+  &--error {
+    background: var(--danger-1);
+  }
+}
+
+@include util.themeContainer("dark") {
+  .ty-caution {
+    &--info {
+      background: rgba(var(--primary-rs-6), 0.2);
+    }
+
+    &--success {
+      background: rgba(var(--success-rs-6), 0.2);
+    }
+
+    &--warning {
+      background: rgba(var(--warning-rs-6), 0.2);
+    }
+
+    &--error {
+      background: rgba(var(--danger-rs-6), 0.2);
+    }
   }
 }

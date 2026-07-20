@@ -86,6 +86,10 @@ const itemClick = (item) => {
 
   &__left,
   &__right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
     &:hover {
       cursor: pointer;
       --toyar-gray-10: var(--primary-6);

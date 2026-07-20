@@ -11,7 +11,7 @@
     --zindex-#{$name}: #{$value};
   }
 
-  @each $name, $value in tokens.$toyar-opcity {
-    --opcity-#{$name}: var(--opcity-color-#{$value});
+  @each $name, $value in tokens.$toyar-opacity {
+    --opacity-#{$name}: var(--opacity-color-#{$value});
   }
 }

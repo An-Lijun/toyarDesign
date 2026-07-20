@@ -2,7 +2,7 @@
   <div :class="nm.b()">
     <div :class="nm.e('inner')">
       <slot name="icon">
-        <TyiInbox2Line/>
+        <TyiInbox2Line :size="size"  />
       </slot>
       <span>
         {{ title }}

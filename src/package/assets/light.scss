@@ -44,9 +44,9 @@ html[toyar-theme='light'],.ty-light {
   }
 
   // 5. 生成透明度 CSS 变量
-  // 格式：--opcity-color-{级别}
+  // 格式：--opacity-color-{级别}
   @each $i, $opacity in $opacity-list {
-    --opcity-color-#{$i}: #{$opacity};
+    --opacity-color-#{$i}: #{$opacity};
   }
 
   // 6. 基础颜色常量
