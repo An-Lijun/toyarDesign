@@ -32,7 +32,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "robinson": "^1.0.22",
-    "toyaricon": "^0.0.6",
+    "toyaricon": "^0.0.9",
     "vue": "^3.4.31",
     "xss": "^1.0.15"
   },

@@ -4,3 +4,4 @@ allowBuilds:
   vue-demi: set this to true or false
 minimumReleaseAgeExclude:
   - robinson@1.0.22
+  - toyaricon@0.0.9

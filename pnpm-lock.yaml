@@ -15,8 +15,8 @@ importers:
         specifier: ^1.0.22
         version: 1.0.22
       toyaricon:
-        specifier: ^0.0.6
-        version: 0.0.6(typescript@5.0.2)(vite@6.3.3(@types/node@20.12.7)(sass@1.87.0))
+        specifier: ^0.0.9
+        version: 0.0.9(typescript@5.0.2)(vite@6.3.3(@types/node@20.12.7)(sass@1.87.0))
       vue:
         specifier: ^3.4.31
         version: 3.4.31(typescript@5.0.2)
@@ -2027,8 +2027,8 @@ packages:
     resolution: {integrity: sha512-Loo5UUvLD9ScZ6jh8beX1T6sO1w2/MpCRpEP7V280GKMVUQ0Jzar2U3UJPsrdbziLEMMhu3Ujnq//rhiFuIeag==}
     engines: {node: '>=6'}
 
-  toyaricon@0.0.6:
-    resolution: {integrity: sha512-Xp8T+zd5tu7YXxSDDTnCR62QMfDmtXM8Tog4Cd4yHMOPF1hec8dmaNKv90j4oD3VgBfnZ5rjvLu+Wo3xwN++Jw==}
+  toyaricon@0.0.9:
+    resolution: {integrity: sha512-MosSpy7qKtIDagYF8g4LW5BbZ51dA6PrMt2jVBtTTJwN+XIvUV6ErTH/zee7l2REE6JZoUlU9OziicXyzWYTDA==}
 
   tr46@3.0.0:
     resolution: {integrity: sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==}
@@ -4208,7 +4208,7 @@ snapshots:
       universalify: 0.2.0
       url-parse: 1.5.10
 
-  toyaricon@0.0.6(typescript@5.0.2)(vite@6.3.3(@types/node@20.12.7)(sass@1.87.0)):
+  toyaricon@0.0.9(typescript@5.0.2)(vite@6.3.3(@types/node@20.12.7)(sass@1.87.0)):
     dependencies:
       sass: 1.87.0
       vite-plugin-style-inject: 0.0.1(vite@6.3.3(@types/node@20.12.7)(sass@1.87.0))
