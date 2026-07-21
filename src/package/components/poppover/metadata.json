@@ -1,0 +1,15 @@
+{
+  "id": "poppover",
+  "name": "TyPoppover",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "content",
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

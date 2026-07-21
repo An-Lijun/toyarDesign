@@ -1,0 +1,16 @@
+{
+  "id": "dialog",
+  "name": "TyDialog",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "title",
+    "default",
+    "footer"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

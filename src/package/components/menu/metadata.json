@@ -1,0 +1,14 @@
+{
+  "id": "menu",
+  "name": "TyMenu",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "header"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

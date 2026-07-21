@@ -1,0 +1,45 @@
+{
+  "id": "avatar",
+  "name": "TyAvatar",
+  "category": "unknown",
+  "description": "",
+  "props": {
+    "width": {
+      "type": "number",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "shape": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": "",
+      "values": [
+        "circle",
+        "square"
+      ]
+    },
+    "autoSize": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": "",
+      "values": []
+    }
+  },
+  "emits": {
+    "trigger": {
+      "params": [],
+      "description": ""
+    }
+  },
+  "slots": [
+    "default",
+    "trigger"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

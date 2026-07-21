@@ -1,0 +1,14 @@
+{
+  "id": "watermark",
+  "name": "TyWaterMark",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

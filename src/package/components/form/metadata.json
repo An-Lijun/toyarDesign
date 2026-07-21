@@ -1,0 +1,14 @@
+{
+  "id": "form",
+  "name": "TyForm",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

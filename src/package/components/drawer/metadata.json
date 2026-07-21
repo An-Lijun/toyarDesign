@@ -1,0 +1,17 @@
+{
+  "id": "drawer",
+  "name": "TyDrawer",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "handleBar",
+    "header",
+    "default",
+    "footer"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

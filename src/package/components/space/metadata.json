@@ -1,0 +1,12 @@
+{
+  "id": "space",
+  "name": "TySpace",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

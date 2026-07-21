@@ -1,0 +1,12 @@
+{
+  "id": "smscodeinput",
+  "name": "TySmsCodeInput",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

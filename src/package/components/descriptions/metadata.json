@@ -1,0 +1,12 @@
+{
+  "id": "descriptions",
+  "name": "TyDescriptions",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

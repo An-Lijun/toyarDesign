@@ -1,0 +1,14 @@
+{
+  "id": "select",
+  "name": "TySelect",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

@@ -1,0 +1,14 @@
+{
+  "id": "logconsole",
+  "name": "TyLogConsole",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "footer"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

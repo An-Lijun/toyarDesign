@@ -1,0 +1,17 @@
+{
+  "id": "input",
+  "name": "TyInput",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "outPre",
+    "innerPre",
+    "innerAft",
+    "outAft"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

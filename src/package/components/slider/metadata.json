@@ -1,0 +1,12 @@
+{
+  "id": "slider",
+  "name": "TySlider",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

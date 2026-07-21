@@ -1,0 +1,15 @@
+{
+  "id": "card",
+  "name": "TyCard",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "header",
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

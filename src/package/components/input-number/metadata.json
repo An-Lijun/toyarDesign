@@ -1,0 +1,12 @@
+{
+  "id": "input-number",
+  "name": "TyInputNumber",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

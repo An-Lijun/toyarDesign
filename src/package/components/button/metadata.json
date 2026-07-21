@@ -1,0 +1,101 @@
+{
+  "id": "button",
+  "name": "TyButton",
+  "category": "unknown",
+  "description": "",
+  "props": {
+    "state": {
+      "type": "string",
+      "default": "primary",
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "type": {
+      "type": "string",
+      "default": "normal",
+      "required": false,
+      "description": "",
+      "values": [
+        "normal",
+        "secondary",
+        "outline",
+        "dashed",
+        "text",
+        "link"
+      ]
+    },
+    "block": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "size": {
+      "type": "string",
+      "default": "small",
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "html-type": {
+      "type": "string",
+      "default": "button",
+      "required": false,
+      "description": "",
+      "values": [
+        "button",
+        "submit",
+        "reset"
+      ]
+    },
+    "shape": {
+      "type": "string",
+      "default": "square",
+      "required": false,
+      "description": "",
+      "values": [
+        "square",
+        "round",
+        "circle"
+      ]
+    },
+    "loading": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "tag": {
+      "type": "string",
+      "default": "button",
+      "required": false,
+      "description": "",
+      "values": []
+    }
+  },
+  "emits": {
+    "click": {
+      "params": [
+        "event: MouseEvent"
+      ],
+      "description": ""
+    }
+  },
+  "slots": [
+    "loading",
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

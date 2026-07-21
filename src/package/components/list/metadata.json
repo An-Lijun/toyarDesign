@@ -1,0 +1,15 @@
+{
+  "id": "list",
+  "name": "TyList",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "header",
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

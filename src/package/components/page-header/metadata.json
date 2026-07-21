@@ -1,0 +1,12 @@
+{
+  "id": "page-header",
+  "name": "TyPage-header",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

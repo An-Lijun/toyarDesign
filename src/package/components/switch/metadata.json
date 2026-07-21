@@ -1,0 +1,12 @@
+{
+  "id": "switch",
+  "name": "TySwitch",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

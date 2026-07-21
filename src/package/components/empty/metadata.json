@@ -1,0 +1,14 @@
+{
+  "id": "empty",
+  "name": "TyEmpty",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "icon"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

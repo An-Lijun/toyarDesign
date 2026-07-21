@@ -1,0 +1,12 @@
+{
+  "id": "image",
+  "name": "TyImage",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

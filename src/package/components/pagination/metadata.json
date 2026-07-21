@@ -1,0 +1,14 @@
+{
+  "id": "pagination",
+  "name": "TyPagination",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "total"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

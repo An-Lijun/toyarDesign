@@ -1,0 +1,14 @@
+{
+  "id": "breadcrumb",
+  "name": "TyBreadcrumb",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

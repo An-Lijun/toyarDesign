@@ -1,0 +1,12 @@
+{
+  "id": "input-password",
+  "name": "TyInputPassword",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

@@ -1,0 +1,12 @@
+{
+  "id": "rate",
+  "name": "TyRate",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

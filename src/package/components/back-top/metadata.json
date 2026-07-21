@@ -1,0 +1,55 @@
+{
+  "id": "back-top",
+  "name": "TyBackTop",
+  "category": "unknown",
+  "description": "",
+  "props": {
+    "vHeight": {
+      "type": "number",
+      "default": 200,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "right": {
+      "type": "number",
+      "default": 40,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "bottom": {
+      "type": "number",
+      "default": 40,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "target": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "circle": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": "",
+      "values": []
+    }
+  },
+  "emits": {
+    "click": {
+      "params": [],
+      "description": ""
+    }
+  },
+  "slots": [
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

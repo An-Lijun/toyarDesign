@@ -1,0 +1,50 @@
+{
+  "id": "affix",
+  "name": "TyAffix",
+  "category": "unknown",
+  "description": "",
+  "props": {
+    "tag": {
+      "type": "string",
+      "default": "div",
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "offsetTop": {
+      "type": "number",
+      "default": 0,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "offsetBottom": {
+      "type": "number",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": []
+    },
+    "target": {
+      "type": "HTMLElement",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": []
+    }
+  },
+  "emits": {
+    "fixed-change": {
+      "params": [
+        "value: boolean"
+      ],
+      "description": ""
+    }
+  },
+  "slots": [
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

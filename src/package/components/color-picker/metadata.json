@@ -1,0 +1,12 @@
+{
+  "id": "color-picker",
+  "name": "TyColor-picker",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

@@ -1,0 +1,15 @@
+{
+  "id": "message",
+  "name": "TyMessage",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "icon",
+    "close"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

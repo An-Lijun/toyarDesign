@@ -1,0 +1,12 @@
+{
+  "id": "notification",
+  "name": "TyNotification",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

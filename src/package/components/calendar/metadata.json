@@ -1,0 +1,14 @@
+{
+  "id": "calendar",
+  "name": "TyCalendar",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "controller"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

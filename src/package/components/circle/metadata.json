@@ -1,0 +1,14 @@
+{
+  "id": "circle",
+  "name": "TyCircle",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "default"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

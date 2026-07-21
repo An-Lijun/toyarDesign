@@ -1,0 +1,15 @@
+{
+  "id": "badge",
+  "name": "TyBadge",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "default",
+    "icon"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

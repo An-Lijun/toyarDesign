@@ -1,0 +1,12 @@
+{
+  "id": "alert",
+  "name": "TyAlert",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

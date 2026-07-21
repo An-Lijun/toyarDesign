@@ -1,0 +1,12 @@
+{
+  "id": "transfer",
+  "name": "TyTransfer",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

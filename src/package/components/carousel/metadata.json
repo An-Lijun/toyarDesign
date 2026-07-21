@@ -1,0 +1,15 @@
+{
+  "id": "carousel",
+  "name": "TyCarousel",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [
+    "default",
+    "indicator"
+  ],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

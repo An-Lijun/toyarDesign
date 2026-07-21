@@ -1,0 +1,12 @@
+{
+  "id": "time-picker",
+  "name": "TyTime-picker",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

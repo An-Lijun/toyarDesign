@@ -1,0 +1,12 @@
+{
+  "id": "result",
+  "name": "TyResult",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}

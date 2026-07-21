@@ -1,0 +1,12 @@
+{
+  "id": "date-picker",
+  "name": "TyDate-picker",
+  "category": "unknown",
+  "description": "",
+  "props": {},
+  "emits": {},
+  "slots": [],
+  "examples": [],
+  "capabilities": [],
+  "useCases": []
+}
