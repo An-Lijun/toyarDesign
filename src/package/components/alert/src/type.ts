@@ -1,3 +1,5 @@
+import type { TyiIconComponent } from 'toyaricon'
+
 export interface IOption {
   title: string
   type: string
@@ -11,4 +13,4 @@ export interface IOption {
   },
   isUnderLine: boolean,
 }
-export type strObj = { [key: string]: string }
+export type IconMap = { [key: string]: TyiIconComponent }

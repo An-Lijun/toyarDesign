@@ -23,10 +23,15 @@
         <TyiArrowDownCircleFill icon="ty-arrow-down-circle-fill" color="#fff"></TyiArrowDownCircleFill>
       </template>
     </TyBadge>
+    <hr>
+    <UseBadge class="mg" :text="1" v-for=" item in ['primary', 'success', 'warning', 'danger']" :status="item">
+      <TyButton >useBadge</TyButton>
+    </UseBadge>
   </div>
 </template>
 <script setup>
 import {TyiArrowDownCircleFill} from 'toyaricon'
+import UseBadge from './useBadge.vue'
 </script>
 <style>
 .mg{

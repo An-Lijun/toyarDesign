@@ -18,13 +18,8 @@ const typeMap = {
   Element: 'HTMLElement',
 }
 
-function parseStaticPropsFromSource(sourceCode) {
+function parsePropsObject(propsContent) {
   const result = {}
-  const staticPropsMatch = sourceCode.match(/export\s+const\s+staticProps\s*=\s*\{([\s\S]*?)\}(?=\s*export|$)/)
-  
-  if (!staticPropsMatch) return result
-  
-  const propsContent = staticPropsMatch[1]
   const braceStack = []
   let currentPropName = null
   let propBuffer = ''
@@ -72,6 +67,16 @@ function parsePropConfig(configStr) {
     config.type = typeMap[typeMatch[1]] || typeMatch[1].toLowerCase()
   }
   
+  const arrayTypeMatch = configStr.match(/type:\s*\[([^\]]+)\]/)
+  if (arrayTypeMatch) {
+    const types = arrayTypeMatch[1]
+      .split(',')
+      .map(t => t.trim())
+      .filter(Boolean)
+      .map(t => typeMap[t] || t.toLowerCase())
+    config.type = types.join(' | ')
+  }
+  
   const valuesMatch = configStr.match(/values:\s*(\[[^\]]+\])/)
   if (valuesMatch) {
     try {
@@ -111,6 +116,13 @@ function parseDefaultValue(value) {
   }
   
   return null
+}
+
+function parsePropsFromSource(sourceCode) {
+  const staticPropsMatch = sourceCode.match(/export\s+const\s+staticProps\s*=\s*\{([\s\S]*?)\}(?=\s*export|$)/)
+  if (!staticPropsMatch) return {}
+  
+  return parsePropsObject(staticPropsMatch[1])
 }
 
 function parseEmitsFromSource(sourceCode) {
@@ -173,7 +185,7 @@ function generateComponentMetadata(componentName) {
   if (fs.existsSync(contextPath)) {
     try {
       const sourceCode = fs.readFileSync(contextPath, 'utf-8')
-      props = parseStaticPropsFromSource(sourceCode)
+      props = parsePropsFromSource(sourceCode)
       emits = parseEmitsFromSource(sourceCode)
     } catch (e) {
       console.warn(`解析 context.ts 失败: ${contextPath}`, e.message)

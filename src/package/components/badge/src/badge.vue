@@ -8,24 +8,15 @@
     </span>
   </div>
 </template>
-<script setup lang='ts' name="TyBadge">
-import { computed } from 'vue'
-import { badgeProp,nm } from './context'
+
+<script setup lang="ts" name="TyBadge">
+import { badgeProp, nm } from './context'
+import useBadge from './use-badge'
 
 defineOptions({
-  name:'TyBadge'
+  name: 'TyBadge'
 })
+
 const props = defineProps(badgeProp)
-
-const text = computed(() => {
-  if (props.dot) {
-    return ''
-  }
-  if (!isNaN(props.text as number)) {
-    const text = Number(props.text)
-    return text > props.max ? props.max + '+' : text
-  }
-  return props.text
-})
+const { text } = useBadge(props, nm)
 </script>
-
