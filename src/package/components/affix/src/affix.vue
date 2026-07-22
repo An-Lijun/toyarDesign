@@ -7,14 +7,14 @@
 </template>
 
 <script setup>
-import { nm, affixProps,affixEmits } from "./context";
+import { nm, useProps, useEmits } from "./context";
 import useAffix from './use-affix';
 
 defineOptions({
     name: "TyAffix",
 });
 
-const props = defineProps(affixProps);
-const emits = defineEmits(affixEmits)
+const props = defineProps(useProps);
+const emits = defineEmits(useEmits)
 const { styles, isFixed, affixRef } = useAffix(props, emits, nm)
 </script>

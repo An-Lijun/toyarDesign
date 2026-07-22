@@ -1,7 +1,7 @@
 import { onBeforeUnmount, onMounted, ref, computed, watch } from "vue";
 import type { ExtractPropTypes } from 'vue'
-import { affixProps } from './context'
-import useNmSpace from '../../../hooks/useBem'
+import { useProps, useEmits } from './context'
+import useNmSpace from '@/package/hooks/useBem'
 import { debounce } from 'robinson'
 import { type UseAffixReturn } from './type.ts'
 
@@ -15,8 +15,8 @@ import { type UseAffixReturn } from './type.ts'
  * @returns {UseAffixReturn} 返回样式、固定状态和元素引用
  */
 export default function useAffix(
-  props: ExtractPropTypes<typeof affixProps>,
-  emits: (event: 'fixed-change', value: boolean) => void,
+  props: ExtractPropTypes<typeof useProps>,
+  emits: ExtractPropTypes<typeof useEmits>,
   nm: ReturnType<typeof useNmSpace>
 ): UseAffixReturn {
 

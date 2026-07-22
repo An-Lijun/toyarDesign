@@ -1,3 +1,5 @@
+import useNmSpace from '../hooks/useBem'
+
 export type propType = {
   type: any, required?: Boolean,
   validator?: Function | undefined,
@@ -16,4 +18,17 @@ export type selfPropType = {
 
 export type selfPropsType = {
   [key: string]: selfPropType | WrapperObject
+}
+
+export interface CreateComponentContextOptions {
+  name: string
+  props: selfPropsType
+  emits?: Record<string, any> | string[]
+}
+
+export interface ComponentContext<Props = any, Emits = any> {
+  staticProps: selfPropsType
+  useProps: Props
+  nm: ReturnType<typeof useNmSpace>
+  useEmits?: Emits
 }
