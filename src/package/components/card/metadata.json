@@ -3,7 +3,26 @@
   "name": "TyCard",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "border": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "shadow": {
+      "type": "string",
+      "default": "none",
+      "required": false,
+      "description": ""
+    },
+    "isLoading": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "header",

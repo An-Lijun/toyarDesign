@@ -3,8 +3,32 @@
   "name": "TyPage-header",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "title": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "subTitle": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "showBack": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "back": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

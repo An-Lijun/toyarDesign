@@ -8,15 +8,13 @@
       "type": "number",
       "default": 8,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "max": {
       "type": "number",
       "default": null,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     }
   },
   "emits": {},

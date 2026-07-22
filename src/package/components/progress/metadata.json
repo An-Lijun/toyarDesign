@@ -3,8 +3,44 @@
   "name": "TyProgress",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "modelValue": {
+      "type": "string | number",
+      "default": "",
+      "required": true,
+      "description": ""
+    },
+    "strokeWidth": {
+      "type": "string",
+      "default": 5,
+      "required": false,
+      "description": ""
+    },
+    "isShowPer": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "type": {
+      "type": "string",
+      "default": "line",
+      "required": false,
+      "description": ""
+    },
+    "width": {
+      "type": "string",
+      "default": 50,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

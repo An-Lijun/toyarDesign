@@ -8,36 +8,31 @@
       "type": "number",
       "default": 200,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "right": {
       "type": "number",
       "default": 40,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "bottom": {
       "type": "number",
       "default": 40,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "target": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "circle": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     }
   },
   "emits": {

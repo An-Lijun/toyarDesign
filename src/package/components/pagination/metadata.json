@@ -3,7 +3,26 @@
   "name": "TyPagination",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "current": {
+      "type": "string | number",
+      "default": "1",
+      "required": true,
+      "description": ""
+    },
+    "total": {
+      "type": "string | number",
+      "default": "",
+      "required": true,
+      "description": ""
+    },
+    "pageSize": {
+      "type": "string | number",
+      "default": "5",
+      "required": true,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "total"

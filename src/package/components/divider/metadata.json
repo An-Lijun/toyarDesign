@@ -3,7 +3,31 @@
   "name": "TyDivider",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "direction": {
+      "type": "string",
+      "default": "row",
+      "required": false,
+      "description": "",
+      "values": [
+        "row",
+        "column"
+      ]
+    },
+    "position": {
+      "type": "string",
+      "default": "center",
+      "required": false,
+      "description": "",
+      "values": [
+        "center",
+        "left",
+        "right",
+        "bottom",
+        "top"
+      ]
+    }
+  },
   "emits": {},
   "slots": [
     "default"

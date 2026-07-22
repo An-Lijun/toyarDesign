@@ -3,8 +3,54 @@
   "name": "TySmsCodeInput",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "modelValue": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "length": {
+      "type": "number",
+      "default": 6,
+      "required": false,
+      "description": ""
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "regCodes": {
+      "type": "array",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "gap": {
+      "type": "number",
+      "default": 12,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "success": {
+      "params": [],
+      "description": ""
+    },
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

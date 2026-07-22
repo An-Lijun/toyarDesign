@@ -3,7 +3,49 @@
   "name": "TyImage",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "src": {
+      "type": "string",
+      "default": null,
+      "required": true,
+      "description": ""
+    },
+    "size": {
+      "type": "string",
+      "default": "100",
+      "required": false,
+      "description": ""
+    },
+    "shape": {
+      "type": "string",
+      "default": "square",
+      "required": false,
+      "description": "",
+      "values": [
+        "square",
+        "circle"
+      ]
+    },
+    "fit": {
+      "type": "string",
+      "default": "none",
+      "required": false,
+      "description": "",
+      "values": [
+        "none",
+        "fill",
+        "contain",
+        "cover",
+        "scale-down"
+      ]
+    },
+    "alt": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

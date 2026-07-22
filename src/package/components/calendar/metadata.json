@@ -3,8 +3,20 @@
   "name": "TyCalendar",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "dayItemHeight": {
+      "type": "number",
+      "default": 110,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "click": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [
     "controller"
   ],

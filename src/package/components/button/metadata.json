@@ -9,7 +9,12 @@
       "default": "primary",
       "required": false,
       "description": "",
-      "values": []
+      "values": [
+        "primary",
+        "success",
+        "warning",
+        "danger"
+      ]
     },
     "type": {
       "type": "string",
@@ -29,22 +34,25 @@
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "size": {
       "type": "string",
       "default": "small",
       "required": false,
       "description": "",
-      "values": []
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
     },
     "html-type": {
       "type": "string",
@@ -72,15 +80,13 @@
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "tag": {
       "type": "string",
       "default": "button",
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     }
   },
   "emits": {

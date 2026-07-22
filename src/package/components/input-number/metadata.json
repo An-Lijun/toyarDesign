@@ -3,8 +3,60 @@
   "name": "TyInputNumber",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "modelValue": {
+      "type": "number",
+      "default": "",
+      "required": true,
+      "description": ""
+    },
+    "precision": {
+      "type": "number",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "stepStrictly": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "step": {
+      "type": "number",
+      "default": 1,
+      "required": false,
+      "description": ""
+    },
+    "maxlength": {
+      "type": "number | string | object",
+      "default": null,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "blur": {
+      "params": [],
+      "description": ""
+    },
+    "clear": {
+      "params": [],
+      "description": ""
+    },
+    "change": {
+      "params": [],
+      "description": ""
+    },
+    "focus": {
+      "params": [],
+      "description": ""
+    },
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

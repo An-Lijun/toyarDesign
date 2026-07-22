@@ -3,8 +3,70 @@
   "name": "TyTime-picker",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "modelValue": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "size": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "clearable": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "format": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "formatValue": {
+      "type": "function",
+      "default": null,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "blur": {
+      "params": [],
+      "description": ""
+    },
+    "input": {
+      "params": [],
+      "description": ""
+    },
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

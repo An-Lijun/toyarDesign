@@ -3,7 +3,32 @@
   "name": "TyBadge",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "text": {
+      "type": "string | number",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "max": {
+      "type": "number",
+      "default": 99,
+      "required": false,
+      "description": ""
+    },
+    "dot": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "status": {
+      "type": "string",
+      "default": "danger",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default",

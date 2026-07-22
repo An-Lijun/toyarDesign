@@ -3,7 +3,44 @@
   "name": "TyLogConsole",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "maxSize": {
+      "type": "number | string",
+      "default": 10000,
+      "required": false,
+      "description": ""
+    },
+    "itemHieght": {
+      "type": "number | string",
+      "default": 40,
+      "required": false,
+      "description": ""
+    },
+    "height": {
+      "type": "number | string",
+      "default": 400,
+      "required": false,
+      "description": ""
+    },
+    "isClear": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "prefixDist": {
+      "type": "object",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "addModel": {
+      "type": "string",
+      "default": "append",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "footer"

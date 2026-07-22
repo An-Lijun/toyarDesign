@@ -8,8 +8,7 @@
       "type": "number",
       "default": null,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     },
     "shape": {
       "type": "string",
@@ -25,8 +24,7 @@
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": "",
-      "values": []
+      "description": ""
     }
   },
   "emits": {

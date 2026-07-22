@@ -3,7 +3,20 @@
   "name": "TyCol",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "span": {
+      "type": "number | object | string",
+      "default": 24,
+      "required": false,
+      "description": ""
+    },
+    "offset": {
+      "type": "number",
+      "default": 0,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

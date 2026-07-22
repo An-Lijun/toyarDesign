@@ -3,7 +3,44 @@
   "name": "TyInputPassword",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "size": {
+      "type": "string",
+      "default": "small",
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "clearable": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "modelValue": {
+      "type": "number | string",
+      "default": "",
+      "required": true,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

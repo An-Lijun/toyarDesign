@@ -3,7 +3,38 @@
   "name": "TyResult",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "type": {
+      "type": "string",
+      "default": null,
+      "required": true,
+      "description": "",
+      "values": [
+        "info",
+        "success",
+        "warning",
+        "error"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "subTitle": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "size": {
+      "type": "string",
+      "default": "100",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

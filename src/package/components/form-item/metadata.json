@@ -3,7 +3,32 @@
   "name": "TyFormItem",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "label": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "isShowStar": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "label",

@@ -3,7 +3,32 @@
   "name": "TyUpload",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "dragger": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "drag": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "accept": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

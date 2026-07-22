@@ -3,7 +3,44 @@
   "name": "TyPopconfirm",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "placement": {
+      "type": "string",
+      "default": "top",
+      "required": false,
+      "description": ""
+    },
+    "content": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "rejectText": {
+      "type": "string",
+      "default": "取消",
+      "required": false,
+      "description": ""
+    },
+    "showRejectBtn": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "resloveText": {
+      "type": "string",
+      "default": "确定",
+      "required": false,
+      "description": ""
+    },
+    "showResloveBtn": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "content",

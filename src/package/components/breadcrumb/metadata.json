@@ -3,7 +3,14 @@
   "name": "TyBreadcrumb",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "separator": {
+      "type": "string",
+      "default": "/",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

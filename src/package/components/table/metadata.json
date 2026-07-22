@@ -3,7 +3,79 @@
   "name": "TyTable",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "size": {
+      "type": "string",
+      "default": "small",
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "align": {
+      "type": "string",
+      "default": "center",
+      "required": false,
+      "description": "",
+      "values": [
+        "left",
+        "center",
+        "right"
+      ]
+    },
+    "columns": {
+      "type": "array",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "data": {
+      "type": "array",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "rowKey": {
+      "type": "string",
+      "default": "key",
+      "required": true,
+      "description": ""
+    },
+    "rowSelection": {
+      "type": "object",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "borders": {
+      "type": "array",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "showOverflow": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": "",
+      "values": [
+        "ellipsis",
+        "title",
+        "tooltip",
+        "none"
+      ]
+    },
+    "stripe": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

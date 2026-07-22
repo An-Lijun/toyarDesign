@@ -3,8 +3,71 @@
   "name": "TySwitch",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "size": {
+      "type": "string",
+      "default": "small",
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "uncheckedText": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "checkedText": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "openValue": {
+      "type": "string | boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "closeValue": {
+      "type": "string | boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "type": {
+      "type": "string",
+      "default": "round",
+      "required": false,
+      "description": "",
+      "values": [
+        "round",
+        "tube",
+        "inline"
+      ]
+    }
+  },
+  "emits": {
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    },
+    "change": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

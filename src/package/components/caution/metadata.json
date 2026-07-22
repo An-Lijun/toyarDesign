@@ -3,7 +3,26 @@
   "name": "TyCaution",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "type": {
+      "type": "string",
+      "default": "info",
+      "required": false,
+      "description": ""
+    },
+    "title": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "isShowIcon": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

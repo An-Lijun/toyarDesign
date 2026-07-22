@@ -3,8 +3,50 @@
   "name": "TyNotification",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "type": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": [
+        "info",
+        "success",
+        "warning",
+        "error"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "default": null,
+      "required": true,
+      "description": ""
+    },
+    "message": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "top": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "time": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "close": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

@@ -8,29 +8,25 @@
       "type": "string",
       "default": "div",
       "required": false,
-      "description": "",
-      "values": []
+      "description": "自定义标签"
     },
     "offsetTop": {
       "type": "number",
       "default": 0,
       "required": false,
-      "description": "",
-      "values": []
+      "description": "顶部偏移量"
     },
     "offsetBottom": {
       "type": "number",
       "default": null,
       "required": false,
-      "description": "",
-      "values": []
+      "description": "底部偏移量"
     },
     "target": {
       "type": "HTMLElement",
       "default": null,
       "required": false,
-      "description": "",
-      "values": []
+      "description": "目标元素"
     }
   },
   "emits": {

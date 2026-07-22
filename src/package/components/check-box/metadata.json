@@ -3,8 +3,50 @@
   "name": "TyCheckBox",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "size": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "value": {
+      "type": "string | number",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "canHarf": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "max": {
+      "type": "string | number",
+      "default": "",
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "change": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [
     "default"
   ],

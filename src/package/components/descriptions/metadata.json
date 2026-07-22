@@ -3,7 +3,61 @@
   "name": "TyDescriptions",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "title": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "data": {
+      "type": "array",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "column": {
+      "type": "number",
+      "default": 3,
+      "required": false,
+      "description": ""
+    },
+    "size": {
+      "type": "string",
+      "default": "small",
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "align": {
+      "type": "string",
+      "default": "left",
+      "required": false,
+      "description": "",
+      "values": [
+        "left",
+        "center",
+        "right"
+      ]
+    },
+    "layout": {
+      "type": "string",
+      "default": "column",
+      "required": false,
+      "description": ""
+    },
+    "border": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

@@ -3,7 +3,20 @@
   "name": "TyWaterMark",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "markInfo": {
+      "type": "string | array",
+      "default": null,
+      "required": true,
+      "description": ""
+    },
+    "options": {
+      "type": "object",
+      "default": null,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

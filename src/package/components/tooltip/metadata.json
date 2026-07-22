@@ -3,7 +3,26 @@
   "name": "TyTooltip",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "content": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "placement": {
+      "type": "string",
+      "default": "top",
+      "required": false,
+      "description": ""
+    },
+    "trigger": {
+      "type": "string",
+      "default": "hover",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

@@ -3,8 +3,82 @@
   "name": "TyInput",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "size": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "clearable": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "modelValue": {
+      "type": "string | number",
+      "default": "",
+      "required": true,
+      "description": ""
+    },
+    "showLimit": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "format": {
+      "type": "function",
+      "default": null,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "blur": {
+      "params": [],
+      "description": ""
+    },
+    "focus": {
+      "params": [],
+      "description": ""
+    },
+    "enter": {
+      "params": [],
+      "description": ""
+    },
+    "clear": {
+      "params": [],
+      "description": ""
+    },
+    "input": {
+      "params": [],
+      "description": ""
+    },
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [
     "outPre",
     "innerPre",

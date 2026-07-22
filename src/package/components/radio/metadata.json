@@ -3,8 +3,48 @@
   "name": "TyRadio",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "size": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "modelValue": {
+      "type": "string | number",
+      "default": "",
+      "required": true,
+      "description": ""
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    },
+    "change": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [
     "default"
   ],

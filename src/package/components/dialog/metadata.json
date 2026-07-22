@@ -3,7 +3,44 @@
   "name": "TyDialog",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "title": {
+      "type": "string",
+      "default": "提示",
+      "required": false,
+      "description": ""
+    },
+    "width": {
+      "type": "string",
+      "default": "30%",
+      "required": false,
+      "description": ""
+    },
+    "top": {
+      "type": "string",
+      "default": "15vh",
+      "required": false,
+      "description": ""
+    },
+    "info": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "isUnderLine": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "isTeleport": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "title",

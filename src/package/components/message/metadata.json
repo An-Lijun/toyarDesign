@@ -3,8 +3,32 @@
   "name": "TyMessage",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "msg": {
+      "type": "string",
+      "default": null,
+      "required": true,
+      "description": ""
+    },
+    "options": {
+      "type": "object",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "top": {
+      "type": "string",
+      "default": "0",
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "close": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [
     "icon",
     "close"

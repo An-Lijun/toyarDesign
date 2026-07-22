@@ -3,7 +3,77 @@
   "name": "TyCarousel",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "interval": {
+      "type": "number",
+      "default": 3000,
+      "required": false,
+      "description": ""
+    },
+    "arrowMode": {
+      "type": "string",
+      "default": "hover",
+      "required": false,
+      "description": "",
+      "values": [
+        "hover",
+        "always",
+        "never"
+      ]
+    },
+    "easing": {
+      "type": "string",
+      "default": "ease",
+      "required": false,
+      "description": "",
+      "values": [
+        "ease",
+        "linear",
+        "ease-in",
+        "ease-out",
+        "ease-in-out"
+      ]
+    },
+    "isAutoPlay": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": ""
+    },
+    "indicatorType": {
+      "type": "string",
+      "default": "line",
+      "required": false,
+      "description": "",
+      "values": [
+        "dot",
+        "line",
+        "slider"
+      ]
+    },
+    "indicatorPosition": {
+      "type": "string",
+      "default": "right",
+      "required": false,
+      "description": "",
+      "values": [
+        "top",
+        "left",
+        "right",
+        "bottom"
+      ]
+    },
+    "direction": {
+      "type": "string",
+      "default": "horizontal",
+      "required": false,
+      "description": "",
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
   "emits": {},
   "slots": [
     "default",

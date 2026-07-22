@@ -3,7 +3,26 @@
   "name": "TyList",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "header": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "size": {
+      "type": "string",
+      "default": "small",
+      "required": false,
+      "description": "",
+      "values": [
+        "mini",
+        "small",
+        "medium",
+        "large"
+      ]
+    }
+  },
   "emits": {},
   "slots": [
     "header",

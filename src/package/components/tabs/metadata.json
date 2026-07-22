@@ -3,8 +3,38 @@
   "name": "TyTabs",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "modelValue": {
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "type": {
+      "type": "string",
+      "default": "normal",
+      "required": false,
+      "description": ""
+    },
+    "position": {
+      "type": "string",
+      "default": "top",
+      "required": false,
+      "description": ""
+    },
+    "trigger": {
+      "type": "string",
+      "default": "click",
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [
     "default"
   ],

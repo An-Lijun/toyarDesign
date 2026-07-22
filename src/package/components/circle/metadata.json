@@ -3,7 +3,54 @@
   "name": "TyCircle",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "percent": {
+      "type": "number",
+      "default": 0,
+      "required": false,
+      "description": ""
+    },
+    "size": {
+      "type": "number",
+      "default": 120,
+      "required": false,
+      "description": ""
+    },
+    "strokeWidth": {
+      "type": "number",
+      "default": 6,
+      "required": false,
+      "description": ""
+    },
+    "strokeColor": {
+      "type": "string",
+      "default": "#298DFF",
+      "required": false,
+      "description": ""
+    },
+    "strokeLinecap": {
+      "type": "string",
+      "default": "round",
+      "required": false,
+      "description": "",
+      "values": [
+        "square",
+        "round"
+      ]
+    },
+    "trailWidth": {
+      "type": "number",
+      "default": 5,
+      "required": false,
+      "description": ""
+    },
+    "trailColor": {
+      "type": "string",
+      "default": "#F7F7F7",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

@@ -3,7 +3,32 @@
   "name": "TyRow",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "type": {
+      "type": "string",
+      "default": "line",
+      "required": false,
+      "description": ""
+    },
+    "gutter": {
+      "type": "number",
+      "default": 0,
+      "required": false,
+      "description": ""
+    },
+    "justify": {
+      "type": "string",
+      "default": "top",
+      "required": false,
+      "description": ""
+    },
+    "align": {
+      "type": "string",
+      "default": "center",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

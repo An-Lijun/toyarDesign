@@ -3,7 +3,14 @@
   "name": "TyTransfer",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "data": {
+      "type": "array",
+      "default": null,
+      "required": true,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

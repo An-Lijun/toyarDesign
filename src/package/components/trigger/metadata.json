@@ -3,7 +3,26 @@
   "name": "TyPoppover",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "placement": {
+      "type": "string",
+      "default": "top",
+      "required": false,
+      "description": ""
+    },
+    "content": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    },
+    "trigger": {
+      "type": "string",
+      "default": "hover",
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "content",

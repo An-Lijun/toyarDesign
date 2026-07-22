@@ -3,8 +3,32 @@
   "name": "TyRate",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "modelValue": {
+      "type": "string",
+      "default": 0,
+      "required": false,
+      "description": ""
+    },
+    "max": {
+      "type": "number",
+      "default": 5,
+      "required": false,
+      "description": ""
+    },
+    "allowHalf": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "update:modelValue": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

@@ -18,7 +18,69 @@ const typeMap = {
   Element: 'HTMLElement',
 }
 
-function parsePropsObject(propsContent) {
+function parseImports(sourceCode) {
+  const imports = []
+  const importRegex = /import\s+(\{[^}]+\})\s+from\s+['"]([^'"]+)['"]/g
+  let match
+  
+  while ((match = importRegex.exec(sourceCode)) !== null) {
+    const namedImports = match[1]
+      .replace(/[{}]/g, '')
+      .split(',')
+      .map(i => i.trim())
+      .filter(Boolean)
+    
+    imports.push({
+      modulePath: match[2],
+      names: namedImports
+    })
+  }
+  
+  return imports
+}
+
+function resolveConstants(filePath, imports) {
+  const constants = {}
+  
+  for (const imp of imports) {
+    const resolvedPath = path.resolve(path.dirname(filePath), imp.modulePath)
+    const resolvedTsPath = resolvedPath.endsWith('.ts') ? resolvedPath : `${resolvedPath}.ts`
+    const resolvedIndexPath = path.join(resolvedPath, 'index.ts')
+    
+    let targetPath = null
+    if (fs.existsSync(resolvedTsPath)) {
+      targetPath = resolvedTsPath
+    } else if (fs.existsSync(resolvedIndexPath)) {
+      targetPath = resolvedIndexPath
+    } else if (fs.existsSync(resolvedPath)) {
+      targetPath = resolvedPath
+    }
+    
+    if (targetPath) {
+      try {
+        const content = fs.readFileSync(targetPath, 'utf-8')
+        
+        for (const name of imp.names) {
+          const constRegex = new RegExp(`export\\s+const\\s+${name}\\s*=\\s*(\\[[^\\]]+\\])`)
+          const constMatch = content.match(constRegex)
+          if (constMatch) {
+            try {
+              constants[name] = JSON.parse(constMatch[1].replace(/'/g, '"'))
+            } catch (e) {
+              constants[name] = []
+            }
+          }
+        }
+      } catch (e) {
+        console.warn(`解析常量文件失败: ${targetPath}`, e.message)
+      }
+    }
+  }
+  
+  return constants
+}
+
+function parsePropsObject(propsContent, constants = {}) {
   const result = {}
   const braceStack = []
   let currentPropName = null
@@ -33,7 +95,7 @@ function parsePropsObject(propsContent) {
       braceStack.pop()
       
       if (braceStack.length === 0 && currentPropName) {
-        const propConfig = parsePropConfig(propBuffer)
+        const propConfig = parsePropConfig(propBuffer, constants)
         result[currentPropName] = propConfig
         currentPropName = null
         propBuffer = ''
@@ -53,13 +115,12 @@ function parsePropsObject(propsContent) {
   return result
 }
 
-function parsePropConfig(configStr) {
+function parsePropConfig(configStr, constants = {}) {
   const config = {
     type: 'unknown',
     default: null,
     required: false,
     description: '',
-    values: [],
   }
   
   const typeMatch = configStr.match(/type:\s*(\w+)/)
@@ -80,13 +141,28 @@ function parsePropConfig(configStr) {
   const valuesMatch = configStr.match(/values:\s*(\[[^\]]+\])/)
   if (valuesMatch) {
     try {
-      config.values = JSON.parse(valuesMatch[1].replace(/'/g, '"'))
+      const parsedValues = JSON.parse(valuesMatch[1].replace(/'/g, '"'))
+      if (parsedValues && parsedValues.length > 0) {
+        config.values = parsedValues
+      }
     } catch (e) {
-      config.values = []
+    }
+  } else {
+    const valuesConstMatch = configStr.match(/values:\s*([\w]+)/)
+    if (valuesConstMatch && constants[valuesConstMatch[1]]) {
+      const constValues = constants[valuesConstMatch[1]]
+      if (constValues && constValues.length > 0) {
+        config.values = constValues
+      }
     }
   }
   
-  const defaultMatch = configStr.match(/default:\s*(.+)/)
+  const descriptionMatch = configStr.match(/description:\s*['"`]([^'"`]+)['"`]/)
+  if (descriptionMatch) {
+    config.description = descriptionMatch[1]
+  }
+  
+  const defaultMatch = configStr.match(/default:\s*([^,\n]+)/)
   if (defaultMatch) {
     config.default = parseDefaultValue(defaultMatch[1].trim())
   }
@@ -106,7 +182,7 @@ function parseDefaultValue(value) {
   if (value === 'null') return null
   if (!isNaN(value)) return Number(value)
   
-  const stringMatch = value.match(/^['"](.*)['"]/)
+  const stringMatch = value.match(/^['"](.*?)['"]/)
   if (stringMatch) {
     return stringMatch[1]
   }
@@ -118,11 +194,68 @@ function parseDefaultValue(value) {
   return null
 }
 
-function parsePropsFromSource(sourceCode) {
-  const staticPropsMatch = sourceCode.match(/export\s+const\s+staticProps\s*=\s*\{([\s\S]*?)\}(?=\s*export|$)/)
-  if (!staticPropsMatch) return {}
+function extractObjectContent(sourceCode, startIndex) {
+  let braceCount = 1
+  let inString = false
+  let stringChar = ''
   
-  return parsePropsObject(staticPropsMatch[1])
+  for (let i = startIndex + 1; i < sourceCode.length; i++) {
+    const char = sourceCode[i]
+    
+    if (!inString && (char === '"' || char === "'" || char === '`')) {
+      inString = true
+      stringChar = char
+    } else if (inString && char === stringChar && sourceCode[i - 1] !== '\\') {
+      inString = false
+    } else if (!inString) {
+      if (char === '{') {
+        braceCount++
+      } else if (char === '}') {
+        braceCount--
+        if (braceCount === 0) {
+          return sourceCode.slice(startIndex, i + 1)
+        }
+      }
+    }
+  }
+  return ''
+}
+
+function parsePropsFromSource(sourceCode, constants = {}) {
+  let propsContent = ''
+  
+  const staticPropsMatch = sourceCode.match(/export\s+const\s+staticProps\s*=\s*\{([\s\S]*?)\}(?=\s*export|$)/)
+  if (staticPropsMatch) {
+    return parsePropsObject(staticPropsMatch[1], constants)
+  }
+  
+  const createContextMatch = sourceCode.match(/createComponentContext\s*\(\s*\{/)
+  if (createContextMatch) {
+    const braceIndex = sourceCode.indexOf('{', createContextMatch.index)
+    const contextObj = extractObjectContent(sourceCode, braceIndex)
+    
+    if (contextObj) {
+      const propsKeyMatch = contextObj.match(/props\s*:\s*\{/)
+      if (propsKeyMatch) {
+        const propsStartIndex = propsKeyMatch.index + propsKeyMatch[0].length - 1
+        const propsObj = extractObjectContent(contextObj, propsStartIndex)
+        if (propsObj) {
+          return parsePropsObject(propsObj.slice(1, -1), constants)
+        }
+      }
+    }
+  }
+  
+  const buildPropsMatch = sourceCode.match(/buildProps\s*\(\s*\{/)
+  if (buildPropsMatch) {
+    const braceIndex = sourceCode.indexOf('{', buildPropsMatch.index)
+    const propsObj = extractObjectContent(sourceCode, braceIndex)
+    if (propsObj) {
+      return parsePropsObject(propsObj.slice(1, -1), constants)
+    }
+  }
+  
+  return {}
 }
 
 function parseEmitsFromSource(sourceCode) {
@@ -142,6 +275,58 @@ function parseEmitsFromSource(sourceCode) {
       params,
       description: '',
     }
+  }
+  
+  if (Object.keys(result).length > 0) {
+    return result
+  }
+  
+  const createContextMatch = sourceCode.match(/createComponentContext\s*\(\s*\{/)
+  if (createContextMatch) {
+    const braceIndex = sourceCode.indexOf('{', createContextMatch.index)
+    const contextObj = extractObjectContent(sourceCode, braceIndex)
+    
+    if (contextObj) {
+      const emitsKeyMatch = contextObj.match(/emits\s*:\s*\{/)
+      if (emitsKeyMatch) {
+        const emitsStartIndex = emitsKeyMatch.index + emitsKeyMatch[0].length - 1
+        const emitsObj = extractObjectContent(contextObj, emitsStartIndex)
+        if (emitsObj) {
+          const emitContent = emitsObj.slice(1, -1)
+          const contextEmitRegex = /['"]?([\w-]+)['"]?\s*:\s*\(([^)]*)\)\s*=>\s*true/g
+          let contextEmitMatch
+          
+          while ((contextEmitMatch = contextEmitRegex.exec(emitContent)) !== null) {
+            const emitName = contextEmitMatch[1]
+            const params = contextEmitMatch[2]
+              .split(',')
+              .map(p => p.trim())
+              .filter(Boolean)
+            
+            result[emitName] = {
+              params,
+              description: '',
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  const emitsArrayMatch = sourceCode.match(/export\s+const\s+\w+Emits?\s*=\s*\[([^\]]*)\]/)
+  if (emitsArrayMatch) {
+    const emitsStr = emitsArrayMatch[1]
+    const emitNames = emitsStr
+      .split(',')
+      .map(e => e.trim().replace(/['"]/g, ''))
+      .filter(Boolean)
+    
+    emitNames.forEach(emitName => {
+      result[emitName] = {
+        params: [],
+        description: '',
+      }
+    })
   }
   
   return result
@@ -185,8 +370,11 @@ function generateComponentMetadata(componentName) {
   if (fs.existsSync(contextPath)) {
     try {
       const sourceCode = fs.readFileSync(contextPath, 'utf-8')
-      props = parsePropsFromSource(sourceCode)
-      emits = parseEmitsFromSource(sourceCode)
+      const imports = parseImports(sourceCode)
+      const constants = resolveConstants(contextPath, imports)
+      
+      props = parsePropsFromSource(sourceCode, constants)
+      emits = parseEmitsFromSource(sourceCode, constants)
     } catch (e) {
       console.warn(`解析 context.ts 失败: ${contextPath}`, e.message)
     }

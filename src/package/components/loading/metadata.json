@@ -3,7 +3,14 @@
   "name": "TyLoading",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "isFixed": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [],
   "examples": [],

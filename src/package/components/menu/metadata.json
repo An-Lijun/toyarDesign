@@ -3,7 +3,38 @@
   "name": "TyMenu",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "modelValue": {
+      "type": "string | number",
+      "default": null,
+      "required": true,
+      "description": ""
+    },
+    "option": {
+      "type": "array",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "isFold": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": ""
+    },
+    "theme": {
+      "type": "string",
+      "default": "design",
+      "required": true,
+      "description": "",
+      "values": [
+        "design",
+        "dark",
+        "light",
+        "rDesign"
+      ]
+    }
+  },
   "emits": {},
   "slots": [
     "header"

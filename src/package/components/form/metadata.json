@@ -3,7 +3,36 @@
   "name": "TyForm",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "rules": {
+      "type": "object",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "labelWidth": {
+      "type": "string",
+      "default": "100",
+      "required": false,
+      "description": ""
+    },
+    "labelSuffix": {
+      "type": "string",
+      "default": ":",
+      "required": false,
+      "description": ""
+    },
+    "layout": {
+      "type": "string",
+      "default": "inline",
+      "required": false,
+      "description": "",
+      "values": [
+        "vertical",
+        "inline"
+      ]
+    }
+  },
   "emits": {},
   "slots": [
     "default"

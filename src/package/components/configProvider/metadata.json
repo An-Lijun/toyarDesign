@@ -3,7 +3,26 @@
   "name": "TyConfigProvider",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "theme": {
+      "type": "string",
+      "default": "light",
+      "required": false,
+      "description": ""
+    },
+    "options": {
+      "type": "object",
+      "default": null,
+      "required": false,
+      "description": ""
+    },
+    "tokens": {
+      "type": "object",
+      "default": null,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "default"

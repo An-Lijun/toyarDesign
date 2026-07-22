@@ -3,7 +3,14 @@
   "name": "TyDrawer",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "width": {
+      "type": "number",
+      "default": 300,
+      "required": false,
+      "description": ""
+    }
+  },
   "emits": {},
   "slots": [
     "handleBar",
