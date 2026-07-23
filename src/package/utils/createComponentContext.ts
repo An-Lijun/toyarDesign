@@ -1,6 +1,7 @@
 import useNmSpace from '../hooks/useBem'
 import buildProps from './buildProps'
-import type { CreateComponentContextOptions, ComponentContext } from './type'
+import type { ExtractPropTypes } from 'vue'
+import type { CreateComponentContextOptions, ComponentContext, selfPropsType } from './type'
 
 /**
  * 组件上下文工厂函数
@@ -21,14 +22,14 @@ import type { CreateComponentContextOptions, ComponentContext } from './type'
  * @returns 组件上下文对象
  */
 export function createComponentContext<
-  Props = any,
-  Emits = Record<string, any>
->(options: CreateComponentContextOptions): ComponentContext<Props, Emits> {
+  Props extends selfPropsType,
+  Emits extends Record<string, any> | string[] = Record<string, any>
+>(options: CreateComponentContextOptions): ComponentContext<ExtractPropTypes<Props>, Emits> {
   const { name, props, emits } = options
 
   return {
     staticProps: props,
-    useProps:  buildProps(props) as Props,
+    useProps:  buildProps(props) as ExtractPropTypes<Props>,
     nm : useNmSpace(name),
     useEmits: emits as Emits
   }

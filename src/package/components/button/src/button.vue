@@ -18,16 +18,16 @@
 
 <script setup lang="ts" name="TyButton">
 import { TyiLoader2Line } from 'toyaricon'
-import { buttonProps, nm } from './context.ts'
+import { useProps, nm } from './context.ts'
 import useButton from './use-button'
 // 组件配置
 defineOptions({ name: 'TyButton' })
 // Props 定义
-const props = defineProps(buttonProps)
+const props = defineProps(useProps)
 
 // 事件定义
 const emits = defineEmits<{
   click: [event: MouseEvent]
 }>()
-const { htmlType, buttonClasses, loading, handleClick } = useButton(props, emits, nm)
+const { htmlType, buttonClasses, mergeDisabled, mergeReadonly, handleClick } = useButton(props, emits, nm)
 </script>

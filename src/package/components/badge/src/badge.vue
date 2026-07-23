@@ -10,13 +10,13 @@
 </template>
 
 <script setup lang="ts" name="TyBadge">
-import { badgeProp, nm } from './context'
+import { useProps, nm } from './context'
 import useBadge from './use-badge'
 
 defineOptions({
   name: 'TyBadge'
 })
 
-const props = defineProps(badgeProp)
+const props = defineProps(useProps)
 const { text } = useBadge(props, nm)
 </script>

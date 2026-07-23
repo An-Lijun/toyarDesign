@@ -1,8 +1,8 @@
 import { useTyButton } from '../index.ts'
 export const {
-  props, 
+  useProps, 
   nm, 
-  emits,
+  useEmits,
   useButton,
-  propsData
+  staticProps
 } = useTyButton

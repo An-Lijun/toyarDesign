@@ -1,11 +1,11 @@
 import { computed } from 'vue'
 import type { ExtractPropTypes } from 'vue'
-import { badgeProp } from './context'
+import { useProps } from './context'
 import useNmSpace from '../../../hooks/useBem'
 import { type UseBadgeReturn } from './type'
 
 export default function useBadge(
-  props: ExtractPropTypes<typeof badgeProp>,
+  props: ExtractPropTypes<typeof useProps>,
   nm: ReturnType<typeof useNmSpace>
 ): UseBadgeReturn {
   const text = computed(() => {

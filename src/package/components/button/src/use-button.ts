@@ -1,14 +1,22 @@
-import { computed, inject, type ComputedRef } from 'vue'
+import { computed, inject, type ComputedRef, type ExtractPropTypes } from 'vue'
 import { configProviderDisabled } from '../../../hooks/symbolNm'
+import useNmSpace from '@/package/hooks/useBem'
+import type { ButtonEmits } from './context'
+import { useProps } from './context'
 
 export interface UseButtonReturn {
   htmlType: ComputedRef<string>
   buttonClasses: ComputedRef<string[]>
-  loading: ComputedRef<boolean>
+  mergeDisabled: ComputedRef<boolean>
+  mergeReadonly: ComputedRef<boolean>
   handleClick: (event: MouseEvent) => void
 }
 
-export default function useButton(props, emit, nm): UseButtonReturn {
+export default function useButton(
+  props: ExtractPropTypes<typeof useProps>,
+  emit: ButtonEmits,
+  nm: ReturnType<typeof useNmSpace>
+): UseButtonReturn {
   const inputInject = inject(configProviderDisabled, () => ({
     disabled: false,
     readonly: false
@@ -33,7 +41,6 @@ export default function useButton(props, emit, nm): UseButtonReturn {
     nm.is('readonly', mergeReadonly.value),
     nm.is('block', props.block),
   ])
-  const loading = computed(() => props.loading)
 
   const handleClick = (event: MouseEvent) => {
     if (mergeDisabled.value || mergeReadonly.value) {
@@ -43,5 +50,5 @@ export default function useButton(props, emit, nm): UseButtonReturn {
     emit('click', event)
   }
 
-  return { htmlType, buttonClasses, loading, handleClick }
+  return { htmlType, buttonClasses, mergeDisabled, mergeReadonly, handleClick }
 }

@@ -24,7 +24,7 @@
       </template>
     </TyBadge>
     <hr>
-    <UseBadge class="mg" :text="1" v-for=" item in ['primary', 'success', 'warning', 'danger']" :status="item">
+    <UseBadge class="mg"  text="1优化" v-for=" item in ['primary', 'success', 'warning', 'danger']" :status="item">
       <TyButton >useBadge</TyButton>
     </UseBadge>
   </div>

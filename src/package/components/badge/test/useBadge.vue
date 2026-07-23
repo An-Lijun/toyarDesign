@@ -11,12 +11,12 @@
 
 <script setup>
 import buildProps from '../../../utils/buildProps'
-import { props, nm, useBadge, propsData } from './context'
+import { useProps, nm, useBadge, staticProps } from './context'
 
 defineOptions({
   name: 'UseBadge'
 })
 
-const prop = defineProps(buildProps(propsData))
+const prop = defineProps(useProps)
 const { text } = useBadge(prop, nm)
 </script>

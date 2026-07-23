@@ -9,13 +9,12 @@ import buildProps from '../../../utils/buildProps';
 import {
   nm, 
   useButton,
-  propsData
+  useProps,
+  useEmits
 } from './context'
 
-const props = defineProps(buildProps(
-  propsData
-))
-const emits = defineEmits()
+const props = defineProps(useProps)
+const emits = defineEmits(useEmits)
 const { htmlType, buttonClasses, loading, handleClick } = useButton(props, emits, nm)
 
 </script>
