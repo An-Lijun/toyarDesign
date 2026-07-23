@@ -1,12 +1,12 @@
 import { onBeforeUnmount, onMounted, ref, computed, shallowRef } from "vue";
 import type { ExtractPropTypes } from 'vue'
-import { backTopProps } from './context'
+import { useProps } from './context'
 import useNmSpace from '../../../hooks/useBem'
-import { type UseBackTopReturn } from './type.ts'
+import { type UseBackTopReturn, type ExtractEmits } from './type.ts'
 
 export default function useBackTop(
-  props: ExtractPropTypes<typeof backTopProps>,
-  emits: (event: 'click') => void,
+  props: ExtractPropTypes<typeof useProps>,
+  emits: ExtractEmits<typeof useEmits>,
   nm: ReturnType<typeof useNmSpace>
 ): UseBackTopReturn {
 

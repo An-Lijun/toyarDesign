@@ -100,7 +100,21 @@ function guessBlockNameFromContext(filePath: string, importSourcePath: string, e
     return localAssignMatch[1]
   }
 
-  // 3. 兜底：同级 context 内第一个 useNmSpace('xxx')
+  // 3. 匹配 createComponentContext 模式：
+    //    export const { nm } = createComponentContext({ name: 'backTop', ... })
+    if (exportName === 'nm') {
+      // 查找 createComponentContext 调用中的 name 字段（支持多行）
+      const createContextPattern = new RegExp(
+        `createComponentContext\\s*\\(\\s*\\{[\\s\\S]*?name\\s*:\\s*${quoteGroup}([^'"\\x60]+)${quoteGroup}[\\s\\S]*?\\}\\s*\\)`,
+        's'
+      )
+      const createContextMatch = contextCode.match(createContextPattern)
+      if (createContextMatch?.[1]) {
+        return createContextMatch[1]
+      }
+    }
+
+  // 4. 兜底：同级 context 内第一个 useNmSpace('xxx')
   const firstNmMatch = contextCode.match(/useNmSpace\s*\(\s*['"\`]([^'"\`]+)['"\`]\s*\)/)
   if (firstNmMatch?.[1]) {
     return firstNmMatch[1]

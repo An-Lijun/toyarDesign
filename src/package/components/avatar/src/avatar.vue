@@ -14,14 +14,14 @@
 </template>
 
 <script setup>
-import { nm, avatarProps, avatarEmits } from './context'
+import { nm, useProps, useEmits } from './context'
 import useAvatar from './use-avatar';
 
 defineOptions({
   name: 'TyAvatar'
 })
 
-const props = defineProps(avatarProps);
-const emit = defineEmits(avatarEmits);
+const props = defineProps(useProps);
+const emit = defineEmits(useEmits);
 const { avatarRef, textRef, textTransform } = useAvatar(props, emit, nm);
 </script>

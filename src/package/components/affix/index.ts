@@ -11,5 +11,4 @@ export const useTyAffix = {
   staticProps
 }
 
-installComp(TyAffix)
-export default TyAffix
+export default installComp(TyAffix)

@@ -147,6 +147,7 @@ function parsePropsObject(propsContent, constants = {}) {
   const braceStack = []       // 花括号层级栈，用于处理嵌套对象
   let currentPropName = null  // 当前正在解析的 prop 名称
   let propBuffer = ''         // 当前 prop 的配置内容缓冲
+  let currentComment = ''     // 当前 prop 前面的 JSDoc 注释
   
   for (let i = 0; i < propsContent.length; i++) {
     const char = propsContent[i]
@@ -158,12 +159,21 @@ function parsePropsObject(propsContent, constants = {}) {
       
       // 当花括号层级回到 0 且有当前 prop 名称时，说明一个 prop 配置解析完成
       if (braceStack.length === 0 && currentPropName) {
-        const propConfig = parsePropConfig(propBuffer, constants)
+        const propConfig = parsePropConfig(propBuffer, constants, currentComment)
         result[currentPropName] = propConfig
         currentPropName = null
         propBuffer = ''
+        currentComment = ''
       }
     } else if (braceStack.length === 0 && !currentPropName) {
+      // 尝试匹配 JSDoc 注释（/** ... */）
+      const commentMatch = propsContent.slice(i).match(/^\/\*\*\s*([\s\S]*?)\s*\*\//)
+      if (commentMatch) {
+        currentComment = commentMatch[1]
+        i += commentMatch[0].length - 1
+        continue
+      }
+      
       // 在顶层且没有当前 prop 名称时，尝试匹配 prop 名称
       const propNameMatch = propsContent.slice(i).match(/^['"]?([\w-]+)['"]?\s*:\s*\{/)
       if (propNameMatch) {
@@ -181,19 +191,43 @@ function parsePropsObject(propsContent, constants = {}) {
 }
 
 /**
- * 解析单个 prop 的配置字符串
+ * Parse single prop config string
  * 
- * @param {string} configStr - prop 的配置内容（如 "type: String, default: 'div', description: '自定义标签'"）
- * @param {Object} constants - 常量映射表
- * @returns {Object} - 解析后的 prop 配置对象
+ * @param {string} configStr - Prop config content
+ * @param {Object} constants - Constants mapping
+ * @param {string} comment - JSDoc comment before prop
+ * @returns {Object} - Parsed prop config
  */
-function parsePropConfig(configStr, constants = {}) {
+function parsePropConfig(configStr, constants = {}, comment = '') {
   // 初始化 prop 配置对象，只包含必要字段
   const config = {
     type: 'unknown',      // 类型
     default: null,        // 默认值
     required: false,      // 是否必填
     description: '',      // 描述
+  }
+  
+  // 优先从 JSDoc 注释中提取 description
+  // 支持格式：/** 描述内容 */ 或 /** @description 描述内容 */
+  if (comment) {
+    // 移除每行开头的 * 和空格
+    const cleanComment = comment.replace(/^\s*\*\s*/gm, '').trim()
+    // 尝试匹配 @description 标签
+    const descTagMatch = cleanComment.match(/@description\s+(.+)/)
+    if (descTagMatch) {
+      config.description = descTagMatch[1].trim()
+    } else if (cleanComment) {
+      // 如果没有 @description 标签，直接使用注释内容
+      config.description = cleanComment
+    }
+  }
+  
+  // 如果 JSDoc 注释中没有 description，再尝试从配置对象中提取
+  if (!config.description) {
+    const descriptionMatch = configStr.match(/description:\s*['"`]([^'"`]+)['"`]/)
+    if (descriptionMatch) {
+      config.description = descriptionMatch[1]
+    }
   }
   
   // 解析 type 字段（单个类型，如 type: String）
@@ -235,12 +269,6 @@ function parsePropConfig(configStr, constants = {}) {
         config.values = constValues
       }
     }
-  }
-  
-  // 解析 description 字段（如 description: '自定义标签'）
-  const descriptionMatch = configStr.match(/description:\s*['"`]([^'"`]+)['"`]/)
-  if (descriptionMatch) {
-    config.description = descriptionMatch[1]
   }
   
   // 解析 default 字段（使用 [^,\n]+ 避免贪婪匹配到后面的字段）
@@ -381,6 +409,88 @@ function parsePropsFromSource(sourceCode, constants = {}) {
 }
 
 /**
+ * 解析 emits 对象的内容，提取每个 emit 的配置（支持 JSDoc 注释）
+ * 
+ * @param {string} emitsContent - emits 对象内部的内容（去掉外层花括号）
+ * @returns {Object} - 解析后的 emits 配置对象
+ */
+function parseEmitsObject(emitsContent) {
+  const result = {}
+  const parenStack = []       // 括号层级栈（用于匹配 ()）
+  let currentEmitName = null  // 当前正在解析的 emit 名称
+  let emitBuffer = ''         // 当前 emit 的配置内容缓冲
+  let currentComment = ''     // 当前 emit 前面的 JSDoc 注释
+  
+  for (let i = 0; i < emitsContent.length; i++) {
+    const char = emitsContent[i]
+    
+    if (char === '(') {
+      parenStack.push('(')
+      emitBuffer += char
+    } else if (char === ')') {
+      parenStack.pop()
+      emitBuffer += char
+      
+      // 当括号层级回到 0 且有当前 emit 名称时，说明一个 emit 配置解析完成
+      if (parenStack.length === 0 && currentEmitName) {
+        // 继续读取箭头函数部分
+        let rest = emitsContent.slice(i + 1)
+        const arrowMatch = rest.match(/^\s*=>\s*true/)
+        if (arrowMatch) {
+          // 解析 emit 配置
+          const emitRegex = /\(([^)]*)\)/
+          const emitMatch = emitBuffer.match(emitRegex)
+          const params = emitMatch ? emitMatch[1].split(',').map(p => p.trim()).filter(Boolean) : []
+          
+          // 从 JSDoc 注释中提取 description
+          let description = ''
+          if (currentComment) {
+            const cleanComment = currentComment.replace(/^\s*\*\s*/gm, '').trim()
+            const descTagMatch = cleanComment.match(/@description\s+(.+)/)
+            if (descTagMatch) {
+              description = descTagMatch[1].trim()
+            } else if (cleanComment) {
+              description = cleanComment
+            }
+          }
+          
+          result[currentEmitName] = {
+            params,
+            description,
+          }
+        }
+        
+        currentEmitName = null
+        emitBuffer = ''
+        currentComment = ''
+      }
+    } else if (parenStack.length === 0 && !currentEmitName) {
+      // 尝试匹配 JSDoc 注释（/** ... */）
+      const commentMatch = emitsContent.slice(i).match(/^\/\*\*\s*([\s\S]*?)\s*\*\//)
+      if (commentMatch) {
+        currentComment = commentMatch[1]
+        i += commentMatch[0].length - 1
+        continue
+      }
+      
+      // 尝试匹配 emit 名称（如 'fixed-change': (value) => true）
+      const emitNameMatch = emitsContent.slice(i).match(/^['"]?([\w-]+)['"]?\s*:\s*\(/)
+      if (emitNameMatch) {
+        currentEmitName = emitNameMatch[1]
+        i += emitNameMatch[0].length - 1
+        parenStack.push('(')
+        emitBuffer += '('
+      }
+    } else if (parenStack.length > 0 && currentEmitName) {
+      // 在括号内时，收集配置内容
+      emitBuffer += char
+    }
+  }
+  
+  return result
+}
+
+/**
  * 从 sourceCode 中解析 emits 配置
  * 依次尝试三种模式：对象形式 → createComponentContext → 数组形式
  * 
@@ -390,25 +500,10 @@ function parsePropsFromSource(sourceCode, constants = {}) {
 function parseEmitsFromSource(sourceCode) {
   const result = {}
   
-  // 模式1：对象形式（如 click: (event) => true）
-  const emitRegex = /['"]?([\w-]+)['"]?\s*:\s*\(([^)]*)\)\s*=>\s*true/g
-  let emitMatch
-  
-  while ((emitMatch = emitRegex.exec(sourceCode)) !== null) {
-    const emitName = emitMatch[1]
-    const params = emitMatch[2]
-      .split(',')
-      .map(p => p.trim())
-      .filter(Boolean)
-    
-    result[emitName] = {
-      params,
-      description: '',
-    }
-  }
-  
-  if (Object.keys(result).length > 0) {
-    return result
+  // 模式1：对象形式（如 export const buttonEmits = { click: (event) => true }）
+  const emitObjectMatch = sourceCode.match(/export\s+const\s+\w+Emits?\s*=\s*\{([\s\S]*?)\}(?=\s*export|$)/)
+  if (emitObjectMatch) {
+    return parseEmitsObject(emitObjectMatch[1])
   }
   
   // 模式2：createComponentContext 模式
@@ -423,22 +518,7 @@ function parseEmitsFromSource(sourceCode) {
         const emitsStartIndex = emitsKeyMatch.index + emitsKeyMatch[0].length - 1
         const emitsObj = extractObjectContent(contextObj, emitsStartIndex)
         if (emitsObj) {
-          const emitContent = emitsObj.slice(1, -1)
-          const contextEmitRegex = /['"]?([\w-]+)['"]?\s*:\s*\(([^)]*)\)\s*=>\s*true/g
-          let contextEmitMatch
-          
-          while ((contextEmitMatch = contextEmitRegex.exec(emitContent)) !== null) {
-            const emitName = contextEmitMatch[1]
-            const params = contextEmitMatch[2]
-              .split(',')
-              .map(p => p.trim())
-              .filter(Boolean)
-            
-            result[emitName] = {
-              params,
-              description: '',
-            }
-          }
+          return parseEmitsObject(emitsObj.slice(1, -1))
         }
       }
     }
@@ -486,6 +566,71 @@ function extractSlotsFromVueFile(vueFilePath) {
       slots.push(slotName)
     }
   }
+  return slots
+}
+
+/**
+ * 从 hooks 文件中提取 slots 信息
+ * 
+ * hooks 中 slots 的使用方式：
+ * 1. slots.default?.() - 使用 default slot
+ * 2. h(component, props, { title: () => ..., default: () => ... }) - 渲染 slots
+ * 
+ * @param {string} hooksFilePath - hooks 文件的路径
+ * @returns {Array} - slot 名称数组
+ * 
+ * @example
+ * // 输入：slots.default?.() 或 h(Comp, {}, { title: () => ..., default: () => ... })
+ * // 输出：['default', 'title']
+ */
+function extractSlotsFromHooksFile(hooksFilePath) {
+  const content = fs.readFileSync(hooksFilePath, 'utf-8')
+  const slots = []
+  
+  // 模式1：匹配 slots.default?.() 形式
+  const slotsAccessRegex = /slots\.([a-zA-Z][\w-]*)/g
+  let slotsMatch
+  while ((slotsMatch = slotsAccessRegex.exec(content)) !== null) {
+    const slotName = slotsMatch[1]
+    if (!slots.includes(slotName)) {
+      slots.push(slotName)
+    }
+  }
+  
+  // 匹配函数调用的第三个参数（slots 对象）的通用函数
+  const extractSlotsFromThirdArg = (thirdArgContent) => {
+    // 只提取值为函数的属性（如 title: () => ... 或 title: function() {}）
+    const slotKeyRegex = /['"]?([a-zA-Z][\w-]*)['"]?\s*:\s*(?:\(\)|()\s*=>|\(\s*\)\s*=>|\(\s*[^)]+\s*\)\s*=>|function)/g
+    let keyMatch
+    while ((keyMatch = slotKeyRegex.exec(thirdArgContent)) !== null) {
+      const slotName = keyMatch[1]
+      if (!slots.includes(slotName)) {
+        slots.push(slotName)
+      }
+    }
+  }
+  
+  // 模式2：匹配 h(component, props, { title: () => ... }) 形式（第三个参数是 slots 对象）
+  const hCallRegex = /h\s*\(\s*[^,]+,\s*[^,]+,\s*\{([^}]*)\}/g
+  let hMatch
+  while ((hMatch = hCallRegex.exec(content)) !== null) {
+    extractSlotsFromThirdArg(hMatch[1])
+  }
+  
+  // 模式3：匹配 createVNode(component, props, { title: () => ... }) 形式
+  const createVNodeRegex = /createVNode\s*\(\s*[^,]+,\s*[^,]+,\s*\{([^}]*)\}/g
+  let createVNodeMatch
+  while ((createVNodeMatch = createVNodeRegex.exec(content)) !== null) {
+    extractSlotsFromThirdArg(createVNodeMatch[1])
+  }
+  
+  // 模式4：匹配 render 函数中的 slots 对象
+  const renderSlotsRegex = /render\s*\(\s*[^,]+,\s*\{([^}]*)\}\s*\)/g
+  let renderMatch
+  while ((renderMatch = renderSlotsRegex.exec(content)) !== null) {
+    extractSlotsFromThirdArg(renderMatch[1])
+  }
+  
   return slots
 }
 
@@ -546,8 +691,30 @@ function generateComponentMetadata(componentName) {
   }
 
   // 从 .vue 文件中提取 slots 和组件名称
-  const slots = fs.existsSync(vueFilePath) ? extractSlotsFromVueFile(vueFilePath) : []
+  const vueSlots = fs.existsSync(vueFilePath) ? extractSlotsFromVueFile(vueFilePath) : []
   const componentNameFromVue = fs.existsSync(vueFilePath) ? extractComponentNameFromVueFile(vueFilePath) : null
+  
+  // 从 hooks 文件中提取 slots（查找 use-*.ts 文件）
+  const hooksFiles = fs.readdirSync(srcDir, { withFileTypes: true })
+    .filter(entry => entry.isFile() && entry.name.startsWith('use-') && entry.name.endsWith('.ts'))
+    .map(entry => path.join(srcDir, entry.name))
+  
+  const hooksSlots = []
+  for (const hooksFile of hooksFiles) {
+    try {
+      const slotsFromHook = extractSlotsFromHooksFile(hooksFile)
+      slotsFromHook.forEach(slot => {
+        if (!hooksSlots.includes(slot)) {
+          hooksSlots.push(slot)
+        }
+      })
+    } catch (e) {
+      console.warn(`解析 hooks 文件失败: ${hooksFile}`, e.message)
+    }
+  }
+  
+  // 合并 Vue 文件和 hooks 文件中的 slots，去重
+  const slots = [...new Set([...vueSlots, ...hooksSlots])]
   
   // 构建元数据对象
   const metadata = {

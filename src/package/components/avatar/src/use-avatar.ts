@@ -1,11 +1,11 @@
 import { onMounted, ref } from "vue";
 import type { ExtractPropTypes } from 'vue'
-import { avatarProps } from './context'
+import { useProps } from './context'
 import useNmSpace from '../../../hooks/useBem'
 import { type UseAvatarReturn } from './type.ts'
 
 export default function useAvatar(
-  props: ExtractPropTypes<typeof avatarProps>,
+  props: ExtractPropTypes<typeof useProps>,
   emits: (event: 'trigger') => void,
   nm: ReturnType<typeof useNmSpace>
 ): UseAvatarReturn {

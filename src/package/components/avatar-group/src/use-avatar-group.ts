@@ -1,14 +1,14 @@
 import { computed, useSlots, type ComputedRef, h, type VNode } from 'vue'
 import type { ExtractPropTypes } from 'vue'
 import TyAvatar from '../../avatar'
-import { avatarGroupProps } from './context'
+import { useProps } from './context'
 
 export interface UseAvatarGroupReturn {
   avatars: ComputedRef<VNode[]>
 }
 
 export default function useAvatarGroup(
-  props: ExtractPropTypes<typeof avatarGroupProps>
+  props: ExtractPropTypes<typeof useProps>
 ): UseAvatarGroupReturn {
   const slots = useSlots()
 

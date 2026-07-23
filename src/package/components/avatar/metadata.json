@@ -8,13 +8,13 @@
       "type": "number",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "头像宽度"
     },
     "shape": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": "",
+      "description": "头像形状",
       "values": [
         "circle",
         "square"
@@ -24,13 +24,13 @@
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否自动调整大小"
     }
   },
   "emits": {
     "trigger": {
       "params": [],
-      "description": ""
+      "description": "点击事件"
     }
   },
   "slots": [

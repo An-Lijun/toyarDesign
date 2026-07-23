@@ -1,15 +1,18 @@
-import useNmSpace from '../../../hooks/useBem'
-import buildProps from '../../../utils/buildProps';
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const staticProps ={
-  offset: {
-    type: Number,
-    default: 8
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'avatar-group',
+  props: {
+    /** 偏移量 */
+    offset: {
+      type: Number,
+      default: 8
+    },
+    /** 最大显示数量 */
+    max: {
+      type: Number,
+    }
   },
-  max: {
-    type: Number,
+  emits: {
   }
-}
-export const avatarGroupProps = buildProps(staticProps)
-
-export const nm = useNmSpace('avatar-group')
+})

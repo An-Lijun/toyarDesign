@@ -1,29 +1,31 @@
-import buildProps from '../../../utils/buildProps'
-import useNmSpace from '../../../hooks/useBem'
-
-export const staticProps = {
-  width:{
-    type:Number
-  },
-  shape:{
-    type:String,
-    values:['circle','square'],
-    default:''
-  },
-  autoSize:{
-    type:Boolean,
-    default:true
-  },
-}
-
-export const avatarProps = buildProps(staticProps)
-
-export const nm = useNmSpace('avatar')
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
 export interface AvatarEmits {
   'trigger': () => boolean
 }
 
-export const avatarEmits: AvatarEmits = {
-  'trigger': () => true
-}
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'avatar',
+  props: {
+    /** 头像宽度 */
+    width: {
+      type: Number
+    },
+    /** 头像形状 */
+    shape: {
+      type: String,
+      values: ['circle', 'square'],
+      default: ''
+    },
+    /** 是否自动调整大小 */
+    autoSize: {
+      type: Boolean,
+      default: true
+    },
+  },
+  emits: {
+    /** 点击事件 */
+    'trigger': () => true
+  }
+})
+

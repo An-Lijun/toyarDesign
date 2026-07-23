@@ -8,15 +8,17 @@ export interface AffixEmits {
 export const { staticProps, useProps, nm, useEmits } = createComponentContext({
   name: 'affix',
   props: {
-    tag: { type: String, default: 'div', description: '自定义标签' },
-    offsetTop: { type: Number, default: 0, description: '顶部偏移量' },
-    offsetBottom: { type: Number, description: '底部偏移量' },
-    target: { type: Element, description: '目标元素' },
+    /** 自定义标签 */
+    tag: { type: String, default: 'div' },
+    /** 顶部偏移量 */
+    offsetTop: { type: Number, default: 0 },
+    /** 底部偏移量 */
+    offsetBottom: { type: Number },
+    /** 目标元素 */
+    target: { type: Element },
   },
   emits: {
+    /** 固定状态改变时触发 */
     'fixed-change': (value: boolean) => true,
-    description: '固定状态改变时触发',
   }
 })
-
-

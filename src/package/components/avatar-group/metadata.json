@@ -8,17 +8,19 @@
       "type": "number",
       "default": 8,
       "required": false,
-      "description": ""
+      "description": "偏移量"
     },
     "max": {
       "type": "number",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "最大显示数量"
     }
   },
   "emits": {},
-  "slots": [],
+  "slots": [
+    "default"
+  ],
   "examples": [],
   "capabilities": [],
   "useCases": []

@@ -34,7 +34,7 @@
       "params": [
         "value: boolean"
       ],
-      "description": ""
+      "description": "固定状态改变时触发"
     }
   },
   "slots": [

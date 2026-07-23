@@ -7,14 +7,14 @@
 </template>
 
 <script setup lang="ts" name="TyAvatarGroup">
-import { avatarGroupProps, nm } from './context.ts'
+import { useProps, nm } from './context.ts'
 import useAvatarGroup from './use-avatar-group.ts'
 
 // 组件配置
 defineOptions({ name: 'TyAvatarGroup' })
 
 // Props 定义
-const props = defineProps(avatarGroupProps)
+const props = defineProps(useProps)
 
 // 逻辑处理
 const { avatars } = useAvatarGroup(props)

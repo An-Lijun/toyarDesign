@@ -35,12 +35,7 @@
       "description": ""
     }
   },
-  "emits": {
-    "click": {
-      "params": [],
-      "description": ""
-    }
-  },
+  "emits": {},
   "slots": [
     "default"
   ],

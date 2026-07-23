@@ -89,14 +89,7 @@
       "description": ""
     }
   },
-  "emits": {
-    "click": {
-      "params": [
-        "event: MouseEvent"
-      ],
-      "description": ""
-    }
-  },
+  "emits": {},
   "slots": [
     "loading",
     "default"
