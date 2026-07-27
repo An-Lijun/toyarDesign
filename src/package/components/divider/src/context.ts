@@ -1,17 +1,11 @@
-import buildProps from "../../../utils/buildProps";
-import useNmSpace from "../../../hooks/useBem";
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const dividerProps=buildProps({
-  direction: {
-    type: String,
-    default: "row",
-    values:["row", "column"]
-  },
-  position: {
-    type: String,
-    default: "center",
-    values:["center", "left", "right",'bottom','top']
-  },
+export const { staticProps, useProps, nm } = createComponentContext({
+  name: 'divider',
+  props: {
+    /** 分割线方向 */
+    direction: { type: String, default: 'row', values: ['row', 'column'] },
+    /** 分割线位置 */
+    position: { type: String, default: 'center', values: ['center', 'left', 'right', 'bottom', 'top'] }
+  }
 })
-
-export const nm =useNmSpace('divider')

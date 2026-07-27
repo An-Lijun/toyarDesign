@@ -1,19 +1,21 @@
 <template>
   <div :class="[nm.b(), nm.bem(direction)]">
     <span
-      :class="[nm.e('inner'), nm.bem('','inner', position)]"
-      v-if="useSlots().default"
+      :class="[nm.e('inner'), nm.bem('', 'inner', position)]"
+      v-if="hasDefaultSlot()"
     >
       <slot> </slot>
     </span>
   </div>
 </template>
 <script lang="ts" setup name="TyDivider">
-import { useSlots } from 'vue'
-import { dividerProps, nm } from './context'
+import { nm, useProps } from './context'
+import useDivider from './use-divider'
 
 defineOptions({
-  name:'TyDivider'
+  name: 'TyDivider'
 })
-defineProps(dividerProps)
+
+const props = defineProps(useProps)
+const { hasDefaultSlot } = useDivider(props)
 </script>

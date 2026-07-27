@@ -1,13 +1,10 @@
-import buildProps from "../../../utils/buildProps";
-import useNmSpace from "../../../hooks/useBem";
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const dProps =buildProps({
-  width:{
-    type:Number,
-    default:300
-  }
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'drawer',
+  props: {
+    /** 抽屉宽度 */
+    width: { type: Number, default: 300 }
+  },
+  emits: []
 })
-
-export const nm = useNmSpace('drawer')
-
-export const dEmits = []

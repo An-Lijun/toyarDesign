@@ -1,9 +1,10 @@
 
-import useNmSpace from '../../../hooks/useBem'
-import buildProps from '../../../utils/buildProps'
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const cardProp=buildProps({
-  border: {
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'card',
+  props: {
+     border: {
     type: Boolean,
     default: true
   },
@@ -15,5 +16,8 @@ export const cardProp=buildProps({
     type: Boolean,
     default:false
   }
+  },
+  emits: {
+  }
 })
-export const nm = useNmSpace('card')
+

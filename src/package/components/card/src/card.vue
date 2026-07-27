@@ -1,13 +1,11 @@
 <template>
-  <div
-    :class="[
-      nm.b(),
-      nm.is('border', border),
-      nm.is('shadow', shadow === 'shadow'),
-      nm.is('hoverShadow', shadow === 'hover'),
-    ]"
-  >
-    
+  <div :class="[
+    nm.b(),
+    nm.is('border', border),
+    nm.is('shadow', shadow === 'shadow'),
+    nm.is('hoverShadow', shadow === 'hover'),
+  ]">
+
     <header :class="nm.e('header')" v-if="useSlots().header">
       <slot name="header"></slot>
     </header>
@@ -19,12 +17,10 @@
 </template>
 <script setup lang='ts' name="TyCard">
 import { useSlots } from 'vue'
-import { cardProp,nm } from './context'
+import { useProps, nm } from './context'
 import TySkeleton from '../../skeleton'
 defineOptions({
-  name:'TyCard'
+  name: 'TyCard'
 })
-defineProps(cardProp)
-
+defineProps(useProps)
 </script>
-

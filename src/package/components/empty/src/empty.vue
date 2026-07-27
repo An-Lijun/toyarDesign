@@ -2,7 +2,7 @@
   <div :class="nm.b()">
     <div :class="nm.e('inner')">
       <slot name="icon">
-        <TyiInbox2Line :size="size"  />
+        <TyiInbox2Line :size="size" />
       </slot>
       <span>
         {{ title }}
@@ -11,10 +11,14 @@
   </div>
 </template>
 <script setup lang="ts" name="TyEmpty">
-import {TyiInbox2Line} from 'toyaricon'
-import {emptyProps,nm} from './context'
+import { TyiInbox2Line } from 'toyaricon'
+import { nm, useProps } from './context'
+import useEmpty from './use-empty'
+
 defineOptions({
-  name:'TyEmpty'
+  name: 'TyEmpty'
 })
-defineProps(emptyProps);
+
+const props = defineProps(useProps)
+useEmpty(props)
 </script>
