@@ -59,7 +59,7 @@
   </div>
 </template>
 <script setup lang="ts" name="TyCalendar">
-import { calendarProp, calendarEmit, nm } from './context'
+import { useProps, useEmits, nm } from './context'
 import { ref } from 'vue'
 import { formatDate } from 'robinson'
 import type { Ref } from 'vue'
@@ -68,8 +68,8 @@ import {TyiArrowLeftDoubleLine,TyiArrowLeftSLine,TyiArrowRightSLine,TyiArrowRigh
 defineOptions({
   name: 'TyCalendar'
 })
-defineProps(calendarProp)
-const emit = defineEmits(calendarEmit)
+defineProps(useProps)
+const emit = defineEmits(useEmits)
 
 const countDate = [new Date().getFullYear(), new Date().getMonth()]
 let nowDate = ref('')
@@ -154,7 +154,6 @@ defineExpose({
   nextYear,
   goTday,
   getNowDate: () => nowDate.value
-
 })
 
 </script>

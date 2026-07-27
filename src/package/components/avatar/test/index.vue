@@ -24,7 +24,7 @@
   </div>
 </template>
 <script setup>
-import {TyiInformationFill} from 'toyaricon'
+import TyiInformationFill from 'toyaricon/TyiInformationFill'
 </script>
 <style lang="less" scoped>
 </style>

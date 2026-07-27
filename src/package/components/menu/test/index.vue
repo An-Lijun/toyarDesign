@@ -1,21 +1,27 @@
 <template>
-
-<div style="height: 150px;">
-      <TyMenu theme="rDesign"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" >
-        <template #header>
-       
+  <TyiBarChartGroupedLine/>
+<TyMenu theme="rDesign" v-model="value1" :isFold="isFold" :option="menu" :data="11" @open="op">
+      <template #header>
+W
         <h1>{{ value1 }}</h1>
-          </template>
-      </TyMenu>
-</div>
-<h1>{{ value1 }}</h1>
-<h2>{{ value2 }}</h2>
-<h3>{{ opend }}</h3>
+      </template>
+    </TyMenu>
+  <div style="height: 150px;">
+    <TyMenu theme="rDesign" v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op">
+      <template #header>
+W
+        <h1>{{ value1 }}</h1>
+      </template>
+    </TyMenu>
+  </div>
+  <h1>{{ value1 }}</h1>
+  <h2>{{ value2 }}</h2>
+  <h3>{{ opend }}</h3>
   <div class="divRoot">
     <TyButton @click="() => {
       isFold = !isFold
     }
-      ">提交</TyButton>
+    ">提交</TyButton>
     <div>
       <TyMenu v-model="value2" v-model:opend="opend" :isFold="isFold" @change="change">
         <template #header>
@@ -64,7 +70,7 @@
         </template>
         <TySubMenu index="1">
           <template #icon>
-            <TyiStackFill/>
+            <TyiStackFill />
           </template>
           <template #title> Navigation1 </template>
 
@@ -74,15 +80,15 @@
         </TySubMenu>
         <TySubMenu index="2">
           <template #icon>
-            <TyiPaletteFill/>
+            <TyiPaletteFill />
           </template>
           <template #title> Navigation2 </template>
           <TyMenuItem index="2-1" mkey="xx31"> menu1 </TyMenuItem>
           <TyMenuItem index="2-2" mkey="xx32"> menu2 </TyMenuItem>
           <TySubMenu index="2-3">
             <template #icon>
-              <TyiBug2Fill ></TyiBug2Fill>
-              <TyiBug2Fill/>
+              <TyiBug2Fill></TyiBug2Fill>
+              <TyiBug2Fill />
             </template>
             <template #title> Navigation2-1 </template>
             <TyMenuItem index="2-3-1" mkey="xx3"> menu1 </TyMenuItem>
@@ -94,8 +100,8 @@
       <br>
       <br>
       <h1>{{ value1 }}</h1>
-      <div >
-        <TyMenu  theme="dark"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op">
+      <div>
+        <TyMenu theme="dark" v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op">
           <template #header>
             <div style="
                 height: 50px;
@@ -147,7 +153,7 @@
       <br>
       <br>
 
-      <TyMenu theme="light"  v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" />
+      <TyMenu theme="light" v-model="value1" :isFold="isFold" :option="opt" :data="11" @open="op" />
       <br>
       <br>
       <br>
@@ -157,19 +163,19 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-
-import {TyiStackFill,TyiPaletteFill,TyiBug2Fill} from 'toyaricon'
-
+import TyiBarChartGroupedLine from 'toyaricon/TyiBarChartGroupedLine'
+import { TyiStackFill, TyiPaletteFill, TyiBug2Fill } from 'toyaricon'
+import {menu} from './i.js'
 let isFold = ref(true)
 let value1 = ref('aaa')
-let value2 =ref('')
-let opend =ref([])
+let value2 = ref('')
+let opend = ref([])
 const change = (val) => {
   // console.log(val);
 }
-const op=(v)=>{
+const op = (v) => {
   console.log(v);
-  
+
 }
 let opt = [
   {

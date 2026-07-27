@@ -1,21 +1,29 @@
 import TySubMenu from "./subMenu.vue"
 import TyMenuItem from "./menuItem.vue"
-import {defineAsyncComponent} from 'vue'
+import { defineAsyncComponent } from 'vue'
+
 function toPascalCase(str) {
   const words = str.split('-');
   return words.map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }).join('');
 }
+
 const getIcon = (icon) => {
-  return defineAsyncComponent(() => import('toyaricon').then((module) => {
-    if(icon.includes('-')){
-      let str = icon.replace('ty-','tyi-')
-      str = toPascalCase(str)
-      return module[str]
-      }
-    return module[icon]
-  }));
+  let pascalName = icon
+  if (icon.includes('-')) {
+    pascalName = toPascalCase(icon.replace('ty-', 'tyi-'))
+  }
+  
+  // 开发环境：Vite alias 解析到本地 node_modules/toyaricon/dist
+  // 生产构建：external 保留原始路径，由消费者项目解析
+  return defineAsyncComponent(() => 
+    import(`toyaricon/${pascalName}.js`).then(m => m.default)
+      .catch(() => {
+        console.warn(`Icon ${pascalName} not found in toyaricon`)
+        return null
+      })
+  )
 }
 
 import { defineComponent, getCurrentInstance, h } from "vue"

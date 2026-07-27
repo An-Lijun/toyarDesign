@@ -1,12 +1,19 @@
-import useNmSpace from '../../../hooks/useBem'
-import buildProps from '../../../utils/buildProps'
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const calendarProp = buildProps({
-  dayItemHeight: {
-    type: Number,
-    default: 110
+
+
+
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'calendar',
+  props: {
+    /** 日期项高度 */
+    dayItemHeight: {
+      type: Number,
+      default: 110
+    }
+  },
+  emits: {
+    /** 日期项点击时触发 */
+    'click': (value: Date) => value,
   }
 })
-export const calendarEmit = ['click']
-
-export const nm = useNmSpace('calendar')

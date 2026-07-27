@@ -6,7 +6,8 @@ import autoImport from 'unplugin-auto-import/vite'//引入语法
 import bemStaticOptimization from './scripts/vite-plugin-bem-static'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  include: ['toyaricon'],
   build: {
     //压缩
     minify: true,
@@ -26,7 +27,7 @@ export default defineConfig({
     rollupOptions: {
       //忽略打包vue文件
       //input: ["index.ts"],
-      external: ['vue'],
+      external: ['vue', 'toyaricon'],
       input: {
         main: join(__dirname, 'src/package/index.ts'),
       },
@@ -67,7 +68,11 @@ export default defineConfig({
   resolve:{
     alias: {
       '@': join(__dirname, "src"),
+      // 开发环境下指向本地 node_modules，生产构建时由 external 处理
+      ...(mode === 'development' ? {
+        'toyaricon': join(__dirname, "node_modules/toyaricon/dist"),
+      } : {}),
     },
   },
   plugins: [bemStaticOptimization(), vue(), VueSetupExtend(), autoImport({ imports: ['vue'] })],
-})
+}))
