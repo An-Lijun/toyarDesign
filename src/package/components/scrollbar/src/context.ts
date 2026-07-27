@@ -1,24 +1,6 @@
-import buildProps from '../../../utils/buildProps';
-import useNmSpace from '../../../hooks/useBem';
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const rowProps =buildProps({
-  type: {
-    type: String,
-    default: 'line'
-  },
-  gutter: {
-    type: Number,
-    default: 0
-  },
-  justify: {
-    type: String,
-    default: 'top'
-  },
-  align: {
-    type: String,
-    default: 'center'
-  }
+export const { staticProps, useProps, nm } = createComponentContext({
+  name: 'scrollbar',
+  props: {}
 })
-
-export const nm =useNmSpace('scrollbar')
- 

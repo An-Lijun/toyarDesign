@@ -1,37 +1,26 @@
 <template>
-  <div :class="[nm.b(),nm.m(type)]">
+  <div :class="[nm.b(), nm.m(type)]">
     <div class="ty-result-icon">
       <component :is="msgIconObj[type]" :size="size" :color="`var(--${colorObj[type]}-5)`"></component>
     </div>
     <div :class="nm.e('title') " v-if="title">
       {{ title }}
     </div>
-    <div  :class="nm.e('subTitle') "  v-if="subTitle">
+    <div :class="nm.e('subTitle') " v-if="subTitle">
       {{ subTitle }}
     </div>
   </div>
 </template>
 <script setup>
-import {resProps,nm} from './context'
+import { nm, useProps } from './context'
+import useResult from './use-result'
 
-import { TyiInformationFill,TyiCheckboxCircleFill,TyiCloseCircleFill } from 'toyaricon'
 defineOptions({
-  name:'TyResult'
+  name: 'TyResult'
 })
-const props = defineProps(resProps)
 
-const msgIconObj = {
-  info: TyiInformationFill,
-  success: TyiCheckboxCircleFill,
-  warning: TyiInformationFill,
-  error: TyiCloseCircleFill
-}
-const colorObj = {
-  'info': 'primary',
-  'success': 'success',
-  'warning': 'warning',
-  'error': 'danger'
-}
+const props = defineProps(useProps)
+const { msgIconObj, colorObj } = useResult(props)
 </script>
 <style lang="scss" scoped>
 .ty-result {

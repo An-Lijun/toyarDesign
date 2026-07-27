@@ -10,41 +10,15 @@
   </div>
 </template>
 <script lang="ts" setup name="TyRow">
-import { provide, computed } from 'vue'
-import {rowContent} from '../../../hooks/symbolNm'
-import {rowProps ,nm} from './context'
+import { nm, useProps } from './context'
+import useRow from './use-row'
+
 defineOptions({
-  name:'TyRow'
-})
-const props = defineProps(rowProps)
-provide(rowContent, {
-  value: props.gutter
+  name: 'TyRow'
 })
 
-const compJustify = computed(() => {
-  switch (props.justify) {
-    case 'start':
-      return ''
-    case 'center':
-      return nm.is('justify-center') 
-    case 'end':
-      return nm.is('justify-end') 
-    case 'around':
-      return nm.is('justify-around') 
-    case 'between':
-      return nm.is('justify-between') 
-  }
-})
-const compAlign = computed(() => {
-  switch (props.align) {
-    case 'center':
-      return nm.is('align-center') 
-    case 'end':
-      return nm.is('align-bottom') 
-    case 'top':
-      return nm.is('align-top') 
-  }
-})
+const props = defineProps(useProps)
+const { compJustify, compAlign } = useRow(props)
 </script>
 <style lang="scss">
 .ty-row {

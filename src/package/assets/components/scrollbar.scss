@@ -1,0 +1,87 @@
+.ty-scrollbar {
+  overflow: hidden;
+  position: relative;
+
+  &__container {
+    height: 100%;
+    max-height: 100%;
+    overflow: auto;
+    position: relative;
+    scrollbar-width: none;
+  }
+
+  &__container::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__rightBarContainer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    z-index: 15;
+    background-color: var(--opacity-color-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  &__rightBar {
+    width: 8px;
+    background-color: var(--fill-4);
+    border-radius: 4px;
+    position: absolute;
+    box-sizing: border-box;
+    right: 2px;
+    top: 2px;
+    user-select: none;
+    -webkit-user-drag: none;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__bottomBarContainer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 12px;
+    width: calc(100% - 12px);
+    z-index: 15;
+    background-color: var(--opacity-color-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  &__bottomBar {
+    height: 8px;
+    background-color: var(--fill-4);
+    border-radius: 4px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 2px;
+    left: 2px;
+    user-select: none;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &:hover {
+    .ty-scrollbar__rightBarContainer,
+    .ty-scrollbar__bottomBarContainer {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
