@@ -2,7 +2,7 @@
   <div :class="nm.b()">
     <slot name="head"> </slot>
     <div :class="nm.e('heading')">
-      <div :class="nm.e('back')" v-if="props.showBack" @click="emit('back')">
+      <div :class="nm.e('back')" v-if="props.showBack" @click="handleBack">
         <slot name="back">
           <TyiArrowLeftFill/>
         </slot>
@@ -26,14 +26,19 @@
   </div>
 </template>
 <script setup>
-import { hdProps, hdEmits, nm } from './context'
-import {TyiArrowLeftFill} from 'toyaricon'
+import { nm, useProps, useEmits } from './context'
+import { TyiArrowLeftFill } from 'toyaricon'
+import TyDivider from '../../divider'
+import usePageHeader from './use-pageHeader'
+
 defineOptions({
-  name:'TyPageHeader'
+  name: 'TyPageHeader'
 })
 
-const props = defineProps(hdProps)
-const emit = defineEmits(hdEmits)
+const props = defineProps(useProps)
+const emit = defineEmits(useEmits)
+
+const { handleBack } = usePageHeader(emit)
 </script>
 <style lang="scss" scoped>
 .ty-pageHeader {

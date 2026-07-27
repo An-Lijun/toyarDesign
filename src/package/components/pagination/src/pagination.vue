@@ -18,57 +18,18 @@
   </div>
 </template>
 <script setup>
-import {TyiArrowRightSLine,TyiArrowLeftSLine} from 'toyaricon'
-import { pagProps, nm } from './context'
+import { TyiArrowRightSLine, TyiArrowLeftSLine } from 'toyaricon'
+import { nm, useProps, useEmits } from './context'
+import usePagination from './use-pagination'
+
 defineOptions({
   name: 'TyPagination'
 })
-const props = defineProps(pagProps)
-const emit = defineEmits(['currentChange', 'sizeChange'])
 
-const items = computed(() => {
-  const item = Math.floor(props.current / props.pageSize)
-  let min = item * props.pageSize
-  let max = (item + 1) * props.pageSize
-  let arr = []
-  let totalFloor = Math.floor(props.total / props.pageSize)
-  if (props.current === min) {
-    min = min - props.pageSize
-    max = props.current
-  }
+const props = defineProps(useProps)
+const emit = defineEmits(useEmits)
 
-  if (props.total <= max) {
-    max = props.total
-  }
-
-  for (let i = min; i < max; i++) {
-    arr.push(i + 1)
-  }
-  return arr
-})
-const preClick = () => {
-  let current = props.current
-  if ((current - props.pageSize) > 0) {
-    current -= props.pageSize
-    emit('currentChange', current)
-  }
-}
-const aftClick = () => {
-  let current = props.current
-  let sum = current + props.pageSize
-
-  if (sum < props.total) {
-    current = sum
-    emit('currentChange', current)
-  }
-  if (sum >= props.total) {
-    current = props.total
-    emit('currentChange', current)
-  }
-}
-const itemClick = (item) => {
-  emit('currentChange', item)
-}
+const { items, preClick, aftClick, itemClick } = usePagination(props, emit)
 </script>
 <style lang="scss" scoped>
 .ty-pagination {
@@ -107,7 +68,6 @@ const itemClick = (item) => {
 
     &:hover {
       cursor: pointer;
-      // color: var(--primary-6);
       background-color: var(--fill-2);
     }
 
@@ -117,14 +77,10 @@ const itemClick = (item) => {
 
       &:hover {
         cursor: pointer;
-        // color: var(--primary-6);
         color: var(--primary-6);
         background-color: var(--primary-2);
       }
     }
   }
 }
-
-// ty-arrow-left-double-line
-// ty-arrow-right-double-line
-// ty-arrow-down-s-line</style>
+</style>

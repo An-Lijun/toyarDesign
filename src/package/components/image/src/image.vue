@@ -1,15 +1,19 @@
 <template>
-  <div :class="[nm.b(),nm.bem('','',shape)]">
+  <div :class="[nm.b(), nm.bem('', '', shape)]">
     <img :src="src" :alt="alt" :style="{
-      width: `${size}px`, 
-      height: `${size}px`, 
+      width: `${size}px`,
+      height: `${size}px`,
       objectFit: fit
-    }"></div>
+    }">
+  </div>
 </template>
-<script setup lang="ts" name="TyImage">
-import {imgProps,nm} from './context'
+<script setup>
+import { nm, useProps, useEmits } from './context'
+
 defineOptions({
-  name:'TyImage'
+  name: 'TyImage'
 })
-defineProps(imgProps)
+
+defineProps(useProps)
+defineEmits(useEmits)
 </script>

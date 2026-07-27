@@ -1,15 +1,19 @@
-import buildProps from '../../../utils/buildProps';
-import useNmSpace from '../../../hooks/useBem';
-export const waterProps =buildProps({
-  markInfo: {
-    type: [String,Array],
-    required: true
-  },
-  options: {
-    type: Object
+import { createComponentContext } from '@/package/utils/createComponentContext'
+
+export const { staticProps, useProps, nm } = createComponentContext({
+  name: 'waterMark',
+  props: {
+    /** 水印信息 */
+    markInfo: {
+      type: [String, Array],
+      required: true
+    },
+    /** 水印配置选项 */
+    options: {
+      type: Object
+    }
   }
 })
-export const nm =useNmSpace('waterMark')
 
 export const defaultOptions = {
   fontColor: 'rgba(210,210,230,0.7)',
@@ -24,4 +28,3 @@ export const defaultOptions = {
   offsetY: 0,
   antiTamper: false
 }
-Object.defineProperty

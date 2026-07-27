@@ -1,5 +1,19 @@
-import { createVNode, render } from "vue"
-import message from './src/message.vue'
+import { createVNode, render } from 'vue'
+import TyMessage from './src/message.vue'
+import { useProps, nm, useEmits, staticProps } from './src/context'
+import { default as useMessage } from './src/use-message'
+import type { TyMessageInstance, UseMessageReturn } from './src/type'
+
+export const useTyMessage = {
+  useProps,
+  nm,
+  useEmits,
+  useMessage,
+  staticProps
+}
+
+export type { TyMessageInstance, UseMessageReturn }
+
 let messageArr = []
 let doc = document || {}
 const getTop = () => messageArr.reduce((item, current) => {
@@ -8,7 +22,7 @@ const getTop = () => messageArr.reduce((item, current) => {
 
 const createMsg = (msg, options, div) => {
   const top = getTop()
-  const instance = createVNode(message, {
+  const instance = createVNode(TyMessage, {
     msg,
     options,
     top,

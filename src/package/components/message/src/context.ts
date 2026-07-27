@@ -1,21 +1,25 @@
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-import buildProps from "../../../utils/buildProps"
-import useNmSpace from "../../../../package/hooks/useBem"
-
-export const msgProps= buildProps({
-  msg: {
-    type: String,
-    required: true
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'message',
+  props: {
+    /** 消息内容 */
+    msg: {
+      type: String,
+      required: true
+    },
+    /** 配置选项 */
+    options: {
+      type: Object
+    },
+    /** 顶部距离 */
+    top: {
+      type: String,
+      default: '0'
+    }
   },
-  options: {
-    type: Object
-  },
-  top: {
-    type: String,
-    default: '0'
+  emits: {
+    /** 关闭事件 */
+    close: () => true
   }
 })
-
-export const msgEmit=['close']
-
-export const nm = useNmSpace('message')

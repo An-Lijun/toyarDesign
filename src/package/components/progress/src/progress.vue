@@ -30,49 +30,17 @@
   </div>
 </template>
 <script setup>
-import { watch } from 'vue'
-import { useCompMvalue } from '../../../hooks/useCompMvalue'
-import { prgProps, prgEmits, nm } from './context'
+import { nm, useProps, useEmits } from './context'
+import useProgress from './use-progress'
 
 defineOptions({
-  name:'TyProgress'
-})
-const props = defineProps(prgProps)
-const emit = defineEmits(prgEmits)
-
-const setFn = value => {
-  model.value = Math.floor(value)
-}
-const { model } = useCompMvalue(props, emit, {
-  watchChange: setFn
-})
-const style = ref({
-  width: '',
-  height: '',
-  borderWidth: '',
-  background: ''
+  name: 'TyProgress'
 })
 
-if (props.type === 'circle') {
-  watch(
-    model,
-    (newVal, oldVal) => {
-      console.log(newVal);
+const props = defineProps(useProps)
+const emit = defineEmits(useEmits)
 
-      style.value = {
-        width: props.width + 'px',
-        height: props.width + 'px',
-        borderWidth: `${props.strokeWidth}px`,
-        background: `conic-gradient(from -90deg at center,  var(--primary-6) ${
-          3.6 * model.value
-        }deg, var(--primary-6) ${3.6 * model.value}deg, var(--fill-4) ${
-          3.6 * model.value
-        }deg)`
-      }
-    },
-    { immediate: true }
-  )
-}
+const { model, style } = useProgress(props, emit)
 </script>
 <style lang="scss" scoped>
 .ty-progress {

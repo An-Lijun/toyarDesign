@@ -1,5 +1,18 @@
 import TyNotification from './src/notification.vue'
 import { createVNode, render } from 'vue'
+import { useProps, nm, useEmits, staticProps } from './src/context'
+import { default as useNotification } from './src/use-notification'
+import type { TyNotificationInstance, UseNotificationReturn } from './src/type'
+
+export const useTyNotification = {
+  useProps,
+  nm,
+  useEmits,
+  useNotification,
+  staticProps
+}
+
+export type { TyNotificationInstance, UseNotificationReturn }
 
 let notiArr = []
 let doc = document || {}
@@ -17,7 +30,7 @@ const createNoti = (msg, options = {
   const top = getTop()
   const instance = createVNode(TyNotification, {
     message: msg,
-    title: options?.title ||'提示',
+    title: options?.title || '提示',
     type: options?.type,
     time: options?.time,
     top,
@@ -38,7 +51,6 @@ const createNoti = (msg, options = {
   notiArr.push(instance)
   return instance
 }
-
 
 export default function NotifyJs(msg, options) {
   if (doc) {

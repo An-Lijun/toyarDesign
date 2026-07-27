@@ -12,7 +12,7 @@
           <div :class="nm.e('index')">
               {{ inx+1 }}
           </div>
-          <div v-text="itemContent(item)"  :class="[nm.e(item.type),nm.e('info')]">
+          <div v-text="itemContent(item)" :class="[nm.e(item.type), nm.e('info')]">
             
           </div>
       </div>
@@ -31,56 +31,23 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
-import { nm, logProps } from "./context";
-import { downloadByBlob } from 'robinson'
+import { nm, useProps, useEmits } from './context'
+import TySpace from '../../space'
+import TyButton from '../../button'
+import useLogConsole from './use-logConsole'
+
 defineOptions({
-  name: "TyLogConsole",
-});
-const props = defineProps(logProps);
-const contentRef = ref()
-let logArr = ref([]);
-let notRoll = true
-const log = (data) => {
-  logArr.value.push(data)
-  if (contentRef.value && !notRoll) {
-    contentRef.value.scrollTop = contentRef.value.scrollHeight;
-  }
-}
-const handlerMouseEnter = () => {
-  notRoll = true
-}
-const handlerMouseLeave = () => {
-  notRoll = false
-}
-const handlerClear = () => {
-  logArr.value = [];
-};
+  name: 'TyLogConsole'
+})
 
+const props = defineProps(useProps)
+defineEmits(useEmits)
 
-const handlerExport = () => {
-  function downloadText(fileName, text) {
-    downloadByBlob(text, fileName, 'text/plain')
-  }
-  downloadText('logs11', logArr.value.map(item => {
-    return `${itemContent(item)}`
-  }).join('\n'))
-}
-const itemContent = (item) => {
-  let pre = '';
-  if (item.custom) {
-    pre = "【" + item.custom + "】"
-  } else if (['warn', 'error', 'debugger'].includes(item.type.toLowerCase(0))) {
-    pre = "【" + item.type.toUpperCase() + "】";
-  } else {
-    pre = "【INFO】";
-  }
-  return pre + (item.time ? item.time : "") + " " + item.info;
-};
+const { contentRef, logArr, log, handlerMouseEnter, handlerMouseLeave, handlerClear, handlerExport, itemContent } = useLogConsole()
 
 defineExpose({
   log,
   clearLog: handlerClear,
-  exportLog: handlerExport,
+  exportLog: handlerExport
 })
 </script>
