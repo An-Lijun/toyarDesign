@@ -29,6 +29,10 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
     draggable: {
       type: Boolean,
       default: true
+    },
+    mask: {
+      type: Boolean,
+      default: true
     }
   },
   emits: {

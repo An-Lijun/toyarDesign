@@ -7,9 +7,10 @@
   overflow: auto;
   margin: 0;
   z-index: var(--zindex-50);
-  background-color: var(--opcity-5);
   color: var(--text-1);
-
+  &.is-mask{
+    background-color: var(--opacity-5);
+  }
   .ty-dialog {
     position: relative;
     margin: 15vh auto 50px;

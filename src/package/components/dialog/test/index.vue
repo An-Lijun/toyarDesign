@@ -2,7 +2,7 @@
   <div class="divRoot">
     <TyButton @click="isShow1=!isShow1">123</TyButton>
     
-    <TyDialog v-model="isShow1" :draggable="false">
+    <TyDialog v-model="isShow1" :draggable="false" :mask="false">
       12345679
     </TyDialog>
     <hr>

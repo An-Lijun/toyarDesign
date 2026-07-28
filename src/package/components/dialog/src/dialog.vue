@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body" v-if="isTeleport">
-    <div :class="nm.e('wrapper')" @click.self="handleClose" v-show="model||showValue">
+    <div :class="[nm.e('wrapper'),nm.is('mask',mask)]" @click.self="handleClose" v-show="model||showValue">
       <transition name="dialog-fade">
         <div
           :class="nm.b()"
@@ -30,7 +30,7 @@
       </transition>
     </div>
   </Teleport>
-  <div v-else :class="nm.e('wrapper')" @click.self="handleClose" v-show="model||showValue">
+  <div v-else :class="[nm.e('wrapper'),nm.is('mask',mask)]" @click.self="handleClose" v-show="model||showValue">
       <transition name="dialog-fade">
         <div
           :class="nm.b()"
