@@ -8,13 +8,7 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": "",
-      "values": [
-        "mini",
-        "small",
-        "medium",
-        "large"
-      ]
+      "description": ""
     },
     "clearable": {
       "type": "boolean",
@@ -37,7 +31,7 @@
     "modelValue": {
       "type": "string | number",
       "default": "",
-      "required": true,
+      "required": false,
       "description": ""
     },
     "showLimit": {
@@ -63,7 +57,9 @@
       "description": ""
     },
     "enter": {
-      "params": [],
+      "params": [
+        "value: string"
+      ],
       "description": ""
     },
     "clear": {
@@ -71,11 +67,15 @@
       "description": ""
     },
     "input": {
-      "params": [],
+      "params": [
+        "value: string"
+      ],
       "description": ""
     },
-    "update:modelValue": {
-      "params": [],
+    "modelValue": {
+      "params": [
+        "value: string"
+      ],
       "description": ""
     }
   },

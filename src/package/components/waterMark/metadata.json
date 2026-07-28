@@ -8,13 +8,13 @@
       "type": "string | array",
       "default": null,
       "required": true,
-      "description": ""
+      "description": "水印信息"
     },
     "options": {
       "type": "object",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "水印配置选项"
     }
   },
   "emits": {},

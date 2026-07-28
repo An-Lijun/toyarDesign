@@ -21,6 +21,12 @@
       "default": true,
       "required": false,
       "description": ""
+    },
+    "size": {
+      "type": "string | number",
+      "default": 24,
+      "required": false,
+      "description": ""
     }
   },
   "emits": {},

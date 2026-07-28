@@ -8,13 +8,7 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": "",
-      "values": [
-        "mini",
-        "small",
-        "medium",
-        "large"
-      ]
+      "description": ""
     },
     "clearable": {
       "type": "boolean",
@@ -37,7 +31,7 @@
     "modelValue": {
       "type": "string",
       "default": "",
-      "required": true,
+      "required": false,
       "description": ""
     },
     "format": {
@@ -68,8 +62,10 @@
       "params": [],
       "description": ""
     },
-    "update:modelValue": {
-      "params": [],
+    "modelValue": {
+      "params": [
+        "value: string"
+      ],
       "description": ""
     }
   },

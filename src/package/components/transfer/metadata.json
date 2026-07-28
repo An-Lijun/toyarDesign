@@ -8,7 +8,7 @@
       "type": "array",
       "default": null,
       "required": true,
-      "description": ""
+      "description": "源数据"
     }
   },
   "emits": {},

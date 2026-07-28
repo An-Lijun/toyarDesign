@@ -8,7 +8,7 @@
       "type": "string",
       "default": null,
       "required": true,
-      "description": "",
+      "description": "结果类型",
       "values": [
         "info",
         "success",
@@ -20,19 +20,19 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "标题"
     },
     "subTitle": {
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "副标题"
     },
     "size": {
       "type": "string",
       "default": "100",
       "required": false,
-      "description": ""
+      "description": "图标尺寸"
     }
   },
   "emits": {},

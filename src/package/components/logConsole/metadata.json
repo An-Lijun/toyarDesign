@@ -8,37 +8,37 @@
       "type": "number | string",
       "default": 10000,
       "required": false,
-      "description": ""
+      "description": "最大日志数量"
     },
     "itemHieght": {
       "type": "number | string",
       "default": 40,
       "required": false,
-      "description": ""
+      "description": "单条日志高度"
     },
     "height": {
       "type": "number | string",
       "default": 400,
       "required": false,
-      "description": ""
+      "description": "组件高度"
     },
     "isClear": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否显示清除按钮"
     },
     "prefixDist": {
       "type": "object",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "前缀配置"
     },
     "addModel": {
       "type": "string",
       "default": "append",
       "required": false,
-      "description": ""
+      "description": "新日志添加模式"
     }
   },
   "emits": {},

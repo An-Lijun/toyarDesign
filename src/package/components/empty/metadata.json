@@ -3,7 +3,20 @@
   "name": "TyEmpty",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "title": {
+      "type": "string",
+      "default": "暂无数据",
+      "required": false,
+      "description": "空状态文本"
+    },
+    "size": {
+      "type": "number",
+      "default": 54,
+      "required": false,
+      "description": "图标尺寸"
+    }
+  },
   "emits": {},
   "slots": [
     "icon"

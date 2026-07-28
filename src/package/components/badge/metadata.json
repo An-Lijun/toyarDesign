@@ -8,25 +8,25 @@
       "type": "string | number",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "坏章内容"
     },
     "max": {
       "type": "number",
       "default": 99,
       "required": false,
-      "description": ""
+      "description": "最大显示数量"
     },
     "dot": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否为点"
     },
     "status": {
       "type": "string",
       "default": "danger",
       "required": false,
-      "description": ""
+      "description": "状态"
     }
   },
   "emits": {},

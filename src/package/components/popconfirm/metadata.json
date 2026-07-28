@@ -41,7 +41,16 @@
       "description": ""
     }
   },
-  "emits": {},
+  "emits": {
+    "confirm": {
+      "params": [],
+      "description": ""
+    },
+    "reject": {
+      "params": [],
+      "description": ""
+    }
+  },
   "slots": [
     "content",
     "default"

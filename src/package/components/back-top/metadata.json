@@ -8,34 +8,39 @@
       "type": "number",
       "default": 200,
       "required": false,
-      "description": ""
+      "description": "触发距离"
     },
     "right": {
       "type": "number",
       "default": 40,
       "required": false,
-      "description": ""
+      "description": "右侧距离"
     },
     "bottom": {
       "type": "number",
       "default": 40,
       "required": false,
-      "description": ""
+      "description": "底部距离"
     },
     "target": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "目标元素"
     },
     "circle": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否显示圆角"
     }
   },
-  "emits": {},
+  "emits": {
+    "click": {
+      "params": [],
+      "description": "点击事件"
+    }
+  },
   "slots": [
     "default"
   ],

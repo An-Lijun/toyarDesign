@@ -7,7 +7,7 @@
     "modelValue": {
       "type": "number",
       "default": "",
-      "required": true,
+      "required": false,
       "description": ""
     },
     "precision": {
@@ -45,15 +45,19 @@
       "description": ""
     },
     "change": {
-      "params": [],
+      "params": [
+        "value: number"
+      ],
       "description": ""
     },
     "focus": {
       "params": [],
       "description": ""
     },
-    "update:modelValue": {
-      "params": [],
+    "modelValue": {
+      "params": [
+        "value: number"
+      ],
       "description": ""
     }
   },

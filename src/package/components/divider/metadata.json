@@ -8,7 +8,7 @@
       "type": "string",
       "default": "row",
       "required": false,
-      "description": "",
+      "description": "分割线方向",
       "values": [
         "row",
         "column"
@@ -18,7 +18,7 @@
       "type": "string",
       "default": "center",
       "required": false,
-      "description": "",
+      "description": "分割线位置",
       "values": [
         "center",
         "left",

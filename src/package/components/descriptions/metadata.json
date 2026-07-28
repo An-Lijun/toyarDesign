@@ -8,25 +8,25 @@
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "标题"
     },
     "data": {
       "type": "array",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "描述数据"
     },
     "column": {
       "type": "number",
       "default": 3,
       "required": false,
-      "description": ""
+      "description": "列数"
     },
     "size": {
       "type": "string",
       "default": "small",
       "required": false,
-      "description": "",
+      "description": "尺寸",
       "values": [
         "mini",
         "small",
@@ -38,7 +38,7 @@
       "type": "string",
       "default": "left",
       "required": false,
-      "description": "",
+      "description": "对齐方式",
       "values": [
         "left",
         "center",
@@ -49,13 +49,13 @@
       "type": "string",
       "default": "column",
       "required": false,
-      "description": ""
+      "description": "布局方式"
     },
     "border": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否显示边框"
     }
   },
   "emits": {},

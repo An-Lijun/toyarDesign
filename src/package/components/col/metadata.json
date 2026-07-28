@@ -8,13 +8,13 @@
       "type": "number | object | string",
       "default": 24,
       "required": false,
-      "description": ""
+      "description": "栅格占据的列数"
     },
     "offset": {
       "type": "number",
       "default": 0,
       "required": false,
-      "description": ""
+      "description": "栅格左侧偏移的列数"
     }
   },
   "emits": {},

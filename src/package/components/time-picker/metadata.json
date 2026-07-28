@@ -14,13 +14,7 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": "",
-      "values": [
-        "mini",
-        "small",
-        "medium",
-        "large"
-      ]
+      "description": ""
     },
     "clearable": {
       "type": "boolean",
@@ -42,7 +36,7 @@
     },
     "format": {
       "type": "string",
-      "default": null,
+      "default": "",
       "required": false,
       "description": ""
     },
@@ -55,15 +49,21 @@
   },
   "emits": {
     "blur": {
-      "params": [],
+      "params": [
+        "value: string"
+      ],
       "description": ""
     },
     "input": {
-      "params": [],
+      "params": [
+        "value: string"
+      ],
       "description": ""
     },
-    "update:modelValue": {
-      "params": [],
+    "modelValue": {
+      "params": [
+        "value: string"
+      ],
       "description": ""
     }
   },

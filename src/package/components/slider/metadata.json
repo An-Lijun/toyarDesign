@@ -8,31 +8,33 @@
       "type": "string | number",
       "default": "",
       "required": true,
-      "description": ""
+      "description": "绑定值"
     },
     "min": {
       "type": "string | number",
       "default": 0,
       "required": false,
-      "description": ""
+      "description": "最小值"
     },
     "max": {
       "type": "string | number",
       "default": 100,
       "required": false,
-      "description": ""
+      "description": "最大值"
     },
     "width": {
       "type": "string | number",
       "default": 10,
       "required": false,
-      "description": ""
+      "description": "滑块宽度"
     }
   },
   "emits": {
-    "update:modelValue": {
-      "params": [],
-      "description": ""
+    "modelValue": {
+      "params": [
+        "value: string | number"
+      ],
+      "description": "更新绑定值"
     }
   },
   "slots": [],

@@ -3,9 +3,37 @@
   "name": "TySpace",
   "category": "unknown",
   "description": "",
-  "props": {},
+  "props": {
+    "align": {
+      "type": "string",
+      "default": "center",
+      "required": false,
+      "description": "对齐方式"
+    },
+    "justify": {
+      "type": "string",
+      "default": "start",
+      "required": false,
+      "description": "水平排列方式"
+    },
+    "direction": {
+      "type": "string",
+      "default": "row",
+      "required": false,
+      "description": "排列方向"
+    },
+    "size": {
+      "type": "number | string",
+      "default": "small",
+      "required": false,
+      "description": "间距大小"
+    }
+  },
   "emits": {},
-  "slots": [],
+  "slots": [
+    "split",
+    "default"
+  ],
   "examples": [],
   "capabilities": [],
   "useCases": []

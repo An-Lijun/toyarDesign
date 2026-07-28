@@ -8,31 +8,31 @@
       "type": "number",
       "default": 0,
       "required": false,
-      "description": ""
+      "description": "百分比"
     },
     "size": {
       "type": "number",
       "default": 120,
       "required": false,
-      "description": ""
+      "description": "圆的大小"
     },
     "strokeWidth": {
       "type": "number",
       "default": 6,
       "required": false,
-      "description": ""
+      "description": "进度条宽度"
     },
     "strokeColor": {
       "type": "string",
       "default": "#298DFF",
       "required": false,
-      "description": ""
+      "description": "进度条颜色"
     },
     "strokeLinecap": {
       "type": "string",
       "default": "round",
       "required": false,
-      "description": "",
+      "description": "进度条端点样式",
       "values": [
         "square",
         "round"
@@ -42,13 +42,13 @@
       "type": "number",
       "default": 5,
       "required": false,
-      "description": ""
+      "description": "轨道宽度"
     },
     "trailColor": {
       "type": "string",
       "default": "#F7F7F7",
       "required": false,
-      "description": ""
+      "description": "轨道颜色"
     }
   },
   "emits": {},

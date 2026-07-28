@@ -8,25 +8,25 @@
       "type": "string",
       "default": "line",
       "required": false,
-      "description": ""
+      "description": "布局类型"
     },
     "gutter": {
       "type": "number",
       "default": 0,
       "required": false,
-      "description": ""
+      "description": "栅格间隔"
     },
     "justify": {
       "type": "string",
       "default": "top",
       "required": false,
-      "description": ""
+      "description": "水平对齐方式"
     },
     "align": {
       "type": "string",
       "default": "center",
       "required": false,
-      "description": ""
+      "description": "垂直对齐方式"
     }
   },
   "emits": {},

@@ -8,13 +8,7 @@
       "type": "string",
       "default": "small",
       "required": false,
-      "description": "",
-      "values": [
-        "mini",
-        "small",
-        "medium",
-        "large"
-      ]
+      "description": ""
     },
     "clearable": {
       "type": "boolean",
@@ -37,11 +31,38 @@
     "modelValue": {
       "type": "number | string",
       "default": "",
-      "required": true,
+      "required": false,
       "description": ""
     }
   },
-  "emits": {},
+  "emits": {
+    "blur": {
+      "params": [],
+      "description": ""
+    },
+    "input": {
+      "params": [
+        "value: string"
+      ],
+      "description": ""
+    },
+    "clear": {
+      "params": [],
+      "description": ""
+    },
+    "enter": {
+      "params": [
+        "value: string"
+      ],
+      "description": ""
+    },
+    "modelValue": {
+      "params": [
+        "value: string"
+      ],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

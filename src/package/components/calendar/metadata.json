@@ -8,15 +8,10 @@
       "type": "number",
       "default": 110,
       "required": false,
-      "description": ""
+      "description": "日期项高度"
     }
   },
-  "emits": {
-    "click": {
-      "params": [],
-      "description": ""
-    }
-  },
+  "emits": {},
   "slots": [
     "controller"
   ],

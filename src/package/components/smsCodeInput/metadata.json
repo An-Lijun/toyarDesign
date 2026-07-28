@@ -8,47 +8,49 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "绑定值"
     },
     "length": {
       "type": "number",
       "default": 6,
       "required": false,
-      "description": ""
+      "description": "验证码长度"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "readonly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否只读"
     },
     "regCodes": {
       "type": "array",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "允许输入的字符"
     },
     "gap": {
       "type": "number",
       "default": 12,
       "required": false,
-      "description": ""
+      "description": "输入框间距"
     }
   },
   "emits": {
     "success": {
       "params": [],
-      "description": ""
+      "description": "输入成功"
     },
-    "update:modelValue": {
-      "params": [],
-      "description": ""
+    "modelValue": {
+      "params": [
+        "value: string"
+      ],
+      "description": "更新绑定值"
     }
   },
   "slots": [],

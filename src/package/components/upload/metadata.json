@@ -29,7 +29,14 @@
       "description": ""
     }
   },
-  "emits": {},
+  "emits": {
+    "change": {
+      "params": [
+        "file: any"
+      ],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],

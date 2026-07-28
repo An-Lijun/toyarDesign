@@ -8,25 +8,25 @@
       "type": "string",
       "default": null,
       "required": true,
-      "description": ""
+      "description": "消息内容"
     },
     "options": {
       "type": "object",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "配置选项"
     },
     "top": {
       "type": "string",
       "default": "0",
       "required": false,
-      "description": ""
+      "description": "顶部距离"
     }
   },
   "emits": {
     "close": {
       "params": [],
-      "description": ""
+      "description": "关闭事件"
     }
   },
   "slots": [

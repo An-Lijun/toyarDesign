@@ -8,13 +8,7 @@
       "type": "string",
       "default": "small",
       "required": false,
-      "description": "",
-      "values": [
-        "mini",
-        "small",
-        "medium",
-        "large"
-      ]
+      "description": ""
     },
     "uncheckedText": {
       "type": "string",
@@ -59,12 +53,16 @@
     }
   },
   "emits": {
-    "update:modelValue": {
-      "params": [],
+    "modelValue": {
+      "params": [
+        "value: any"
+      ],
       "description": ""
     },
     "change": {
-      "params": [],
+      "params": [
+        "value: any"
+      ],
       "description": ""
     }
   },

@@ -8,37 +8,39 @@
       "type": "string | number",
       "default": "",
       "required": true,
-      "description": ""
+      "description": "绑定值"
     },
     "strokeWidth": {
-      "type": "string",
+      "type": "string | number",
       "default": 5,
       "required": false,
-      "description": ""
+      "description": "进度条宽度"
     },
     "isShowPer": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否显示百分比"
     },
     "type": {
       "type": "string",
       "default": "line",
       "required": false,
-      "description": ""
+      "description": "类型"
     },
     "width": {
-      "type": "string",
+      "type": "string | number",
       "default": 50,
       "required": false,
-      "description": ""
+      "description": "圆形进度条宽度"
     }
   },
   "emits": {
-    "update:modelValue": {
-      "params": [],
-      "description": ""
+    "modelValue": {
+      "params": [
+        "value: string | number"
+      ],
+      "description": "更新绑定值"
     }
   },
   "slots": [],

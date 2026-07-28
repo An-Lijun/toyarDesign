@@ -8,19 +8,19 @@
       "type": "string",
       "default": null,
       "required": true,
-      "description": ""
+      "description": "图片地址"
     },
     "size": {
       "type": "string",
       "default": "100",
       "required": false,
-      "description": ""
+      "description": "图片尺寸"
     },
     "shape": {
       "type": "string",
       "default": "square",
       "required": false,
-      "description": "",
+      "description": "图片形状",
       "values": [
         "square",
         "circle"
@@ -30,7 +30,7 @@
       "type": "string",
       "default": "none",
       "required": false,
-      "description": "",
+      "description": "图片填充方式",
       "values": [
         "none",
         "fill",
@@ -43,7 +43,7 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "替代文本"
     }
   },
   "emits": {},

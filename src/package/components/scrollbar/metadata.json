@@ -3,32 +3,7 @@
   "name": "TyScrollBar",
   "category": "unknown",
   "description": "",
-  "props": {
-    "type": {
-      "type": "string",
-      "default": "line",
-      "required": false,
-      "description": ""
-    },
-    "gutter": {
-      "type": "number",
-      "default": 0,
-      "required": false,
-      "description": ""
-    },
-    "justify": {
-      "type": "string",
-      "default": "top",
-      "required": false,
-      "description": ""
-    },
-    "align": {
-      "type": "string",
-      "default": "center",
-      "required": false,
-      "description": ""
-    }
-  },
+  "props": {},
   "emits": {},
   "slots": [
     "default"

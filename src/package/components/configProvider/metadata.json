@@ -8,19 +8,19 @@
       "type": "string",
       "default": "light",
       "required": false,
-      "description": ""
+      "description": "主题模式"
     },
     "options": {
       "type": "object",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "配置选项"
     },
     "tokens": {
       "type": "object",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "设计令牌"
     }
   },
   "emits": {},

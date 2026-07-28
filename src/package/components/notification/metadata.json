@@ -8,7 +8,7 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": "",
+      "description": "通知类型",
       "values": [
         "info",
         "success",
@@ -20,31 +20,31 @@
       "type": "string",
       "default": null,
       "required": true,
-      "description": ""
+      "description": "标题"
     },
     "message": {
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "消息内容"
     },
     "top": {
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "顶部距离"
     },
     "time": {
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "显示时长"
     }
   },
   "emits": {
     "close": {
       "params": [],
-      "description": ""
+      "description": "关闭事件"
     }
   },
   "slots": [],

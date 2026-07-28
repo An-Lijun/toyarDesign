@@ -8,12 +8,11 @@
       "type": "number",
       "default": 300,
       "required": false,
-      "description": ""
+      "description": "抽屉宽度"
     }
   },
   "emits": {},
   "slots": [
-    "handleBar",
     "header",
     "default",
     "footer"

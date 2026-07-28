@@ -41,7 +41,14 @@
       "description": ""
     }
   },
-  "emits": {},
+  "emits": {
+    "modelValue": {
+      "params": [
+        "value: boolean"
+      ],
+      "description": ""
+    }
+  },
   "slots": [
     "title",
     "default",

@@ -8,25 +8,27 @@
       "type": "string",
       "default": 0,
       "required": false,
-      "description": ""
+      "description": "绑定值"
     },
     "max": {
       "type": "number",
       "default": 5,
       "required": false,
-      "description": ""
+      "description": "最大评分"
     },
     "allowHalf": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否允许半星"
     }
   },
   "emits": {
-    "update:modelValue": {
-      "params": [],
-      "description": ""
+    "modelValue": {
+      "params": [
+        "value: string | number"
+      ],
+      "description": "更新绑定值"
     }
   },
   "slots": [],

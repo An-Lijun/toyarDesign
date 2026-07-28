@@ -8,25 +8,25 @@
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "readonly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否只读"
     },
     "label": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "标签文本"
     },
     "isShowStar": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否显示必填星号"
     }
   },
   "emits": {},

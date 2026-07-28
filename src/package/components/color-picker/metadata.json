@@ -3,8 +3,28 @@
   "name": "TyColor-picker",
   "category": "unknown",
   "description": "",
-  "props": {},
-  "emits": {},
+  "props": {
+    "modelValue": {
+      "type": "string",
+      "default": "",
+      "required": false,
+      "description": ""
+    }
+  },
+  "emits": {
+    "change": {
+      "params": [
+        "value: string"
+      ],
+      "description": ""
+    },
+    "modelValue": {
+      "params": [
+        "value: string"
+      ],
+      "description": ""
+    }
+  },
   "slots": [],
   "examples": [],
   "capabilities": [],
