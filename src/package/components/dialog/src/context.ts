@@ -25,6 +25,10 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
     isTeleport: {
       type: Boolean,
       default: true
+    },
+    draggable: {
+      type: Boolean,
+      default: true
     }
   },
   emits: {

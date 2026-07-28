@@ -74,7 +74,7 @@ const model = defineModel('modelValue')
 const props = defineProps(useProps)
 defineEmits(useEmits)
 
-const { showValue, tyDialogHeader, tyDialog, handleClose } = useDialog(model)
+const { showValue, tyDialogHeader, tyDialog, handleClose } = useDialog(model,props)
 
 defineExpose({
   showValue
