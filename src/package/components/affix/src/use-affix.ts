@@ -4,6 +4,7 @@ import { useProps, useEmits } from './context'
 import useNmSpace from '@/package/hooks/useBem'
 import { debounce } from 'robinson'
 import { type UseAffixReturn } from './type.ts'
+import { type ExtractEmitsFn } from '@/package/utils/type'
 
 
 /**
@@ -16,14 +17,14 @@ import { type UseAffixReturn } from './type.ts'
  */
 export default function useAffix(
   props: ExtractPropTypes<typeof useProps>,
-  emits: ExtractPropTypes<typeof useEmits>,
+  emits: ExtractEmitsFn<typeof useEmits>,
   nm: ReturnType<typeof useNmSpace>
 ): UseAffixReturn {
 
   const affixRef = ref<HTMLElement | null>(null);
   const isFixed = ref(false);
   const styles = ref<Record<string, string>>({});
-  const targetDom = computed(() => props.target || window);
+  const targetDom = computed<Element | null>(() => props.target ?? null);
 
   let observer: IntersectionObserver | null = null;
   let placeholder: HTMLElement | null = null;
@@ -135,7 +136,10 @@ export default function useAffix(
       const { top, left } = entry.boundingClientRect;
       const windowHeight = window.innerHeight;
       const { height: elHeight, width } = getElementSize();
-      let fixedValue = false, fixedObject: Record<string, string> | undefined, position = null, isRemove = false;
+      let fixedValue = false;
+      let fixedObject: Record<string, string> = {};
+      let position = null;
+      let isRemove = false;
       switch (offsetType.value) {
         case 'top':
           if (top <= offsetTop.value && !isFixed.value) {
@@ -177,7 +181,7 @@ export default function useAffix(
               if (windowHeight - placeholderTop - elHeight > offsetBottom.value) {
                 fixedValue = false;
                 fixedObject = {};
-                position = null
+                position = null;
                 isRemove = true
               }
             }
@@ -186,7 +190,7 @@ export default function useAffix(
       }
       updateDom(fixedValue, fixedObject, position, isRemove)
     }, {
-      root: targetDom.value === window ? null : targetDom.value,
+      root: targetDom.value || window.document,
       rootMargin: offsetType.value === 'top'
         ? `-${offsetTop.value}px 0px 0px 0px`
         : `0px 0px -${offsetBottom.value}px 0px`,

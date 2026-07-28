@@ -30,5 +30,11 @@ export interface ComponentContext<Props = any, Emits = any> {
   staticProps: selfPropsType
   useProps: Props
   nm: ReturnType<typeof useNmSpace>
-  useEmits?: Emits
+  useEmits: Emits
 }
+
+export type ExtractEmitsFn<T> = {
+  [K in keyof T]: T[K] extends (...args: infer Args) => any
+    ? (event: K, ...args: Args) => void
+    : never
+}[keyof T]

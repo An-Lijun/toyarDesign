@@ -22,16 +22,16 @@ import type { CreateComponentContextOptions, ComponentContext, selfPropsType } f
  * @returns 组件上下文对象
  */
 export function createComponentContext<
-  Props extends selfPropsType,
-  Emits extends Record<string, any> | string[] = Record<string, any>
->(options: CreateComponentContextOptions): ComponentContext<ExtractPropTypes<Props>, Emits> {
+  T extends selfPropsType,
+  E extends Record<string, any> | string[] = Record<string, any>
+>(options: { name: string; props: T; emits?: E }): ComponentContext<ExtractPropTypes<T>, E> {
   const { name, props, emits } = options
 
   return {
-    staticProps: props,
-    useProps:  buildProps(props) as ExtractPropTypes<Props>,
+    staticProps: props as selfPropsType,
+    useProps:  buildProps(props) as ExtractPropTypes<T>,
     nm : useNmSpace(name),
-    useEmits: emits as Emits
+    useEmits: emits as E
   }
 }
 

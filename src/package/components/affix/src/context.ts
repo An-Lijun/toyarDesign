@@ -15,7 +15,7 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
     /** 底部偏移量 */
     offsetBottom: { type: Number },
     /** 目标元素 */
-    target: { type: Element },
+    target: { type: Element, required: false },
   },
   emits: {
     /** 固定状态改变时触发 */
