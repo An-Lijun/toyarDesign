@@ -1,11 +1,12 @@
-import buildProps from "../../../utils/buildProps"
-import useNmSpace from "../../../../package/hooks/useBem"
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const lodProps = buildProps({
-  isFixed: {
-    type: Boolean,
-    default: false
-  }
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'loading',
+  props: {
+    isFixed: {
+      type: Boolean,
+      default: false
+    }
+  },
+  emits: {}
 })
-
-export const nm = useNmSpace('loading')

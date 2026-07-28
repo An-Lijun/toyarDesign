@@ -1,34 +1,39 @@
-import buildProps from '../../../utils/buildProps';
-import useNmSpace from '../../../hooks/useBem';
-import { TY_SIZE } from '../../../constant'
+import { createComponentContext } from '@/package/utils/createComponentContext'
+import { TY_SIZE } from '@/package/constant'
 
-export const timeProps =buildProps({
-  modelValue: {
-    type: String
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'timePicker',
+  props: {
+    modelValue: {
+      type: String
+    },
+    size: {
+      type: String,
+      values: TY_SIZE
+    },
+    clearable: {
+      type: Boolean,
+      default: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    format: {
+      type: String,
+      default: ''
+    },
+    formatValue: {
+      type: Function
+    }
   },
-  size: {
-    type: String,
-    values:TY_SIZE
-  },
-  clearable: {
-    type: Boolean,
-    default: true
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  format:{
-    type:String,
-  },
-  formatValue:{
-    type:Function,
+  emits: {
+    blur: (value: string) => true,
+    input: (value: string) => true,
+    'update:modelValue': (value: string) => true
   }
 })
-export const timeEmits  =['blur', 'input', 'update:modelValue']
-
-export const nm = useNmSpace('timePicker')

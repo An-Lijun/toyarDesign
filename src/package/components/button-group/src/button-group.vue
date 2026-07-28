@@ -4,9 +4,12 @@
   </div>
 </template>
 <script setup>
-import {nm} from './context'
-defineOptions({
-  name:'TyButtonGroup'
-})
-</script>
+import { nm, useProps, useEmits } from './context'
 
+defineOptions({
+  name: 'TyButtonGroup'
+})
+
+defineProps(useProps)
+defineEmits(useEmits)
+</script>

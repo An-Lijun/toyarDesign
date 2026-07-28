@@ -1,7 +1,15 @@
-import { TY_SIZE } from '../../../constant'
-import useNmSpace from '../../../hooks/useBem'
-import buildProps from '../../../utils/buildProps'
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-
-export const nm = useNmSpace('colorPicker')
- 
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'colorPicker',
+  props: {
+    modelValue: {
+      type: String,
+      default: ''
+    }
+  },
+  emits: {
+    change: (value: string) => true,
+    'update:modelValue': (value: string) => true
+  }
+})

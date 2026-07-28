@@ -1,18 +1,20 @@
-import buildProps from "../../../utils/buildProps"
-import useNmSpace from "../../../../package/hooks/useBem"
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const popProps =buildProps({
-  placement: {
-    type: String,
-    default: 'top'
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'poppover',
+  props: {
+    placement: {
+      type: String,
+      default: 'top'
+    },
+    content: {
+      type: String,
+      default: ''
+    },
+    trigger: {
+      type: String,
+      default: 'hover'
+    }
   },
-  content:{
-    type: String,
-    default: ''
-  },
-  trigger:{
-    type:String,
-    default:'hover'
-  }
+  emits: {}
 })
-export const nm =useNmSpace('poppover')

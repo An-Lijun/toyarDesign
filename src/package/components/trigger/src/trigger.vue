@@ -15,117 +15,25 @@
   </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
-import { popProps, nm } from './context'
+import { useProps, nm, useEmits } from './context'
+import useTrigger from './use-trigger'
+
 defineOptions({
-  name: 'TyPoppover'
-})
-const props = defineProps(popProps)
-
-const defaultSlot = ref()
-let eventMaps = ref({})
-let isShowConfirm = ref(false)
-let now = false
-const handleClick = (e) => {
-  setTimeout(() => {
-    isShowConfirm.value = !isShowConfirm.value
-  })
-}
-const handleEnter = () => {
-  isShowConfirm.value = true
-  now = true
-}
-const handleLeave = () => {
-  now = false
-  setTimeout(() => {
-    if (!now) {
-      isShowConfirm.value = false
-    }
-  }, 150)
-}
-const clickFn = () => {
-  isShowConfirm.value = false
-}
-window.addEventListener('click', clickFn)
-onUnmounted(() => {
-  window.removeEventListener('click', clickFn)
+  name: 'TyTrigger'
 })
 
-switch (props.trigger) {
-  case 'click':
-    eventMaps.value = {
-      click: handleClick
-    }
-    break
-  case 'hover':
-    eventMaps.value = {
-      mouseenter: handleEnter,
-      mouseleave: handleLeave
-    }
-    break
-  default:
-    eventMaps.value = {
-      click: handleClick
-    }
-}
-let style = ref('')
-onMounted(() => {
-  let { width, height } = getComputedStyle(defaultSlot.value)
-  width = width.slice(0, -2)
-  height = height.slice(0, -2)
+const props = defineProps(useProps)
 
-  const getPlacement = () => {
-    switch (props.placement) {
-      case 'tl':
-        return {
-          top: '0',
-          left: '50%',
-          transform: `translate(calc(0% - ${width / 2}px), calc(-100% - 15px))`,
-          '--ui-width': width + 'px',
-          '--ui-height': width + 'px',
-        }
-      case 'top':
-        return {
-          top: '0',
-          left: '50%',
-          transform: 'translate(-50%, calc(-100% - 15px))'
-        }
-      case 'tr':
-        return {
-          top: '0',
-          right: '0%',
-          transform: `translate(calc(0%), calc(-100% - 15px))`
-        }
-      case 'bl':
-        return {
-          top: '0',
-          left: '50%',
-          transform: `translate(calc(0% - ${width / 2}px),  calc(50% + 5px))`,
-          '--ui-width': width + 'px',
-          '--ui-height': width + 'px',
-        }
-      case 'bottom':
-        return {
-          top: '0',
-          left: '50%',
-          transform: 'translate(-50%, calc(50% + 5px))'
-        }
-      case 'br':
-        return {
-          top: '0',
-          right: '0%',
-          transform: `translate(0% , calc(50% + 5px))`,
-          '--ui-width': width + 'px',
-          '--ui-height': width + 'px',
-        }
-    }
-  }
-  style.value = getPlacement()
-})
-
+const {
+  defaultSlot,
+  eventMaps,
+  isShowConfirm,
+  style
+} = useTrigger(props)
 </script>
+
 <style lang="scss" scoped>
-.ty-poppover {
+.ty-trigger {
   position: relative;
   display: inline;
   color: var(--text-2);
@@ -144,7 +52,7 @@ onMounted(() => {
 
     &.is-tl {
       position: absolute;
-      bottom:0px;
+      bottom: 0px;
       left: 50%;
       border-top-color: var(--bg-5);
       transform: translate(-50%, -33px) rotate(45deg);
@@ -212,10 +120,6 @@ onMounted(() => {
       margin-bottom: 20px;
       text-align: left;
     }
-
-
-
-
   }
 }
 </style>

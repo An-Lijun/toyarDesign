@@ -3,181 +3,48 @@
     <div :class="nm.e('selector')" @click="handleClick" :style="{
       background: colorFormat.hexColor
     }">
-    
+
     </div>
-    <div :class="nm.e('container')" ref="popRef" v-show="isShowColor" @click.stop="()=>{}">
-        <div :class="nm.e('wrap')" ref="wrapRef">
-          <div class="draggable" ref="wrapDraggerRef"></div>
-        </div>
-        <div :class="nm.e('hue')">
-          <div class="draggable" ref="hueDraggerRef"></div>
-        </div>
-        <div :class="nm.e('alpha')" ref="alphaRef">
-          <div class="draggable" ref="alphaDraggerRef"></div>
-        </div>
+    <div :class="nm.e('container')" ref="popRef" v-show="isShowColor" @click.stop="() => {}">
+      <div :class="nm.e('wrap')" ref="wrapRef">
+        <div class="draggable" ref="wrapDraggerRef"></div>
       </div>
-    {{ color }}
-    <br>
-    {{ colorFormat }}
+      <div :class="nm.e('hue')">
+        <div class="draggable" ref="hueDraggerRef"></div>
+      </div>
+      <div :class="nm.e('alpha')" ref="alphaRef">
+        <div class="draggable" ref="alphaDraggerRef"></div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
-import { nm } from './context'
-import Draggable from '../../../utils/draggable'
-import { rgbToHsv, hsvToRgb, rgbToHex, transformColorFormat } from './color.js'
-import { arrow, createPopper } from '@popperjs/core';
+import { onMounted } from 'vue'
+import { useProps, nm, useEmits } from './context'
+import useColorPicker from './use-color-picker'
 
 defineOptions({
   name: 'TyColorPicker'
 })
 
-const wrapRef = ref(null)
-const wrapDraggerRef = ref(null)
-const hueDraggerRef = ref(null)
-const alphaDraggerRef = ref(null)
-const alphaRef = ref(null)
-const containerRef = ref(null)
-const popRef = ref(null)
-const arrowRef = ref(null)
-const isShowColor = ref(false)
-let popperInstance = null
+defineProps(useProps)
+const emit = defineEmits(useEmits)
 
-let containerHeight, containerWidth
+const {
+  wrapRef,
+  wrapDraggerRef,
+  hueDraggerRef,
+  alphaDraggerRef,
+  alphaRef,
+  containerRef,
+  popRef,
+  isShowColor,
+  colorFormat,
+  handleClick,
+  initPopper
+} = useColorPicker(emit)
 
-const initColor = {
-  r: 0,
-  g: 0,
-  b: 0,
-  a: 1,
-};
-let color = ref({
-  ...initColor,
-  ...rgbToHsv(initColor),
-})
-let colorFormat = ref({
-  ...transformColorFormat(color.value),
-})
-
-const createInstance = () => {
-  popperInstance = createPopper(unref(containerRef), unref(popRef), {
-    placement: 'bottom',
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          // 偏移值 左右，上下
-          offset: [355, 355]
-        }
-      },
-      {
-        name: 'arrow',
-        options: {
-          element: unref(arrowRef),
-        }
-      }
-    ]
-  });
-  nextTick(() => {
-    // 异步更新
-    popperInstance.update()
-  })
-}
-function handleChangeSaturationValue(dx, dy) {
-  const s = 100 * dx / containerWidth;
-  const v = 100 * (1 - (dy / containerHeight));
-  const rgb = hsvToRgb({
-    h: color.value.h,
-    s,
-    v,
-  });
-  const colorResult = {
-    ...color.value,
-    ...rgb,
-    s,
-    v,
-  };
-  color.value = colorResult;
-  colorFormat.value = transformColorFormat(colorResult);
-};
-function handleChangeHue(dx) {
-  const h = (dx / containerWidth) * 360;
-  const rgb = hsvToRgb({
-    h,
-    s: color.value.s,
-    v: color.value.v,
-  });
-  const colorResult = {
-    ...color.value,
-    ...rgb,
-    h,
-  };
-  color.value = colorResult;
-  colorFormat.value = transformColorFormat(colorResult);
-}
-
-function handleChangeAlpha(dx) {
-  const a = dx / containerWidth;
-  const colorResult = {
-    ...color.value,
-    a,
-  };
-  color.value = colorResult;
-  colorFormat.value = transformColorFormat(colorResult);
-}
-function updatePageView(dx) {
-  wrapRef.value.style.backgroundColor = colorFormat.value.hslColor;
-  alphaRef.value.style.background = `linear-gradient(to right, rgb(${color.value.r} ${color.value.g} ${color.value.b} / 0), rgb(${color.value.r} ${color.value.g} ${color.value.b} / 1)) top left / 100% 100%,conic-gradient(
-						#666 0.25turn,
-						#999 0.25turn 0.5turn,
-						#666 0.5turn 0.75turn,
-						#999 0.75turn ) top left / 16px 16px repeat`
-}
-
-function addDraggable(){
-  const draggableInstance = new Draggable(wrapDraggerRef.value);
-  const { width, height } = wrapRef.value.getBoundingClientRect();
-  containerWidth = width;
-  containerHeight = height;
-  draggableInstance.on('mousemove', ({ dx, dy }) => {
-    handleChangeSaturationValue(dx, dy);
-    wrapDraggerRef.value.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
-    updatePageView();
-  });
-
-  const draggableHueInstance = new Draggable(hueDraggerRef.value);
-  draggableHueInstance.on('mousemove', ({ dx }) => {
-    handleChangeHue(dx);
-    hueDraggerRef.value.style.transform = `translate(${dx}px, 0)`;
-    updatePageView();
-  });
-
-  const draggableAlphaInstance = new Draggable(alphaDraggerRef.value);
-  draggableAlphaInstance.on('mousemove', ({ dx }) => {
-    handleChangeAlpha(dx);
-    alphaDraggerRef.value.style.transform = `translate(${dx}px, 0)`;
-    updatePageView(dx);
-  });
-
-}
-let isMounted= false
-const handleClick =(e)=>{
-  e.stopPropagation();
-  
-  isShowColor.value = true
-  if(!isMounted){
-    nextTick(() => {
-      addDraggable()
-    })
-  }
-}
-function close(){
-  isShowColor.value = false
-}
 onMounted(() => {
-  window.addEventListener('click', close)
+  initPopper()
 })
-onUnmounted(() => {
-  window.removeEventListener('click',close)
-})
-
 </script>

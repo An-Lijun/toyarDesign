@@ -1,11 +1,3 @@
-<!-- 
-  @input="aainput"
-  @blur ="aablur"
-  @click ='aaClick'
-  @clear	点击清除按钮的回调	() => void	-	-
-  @parseEnter
- -->
-
 <template>
   <div
     :class="[
@@ -17,8 +9,6 @@
       nm.is('error',tyFormItem && tyFormItem.formItemError.isShowErrorMsg),
     ]"
   >
-    <!-- 输入框 -->
-
     <input
       :type="isPassworld ? 'password' : 'text'"
       :maxlength="attrs.maxlength"
@@ -38,7 +28,6 @@
       @keydown.enter="handleEnter"
     />
 
-    <!-- 后置内容 -->
     <span
       ref="innerAft"
       :class="nm.e('innerAft')"
@@ -62,111 +51,35 @@
   </div>
 </template>
 <script setup>
-import { useCompMvalue } from '../../../hooks/useCompMvalue'
-import { inputProps,nm } from './context'
-import {TyiEyeOffLine,TyiEyeLine} from 'toyaricon'
-import {
-  formContent,
-  formItemContent,
-  configProviderDisabled
-} from '../../../hooks/symbolNm'
-import {
-  ref,
-  onMounted,
-  computed,
-  toRefs,
-  reactive,
-  useSlots,
-  useAttrs,
-  watch,
-  inject,
-  provide
-} from 'vue'
+import { TyiEyeOffLine, TyiEyeLine } from 'toyaricon'
+import { useProps, nm, useEmits } from './context'
+import useInputPassword from './use-input-password'
+
 defineOptions({
-  name:'TyInputPassword'
+  name: 'TyInputPassword'
 })
-// 属性
-const attrs = useAttrs()
-const props = defineProps(inputProps)
-const emit = defineEmits(['blur', 'input', 'update:modelValue'])
+
 const model = defineModel('modelValue')
-const { modelValue } = toRefs(props)
-//inject
-const tyForm = inject(formContent, null)
-const tyFormItem = inject(formItemContent, null)
+const props = defineProps(useProps)
+const emit = defineEmits(useEmits)
 
-// ref
-const limitBlock = ref()
-const nativeInp = ref()
-const outAft = ref()
-const innerAft = ref()
-
-const focus = ref(false)
-let limitBlockWidth = ref(0)
-let innerPreWidth = ref(0)
-let innerAftWidth = ref(0)
-
-// computed 继承属性
-const disabled = computed(() => {
-  return props.disabled || tyFormItem?.disabled || tyForm?.disabled
-})
-const readonly = computed(() => {
-  return props.readonly || tyFormItem?.readonly || tyForm?.readonly
-})
-const size = computed(() => {
-  return props.size || tyFormItem?.size || tyForm?.size || 'small'
-})
-
-const provideInp = reactive({ disabled })
-provide(configProviderDisabled, provideInp)
-
-onMounted(() => {
-  innerAftWidth.value = innerAft?.value?.offsetWidth
-})
-
-function handleInput (event) {
-  // emit('update:modelValue', event.target.value)
-  emit('input', event.target.value)
-}
-
-function handleToFocus () {
-  focus.value = true
-  setTimeout(() => {
-    nativeInp.value.focus()
-  })
-}
-
-function handleBlur (event) {
-  if (tyForm && tyFormItem && tyFormItem.prop) {
-    tyForm.validate(tyFormItem.prop, 'blur')
-  }
-  focus.value = false
-  emit('blur', event)
-}
-
-function handleClear () {
-  emit('update:modelValue', '')
-  emit('clear')
-}
-
-function handleEnter () {
-  emit('enter', model.value)
-}
-
-function handleFocus () {
-  focus.value = true
-}
-const isPassworld = ref(true)
-
-let isShowClearBtn = computed(() => {
-  return (
-    props.modelValue !== '' &&
-    props.clearable &&
-    !disabled.value &&
-    !readonly.value
-  )
-})
-
+const {
+  attrs,
+  nativeInp,
+  innerAft,
+  focus,
+  innerPreWidth,
+  innerAftWidth,
+  disabled,
+  readonly,
+  size,
+  isPassworld,
+  isShowClearBtn,
+  tyFormItem,
+  handleInput,
+  handleBlur,
+  handleFocus,
+  handleEnter,
+  handleClear
+} = useInputPassword(props, emit, model)
 </script>
-
-

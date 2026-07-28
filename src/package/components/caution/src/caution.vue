@@ -16,30 +16,15 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-import { cProps, nm } from './context'
-import { TyiInformationFill, TyiCheckboxCircleFill, TyiCloseCircleFill } from 'toyaricon'
+import { useProps, nm, useEmits } from './context'
+import useCaution from './use-caution'
 
 defineOptions({
   name: 'TyCaution'
 })
-const props = defineProps(cProps)
 
-const cauIconObj = {
-  info: TyiInformationFill,
-  success: TyiCheckboxCircleFill,
-  warning: TyiInformationFill,
-  error: TyiCloseCircleFill
-}
-const colorObj = {
-  'info': 'primary',
-  'success': 'success',
-  'warning': 'warning',
-  'error': 'danger'
-}
-// const style = {
-//   background: `var(--${colorObj[props.type]}-1)`
-//   // background:`rgba(var(--danger-6), .2)`
-// }
-// var(--primary-6)
+const props = defineProps(useProps)
+defineEmits(useEmits)
+
+const { cauIconObj, colorObj } = useCaution()
 </script>

@@ -1,41 +1,43 @@
-import { TY_SIZE } from '../../../constant'
-import useNmSpace from '../../../hooks/useBem'
-import buildProps from '../../../utils/buildProps'
+import { createComponentContext } from '@/package/utils/createComponentContext'
+import { TY_SIZE } from '@/package/constant'
 
-export const datePickerProp=buildProps({
-  size: {
-    type: String,
-    values:TY_SIZE
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'datePicker',
+  props: {
+    size: {
+      type: String,
+      values: TY_SIZE
+    },
+    clearable: {
+      type: Boolean,
+      default: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    modelValue: {
+      type: String,
+      default: ''
+    },
+    format: {
+      type: String
+    },
+    formatValue: {
+      type: Function
+    },
+    opType: {
+      type: String,
+      default: 'day'
+    }
   },
-  clearable: {
-    type: Boolean,
-    default: true
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  modelValue: {
-    type: String,
-    required: true,
-    default: ''
-  },
-  format:{
-    type:String,
-  },
-  formatValue:{
-    type:Function,
-  },
-  opType:{
-    type:String,
-    default:'day'
+  emits: {
+    blur: () => true,
+    input: () => true,
+    'update:modelValue': (value: string) => true
   }
 })
-export const  datePickerEmit =['blur', 'input', 'update:modelValue']
-
-export const nm = useNmSpace('datePicker')
- 

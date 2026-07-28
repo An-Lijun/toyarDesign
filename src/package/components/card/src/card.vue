@@ -15,12 +15,15 @@
     </main>
   </div>
 </template>
-<script setup lang='ts' name="TyCard">
+<script setup>
 import { useSlots } from 'vue'
-import { useProps, nm } from './context'
+import { useProps, nm, useEmits } from './context'
 import TySkeleton from '../../skeleton'
+
 defineOptions({
   name: 'TyCard'
 })
+
 defineProps(useProps)
+defineEmits(useEmits)
 </script>

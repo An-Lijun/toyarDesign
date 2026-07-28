@@ -1,3 +1,7 @@
-import useNmSpace from '../../../hooks/useBem'
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const nm = useNmSpace('button-group')
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'button-group',
+  props: {},
+  emits: {}
+})

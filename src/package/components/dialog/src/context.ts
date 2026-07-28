@@ -1,33 +1,33 @@
-import buildProps from "../../../utils/buildProps"
-import useNmSpace from "../../../hooks/useBem"
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const dialogProp=buildProps({
-  title: {
-    type: String,
-    default: "提示",
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'dialog',
+  props: {
+    title: {
+      type: String,
+      default: '提示'
+    },
+    width: {
+      type: String,
+      default: '30%'
+    },
+    top: {
+      type: String,
+      default: '15vh'
+    },
+    info: {
+      type: String
+    },
+    isUnderLine: {
+      type: Boolean,
+      default: true
+    },
+    isTeleport: {
+      type: Boolean,
+      default: true
+    }
   },
-  width: {
-    type: String,
-    default: "30%",
-  },
-  top: {
-    type: String,
-    default: "15vh",
-  },
-
-  info:{
-    type:String,
-  },
-  isUnderLine:{
-    type: Boolean,
-    default: true,
-  },
-  isTeleport:{
-    type: Boolean,
-    default: true,
+  emits: {
+    'update:modelValue': (value: boolean) => true
   }
 })
-
-export const dialogEmit=[]
-
-export const  nm = useNmSpace('dialog')

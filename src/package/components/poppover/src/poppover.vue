@@ -1,14 +1,14 @@
 <template>
-  <div :class="nm.b()" v-on="eventMaps"  ref="containerRef">
-      <div :class="[nm.e('content')]"  v-show="isShowConfirm" ref="popRef">
-        <main>
-          <slot name="content">
-            {{ props.content }}
-          </slot>
-        </main>
-        <div ref="arrowRef" data-popper-arrow :class="nm.e('arrow')">
-        </div>
+  <div :class="nm.b()" v-on="eventMaps" ref="containerRef">
+    <div :class="[nm.e('content')]" v-show="isShowConfirm" ref="popRef">
+      <main>
+        <slot name="content">
+          {{ props.content }}
+        </slot>
+      </main>
+      <div ref="arrowRef" data-popper-arrow :class="nm.e('arrow')">
       </div>
+    </div>
 
     <span ref="defaultSlot" style="display: inline-block;">
       <slot></slot>
@@ -16,97 +16,25 @@
   </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
-import { popProps, nm } from './context'
-import { arrow, createPopper } from '@popperjs/core';
+import { useProps, nm, useEmits } from './context'
+import usePoppover from './use-poppover'
 
 defineOptions({
   name: 'TyPoppover'
 })
-const props = defineProps(popProps)
 
-let popperInstance = null
-const popRef = ref();
-const arrowRef = ref();
-const containerRef = ref();
+const props = defineProps(useProps)
 
-const defaultSlot = ref()
-let eventMaps = ref({})
-let isShowConfirm = ref(false)
-let now = false
-const handleClick = (e) => {
-  setTimeout(() => {
-    isShowConfirm.value = !isShowConfirm.value
-    createInstance()
-
-  })
-}
-const handleEnter = () => {
-  createInstance()
-
-  isShowConfirm.value = true
-  now = true
-}
-const handleLeave = () => {
-  now = false
-  setTimeout(() => {
-    if (!now) {
-      isShowConfirm.value = false
-    }
-  }, 150)
-}
-const clickFn = () => {
-  isShowConfirm.value = false
-}
-window.addEventListener('click', clickFn)
-onUnmounted(() => {
-  window.removeEventListener('click', clickFn)
-})
-
-switch (props.trigger) {
-  case 'click':
-    eventMaps.value = {
-      click: handleClick
-    }
-    break
-  case 'hover':
-    eventMaps.value = {
-      mouseenter: handleEnter,
-      mouseleave: handleLeave
-    }
-    break
-  default:
-    eventMaps.value = {
-      click: handleClick
-    }
-}
-const createInstance = () => {
-  popperInstance = createPopper(unref(containerRef), unref(popRef), {
-    placement: props.placement,
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          // 偏移值 左右，上下
-          offset: [0, 10]
-        }
-      },
-      {
-        name: 'arrow',
-        options: {
-          element: unref(arrowRef),
-        }
-      }
-    ]
-  });
-  nextTick(() => {
-    // 异步更新
-    popperInstance.update()
-  })
-}
-
-
+const {
+  popRef,
+  arrowRef,
+  containerRef,
+  defaultSlot,
+  eventMaps,
+  isShowConfirm
+} = usePoppover(props)
 </script>
+
 <style lang="scss" scoped>
 .ty-poppover {
   position: relative;
@@ -134,7 +62,6 @@ const createInstance = () => {
 
 
 
-
 [data-popper-placement="right"] {
   .ty-poppover__arrow {
     position: absolute;
@@ -142,11 +69,9 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: transparent var(--tooltip) transparent transparent;
     left: -13px;
     z-index: 999;
-    /* 调整箭头颜色 */
   }
 }
 
@@ -157,11 +82,9 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: var(--tooltip) transparent transparent transparent;
     z-index: 999;
     bottom: -13px;
-    /* 调整箭头颜色 */
   }
 }
 
@@ -172,12 +95,10 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: transparent transparent var(--tooltip) transparent;
 
     top: -13px;
     z-index: 999;
-    /* 调整箭头颜色 */
   }
 }
 
@@ -188,11 +109,9 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: transparent transparent transparent var(--tooltip);
     right: -13px;
     z-index: 999;
-    /* 调整箭头颜色 */
   }
 }
 
@@ -203,11 +122,9 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: transparent var(--tooltip) transparent transparent;
     left: -13px;
     z-index: 999;
-    /* 调整箭头颜色 */
   }
 }
 
@@ -218,11 +135,9 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: var(--tooltip) transparent transparent transparent;
     z-index: 999;
     bottom: -13px;
-    /* 调整箭头颜色 */
   }
 }
 [data-popper-placement="top-end"] {
@@ -232,11 +147,9 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: var(--tooltip) transparent transparent transparent;
     z-index: 999;
     bottom: -13px;
-    /* 调整箭头颜色 */
   }
 }
 [data-popper-placement="top-start"] {
@@ -246,11 +159,9 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: var(--tooltip) transparent transparent transparent;
     z-index: 999;
     bottom: -13px;
-    /* 调整箭头颜色 */
   }
 }
 [data-popper-placement="bottom-end"] {
@@ -260,12 +171,10 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: transparent transparent var(--tooltip) transparent;
 
     z-index: 999;
     top: -13px;
-    /* 调整箭头颜色 */
   }
 }
 [data-popper-placement="bottom-start"] {
@@ -275,12 +184,10 @@ const createInstance = () => {
     height: 0;
     border-style: solid;
     border-width: 8px;
-    /* 调整箭头大小 */
     border-color: transparent transparent var(--tooltip) transparent;
 
     z-index: 999;
     top: -13px;
-    /* 调整箭头颜色 */
   }
 }
 </style>

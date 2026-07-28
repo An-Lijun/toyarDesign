@@ -11,7 +11,7 @@
     )
   ]" ref="containerRef">
     <TyInput v-model="model" :format="formatTime" v-bind="attrs" @input="handleInput" @focus="handleFocus"
-      @blur="handleBlur(false)" @clear="handleClear" :maxlength="maxlength" inputmode="numeric">
+      @blur="handleBlur" @clear="handleClear" :maxlength="maxlength" inputmode="numeric">
       <template #innerAft>
         <TyiCalendarScheduleLine />
       </template>
@@ -54,90 +54,44 @@
   </div>
 </template>
 <script setup>
-import {TyiCalendarScheduleLine} from 'toyaricon'
-import { nm, timeEmits, timeProps } from './context'
-import { formContent, formItemContent } from '../../../hooks/symbolNm'
-import { inject, ref, computed, watch, useAttrs } from 'vue';
-import { arrow, createPopper } from '@popperjs/core';
+import { TyiCalendarScheduleLine } from 'toyaricon'
+import { useProps, nm, useEmits } from './context'
+import useTimePicker from './use-time-picker'
 
 defineOptions({
   name: 'TyTimePicker'
 })
-const props = defineProps(timeProps)
-const emit = defineEmits(timeEmits)
+
 const model = defineModel()
-const tyFormItem = inject(formItemContent, null);
-const tyForm = inject(formContent, null)
+const props = defineProps(useProps)
+const emit = defineEmits(useEmits)
 
-let popperInstance = null
-const popRef = ref();
-const arrowRef = ref();
-const containerRef = ref();
-const isShowTimePicker = ref(false)
-
-// computed 继承属性
-const disabled = computed(() => {
-  return props.disabled || tyFormItem?.disabled || tyForm?.disabled || false
-})
-const readonly = computed(() => {
-  return props.readonly || tyFormItem?.readonly || tyForm?.readonly || false
-})
-const size = computed(() => {
-  return props.size || tyFormItem?.size || tyForm?.size || 'small'
-})
-
-const hours = ref(24)
-const minutes = ref(60)
-const seconds = ref(60)
-const value = ref([0,0,0])
-const selectHour = (val) => {
-  value.value[0] = val
-}
-
-const selectMinute = (val) => {
-  value.value[1] = val
-
-}
-
-const selectSecond = (val) => {
-  value.value[2] = val
-}
-
-const confirm = () => {
-  model.value = value.value.join(':')
-  isShowTimePicker.value = false
-  emit('update:modelValue', data)
-}
-
-const createInstance = () => {
-  popperInstance = createPopper(unref(containerRef), unref(popRef), {
-    placement: 'bottom',
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          // 偏移值 左右，上下
-          offset: [0, 5]
-        }
-      },
-      {
-        name: 'arrow',
-        options: {
-          element: unref(arrowRef),
-        }
-      }
-    ]
-  });
-  nextTick(() => {
-    // 异步更新
-    popperInstance.update()
-  })
-}
-const handleFocus = () => {
-  isShowTimePicker.value = true
-  createInstance()
-}
-
+const {
+  attrs,
+  tyFormItem,
+  popRef,
+  arrowRef,
+  containerRef,
+  isShowTimePicker,
+  disabled,
+  readonly,
+  size,
+  hours,
+  minutes,
+  seconds,
+  value,
+  focus,
+  maxlength,
+  selectHour,
+  selectMinute,
+  selectSecond,
+  confirm,
+  handleFocus,
+  handleInput,
+  handleBlur,
+  handleClear,
+  formatTime
+} = useTimePicker(props, emit, model)
 </script>
 
 <style lang="scss" scoped>
@@ -209,13 +163,11 @@ const handleFocus = () => {
     height: 0;
     border-style: solid;
     border-width: 6px;
-    /* 调整箭头大小 */
     border-color: var(--fill-3) transparent transparent transparent;
     z-index: -1;
     bottom: -12px;
     display: flex;
 
-    /* 调整箭头颜色 */
     &::after {
       content: '';
       display: inline-block;
@@ -227,7 +179,6 @@ const handleFocus = () => {
       border-width: 8px;
       transform: translate(-8px, -9px);
 
-      /* 调整箭头大小 */
       border-color: var(--color-bg-1) transparent transparent transparent;
     }
   }
@@ -244,12 +195,10 @@ const handleFocus = () => {
     top: 0px;
     border-style: solid;
     border-width: 6px;
-    /* 调整箭头大小 */
     border-color: transparent transparent var(--fill-3) transparent;
     top: -13px;
     z-index: -1;
 
-    /* 调整箭头颜色 */
     &::after {
       content: '';
       display: inline-block;
@@ -259,7 +208,6 @@ const handleFocus = () => {
       border-style: solid;
       border-width: 8px;
       left: -50%;
-      /* 调整箭头大小 */
       border-color: transparent transparent var(--color-bg-1) transparent;
       transform: translate(-8px, -7px);
 

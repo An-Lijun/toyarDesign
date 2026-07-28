@@ -1,18 +1,23 @@
-import buildProps from '../../../utils/buildProps';
-import useNmSpace from '../../../hooks/useBem';
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const cProps =buildProps({
-  type:{
-    type: String,
-    default: 'info'
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'caution',
+  props: {
+    type: {
+      type: String,
+      default: 'info'
+    },
+    title: {
+      type: String
+    },
+    isShowIcon: {
+      type: Boolean,
+      default: true
+    },
+    size: {
+      type: [String, Number],
+      default: 24
+    }
   },
-  title:{
-    type:String
-  },
-  isShowIcon:{
-    type:Boolean,
-    default:true
-  }
+  emits: {}
 })
-
-export const nm = useNmSpace('caution')

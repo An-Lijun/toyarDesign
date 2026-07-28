@@ -1,42 +1,32 @@
-import buildProps from '../../../utils/buildProps'
-import { computed } from 'vue'
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const inputProps=buildProps({
-  modelValue: {
-    type: [ Number],
-    required: true,
-    default: ''
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'inputNumber',
+  props: {
+    modelValue: {
+      type: Number,
+      default: ''
+    },
+    precision: {
+      type: Number
+    },
+    stepStrictly: {
+      type: Boolean,
+      default: false
+    },
+    step: {
+      type: Number,
+      default: 1
+    },
+    maxlength: {
+      type: [Number, String, Object]
+    }
   },
-  precision:{
-    type:Number
-  },
-  stepStrictly:{
-    type:Boolean,
-    default:false
-  },
-  step:{
-    type:Number,
-    default:1
-  },
-  maxlength:{
-    type:[Number,String,Object]
+  emits: {
+    blur: () => true,
+    clear: () => true,
+    change: (value: number) => true,
+    focus: () => true,
+    'update:modelValue': (value: number) => true
   }
 })
-
-export const inputEmits =['blur','clear', 'change', 'focus','update:modelValue']
-
-/**
- * 计算props的值进行v-model绑定
- */
-export const useCompMvalue= (props,emitFn)=>{
-  const model = computed({
-    get() {
-      return props.modelValue
-    },
-    set(val) {
-     let value =  Number.isNaN(val)?'':!val?'':val
-     emitFn('update:modelValue',value)
-    },
-  })
-  return {model}
-}

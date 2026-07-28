@@ -1,18 +1,20 @@
-import buildProps from '../../../utils/buildProps';
-import useNmSpace from '../../../hooks/useBem';
-export const toolProps=buildProps({
-  content: {
-    type: String,
-    default: ''
-  },
-  placement: {
-    type: String,
-    default: 'top'
-  },
-  trigger: {
-    type: String,
-    default: 'hover'
-  }
-})
+import { createComponentContext } from '@/package/utils/createComponentContext'
 
-export const nm = useNmSpace('tooltip')
+export const { staticProps, useProps, nm, useEmits } = createComponentContext({
+  name: 'tooltip',
+  props: {
+    content: {
+      type: String,
+      default: ''
+    },
+    placement: {
+      type: String,
+      default: 'top'
+    },
+    trigger: {
+      type: String,
+      default: 'hover'
+    }
+  },
+  emits: {}
+})
