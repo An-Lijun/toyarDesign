@@ -8,25 +8,25 @@
       "type": "string | number",
       "default": null,
       "required": true,
-      "description": ""
+      "description": "当前选中的菜单值（v-model）"
     },
     "option": {
       "type": "array",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "菜单选项数据"
     },
     "isFold": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否折叠菜单"
     },
     "theme": {
       "type": "string",
       "default": "design",
       "required": true,
-      "description": "",
+      "description": "主题样式",
       "values": [
         "design",
         "dark",

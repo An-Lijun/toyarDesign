@@ -8,43 +8,43 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "输入框尺寸"
     },
     "clearable": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否可清除"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "readonly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否只读"
     },
     "modelValue": {
       "type": "string | number",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "绑定值"
     },
     "showLimit": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否显示字数限制"
     },
     "format": {
       "type": "function",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "格式化函数"
     }
   },
   "emits": {

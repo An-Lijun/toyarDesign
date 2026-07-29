@@ -8,19 +8,19 @@
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否显示边框"
     },
     "shadow": {
       "type": "string",
       "default": "none",
       "required": false,
-      "description": ""
+      "description": "卡片阴影样式"
     },
     "isLoading": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否显示加载状态"
     }
   },
   "emits": {},

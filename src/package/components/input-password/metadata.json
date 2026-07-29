@@ -8,31 +8,31 @@
       "type": "string",
       "default": "small",
       "required": false,
-      "description": ""
+      "description": "输入框尺寸"
     },
     "clearable": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否可清除"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "readonly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否只读"
     },
     "modelValue": {
       "type": "number | string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "绑定值"
     }
   },
   "emits": {

@@ -8,19 +8,19 @@
       "type": "string",
       "default": "top",
       "required": false,
-      "description": ""
+      "description": "弹出位置"
     },
     "content": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "弹出内容"
     },
     "trigger": {
       "type": "string",
       "default": "hover",
       "required": false,
-      "description": ""
+      "description": "触发方式"
     }
   },
   "emits": {},

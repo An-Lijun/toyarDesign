@@ -8,7 +8,7 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": "",
+      "description": "单选组尺寸",
       "values": [
         "mini",
         "small",
@@ -20,19 +20,19 @@
       "type": "string | number",
       "default": "",
       "required": true,
-      "description": ""
+      "description": "当前选中值（v-model绑定）"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "readonly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否只读"
     }
   },
   "emits": {

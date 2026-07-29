@@ -8,43 +8,43 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "绑定值"
     },
     "size": {
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "尺寸"
     },
     "clearable": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否可清除"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "readonly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否只读"
     },
     "format": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "时间格式"
     },
     "formatValue": {
       "type": "function",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "自定义格式化函数"
     }
   },
   "emits": {

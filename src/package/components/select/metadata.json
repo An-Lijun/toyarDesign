@@ -8,55 +8,55 @@
       "type": "string",
       "default": "small",
       "required": false,
-      "description": ""
+      "description": "选择器尺寸"
     },
     "multiple": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否多选"
     },
     "clearable": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否可清空"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "readonly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否只读"
     },
     "modelValue": {
       "type": "string | number | array",
       "default": null,
       "required": true,
-      "description": ""
+      "description": "当前选中值（v-model绑定）"
     },
     "placeholder": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "占位文本"
     },
     "icon": {
       "type": "string",
       "default": "ty-arrow-down-s-line",
       "required": false,
-      "description": ""
+      "description": "图标"
     },
     "width": {
       "type": "string",
       "default": "100%",
       "required": false,
-      "description": ""
+      "description": "宽度"
     }
   },
   "emits": {

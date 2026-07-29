@@ -8,25 +8,25 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "当前激活的标签页值（v-model绑定）"
     },
     "type": {
       "type": "string",
       "default": "normal",
       "required": false,
-      "description": ""
+      "description": "标签页类型"
     },
     "position": {
       "type": "string",
       "default": "top",
       "required": false,
-      "description": ""
+      "description": "标签页位置"
     },
     "trigger": {
       "type": "string",
       "default": "click",
       "required": false,
-      "description": ""
+      "description": "触发方式"
     }
   },
   "emits": {

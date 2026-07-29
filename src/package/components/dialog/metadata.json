@@ -8,37 +8,49 @@
       "type": "string",
       "default": "提示",
       "required": false,
-      "description": ""
+      "description": "对话框标题"
     },
     "width": {
       "type": "string",
       "default": "30%",
       "required": false,
-      "description": ""
+      "description": "对话框宽度"
     },
     "top": {
       "type": "string",
       "default": "15vh",
       "required": false,
-      "description": ""
+      "description": "对话框距顶部距离"
     },
     "info": {
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "提示信息"
     },
     "isUnderLine": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否显示下划线"
     },
     "isTeleport": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否使用 teleport 传送"
+    },
+    "draggable": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": "是否可拖拽"
+    },
+    "mask": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": "是否显示遮罩层"
     }
   },
   "emits": {

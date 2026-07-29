@@ -8,43 +8,43 @@
       "type": "string",
       "default": "small",
       "required": false,
-      "description": ""
+      "description": "尺寸"
     },
     "uncheckedText": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "未选中时的文字"
     },
     "checkedText": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "选中时的文字"
     },
     "openValue": {
       "type": "string | boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "开启时的值"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "closeValue": {
       "type": "string | boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "关闭时的值"
     },
     "type": {
       "type": "string",
       "default": "round",
       "required": false,
-      "description": "",
+      "description": "类型",
       "values": [
         "round",
         "tube",

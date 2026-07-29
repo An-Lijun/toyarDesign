@@ -8,37 +8,37 @@
       "type": "string",
       "default": "top",
       "required": false,
-      "description": ""
+      "description": "弹出位置"
     },
     "content": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "提示内容"
     },
     "rejectText": {
       "type": "string",
       "default": "取消",
       "required": false,
-      "description": ""
+      "description": "拒绝按钮文字"
     },
     "showRejectBtn": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否显示拒绝按钮"
     },
     "resloveText": {
       "type": "string",
       "default": "确定",
       "required": false,
-      "description": ""
+      "description": "确认按钮文字"
     },
     "showResloveBtn": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否显示确认按钮"
     }
   },
   "emits": {

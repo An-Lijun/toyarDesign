@@ -8,7 +8,7 @@
       "type": "string",
       "default": null,
       "required": false,
-      "description": "",
+      "description": "尺寸大小",
       "values": [
         "mini",
         "small",
@@ -20,25 +20,25 @@
       "type": "string | number",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "绑定值"
     },
     "canHarf": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否可选半选状态"
     },
     "disabled": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "max": {
       "type": "string | number",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "最大可选数量"
     }
   },
   "emits": {

@@ -8,31 +8,31 @@
       "type": "number",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "绑定值"
     },
     "precision": {
       "type": "number",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "精度"
     },
     "stepStrictly": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否严格步进"
     },
     "step": {
       "type": "number",
       "default": 1,
       "required": false,
-      "description": ""
+      "description": "步长"
     },
     "maxlength": {
       "type": "number | string | object",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "最大长度"
     }
   },
   "emits": {

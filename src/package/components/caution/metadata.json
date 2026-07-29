@@ -8,25 +8,25 @@
       "type": "string",
       "default": "info",
       "required": false,
-      "description": ""
+      "description": "类型"
     },
     "title": {
       "type": "string",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "标题"
     },
     "isShowIcon": {
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否显示图标"
     },
     "size": {
       "type": "string | number",
       "default": 24,
       "required": false,
-      "description": ""
+      "description": "图标尺寸"
     }
   },
   "emits": {},

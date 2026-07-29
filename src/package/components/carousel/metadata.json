@@ -8,13 +8,13 @@
       "type": "number",
       "default": 3000,
       "required": false,
-      "description": ""
+      "description": "自动切换间隔时间（毫秒）"
     },
     "arrowMode": {
       "type": "string",
       "default": "hover",
       "required": false,
-      "description": "",
+      "description": "箭头显示模式",
       "values": [
         "hover",
         "always",
@@ -25,7 +25,7 @@
       "type": "string",
       "default": "ease",
       "required": false,
-      "description": "",
+      "description": "过渡动画效果",
       "values": [
         "ease",
         "linear",
@@ -38,13 +38,13 @@
       "type": "boolean",
       "default": true,
       "required": false,
-      "description": ""
+      "description": "是否自动播放"
     },
     "indicatorType": {
       "type": "string",
       "default": "line",
       "required": false,
-      "description": "",
+      "description": "指示器类型",
       "values": [
         "dot",
         "line",
@@ -55,7 +55,7 @@
       "type": "string",
       "default": "right",
       "required": false,
-      "description": "",
+      "description": "指示器位置",
       "values": [
         "top",
         "left",
@@ -67,7 +67,7 @@
       "type": "string",
       "default": "horizontal",
       "required": false,
-      "description": "",
+      "description": "轮播方向",
       "values": [
         "horizontal",
         "vertical"

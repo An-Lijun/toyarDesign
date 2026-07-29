@@ -8,25 +8,25 @@
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用上传"
     },
     "dragger": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否为拖拽卡片模式"
     },
     "drag": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否支持拖拽上传"
     },
     "accept": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "接受的文件类型"
     }
   },
   "emits": {

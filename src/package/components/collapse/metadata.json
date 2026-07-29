@@ -8,31 +8,31 @@
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否禁用"
     },
     "accordion": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否手风琴模式"
     },
     "hide": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否隐藏"
     },
     "positionLeft": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "面板位置是否在左侧"
     },
     "destroy": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "切换时是否销毁子元素"
     }
   },
   "emits": {},

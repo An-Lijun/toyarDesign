@@ -8,7 +8,7 @@
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否固定定位"
     }
   },
   "emits": {},

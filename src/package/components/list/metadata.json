@@ -8,13 +8,13 @@
       "type": "string",
       "default": "",
       "required": false,
-      "description": ""
+      "description": "列表头部标题"
     },
     "size": {
       "type": "string",
       "default": "small",
       "required": false,
-      "description": "",
+      "description": "尺寸大小",
       "values": [
         "mini",
         "small",

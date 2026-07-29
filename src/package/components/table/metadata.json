@@ -8,7 +8,7 @@
       "type": "string",
       "default": "small",
       "required": false,
-      "description": "",
+      "description": "表格尺寸",
       "values": [
         "mini",
         "small",
@@ -20,7 +20,7 @@
       "type": "string",
       "default": "center",
       "required": false,
-      "description": "",
+      "description": "对齐方式",
       "values": [
         "left",
         "center",
@@ -31,37 +31,37 @@
       "type": "array",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "列配置"
     },
     "data": {
       "type": "array",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "表格数据"
     },
     "rowKey": {
       "type": "string",
       "default": "key",
       "required": true,
-      "description": ""
+      "description": "行唯一标识字段"
     },
     "rowSelection": {
       "type": "object",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "行选择配置"
     },
     "borders": {
       "type": "array",
       "default": null,
       "required": false,
-      "description": ""
+      "description": "边框配置"
     },
     "showOverflow": {
       "type": "string",
       "default": "",
       "required": false,
-      "description": "",
+      "description": "溢出显示方式",
       "values": [
         "ellipsis",
         "title",
@@ -73,7 +73,7 @@
       "type": "boolean",
       "default": false,
       "required": false,
-      "description": ""
+      "description": "是否显示斑马纹"
     }
   },
   "emits": {},
