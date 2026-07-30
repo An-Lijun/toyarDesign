@@ -3,7 +3,7 @@
   "name": "TyAvatar",
   "category": "展示组件",
   "categoryKey": "show",
-  "description": "avatar 头像",
+  "description": "avatar 头像（需配合 TyAvatar-group 使用）",
   "docPath": "docsBase/page/component/show/avatar.md",
   "props": {
     "width": {
@@ -41,5 +41,8 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyAvatar-group"
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "TySelect",
   "category": "表单组件",
   "categoryKey": "form",
-  "description": "select",
+  "description": "选择器组件，需配合 TySelectOption 使用，支持通过 TySelectGroup 对选项进行分组。",
   "docPath": "docsBase/page/component/form/select.md",
   "props": {
     "size": {
@@ -78,7 +78,16 @@
   "slots": [
     "default"
   ],
-  "examples": [],
+  "examples": [
+    {
+      "title": "基础用法示例",
+      "code": "<ty-select v-model=\"value\" placeholder=\"请选择\">\n  <ty-select-group label=\"一线城市\">\n    <ty-select-option value=\"bj\" label=\"北京\" />\n    <ty-select-option value=\"sh\" label=\"上海\" />\n  </ty-select-group>\n  <ty-select-option value=\"hz\" label=\"杭州\" />\n</ty-select>"
+    }
+  ],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TySelectOption",
+    "TySelectGroup"
+  ]
 }

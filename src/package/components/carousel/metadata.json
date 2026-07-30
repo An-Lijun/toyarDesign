@@ -3,7 +3,7 @@
   "name": "TyCarousel",
   "category": "展示组件",
   "categoryKey": "show",
-  "description": "carousel",
+  "description": "carousel（需配合 TyCarouselItem 使用）",
   "docPath": "docsBase/page/component/show/carousel.md",
   "props": {
     "interval": {
@@ -83,5 +83,8 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyCarouselItem"
+  ]
 }

@@ -1,0 +1,68 @@
+{
+  "projectSetup": {
+    "packageName": "toyar-design",
+    "version": "1.0.0",
+    "installCommand": "npm install toyar-design",
+    "cssPath": "toyar-design/dist/toyar-design.css",
+    "globalRegister": "app.use(toyar)",
+    "namedImportExample": "import { TyButton, TyInput } from 'toyar-design'",
+    "setupNote": "先引入 CSS 文件，再通过 app.use(toyar) 全局注册；组件库同时支持按需引入。"
+  },
+  "relatedComponents": {
+    "select": ["TySelectOption", "TySelectGroup"],
+    "check-box": ["TyCheckBoxGroup"],
+    "radio": ["TyRadioGroup"],
+    "form": ["TyFormItem"],
+    "avatar": ["TyAvatar-group"],
+    "breadcrumb": ["TyBreadcrumbItem"],
+    "button": ["TyButtonGroup"],
+    "carousel": ["TyCarouselItem"],
+    "collapse": ["TyCollapseItem"],
+    "container": ["TyHeader", "TyAside", "TyMain", "TyFooter"],
+    "list": ["TyListItem"],
+    "menu": ["TyMenuItem", "TySubMenu", "TyMenuGroup"],
+    "row": ["TyCol"],
+    "skeleton": ["TySkeletonItem"],
+    "tabs": ["TyTabItem"]
+  },
+  "componentExamples": {
+    "form": {
+      "description": "表单组件，需配合 TyFormItem 使用。rules 字段支持 required、pattern、min、max、trigger 等校验规则。",
+      "rulesExample": {
+        "username": [
+          { "required": true, "message": "请输入用户名", "trigger": "blur" },
+          { "min": 3, "max": 12, "message": "长度在 3 到 12 个字符", "trigger": "blur" }
+        ],
+        "email": [
+          { "required": true, "message": "请输入邮箱", "trigger": "blur" },
+          { "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", "message": "邮箱格式不正确", "trigger": "blur" }
+        ],
+        "city": [
+          { "required": true, "message": "请选择城市", "trigger": "change" }
+        ]
+      },
+      "templateExample": "<ty-form :model=\"form\" :rules=\"rules\">\n  <ty-form-item label=\"用户名\" prop=\"username\">\n    <ty-input v-model=\"form.username\" />\n  </ty-form-item>\n  <ty-form-item label=\"邮箱\" prop=\"email\">\n    <ty-input v-model=\"form.email\" />\n  </ty-form-item>\n  <ty-form-item label=\"城市\" prop=\"city\">\n    <ty-select v-model=\"form.city\">\n      <ty-select-option value=\"bj\" label=\"北京\" />\n      <ty-select-option value=\"sh\" label=\"上海\" />\n    </ty-select>\n  </ty-form-item>\n</ty-form>"
+    },
+    "select": {
+      "description": "选择器组件，需配合 TySelectOption 使用，支持通过 TySelectGroup 对选项进行分组。",
+      "templateExample": "<ty-select v-model=\"value\" placeholder=\"请选择\">\n  <ty-select-group label=\"一线城市\">\n    <ty-select-option value=\"bj\" label=\"北京\" />\n    <ty-select-option value=\"sh\" label=\"上海\" />\n  </ty-select-group>\n  <ty-select-option value=\"hz\" label=\"杭州\" />\n</ty-select>"
+    },
+    "check-box": {
+      "description": "复选框组件，可单独使用；多选场景请使用 TyCheckBoxGroup 包裹多个 TyCheckBox。",
+      "templateExample": "<ty-check-box-group v-model=\"checked\">\n  <ty-check-box value=\"a\">选项 A</ty-check-box>\n  <ty-check-box value=\"b\">选项 B</ty-check-box>\n</ty-check-box-group>"
+    },
+    "radio": {
+      "description": "单选框组件，可单独使用；多选场景请使用 TyRadioGroup 包裹多个 TyRadio。",
+      "templateExample": "<ty-radio-group v-model=\"picked\">\n  <ty-radio value=\"a\">选项 A</ty-radio>\n  <ty-radio value=\"b\">选项 B</ty-radio>\n</ty-radio-group>"
+    },
+    "input": {
+      "templateExample": "<ty-input v-model=\"value\" placeholder=\"请输入\" clearable />"
+    },
+    "button": {
+      "templateExample": "<ty-button state=\"primary\" @click=\"handleClick\">提交</ty-button>"
+    },
+    "table": {
+      "templateExample": "<ty-table :data=\"tableData\" :columns=\"columns\" row-key=\"id\" />"
+    }
+  }
+}

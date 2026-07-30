@@ -3,7 +3,7 @@
   "name": "TyRow",
   "category": "布局组件",
   "categoryKey": "layout",
-  "description": "Row 栅格行",
+  "description": "Row 栅格行（需配合 TyCol 使用）",
   "docPath": "docsBase/page/component/layout/row.md",
   "props": {
     "type": {
@@ -37,5 +37,8 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyCol"
+  ]
 }

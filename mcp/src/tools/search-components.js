@@ -23,12 +23,15 @@ export function registerSearchComponents(server, components) {
         return textResult(`未找到与「${query}」匹配的组件。`)
       }
 
-      const lines = ranked.map(({ c }) =>
-        `- ${c.name}（${c.id}）｜分类：${c.category}｜${c.title || c.description || '无描述'}`
-      )
+      const lines = ranked.map(({ c }) => {
+        const related = c.relatedComponents && c.relatedComponents.length
+          ? `｜组合子组件：${c.relatedComponents.join(' / ')}`
+          : ''
+        return `- ${c.name}（${c.id}）｜分类：${c.category}｜${c.description || '无描述'}${related}`
+      })
       return textResult(
         `找到 ${ranked.length} 个匹配组件：\n\n${lines.join('\n')}\n\n` +
-        `提示：使用 get_component_description 获取某个组件的详细属性、事件和插槽。`
+        `提示：使用 get_component_description 获取某个组件的详细属性、事件和插槽，使用 get_component_relations 查看组件关系索引。`
       )
     }
   )

@@ -87,7 +87,12 @@
     "innerAft",
     "outAft"
   ],
-  "examples": [],
+  "examples": [
+    {
+      "title": "基础用法示例",
+      "code": "<ty-input v-model=\"value\" placeholder=\"请输入\" clearable />"
+    }
+  ],
   "capabilities": [],
   "useCases": []
 }

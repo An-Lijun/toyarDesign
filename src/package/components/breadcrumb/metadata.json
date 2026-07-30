@@ -3,7 +3,7 @@
   "name": "TyBreadcrumb",
   "category": "未分类",
   "categoryKey": "other",
-  "description": "",
+  "description": "需配合 TyBreadcrumbItem 使用",
   "docPath": "",
   "props": {
     "separator": {
@@ -19,5 +19,8 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyBreadcrumbItem"
+  ]
 }

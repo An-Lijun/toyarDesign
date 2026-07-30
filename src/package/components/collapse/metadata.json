@@ -3,7 +3,7 @@
   "name": "TyCollapse",
   "category": "容器组件",
   "categoryKey": "container",
-  "description": "collapse",
+  "description": "collapse（需配合 TyCollapseItem 使用）",
   "docPath": "docsBase/page/component/container/collapse.md",
   "props": {
     "disabled": {
@@ -43,5 +43,8 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyCollapseItem"
+  ]
 }

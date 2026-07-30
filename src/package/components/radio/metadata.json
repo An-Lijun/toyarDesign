@@ -3,7 +3,7 @@
   "name": "TyRadio",
   "category": "表单组件",
   "categoryKey": "form",
-  "description": "rdaio",
+  "description": "单选框组件，可单独使用；多选场景请使用 TyRadioGroup 包裹多个 TyRadio。",
   "docPath": "docsBase/page/component/form/radio.md",
   "props": {
     "size": {
@@ -50,7 +50,15 @@
   "slots": [
     "default"
   ],
-  "examples": [],
+  "examples": [
+    {
+      "title": "基础用法示例",
+      "code": "<ty-radio-group v-model=\"picked\">\n  <ty-radio value=\"a\">选项 A</ty-radio>\n  <ty-radio value=\"b\">选项 B</ty-radio>\n</ty-radio-group>"
+    }
+  ],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyRadioGroup"
+  ]
 }

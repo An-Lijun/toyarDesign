@@ -3,7 +3,7 @@
   "name": "TyTabs",
   "category": "容器组件",
   "categoryKey": "container",
-  "description": "tabs",
+  "description": "tabs（需配合 TyTabItem 使用）",
   "docPath": "docsBase/page/component/container/tabs.md",
   "props": {
     "modelValue": {
@@ -42,5 +42,8 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyTabItem"
+  ]
 }

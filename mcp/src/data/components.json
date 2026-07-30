@@ -66,7 +66,7 @@
     "name": "TyAvatar",
     "category": "展示组件",
     "categoryKey": "show",
-    "description": "avatar 头像",
+    "description": "avatar 头像（需配合 TyAvatar-group 使用）",
     "docPath": "docsBase/page/component/show/avatar.md",
     "props": {
       "width": {
@@ -104,7 +104,10 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyAvatar-group"
+    ]
   },
   {
     "id": "avatar-group",
@@ -234,7 +237,7 @@
     "name": "TyBreadcrumb",
     "category": "未分类",
     "categoryKey": "other",
-    "description": "",
+    "description": "需配合 TyBreadcrumbItem 使用",
     "docPath": "",
     "props": {
       "separator": {
@@ -250,14 +253,17 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyBreadcrumbItem"
+    ]
   },
   {
     "id": "button",
     "name": "TyButton",
     "category": "基础组件",
     "categoryKey": "base",
-    "description": "Button 按钮",
+    "description": "Button 按钮（需配合 TyButtonGroup 使用）",
     "docPath": "docsBase/page/component/base/button.md",
     "props": {
       "state": {
@@ -357,9 +363,17 @@
       "loading",
       "default"
     ],
-    "examples": [],
+    "examples": [
+      {
+        "title": "基础用法示例",
+        "code": "<ty-button state=\"primary\" @click=\"handleClick\">提交</ty-button>"
+      }
+    ],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyButtonGroup"
+    ]
   },
   {
     "id": "button-group",
@@ -441,7 +455,7 @@
     "name": "TyCarousel",
     "category": "展示组件",
     "categoryKey": "show",
-    "description": "carousel",
+    "description": "carousel（需配合 TyCarouselItem 使用）",
     "docPath": "docsBase/page/component/show/carousel.md",
     "props": {
       "interval": {
@@ -521,7 +535,10 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyCarouselItem"
+    ]
   },
   {
     "id": "caution",
@@ -569,7 +586,7 @@
     "name": "TyCheckBox",
     "category": "表单组件",
     "categoryKey": "form",
-    "description": "checkBox",
+    "description": "复选框组件，可单独使用；多选场景请使用 TyCheckBoxGroup 包裹多个 TyCheckBox。",
     "docPath": "docsBase/page/component/form/checkBox.md",
     "props": {
       "size": {
@@ -618,9 +635,17 @@
     "slots": [
       "default"
     ],
-    "examples": [],
+    "examples": [
+      {
+        "title": "基础用法示例",
+        "code": "<ty-check-box-group v-model=\"checked\">\n  <ty-check-box value=\"a\">选项 A</ty-check-box>\n  <ty-check-box value=\"b\">选项 B</ty-check-box>\n</ty-check-box-group>"
+      }
+    ],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyCheckBoxGroup"
+    ]
   },
   {
     "id": "circle",
@@ -719,7 +744,7 @@
     "name": "TyCollapse",
     "category": "容器组件",
     "categoryKey": "container",
-    "description": "collapse",
+    "description": "collapse（需配合 TyCollapseItem 使用）",
     "docPath": "docsBase/page/component/container/collapse.md",
     "props": {
       "disabled": {
@@ -759,7 +784,10 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyCollapseItem"
+    ]
   },
   {
     "id": "color-picker",
@@ -835,7 +863,7 @@
     "name": "TyContainer",
     "category": "布局组件",
     "categoryKey": "layout",
-    "description": "container",
+    "description": "container（需配合 TyHeader / TyAside / TyMain / TyFooter 使用）",
     "docPath": "docsBase/page/component/layout/container.md",
     "props": {},
     "emits": {},
@@ -844,7 +872,13 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyHeader",
+      "TyAside",
+      "TyMain",
+      "TyFooter"
+    ]
   },
   {
     "id": "date-picker",
@@ -1165,7 +1199,7 @@
     "name": "TyForm",
     "category": "表单组件",
     "categoryKey": "form",
-    "description": "Form 表单",
+    "description": "表单组件，需配合 TyFormItem 使用。rules 字段支持 required、pattern、min、max、trigger 等校验规则。",
     "docPath": "docsBase/page/component/form/form.md",
     "props": {
       "rules": {
@@ -1201,9 +1235,51 @@
     "slots": [
       "default"
     ],
-    "examples": [],
+    "examples": [
+      {
+        "title": "校验规则示例",
+        "rules": {
+          "username": [
+            {
+              "required": true,
+              "message": "请输入用户名",
+              "trigger": "blur"
+            },
+            {
+              "min": 3,
+              "max": 12,
+              "message": "长度在 3 到 12 个字符",
+              "trigger": "blur"
+            }
+          ],
+          "email": [
+            {
+              "required": true,
+              "message": "请输入邮箱",
+              "trigger": "blur"
+            },
+            {
+              "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+              "message": "邮箱格式不正确",
+              "trigger": "blur"
+            }
+          ],
+          "city": [
+            {
+              "required": true,
+              "message": "请选择城市",
+              "trigger": "change"
+            }
+          ]
+        },
+        "code": "<ty-form :model=\"form\" :rules=\"rules\">\n  <ty-form-item label=\"用户名\" prop=\"username\">\n    <ty-input v-model=\"form.username\" />\n  </ty-form-item>\n  <ty-form-item label=\"邮箱\" prop=\"email\">\n    <ty-input v-model=\"form.email\" />\n  </ty-form-item>\n  <ty-form-item label=\"城市\" prop=\"city\">\n    <ty-select v-model=\"form.city\">\n      <ty-select-option value=\"bj\" label=\"北京\" />\n      <ty-select-option value=\"sh\" label=\"上海\" />\n    </ty-select>\n  </ty-form-item>\n</ty-form>"
+      }
+    ],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyFormItem"
+    ]
   },
   {
     "id": "form-item",
@@ -1392,7 +1468,12 @@
       "innerAft",
       "outAft"
     ],
-    "examples": [],
+    "examples": [
+      {
+        "title": "基础用法示例",
+        "code": "<ty-input v-model=\"value\" placeholder=\"请输入\" clearable />"
+      }
+    ],
     "capabilities": [],
     "useCases": []
   },
@@ -1543,7 +1624,7 @@
     "name": "TyList",
     "category": "未分类",
     "categoryKey": "other",
-    "description": "",
+    "description": "需配合 TyListItem 使用",
     "docPath": "",
     "props": {
       "header": {
@@ -1572,7 +1653,10 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyListItem"
+    ]
   },
   {
     "id": "loading",
@@ -1653,7 +1737,7 @@
     "name": "TyMenu",
     "category": "展示组件",
     "categoryKey": "show",
-    "description": "Menu",
+    "description": "Menu（需配合 TyMenuItem / TySubMenu / TyMenuGroup 使用）",
     "docPath": "docsBase/page/component/show/menu.md",
     "props": {
       "modelValue": {
@@ -1693,7 +1777,12 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyMenuItem",
+      "TySubMenu",
+      "TyMenuGroup"
+    ]
   },
   {
     "id": "message",
@@ -2034,7 +2123,7 @@
     "name": "TyRadio",
     "category": "表单组件",
     "categoryKey": "form",
-    "description": "rdaio",
+    "description": "单选框组件，可单独使用；多选场景请使用 TyRadioGroup 包裹多个 TyRadio。",
     "docPath": "docsBase/page/component/form/radio.md",
     "props": {
       "size": {
@@ -2081,9 +2170,17 @@
     "slots": [
       "default"
     ],
-    "examples": [],
+    "examples": [
+      {
+        "title": "基础用法示例",
+        "code": "<ty-radio-group v-model=\"picked\">\n  <ty-radio value=\"a\">选项 A</ty-radio>\n  <ty-radio value=\"b\">选项 B</ty-radio>\n</ty-radio-group>"
+      }
+    ],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyRadioGroup"
+    ]
   },
   {
     "id": "rate",
@@ -2175,7 +2272,7 @@
     "name": "TyRow",
     "category": "布局组件",
     "categoryKey": "layout",
-    "description": "Row 栅格行",
+    "description": "Row 栅格行（需配合 TyCol 使用）",
     "docPath": "docsBase/page/component/layout/row.md",
     "props": {
       "type": {
@@ -2209,7 +2306,10 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyCol"
+    ]
   },
   {
     "id": "scrollbar",
@@ -2232,7 +2332,7 @@
     "name": "TySelect",
     "category": "表单组件",
     "categoryKey": "form",
-    "description": "select",
+    "description": "选择器组件，需配合 TySelectOption 使用，支持通过 TySelectGroup 对选项进行分组。",
     "docPath": "docsBase/page/component/form/select.md",
     "props": {
       "size": {
@@ -2307,16 +2407,25 @@
     "slots": [
       "default"
     ],
-    "examples": [],
+    "examples": [
+      {
+        "title": "基础用法示例",
+        "code": "<ty-select v-model=\"value\" placeholder=\"请选择\">\n  <ty-select-group label=\"一线城市\">\n    <ty-select-option value=\"bj\" label=\"北京\" />\n    <ty-select-option value=\"sh\" label=\"上海\" />\n  </ty-select-group>\n  <ty-select-option value=\"hz\" label=\"杭州\" />\n</ty-select>"
+      }
+    ],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TySelectOption",
+      "TySelectGroup"
+    ]
   },
   {
     "id": "skeleton",
     "name": "TySkeleton",
     "category": "展示组件",
     "categoryKey": "show",
-    "description": "skeleton",
+    "description": "skeleton（需配合 TySkeletonItem 使用）",
     "docPath": "docsBase/page/component/show/skeleton.md",
     "props": {},
     "emits": {},
@@ -2325,7 +2434,10 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TySkeletonItem"
+    ]
   },
   {
     "id": "slider",
@@ -2634,7 +2746,12 @@
     },
     "emits": {},
     "slots": [],
-    "examples": [],
+    "examples": [
+      {
+        "title": "基础用法示例",
+        "code": "<ty-table :data=\"tableData\" :columns=\"columns\" row-key=\"id\" />"
+      }
+    ],
     "capabilities": [],
     "useCases": []
   },
@@ -2643,7 +2760,7 @@
     "name": "TyTabs",
     "category": "容器组件",
     "categoryKey": "container",
-    "description": "tabs",
+    "description": "tabs（需配合 TyTabItem 使用）",
     "docPath": "docsBase/page/component/container/tabs.md",
     "props": {
       "modelValue": {
@@ -2682,7 +2799,10 @@
     ],
     "examples": [],
     "capabilities": [],
-    "useCases": []
+    "useCases": [],
+    "relatedComponents": [
+      "TyTabItem"
+    ]
   },
   {
     "id": "time-picker",

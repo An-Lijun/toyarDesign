@@ -3,7 +3,7 @@
   "name": "TyContainer",
   "category": "布局组件",
   "categoryKey": "layout",
-  "description": "container",
+  "description": "container（需配合 TyHeader / TyAside / TyMain / TyFooter 使用）",
   "docPath": "docsBase/page/component/layout/container.md",
   "props": {},
   "emits": {},
@@ -12,5 +12,11 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyHeader",
+    "TyAside",
+    "TyMain",
+    "TyFooter"
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "TyButton",
   "category": "基础组件",
   "categoryKey": "base",
-  "description": "Button 按钮",
+  "description": "Button 按钮（需配合 TyButtonGroup 使用）",
   "docPath": "docsBase/page/component/base/button.md",
   "props": {
     "state": {
@@ -103,7 +103,15 @@
     "loading",
     "default"
   ],
-  "examples": [],
+  "examples": [
+    {
+      "title": "基础用法示例",
+      "code": "<ty-button state=\"primary\" @click=\"handleClick\">提交</ty-button>"
+    }
+  ],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyButtonGroup"
+  ]
 }

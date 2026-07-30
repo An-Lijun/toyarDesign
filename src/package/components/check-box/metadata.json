@@ -3,7 +3,7 @@
   "name": "TyCheckBox",
   "category": "表单组件",
   "categoryKey": "form",
-  "description": "checkBox",
+  "description": "复选框组件，可单独使用；多选场景请使用 TyCheckBoxGroup 包裹多个 TyCheckBox。",
   "docPath": "docsBase/page/component/form/checkBox.md",
   "props": {
     "size": {
@@ -52,7 +52,15 @@
   "slots": [
     "default"
   ],
-  "examples": [],
+  "examples": [
+    {
+      "title": "基础用法示例",
+      "code": "<ty-check-box-group v-model=\"checked\">\n  <ty-check-box value=\"a\">选项 A</ty-check-box>\n  <ty-check-box value=\"b\">选项 B</ty-check-box>\n</ty-check-box-group>"
+    }
+  ],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyCheckBoxGroup"
+  ]
 }

@@ -2,6 +2,8 @@ import { registerSearchComponents } from './search-components.js'
 import { registerGetDescription } from './get-component-description.js'
 import { registerRecommendComponents } from './recommend-components.js'
 import { registerGenerateCode } from './generate-component-code.js'
+import { registerGetProjectSetup } from './get-project-setup.js'
+import { registerGetComponentRelations } from './get-component-relations.js'
 
 /**
  * 注册所有 MCP 工具
@@ -13,4 +15,6 @@ export function registerTools(server, components) {
   registerGetDescription(server, components)
   registerRecommendComponents(server, components)
   registerGenerateCode(server, components)
+  registerGetProjectSetup(server)
+  registerGetComponentRelations(server, components)
 }

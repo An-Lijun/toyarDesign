@@ -1,0 +1,9 @@
+{
+  "packageName": "toyar-design",
+  "version": "1.0.0",
+  "installCommand": "npm install toyar-design",
+  "cssPath": "toyar-design/dist/toyar-design.css",
+  "globalRegister": "app.use(toyar)",
+  "namedImportExample": "import { TyButton, TyInput } from 'toyar-design'",
+  "setupNote": "先引入 CSS 文件，再通过 app.use(toyar) 全局注册；组件库同时支持按需引入。"
+}

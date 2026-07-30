@@ -80,7 +80,12 @@
   },
   "emits": {},
   "slots": [],
-  "examples": [],
+  "examples": [
+    {
+      "title": "基础用法示例",
+      "code": "<ty-table :data=\"tableData\" :columns=\"columns\" row-key=\"id\" />"
+    }
+  ],
   "capabilities": [],
   "useCases": []
 }

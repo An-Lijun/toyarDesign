@@ -3,7 +3,7 @@
   "name": "TyMenu",
   "category": "展示组件",
   "categoryKey": "show",
-  "description": "Menu",
+  "description": "Menu（需配合 TyMenuItem / TySubMenu / TyMenuGroup 使用）",
   "docPath": "docsBase/page/component/show/menu.md",
   "props": {
     "modelValue": {
@@ -43,5 +43,10 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TyMenuItem",
+    "TySubMenu",
+    "TyMenuGroup"
+  ]
 }

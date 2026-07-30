@@ -3,7 +3,7 @@
   "name": "TySkeleton",
   "category": "展示组件",
   "categoryKey": "show",
-  "description": "skeleton",
+  "description": "skeleton（需配合 TySkeletonItem 使用）",
   "docPath": "docsBase/page/component/show/skeleton.md",
   "props": {},
   "emits": {},
@@ -12,5 +12,8 @@
   ],
   "examples": [],
   "capabilities": [],
-  "useCases": []
+  "useCases": [],
+  "relatedComponents": [
+    "TySkeletonItem"
+  ]
 }

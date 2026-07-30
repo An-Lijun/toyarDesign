@@ -22,6 +22,12 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// 手动维护的组件覆写配置（组合子组件、示例片段等）
+const OVERRIDES_PATH = path.join(__dirname, 'component-overrides.json')
+const OVERRIDES = fs.existsSync(OVERRIDES_PATH)
+  ? JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf-8'))
+  : {}
+
 // 组件目录路径（包含所有组件的文件夹）
 const COMPONENTS_DIR = path.join(__dirname, '../src/package/components')
 // 输出目录路径（生成的 manifest 文件存放位置）
@@ -820,6 +826,34 @@ function generateComponentMetadata(componentName, docIndex = {}) {
     metadata.docPath = doc.docPath
   }
 
+  // 合并手动维护的覆写信息
+  const related = (OVERRIDES.relatedComponents || {})[componentName]
+  if (related && related.length > 0) {
+    metadata.relatedComponents = related
+    const relatedText = related.join(' / ')
+    const comboHint = `需配合 ${relatedText} 使用`
+    metadata.description = metadata.description
+      ? `${metadata.description}（${comboHint}）`
+      : comboHint
+  }
+
+  const example = (OVERRIDES.componentExamples || {})[componentName]
+  if (example) {
+    if (example.description) {
+      metadata.description = example.description
+    }
+    if (example.rulesExample || example.templateExample) {
+      metadata.examples = [
+        ...(metadata.examples || []),
+        {
+          title: example.rulesExample ? '校验规则示例' : '基础用法示例',
+          rules: example.rulesExample || undefined,
+          code: example.templateExample || undefined,
+        },
+      ]
+    }
+  }
+
   return metadata
 }
 
@@ -902,6 +936,15 @@ function generateManifest() {
     JSON.stringify(components, null, 2)
   )
   console.log(`📦 mcp/src/data/components.json 已同步，共 ${components.length} 个组件`)
+
+  // 同步工程化信息到 MCP 包内
+  if (OVERRIDES.projectSetup) {
+    fs.writeFileSync(
+      path.join(mcpDataDir, 'project-setup.json'),
+      JSON.stringify(OVERRIDES.projectSetup, null, 2)
+    )
+    console.log(`📦 mcp/src/data/project-setup.json 已同步`)
+  }
 
   console.log(`\n📦 component-manifest.json 已生成，共 ${components.length} 个组件`)
   console.log(`✅ 成功: ${successCount} 个`)
