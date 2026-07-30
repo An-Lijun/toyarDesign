@@ -1,8 +1,10 @@
 {
   "id": "container",
   "name": "TyContainer",
-  "category": "unknown",
-  "description": "",
+  "category": "布局组件",
+  "categoryKey": "layout",
+  "description": "container",
+  "docPath": "docsBase/page/component/layout/container.md",
   "props": {},
   "emits": {},
   "slots": [

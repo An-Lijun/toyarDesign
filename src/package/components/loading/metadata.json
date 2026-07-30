@@ -1,8 +1,10 @@
 {
   "id": "loading",
   "name": "TyLoading",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "loading",
+  "docPath": "docsBase/page/component/feedback/loading.md",
   "props": {
     "isFixed": {
       "type": "boolean",

@@ -1,8 +1,10 @@
 {
   "id": "row",
   "name": "TyRow",
-  "category": "unknown",
-  "description": "",
+  "category": "布局组件",
+  "categoryKey": "layout",
+  "description": "Row 栅格行",
+  "docPath": "docsBase/page/component/layout/row.md",
   "props": {
     "type": {
       "type": "string",

@@ -1,8 +1,10 @@
 {
   "id": "caution",
   "name": "TyCaution",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "caution",
+  "docPath": "docsBase/page/component/show/caution.md",
   "props": {
     "type": {
       "type": "string",

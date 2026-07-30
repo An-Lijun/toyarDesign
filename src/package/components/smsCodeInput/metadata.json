@@ -1,8 +1,10 @@
 {
   "id": "smscodeinput",
   "name": "TySmsCodeInput",
-  "category": "unknown",
+  "category": "未分类",
+  "categoryKey": "other",
   "description": "",
+  "docPath": "",
   "props": {
     "modelValue": {
       "type": "string",

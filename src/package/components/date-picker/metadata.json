@@ -1,8 +1,10 @@
 {
   "id": "date-picker",
   "name": "TyDate-picker",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "calendar",
+  "docPath": "docsBase/page/component/form/datePicker.md",
   "props": {
     "size": {
       "type": "string",

@@ -1,8 +1,10 @@
 {
   "id": "empty",
   "name": "TyEmpty",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "empty",
+  "docPath": "docsBase/page/component/show/empty.md",
   "props": {
     "title": {
       "type": "string",

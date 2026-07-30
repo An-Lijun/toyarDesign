@@ -1,8 +1,10 @@
 {
   "id": "input-password",
   "name": "TyInputPassword",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "InputPassword",
+  "docPath": "docsBase/page/component/form/inputPassword.md",
   "props": {
     "size": {
       "type": "string",

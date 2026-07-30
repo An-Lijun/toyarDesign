@@ -1,8 +1,10 @@
 {
   "id": "image",
   "name": "TyImage",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "image",
+  "docPath": "docsBase/page/component/show/image.md",
   "props": {
     "src": {
       "type": "string",

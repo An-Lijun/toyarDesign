@@ -1,8 +1,10 @@
 {
   "id": "check-box",
   "name": "TyCheckBox",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "checkBox",
+  "docPath": "docsBase/page/component/form/checkBox.md",
   "props": {
     "size": {
       "type": "string",

@@ -1,8 +1,10 @@
 {
   "id": "tabs",
   "name": "TyTabs",
-  "category": "unknown",
-  "description": "",
+  "category": "容器组件",
+  "categoryKey": "container",
+  "description": "tabs",
+  "docPath": "docsBase/page/component/container/tabs.md",
   "props": {
     "modelValue": {
       "type": "string",

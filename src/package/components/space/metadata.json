@@ -1,8 +1,10 @@
 {
   "id": "space",
   "name": "TySpace",
-  "category": "unknown",
-  "description": "",
+  "category": "布局组件",
+  "categoryKey": "layout",
+  "description": "间距 Space",
+  "docPath": "docsBase/page/component/layout/space.md",
   "props": {
     "align": {
       "type": "string",

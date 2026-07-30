@@ -1,8 +1,10 @@
 {
   "id": "radio",
   "name": "TyRadio",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "rdaio",
+  "docPath": "docsBase/page/component/form/radio.md",
   "props": {
     "size": {
       "type": "string",

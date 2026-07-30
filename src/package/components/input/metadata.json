@@ -1,8 +1,10 @@
 {
   "id": "input",
   "name": "TyInput",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "Input",
+  "docPath": "docsBase/page/component/form/input.md",
   "props": {
     "size": {
       "type": "string",

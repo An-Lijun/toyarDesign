@@ -1,8 +1,10 @@
 {
   "id": "message",
   "name": "TyMessage",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "message",
+  "docPath": "docsBase/page/component/feedback/message.md",
   "props": {
     "msg": {
       "type": "string",

@@ -1,8 +1,10 @@
 {
   "id": "button",
   "name": "TyButton",
-  "category": "unknown",
-  "description": "",
+  "category": "基础组件",
+  "categoryKey": "base",
+  "description": "Button 按钮",
+  "docPath": "docsBase/page/component/base/button.md",
   "props": {
     "state": {
       "type": "string",

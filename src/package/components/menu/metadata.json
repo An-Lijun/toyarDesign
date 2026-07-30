@@ -1,8 +1,10 @@
 {
   "id": "menu",
   "name": "TyMenu",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "Menu",
+  "docPath": "docsBase/page/component/show/menu.md",
   "props": {
     "modelValue": {
       "type": "string | number",

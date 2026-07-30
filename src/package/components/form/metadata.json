@@ -1,8 +1,10 @@
 {
   "id": "form",
   "name": "TyForm",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "Form 表单",
+  "docPath": "docsBase/page/component/form/form.md",
   "props": {
     "rules": {
       "type": "object",

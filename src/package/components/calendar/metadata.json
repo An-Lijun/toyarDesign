@@ -1,8 +1,10 @@
 {
   "id": "calendar",
   "name": "TyCalendar",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "Calendar",
+  "docPath": "docsBase/page/component/show/calendar.md",
   "props": {
     "dayItemHeight": {
       "type": "number",

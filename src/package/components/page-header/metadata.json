@@ -1,8 +1,10 @@
 {
   "id": "page-header",
   "name": "TyPage-header",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "pageHeader",
+  "docPath": "docsBase/page/component/show/pageHeader.md",
   "props": {
     "title": {
       "type": "string",

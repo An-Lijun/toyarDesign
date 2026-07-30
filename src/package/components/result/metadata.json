@@ -1,8 +1,10 @@
 {
   "id": "result",
   "name": "TyResult",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "结果",
+  "docPath": "docsBase/page/component/feedback/result.md",
   "props": {
     "type": {
       "type": "string",

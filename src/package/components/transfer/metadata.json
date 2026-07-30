@@ -1,8 +1,10 @@
 {
   "id": "transfer",
   "name": "TyTransfer",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "transfer",
+  "docPath": "docsBase/page/component/form/transfer.md",
   "props": {
     "data": {
       "type": "array",

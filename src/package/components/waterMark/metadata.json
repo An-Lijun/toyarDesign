@@ -1,8 +1,10 @@
 {
   "id": "watermark",
   "name": "TyWaterMark",
-  "category": "unknown",
-  "description": "",
+  "category": "基础组件",
+  "categoryKey": "base",
+  "description": "waterMark 水印",
+  "docPath": "docsBase/page/component/base/waterMark.md",
   "props": {
     "markInfo": {
       "type": "string | array",

@@ -1,8 +1,10 @@
 {
   "id": "list",
   "name": "TyList",
-  "category": "unknown",
+  "category": "未分类",
+  "categoryKey": "other",
   "description": "",
+  "docPath": "",
   "props": {
     "header": {
       "type": "string",

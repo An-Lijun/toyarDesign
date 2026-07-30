@@ -1,8 +1,10 @@
 {
   "id": "input-number",
   "name": "TyInputNumber",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "inputNumber",
+  "docPath": "docsBase/page/component/form/inputNumber.md",
   "props": {
     "modelValue": {
       "type": "number",

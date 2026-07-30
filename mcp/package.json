@@ -1,0 +1,25 @@
+{
+  "name": "toyar-design-mcp",
+  "version": "1.0.0",
+  "description": "ToyarDesign 组件库 MCP 服务器（本地开发使用，stdio 传输）",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "toyar-design-mcp": "./dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "vite build",
+    "start": "node dist/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.3"
+  }
+}

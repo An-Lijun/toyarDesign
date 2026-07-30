@@ -1,8 +1,10 @@
 {
   "id": "card",
   "name": "TyCard",
-  "category": "unknown",
-  "description": "",
+  "category": "容器组件",
+  "categoryKey": "container",
+  "description": "card",
+  "docPath": "docsBase/page/component/container/card.md",
   "props": {
     "border": {
       "type": "boolean",

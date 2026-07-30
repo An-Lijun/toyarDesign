@@ -1,8 +1,10 @@
 {
   "id": "switch",
   "name": "TySwitch",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "switch",
+  "docPath": "docsBase/page/component/form/switch.md",
   "props": {
     "size": {
       "type": "string",

@@ -1,8 +1,10 @@
 {
   "id": "form-item",
   "name": "TyFormItem",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "formItem",
+  "docPath": "docsBase/page/component/form/formItem.md",
   "props": {
     "disabled": {
       "type": "boolean",

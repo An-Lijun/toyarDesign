@@ -1,8 +1,10 @@
 {
   "id": "alert",
   "name": "TyAlert",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "alert",
+  "docPath": "docsBase/page/component/feedback/alert.md",
   "props": {},
   "emits": {},
   "slots": [],

@@ -1,8 +1,10 @@
 {
   "id": "select",
   "name": "TySelect",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "select",
+  "docPath": "docsBase/page/component/form/select.md",
   "props": {
     "size": {
       "type": "string",

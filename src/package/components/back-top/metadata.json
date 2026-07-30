@@ -1,8 +1,10 @@
 {
   "id": "back-top",
   "name": "TyBackTop",
-  "category": "unknown",
-  "description": "",
+  "category": "基础组件",
+  "categoryKey": "base",
+  "description": "BackTop 滚动到顶部",
+  "docPath": "docsBase/page/component/base/backTop.md",
   "props": {
     "vHeight": {
       "type": "number",

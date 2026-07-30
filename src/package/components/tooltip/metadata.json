@@ -1,8 +1,10 @@
 {
   "id": "tooltip",
   "name": "TyTooltip",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "tooltip",
+  "docPath": "docsBase/page/component/feedback/tooltip.md",
   "props": {
     "content": {
       "type": "string",

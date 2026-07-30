@@ -1,8 +1,10 @@
 {
   "id": "drawer",
   "name": "TyDrawer",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "抽屉",
+  "docPath": "docsBase/page/component/feedback/drawer.md",
   "props": {
     "width": {
       "type": "number",

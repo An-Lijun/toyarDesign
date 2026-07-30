@@ -1,8 +1,10 @@
 {
   "id": "dialog",
   "name": "TyDialog",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "dialog",
+  "docPath": "docsBase/page/component/feedback/dialog.md",
   "props": {
     "title": {
       "type": "string",

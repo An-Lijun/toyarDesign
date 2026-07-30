@@ -1,8 +1,10 @@
 {
   "id": "col",
   "name": "TyCol",
-  "category": "unknown",
-  "description": "",
+  "category": "布局组件",
+  "categoryKey": "layout",
+  "description": "Col 栅格列",
+  "docPath": "docsBase/page/component/layout/col.md",
   "props": {
     "span": {
       "type": "number | object | string",

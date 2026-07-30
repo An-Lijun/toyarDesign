@@ -1,8 +1,10 @@
 {
   "id": "carousel",
   "name": "TyCarousel",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "carousel",
+  "docPath": "docsBase/page/component/show/carousel.md",
   "props": {
     "interval": {
       "type": "number",

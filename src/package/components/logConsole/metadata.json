@@ -1,8 +1,10 @@
 {
   "id": "logconsole",
   "name": "TyLogConsole",
-  "category": "unknown",
+  "category": "未分类",
+  "categoryKey": "other",
   "description": "",
+  "docPath": "",
   "props": {
     "maxSize": {
       "type": "number | string",

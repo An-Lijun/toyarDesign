@@ -1,8 +1,10 @@
 {
   "id": "table",
   "name": "TyTable",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "table",
+  "docPath": "docsBase/page/component/show/table.md",
   "props": {
     "size": {
       "type": "string",

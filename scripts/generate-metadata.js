@@ -26,6 +26,17 @@ const __dirname = path.dirname(__filename)
 const COMPONENTS_DIR = path.join(__dirname, '../src/package/components')
 // 输出目录路径（生成的 manifest 文件存放位置）
 const OUTPUT_DIR = path.join(__dirname, '../dist')
+// 文档组件目录路径（用于推断分类和描述）
+const DOCS_DIR = path.join(__dirname, '../docsBase/page/component')
+// 分类英文 key → 中文标签
+const CATEGORY_LABELS = {
+  base: '基础组件',
+  form: '表单组件',
+  show: '展示组件',
+  feedback: '反馈组件',
+  layout: '布局组件',
+  container: '容器组件',
+}
 
 /**
  * Vue Prop 类型映射表
@@ -651,12 +662,80 @@ function extractComponentNameFromVueFile(vueFilePath) {
 }
 
 /**
+ * 从 md 文件提取第一个 # 标题作为组件描述
+ *
+ * @param {string} filePath - md 文件绝对路径
+ * @returns {string} - 标题文本（提取失败返回空串）
+ */
+function extractMdTitle(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8')
+    const match = content.match(/^#\s+(.+)$/m)
+    return match ? match[1].trim() : ''
+  } catch {
+    return ''
+  }
+}
+
+/**
+ * 解析文档侧边栏目录，构建 文档文件名(小写) → 分类信息 的映射
+ *
+ * 扫描 docsBase/page/component/{category}/ 下的 .md 文件，
+ * 每个目录代表一个分类，目录下的 .md 文件归属该分类。
+ *
+ * @returns {Object} - { [filename: string]: { categoryKey, categoryLabel, docPath, title } }
+ */
+function buildDocIndex() {
+  const index = {}
+  if (!fs.existsSync(DOCS_DIR)) return index
+
+  const dirs = fs.readdirSync(DOCS_DIR, { withFileTypes: true })
+    .filter(e => e.isDirectory())
+
+  for (const dir of dirs) {
+    const categoryKey = dir.name
+    const categoryLabel = CATEGORY_LABELS[categoryKey] || categoryKey
+    const dirPath = path.join(DOCS_DIR, categoryKey)
+
+    const mdFiles = fs.readdirSync(dirPath).filter(f => f.endsWith('.md'))
+    for (const file of mdFiles) {
+      const fileName = path.basename(file, '.md')
+      const filePath = path.join(dirPath, file)
+      index[fileName.toLowerCase()] = {
+        categoryKey,
+        categoryLabel,
+        docPath: path.relative(path.join(__dirname, '..'), filePath).replace(/\\/g, '/'),
+        title: extractMdTitle(filePath),
+      }
+    }
+  }
+  return index
+}
+
+/**
+ * 根据组件元数据匹配文档分类
+ *
+ * 规则：metadata.name 去掉 Ty 前缀后小写，匹配文档文件名（小写）
+ *
+ * @param {Object} metadata - 组件元数据
+ * @param {Object} docIndex - 文档索引
+ * @returns {Object|null} - 匹配到的文档信息
+ */
+function matchDoc(metadata, docIndex) {
+  const name = (metadata.name || '').replace(/^Ty/, '').toLowerCase()
+  if (docIndex[name]) return docIndex[name]
+  // 去掉连字符再尝试（如 sms-code → smscode）
+  const noDash = name.replace(/-/g, '')
+  return docIndex[noDash] || null
+}
+
+/**
  * 生成单个组件的元数据
  * 
  * @param {string} componentName - 组件名称（目录名）
  * @returns {Object|null} - 组件元数据对象或 null
  */
-function generateComponentMetadata(componentName) {
+function generateComponentMetadata(componentName, docIndex = {}) {
   // 构建组件目录路径
   const componentDir = path.join(COMPONENTS_DIR, componentName)
   const srcDir = path.join(componentDir, 'src')
@@ -720,14 +799,25 @@ function generateComponentMetadata(componentName) {
   const metadata = {
     id: componentName.toLowerCase(),                           // 组件 ID（小写）
     name: componentNameFromVue || `Ty${componentName.charAt(0).toUpperCase() + componentName.slice(1)}`,  // 组件名称
-    category: 'unknown',                                      // 分类（待完善）
-    description: '',                                          // 组件描述（待完善）
+    category: '未分类',                                        // 分类（从文档侧边栏推断）
+    categoryKey: 'other',                                     // 分类英文 key
+    description: '',                                          // 组件描述（从文档 md 标题推断）
+    docPath: '',                                              // 文档路径
     props,                                                    // 属性配置
     emits,                                                    // 事件配置
     slots,                                                    // 插槽列表
     examples: [],                                             // 使用示例（待完善）
     capabilities: [],                                         // 功能特性（待完善）
     useCases: [],                                             // 使用场景（待完善）
+  }
+
+  // 从文档侧边栏推断分类与描述（单一数据源：metadata.json 自带分类信息）
+  const doc = matchDoc(metadata, docIndex)
+  if (doc) {
+    metadata.category = doc.categoryLabel
+    metadata.categoryKey = doc.categoryKey
+    metadata.description = doc.title
+    metadata.docPath = doc.docPath
   }
 
   return metadata
@@ -740,6 +830,8 @@ function generateComponentMetadata(componentName) {
  */
 function generateManifest() {
   const components = []
+  // 构建文档索引（一次性，用于推断分类和描述）
+  const docIndex = buildDocIndex()
   // 读取组件目录下的所有子目录
   const entries = fs.readdirSync(COMPONENTS_DIR, { withFileTypes: true })
   
@@ -753,7 +845,7 @@ function generateManifest() {
     if (entry.isDirectory()) {
       try {
         // 为每个组件生成元数据
-        const metadata = generateComponentMetadata(entry.name)
+        const metadata = generateComponentMetadata(entry.name, docIndex)
         if (metadata) {
           components.push(metadata)
           
@@ -813,7 +905,8 @@ function generateManifest() {
  * @returns {Object|null} - 组件元数据对象或 null
  */
 function generateSingleMetadata(componentName) {
-  const metadata = generateComponentMetadata(componentName)
+  const docIndex = buildDocIndex()
+  const metadata = generateComponentMetadata(componentName, docIndex)
   if (metadata) {
     const outputPath = path.join(COMPONENTS_DIR, componentName, 'metadata.json')
     fs.writeFileSync(outputPath, JSON.stringify(metadata, null, 2))

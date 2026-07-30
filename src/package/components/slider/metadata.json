@@ -1,8 +1,10 @@
 {
   "id": "slider",
   "name": "TySlider",
-  "category": "unknown",
-  "description": "",
+  "category": "表单组件",
+  "categoryKey": "form",
+  "description": "slider",
+  "docPath": "docsBase/page/component/form/slider.md",
   "props": {
     "modelValue": {
       "type": "string | number",

@@ -1,8 +1,10 @@
 {
   "id": "descriptions",
   "name": "TyDescriptions",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "描述列表",
+  "docPath": "docsBase/page/component/show/descriptions.md",
   "props": {
     "title": {
       "type": "string",

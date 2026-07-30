@@ -1,8 +1,10 @@
 {
   "id": "configprovider",
   "name": "TyConfigProvider",
-  "category": "unknown",
-  "description": "",
+  "category": "基础组件",
+  "categoryKey": "base",
+  "description": "全局配置",
+  "docPath": "docsBase/page/component/base/configProvider.md",
   "props": {
     "theme": {
       "type": "string",

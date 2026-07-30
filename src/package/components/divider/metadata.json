@@ -1,8 +1,10 @@
 {
   "id": "divider",
   "name": "TyDivider",
-  "category": "unknown",
-  "description": "",
+  "category": "基础组件",
+  "categoryKey": "base",
+  "description": "Divider 分隔线",
+  "docPath": "docsBase/page/component/base/divider.md",
   "props": {
     "direction": {
       "type": "string",

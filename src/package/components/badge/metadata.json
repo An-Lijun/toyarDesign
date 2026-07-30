@@ -1,8 +1,10 @@
 {
   "id": "badge",
   "name": "TyBadge",
-  "category": "unknown",
-  "description": "",
+  "category": "展示组件",
+  "categoryKey": "show",
+  "description": "badge",
+  "docPath": "docsBase/page/component/show/badge.md",
   "props": {
     "text": {
       "type": "string | number",

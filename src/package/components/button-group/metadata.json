@@ -1,8 +1,10 @@
 {
   "id": "button-group",
   "name": "TyButtonGroup",
-  "category": "unknown",
+  "category": "未分类",
+  "categoryKey": "other",
   "description": "",
+  "docPath": "",
   "props": {},
   "emits": {},
   "slots": [

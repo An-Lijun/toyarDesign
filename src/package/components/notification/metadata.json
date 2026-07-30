@@ -1,8 +1,10 @@
 {
   "id": "notification",
   "name": "TyNotification",
-  "category": "unknown",
-  "description": "",
+  "category": "反馈组件",
+  "categoryKey": "feedback",
+  "description": "notification",
+  "docPath": "docsBase/page/component/feedback/notification.md",
   "props": {
     "type": {
       "type": "string",
