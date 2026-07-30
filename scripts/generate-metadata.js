@@ -892,6 +892,17 @@ function generateManifest() {
     JSON.stringify(manifest, null, 2)
   )
 
+  // 同步输出合并版 components.json 到 MCP 包内（作为 MCP 的内置数据源，随代码一起打包）
+  const mcpDataDir = path.join(__dirname, '../mcp/src/data')
+  if (!fs.existsSync(mcpDataDir)) {
+    fs.mkdirSync(mcpDataDir, { recursive: true })
+  }
+  fs.writeFileSync(
+    path.join(mcpDataDir, 'components.json'),
+    JSON.stringify(components, null, 2)
+  )
+  console.log(`📦 mcp/src/data/components.json 已同步，共 ${components.length} 个组件`)
+
   console.log(`\n📦 component-manifest.json 已生成，共 ${components.length} 个组件`)
   console.log(`✅ 成功: ${successCount} 个`)
   console.log(`❌ 失败: ${failCount} 个`)

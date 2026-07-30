@@ -1,0 +1,2930 @@
+[
+  {
+    "id": "affix",
+    "name": "TyAffix",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "tag": {
+        "type": "string",
+        "default": "div",
+        "required": false,
+        "description": "自定义标签"
+      },
+      "offsetTop": {
+        "type": "number",
+        "default": 0,
+        "required": false,
+        "description": "顶部偏移量"
+      },
+      "offsetBottom": {
+        "type": "number",
+        "default": null,
+        "required": false,
+        "description": "底部偏移量"
+      },
+      "target": {
+        "type": "HTMLElement",
+        "default": null,
+        "required": false,
+        "description": "目标元素"
+      }
+    },
+    "emits": {
+      "fixed-change": {
+        "params": [
+          "value: boolean"
+        ],
+        "description": "固定状态改变时触发"
+      }
+    },
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "alert",
+    "name": "TyAlert",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "alert",
+    "docPath": "docsBase/page/component/feedback/alert.md",
+    "props": {},
+    "emits": {},
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "avatar",
+    "name": "TyAvatar",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "avatar 头像",
+    "docPath": "docsBase/page/component/show/avatar.md",
+    "props": {
+      "width": {
+        "type": "number",
+        "default": null,
+        "required": false,
+        "description": "头像宽度"
+      },
+      "shape": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "头像形状",
+        "values": [
+          "circle",
+          "square"
+        ]
+      },
+      "autoSize": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否自动调整大小"
+      }
+    },
+    "emits": {
+      "trigger": {
+        "params": [],
+        "description": "点击事件"
+      }
+    },
+    "slots": [
+      "default",
+      "trigger"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "avatar-group",
+    "name": "TyAvatar-group",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "offset": {
+        "type": "number",
+        "default": 8,
+        "required": false,
+        "description": "偏移量"
+      },
+      "max": {
+        "type": "number",
+        "default": null,
+        "required": false,
+        "description": "最大显示数量"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "back-top",
+    "name": "TyBackTop",
+    "category": "基础组件",
+    "categoryKey": "base",
+    "description": "BackTop 滚动到顶部",
+    "docPath": "docsBase/page/component/base/backTop.md",
+    "props": {
+      "vHeight": {
+        "type": "number",
+        "default": 200,
+        "required": false,
+        "description": "触发距离"
+      },
+      "right": {
+        "type": "number",
+        "default": 40,
+        "required": false,
+        "description": "右侧距离"
+      },
+      "bottom": {
+        "type": "number",
+        "default": 40,
+        "required": false,
+        "description": "底部距离"
+      },
+      "target": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "目标元素"
+      },
+      "circle": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否显示圆角"
+      }
+    },
+    "emits": {
+      "click": {
+        "params": [],
+        "description": "点击事件"
+      }
+    },
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "badge",
+    "name": "TyBadge",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "badge",
+    "docPath": "docsBase/page/component/show/badge.md",
+    "props": {
+      "text": {
+        "type": "string | number",
+        "default": "",
+        "required": false,
+        "description": "坏章内容"
+      },
+      "max": {
+        "type": "number",
+        "default": 99,
+        "required": false,
+        "description": "最大显示数量"
+      },
+      "dot": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否为点"
+      },
+      "status": {
+        "type": "string",
+        "default": "danger",
+        "required": false,
+        "description": "状态"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default",
+      "icon"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "breadcrumb",
+    "name": "TyBreadcrumb",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "separator": {
+        "type": "string",
+        "default": "/",
+        "required": false,
+        "description": "分隔符"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "button",
+    "name": "TyButton",
+    "category": "基础组件",
+    "categoryKey": "base",
+    "description": "Button 按钮",
+    "docPath": "docsBase/page/component/base/button.md",
+    "props": {
+      "state": {
+        "type": "string",
+        "default": "primary",
+        "required": false,
+        "description": "按钮状态",
+        "values": [
+          "primary",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
+      "type": {
+        "type": "string",
+        "default": "normal",
+        "required": false,
+        "description": "按钮类型",
+        "values": [
+          "normal",
+          "secondary",
+          "outline",
+          "dashed",
+          "text",
+          "link"
+        ]
+      },
+      "block": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否为块级元素"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "size": {
+        "type": "string",
+        "default": "small",
+        "required": false,
+        "description": "按钮大小",
+        "values": [
+          "mini",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "html-type": {
+        "type": "string",
+        "default": "button",
+        "required": false,
+        "description": "html类型",
+        "values": [
+          "button",
+          "submit",
+          "reset"
+        ]
+      },
+      "shape": {
+        "type": "string",
+        "default": "square",
+        "required": false,
+        "description": "按钮形状",
+        "values": [
+          "square",
+          "round",
+          "circle"
+        ]
+      },
+      "loading": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否加载中"
+      },
+      "tag": {
+        "type": "string",
+        "default": "button",
+        "required": false,
+        "description": "自定义标签"
+      }
+    },
+    "emits": {
+      "click": {
+        "params": [
+          "event: MouseEvent"
+        ],
+        "description": "点击事件"
+      }
+    },
+    "slots": [
+      "loading",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "button-group",
+    "name": "TyButtonGroup",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {},
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "calendar",
+    "name": "TyCalendar",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "Calendar",
+    "docPath": "docsBase/page/component/show/calendar.md",
+    "props": {
+      "dayItemHeight": {
+        "type": "number",
+        "default": 110,
+        "required": false,
+        "description": "日期项高度"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "controller"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "card",
+    "name": "TyCard",
+    "category": "容器组件",
+    "categoryKey": "container",
+    "description": "card",
+    "docPath": "docsBase/page/component/container/card.md",
+    "props": {
+      "border": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示边框"
+      },
+      "shadow": {
+        "type": "string",
+        "default": "none",
+        "required": false,
+        "description": "卡片阴影样式"
+      },
+      "isLoading": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否显示加载状态"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "header",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "carousel",
+    "name": "TyCarousel",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "carousel",
+    "docPath": "docsBase/page/component/show/carousel.md",
+    "props": {
+      "interval": {
+        "type": "number",
+        "default": 3000,
+        "required": false,
+        "description": "自动切换间隔时间（毫秒）"
+      },
+      "arrowMode": {
+        "type": "string",
+        "default": "hover",
+        "required": false,
+        "description": "箭头显示模式",
+        "values": [
+          "hover",
+          "always",
+          "never"
+        ]
+      },
+      "easing": {
+        "type": "string",
+        "default": "ease",
+        "required": false,
+        "description": "过渡动画效果",
+        "values": [
+          "ease",
+          "linear",
+          "ease-in",
+          "ease-out",
+          "ease-in-out"
+        ]
+      },
+      "isAutoPlay": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否自动播放"
+      },
+      "indicatorType": {
+        "type": "string",
+        "default": "line",
+        "required": false,
+        "description": "指示器类型",
+        "values": [
+          "dot",
+          "line",
+          "slider"
+        ]
+      },
+      "indicatorPosition": {
+        "type": "string",
+        "default": "right",
+        "required": false,
+        "description": "指示器位置",
+        "values": [
+          "top",
+          "left",
+          "right",
+          "bottom"
+        ]
+      },
+      "direction": {
+        "type": "string",
+        "default": "horizontal",
+        "required": false,
+        "description": "轮播方向",
+        "values": [
+          "horizontal",
+          "vertical"
+        ]
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default",
+      "indicator"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "caution",
+    "name": "TyCaution",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "caution",
+    "docPath": "docsBase/page/component/show/caution.md",
+    "props": {
+      "type": {
+        "type": "string",
+        "default": "info",
+        "required": false,
+        "description": "类型"
+      },
+      "title": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "标题"
+      },
+      "isShowIcon": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示图标"
+      },
+      "size": {
+        "type": "string | number",
+        "default": 24,
+        "required": false,
+        "description": "图标尺寸"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "check-box",
+    "name": "TyCheckBox",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "checkBox",
+    "docPath": "docsBase/page/component/form/checkBox.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "尺寸大小",
+        "values": [
+          "mini",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "value": {
+        "type": "string | number",
+        "default": null,
+        "required": false,
+        "description": "绑定值"
+      },
+      "canHarf": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否可选半选状态"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "max": {
+        "type": "string | number",
+        "default": "",
+        "required": false,
+        "description": "最大可选数量"
+      }
+    },
+    "emits": {
+      "change": {
+        "params": [],
+        "description": ""
+      }
+    },
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "circle",
+    "name": "TyCircle",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "percent": {
+        "type": "number",
+        "default": 0,
+        "required": false,
+        "description": "百分比"
+      },
+      "size": {
+        "type": "number",
+        "default": 120,
+        "required": false,
+        "description": "圆的大小"
+      },
+      "strokeWidth": {
+        "type": "number",
+        "default": 6,
+        "required": false,
+        "description": "进度条宽度"
+      },
+      "strokeColor": {
+        "type": "string",
+        "default": "#298DFF",
+        "required": false,
+        "description": "进度条颜色"
+      },
+      "strokeLinecap": {
+        "type": "string",
+        "default": "round",
+        "required": false,
+        "description": "进度条端点样式",
+        "values": [
+          "square",
+          "round"
+        ]
+      },
+      "trailWidth": {
+        "type": "number",
+        "default": 5,
+        "required": false,
+        "description": "轨道宽度"
+      },
+      "trailColor": {
+        "type": "string",
+        "default": "#F7F7F7",
+        "required": false,
+        "description": "轨道颜色"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "col",
+    "name": "TyCol",
+    "category": "布局组件",
+    "categoryKey": "layout",
+    "description": "Col 栅格列",
+    "docPath": "docsBase/page/component/layout/col.md",
+    "props": {
+      "span": {
+        "type": "number | object | string",
+        "default": 24,
+        "required": false,
+        "description": "栅格占据的列数"
+      },
+      "offset": {
+        "type": "number",
+        "default": 0,
+        "required": false,
+        "description": "栅格左侧偏移的列数"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "collapse",
+    "name": "TyCollapse",
+    "category": "容器组件",
+    "categoryKey": "container",
+    "description": "collapse",
+    "docPath": "docsBase/page/component/container/collapse.md",
+    "props": {
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "accordion": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否手风琴模式"
+      },
+      "hide": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否隐藏"
+      },
+      "positionLeft": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "面板位置是否在左侧"
+      },
+      "destroy": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "切换时是否销毁子元素"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "color-picker",
+    "name": "TyColor-picker",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "modelValue": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "当前颜色值"
+      }
+    },
+    "emits": {
+      "change": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      },
+      "modelValue": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "configprovider",
+    "name": "TyConfigProvider",
+    "category": "基础组件",
+    "categoryKey": "base",
+    "description": "全局配置",
+    "docPath": "docsBase/page/component/base/configProvider.md",
+    "props": {
+      "theme": {
+        "type": "string",
+        "default": "light",
+        "required": false,
+        "description": "主题模式"
+      },
+      "options": {
+        "type": "object",
+        "default": null,
+        "required": false,
+        "description": "配置选项"
+      },
+      "tokens": {
+        "type": "object",
+        "default": null,
+        "required": false,
+        "description": "设计令牌"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "container",
+    "name": "TyContainer",
+    "category": "布局组件",
+    "categoryKey": "layout",
+    "description": "container",
+    "docPath": "docsBase/page/component/layout/container.md",
+    "props": {},
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "date-picker",
+    "name": "TyDate-picker",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "calendar",
+    "docPath": "docsBase/page/component/form/datePicker.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "尺寸"
+      },
+      "clearable": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否可清除"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      },
+      "modelValue": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "当前值"
+      },
+      "format": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "日期格式"
+      },
+      "formatValue": {
+        "type": "function",
+        "default": null,
+        "required": false,
+        "description": "自定义格式化函数"
+      },
+      "opType": {
+        "type": "string",
+        "default": "day",
+        "required": false,
+        "description": "操作类型"
+      }
+    },
+    "emits": {
+      "blur": {
+        "params": [],
+        "description": ""
+      },
+      "input": {
+        "params": [],
+        "description": ""
+      },
+      "modelValue": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "descriptions",
+    "name": "TyDescriptions",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "描述列表",
+    "docPath": "docsBase/page/component/show/descriptions.md",
+    "props": {
+      "title": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "标题"
+      },
+      "data": {
+        "type": "array",
+        "default": null,
+        "required": false,
+        "description": "描述数据"
+      },
+      "column": {
+        "type": "number",
+        "default": 3,
+        "required": false,
+        "description": "列数"
+      },
+      "size": {
+        "type": "string",
+        "default": "small",
+        "required": false,
+        "description": "尺寸",
+        "values": [
+          "mini",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "align": {
+        "type": "string",
+        "default": "left",
+        "required": false,
+        "description": "对齐方式",
+        "values": [
+          "left",
+          "center",
+          "right"
+        ]
+      },
+      "layout": {
+        "type": "string",
+        "default": "column",
+        "required": false,
+        "description": "布局方式"
+      },
+      "border": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否显示边框"
+      }
+    },
+    "emits": {},
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "dialog",
+    "name": "TyDialog",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "dialog",
+    "docPath": "docsBase/page/component/feedback/dialog.md",
+    "props": {
+      "title": {
+        "type": "string",
+        "default": "提示",
+        "required": false,
+        "description": "对话框标题"
+      },
+      "width": {
+        "type": "string",
+        "default": "30%",
+        "required": false,
+        "description": "对话框宽度"
+      },
+      "top": {
+        "type": "string",
+        "default": "15vh",
+        "required": false,
+        "description": "对话框距顶部距离"
+      },
+      "info": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "提示信息"
+      },
+      "isUnderLine": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示下划线"
+      },
+      "isTeleport": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否使用 teleport 传送"
+      },
+      "draggable": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否可拖拽"
+      },
+      "mask": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示遮罩层"
+      }
+    },
+    "emits": {
+      "modelValue": {
+        "params": [
+          "value: boolean"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [
+      "title",
+      "default",
+      "footer"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "divider",
+    "name": "TyDivider",
+    "category": "基础组件",
+    "categoryKey": "base",
+    "description": "Divider 分隔线",
+    "docPath": "docsBase/page/component/base/divider.md",
+    "props": {
+      "direction": {
+        "type": "string",
+        "default": "row",
+        "required": false,
+        "description": "分割线方向",
+        "values": [
+          "row",
+          "column"
+        ]
+      },
+      "position": {
+        "type": "string",
+        "default": "center",
+        "required": false,
+        "description": "分割线位置",
+        "values": [
+          "center",
+          "left",
+          "right",
+          "bottom",
+          "top"
+        ]
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "drawer",
+    "name": "TyDrawer",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "抽屉",
+    "docPath": "docsBase/page/component/feedback/drawer.md",
+    "props": {
+      "width": {
+        "type": "number",
+        "default": 300,
+        "required": false,
+        "description": "抽屉宽度"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "header",
+      "default",
+      "footer"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "empty",
+    "name": "TyEmpty",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "empty",
+    "docPath": "docsBase/page/component/show/empty.md",
+    "props": {
+      "title": {
+        "type": "string",
+        "default": "暂无数据",
+        "required": false,
+        "description": "空状态文本"
+      },
+      "size": {
+        "type": "number",
+        "default": 54,
+        "required": false,
+        "description": "图标尺寸"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "icon"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "form",
+    "name": "TyForm",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "Form 表单",
+    "docPath": "docsBase/page/component/form/form.md",
+    "props": {
+      "rules": {
+        "type": "object",
+        "default": null,
+        "required": false,
+        "description": "验证规则"
+      },
+      "labelWidth": {
+        "type": "string",
+        "default": "100",
+        "required": false,
+        "description": "标签宽度"
+      },
+      "labelSuffix": {
+        "type": "string",
+        "default": ":",
+        "required": false,
+        "description": "标签后缀"
+      },
+      "layout": {
+        "type": "string",
+        "default": "inline",
+        "required": false,
+        "description": "布局方式",
+        "values": [
+          "vertical",
+          "inline"
+        ]
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "form-item",
+    "name": "TyFormItem",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "formItem",
+    "docPath": "docsBase/page/component/form/formItem.md",
+    "props": {
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      },
+      "label": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "标签文本"
+      },
+      "isShowStar": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示必填星号"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "label",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "image",
+    "name": "TyImage",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "image",
+    "docPath": "docsBase/page/component/show/image.md",
+    "props": {
+      "src": {
+        "type": "string",
+        "default": null,
+        "required": true,
+        "description": "图片地址"
+      },
+      "size": {
+        "type": "string",
+        "default": "100",
+        "required": false,
+        "description": "图片尺寸"
+      },
+      "shape": {
+        "type": "string",
+        "default": "square",
+        "required": false,
+        "description": "图片形状",
+        "values": [
+          "square",
+          "circle"
+        ]
+      },
+      "fit": {
+        "type": "string",
+        "default": "none",
+        "required": false,
+        "description": "图片填充方式",
+        "values": [
+          "none",
+          "fill",
+          "contain",
+          "cover",
+          "scale-down"
+        ]
+      },
+      "alt": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "替代文本"
+      }
+    },
+    "emits": {},
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "input",
+    "name": "TyInput",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "Input",
+    "docPath": "docsBase/page/component/form/input.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "输入框尺寸"
+      },
+      "clearable": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否可清除"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      },
+      "modelValue": {
+        "type": "string | number",
+        "default": "",
+        "required": false,
+        "description": "绑定值"
+      },
+      "showLimit": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否显示字数限制"
+      },
+      "format": {
+        "type": "function",
+        "default": null,
+        "required": false,
+        "description": "格式化函数"
+      }
+    },
+    "emits": {
+      "blur": {
+        "params": [],
+        "description": ""
+      },
+      "focus": {
+        "params": [],
+        "description": ""
+      },
+      "enter": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      },
+      "clear": {
+        "params": [],
+        "description": ""
+      },
+      "input": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      },
+      "modelValue": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [
+      "outPre",
+      "innerPre",
+      "innerAft",
+      "outAft"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "input-number",
+    "name": "TyInputNumber",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "inputNumber",
+    "docPath": "docsBase/page/component/form/inputNumber.md",
+    "props": {
+      "modelValue": {
+        "type": "number",
+        "default": "",
+        "required": false,
+        "description": "绑定值"
+      },
+      "precision": {
+        "type": "number",
+        "default": null,
+        "required": false,
+        "description": "精度"
+      },
+      "stepStrictly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否严格步进"
+      },
+      "step": {
+        "type": "number",
+        "default": 1,
+        "required": false,
+        "description": "步长"
+      },
+      "maxlength": {
+        "type": "number | string | object",
+        "default": null,
+        "required": false,
+        "description": "最大长度"
+      }
+    },
+    "emits": {
+      "blur": {
+        "params": [],
+        "description": ""
+      },
+      "clear": {
+        "params": [],
+        "description": ""
+      },
+      "change": {
+        "params": [
+          "value: number"
+        ],
+        "description": ""
+      },
+      "focus": {
+        "params": [],
+        "description": ""
+      },
+      "modelValue": {
+        "params": [
+          "value: number"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "input-password",
+    "name": "TyInputPassword",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "InputPassword",
+    "docPath": "docsBase/page/component/form/inputPassword.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": "small",
+        "required": false,
+        "description": "输入框尺寸"
+      },
+      "clearable": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否可清除"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      },
+      "modelValue": {
+        "type": "number | string",
+        "default": "",
+        "required": false,
+        "description": "绑定值"
+      }
+    },
+    "emits": {
+      "blur": {
+        "params": [],
+        "description": ""
+      },
+      "input": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      },
+      "clear": {
+        "params": [],
+        "description": ""
+      },
+      "enter": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      },
+      "modelValue": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "list",
+    "name": "TyList",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "header": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "列表头部标题"
+      },
+      "size": {
+        "type": "string",
+        "default": "small",
+        "required": false,
+        "description": "尺寸大小",
+        "values": [
+          "mini",
+          "small",
+          "medium",
+          "large"
+        ]
+      }
+    },
+    "emits": {},
+    "slots": [
+      "header",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "loading",
+    "name": "TyLoading",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "loading",
+    "docPath": "docsBase/page/component/feedback/loading.md",
+    "props": {
+      "isFixed": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否固定定位"
+      }
+    },
+    "emits": {},
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "logconsole",
+    "name": "TyLogConsole",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "maxSize": {
+        "type": "number | string",
+        "default": 10000,
+        "required": false,
+        "description": "最大日志数量"
+      },
+      "itemHieght": {
+        "type": "number | string",
+        "default": 40,
+        "required": false,
+        "description": "单条日志高度"
+      },
+      "height": {
+        "type": "number | string",
+        "default": 400,
+        "required": false,
+        "description": "组件高度"
+      },
+      "isClear": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示清除按钮"
+      },
+      "prefixDist": {
+        "type": "object",
+        "default": null,
+        "required": false,
+        "description": "前缀配置"
+      },
+      "addModel": {
+        "type": "string",
+        "default": "append",
+        "required": false,
+        "description": "新日志添加模式"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "footer"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "menu",
+    "name": "TyMenu",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "Menu",
+    "docPath": "docsBase/page/component/show/menu.md",
+    "props": {
+      "modelValue": {
+        "type": "string | number",
+        "default": null,
+        "required": true,
+        "description": "当前选中的菜单值（v-model）"
+      },
+      "option": {
+        "type": "array",
+        "default": null,
+        "required": false,
+        "description": "菜单选项数据"
+      },
+      "isFold": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否折叠菜单"
+      },
+      "theme": {
+        "type": "string",
+        "default": "design",
+        "required": true,
+        "description": "主题样式",
+        "values": [
+          "design",
+          "dark",
+          "light",
+          "rDesign"
+        ]
+      }
+    },
+    "emits": {},
+    "slots": [
+      "header"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "message",
+    "name": "TyMessage",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "message",
+    "docPath": "docsBase/page/component/feedback/message.md",
+    "props": {
+      "msg": {
+        "type": "string",
+        "default": null,
+        "required": true,
+        "description": "消息内容"
+      },
+      "options": {
+        "type": "object",
+        "default": null,
+        "required": false,
+        "description": "配置选项"
+      },
+      "top": {
+        "type": "string",
+        "default": "0",
+        "required": false,
+        "description": "顶部距离"
+      }
+    },
+    "emits": {
+      "close": {
+        "params": [],
+        "description": "关闭事件"
+      }
+    },
+    "slots": [
+      "icon",
+      "close"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "notification",
+    "name": "TyNotification",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "notification",
+    "docPath": "docsBase/page/component/feedback/notification.md",
+    "props": {
+      "type": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "通知类型",
+        "values": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "default": null,
+        "required": true,
+        "description": "标题"
+      },
+      "message": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "消息内容"
+      },
+      "top": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "顶部距离"
+      },
+      "time": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "显示时长"
+      }
+    },
+    "emits": {
+      "close": {
+        "params": [],
+        "description": "关闭事件"
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "page-header",
+    "name": "TyPage-header",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "pageHeader",
+    "docPath": "docsBase/page/component/show/pageHeader.md",
+    "props": {
+      "title": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "标题"
+      },
+      "subTitle": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "副标题"
+      },
+      "showBack": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示返回按钮"
+      }
+    },
+    "emits": {
+      "back": {
+        "params": [],
+        "description": "返回事件"
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "pagination",
+    "name": "TyPagination",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "current": {
+        "type": "string | number",
+        "default": "1",
+        "required": true,
+        "description": "当前页码"
+      },
+      "total": {
+        "type": "string | number",
+        "default": "",
+        "required": true,
+        "description": "总条数"
+      },
+      "pageSize": {
+        "type": "string | number",
+        "default": "5",
+        "required": true,
+        "description": "每页条数"
+      }
+    },
+    "emits": {
+      "currentChange": {
+        "params": [
+          "value: number"
+        ],
+        "description": "当前页改变"
+      },
+      "sizeChange": {
+        "params": [
+          "value: number"
+        ],
+        "description": "每页条数改变"
+      }
+    },
+    "slots": [
+      "total"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "popconfirm",
+    "name": "TyPopconfirm",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "placement": {
+        "type": "string",
+        "default": "top",
+        "required": false,
+        "description": "弹出位置"
+      },
+      "content": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "提示内容"
+      },
+      "rejectText": {
+        "type": "string",
+        "default": "取消",
+        "required": false,
+        "description": "拒绝按钮文字"
+      },
+      "showRejectBtn": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示拒绝按钮"
+      },
+      "resloveText": {
+        "type": "string",
+        "default": "确定",
+        "required": false,
+        "description": "确认按钮文字"
+      },
+      "showResloveBtn": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否显示确认按钮"
+      }
+    },
+    "emits": {
+      "confirm": {
+        "params": [],
+        "description": ""
+      },
+      "reject": {
+        "params": [],
+        "description": ""
+      }
+    },
+    "slots": [
+      "content",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "poppover",
+    "name": "TyPoppover",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "placement": {
+        "type": "string",
+        "default": "top",
+        "required": false,
+        "description": "弹出位置"
+      },
+      "content": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "弹出内容"
+      },
+      "trigger": {
+        "type": "string",
+        "default": "hover",
+        "required": false,
+        "description": "触发方式"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "content",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "progress",
+    "name": "TyProgress",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "modelValue": {
+        "type": "string | number",
+        "default": "",
+        "required": true,
+        "description": "绑定值"
+      },
+      "strokeWidth": {
+        "type": "string | number",
+        "default": 5,
+        "required": false,
+        "description": "进度条宽度"
+      },
+      "isShowPer": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否显示百分比"
+      },
+      "type": {
+        "type": "string",
+        "default": "line",
+        "required": false,
+        "description": "类型"
+      },
+      "width": {
+        "type": "string | number",
+        "default": 50,
+        "required": false,
+        "description": "圆形进度条宽度"
+      }
+    },
+    "emits": {
+      "modelValue": {
+        "params": [
+          "value: string | number"
+        ],
+        "description": "更新绑定值"
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "radio",
+    "name": "TyRadio",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "rdaio",
+    "docPath": "docsBase/page/component/form/radio.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "单选组尺寸",
+        "values": [
+          "mini",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "modelValue": {
+        "type": "string | number",
+        "default": "",
+        "required": true,
+        "description": "当前选中值（v-model绑定）"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      }
+    },
+    "emits": {
+      "update:modelValue": {
+        "params": [],
+        "description": ""
+      },
+      "change": {
+        "params": [],
+        "description": ""
+      }
+    },
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "rate",
+    "name": "TyRate",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "modelValue": {
+        "type": "string",
+        "default": 0,
+        "required": false,
+        "description": "绑定值"
+      },
+      "max": {
+        "type": "number",
+        "default": 5,
+        "required": false,
+        "description": "最大评分"
+      },
+      "allowHalf": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否允许半星"
+      }
+    },
+    "emits": {
+      "modelValue": {
+        "params": [
+          "value: string | number"
+        ],
+        "description": "更新绑定值"
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "result",
+    "name": "TyResult",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "结果",
+    "docPath": "docsBase/page/component/feedback/result.md",
+    "props": {
+      "type": {
+        "type": "string",
+        "default": null,
+        "required": true,
+        "description": "结果类型",
+        "values": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "标题"
+      },
+      "subTitle": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "副标题"
+      },
+      "size": {
+        "type": "string",
+        "default": "100",
+        "required": false,
+        "description": "图标尺寸"
+      }
+    },
+    "emits": {},
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "row",
+    "name": "TyRow",
+    "category": "布局组件",
+    "categoryKey": "layout",
+    "description": "Row 栅格行",
+    "docPath": "docsBase/page/component/layout/row.md",
+    "props": {
+      "type": {
+        "type": "string",
+        "default": "line",
+        "required": false,
+        "description": "布局类型"
+      },
+      "gutter": {
+        "type": "number",
+        "default": 0,
+        "required": false,
+        "description": "栅格间隔"
+      },
+      "justify": {
+        "type": "string",
+        "default": "top",
+        "required": false,
+        "description": "水平对齐方式"
+      },
+      "align": {
+        "type": "string",
+        "default": "center",
+        "required": false,
+        "description": "垂直对齐方式"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "scrollbar",
+    "name": "TyScrollBar",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {},
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "select",
+    "name": "TySelect",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "select",
+    "docPath": "docsBase/page/component/form/select.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": "small",
+        "required": false,
+        "description": "选择器尺寸"
+      },
+      "multiple": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否多选"
+      },
+      "clearable": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否可清空"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      },
+      "modelValue": {
+        "type": "string | number | array",
+        "default": null,
+        "required": true,
+        "description": "当前选中值（v-model绑定）"
+      },
+      "placeholder": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "占位文本"
+      },
+      "icon": {
+        "type": "string",
+        "default": "ty-arrow-down-s-line",
+        "required": false,
+        "description": "图标"
+      },
+      "width": {
+        "type": "string",
+        "default": "100%",
+        "required": false,
+        "description": "宽度"
+      }
+    },
+    "emits": {
+      "blur": {
+        "params": [],
+        "description": ""
+      },
+      "input": {
+        "params": [],
+        "description": ""
+      },
+      "update:modelValue": {
+        "params": [],
+        "description": ""
+      }
+    },
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "skeleton",
+    "name": "TySkeleton",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "skeleton",
+    "docPath": "docsBase/page/component/show/skeleton.md",
+    "props": {},
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "slider",
+    "name": "TySlider",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "slider",
+    "docPath": "docsBase/page/component/form/slider.md",
+    "props": {
+      "modelValue": {
+        "type": "string | number",
+        "default": "",
+        "required": true,
+        "description": "绑定值"
+      },
+      "min": {
+        "type": "string | number",
+        "default": 0,
+        "required": false,
+        "description": "最小值"
+      },
+      "max": {
+        "type": "string | number",
+        "default": 100,
+        "required": false,
+        "description": "最大值"
+      },
+      "width": {
+        "type": "string | number",
+        "default": 10,
+        "required": false,
+        "description": "滑块宽度"
+      }
+    },
+    "emits": {
+      "modelValue": {
+        "params": [
+          "value: string | number"
+        ],
+        "description": "更新绑定值"
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "smscodeinput",
+    "name": "TySmsCodeInput",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "modelValue": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "绑定值"
+      },
+      "length": {
+        "type": "number",
+        "default": 6,
+        "required": false,
+        "description": "验证码长度"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      },
+      "regCodes": {
+        "type": "array",
+        "default": null,
+        "required": false,
+        "description": "允许输入的字符"
+      },
+      "gap": {
+        "type": "number",
+        "default": 12,
+        "required": false,
+        "description": "输入框间距"
+      }
+    },
+    "emits": {
+      "success": {
+        "params": [],
+        "description": "输入成功"
+      },
+      "modelValue": {
+        "params": [
+          "value: string"
+        ],
+        "description": "更新绑定值"
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "space",
+    "name": "TySpace",
+    "category": "布局组件",
+    "categoryKey": "layout",
+    "description": "间距 Space",
+    "docPath": "docsBase/page/component/layout/space.md",
+    "props": {
+      "align": {
+        "type": "string",
+        "default": "center",
+        "required": false,
+        "description": "对齐方式"
+      },
+      "justify": {
+        "type": "string",
+        "default": "start",
+        "required": false,
+        "description": "水平排列方式"
+      },
+      "direction": {
+        "type": "string",
+        "default": "row",
+        "required": false,
+        "description": "排列方向"
+      },
+      "size": {
+        "type": "number | string",
+        "default": "small",
+        "required": false,
+        "description": "间距大小"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "split",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "switch",
+    "name": "TySwitch",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "switch",
+    "docPath": "docsBase/page/component/form/switch.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": "small",
+        "required": false,
+        "description": "尺寸"
+      },
+      "uncheckedText": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "未选中时的文字"
+      },
+      "checkedText": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "选中时的文字"
+      },
+      "openValue": {
+        "type": "string | boolean",
+        "default": true,
+        "required": false,
+        "description": "开启时的值"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "closeValue": {
+        "type": "string | boolean",
+        "default": false,
+        "required": false,
+        "description": "关闭时的值"
+      },
+      "type": {
+        "type": "string",
+        "default": "round",
+        "required": false,
+        "description": "类型",
+        "values": [
+          "round",
+          "tube",
+          "inline"
+        ]
+      }
+    },
+    "emits": {
+      "modelValue": {
+        "params": [
+          "value: any"
+        ],
+        "description": ""
+      },
+      "change": {
+        "params": [
+          "value: any"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "table",
+    "name": "TyTable",
+    "category": "展示组件",
+    "categoryKey": "show",
+    "description": "table",
+    "docPath": "docsBase/page/component/show/table.md",
+    "props": {
+      "size": {
+        "type": "string",
+        "default": "small",
+        "required": false,
+        "description": "表格尺寸",
+        "values": [
+          "mini",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "align": {
+        "type": "string",
+        "default": "center",
+        "required": false,
+        "description": "对齐方式",
+        "values": [
+          "left",
+          "center",
+          "right"
+        ]
+      },
+      "columns": {
+        "type": "array",
+        "default": null,
+        "required": false,
+        "description": "列配置"
+      },
+      "data": {
+        "type": "array",
+        "default": null,
+        "required": false,
+        "description": "表格数据"
+      },
+      "rowKey": {
+        "type": "string",
+        "default": "key",
+        "required": true,
+        "description": "行唯一标识字段"
+      },
+      "rowSelection": {
+        "type": "object",
+        "default": null,
+        "required": false,
+        "description": "行选择配置"
+      },
+      "borders": {
+        "type": "array",
+        "default": null,
+        "required": false,
+        "description": "边框配置"
+      },
+      "showOverflow": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "溢出显示方式",
+        "values": [
+          "ellipsis",
+          "title",
+          "tooltip",
+          "none"
+        ]
+      },
+      "stripe": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否显示斑马纹"
+      }
+    },
+    "emits": {},
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "tabs",
+    "name": "TyTabs",
+    "category": "容器组件",
+    "categoryKey": "container",
+    "description": "tabs",
+    "docPath": "docsBase/page/component/container/tabs.md",
+    "props": {
+      "modelValue": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "当前激活的标签页值（v-model绑定）"
+      },
+      "type": {
+        "type": "string",
+        "default": "normal",
+        "required": false,
+        "description": "标签页类型"
+      },
+      "position": {
+        "type": "string",
+        "default": "top",
+        "required": false,
+        "description": "标签页位置"
+      },
+      "trigger": {
+        "type": "string",
+        "default": "click",
+        "required": false,
+        "description": "触发方式"
+      }
+    },
+    "emits": {
+      "update:modelValue": {
+        "params": [],
+        "description": ""
+      }
+    },
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "time-picker",
+    "name": "TyTime-picker",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "modelValue": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "绑定值"
+      },
+      "size": {
+        "type": "string",
+        "default": null,
+        "required": false,
+        "description": "尺寸"
+      },
+      "clearable": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否可清除"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否只读"
+      },
+      "format": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "时间格式"
+      },
+      "formatValue": {
+        "type": "function",
+        "default": null,
+        "required": false,
+        "description": "自定义格式化函数"
+      }
+    },
+    "emits": {
+      "blur": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      },
+      "input": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      },
+      "modelValue": {
+        "params": [
+          "value: string"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "tooltip",
+    "name": "TyTooltip",
+    "category": "反馈组件",
+    "categoryKey": "feedback",
+    "description": "tooltip",
+    "docPath": "docsBase/page/component/feedback/tooltip.md",
+    "props": {
+      "content": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "提示内容"
+      },
+      "placement": {
+        "type": "string",
+        "default": "top",
+        "required": false,
+        "description": "弹出位置"
+      },
+      "trigger": {
+        "type": "string",
+        "default": "hover",
+        "required": false,
+        "description": "触发方式"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "transfer",
+    "name": "TyTransfer",
+    "category": "表单组件",
+    "categoryKey": "form",
+    "description": "transfer",
+    "docPath": "docsBase/page/component/form/transfer.md",
+    "props": {
+      "data": {
+        "type": "array",
+        "default": null,
+        "required": true,
+        "description": "源数据"
+      }
+    },
+    "emits": {},
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "trigger",
+    "name": "TyTrigger",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "placement": {
+        "type": "string",
+        "default": "top",
+        "required": false,
+        "description": "弹出位置"
+      },
+      "content": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "弹出内容"
+      },
+      "trigger": {
+        "type": "string",
+        "default": "hover",
+        "required": false,
+        "description": "触发方式"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "content",
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "upload",
+    "name": "TyUpload",
+    "category": "未分类",
+    "categoryKey": "other",
+    "description": "",
+    "docPath": "",
+    "props": {
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否禁用上传"
+      },
+      "dragger": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否为拖拽卡片模式"
+      },
+      "drag": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否支持拖拽上传"
+      },
+      "accept": {
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "接受的文件类型"
+      }
+    },
+    "emits": {
+      "change": {
+        "params": [
+          "file: any"
+        ],
+        "description": ""
+      }
+    },
+    "slots": [],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  },
+  {
+    "id": "watermark",
+    "name": "TyWaterMark",
+    "category": "基础组件",
+    "categoryKey": "base",
+    "description": "waterMark 水印",
+    "docPath": "docsBase/page/component/base/waterMark.md",
+    "props": {
+      "markInfo": {
+        "type": "string | array",
+        "default": null,
+        "required": true,
+        "description": "水印信息"
+      },
+      "options": {
+        "type": "object",
+        "default": null,
+        "required": false,
+        "description": "水印配置选项"
+      }
+    },
+    "emits": {},
+    "slots": [
+      "default"
+    ],
+    "examples": [],
+    "capabilities": [],
+    "useCases": []
+  }
+]
