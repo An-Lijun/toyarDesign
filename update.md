@@ -862,3 +862,35 @@ Element Plus（样式分离）
 ** 不是 Element 故意写复杂，而是：
 业务组件 = 怎么快怎么写
 组件库 = 怎么稳、怎么通用、怎么扩展怎么写 **
+
+
+
+
+
+
+
+
+
+## 问题清单
+编号 优先级 问题 修改建议 位置 1 🔴 严重 poppover 拼写错误(应为 popover ),且已作为公开 API 导出 TyPoppover ,一旦发布改名即破坏性变更 立即重命名为 popover (目录/类名/导出全链路),在 1.0 前修复 index.ts:54 、 poppover/ 2 🔴 严重 顶层副作用: document.getElementsByTagName('html')[0].setAttribute('toyar-theme','light') 在 import 时即执行,破坏 SSR,且强制覆盖用户主题选择 移到 install 函数内,或改为可选 defaultTheme 选项由用户控制 index.ts:139 3 🔴 严重 install 函数漏注册组件: TyNotification 、 TyMessage 、 TyForm 、 TyFormItem 、 TyInput 、 TySelect 、 TyInputNumber 、 TyInputPassword 均未 app.use ,导致 app.use(toyar) 后这些组件不可用 补全 install 列表,或改为遍历导出对象自动注册 index.ts:78-137 4 🟠 主要 install 用逗号运算符 app.use(A), app.use(B), ... 而非语句分隔,是反模式 改为分号分隔的语句块 index.ts:79-136 5 🟠 主要 命名违反自身规范(README 明确"多单词采用-分割"): waterMark (驼峰)、 configProvider 、 logConsole 、 smsCodeInput 、 poppver 无连字符,而 back-top 、 form-item 、 input-number 有连字符 统一为连字符命名; waterMark → water-mark 等。若考虑破坏性可分阶段 components/ 6 🟠 主要 README 严重过时:标注 vue 3.2.41 + VITE 3.2.3 + node 16.0+ ,实际为 Vue 3.4.31 + Vite 6.3.3 (Vite6 需 Node 18+) 更新版本要求与启动说明 README.md:37-48 7 🟠 主要 trigger 组件完整存在却全部注释导出,形成死代码 要么删除 trigger/ 目录,要么恢复导出 index.ts:73,138,227 8 🟡 次要 minify: true 在 Vite 中已 deprecated,且配置了 terserOptions 但默认用 esbuild,配置失效 改为 minify: 'esbuild' 并移除 terserOptions ,或改用 'terser' vite.config.ts:13,21 9 🟡 次要 违反"所有 SCSS 变量必须从 _tokens.scss 导入"约束: light.scss 中 --fill-white 、 --text-white 、 --tooltip 、 --menu 、 --menu-open 、 --color-secondary 直接硬编码 抽取到 _tokens.scss 作为 token light.scss:53-62 10 🟡 次要 $toyar-bg-light 五级背景全是 #fff ,失去分级意义 参照 dark 的 5 级灰阶设置差异化值 _tokens.scss:164-169 11 🟡 次要 $toyar-opacity 值只是 0-9 数字,非真实透明度,疑似死代码 删除或修正为真实透明度值 _tokens.scss:151-161 12 🟡 次要 $toyar-z-index 的 import:(99) 键名用了 JS 保留字 重命名为 import-btn 或 sticky _tokens.scss:189 13 🟡 次要 核心组件无测试: input 、 select 、 form 、 date-picker 、 time-picker 、 input-number 、 message 、 notification 、 loading 、 table 、 tabs 、 menu 等 42 个组件裸奔 优先补齐表单类与反馈类测试 components/ 14 🟢 提示 无 ESLint/Prettier 配置,仅靠 tsconfig strict 约束 增加 ESLint + @vue/eslint-config-typescript ,统一代码风格 根目录
+
+## 修改意见(按优先级)
+### 立即修复(1.0 发布前阻断项)
+1. 重命名 poppover → popover (全链路:目录、 context.ts 、 index.ts 导出、文档)
+2. 移除顶层副作用 (index.ts:139),改为 install 时按需设置,或交由 ConfigProvider 管理
+3. 补全 install 注册列表 ,把 TyForm/TyFormItem/TyInput/TySelect/TyInputNumber/TyInputPassword/TyMessage/TyNotification 全部加入,否则全量引入形同虚设
+### 短期改进(下个小版本)
+4. 统一组件命名规范,至少新增组件严格遵循连字符规则
+5. 更新 README 版本信息与 Node 要求(Node 18+)
+6. 清理 trigger 死代码(删除目录或恢复导出)
+7. 修复 Vite minify 配置
+### 中长期演进
+8. 补齐 42 个未测试组件的单测,重点先覆盖表单/反馈类
+9. 把 light.scss 中的硬编码色值下沉到 _tokens.scss
+10. 引入 ESLint + Prettier,固化代码风格
+11. 修正 $toyar-bg-light 分级与 $toyar-opacity 死代码
+12. 考虑移除 allowImportingTsExtensions ,统一构建产物不带 .ts 后缀
+## 总结
+toyarDesign 是一个架构思路清晰、Token 体系完整的 Vue3 组件库,Headless + JSDoc 元数据驱动的设计在同类库里颇有亮点。 但工程化收尾不够干净:入口副作用、install 漏注册、命名拼写错误( poppver )等问题会直接影响可用性;测试覆盖仅 31% 且核心表单组件裸奔,离生产级稳定还有距离。 优先处理前 3 项严重问题,即可显著提升库的可用性与专业度。
+
+需要我针对哪些问题开始动手修复?
