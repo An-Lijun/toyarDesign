@@ -40,7 +40,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue,scss,json,md}\" \"scripts/**/*.{js,ts}\" \"*.{js,ts}\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,vue,scss,json,md}\" \"scripts/**/*.{js,ts}\" \"*.{js,ts}\""
+    "format:check": "prettier --check \"src/**/*.{js,ts,vue,scss,json,md}\" \"scripts/**/*.{js,ts}\" \"*.{js,ts}\"",
+    "generate:tokens": "node scripts/generate-tokens.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
