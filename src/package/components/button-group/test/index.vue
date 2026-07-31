@@ -1,23 +1,15 @@
 <template>
     <div class="divRoot">
-        <TyButtonGroup>
-            <TyButton>
-                查询
-            </TyButton>
-            <TyButton >
-                重置
-            </TyButton>
-            <TyButton >
-                取消
-            </TyButton>
-        </TyButtonGroup>
+        <ButtonGroupDemo />
     </div>
-  </template>
-  <script setup>
+</template>
 
-  
-  </script>
-  <style lang="scss" scoped>
-  
-  </style>
-  
+<script setup>
+import ButtonGroupDemo from './testDemo/buttonGroupDemo.vue'
+</script>
+
+<style>
+.divRoot {
+    padding: 20px;
+}
+</style>

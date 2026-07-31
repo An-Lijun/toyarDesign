@@ -1,17 +1,15 @@
 <template>
     <div class="divRoot">
-        <TyCircle :percent="80">
-            <span class="demo-circle-inner" style="font-size: 24px;">80%</span>
-        </TyCircle>
-
-        <TyCircle :percent="20">
-        </TyCircle>
-
-        <TyCircle :percent="10" strokeColor="red">
-        </TyCircle>
+        <CircleDemo />
     </div>
 </template>
-<script setup>
 
+<script setup>
+import CircleDemo from './testDemo/circleDemo.vue'
 </script>
-<style lang="scss" scoped></style>
+
+<style>
+.divRoot {
+    padding: 20px;
+}
+</style>

@@ -1,58 +1,15 @@
 <template>
-  <div class="divRoot">
-  
-    <br>
-    <template v-for="state in states">
-      <TyButton :state="state" v-for="item in type" :type="item">111</TyButton>
-        <TyButton type="aa">11111111</TyButton>
-    <UseButtonComp>111111111</UseButtonComp>
-    
-    <TyButton id="tat" style="background:red">11111111</TyButton>
-      <br>
-    </template>
-    <hr />
-
-    <template v-for="state in states">
-      <TyButton disabled :state="state" v-for="item in type" :type="item">111</TyButton>
-      <br>
-    </template>
-    <hr />
-
-    <template v-for="size in sizes">
-      <TyButton :size="size" v-for="item in type" :type="item">111</TyButton>
-      <br>
-    </template>
-    <hr>
-    <template v-for="shape in shapes">
-      <TyButton :shape="shape" v-for="item in type" :type="item">1</TyButton>
-      <br>
-    </template>
-    <hr>
-
-    <template v-for="size in sizes">
-      <TyButton :size="size" v-for="item in type" shape="square" :type="item">1</TyButton>
-
-      <br>
-    </template>
-    <template v-for="size in sizes">
-      <TyButton :size="size" v-for="item in type" shape="circle" :type="item">1</TyButton>
-      <br>
-    </template>
-    <br>
-    <TyButton block>1</TyButton>
-    <br>
-    <br>
-    <TyButton block loading>1</TyButton>
-    <br>
-  </div>
+    <div class="divRoot">
+        <ButtonDemo />
+    </div>
 </template>
-<script setup>
-import { TY_SIZE, TY_STATE } from '../../../constant';
-import UseButtonComp from './useButtonComp.vue'
-let states = ref(TY_STATE)
-let sizes = ref(TY_SIZE)
-let type = ref(['normal', 'secondary', 'outline','dashed', 'text', 'link'])
-let shapes = ref(["square", "round", "circle"])
 
+<script setup>
+import ButtonDemo from './testDemo/buttonDemo.vue'
 </script>
-<style lang="scss" scoped></style>
+
+<style>
+.divRoot {
+    padding: 20px;
+}
+</style>

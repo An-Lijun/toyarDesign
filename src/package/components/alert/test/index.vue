@@ -1,11 +1,11 @@
 <template>
     <div class="divRoot">
-        <BadgeDemo />
+        <AlertDemo />
     </div>
 </template>
 
 <script setup>
-import BadgeDemo from './testDemo/badgeDemo.vue'
+import AlertDemo from './testDemo/alertDemo.vue'
 </script>
 
 <style>
