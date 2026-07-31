@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { findComponent, toKebab } from '../utils/matcher.js'
+import { formatSetupSnippet } from '../utils/setup-snippet.js'
 import { textResult } from '../utils/result.js'
 
 /**
@@ -209,6 +210,8 @@ export function registerGenerateCode(server, components) {
       if (related.length) {
         lines.push(`// 组合子组件：${related.join(' / ')}`)
       }
+      lines.push('')
+      lines.push(...formatSetupSnippet(c))
       lines.push('')
       lines.push('```vue')
       lines.push('<template>')
