@@ -28,6 +28,7 @@ html[toyar-theme='light'],.ty-light {
   @each $name, $value in $theme-map {
     @for $i from 1 through 7 {
       --#{$name}-#{$i}: var(--toyar-#{$value}-#{$i});
+      --#{$name}-rs-#{$i}: var(--toyar-#{$value}-rs-#{$i});
     }
   }
 

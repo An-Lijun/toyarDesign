@@ -60,7 +60,7 @@ const { model, style } = useProgress(props, emit)
       font-size: 5px;
       box-sizing: border-box;
       padding-right: 5px;
-      color: #fff;
+      color: var(--text-white);
       transition: width 0.5s;
     }
   &--circle {

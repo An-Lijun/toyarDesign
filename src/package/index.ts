@@ -1,7 +1,7 @@
 import { version } from '../../package.json'
 
 import './assets/index.scss'
-import TyButton,{useTyButton} from './components/button'
+import TyButton, { useTyButton } from './components/button'
 import TyButtonGroup from './components/button-group'
 import TyDivider from './components/divider'
 import TyRow from './components/row'
@@ -9,9 +9,9 @@ import TyCol from './components/col'
 import TyForm from './components/form'
 import TyFormItem from './components/form-item'
 import TyInput from './components/input'
-import TySelect,{TySelectOption} from './components/select'
-import {TyCheckBox,TyCheckBoxGroup} from './components/check-box'
-import {TyRadio,TyRadioGroup} from './components/radio'
+import TySelect, { TySelectOption } from './components/select'
+import { TyCheckBox, TyCheckBoxGroup } from './components/check-box'
+import { TyRadio, TyRadioGroup } from './components/radio'
 import TyDatePicker from './components/date-picker'
 import TyDialog from './components/dialog'
 import TyBackTop from './components/back-top'
@@ -27,32 +27,32 @@ import {
   TyFooter
 } from './components/container'
 import { TyMenu, TySubMenu, TyMenuGroup, TyMenuItem } from './components/menu'
-import TyMessage from './components/message'
+import TyMessage from './components/message' // API 式组件，无需 install
 import TyAlert from './components/alert'
 import TyResult from './components/result'
 import TyImage from './components/image'
-import TyNotification from './components/notification'
+import TyNotification from './components/notification' // API 式组件，无需 install
 import TyWaterMark from './components/waterMark'
-import {TyCollapse,TyCollapseItem} from './components/collapse'
-import {TyTabs,TyTabItem} from './components/tabs'
+import { TyCollapse, TyCollapseItem } from './components/collapse'
+import { TyTabs, TyTabItem } from './components/tabs'
 import TyBadge from './components/badge'
 import TyPageHeader from './components/page-header'
 import TySwitch from './components/switch'
 import TyPagination from './components/pagination'
-import {LoadingJs as TyLoading} from './components/loading'
+import { LoadingJs as TyLoading } from './components/loading'
 import TyLoadingDirc from './components/loading'
 import TyEmpty from './components/empty'
 import TyProgress from './components/progress'
 import TySlider from './components/slider'
-import {TySkeleton,TySkeletonItem} from './components/skeleton'
+import { TySkeleton, TySkeletonItem } from './components/skeleton'
 import TyCarousel from './components/carousel'
 import TyTooltip from './components/tooltip'
 import TyPopconfirm from './components/popconfirm'
-import { TyList,TyListItem } from './components/list'
+import { TyList, TyListItem } from './components/list'
 import TyRate from './components/rate'
 import TyTransfer from './components/transfer'
 import TyPoppover from './components/poppover'
-import {TyBreadcrumb,TyBreadcrumbItem} from './components/breadcrumb'
+import { TyBreadcrumb, TyBreadcrumbItem } from './components/breadcrumb'
 import TyDescriptions from './components/descriptions'
 import TyCaution from './components/caution'
 import TyConfigProvider from './components/configProvider'
@@ -61,82 +61,82 @@ import TyCalendar from './components/calendar'
 import TySpace from './components/space'
 import TyAvatar from './components/avatar'
 import TyAvatarGroup from './components/avatar-group'
-import {TyThemeChange} from './hooks/changeTheme'
+import { TyThemeChange } from './hooks/changeTheme'
 import TyScrollBar from './components/scrollbar'
 import TyLogConsole from './components/logConsole'
-import TyAffix,{useTyAffix} from './components/affix'
+import TyAffix, { useTyAffix } from './components/affix'
 import TyCircle from './components/circle'
 import TyUpload from './components/upload'
 import TyTimePicker from './components/time-picker'
 import TyColorPicker from './components/color-picker'
 import TySmsCodeInput from './components/smsCodeInput'
-// import TyTrigger from './components/trigger'
 import generateColor, { TyColor } from './color/index.js'
 import { defaultTokens } from './tokens/defaultTokens.js'
 
 
 const install = app => {
-    app.use(TyButton),
-    app.use(TyButtonGroup),
-    app.use(TyDivider),
-    app.use(TyRow),
-    app.use(TyCol),
-    app.use(TyForm),
-    app.use(TyFormItem),
-    app.use(TyInput),
-    app.use(TySelect),
-    app.use(TyCheckBox),
-    app.use(TyRadio),
-    app.use(TyDatePicker),
-    app.use(TyDialog),
-    app.use(TyBackTop),
-    app.use(TyCard),
-    app.use(TyTable),
-    app.use(TyInputNumber),
-    app.use(TyInputPassword),
-    app.use(TyContainer),
-    app.use(TyMenu),
-    app.use(TyResult),
-    app.use(TyImage),
-    app.use(TyWaterMark),
-    app.use(TyCollapse),
-    app.use(TyTabs),
-    app.use(TyBadge),
-    app.use(TyPageHeader),
-    app.use(TySwitch),
-    app.use(TyPagination),
-    app.use(TyLoadingDirc),
-    app.use(TyEmpty),
-    app.use(TyProgress),
-    app.use(TySlider),
-    app.use(TySkeleton),
-    app.use(TyCarousel),
-    app.use(TyTooltip),
-    app.use(TyPopconfirm),
-    app.use(TyList),
-    app.use(TyRate),
-    app.use(TyTransfer),
-    app.use(TyPoppover),
-    app.use(TyBreadcrumb),
-    app.use(TyDescriptions),
-    app.use(TyCaution),
-    app.use(TyConfigProvider),
-    app.use(TyDrawer),
-    app.use(TyCalendar),
-    app.use(TySpace),
-    app.use(TyAvatar),
-    app.use(TyAvatarGroup),
-    app.use(TyScrollBar),
-    app.use(TyLogConsole),
-    app.use(TyAffix),
-    app.use(TyCircle),
-    app.use(TyUpload),
-    app.use(TyTimePicker),
-    app.use(TyColorPicker),
-    app.use(TySmsCodeInput)
-  }
-  // app.use(TyTrigger)
-document.getElementsByTagName('html')[0].setAttribute('toyar-theme', 'light')
+  app.use(TyButton)
+  app.use(TyButtonGroup)
+  app.use(TyDivider)
+  app.use(TyRow)
+  app.use(TyCol)
+  app.use(TyForm)
+  app.use(TyFormItem)
+  app.use(TyInput)
+  app.use(TySelect)
+  app.use(TyCheckBox)
+  app.use(TyRadio)
+  app.use(TyDatePicker)
+  app.use(TyDialog)
+  app.use(TyBackTop)
+  app.use(TyCard)
+  app.use(TyTable)
+  app.use(TyInputNumber)
+  app.use(TyInputPassword)
+  app.use(TyContainer)
+  app.use(TyMenu)
+  app.use(TyResult)
+  app.use(TyImage)
+  app.use(TyWaterMark)
+  app.use(TyCollapse)
+  app.use(TyTabs)
+  app.use(TyBadge)
+  app.use(TyPageHeader)
+  app.use(TySwitch)
+  app.use(TyPagination)
+  app.use(TyLoadingDirc)
+  app.use(TyEmpty)
+  app.use(TyProgress)
+  app.use(TySlider)
+  app.use(TySkeleton)
+  app.use(TyCarousel)
+  app.use(TyTooltip)
+  app.use(TyPopconfirm)
+  app.use(TyList)
+  app.use(TyRate)
+  app.use(TyTransfer)
+  app.use(TyPoppover)
+  app.use(TyBreadcrumb)
+  app.use(TyDescriptions)
+  app.use(TyCaution)
+  app.use(TyConfigProvider)
+  app.use(TyDrawer)
+  app.use(TyCalendar)
+  app.use(TySpace)
+  app.use(TyAvatar)
+  app.use(TyAvatarGroup)
+  app.use(TyScrollBar)
+  app.use(TyLogConsole)
+  app.use(TyAffix)
+  app.use(TyCircle)
+  app.use(TyUpload)
+  app.use(TyTimePicker)
+  app.use(TyColorPicker)
+  app.use(TySmsCodeInput)
+  // API 式组件（函数式调用，通过 createVNode + render 挂载，无需 app.use 注册）：
+  //   TyMessage / TyNotification
+}
+// app.use(TyTrigger)
 
 
 
@@ -184,8 +184,8 @@ export {
   TyResult,
   TyImage,
   TyWaterMark,
-  TyCollapse,TyCollapseItem,
-  TyTabs,TyTabItem,
+  TyCollapse, TyCollapseItem,
+  TyTabs, TyTabItem,
   TyBadge,
   TyPageHeader,
   TySwitch,
@@ -194,15 +194,15 @@ export {
   TyEmpty,
   TyProgress,
   TySlider,
-  TySkeleton,TySkeletonItem,
+  TySkeleton, TySkeletonItem,
   TyCarousel,
   TyTooltip,
   TyPopconfirm,
-  TyList,TyListItem ,
+  TyList, TyListItem,
   TyRate,
   TyTransfer,
   TyPoppover,
-  TyBreadcrumb,TyBreadcrumbItem,
+  TyBreadcrumb, TyBreadcrumbItem,
   TyDescriptions,
   TyCaution,
   TyConfigProvider,
@@ -211,7 +211,7 @@ export {
   TyColor,
   TyCalendar,
   TySpace,
-  TyAvatar,TyAvatarGroup,
+  TyAvatar, TyAvatarGroup,
   TyScrollBar,
   TyLogConsole,
   TyAffix,

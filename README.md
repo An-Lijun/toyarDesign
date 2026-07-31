@@ -34,7 +34,7 @@ https://an-lijun.github.io/toyarDesign/index.html
 
 ## 创建
 
-- 脚手架初始化 vue(3.2.41) + VITE(3.2.3) + TS + dart-sass
+- 脚手架初始化 vue(3.4.31) + VITE( 6.3.3) + TS + dart-sass
 
 ## 字体图标
     toyarIcon 图标

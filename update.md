@@ -894,3 +894,82 @@ Element Plus（样式分离）
 toyarDesign 是一个架构思路清晰、Token 体系完整的 Vue3 组件库,Headless + JSDoc 元数据驱动的设计在同类库里颇有亮点。 但工程化收尾不够干净:入口副作用、install 漏注册、命名拼写错误( poppver )等问题会直接影响可用性;测试覆盖仅 31% 且核心表单组件裸奔,离生产级稳定还有距离。 优先处理前 3 项严重问题,即可显著提升库的可用性与专业度。
 
 需要我针对哪些问题开始动手修复?
+
+
+
+
+
+
+
+
+
+维度 现状 技术栈 Vue 3.4 + TypeScript + Vite 6 + SCSS + Vitest 组件规模 62 个组件（基于 src/package/components/ 实际目录） 测试文件 19 个 .test.js ，覆盖率 ≈ 30% 主题系统 SCSS Token + CSS 变量 + JS Token 双轨 文档 VitePress 站点 + MCP 组件元数据工具链 发布版本 v0.0.92-0（npm 公开发布）
+
+## 二、维度评分
+评分维度 得分 说明 架构设计 8.5 / 10 Headless 模式成熟，context 抽象优秀 主题系统 7 / 10 双轨设计完整，但 light/dark 不对称、JS/SCSS 重复 类型安全 6 / 10 strict 模式开启，但发布无 .d.ts 、存在 any 构建工程化 5 / 10 配置冗余、缺少类型产物、第三方代码内嵌 测试覆盖 5 / 10 测试用例质量高但覆盖面低、coverage 配置有缺陷 代码质量 6 / 10 硬编码颜色、死代码、index 导出不一致 文档与工具 8.5 / 10 VitePress + MCP 元数据自动化，亮点突出 可维护性 7 / 10 组件结构一致、自动化生成，但耦合点存在 综合 ≈ 7.0 / 10 架构底子扎实，工程化与质量治理是主要短板
+
+## 三、核心亮点
+### 1. Headless 组件模式设计优秀
+createComponentContext.ts 统一产出 { staticProps, useProps, nm, useEmits } ，使组件结构高度一致：
+
+- button.vue 极薄，仅做模板与 hook 装配
+- use-button.ts 承载全部逻辑
+- index.ts 同时导出 useTyButton headless API，支持二次封装
+### 2. 主题系统双轨完整
+_tokens.scss 为单一真源，14 色系 × 10 色阶 + 语义映射 + !default 支持外部覆盖； defaultTokens.js 提供 JS 侧默认值，配合 ConfigProvider 实现运行时换肤。
+
+### 3. 元数据自动化生成
+generate-metadata.js 从 context.ts 的 JSDoc 注释中提取 props/emits/slots，反哺 MCP 工具链与文档站，工程闭环做得好。
+
+## 四、关键问题（按优先级排序）
+### P0 — 发布产物缺失类型声明（影响库可用性）
+package.json 无 types 字段，构建链无 vite-plugin-dts ， vue-tsc 仅作 devDep 未参与产物生成。 公开发布的 Vue 组件库不附带 .d.ts 会导致消费方失去类型提示 ，这是硬伤。
+
+### P1 — light/dark 主题变量不对称
+light.scss#L28-L32 语义循环只生成 --{name}-{i} ，而 dark.scss#L30-L35 同时生成 --{name}-{i} 与 --{name}-rs-{i} （RGB 原始值）。组件中若有 rgba(var(--primary-rs-6), .5) 写法，在浅色模式下会取不到值。
+
+### P1 — 生产组件硬编码颜色（违反项目硬约束）
+项目 memory 明确要求"组件必须使用语义变量而非直接颜色值"，但以下文件违反：
+
+- progress.vue 出现 #fff （2 处，应改为 var(--text-white) ）
+- 另有 upload、tooltip、time-picker、poppover、popconfirm、input-number、message、notification 共 9 个组件存在 hex 颜色
+### P2 — index.ts 导出与 install 不一致
+src/package/index.ts ：
+
+- TyMessage 、 TyNotification 被导入并导出，但 未进入 install 函数 （API 式组件需单独说明，当前易误判为漏注册）
+- TyTrigger 被注释掉（ 第 73 行 组件仍存在），属死代码
+- TyLoading 导出别名与 install 中的 TyLoadingDirc 命名不统一
+### P2 — 第三方代码内嵌
+src/package/color/ 内嵌了 color-convert 、 color-name 、 color-string 、 simple-swizzle 等 npm 包源码（ESLint 配置已注释"应后续迁移为 npm 依赖"）。带来版本维护、安全审计与 license 合规风险。
+
+### P2 — 构建配置冗余/失效
+vite.config.ts ：
+
+- lib 配置与 rollupOptions.input/output 同时存在， lib 实际被 rollupOptions 覆盖，冗余
+- minify: true + terserOptions —— Vite 6 默认用 esbuild， terserOptions 不生效（需显式 minify: 'terser' ），属无效配置
+### P3 — 测试 coverage 配置误导
+vitest.config.ts#L17 coverage.include 仅含 **/*.vue ，而 headless 逻辑全在 use-*.ts 中， 覆盖率统计系统性遗漏了核心逻辑文件 ，数值会严重失真。
+
+### P3 — JS Token 与 SCSS Token 双写
+defaultTokens.js 完整复制了 _tokens.scss 的全部色值。任一侧修改不同步即产生隐蔽 bug。建议由 SCSS 单一源生成 JS 产物。
+
+### P3 — scripts 目录存在临时文件
+scripts/ 下存在 i.html 、 i.md 、 i.vue 等疑似调试残留文件，应清理。
+
+## 五、优化建议
+### 短期（1-2 周）
+1. 补齐类型产物 ：引入 vite-plugin-dts ，在 vite.config.ts 中生成 .d.ts ， package.json 补 types 、 exports 字段
+2. 修复 light/dark 对称性 ：在 light.scss 语义循环中补 --{name}-rs-{i} 生成
+3. 清理硬编码颜色 ：批量将 9 个组件中的 hex 值替换为 var(--text-white) / var(--fill-white) 等语义变量
+4. 清理死代码 ：移除 trigger 组件或恢复注册；删除 scripts/i.* 临时文件
+### 中期（3-6 周）
+5. 测试覆盖提升至 60%+ ：优先补齐 form 类（input、select、date-picker、form）、feedback 类（message、notification、loading）核心组件；修正 coverage.include 包含 use-*.ts
+6. Token 单一源 ：编写脚本从 _tokens.scss 解析生成 defaultTokens.js ，消除双写
+7. 第三方依赖外置化 ：将 src/package/color/ 内嵌代码替换为 npm color / color-string 依赖
+8. 构建配置收敛 ：移除冗余 lib 块，明确 minify 策略； module 字段指向文件而非目录
+### 长期
+9. 建立 CI/CD ：当前发布为手动 npm run pub ，建议加 GitHub Actions 跑 lint + test + build 门禁
+10. 按需引入产物 ：当前 vite.component.config.ts 支持单组件构建，但 package.json 未暴露 exports 子路径映射，消费方无法 import { TyButton } from 'toyar-design/button' ，建议补全 subpath exports
+11. metadata.json 治理 ：明确其为生成产物还是提交产物，若为生成物应加入 .gitignore
+## 六、结论
+ToyarDesign 的架构地基是扎实的 ：Headless + context 抽象 + 双轨主题 + 元数据自动化，这套组合在同类 Vue 3 组件库中属于中上水准。主要短板集中在**工程化产出（类型声明、构建配置） 与 质量治理（测试覆盖、硬编码、死代码）**两类"非架构"层面。P0/P1 问题（类型声明缺失、主题不对称、硬编码颜色）建议优先修复，它们直接影响库的可用性与正确性；其余为可持续迭代项。
