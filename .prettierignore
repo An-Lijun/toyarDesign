@@ -1,0 +1,28 @@
+# 构建产物
+dist
+distBase
+docs
+docsBase/.vitepress/cache
+docsBase/.vitepress/dist
+
+# 依赖
+node_modules
+
+# 第三方内嵌源码(后续应迁移为 npm 依赖)
+src/package/color
+
+# MCP 子工程(独立配置)
+mcp
+
+# 自动生成的文件
+auto-imports.d.ts
+src/package/iconLists.js
+**/metadata.json
+
+# 锁文件
+pnpm-lock.yaml
+package-lock.json
+
+# 大文件/非源码
+*.min.js
+*.min.css
