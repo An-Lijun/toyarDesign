@@ -1,0 +1,29 @@
+# EditorConfig: https://editorconfig.org
+# 统一不同 IDE/编辑器的基础编辑行为，与 .prettierrc.json 对齐
+# （格式化细节仍以 Prettier 为准，本文件只约束 Prettier 不管的层面）
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+[*.{js,mjs,cjs,ts,tsx,vue,json,jsonc,json5}]
+indent_size = 2
+
+[*.{scss,sass,css}]
+indent_size = 2
+
+[*.md]
+# Markdown 保留行尾空格（两个空格表示硬换行）
+trim_trailing_whitespace = false
+max_line_length = off
+
+[Makefile]
+# Makefile 必须用 Tab
+indent_style = tab

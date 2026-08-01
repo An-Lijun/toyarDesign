@@ -41,7 +41,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue,scss,json,md}\" \"scripts/**/*.{js,ts}\" \"*.{js,ts}\"",
     "format:check": "prettier --check \"src/**/*.{js,ts,vue,scss,json,md}\" \"scripts/**/*.{js,ts}\" \"*.{js,ts}\"",
-    "generate:tokens": "node scripts/generate-tokens.js"
+    "generate:tokens": "node scripts/generate-tokens.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
@@ -60,7 +61,9 @@
     "@vuepress/plugin-register-components": "2.0.0-rc.15",
     "eslint": "^10.8.0",
     "eslint-plugin-vue": "^10.10.0",
+    "husky": "^9.1.7",
     "jsdom": "20.0.0",
+    "lint-staged": "^13.0.0",
     "markdown-it-container": "^3.0.0",
     "prettier": "^3.9.6",
     "sass": "^1.87.0",
@@ -78,5 +81,9 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,tsx,vue}": "eslint --fix",
+    "*.{js,mjs,cjs,ts,tsx,vue,scss,sass,css,json,jsonc,md}": "prettier --write"
   }
 }
