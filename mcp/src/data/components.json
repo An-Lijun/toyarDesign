@@ -33,7 +33,7 @@
       }
     },
     "emits": {
-      "fixed-change": {
+      "change": {
         "params": [
           "value: boolean"
         ],

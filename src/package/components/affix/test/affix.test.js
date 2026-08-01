@@ -12,14 +12,13 @@ import { nextTick } from 'vue'
  * 占位元素 placeholder 插入在 affixRef.value（外层元素）之前，即 wrapper.element.parentNode 中。
  */
 
-// Mock robinson 的 debounce，避免触发其内部 dayjs 模块解析错误
+// Mock robinson 的 debounce，同步执行以简化测试时序
 vi.mock('robinson', () => ({
-  debounce: (fn, delay) => {
+  debounce: fn => {
     const debounced = (...args) => {
-      clearTimeout(debounced._timer)
-      debounced._timer = setTimeout(() => fn(...args), delay)
+      fn(...args)
     }
-    debounced.cancel = () => clearTimeout(debounced._timer)
+    debounced.cancel = () => {}
     return debounced
   }
 }))
@@ -33,6 +32,30 @@ let lastObserverOptions = null
 const observeMock = vi.fn()
 const unobserveMock = vi.fn()
 const disconnectMock = vi.fn()
+
+// ===== Scroll Event Mock =====
+let scrollListeners = new Map() // targetEl -> [handlers]
+const addEventListenerSpy = vi.fn((type, handler) => {
+  if (type === 'scroll') {
+    scrollListeners.set(targetElForSpy, [...(scrollListeners.get(targetElForSpy) || []), handler])
+  }
+})
+const removeEventListenerSpy = vi.fn((type, handler) => {
+  if (type === 'scroll') {
+    const handlers = scrollListeners.get(targetElForSpy) || []
+    const idx = handlers.indexOf(handler)
+    if (idx > -1) handlers.splice(idx, 1)
+  }
+})
+let targetElForSpy = null
+
+/**
+ * 触发 target 容器的 scroll 事件
+ */
+const triggerTargetScroll = targetEl => {
+  const handlers = scrollListeners.get(targetEl) || []
+  handlers.forEach(h => h())
+}
 
 class MockIntersectionObserver {
   constructor(callback, options) {
@@ -57,7 +80,7 @@ class MockIntersectionObserver {
  * 触发一次 intersection 回调
  * @param {Object} boundingClientRect - 元素的位置信息 { top, left, width, height }
  */
-const triggerIntersection = (boundingClientRect) => {
+const triggerIntersection = boundingClientRect => {
   if (lastObserverCallback) {
     lastObserverCallback([{ boundingClientRect, isIntersecting: false }])
   }
@@ -73,6 +96,50 @@ const mockElementSize = (el, width, height) => {
   Object.defineProperty(el, 'getBoundingClientRect', {
     configurable: true,
     value: () => ({ top: 0, left: 0, width, height, bottom: height, right: width })
+  })
+}
+
+/**
+ * 工具函数：mock 元素相对于 target 的位置
+ * 同时 mock placeholder 的位置（已固定时 handleTargetScroll 使用 placeholder 位置）
+ */
+const mockRelativePosition = (el, relativeTop, relativeLeft, width, height) => {
+  const rectFn = () => ({
+    top: relativeTop + 100, // 100 是 target 的偏移
+    left: relativeLeft + 50,
+    width,
+    height,
+    bottom: relativeTop + 100 + height,
+    right: relativeLeft + 50 + width
+  })
+  Object.defineProperty(el, 'getBoundingClientRect', {
+    configurable: true,
+    value: rectFn
+  })
+  // 同时 mock placeholder（如果已存在）
+  const placeholder = el.previousElementSibling
+  if (placeholder && placeholder.style && placeholder.style.visibility === 'hidden') {
+    Object.defineProperty(placeholder, 'getBoundingClientRect', {
+      configurable: true,
+      value: rectFn
+    })
+  }
+}
+
+/**
+ * 工具函数：mock target 元素的位置
+ */
+const mockTargetPosition = (targetEl, top = 100, left = 50, width = 300, height = 300) => {
+  Object.defineProperty(targetEl, 'getBoundingClientRect', {
+    configurable: true,
+    value: () => ({
+      top,
+      left,
+      width,
+      height,
+      bottom: top + height,
+      right: left + width
+    })
   })
 }
 
@@ -93,8 +160,34 @@ describe('TyAffix 组件', () => {
     observeMock.mockClear()
     unobserveMock.mockClear()
     disconnectMock.mockClear()
+    scrollListeners.clear()
+    addEventListenerSpy.mockClear()
+    removeEventListenerSpy.mockClear()
 
     vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
+
+    // Spy on addEventListener/removeEventListener for scroll events
+    vi.spyOn(Element.prototype, 'addEventListener').mockImplementation(function (type, handler, options) {
+      if (type === 'scroll') {
+        // 找到这个元素作为 target
+        scrollListeners.set(this, [...(scrollListeners.get(this) || []), handler])
+      }
+      return this
+    })
+    vi.spyOn(Element.prototype, 'removeEventListener').mockImplementation(function (type, handler, options) {
+      if (type === 'scroll') {
+        const handlers = scrollListeners.get(this) || []
+        const idx = handlers.indexOf(handler)
+        if (idx > -1) {
+          handlers.splice(idx, 1)
+          // 如果数组为空，删除 Map 的键
+          if (handlers.length === 0) {
+            scrollListeners.delete(this)
+          }
+        }
+      }
+      return this
+    })
 
     Object.defineProperty(window, 'innerHeight', {
       configurable: true,
@@ -275,14 +368,204 @@ describe('TyAffix 组件', () => {
       wrapper.unmount()
     })
 
-    it('传入 target 时 root 应为该元素', async () => {
+    it('传入 target 时应添加 scroll 事件监听，而非创建 IntersectionObserver', async () => {
       const targetEl = document.createElement('div')
       const wrapper = mount(TyAffix, {
         props: { target: targetEl },
         slots: { default: '内容' }
       })
       await nextTick()
-      expect(lastObserverOptions.root).toBe(targetEl)
+
+      // 有 target 时不应创建 IntersectionObserver
+      expect(observerInstances.length).toBe(0)
+      // 应添加 scroll 事件监听
+      expect(scrollListeners.has(targetEl)).toBe(true)
+      expect(scrollListeners.get(targetEl).length).toBeGreaterThan(0)
+      wrapper.unmount()
+    })
+  })
+
+  // ===== target 容器固定行为测试 =====
+  describe('target 容器固定行为', () => {
+    it('传入 target 容器时，元素在 target 内滚动至 offsetTop 范围应固定', async () => {
+      const targetEl = document.createElement('div')
+      Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
+      mockTargetPosition(targetEl)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetTop: 50 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      expect(scrollListeners.has(targetEl)).toBe(true)
+
+      mockElementSize(wrapper.element, 200, 40)
+      mockRelativePosition(wrapper.element, 30, 10, 200, 40)
+
+      // 触发 scroll 事件（debounce 同步执行）
+      triggerTargetScroll(targetEl)
+      await nextTick()
+
+      expect(wrapper.find('.is-fixed').exists()).toBe(true)
+
+      const styles = wrapper.find('.ty-affix').attributes('style') || ''
+      expect(styles).toContain('position: fixed')
+      // fixed top = targetRect.top(100) + offsetTop(50) = 150px
+      expect(styles).toContain('top: 150px')
+      wrapper.unmount()
+    })
+
+    it('传入 target 容器时，元素滚出 offsetTop 范围应取消固定', async () => {
+      const targetEl = document.createElement('div')
+      Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
+      mockTargetPosition(targetEl)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetTop: 50 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      mockElementSize(wrapper.element, 200, 40)
+
+      // 先固定：relativeTop=30 <= 50
+      mockRelativePosition(wrapper.element, 30, 10, 200, 40)
+      triggerTargetScroll(targetEl)
+      await nextTick()
+      expect(wrapper.find('.is-fixed').exists()).toBe(true)
+
+      // 滚出范围取消固定：relativeTop=100 > 50
+      mockRelativePosition(wrapper.element, 100, 10, 200, 40)
+      triggerTargetScroll(targetEl)
+      await nextTick()
+      expect(wrapper.find('.is-fixed').exists()).toBe(false)
+      wrapper.unmount()
+    })
+
+    it('target 容器场景下固定时应触发 change 事件', async () => {
+      const targetEl = document.createElement('div')
+      Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
+      mockTargetPosition(targetEl)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetTop: 50 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      mockElementSize(wrapper.element, 200, 40)
+      mockRelativePosition(wrapper.element, 30, 10, 200, 40)
+
+      triggerTargetScroll(targetEl)
+      await nextTick()
+
+      expect(wrapper.emitted('change')).toBeTruthy()
+      expect(wrapper.emitted('change')[0]).toEqual([true])
+      wrapper.unmount()
+    })
+
+    it('target 容器场景下固定时应插入占位元素', async () => {
+      const container = createContainer()
+      const targetEl = document.createElement('div')
+      Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
+      mockTargetPosition(targetEl)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetTop: 50 },
+        slots: { default: '内容' },
+        attachTo: container
+      })
+      await nextTick()
+
+      // mount 时 handleTargetScroll 已创建 placeholder（尺寸为 0）
+      // 设置正确的 mock 后，triggerTargetScroll 会更新 placeholder 尺寸
+      mockElementSize(wrapper.element, 200, 40)
+      mockRelativePosition(wrapper.element, 30, 10, 200, 40)
+
+      triggerTargetScroll(targetEl)
+      await nextTick()
+
+      // 验证 placeholder 存在且尺寸正确
+      const parentNode = wrapper.element.parentNode
+      const placeholderEl = parentNode.querySelector('div[style*="visibility: hidden"]')
+      expect(placeholderEl).not.toBeNull()
+      expect(placeholderEl.style.width).toBe('200px')
+      expect(placeholderEl.style.height).toBe('40px')
+
+      wrapper.unmount()
+      container.remove()
+    })
+
+    it('target 容器场景下 offsetBottom 固定行为', async () => {
+      const targetEl = document.createElement('div')
+      Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
+      mockTargetPosition(targetEl)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetBottom: 80 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      mockElementSize(wrapper.element, 200, 40)
+
+      // elBottomInTarget = relativeTop + elHeight = 200 + 40 = 240
+      // distanceToBottom = targetHeight - elBottomInTarget = 300 - 240 = 60 <= 80
+      mockRelativePosition(wrapper.element, 200, 20, 200, 40)
+
+      triggerTargetScroll(targetEl)
+      await nextTick()
+
+      expect(wrapper.find('.is-fixed').exists()).toBe(true)
+
+      const styles = wrapper.find('.ty-affix').attributes('style') || ''
+      expect(styles).toContain('position: fixed')
+      // fixed bottom = innerHeight(800) - (targetRect.bottom(400) - offsetBottom(80)) = 480px
+      expect(styles).toContain('bottom: 480px')
+      wrapper.unmount()
+    })
+
+    it('从有 target 切换为 undefined 时，应移除 scroll 监听并回退到 IntersectionObserver', async () => {
+      const targetEl = document.createElement('div')
+      mockTargetPosition(targetEl)
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetTop: 50 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+      expect(scrollListeners.has(targetEl)).toBe(true)
+
+      await wrapper.setProps({ target: undefined })
+      await nextTick()
+
+      // 应移除 scroll 监听
+      expect(scrollListeners.has(targetEl)).toBe(false)
+      // 应创建 IntersectionObserver
+      expect(observerInstances.length).toBeGreaterThan(0)
+      expect(lastObserverOptions.root).toBe(window.document)
+      wrapper.unmount()
+    })
+
+    it('切换 target 为新容器时，应更新 scroll 监听', async () => {
+      const targetEl1 = document.createElement('div')
+      const targetEl2 = document.createElement('div')
+      mockTargetPosition(targetEl1)
+      mockTargetPosition(targetEl2)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl1, offsetTop: 50 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+      expect(scrollListeners.has(targetEl1)).toBe(true)
+      expect(scrollListeners.has(targetEl2)).toBe(false)
+
+      await wrapper.setProps({ target: targetEl2 })
+      await nextTick()
+
+      expect(scrollListeners.has(targetEl1)).toBe(false)
+      expect(scrollListeners.has(targetEl2)).toBe(true)
       wrapper.unmount()
     })
   })
@@ -413,7 +696,7 @@ describe('TyAffix 组件', () => {
 
   // ===== 事件测试 =====
   describe('事件', () => {
-    it('固定状态改变时应触发 fixed-change 事件（true）', async () => {
+    it('固定状态改变时应触发 change 事件（true）', async () => {
       const wrapper = mount(TyAffix, {
         props: { offsetTop: 100 },
         slots: { default: '内容' }
@@ -425,12 +708,15 @@ describe('TyAffix 组件', () => {
       triggerIntersection({ top: 50, left: 10, width: 200, height: 40 })
       await nextTick()
 
-      expect(wrapper.emitted('fixed-change')).toBeTruthy()
-      expect(wrapper.emitted('fixed-change')[0]).toEqual([true])
+      // debounce 延迟 150ms 触发 emit，需等待真实定时器
+      await vi.waitFor(() => {
+        expect(wrapper.emitted('change')).toBeTruthy()
+        expect(wrapper.emitted('change')[0]).toEqual([true])
+      })
       wrapper.unmount()
     })
 
-    it('取消固定时应触发 fixed-change 事件（false）', async () => {
+    it('取消固定时应触发 change 事件（false）', async () => {
       const wrapper = mount(TyAffix, {
         props: { offsetTop: 100 },
         slots: { default: '内容' }
@@ -443,18 +729,25 @@ describe('TyAffix 组件', () => {
       triggerIntersection({ top: 50, left: 10, width: 200, height: 40 })
       await nextTick()
 
+      // 等待 debounce（150ms）触发第一次 change(true)
+      await vi.waitFor(() => {
+        expect(wrapper.emitted('change')).toBeTruthy()
+        expect(wrapper.emitted('change')[0]).toEqual([true])
+      })
+
       // 取消固定
       triggerIntersection({ top: 150, left: 10, width: 200, height: 40 })
       await nextTick()
 
-      const events = wrapper.emitted('fixed-change')
-      expect(events).toBeTruthy()
-      expect(events[0]).toEqual([true])
-      expect(events[1]).toEqual([false])
+      // 等待 debounce 触发第二次 change(false)
+      await vi.waitFor(() => {
+        const events = wrapper.emitted('change')
+        expect(events[1]).toEqual([false])
+      })
       wrapper.unmount()
     })
 
-    it('未固定且无需固定时不应触发 fixed-change', async () => {
+    it('未固定且无需固定时不应触发 change', async () => {
       const wrapper = mount(TyAffix, {
         props: { offsetTop: 100 },
         slots: { default: '内容' }
@@ -467,7 +760,7 @@ describe('TyAffix 组件', () => {
       triggerIntersection({ top: 200, left: 10, width: 200, height: 40 })
       await nextTick()
 
-      expect(wrapper.emitted('fixed-change')).toBeFalsy()
+      expect(wrapper.emitted('change')).toBeFalsy()
       wrapper.unmount()
     })
   })
@@ -617,20 +910,25 @@ describe('TyAffix 组件', () => {
       wrapper.unmount()
     })
 
-    it('target 变化时应重新初始化 observer', async () => {
+    it('target 变化时应重新初始化（移除旧 scroll 监听，添加新 scroll 监听）', async () => {
       const wrapper = mount(TyAffix, {
         props: { offsetTop: 50 },
         slots: { default: '内容' }
       })
       await nextTick()
-      const initialCount = observerInstances.length
+      const initialObserverCount = observerInstances.length
+
+      // 初始无 target，应创建 observer
+      expect(initialObserverCount).toBeGreaterThan(0)
 
       const newTarget = document.createElement('div')
       await wrapper.setProps({ target: newTarget })
       await nextTick()
 
-      expect(observerInstances.length).toBeGreaterThan(initialCount)
-      expect(lastObserverOptions.root).toBe(newTarget)
+      // 有 target 时不应创建新的 observer
+      expect(observerInstances.length).toBe(initialObserverCount)
+      // 应添加 scroll 监听到新 target
+      expect(scrollListeners.has(newTarget)).toBe(true)
       wrapper.unmount()
     })
   })
@@ -739,6 +1037,150 @@ describe('TyAffix 组件', () => {
 
       // disconnect 至少调用两次
       expect(disconnectMock.mock.calls.length).toBeGreaterThanOrEqual(2)
+    })
+  })
+
+  // ===== updatePosition 方法测试 =====
+  describe('updatePosition 方法', () => {
+    it('组件实例应暴露 updatePosition 方法', async () => {
+      const wrapper = mount(TyAffix, {
+        props: { offsetTop: 100 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      expect(typeof wrapper.vm.updatePosition).toBe('function')
+      wrapper.unmount()
+    })
+
+    it('无 target 时，updatePosition 应能触发固定', async () => {
+      const wrapper = mount(TyAffix, {
+        props: { offsetTop: 100 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      mockElementSize(wrapper.element, 200, 40)
+
+      // 模拟元素滚动到固定范围内（top=50 <= offsetTop=100）
+      Object.defineProperty(wrapper.element, 'getBoundingClientRect', {
+        configurable: true,
+        value: () => ({ top: 50, left: 10, width: 200, height: 40, bottom: 90, right: 210 })
+      })
+
+      wrapper.vm.updatePosition()
+      await nextTick()
+
+      expect(wrapper.find('.is-fixed').exists()).toBe(true)
+      const styles = wrapper.find('.ty-affix').attributes('style') || ''
+      expect(styles).toContain('position: fixed')
+      expect(styles).toContain('top: 100px')
+      wrapper.unmount()
+    })
+
+    it('无 target 时，updatePosition 应能取消固定', async () => {
+      const wrapper = mount(TyAffix, {
+        props: { offsetTop: 100 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      mockElementSize(wrapper.element, 200, 40)
+
+      // 先固定
+      Object.defineProperty(wrapper.element, 'getBoundingClientRect', {
+        configurable: true,
+        value: () => ({ top: 50, left: 10, width: 200, height: 40, bottom: 90, right: 210 })
+      })
+      triggerIntersection({ top: 50, left: 10, width: 200, height: 40 })
+      await nextTick()
+      expect(wrapper.find('.is-fixed').exists()).toBe(true)
+
+      // mock placeholder 位置（取消固定时用 placeholder 判断）
+      const placeholder = wrapper.element.previousElementSibling
+      if (placeholder) {
+        Object.defineProperty(placeholder, 'getBoundingClientRect', {
+          configurable: true,
+          value: () => ({ top: 200, left: 10, width: 200, height: 40, bottom: 240, right: 210 })
+        })
+      }
+
+      // 调用 updatePosition，元素已移出范围（top=200 > offsetTop=100）
+      Object.defineProperty(wrapper.element, 'getBoundingClientRect', {
+        configurable: true,
+        value: () => ({ top: 200, left: 10, width: 200, height: 40, bottom: 240, right: 210 })
+      })
+      wrapper.vm.updatePosition()
+      await nextTick()
+
+      expect(wrapper.find('.is-fixed').exists()).toBe(false)
+      wrapper.unmount()
+    })
+
+    it('有 target 时，updatePosition 应能触发固定', async () => {
+      const targetEl = document.createElement('div')
+      Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
+      mockTargetPosition(targetEl)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetTop: 50 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      mockElementSize(wrapper.element, 200, 40)
+      // 元素在固定范围内：relativeTop=30 <= offsetTop=50
+      mockRelativePosition(wrapper.element, 30, 10, 200, 40)
+
+      wrapper.vm.updatePosition()
+      await nextTick()
+
+      expect(wrapper.find('.is-fixed').exists()).toBe(true)
+      const styles = wrapper.find('.ty-affix').attributes('style') || ''
+      expect(styles).toContain('position: fixed')
+      // fixed top = targetRect.top(100) + offsetTop(50) = 150px
+      expect(styles).toContain('top: 150px')
+      wrapper.unmount()
+    })
+
+    it('有 target 时，updatePosition 应能取消固定', async () => {
+      const targetEl = document.createElement('div')
+      Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
+      mockTargetPosition(targetEl)
+
+      const wrapper = mount(TyAffix, {
+        props: { target: targetEl, offsetTop: 50 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      mockElementSize(wrapper.element, 200, 40)
+
+      // 先固定：relativeTop=30 <= 50
+      mockRelativePosition(wrapper.element, 30, 10, 200, 40)
+      triggerTargetScroll(targetEl)
+      await nextTick()
+      expect(wrapper.find('.is-fixed').exists()).toBe(true)
+
+      // 滚出范围：relativeTop=100 > 50
+      mockRelativePosition(wrapper.element, 100, 10, 200, 40)
+      wrapper.vm.updatePosition()
+      await nextTick()
+
+      expect(wrapper.find('.is-fixed').exists()).toBe(false)
+      wrapper.unmount()
+    })
+
+    it('updatePosition 不应在 affixRef 为空时报错', async () => {
+      const wrapper = mount(TyAffix, {
+        props: { offsetTop: 100 },
+        slots: { default: '内容' }
+      })
+      await nextTick()
+
+      // 正常调用不应抛出异常
+      expect(() => wrapper.vm.updatePosition()).not.toThrow()
+      wrapper.unmount()
     })
   })
 })

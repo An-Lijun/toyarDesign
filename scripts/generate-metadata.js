@@ -1,14 +1,14 @@
 /**
  * 组件元数据生成脚本
- * 
+ *
  * 功能：自动扫描 src/package/components 下的所有组件，从 context.ts 和 .vue 文件中提取
  *       props、emits、slots 等信息，生成 metadata.json 和 component-manifest.json
- * 
+ *
  * 支持的组件定义模式：
  * 1. 传统模式：export const staticProps = { ... }
  * 2. createComponentContext 模式：createComponentContext({ props: { ... }, emits: { ... } })
  * 3. buildProps 模式：buildProps({ ... }) + export const xxxEmits = ['event1', 'event2']
- * 
+ *
  * 使用方式：
  * - node scripts/generate-metadata.js          # 为所有组件生成元数据
  * - node scripts/generate-metadata.js button    # 为指定组件生成元数据
@@ -24,9 +24,7 @@ const __dirname = path.dirname(__filename)
 
 // 手动维护的组件覆写配置（组合子组件、示例片段等）
 const OVERRIDES_PATH = path.join(__dirname, 'component-overrides.json')
-const OVERRIDES = fs.existsSync(OVERRIDES_PATH)
-  ? JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf-8'))
-  : {}
+const OVERRIDES = fs.existsSync(OVERRIDES_PATH) ? JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf-8')) : {}
 
 // 组件目录路径（包含所有组件的文件夹）
 const COMPONENTS_DIR = path.join(__dirname, '../src/package/components')
@@ -41,7 +39,7 @@ const CATEGORY_LABELS = {
   show: '展示组件',
   feedback: '反馈组件',
   layout: '布局组件',
-  container: '容器组件',
+  container: '容器组件'
 }
 
 /**
@@ -55,15 +53,15 @@ const typeMap = {
   Object: 'object',
   Array: 'array',
   Function: 'function',
-  Element: 'HTMLElement',
+  Element: 'HTMLElement'
 }
 
 /**
  * 解析 sourceCode 中的 import 语句
- * 
+ *
  * @param {string} sourceCode - context.ts 的源代码内容
  * @returns {Array} - 解析结果数组，每项包含 { modulePath, names }
- * 
+ *
  * @example
  * // 输入：import { TY_STATE, TY_SIZE } from '../../../constant'
  * // 输出：[{ modulePath: '../../../constant', names: ['TY_STATE', 'TY_SIZE'] }]
@@ -73,7 +71,7 @@ function parseImports(sourceCode) {
   // 正则匹配 import { xxx, yyy } from 'path' 格式
   const importRegex = /import\s+(\{[^}]+\})\s+from\s+['"]([^'"]+)['"]/g
   let match
-  
+
   while ((match = importRegex.exec(sourceCode)) !== null) {
     // 提取花括号内的变量名，去掉花括号并分割
     const namedImports = match[1]
@@ -81,36 +79,36 @@ function parseImports(sourceCode) {
       .split(',')
       .map(i => i.trim())
       .filter(Boolean)
-    
+
     imports.push({
-      modulePath: match[2],    // 模块路径
-      names: namedImports      // 导入的变量名数组
+      modulePath: match[2], // 模块路径
+      names: namedImports // 导入的变量名数组
     })
   }
-  
+
   return imports
 }
 
 /**
  * 根据 import 语句解析并获取常量的实际值
- * 
+ *
  * @param {string} filePath - 当前 context.ts 文件的绝对路径
  * @param {Array} imports - parseImports 返回的导入信息数组
  * @returns {Object} - 常量名到实际值的映射表
- * 
+ *
  * @example
  * // 输入：filePath = '.../button/src/context.ts', imports = [{ modulePath: '../../../constant', names: ['TY_STATE'] }]
  * // 输出：{ TY_STATE: ['primary', 'success', 'warning', 'danger'] }
  */
 function resolveConstants(filePath, imports) {
   const constants = {}
-  
+
   for (const imp of imports) {
     // 解析模块的绝对路径（支持 .ts 文件和目录）
     const resolvedPath = path.resolve(path.dirname(filePath), imp.modulePath)
     const resolvedTsPath = resolvedPath.endsWith('.ts') ? resolvedPath : `${resolvedPath}.ts`
     const resolvedIndexPath = path.join(resolvedPath, 'index.ts')
-    
+
     // 按优先级查找文件：.ts 文件 → 目录下的 index.ts → 原始路径
     let targetPath = null
     if (fs.existsSync(resolvedTsPath)) {
@@ -120,11 +118,11 @@ function resolveConstants(filePath, imports) {
     } else if (fs.existsSync(resolvedPath)) {
       targetPath = resolvedPath
     }
-    
+
     if (targetPath) {
       try {
         const content = fs.readFileSync(targetPath, 'utf-8')
-        
+
         // 遍历每个导入的常量名，提取其值
         for (const name of imp.names) {
           // 正则匹配 export const NAME = [...] 格式
@@ -144,36 +142,36 @@ function resolveConstants(filePath, imports) {
       }
     }
   }
-  
+
   return constants
 }
 
 /**
  * 解析 props 对象的内容，提取每个 prop 的配置
- * 
+ *
  * @param {string} propsContent - props 对象内部的内容（去掉外层花括号）
  * @param {Object} constants - 常量映射表，用于解析 values: TY_STATE 这类引用
  * @returns {Object} - 解析后的 props 配置对象
- * 
+ *
  * @example
  * // 输入："tag: { type: String, default: 'div' }, offsetTop: { type: Number, default: 0 }"
  * // 输出：{ tag: { type: 'string', default: 'div', ... }, offsetTop: { type: 'number', default: 0, ... } }
  */
 function parsePropsObject(propsContent, constants = {}) {
   const result = {}
-  const braceStack = []       // 花括号层级栈，用于处理嵌套对象
-  let currentPropName = null  // 当前正在解析的 prop 名称
-  let propBuffer = ''         // 当前 prop 的配置内容缓冲
-  let currentComment = ''     // 当前 prop 前面的 JSDoc 注释
-  
+  const braceStack = [] // 花括号层级栈，用于处理嵌套对象
+  let currentPropName = null // 当前正在解析的 prop 名称
+  let propBuffer = '' // 当前 prop 的配置内容缓冲
+  let currentComment = '' // 当前 prop 前面的 JSDoc 注释
+
   for (let i = 0; i < propsContent.length; i++) {
     const char = propsContent[i]
-    
+
     if (char === '{') {
       braceStack.push('{')
     } else if (char === '}') {
       braceStack.pop()
-      
+
       // 当花括号层级回到 0 且有当前 prop 名称时，说明一个 prop 配置解析完成
       if (braceStack.length === 0 && currentPropName) {
         const propConfig = parsePropConfig(propBuffer, constants, currentComment)
@@ -190,12 +188,12 @@ function parsePropsObject(propsContent, constants = {}) {
         i += commentMatch[0].length - 1
         continue
       }
-      
+
       // 在顶层且没有当前 prop 名称时，尝试匹配 prop 名称
       const propNameMatch = propsContent.slice(i).match(/^['"]?([\w-]+)['"]?\s*:\s*\{/)
       if (propNameMatch) {
         currentPropName = propNameMatch[1]
-        i += propNameMatch[0].length - 1  // 跳过已匹配的部分
+        i += propNameMatch[0].length - 1 // 跳过已匹配的部分
         braceStack.push('{')
       }
     } else if (braceStack.length === 1 && currentPropName) {
@@ -203,13 +201,13 @@ function parsePropsObject(propsContent, constants = {}) {
       propBuffer += char
     }
   }
-  
+
   return result
 }
 
 /**
  * Parse single prop config string
- * 
+ *
  * @param {string} configStr - Prop config content
  * @param {Object} constants - Constants mapping
  * @param {string} comment - JSDoc comment before prop
@@ -218,12 +216,12 @@ function parsePropsObject(propsContent, constants = {}) {
 function parsePropConfig(configStr, constants = {}, comment = '') {
   // 初始化 prop 配置对象，只包含必要字段
   const config = {
-    type: 'unknown',      // 类型
-    default: null,        // 默认值
-    required: false,      // 是否必填
-    description: '',      // 描述
+    type: 'unknown', // 类型
+    default: null, // 默认值
+    required: false, // 是否必填
+    description: '' // 描述
   }
-  
+
   // 优先从 JSDoc 注释中提取 description
   // 支持格式：/** 描述内容 */ 或 /** @description 描述内容 */
   if (comment) {
@@ -238,7 +236,7 @@ function parsePropConfig(configStr, constants = {}, comment = '') {
       config.description = cleanComment
     }
   }
-  
+
   // 如果 JSDoc 注释中没有 description，再尝试从配置对象中提取
   if (!config.description) {
     const descriptionMatch = configStr.match(/description:\s*['"`]([^'"`]+)['"`]/)
@@ -246,13 +244,13 @@ function parsePropConfig(configStr, constants = {}, comment = '') {
       config.description = descriptionMatch[1]
     }
   }
-  
+
   // 解析 type 字段（单个类型，如 type: String）
   const typeMatch = configStr.match(/type:\s*(\w+)/)
   if (typeMatch) {
     config.type = typeMap[typeMatch[1]] || typeMatch[1].toLowerCase()
   }
-  
+
   // 解析 type 字段（数组类型，如 type: [String, Number]）
   const arrayTypeMatch = configStr.match(/type:\s*\[([^\]]+)\]/)
   if (arrayTypeMatch) {
@@ -261,9 +259,9 @@ function parsePropConfig(configStr, constants = {}, comment = '') {
       .map(t => t.trim())
       .filter(Boolean)
       .map(t => typeMap[t] || t.toLowerCase())
-    config.type = types.join(' | ')  // 合并为 "string | number" 格式
+    config.type = types.join(' | ') // 合并为 "string | number" 格式
   }
-  
+
   // 解析 values 字段（内联数组，如 values: ['primary', 'success']）
   const valuesMatch = configStr.match(/values:\s*(\[[^\]]+\])/)
   if (valuesMatch) {
@@ -287,25 +285,25 @@ function parsePropConfig(configStr, constants = {}, comment = '') {
       }
     }
   }
-  
+
   // 解析 default 字段（使用 [^,\n]+ 避免贪婪匹配到后面的字段）
   const defaultMatch = configStr.match(/default:\s*([^,\n]+)/)
   if (defaultMatch) {
     config.default = parseDefaultValue(defaultMatch[1].trim())
   }
-  
+
   // 解析 required 字段
   const requiredMatch = configStr.match(/required:\s*(true|false)/)
   if (requiredMatch) {
     config.required = requiredMatch[1] === 'true'
   }
-  
+
   return config
 }
 
 /**
  * 解析 default 值的字符串表示为实际值
- * 
+ *
  * @param {string} value - default 值的字符串（如 "'div'", "0", "true", "null"）
  * @returns {*} - 解析后的实际值
  */
@@ -313,47 +311,47 @@ function parseDefaultValue(value) {
   // 处理布尔值
   if (value === 'true') return true
   if (value === 'false') return false
-  
+
   // 处理 null/undefined
   if (value === 'undefined') return null
   if (value === 'null') return null
-  
+
   // 处理数字
   if (!isNaN(value)) return Number(value)
-  
+
   // 处理字符串（使用非贪婪匹配 .*?）
   const stringMatch = value.match(/^['"](.*?)['"]/)
   if (stringMatch) {
     return stringMatch[1]
   }
-  
+
   // 处理末尾有逗号的情况（如 "0,"）
   if (value.endsWith(',')) {
     return parseDefaultValue(value.slice(0, -1).trim())
   }
-  
+
   return null
 }
 
 /**
  * 从 sourceCode 中提取指定位置开始的完整对象内容（包含配对的花括号）
- * 
+ *
  * @param {string} sourceCode - 源代码内容
  * @param {number} startIndex - 起始位置（指向开始的 '{'）
  * @returns {string} - 完整的对象字符串（包含外层花括号）
- * 
+ *
  * @example
  * // 输入：sourceCode = "{ name: 'affix', props: { tag: 'div' } }", startIndex = 0
  * // 输出："{ name: 'affix', props: { tag: 'div' } }"
  */
 function extractObjectContent(sourceCode, startIndex) {
-  let braceCount = 1        // 花括号计数，初始为 1（因为 startIndex 已经是 '{'）
-  let inString = false      // 是否在字符串内
-  let stringChar = ''       // 当前字符串的引号类型
-  
+  let braceCount = 1 // 花括号计数，初始为 1（因为 startIndex 已经是 '{'）
+  let inString = false // 是否在字符串内
+  let stringChar = '' // 当前字符串的引号类型
+
   for (let i = startIndex + 1; i < sourceCode.length; i++) {
     const char = sourceCode[i]
-    
+
     // 处理字符串开始
     if (!inString && (char === '"' || char === "'" || char === '`')) {
       inString = true
@@ -376,13 +374,13 @@ function extractObjectContent(sourceCode, startIndex) {
       }
     }
   }
-  return ''  // 未找到匹配的花括号
+  return '' // 未找到匹配的花括号
 }
 
 /**
  * 从 sourceCode 中解析 props 配置
  * 依次尝试三种模式：staticProps → createComponentContext → buildProps
- * 
+ *
  * @param {string} sourceCode - context.ts 的源代码内容
  * @param {Object} constants - 常量映射表
  * @returns {Object} - 解析后的 props 对象
@@ -393,13 +391,13 @@ function parsePropsFromSource(sourceCode, constants = {}) {
   if (staticPropsMatch) {
     return parsePropsObject(staticPropsMatch[1], constants)
   }
-  
+
   // 模式2：createComponentContext 模式
   const createContextMatch = sourceCode.match(/createComponentContext\s*\(\s*\{/)
   if (createContextMatch) {
     const braceIndex = sourceCode.indexOf('{', createContextMatch.index)
     const contextObj = extractObjectContent(sourceCode, braceIndex)
-    
+
     if (contextObj) {
       const propsKeyMatch = contextObj.match(/props\s*:\s*\{/)
       if (propsKeyMatch) {
@@ -411,7 +409,7 @@ function parsePropsFromSource(sourceCode, constants = {}) {
       }
     }
   }
-  
+
   // 模式3：buildProps 模式
   const buildPropsMatch = sourceCode.match(/buildProps\s*\(\s*\{/)
   if (buildPropsMatch) {
@@ -421,33 +419,33 @@ function parsePropsFromSource(sourceCode, constants = {}) {
       return parsePropsObject(propsObj.slice(1, -1), constants)
     }
   }
-  
-  return {}  // 未匹配到任何模式
+
+  return {} // 未匹配到任何模式
 }
 
 /**
  * 解析 emits 对象的内容，提取每个 emit 的配置（支持 JSDoc 注释）
- * 
+ *
  * @param {string} emitsContent - emits 对象内部的内容（去掉外层花括号）
  * @returns {Object} - 解析后的 emits 配置对象
  */
 function parseEmitsObject(emitsContent) {
   const result = {}
-  const parenStack = []       // 括号层级栈（用于匹配 ()）
-  let currentEmitName = null  // 当前正在解析的 emit 名称
-  let emitBuffer = ''         // 当前 emit 的配置内容缓冲
-  let currentComment = ''     // 当前 emit 前面的 JSDoc 注释
-  
+  const parenStack = [] // 括号层级栈（用于匹配 ()）
+  let currentEmitName = null // 当前正在解析的 emit 名称
+  let emitBuffer = '' // 当前 emit 的配置内容缓冲
+  let currentComment = '' // 当前 emit 前面的 JSDoc 注释
+
   for (let i = 0; i < emitsContent.length; i++) {
     const char = emitsContent[i]
-    
+
     if (char === '(') {
       parenStack.push('(')
       emitBuffer += char
     } else if (char === ')') {
       parenStack.pop()
       emitBuffer += char
-      
+
       // 当括号层级回到 0 且有当前 emit 名称时，说明一个 emit 配置解析完成
       if (parenStack.length === 0 && currentEmitName) {
         // 继续读取箭头函数部分
@@ -457,8 +455,13 @@ function parseEmitsObject(emitsContent) {
           // 解析 emit 配置
           const emitRegex = /\(([^)]*)\)/
           const emitMatch = emitBuffer.match(emitRegex)
-          const params = emitMatch ? emitMatch[1].split(',').map(p => p.trim()).filter(Boolean) : []
-          
+          const params = emitMatch
+            ? emitMatch[1]
+                .split(',')
+                .map(p => p.trim())
+                .filter(Boolean)
+            : []
+
           // 从 JSDoc 注释中提取 description
           let description = ''
           if (currentComment) {
@@ -470,13 +473,13 @@ function parseEmitsObject(emitsContent) {
               description = cleanComment
             }
           }
-          
+
           result[currentEmitName] = {
             params,
-            description,
+            description
           }
         }
-        
+
         currentEmitName = null
         emitBuffer = ''
         currentComment = ''
@@ -489,8 +492,8 @@ function parseEmitsObject(emitsContent) {
         i += commentMatch[0].length - 1
         continue
       }
-      
-      // 尝试匹配 emit 名称（如 'fixed-change': (value) => true）
+
+      // 尝试匹配 emit 名称（如 'change': (value) => true）
       const emitNameMatch = emitsContent.slice(i).match(/^['"]?([\w-]+)['"]?\s*:\s*\(/)
       if (emitNameMatch) {
         currentEmitName = emitNameMatch[1]
@@ -503,32 +506,32 @@ function parseEmitsObject(emitsContent) {
       emitBuffer += char
     }
   }
-  
+
   return result
 }
 
 /**
  * 从 sourceCode 中解析 emits 配置
  * 依次尝试三种模式：对象形式 → createComponentContext → 数组形式
- * 
+ *
  * @param {string} sourceCode - context.ts 的源代码内容
  * @returns {Object} - 解析后的 emits 对象
  */
 function parseEmitsFromSource(sourceCode) {
   const result = {}
-  
+
   // 模式1：对象形式（如 export const buttonEmits = { click: (event) => true }）
   const emitObjectMatch = sourceCode.match(/export\s+const\s+\w+Emits?\s*=\s*\{([\s\S]*?)\}(?=\s*export|$)/)
   if (emitObjectMatch) {
     return parseEmitsObject(emitObjectMatch[1])
   }
-  
+
   // 模式2：createComponentContext 模式
   const createContextMatch = sourceCode.match(/createComponentContext\s*\(\s*\{/)
   if (createContextMatch) {
     const braceIndex = sourceCode.indexOf('{', createContextMatch.index)
     const contextObj = extractObjectContent(sourceCode, braceIndex)
-    
+
     if (contextObj) {
       const emitsKeyMatch = contextObj.match(/emits\s*:\s*\{/)
       if (emitsKeyMatch) {
@@ -540,7 +543,7 @@ function parseEmitsFromSource(sourceCode) {
       }
     }
   }
-  
+
   // 模式3：数组形式（如 export const inputEmits = ['blur', 'focus']）
   const emitsArrayMatch = sourceCode.match(/export\s+const\s+\w+Emits?\s*=\s*\[([^\]]*)\]/)
   if (emitsArrayMatch) {
@@ -549,24 +552,24 @@ function parseEmitsFromSource(sourceCode) {
       .split(',')
       .map(e => e.trim().replace(/['"]/g, ''))
       .filter(Boolean)
-    
+
     emitNames.forEach(emitName => {
       result[emitName] = {
         params: [],
-        description: '',
+        description: ''
       }
     })
   }
-  
+
   return result
 }
 
 /**
  * 从 Vue 文件中提取 slots 信息
- * 
+ *
  * @param {string} vueFilePath - .vue 文件的路径
  * @returns {Array} - slot 名称数组
- * 
+ *
  * @example
  * // 输入：<slot /> <slot name="header" /> <slot name="footer" />
  * // 输出：['default', 'header', 'footer']
@@ -578,7 +581,7 @@ function extractSlotsFromVueFile(vueFilePath) {
   const slots = []
   let match
   while ((match = slotRegex.exec(content)) !== null) {
-    const slotName = match[1] || 'default'  // 没有 name 属性的 slot 默认为 default
+    const slotName = match[1] || 'default' // 没有 name 属性的 slot 默认为 default
     if (!slots.includes(slotName)) {
       slots.push(slotName)
     }
@@ -588,14 +591,14 @@ function extractSlotsFromVueFile(vueFilePath) {
 
 /**
  * 从 hooks 文件中提取 slots 信息
- * 
+ *
  * hooks 中 slots 的使用方式：
  * 1. slots.default?.() - 使用 default slot
  * 2. h(component, props, { title: () => ..., default: () => ... }) - 渲染 slots
- * 
+ *
  * @param {string} hooksFilePath - hooks 文件的路径
  * @returns {Array} - slot 名称数组
- * 
+ *
  * @example
  * // 输入：slots.default?.() 或 h(Comp, {}, { title: () => ..., default: () => ... })
  * // 输出：['default', 'title']
@@ -603,7 +606,7 @@ function extractSlotsFromVueFile(vueFilePath) {
 function extractSlotsFromHooksFile(hooksFilePath) {
   const content = fs.readFileSync(hooksFilePath, 'utf-8')
   const slots = []
-  
+
   // 模式1：匹配 slots.default?.() 形式
   const slotsAccessRegex = /slots\.([a-zA-Z][\w-]*)/g
   let slotsMatch
@@ -613,9 +616,9 @@ function extractSlotsFromHooksFile(hooksFilePath) {
       slots.push(slotName)
     }
   }
-  
+
   // 匹配函数调用的第三个参数（slots 对象）的通用函数
-  const extractSlotsFromThirdArg = (thirdArgContent) => {
+  const extractSlotsFromThirdArg = thirdArgContent => {
     // 只提取值为函数的属性（如 title: () => ... 或 title: function() {}）
     const slotKeyRegex = /['"]?([a-zA-Z][\w-]*)['"]?\s*:\s*(?:\(\)|()\s*=>|\(\s*\)\s*=>|\(\s*[^)]+\s*\)\s*=>|function)/g
     let keyMatch
@@ -626,37 +629,37 @@ function extractSlotsFromHooksFile(hooksFilePath) {
       }
     }
   }
-  
+
   // 模式2：匹配 h(component, props, { title: () => ... }) 形式（第三个参数是 slots 对象）
   const hCallRegex = /h\s*\(\s*[^,]+,\s*[^,]+,\s*\{([^}]*)\}/g
   let hMatch
   while ((hMatch = hCallRegex.exec(content)) !== null) {
     extractSlotsFromThirdArg(hMatch[1])
   }
-  
+
   // 模式3：匹配 createVNode(component, props, { title: () => ... }) 形式
   const createVNodeRegex = /createVNode\s*\(\s*[^,]+,\s*[^,]+,\s*\{([^}]*)\}/g
   let createVNodeMatch
   while ((createVNodeMatch = createVNodeRegex.exec(content)) !== null) {
     extractSlotsFromThirdArg(createVNodeMatch[1])
   }
-  
+
   // 模式4：匹配 render 函数中的 slots 对象
   const renderSlotsRegex = /render\s*\(\s*[^,]+,\s*\{([^}]*)\}\s*\)/g
   let renderMatch
   while ((renderMatch = renderSlotsRegex.exec(content)) !== null) {
     extractSlotsFromThirdArg(renderMatch[1])
   }
-  
+
   return slots
 }
 
 /**
  * 从 Vue 文件中提取组件名称（从 defineOptions 中读取）
- * 
+ *
  * @param {string} vueFilePath - .vue 文件的路径
  * @returns {string|null} - 组件名称或 null
- * 
+ *
  * @example
  * // 输入：defineOptions({ name: 'TyButton' })
  * // 输出：'TyButton'
@@ -695,8 +698,7 @@ function buildDocIndex() {
   const index = {}
   if (!fs.existsSync(DOCS_DIR)) return index
 
-  const dirs = fs.readdirSync(DOCS_DIR, { withFileTypes: true })
-    .filter(e => e.isDirectory())
+  const dirs = fs.readdirSync(DOCS_DIR, { withFileTypes: true }).filter(e => e.isDirectory())
 
   for (const dir of dirs) {
     const categoryKey = dir.name
@@ -711,7 +713,7 @@ function buildDocIndex() {
         categoryKey,
         categoryLabel,
         docPath: path.relative(path.join(__dirname, '..'), filePath).replace(/\\/g, '/'),
-        title: extractMdTitle(filePath),
+        title: extractMdTitle(filePath)
       }
     }
   }
@@ -737,7 +739,7 @@ function matchDoc(metadata, docIndex) {
 
 /**
  * 生成单个组件的元数据
- * 
+ *
  * @param {string} componentName - 组件名称（目录名）
  * @returns {Object|null} - 组件元数据对象或 null
  */
@@ -745,7 +747,7 @@ function generateComponentMetadata(componentName, docIndex = {}) {
   // 构建组件目录路径
   const componentDir = path.join(COMPONENTS_DIR, componentName)
   const srcDir = path.join(componentDir, 'src')
-  
+
   // 检查组件目录是否存在
   if (!fs.existsSync(componentDir)) {
     console.error(`组件目录不存在: ${componentDir}`)
@@ -755,10 +757,10 @@ function generateComponentMetadata(componentName, docIndex = {}) {
   // 构建 context.ts 和 .vue 文件路径
   const contextPath = path.join(srcDir, 'context.ts')
   const vueFilePath = path.join(srcDir, `${componentName}.vue`)
-  
+
   let props = {}
   let emits = {}
-  
+
   // 如果存在 context.ts，解析 props 和 emits
   if (fs.existsSync(contextPath)) {
     try {
@@ -766,7 +768,7 @@ function generateComponentMetadata(componentName, docIndex = {}) {
       // 解析 imports 并获取常量值
       const imports = parseImports(sourceCode)
       const constants = resolveConstants(contextPath, imports)
-      
+
       // 解析 props 和 emits
       props = parsePropsFromSource(sourceCode, constants)
       emits = parseEmitsFromSource(sourceCode, constants)
@@ -778,12 +780,13 @@ function generateComponentMetadata(componentName, docIndex = {}) {
   // 从 .vue 文件中提取 slots 和组件名称
   const vueSlots = fs.existsSync(vueFilePath) ? extractSlotsFromVueFile(vueFilePath) : []
   const componentNameFromVue = fs.existsSync(vueFilePath) ? extractComponentNameFromVueFile(vueFilePath) : null
-  
+
   // 从 hooks 文件中提取 slots（查找 use-*.ts 文件）
-  const hooksFiles = fs.readdirSync(srcDir, { withFileTypes: true })
+  const hooksFiles = fs
+    .readdirSync(srcDir, { withFileTypes: true })
     .filter(entry => entry.isFile() && entry.name.startsWith('use-') && entry.name.endsWith('.ts'))
     .map(entry => path.join(srcDir, entry.name))
-  
+
   const hooksSlots = []
   for (const hooksFile of hooksFiles) {
     try {
@@ -797,24 +800,24 @@ function generateComponentMetadata(componentName, docIndex = {}) {
       console.warn(`解析 hooks 文件失败: ${hooksFile}`, e.message)
     }
   }
-  
+
   // 合并 Vue 文件和 hooks 文件中的 slots，去重
   const slots = [...new Set([...vueSlots, ...hooksSlots])]
-  
+
   // 构建元数据对象
   const metadata = {
-    id: componentName.toLowerCase(),                           // 组件 ID（小写）
-    name: componentNameFromVue || `Ty${componentName.charAt(0).toUpperCase() + componentName.slice(1)}`,  // 组件名称
-    category: '未分类',                                        // 分类（从文档侧边栏推断）
-    categoryKey: 'other',                                     // 分类英文 key
-    description: '',                                          // 组件描述（从文档 md 标题推断）
-    docPath: '',                                              // 文档路径
-    props,                                                    // 属性配置
-    emits,                                                    // 事件配置
-    slots,                                                    // 插槽列表
-    examples: [],                                             // 使用示例（待完善）
-    capabilities: [],                                         // 功能特性（待完善）
-    useCases: [],                                             // 使用场景（待完善）
+    id: componentName.toLowerCase(), // 组件 ID（小写）
+    name: componentNameFromVue || `Ty${componentName.charAt(0).toUpperCase() + componentName.slice(1)}`, // 组件名称
+    category: '未分类', // 分类（从文档侧边栏推断）
+    categoryKey: 'other', // 分类英文 key
+    description: '', // 组件描述（从文档 md 标题推断）
+    docPath: '', // 文档路径
+    props, // 属性配置
+    emits, // 事件配置
+    slots, // 插槽列表
+    examples: [], // 使用示例（待完善）
+    capabilities: [], // 功能特性（待完善）
+    useCases: [] // 使用场景（待完善）
   }
 
   // 从文档侧边栏推断分类与描述（单一数据源：metadata.json 自带分类信息）
@@ -832,9 +835,7 @@ function generateComponentMetadata(componentName, docIndex = {}) {
     metadata.relatedComponents = related
     const relatedText = related.join(' / ')
     const comboHint = `需配合 ${relatedText} 使用`
-    metadata.description = metadata.description
-      ? `${metadata.description}（${comboHint}）`
-      : comboHint
+    metadata.description = metadata.description ? `${metadata.description}（${comboHint}）` : comboHint
   }
 
   const example = (OVERRIDES.componentExamples || {})[componentName]
@@ -848,8 +849,8 @@ function generateComponentMetadata(componentName, docIndex = {}) {
         {
           title: example.rulesExample ? '校验规则示例' : '基础用法示例',
           rules: example.rulesExample || undefined,
-          code: example.templateExample || undefined,
-        },
+          code: example.templateExample || undefined
+        }
       ]
     }
   }
@@ -859,7 +860,7 @@ function generateComponentMetadata(componentName, docIndex = {}) {
 
 /**
  * 为所有组件生成元数据并输出 manifest 文件
- * 
+ *
  * @returns {Object} - manifest 对象
  */
 function generateManifest() {
@@ -868,13 +869,13 @@ function generateManifest() {
   const docIndex = buildDocIndex()
   // 读取组件目录下的所有子目录
   const entries = fs.readdirSync(COMPONENTS_DIR, { withFileTypes: true })
-  
+
   console.log('🚀 开始为所有组件生成元数据...')
   console.log('='.repeat(80))
-  
+
   let successCount = 0
   let failCount = 0
-  
+
   for (const entry of entries) {
     if (entry.isDirectory()) {
       try {
@@ -882,17 +883,19 @@ function generateManifest() {
         const metadata = generateComponentMetadata(entry.name, docIndex)
         if (metadata) {
           components.push(metadata)
-          
+
           // 将元数据写入组件目录下的 metadata.json
           const outputPath = path.join(COMPONENTS_DIR, entry.name, 'metadata.json')
           fs.writeFileSync(outputPath, JSON.stringify(metadata, null, 2))
-          
+
           // 打印统计信息
           const propCount = Object.keys(metadata.props).length
           const emitCount = Object.keys(metadata.emits).length
           const slotCount = metadata.slots.length
-          
-          console.log(`✅ ${entry.name.padEnd(20)} props: ${String(propCount).padStart(2)} | emits: ${String(emitCount).padStart(2)} | slots: ${String(slotCount).padStart(2)}`)
+
+          console.log(
+            `✅ ${entry.name.padEnd(20)} props: ${String(propCount).padStart(2)} | emits: ${String(emitCount).padStart(2)} | slots: ${String(slotCount).padStart(2)}`
+          )
           successCount++
         } else {
           console.log(`❌ ${entry.name.padEnd(20)} 生成失败`)
@@ -906,13 +909,13 @@ function generateManifest() {
   }
 
   console.log('='.repeat(80))
-  
+
   // 构建 manifest 对象
   const manifest = {
-    version: '1.0.0',                    // 版本号
-    hash: Date.now().toString(36),       // 哈希值（用于缓存）
-    components,                          // 所有组件的元数据数组
-    generatedAt: new Date().toISOString(), // 生成时间
+    version: '1.0.0', // 版本号
+    hash: Date.now().toString(36), // 哈希值（用于缓存）
+    components, // 所有组件的元数据数组
+    generatedAt: new Date().toISOString() // 生成时间
   }
 
   // 确保输出目录存在
@@ -921,28 +924,19 @@ function generateManifest() {
   }
 
   // 将 manifest 写入 dist 目录
-  fs.writeFileSync(
-    path.join(OUTPUT_DIR, 'component-manifest.json'),
-    JSON.stringify(manifest, null, 2)
-  )
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'component-manifest.json'), JSON.stringify(manifest, null, 2))
 
   // 同步输出合并版 components.json 到 MCP 包内（作为 MCP 的内置数据源，随代码一起打包）
   const mcpDataDir = path.join(__dirname, '../mcp/src/data')
   if (!fs.existsSync(mcpDataDir)) {
     fs.mkdirSync(mcpDataDir, { recursive: true })
   }
-  fs.writeFileSync(
-    path.join(mcpDataDir, 'components.json'),
-    JSON.stringify(components, null, 2)
-  )
+  fs.writeFileSync(path.join(mcpDataDir, 'components.json'), JSON.stringify(components, null, 2))
   console.log(`📦 mcp/src/data/components.json 已同步，共 ${components.length} 个组件`)
 
   // 同步工程化信息到 MCP 包内
   if (OVERRIDES.projectSetup) {
-    fs.writeFileSync(
-      path.join(mcpDataDir, 'project-setup.json'),
-      JSON.stringify(OVERRIDES.projectSetup, null, 2)
-    )
+    fs.writeFileSync(path.join(mcpDataDir, 'project-setup.json'), JSON.stringify(OVERRIDES.projectSetup, null, 2))
     console.log(`📦 mcp/src/data/project-setup.json 已同步`)
   }
 
@@ -954,7 +948,7 @@ function generateManifest() {
 
 /**
  * 为单个组件生成元数据
- * 
+ *
  * @param {string} componentName - 组件名称
  * @returns {Object|null} - 组件元数据对象或 null
  */

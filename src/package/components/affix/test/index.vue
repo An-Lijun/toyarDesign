@@ -22,8 +22,14 @@
       <hr />
     </div>
 
+    <!-- 目标容器 demo -->
+    <AffixTargetDemo />
+
     <!-- Headless Hook demo -->
     <AffixHookDemo />
+
+    <!-- updatePosition demo -->
+    <AffixUpdateDemo />
 
     <!-- 底部留白，便于观察底部固定效果 -->
     <div v-for="item in 30" :key="`bottom-${item}`">
@@ -36,7 +42,9 @@
 <script setup lang="ts">
 import AffixTopDemo from './testDemo/affixTopDemo.vue'
 import AffixBottomDemo from './testDemo/affixBottomDemo.vue'
+import AffixTargetDemo from './testDemo/affixTargetDemo.vue'
 import AffixHookDemo from './testDemo/affixHookDemo.vue'
+import AffixUpdateDemo from './testDemo/affixUpdateDemo.vue'
 </script>
 
 <style>

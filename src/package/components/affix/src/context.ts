@@ -1,9 +1,8 @@
 import { createComponentContext } from '@/package/utils/createComponentContext'
 
 export interface AffixEmits {
-  'fixed-change': (value: boolean) => boolean
+  change: (value: boolean) => boolean
 }
-
 
 export const { staticProps, useProps, nm, useEmits } = createComponentContext({
   name: 'affix',
@@ -15,10 +14,10 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
     /** 底部偏移量 */
     offsetBottom: { type: Number },
     /** 目标元素 */
-    target: { type: Element, required: false },
+    target: { type: Element, required: false }
   },
   emits: {
     /** 固定状态改变时触发 */
-    'fixed-change': (value: boolean) => true,
+    change: (_value: boolean) => true
   }
 })

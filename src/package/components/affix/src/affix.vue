@@ -1,20 +1,22 @@
 <template>
-    <component :is="tag" ref="affixRef">
-        <div v-memo="[isFixed, styles]" :class="[nm.b(), nm.is('fixed', isFixed)]" :style="styles">
-            <slot></slot>
-        </div>
-    </component>
+  <component :is="tag" ref="affixRef">
+    <div v-memo="[isFixed, styles]" :class="[nm.b(), nm.is('fixed', isFixed)]" :style="styles">
+      <slot></slot>
+    </div>
+  </component>
 </template>
 
-<script setup>
-import { nm, useProps, useEmits } from "./context";
-import useAffix from './use-affix';
+<script setup lang="ts">
+import { nm, useProps, useEmits } from './context'
+import useAffix from './use-affix'
 
 defineOptions({
-    name: "TyAffix",
-});
+  name: 'TyAffix'
+})
 
-const props = defineProps(useProps);
+const props = defineProps(useProps)
 const emits = defineEmits(useEmits)
-const { styles, isFixed, affixRef } = useAffix(props, emits, nm)
+const { styles, isFixed, affixRef, updatePosition } = useAffix(props, emits, nm)
+
+defineExpose({ updatePosition })
 </script>
