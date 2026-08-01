@@ -973,3 +973,82 @@ scripts/ 下存在 i.html 、 i.md 、 i.vue 等疑似调试残留文件，应�
 11. metadata.json 治理 ：明确其为生成产物还是提交产物，若为生成物应加入 .gitignore
 ## 六、结论
 ToyarDesign 的架构地基是扎实的 ：Headless + context 抽象 + 双轨主题 + 元数据自动化，这套组合在同类 Vue 3 组件库中属于中上水准。主要短板集中在**工程化产出（类型声明、构建配置） 与 质量治理（测试覆盖、硬编码、死代码）**两类"非架构"层面。P0/P1 问题（类型声明缺失、主题不对称、硬编码颜色）建议优先修复，它们直接影响库的可用性与正确性；其余为可持续迭代项。
+
+
+
+
+
+
+
+
+
+
+# ToyarDesign 项目架构评估报告
+## 一、项目概况
+维度 现状 技术栈 Vue 3.4 + TS + Vite 6 + SCSS + Vitest 4 组件规模 62 个 组件 测试文件 19 个 .test.js ，覆盖率 ≈ 31% （19/62） 主题系统 SCSS Token 单一源 + 自动生成 JS Token（已优化） 文档工具 VitePress + MCP 元数据工具链 发布版本 v0.0.92-0
+
+## 二、与历史分析对照（已修复项 ✅ / 仍存在 ❌）
+编号 问题 状态 P0 类型声明缺失 vite.config.ts 已加 vite-plugin-dts ，package.json 有 types 字段 ✅ 已修复 P1 install 漏注册 TyForm/TyFormItem/TyInput/TySelect/... 已补全 install 列表 ✅ 已修复 P1 顶层副作用 setAttribute index.ts 顶层已无强制设置主题副作用 ✅ 已修复 P1 light/dark 对称性 light.scss 已补 --{name}-rs-{i} RGB 变量 ✅ 已修复 P3 Token 双写 defaultTokens.js 由 generate-tokens.js 自动生成 ✅ 已修复 P3 scripts 临时文件 i.html/i.md/i.vue 已清理；但 menu/test/i.js 仍残留 ❌ 部分残留 P1 poppover 拼写 TyPoppover 、 poppover/ 目录、文件名均未改名 ❌ 仍存在 P1 硬编码颜色 progress/upload/tooltip/time-picker/poppover/popconfirm/input-number/message/notification/back-top 等 10 个组件 仍含 hex 值 ❌ 仍存在 P2 TyTrigger 死代码 index.ts:139、227 仍注释导出 ❌ 仍存在 P3 vitest coverage coverage.include 仍只含 **/*.vue ，遗漏 use-*.ts 核心逻辑 ❌ 仍存在 changeTheme 运算符 Bug L7 仍为 `theme light.scss 硬编码 --fill-white/--text-white/--tooltip/--menu/--menu-open 未下沉到 _tokens.scss ❌ 仍存在
+
+## 三、维度评分
+评分维度 得分 说明 架构设计 8.5 / 10 Headless + context.ts 抽象优秀，但部分组件（breadcrumb/carousel/collapse/check-box/radio/select/list）缺 use-*.ts 与 type.ts ，一致性不足 主题系统 8.0 / 10 Token 单源化已落地，仍存 light.scss 硬编码与 changeTheme Bug 类型安全 7.5 / 10 dts 产物已生成；tsconfig strict 已开；仍有 any 与 useCompMvalue 缺泛型 构建工程化 7.0 / 10 dts/esbuild.drop 已配；仍缺 subpath exports、第三方源码内嵌未清理 测试覆盖 5.0 / 10 19/62，且 coverage 统计口径错误，核心 use-*.ts 未纳入 代码质量 6.0 / 10 poppover 拼写、TyTrigger 死代码、10 组件硬编码颜色、changeTheme Bug 文档与工具 8.5 / 10 VitePress + MCP 元数据闭环，工程亮点突出 可维护性 7.5 / 10 结构一致 + 自动化生成，但耦合点与命名遗留 综合 ≈ 7.3 / 10 架构底子扎实，工程化与质量治理是主要短板
+
+较上一轮（≈ 7.0）有进步，主要来自类型产物、Token 单源、主题对称、install 完整性修复。
+
+## 四、关键问题（按优先级）
+### 🔴 P0 — changeTheme.ts 运算符优先级 Bug（影响功能正确性）
+src/package/hooks/changeTheme.ts:7
+
+不传 theme 时切换会得到错误结果。修复：
+
+同时 let html = document.documentElement 是模块顶层副作用，破坏 SSR，建议移入函数内或加 typeof document !== 'undefined' 守卫。
+
+### 🔴 P0 — 拼写错误 poppver/poppover 作为公开 API
+index.ts:54 、 poppover/ 目录、 TyPoppover 导出。1.0 前必须全链路改名 popover ，否则一旦发布即为破坏性变更。
+
+### 🟠 P1 — 10 个组件硬编码颜色（违反项目硬约束）
+progress/upload/tooltip/time-picker/poppover/popconfirm/input-number/message/notification/back-top 含 #fff/#1d2129/#0c2135 等值，应替换为 var(--text-white)/var(--fill-white) 等语义变量。
+
+### 🟠 P1 — light.scss 硬编码未下沉 Token
+light.scss:53-63 中 --fill-white/--text-white/--tooltip/--menu/--menu-open 直接写死，违反"所有变量从 _tokens.scss 导入"硬约束。
+
+### 🟡 P2 — TyTrigger 死代码
+index.ts:139 、227 仍注释导出，组件目录完整存在。要么删除要么恢复。
+
+### 🟡 P2 — 第三方源码内嵌
+src/package/color/ 内嵌 color-convert/color-name/color-string/simple-swizzle 源码。建议替换为 npm color 包。
+
+### 🟡 P2 — 构建缺 subpath exports
+package.json exports 仅有 . 、 ./dist/* ，无 ./button 、 ./input 子路径，消费方无法 import { TyButton } from 'toyar-design/button' ，Tree-shaking 受限。
+
+### 🟢 P3 — vitest coverage 配置错误
+vitest.config.ts:17 coverage.include 仅 **/*.vue ，headless 逻辑全在 use-*.ts ，覆盖率数值严重失真。应改为：
+
+### 🟢 P3 — 残留临时文件
+src/package/components/menu/test/i.js 疑似调试残留，应删除。
+
+### 🟢 P3 — 组件架构一致性
+breadcrumb、carousel、collapse、check-box、radio、select、list、container 等组件缺 use-*.ts 与 type.ts ，与 Headless 规范不一致。
+
+## 五、优化建议
+### 短期（1–2 周，发布阻断项）
+1. 修复 changeTheme 运算符 Bug （含 SSR 守卫）
+2. poppover → popover 全链路改名 （目录 / context.ts / index.ts 导出 / 文档）
+3. 清理 10 组件硬编码颜色 → 语义变量
+4. light.scss 硬编码下沉 _tokens.scss
+5. 删除 TyTrigger 死代码 与 menu/test/i.js
+### 中期（3–6 周）
+6. 修正 vitest coverage 配置 ，把 use-*.ts 纳入统计
+7. 测试覆盖提升至 60%+ ：优先补 form 类（input/select/date-picker/form/form-item）、feedback 类（message/notification/loading/dialog）、navigation 类（menu/tabs）
+8. 第三方源码外置化 ： src/package/color/ → npm color 依赖
+9. 补 subpath exports ：支持 toyar-design/button 按需引入
+10. 补齐缺架构组件 ：breadcrumb/carousel/collapse/check-box/radio/select/list 补 use-*.ts + type.ts
+### 长期
+11. CI/CD 门禁 ：当前发布为手动 npm run pub ，建议加 GitHub Actions 跑 lint + typecheck + test + build
+12. typecheck 脚本 ：package.json 补 "typecheck": "vue-tsc --noEmit" ，纳入 CI
+13. metadata.json 治理 ：明确是生成物还是提交物，若为生成物应入 .gitignore
+14. i18n 与 a11y ：考虑国际化与 ARIA 属性支持
+## 六、结论
+ToyarDesign 架构地基扎实：Headless + context 抽象 + Token 单源 + 元数据自动化，在同类 Vue3 组件库中属 中上水准 。本轮相比上一轮在 类型产物、Token 单源、主题对称、install 完整性 上已有明显进步。
+
+主要短板集中在 质量治理 （poppover 拼写、changeTheme Bug、硬编码颜色、死代码、coverage 配置错误）与 工程化收尾 （subpath exports、第三方依赖外置、CI/CD）。 P0 两项（changeTheme Bug、poppover 改名）建议立即修复 ，直接影响功能正确性与 1.0 兼容性；其余为可持续迭代项。
