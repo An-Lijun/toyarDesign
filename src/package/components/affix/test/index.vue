@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AffixTopDemo from './testDemo/affixTopDemo.vue'
 import AffixBottomDemo from './testDemo/affixBottomDemo.vue'
 import AffixHookDemo from './testDemo/affixHookDemo.vue'

@@ -13,6 +13,10 @@
     "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "files": [
     "/dist/*"
   ],
@@ -25,7 +29,7 @@
   "version": "0.0.92-0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build -f es",
+    "build": "vite build",
     "build:component": "node scripts/build-component.js",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docsBase",
@@ -53,6 +57,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.9.0",
@@ -66,6 +71,7 @@
     "lint-staged": "^13.0.0",
     "markdown-it-container": "^3.0.0",
     "prettier": "^3.9.6",
+    "rollup": "^4.62.3",
     "sass": "^1.87.0",
     "typescript": "^5.0.2",
     "unplugin-auto-import": "^0.12.0",
