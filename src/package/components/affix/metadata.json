@@ -6,6 +6,12 @@
   "description": "",
   "docPath": "",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "tag": {
       "type": "string",
       "default": "div",
@@ -34,7 +40,7 @@
   "emits": {
     "change": {
       "params": [
-        "value: boolean"
+        "_value: boolean"
       ],
       "description": "固定状态改变时触发"
     }

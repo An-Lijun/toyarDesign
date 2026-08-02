@@ -6,6 +6,12 @@
   "description": "Calendar",
   "docPath": "docsBase/page/component/show/calendar.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "dayItemHeight": {
       "type": "number",
       "default": 110,

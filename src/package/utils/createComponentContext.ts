@@ -4,8 +4,21 @@ import type { ExtractPropTypes } from 'vue'
 import type { CreateComponentContextOptions, ComponentContext, selfPropsType } from './type'
 
 /**
+ * 所有组件共享的公共属性
+ * 通过 createComponentContext 自动注入，对所有组件生效
+ */
+const commonProps = {
+  /** 自定义类名，将追加到组件根节点 */
+  customClass: {
+    type: [String, Array, Object],
+    default: ''
+  }
+}
+
+/**
  * 组件上下文工厂函数
  * 统一处理 props 定义、nm 创建和 emits 定义，减少样板代码
+ * 自动注入 customClass 等公共属性，对所有组件生效
  *
  * @example
  * // 基础用法
@@ -24,13 +37,16 @@ import type { CreateComponentContextOptions, ComponentContext, selfPropsType } f
 export function createComponentContext<
   T extends selfPropsType,
   E extends Record<string, any> | string[] = Record<string, any>
->(options: { name: string; props: T; emits?: E }): ComponentContext<ExtractPropTypes<T>, E> {
+>(options: { name: string; props: T; emits?: E }): ComponentContext<ExtractPropTypes<T & typeof commonProps>, E> {
   const { name, props, emits } = options
 
+  // 合并公共属性（组件自定义属性优先，确保 customClass 对所有组件生效）
+  const mergedProps = { ...commonProps, ...props } as selfPropsType
+
   return {
-    staticProps: props as selfPropsType,
-    useProps:  buildProps(props) as ExtractPropTypes<T>,
-    nm : useNmSpace(name),
+    staticProps: mergedProps,
+    useProps: buildProps(mergedProps) as ExtractPropTypes<T & typeof commonProps>,
+    nm: useNmSpace(name),
     useEmits: emits as E
   }
 }

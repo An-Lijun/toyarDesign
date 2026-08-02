@@ -6,6 +6,12 @@
   "description": "结果",
   "docPath": "docsBase/page/component/feedback/result.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "type": {
       "type": "string",
       "default": null,

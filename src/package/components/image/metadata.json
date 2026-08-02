@@ -6,6 +6,12 @@
   "description": "image",
   "docPath": "docsBase/page/component/show/image.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "src": {
       "type": "string",
       "default": null,

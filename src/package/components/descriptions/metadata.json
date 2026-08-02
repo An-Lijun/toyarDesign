@@ -6,6 +6,12 @@
   "description": "描述列表",
   "docPath": "docsBase/page/component/show/descriptions.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "title": {
       "type": "string",
       "default": "",

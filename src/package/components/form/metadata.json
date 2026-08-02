@@ -6,6 +6,12 @@
   "description": "表单组件，需配合 TyFormItem 使用。rules 字段支持 required、pattern、min、max、trigger 等校验规则。",
   "docPath": "docsBase/page/component/form/form.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "rules": {
       "type": "object",
       "default": null,

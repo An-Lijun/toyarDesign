@@ -6,6 +6,12 @@
   "description": "avatar 头像（需配合 TyAvatar-group 使用）",
   "docPath": "docsBase/page/component/show/avatar.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "width": {
       "type": "number",
       "default": null,

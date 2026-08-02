@@ -6,6 +6,12 @@
   "description": "switch",
   "docPath": "docsBase/page/component/form/switch.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "size": {
       "type": "string",
       "default": "small",

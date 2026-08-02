@@ -6,6 +6,12 @@
   "description": "间距 Space",
   "docPath": "docsBase/page/component/layout/space.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "align": {
       "type": "string",
       "default": "center",

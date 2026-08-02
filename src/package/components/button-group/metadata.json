@@ -5,7 +5,14 @@
   "categoryKey": "other",
   "description": "",
   "docPath": "",
-  "props": {},
+  "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    }
+  },
   "emits": {},
   "slots": [
     "default"

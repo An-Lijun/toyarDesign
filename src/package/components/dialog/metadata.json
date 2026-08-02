@@ -6,6 +6,12 @@
   "description": "dialog",
   "docPath": "docsBase/page/component/feedback/dialog.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "title": {
       "type": "string",
       "default": "提示",
@@ -16,7 +22,7 @@
       "type": "string",
       "default": "30%",
       "required": false,
-      "description": "对话框宽度"
+      "description": "对话框宽度 支持百分比和calc计算宽度"
     },
     "top": {
       "type": "string",
@@ -53,12 +59,42 @@
       "default": true,
       "required": false,
       "description": "是否显示遮罩层"
+    },
+    "maskClosable": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": "是否允许点击遮罩层关闭对话框"
+    },
+    "destroyOnClose": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": "关闭时是否销毁弹窗内容"
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": "是否允许按 ESC 键关闭对话框"
+    },
+    "isShowClose": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": "是否展示关闭按钮"
+    },
+    "beforeClose": {
+      "type": "function",
+      "default": null,
+      "required": false,
+      "description": "关闭前的回调，调用 done 才会真正关闭 Dialog"
     }
   },
   "emits": {
     "modelValue": {
       "params": [
-        "value: boolean"
+        "_value: boolean"
       ],
       "description": ""
     }

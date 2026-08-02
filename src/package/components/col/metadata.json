@@ -6,6 +6,12 @@
   "description": "Col 栅格列",
   "docPath": "docsBase/page/component/layout/col.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "span": {
       "type": "number | object | string",
       "default": 24,

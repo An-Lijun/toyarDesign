@@ -7,6 +7,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "tag": {
         "type": "string",
         "default": "div",
@@ -35,7 +41,7 @@
     "emits": {
       "change": {
         "params": [
-          "value: boolean"
+          "_value: boolean"
         ],
         "description": "固定状态改变时触发"
       }
@@ -69,6 +75,12 @@
     "description": "avatar 头像（需配合 TyAvatar-group 使用）",
     "docPath": "docsBase/page/component/show/avatar.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "width": {
         "type": "number",
         "default": null,
@@ -117,6 +129,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "offset": {
         "type": "number",
         "default": 8,
@@ -146,6 +164,12 @@
     "description": "BackTop 滚动到顶部",
     "docPath": "docsBase/page/component/base/backTop.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "vHeight": {
         "type": "number",
         "default": 200,
@@ -198,6 +222,12 @@
     "description": "badge",
     "docPath": "docsBase/page/component/show/badge.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "text": {
         "type": "string | number",
         "default": "",
@@ -266,6 +296,12 @@
     "description": "Button 按钮（需配合 TyButtonGroup 使用）",
     "docPath": "docsBase/page/component/base/button.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "state": {
         "type": "string",
         "default": "primary",
@@ -382,7 +418,14 @@
     "categoryKey": "other",
     "description": "",
     "docPath": "",
-    "props": {},
+    "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      }
+    },
     "emits": {},
     "slots": [
       "default"
@@ -399,6 +442,12 @@
     "description": "Calendar",
     "docPath": "docsBase/page/component/show/calendar.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "dayItemHeight": {
         "type": "number",
         "default": 110,
@@ -422,6 +471,12 @@
     "description": "card",
     "docPath": "docsBase/page/component/container/card.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "border": {
         "type": "boolean",
         "default": true,
@@ -548,6 +603,12 @@
     "description": "caution",
     "docPath": "docsBase/page/component/show/caution.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "type": {
         "type": "string",
         "default": "info",
@@ -655,6 +716,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "percent": {
         "type": "number",
         "default": 0,
@@ -718,6 +785,12 @@
     "description": "Col 栅格列",
     "docPath": "docsBase/page/component/layout/col.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "span": {
         "type": "number | object | string",
         "default": 24,
@@ -797,6 +870,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "modelValue": {
         "type": "string",
         "default": "",
@@ -831,6 +910,12 @@
     "description": "全局配置",
     "docPath": "docsBase/page/component/base/configProvider.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "theme": {
         "type": "string",
         "default": "light",
@@ -888,6 +973,12 @@
     "description": "calendar",
     "docPath": "docsBase/page/component/form/datePicker.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "size": {
         "type": "string",
         "default": null,
@@ -966,6 +1057,12 @@
     "description": "描述列表",
     "docPath": "docsBase/page/component/show/descriptions.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "title": {
         "type": "string",
         "default": "",
@@ -1034,6 +1131,12 @@
     "description": "dialog",
     "docPath": "docsBase/page/component/feedback/dialog.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "title": {
         "type": "string",
         "default": "提示",
@@ -1044,7 +1147,7 @@
         "type": "string",
         "default": "30%",
         "required": false,
-        "description": "对话框宽度"
+        "description": "对话框宽度 支持百分比和calc计算宽度"
       },
       "top": {
         "type": "string",
@@ -1081,12 +1184,42 @@
         "default": true,
         "required": false,
         "description": "是否显示遮罩层"
+      },
+      "maskClosable": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否允许点击遮罩层关闭对话框"
+      },
+      "destroyOnClose": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "关闭时是否销毁弹窗内容"
+      },
+      "closeOnEsc": {
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "是否允许按 ESC 键关闭对话框"
+      },
+      "isShowClose": {
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "是否展示关闭按钮"
+      },
+      "beforeClose": {
+        "type": "function",
+        "default": null,
+        "required": false,
+        "description": "关闭前的回调，调用 done 才会真正关闭 Dialog"
       }
     },
     "emits": {
       "modelValue": {
         "params": [
-          "value: boolean"
+          "_value: boolean"
         ],
         "description": ""
       }
@@ -1108,6 +1241,12 @@
     "description": "Divider 分隔线",
     "docPath": "docsBase/page/component/base/divider.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "direction": {
         "type": "string",
         "default": "row",
@@ -1148,6 +1287,12 @@
     "description": "抽屉",
     "docPath": "docsBase/page/component/feedback/drawer.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "width": {
         "type": "number",
         "default": 300,
@@ -1173,6 +1318,12 @@
     "description": "empty",
     "docPath": "docsBase/page/component/show/empty.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "title": {
         "type": "string",
         "default": "暂无数据",
@@ -1202,6 +1353,12 @@
     "description": "表单组件，需配合 TyFormItem 使用。rules 字段支持 required、pattern、min、max、trigger 等校验规则。",
     "docPath": "docsBase/page/component/form/form.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "rules": {
         "type": "object",
         "default": null,
@@ -1289,6 +1446,12 @@
     "description": "formItem",
     "docPath": "docsBase/page/component/form/formItem.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "disabled": {
         "type": "boolean",
         "default": false,
@@ -1331,6 +1494,12 @@
     "description": "image",
     "docPath": "docsBase/page/component/show/image.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "src": {
         "type": "string",
         "default": null,
@@ -1387,6 +1556,12 @@
     "description": "Input",
     "docPath": "docsBase/page/component/form/input.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "size": {
         "type": "string",
         "default": null,
@@ -1485,6 +1660,12 @@
     "description": "inputNumber",
     "docPath": "docsBase/page/component/form/inputNumber.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "modelValue": {
         "type": "number",
         "default": "",
@@ -1555,6 +1736,12 @@
     "description": "InputPassword",
     "docPath": "docsBase/page/component/form/inputPassword.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "size": {
         "type": "string",
         "default": "small",
@@ -1666,6 +1853,12 @@
     "description": "loading",
     "docPath": "docsBase/page/component/feedback/loading.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "isFixed": {
         "type": "boolean",
         "default": false,
@@ -1687,6 +1880,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "maxSize": {
         "type": "number | string",
         "default": 10000,
@@ -1792,6 +1991,12 @@
     "description": "message",
     "docPath": "docsBase/page/component/feedback/message.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "msg": {
         "type": "string",
         "default": null,
@@ -1833,6 +2038,12 @@
     "description": "notification",
     "docPath": "docsBase/page/component/feedback/notification.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "type": {
         "type": "string",
         "default": null,
@@ -1889,6 +2100,12 @@
     "description": "pageHeader",
     "docPath": "docsBase/page/component/show/pageHeader.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "title": {
         "type": "string",
         "default": "",
@@ -1927,6 +2144,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "current": {
         "type": "string | number",
         "default": "1",
@@ -1975,6 +2198,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "placement": {
         "type": "string",
         "default": "top",
@@ -2038,6 +2267,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "placement": {
         "type": "string",
         "default": "top",
@@ -2074,6 +2309,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "modelValue": {
         "type": "string | number",
         "default": "",
@@ -2190,6 +2431,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "modelValue": {
         "type": "string",
         "default": 0,
@@ -2230,6 +2477,12 @@
     "description": "结果",
     "docPath": "docsBase/page/component/feedback/result.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "type": {
         "type": "string",
         "default": null,
@@ -2275,6 +2528,12 @@
     "description": "Row 栅格行（需配合 TyCol 使用）",
     "docPath": "docsBase/page/component/layout/row.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "type": {
         "type": "string",
         "default": "line",
@@ -2318,7 +2577,14 @@
     "categoryKey": "other",
     "description": "",
     "docPath": "",
-    "props": {},
+    "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      }
+    },
     "emits": {},
     "slots": [
       "default"
@@ -2447,6 +2713,12 @@
     "description": "slider",
     "docPath": "docsBase/page/component/form/slider.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "modelValue": {
         "type": "string | number",
         "default": "",
@@ -2493,6 +2765,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "modelValue": {
         "type": "string",
         "default": null,
@@ -2555,6 +2833,12 @@
     "description": "间距 Space",
     "docPath": "docsBase/page/component/layout/space.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "align": {
         "type": "string",
         "default": "center",
@@ -2597,6 +2881,12 @@
     "description": "switch",
     "docPath": "docsBase/page/component/form/switch.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "size": {
         "type": "string",
         "default": "small",
@@ -2812,6 +3102,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "modelValue": {
         "type": "string",
         "default": null,
@@ -2888,6 +3184,12 @@
     "description": "tooltip",
     "docPath": "docsBase/page/component/feedback/tooltip.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "content": {
         "type": "string",
         "default": "",
@@ -2923,6 +3225,12 @@
     "description": "transfer",
     "docPath": "docsBase/page/component/form/transfer.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "data": {
         "type": "array",
         "default": null,
@@ -2944,6 +3252,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "placement": {
         "type": "string",
         "default": "top",
@@ -2980,6 +3294,12 @@
     "description": "",
     "docPath": "",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "disabled": {
         "type": "boolean",
         "default": false,
@@ -3026,6 +3346,12 @@
     "description": "waterMark 水印",
     "docPath": "docsBase/page/component/base/waterMark.md",
     "props": {
+      "customClass": {
+        "type": "string | array | object",
+        "default": "",
+        "required": false,
+        "description": "自定义类名，将追加到组件根节点"
+      },
       "markInfo": {
         "type": "string | array",
         "default": null,

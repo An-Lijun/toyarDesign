@@ -32,6 +32,8 @@ const COMPONENTS_DIR = path.join(__dirname, '../src/package/components')
 const OUTPUT_DIR = path.join(__dirname, '../dist')
 // 文档组件目录路径（用于推断分类和描述）
 const DOCS_DIR = path.join(__dirname, '../docsBase/page/component')
+// createComponentContext 源码路径（用于提取公共属性 commonProps，保持单一数据源）
+const CREATE_CONTEXT_PATH = path.join(__dirname, '../src/package/utils/createComponentContext.ts')
 // 分类英文 key → 中文标签
 const CATEGORY_LABELS = {
   base: '基础组件',
@@ -424,6 +426,30 @@ function parsePropsFromSource(sourceCode, constants = {}) {
 }
 
 /**
+ * 从 createComponentContext.ts 中提取公共属性（commonProps）
+ * 与运行时注入保持单一数据源：在 createComponentContext.ts 的 commonProps 中新增属性，
+ * metadata 生成会自动同步，无需在本脚本重复维护
+ */
+function parseCommonProps() {
+  try {
+    if (!fs.existsSync(CREATE_CONTEXT_PATH)) return {}
+    const sourceCode = fs.readFileSync(CREATE_CONTEXT_PATH, 'utf-8')
+    const match = sourceCode.match(/const\s+commonProps\s*=\s*\{/)
+    if (!match) return {}
+    const braceIndex = sourceCode.indexOf('{', match.index)
+    const commonObj = extractObjectContent(sourceCode, braceIndex)
+    if (!commonObj) return {}
+    return parsePropsObject(commonObj.slice(1, -1), {})
+  } catch (e) {
+    console.warn('解析 commonProps 失败:', e.message)
+    return {}
+  }
+}
+
+// 公共属性缓存（所有使用 createComponentContext 的组件自动注入）
+const COMMON_PROPS = parseCommonProps()
+
+/**
  * 解析 emits 对象的内容，提取每个 emit 的配置（支持 JSDoc 注释）
  *
  * @param {string} emitsContent - emits 对象内部的内容（去掉外层花括号）
@@ -772,6 +798,12 @@ function generateComponentMetadata(componentName, docIndex = {}) {
       // 解析 props 和 emits
       props = parsePropsFromSource(sourceCode, constants)
       emits = parseEmitsFromSource(sourceCode, constants)
+
+      // 使用 createComponentContext 的组件自动注入公共属性（如 customClass）
+      // 组件自定义属性优先，与运行时 { ...commonProps, ...props } 合并顺序一致
+      if (/createComponentContext\s*\(\s*\{/.test(sourceCode)) {
+        props = { ...COMMON_PROPS, ...props }
+      }
     } catch (e) {
       console.warn(`解析 context.ts 失败: ${contextPath}`, e.message)
     }

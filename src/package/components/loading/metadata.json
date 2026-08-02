@@ -6,6 +6,12 @@
   "description": "loading",
   "docPath": "docsBase/page/component/feedback/loading.md",
   "props": {
+    "customClass": {
+      "type": "string | array | object",
+      "default": "",
+      "required": false,
+      "description": "自定义类名，将追加到组件根节点"
+    },
     "isFixed": {
       "type": "boolean",
       "default": false,
