@@ -90,6 +90,12 @@
       "required": false,
       "description": "是否展示关闭按钮"
     },
+    "fullscreen": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "description": "是否开启全屏"
+    },
     "beforeClose": {
       "type": "function",
       "default": null,

@@ -116,6 +116,26 @@
         </template>
       </TyDialog>
     </TyDialog>
+
+    <h3>全屏对话框</h3>
+    <TyButton @click="visible17 = true">打开全屏对话框</TyButton>
+    <TyDialog v-model="visible17" :fullscreen="true" title="全屏对话框" content="铺满整个视口" :is-teleport="false">
+      <template #footer>
+        <TyButton @click="visible17 = false">关闭</TyButton>
+      </template>
+    </TyDialog>
+
+    <h3>动态切换全屏</h3>
+    <TyButton @click="visible18 = true">打开对话框</TyButton>
+    <TyButton @click="isFullscreen = !isFullscreen">切换全屏：{{ isFullscreen }}</TyButton>
+    <TyDialog
+      v-model="visible18"
+      :fullscreen="isFullscreen"
+      title="动态全屏"
+      content="可动态切换全屏状态"
+      :is-teleport="false"
+    >
+    </TyDialog>
   </div>
 </template>
 
@@ -140,6 +160,9 @@ const visible13 = ref(false)
 const visible14 = ref(false)
 const visible15 = ref(false)
 const visible16 = ref(false)
+const visible17 = ref(false)
+const visible18 = ref(false)
+const isFullscreen = ref(false)
 
 // 二次确认：确认后才调用 done 关闭
 const handleBeforeClose = done => {

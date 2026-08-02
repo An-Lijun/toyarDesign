@@ -6,8 +6,8 @@
           v-if="!destroyOnClose || model || showValue"
           v-show="model || showValue"
           ref="tyDialog"
-          :class="nm.b()"
-          :style="{ width, top }"
+          :class="[nm.b(), nm.is('fullscreen', fullscreen)]"
+          :style="fullscreen ? null : { width, top }"
         >
           <div ref="tyDialogHeader" :class="[nm.e('header'), nm.is('underLine', isUnderLine)]">
             <slot name="title">

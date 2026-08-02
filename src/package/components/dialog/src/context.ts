@@ -67,6 +67,11 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
       type: Boolean,
       default: true
     },
+    /** 是否开启全屏 */
+    fullscreen: {
+      type: Boolean,
+      default: false
+    },
     /** 关闭前的回调，调用 done 才会真正关闭 Dialog */
     beforeClose: {
       type: Function,

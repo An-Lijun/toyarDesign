@@ -831,6 +831,169 @@ describe('TyDialog 组件', () => {
     })
   })
 
+  // ===== fullscreen =====
+  describe('fullscreen', () => {
+    it('默认 fullscreen 为 false', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false }
+      })
+      expect(wrapper.props('fullscreen')).toBe(false)
+      expect(wrapper.find('.ty-dialog').classes()).not.toContain('is-fullscreen')
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 时 dialog 有 is-fullscreen 类', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true }
+      })
+      expect(wrapper.find('.ty-dialog').classes()).toContain('is-fullscreen')
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 时不应用 width 内联样式', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, width: '500px' }
+      })
+      const style = wrapper.find('.ty-dialog').attributes('style')
+      expect(style).toBeUndefined()
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 时不应用 top 内联样式', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, top: '50px' }
+      })
+      const style = wrapper.find('.ty-dialog').attributes('style')
+      expect(style).toBeUndefined()
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 同时传 width/top 时均不应用', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, width: '600px', top: '100px' }
+      })
+      const style = wrapper.find('.ty-dialog').attributes('style')
+      expect(style).toBeUndefined()
+      wrapper.unmount()
+    })
+
+    it('fullscreen=false 时正常应用 width/top 内联样式', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: false, width: '500px', top: '50px' }
+      })
+      const style = wrapper.find('.ty-dialog').attributes('style')
+      expect(style).toContain('width: 500px')
+      expect(style).toContain('top: 50px')
+      wrapper.unmount()
+    })
+
+    it('动态切换 fullscreen 从 false 到 true', async () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: false }
+      })
+      expect(wrapper.find('.ty-dialog').classes()).not.toContain('is-fullscreen')
+      expect(wrapper.find('.ty-dialog').attributes('style')).toContain('width: 30%')
+
+      await wrapper.setProps({ fullscreen: true })
+      expect(wrapper.find('.ty-dialog').classes()).toContain('is-fullscreen')
+      expect(wrapper.find('.ty-dialog').attributes('style')).toBeUndefined()
+      wrapper.unmount()
+    })
+
+    it('动态切换 fullscreen 从 true 到 false', async () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true }
+      })
+      expect(wrapper.find('.ty-dialog').classes()).toContain('is-fullscreen')
+
+      await wrapper.setProps({ fullscreen: false })
+      expect(wrapper.find('.ty-dialog').classes()).not.toContain('is-fullscreen')
+      expect(wrapper.find('.ty-dialog').attributes('style')).toContain('width: 30%')
+      expect(wrapper.find('.ty-dialog').attributes('style')).toContain('top: 15vh')
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 时其他结构（header/body/footer）仍正常渲染', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true },
+        slots: { footer: '<button>OK</button>' }
+      })
+      expect(wrapper.find('.ty-dialog__header').exists()).toBe(true)
+      expect(wrapper.find('.ty-dialog__body').exists()).toBe(true)
+      expect(wrapper.find('.ty-dialog__footer').exists()).toBe(true)
+      expect(wrapper.find('.ty-dialog__headerBtn').exists()).toBe(true)
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 时 content 文本仍渲染', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, content: '全屏内容' }
+      })
+      expect(wrapper.find('.ty-dialog__body').text()).toContain('全屏内容')
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 时关闭按钮仍可关闭', async () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true }
+      })
+      await wrapper.find('.ty-dialog__headerBtn').trigger('click')
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+      expect(wrapper.emitted('update:modelValue')[0][0]).toBe(false)
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 且 maskClosable=true 时点击遮罩可关闭', async () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, maskClosable: true }
+      })
+      await wrapper.find('.ty-dialog__wrapper').trigger('click')
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+      expect(wrapper.emitted('update:modelValue')[0][0]).toBe(false)
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 且 closeOnEsc=true 时按 ESC 可关闭', async () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, closeOnEsc: true }
+      })
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+      await nextTick()
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+      expect(wrapper.emitted('update:modelValue')[0][0]).toBe(false)
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 且 isShowClose=false 时不渲染关闭按钮', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, isShowClose: false }
+      })
+      expect(wrapper.find('.ty-dialog__headerBtn').exists()).toBe(false)
+      expect(wrapper.find('.ty-dialog').classes()).toContain('is-fullscreen')
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 且 isUnderLine=false 时 header 无 is-underLine 类', () => {
+      const wrapper = mount(TyDialog, {
+        props: { modelValue: true, isTeleport: false, fullscreen: true, isUnderLine: false }
+      })
+      expect(wrapper.find('.ty-dialog__header').classes()).not.toContain('is-underLine')
+      expect(wrapper.find('.ty-dialog').classes()).toContain('is-fullscreen')
+      wrapper.unmount()
+    })
+
+    it('fullscreen=true 在 Teleport 模式下也生效', () => {
+      mount(TyDialog, {
+        props: { modelValue: true, fullscreen: true }
+      })
+      const dialog = document.querySelector('.ty-dialog')
+      expect(dialog).toBeTruthy()
+      expect(dialog.classList.contains('is-fullscreen')).toBe(true)
+      // Teleport 模式下 inline style 同样不应有 width/top
+      expect(dialog.getAttribute('style')).toBeNull()
+    })
+  })
+
   // ===== beforeClose =====
   describe('beforeClose', () => {
     it('默认 beforeClose 立即关闭（点击关闭按钮）', async () => {
