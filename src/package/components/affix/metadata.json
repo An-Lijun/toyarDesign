@@ -38,7 +38,7 @@
     }
   },
   "emits": {
-    "change": {
+    "onChange": {
       "params": [
         "_value: boolean"
       ],

@@ -2,7 +2,7 @@
   <div class="affix-top-demo">
     <h3>顶部偏移（offsetTop）</h3>
     <p>offsetTop = 0：滚动到顶部即固定</p>
-    <TyAffix :offset-top="0" class="demo-affix" @change="handlechange">
+    <TyAffix :offset-top="0" class="demo-affix" @on-change="handlechange">
       <div class="demo-block">offsetTop: 0</div>
     </TyAffix>
 

@@ -1,7 +1,7 @@
 import { createComponentContext } from '@/package/utils/createComponentContext'
 
 export interface AffixEmits {
-  change: (value: boolean) => boolean
+  onChange: (value: boolean) => boolean
 }
 
 export const { staticProps, useProps, nm, useEmits } = createComponentContext({
@@ -18,6 +18,6 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
   },
   emits: {
     /** 固定状态改变时触发 */
-    change: (_value: boolean) => true
+    onChange: (_value: boolean) => true
   }
 })

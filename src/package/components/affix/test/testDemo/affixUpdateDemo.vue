@@ -10,7 +10,7 @@
 
     <div v-if="showExtra" class="extra-block">动态插入的内容（{{ extraHeight }}px 高）</div>
 
-    <TyAffix ref="affixRef" :offset-top="0" class="demo-affix" @change="onchange">
+    <TyAffix ref="affixRef" :offset-top="0" class="demo-affix" @on-change="onchange">
       <div class="demo-block">Affix offsetTop: 0 — 固定状态：{{ isFixed }}</div>
     </TyAffix>
 

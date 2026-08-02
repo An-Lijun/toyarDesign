@@ -20,7 +20,7 @@ vi.mock('robinson', () => ({
 
 // Mock toyaricon 图标组件
 vi.mock('toyaricon', () => {
-  const makeIcon = (name) => ({
+  const makeIcon = name => ({
     name,
     render: () => null
   })
@@ -28,7 +28,7 @@ vi.mock('toyaricon', () => {
     TyiCheckboxCircleFill: makeIcon('TyiCheckboxCircleFill'),
     TyiCloseCircleFill: makeIcon('TyiCloseCircleFill'),
     TyiInformationFill: makeIcon('TyiInformationFill'),
-    TyiCloseFill: makeIcon('TyiCloseFill'),
+    TyiCloseFill: makeIcon('TyiCloseFill')
   }
 })
 
@@ -96,7 +96,7 @@ describe('TyAlert 组件', () => {
       destroy()
     })
 
-    it('dialog 应包含 info 信息文本', async () => {
+    it('dialog 应包含 content 信息文本', async () => {
       const { destroy } = useAlert('这是提示内容', { title: '标题', type: 'info', isUnderLine: false })
       await waitForShow()
 
@@ -423,7 +423,7 @@ describe('TyAlert 组件', () => {
 
   // ===== 边界情况 =====
   describe('边界情况', () => {
-    it('info 为空字符串时也能正常渲染', async () => {
+    it('content 为空字符串时也能正常渲染', async () => {
       const { destroy } = useAlert('', { title: '标题', type: 'info', isUnderLine: false })
       await waitForShow()
 

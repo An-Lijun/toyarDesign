@@ -19,7 +19,7 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
       default: '15vh'
     },
     /** 提示信息 */
-    info: {
+    content: {
       type: String
     },
     /** 是否显示下划线 */
@@ -46,6 +46,11 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
     maskClosable: {
       type: Boolean,
       default: false
+    },
+    /** 弹窗打开时是否锁定 body 滚动 */
+    isScrollLock: {
+      type: Boolean,
+      default: true
     },
     /** 关闭时是否销毁弹窗内容 */
     destroyOnClose: {

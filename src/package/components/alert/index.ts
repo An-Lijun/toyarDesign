@@ -1,11 +1,8 @@
 import type { IOption } from './src/type'
 import useAlert, { UseAlertReturn } from './src/use-alert'
 
-export default function AlertJs(
-  info: string,
-  options: IOption
-) {
-  const { destroy } = useAlert(info, options)
+export default function AlertJs(content: string, options: IOption) {
+  const { destroy } = useAlert(content, options)
   return {
     destroy
   }

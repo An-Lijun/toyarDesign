@@ -30,7 +30,7 @@
       "required": false,
       "description": "对话框距顶部距离"
     },
-    "info": {
+    "content": {
       "type": "string",
       "default": null,
       "required": false,
@@ -65,6 +65,12 @@
       "default": false,
       "required": false,
       "description": "是否允许点击遮罩层关闭对话框"
+    },
+    "isScrollLock": {
+      "type": "boolean",
+      "default": true,
+      "required": false,
+      "description": "弹窗打开时是否锁定 body 滚动"
     },
     "destroyOnClose": {
       "type": "boolean",

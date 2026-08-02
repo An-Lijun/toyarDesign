@@ -21,7 +21,7 @@
           </div>
           <div :class="nm.e('body')">
             <slot>
-              {{ info }}
+              {{ content }}
             </slot>
           </div>
           <div v-if="useSlots().footer" :class="nm.e('footer')">

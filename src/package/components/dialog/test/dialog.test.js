@@ -145,17 +145,17 @@ describe('TyDialog 组件', () => {
       wrapper.unmount()
     })
 
-    it('info 作为默认插槽文本', () => {
+    it('content 作为默认插槽文本', () => {
       const wrapper = mount(TyDialog, {
-        props: { modelValue: true, isTeleport: false, info: '提示内容' }
+        props: { modelValue: true, isTeleport: false, content: '提示内容' }
       })
       expect(wrapper.find('.ty-dialog__body').text()).toContain('提示内容')
       wrapper.unmount()
     })
 
-    it('默认插槽优先于 info', () => {
+    it('默认插槽优先于 content', () => {
       const wrapper = mount(TyDialog, {
-        props: { modelValue: true, isTeleport: false, info: 'info文本' },
+        props: { modelValue: true, isTeleport: false, content: 'content文本' },
         slots: { default: '插槽文本' }
       })
       expect(wrapper.find('.ty-dialog__body').text()).toContain('插槽文本')
@@ -517,7 +517,7 @@ describe('TyDialog 组件', () => {
           title: '确认',
           width: '600px',
           top: '100px',
-          info: '确认操作？',
+          content: '确认操作？',
           isUnderLine: false,
           mask: false,
           draggable: false
@@ -537,7 +537,7 @@ describe('TyDialog 组件', () => {
       wrapper.unmount()
     })
 
-    it('空 info 且无默认插槽', () => {
+    it('空 content 且无默认插槽', () => {
       const wrapper = mount(TyDialog, {
         props: { modelValue: true, isTeleport: false }
       })

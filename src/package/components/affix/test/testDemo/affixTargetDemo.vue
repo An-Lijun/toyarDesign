@@ -8,7 +8,7 @@
         <p v-for="i in 6" :key="`before-${i}`">占位内容 {{ i }}</p>
       </div>
 
-      <TyAffix :target="scrollContainerRef" :offset-top="0" class="demo-affix" @change="handlechange">
+      <TyAffix :target="scrollContainerRef" :offset-top="0" class="demo-affix" @on-change="handlechange">
         <div class="demo-block">target 容器内 offsetTop: 0</div>
       </TyAffix>
 

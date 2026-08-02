@@ -2,6 +2,10 @@ import { ref, onMounted, onBeforeUnmount, watch, nextTick, type Ref, type Extrac
 import type { UseDialogReturn } from './type'
 import { useProps } from './context'
 
+// body 滚动锁定计数器，支持嵌套弹窗
+let scrollLockCount = 0
+let originalBodyOverflow = ''
+
 /**
  * Dialog 组件的核心逻辑 Hook
  * @param model - v-model 引用
@@ -12,6 +16,7 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
   const showValue = ref(false)
   const tyDialogHeader = ref()
   const tyDialog = ref()
+  let isScrollLocked = false
 
   const handleClose = () => {
     props.beforeClose?.(() => {
@@ -29,6 +34,25 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
     if (props.closeOnEsc && (model.value || showValue.value) && (e.key === 'Escape' || e.keyCode === 27)) {
       handleClose()
     }
+  }
+
+  const lockScroll = () => {
+    if (isScrollLocked) return
+    if (scrollLockCount === 0) {
+      originalBodyOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+    }
+    scrollLockCount++
+    isScrollLocked = true
+  }
+
+  const unlockScroll = () => {
+    if (!isScrollLocked) return
+    scrollLockCount = Math.max(0, scrollLockCount - 1)
+    if (scrollLockCount === 0) {
+      document.body.style.overflow = originalBodyOverflow
+    }
+    isScrollLocked = false
   }
 
   let x = 0
@@ -75,6 +99,11 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
   watch(
     () => model.value || showValue.value,
     async visible => {
+      if (props.isScrollLock && visible) {
+        lockScroll()
+      } else if (!visible) {
+        unlockScroll()
+      }
       if (props.destroyOnClose && props.draggable && visible) {
         await nextTick()
         initDrag()
@@ -85,6 +114,7 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
   onBeforeUnmount(() => {
     destroyDrag()
     document.removeEventListener('keydown', handleEsc)
+    unlockScroll()
   })
 
   return {

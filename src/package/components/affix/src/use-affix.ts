@@ -51,7 +51,7 @@ export default function useAffix(
    * @param style - 固定时的样式
    */
   const stateChangeOrigin = () => {
-    emits('change', isFixed.value)
+    emits('onChange', isFixed.value)
   }
   type ChangeHandler = () => void
   const stateChange = debounce(stateChangeOrigin, 150) as ChangeHandler

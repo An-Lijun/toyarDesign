@@ -443,7 +443,7 @@ describe('TyAffix 组件', () => {
       wrapper.unmount()
     })
 
-    it('target 容器场景下固定时应触发 change 事件', async () => {
+    it('target 容器场景下固定时应触发 onChange 事件', async () => {
       const targetEl = document.createElement('div')
       Object.defineProperty(targetEl, 'clientHeight', { configurable: true, value: 300 })
       mockTargetPosition(targetEl)
@@ -460,8 +460,8 @@ describe('TyAffix 组件', () => {
       triggerTargetScroll(targetEl)
       await nextTick()
 
-      expect(wrapper.emitted('change')).toBeTruthy()
-      expect(wrapper.emitted('change')[0]).toEqual([true])
+      expect(wrapper.emitted('onChange')).toBeTruthy()
+      expect(wrapper.emitted('onChange')[0]).toEqual([true])
       wrapper.unmount()
     })
 
@@ -696,7 +696,7 @@ describe('TyAffix 组件', () => {
 
   // ===== 事件测试 =====
   describe('事件', () => {
-    it('固定状态改变时应触发 change 事件（true）', async () => {
+    it('固定状态改变时应触发 onChange 事件（true）', async () => {
       const wrapper = mount(TyAffix, {
         props: { offsetTop: 100 },
         slots: { default: '内容' }
@@ -710,13 +710,13 @@ describe('TyAffix 组件', () => {
 
       // debounce 延迟 150ms 触发 emit，需等待真实定时器
       await vi.waitFor(() => {
-        expect(wrapper.emitted('change')).toBeTruthy()
-        expect(wrapper.emitted('change')[0]).toEqual([true])
+        expect(wrapper.emitted('onChange')).toBeTruthy()
+        expect(wrapper.emitted('onChange')[0]).toEqual([true])
       })
       wrapper.unmount()
     })
 
-    it('取消固定时应触发 change 事件（false）', async () => {
+    it('取消固定时应触发 onChange 事件（false）', async () => {
       const wrapper = mount(TyAffix, {
         props: { offsetTop: 100 },
         slots: { default: '内容' }
@@ -729,25 +729,25 @@ describe('TyAffix 组件', () => {
       triggerIntersection({ top: 50, left: 10, width: 200, height: 40 })
       await nextTick()
 
-      // 等待 debounce（150ms）触发第一次 change(true)
+      // 等待 debounce（150ms）触发第一次 onChange(true)
       await vi.waitFor(() => {
-        expect(wrapper.emitted('change')).toBeTruthy()
-        expect(wrapper.emitted('change')[0]).toEqual([true])
+        expect(wrapper.emitted('onChange')).toBeTruthy()
+        expect(wrapper.emitted('onChange')[0]).toEqual([true])
       })
 
       // 取消固定
       triggerIntersection({ top: 150, left: 10, width: 200, height: 40 })
       await nextTick()
 
-      // 等待 debounce 触发第二次 change(false)
+      // 等待 debounce 触发第二次 onChange(false)
       await vi.waitFor(() => {
-        const events = wrapper.emitted('change')
+        const events = wrapper.emitted('onChange')
         expect(events[1]).toEqual([false])
       })
       wrapper.unmount()
     })
 
-    it('未固定且无需固定时不应触发 change', async () => {
+    it('未固定且无需固定时不应触发 onChange', async () => {
       const wrapper = mount(TyAffix, {
         props: { offsetTop: 100 },
         slots: { default: '内容' }
@@ -760,7 +760,7 @@ describe('TyAffix 组件', () => {
       triggerIntersection({ top: 200, left: 10, width: 200, height: 40 })
       await nextTick()
 
-      expect(wrapper.emitted('change')).toBeFalsy()
+      expect(wrapper.emitted('onChange')).toBeFalsy()
       wrapper.unmount()
     })
   })
