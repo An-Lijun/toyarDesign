@@ -1,4 +1,4 @@
-import { ref, onMounted, onBeforeUnmount, type Ref, type ExtractPropTypes } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, nextTick, type Ref, type ExtractPropTypes } from 'vue'
 import type { UseDialogReturn } from './type'
 import { useProps } from './context'
 
@@ -14,7 +14,21 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
   const tyDialog = ref()
 
   const handleClose = () => {
-    model.value = false
+    props.beforeClose?.(() => {
+      model.value = false
+    })
+  }
+
+  const handleMaskClick = () => {
+    if (props.maskClosable) {
+      handleClose()
+    }
+  }
+
+  const handleEsc = (e: KeyboardEvent) => {
+    if (props.closeOnEsc && (model.value || showValue.value) && (e.key === 'Escape' || e.keyCode === 27)) {
+      handleClose()
+    }
   }
 
   let x = 0
@@ -22,8 +36,8 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
 
   const moveDialog = (e: MouseEvent) => {
     tyDialog.value.style.margin = 0
-    let moveX = e.pageX - x
-    let moveY = e.pageY - y
+    const moveX = e.pageX - x
+    const moveY = e.pageY - y
     tyDialog.value.style.left = moveX + 'px'
     tyDialog.value.style.top = moveY + 'px'
   }
@@ -54,10 +68,23 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
     if (props.draggable) {
       initDrag()
     }
+    document.addEventListener('keydown', handleEsc)
   })
+
+  // destroyOnClose 模式下，内层 DOM 销毁后 ref 失效，重新打开时需重新绑定拖拽
+  watch(
+    () => model.value || showValue.value,
+    async visible => {
+      if (props.destroyOnClose && props.draggable && visible) {
+        await nextTick()
+        initDrag()
+      }
+    }
+  )
 
   onBeforeUnmount(() => {
     destroyDrag()
+    document.removeEventListener('keydown', handleEsc)
   })
 
   return {
@@ -66,6 +93,7 @@ export default function useDialog(model: Ref<boolean>, props: ExtractPropTypes<t
     tyDialog,
     model,
     handleClose,
+    handleMaskClick,
     initDrag
   }
 }

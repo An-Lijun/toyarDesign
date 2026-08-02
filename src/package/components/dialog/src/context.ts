@@ -8,7 +8,7 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
       type: String,
       default: '提示'
     },
-    /** 对话框宽度 */
+    /** 对话框宽度 支持百分比和calc计算宽度*/
     width: {
       type: String,
       default: '30%'
@@ -41,9 +41,36 @@ export const { staticProps, useProps, nm, useEmits } = createComponentContext({
     mask: {
       type: Boolean,
       default: true
+    },
+    /** 是否允许点击遮罩层关闭对话框 */
+    maskClosable: {
+      type: Boolean,
+      default: false
+    },
+    /** 关闭时是否销毁弹窗内容 */
+    destroyOnClose: {
+      type: Boolean,
+      default: true
+    },
+    /** 是否允许按 ESC 键关闭对话框 */
+    closeOnEsc: {
+      type: Boolean,
+      default: false
+    },
+    /** 是否展示关闭按钮 */
+    isShowClose: {
+      type: Boolean,
+      default: true
+    },
+    /** 关闭前的回调，调用 done 才会真正关闭 Dialog */
+    beforeClose: {
+      type: Function,
+      default: (done: () => void) => {
+        done()
+      }
     }
   },
   emits: {
-    'update:modelValue': (value: boolean) => true
+    'update:modelValue': (_value: boolean) => true
   }
 })
